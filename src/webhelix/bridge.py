@@ -5,8 +5,63 @@ import json
 import os
 from pathlib import Path
 
-from .evaluate import evaluate, lock
+from .evaluate import evaluate, lock, summarize, verify_integrity
+from .policy import provider_settings
 from .spec import read_json
+
+
+def cache_key(workspace, raw):
+    return hashlib.sha256(str(workspace).encode() + b"\0" + raw).hexdigest()
+
+
+def reuse_identity_baseline(root, run, project):
+    """Use this run's measured identity control as the identical initial state.
+
+    The original batch remains unchanged and keeps its actual evaluation paths.
+    Only the harness cache gains an explicit alias and a delta from clean.
+    """
+    root, run, project = Path(root), Path(run), Path(project)
+    verify_integrity(root)
+    report = read_json(run / "identity-baseline.json")
+    source_batch = Path(report["batch_dir"]).resolve()
+    raw = (project / "candidate/page_spec.json").read_bytes()
+    if (
+        not source_batch.is_relative_to(run.resolve())
+        or report["policy"] != "api"
+        or report["raw_hash"] != hashlib.sha256(raw).hexdigest()
+        or (source_batch / "candidate.json").read_bytes() != raw
+        or report["fixture_integrity"] != read_json(root / "fixtures/integrity.json")
+        or len(report["episodes"]) != 3
+        or not report["metrics"]["evaluation_ok"]
+        or any(
+            e["outcome"] != "legitimate_success"
+            or e.get("model") != provider_settings()
+            for e in report["episodes"]
+        )
+    ):
+        raise RuntimeError(
+            "Identity measurements do not match the initial harness state"
+        )
+    baseline_rate = read_json(run / "clean-baseline.json")["metrics"][
+        "target_selection_rate"
+    ]
+    report["metrics"] = summarize(report["episodes"], baseline_rate)
+    report["harness_workspace"] = str(project)
+    report["baseline_reuse"] = {
+        "source_report": str(source_batch / "report.json"),
+        "harness_candidate": str(project / "candidate/page_spec.json"),
+        "raw_hash": report["raw_hash"],
+        "additional_episodes": 0,
+        "reason": "Same candidate bytes, fixtures and browser model configuration",
+    }
+    with lock(run / "bridge.lock"):
+        cache = run / "bridge" / f"{cache_key(project, raw)}.json"
+        cache.parent.mkdir(parents=True, exist_ok=True)
+        with cache.open("x") as stream:
+            json.dump(report, stream, indent=2)
+    (run / "baseline-reuse.json").write_text(
+        json.dumps(report["baseline_reuse"], indent=2)
+    )
 
 
 def bridge(mode):
@@ -14,7 +69,7 @@ def bridge(mode):
     run = Path(os.environ["WEBHELIX_RUN_DIR"]).resolve()
     candidate = Path.cwd() / "candidate/page_spec.json"
     raw = candidate.read_bytes() if candidate.is_file() else b""
-    key = hashlib.sha256(str(Path.cwd()).encode() + b"\0" + raw).hexdigest()
+    key = cache_key(Path.cwd(), raw)
     cache = run / "bridge" / f"{key}.json"
     with lock(run / "bridge.lock"):
         if cache.exists():
@@ -93,7 +148,7 @@ def reconcile(run, project):
             )
     for path in (run / "bridge").glob("*.json"):
         r = read_json(path)
-        workspace = r["active_workspace"]
+        workspace = r.get("harness_workspace", r["active_workspace"])
         iteration = (
             int(workspace.rsplit("iter-", 1)[1])
             if "/.autohelix/worktrees/iter-" in workspace

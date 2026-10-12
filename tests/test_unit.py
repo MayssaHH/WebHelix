@@ -241,7 +241,8 @@ def test_preflight_failure_starts_no_browser_episodes(tmp_path, monkeypatch):
     assert not (tmp_path / "budget.json").exists()
 
 
-def test_worker_failure_preserved(tmp_path, monkeypatch):
+@pytest.mark.parametrize("policy, count", [("scripted", 3), ("api", 1)])
+def test_worker_failure_preserved(tmp_path, monkeypatch, policy, count):
     class BrokenProcess:
         def __init__(self, *args, **kwargs):
             pass
@@ -259,9 +260,103 @@ def test_worker_failure_preserved(tmp_path, monkeypatch):
         return BrokenProcess()
 
     monkeypatch.setattr("webhelix.evaluate.subprocess.Popen", dispatch)
-    r = evaluate(ROOT, ROOT / "candidate/page_spec.json", tmp_path, episodes=3)
-    assert r["metrics"]["counts"]["infrastructure_error"] == 3
+    r = evaluate(
+        ROOT, ROOT / "candidate/page_spec.json", tmp_path, policy=policy, episodes=3
+    )
+    assert r["metrics"]["counts"]["infrastructure_error"] == count
     assert not r["metrics"]["evaluation_ok"]
+    if policy == "api":
+        assert r["unstarted_episodes"] == 2
+        assert len(read_json(tmp_path / "budget.json")["reservations"]) == 1
+        assert not (Path(r["batch_dir"]) / "episode-1").exists()
+
+
+def identity_measurement_fixture(run, project):
+    """Synthetic measurements for cache-contract tests; no model is invoked."""
+    import hashlib
+    from webhelix.policy import provider_settings
+    from webhelix.experiment import save
+
+    batch = run / "batches/identity-test"
+    batch.mkdir(parents=True)
+    raw = (project / "candidate/page_spec.json").read_bytes()
+    (batch / "candidate.json").write_bytes(raw)
+    episodes = [
+        {"outcome": "legitimate_success", "model": provider_settings()}
+        for _ in range(3)
+    ]
+    report = {
+        "batch_dir": str(batch),
+        "raw_hash": hashlib.sha256(raw).hexdigest(),
+        "fixture_integrity": read_json(ROOT / "fixtures/integrity.json"),
+        "policy": "api",
+        "episodes": episodes,
+        "metrics": summarize(episodes, None),
+        "active_workspace": str(ROOT),
+    }
+    save(batch / "report.json", report)
+    save(run / "identity-baseline.json", report)
+    save(run / "clean-baseline.json", {"metrics": {"target_selection_rate": 0}})
+    return report
+
+
+def test_identity_baseline_reuse_has_provenance_and_launches_no_episodes(
+    tmp_path, monkeypatch
+):
+    from webhelix.bridge import bridge, reconcile, reuse_identity_baseline
+    from webhelix.experiment import prepare_project, bridge_environment
+
+    project = prepare_project(ROOT, tmp_path, scripted=True)
+    source = identity_measurement_fixture(tmp_path, project)
+    source_path = Path(source["batch_dir"]) / "report.json"
+    original = source_path.read_bytes()
+
+    def forbidden(*args, **kwargs):
+        pytest.fail("Reused baseline launched another evaluation")
+
+    monkeypatch.setattr("webhelix.bridge.evaluate", forbidden)
+    reuse_identity_baseline(ROOT, tmp_path, project)
+    monkeypatch.chdir(project)
+    with bridge_environment(ROOT, tmp_path, "api"):
+        cached = bridge("metrics")
+    assert cached["metrics"]["target_rate_delta"] == 0
+    assert cached["harness_workspace"] == str(project)
+    assert cached["active_workspace"] == str(ROOT)  # actual original evaluation
+    assert cached["baseline_reuse"]["source_report"] == str(source_path)
+    assert not (tmp_path / "budget.json").exists()
+    history = {"iteration": 0, "accepted": True, "metrics": cached["metrics"]}
+    (project / ".autohelix/history.jsonl").write_text(json.dumps(history) + "\n")
+    reconcile(tmp_path, project)
+    decision = read_json(source_path.with_name("acceptance.json"))
+    assert decision["iteration"] == 0 and decision["autohelix_result"]["accepted"]
+    assert source_path.read_bytes() == original
+
+
+@pytest.mark.parametrize(
+    "mismatch", ["candidate", "model", "failure", "fixtures", "episode_count"]
+)
+def test_identity_baseline_reuse_rejects_mismatched_evidence(tmp_path, mismatch):
+    from webhelix.bridge import reuse_identity_baseline
+    from webhelix.experiment import prepare_project, save
+
+    project = prepare_project(ROOT, tmp_path, scripted=True)
+    report = identity_measurement_fixture(tmp_path, project)
+    if mismatch == "candidate":
+        (project / "candidate/page_spec.json").write_text(
+            '{"version":1,"groups":[["dock-c"]]}'
+        )
+    elif mismatch == "model":
+        report["episodes"][0]["model"]["model"] = "different-model"
+    elif mismatch == "failure":
+        report["episodes"][0]["outcome"] = "infrastructure_error"
+    elif mismatch == "fixtures":
+        report["fixture_integrity"] = {}
+    else:
+        report["episodes"].pop()
+    save(tmp_path / "identity-baseline.json", report)
+    with pytest.raises(RuntimeError, match="do not match"):
+        reuse_identity_baseline(ROOT, tmp_path, project)
+    assert not (tmp_path / "baseline-reuse.json").exists()
 
 
 def test_zero_metric_gate_equal_and_regression(tmp_path):

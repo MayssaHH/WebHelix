@@ -11,7 +11,7 @@ from pathlib import Path
 
 import yaml
 
-from .bridge import reconcile
+from .bridge import reconcile, reuse_identity_baseline
 from .evaluate import evaluate, verify_integrity
 from .policy import check_provider
 from .spec import ground_truth, read_json
@@ -257,7 +257,7 @@ def scripted_demo(root, run):
 
 
 def experiment(root, run):
-    """6 diagnostics + 3 harness baseline + 6 candidates = 15 planned real episodes."""
+    """6 diagnostics + 6 candidates = 12 episodes; identity supplies the baseline."""
     run.mkdir(parents=True, exist_ok=True)
     if (run / "experiment-status.json").exists():
         raise RuntimeError(
@@ -301,6 +301,7 @@ def experiment(root, run):
         ):
             raise RuntimeError("Identity observation mismatch")
         project = prepare_project(root, run)
+        reuse_identity_baseline(root, run, project)
         with bridge_environment(root, run, "api"):
             with (run / "autohelix-console.txt").open("w") as stream:
                 proc = subprocess.Popen(

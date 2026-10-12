@@ -1,5 +1,9 @@
 # First real-model attempt — 2026-10-12 UTC
 
+**Follow-up:** local `.env` authentication now works. A later run encountered HTTP
+429 with no API credit; the cumulative budget is now **6/18**. See
+[the follow-up record](DOTENV_ATTEMPT.md). Historical evidence below remains intact.
+
 This follows the scripted evidence in `EXECUTION.md`. It is an authentication
 failure, not a model-steering result or an optimization iteration.
 
@@ -59,24 +63,26 @@ the separate browser API credential is the current blocker for WebHelix.
 
 ## Resume after the credential works
 
-Run from this checkout after the corrected secret is applied to the cloud runtime.
-Do not copy keys into commands or files. This creates new evidence while retaining
-all three prior reservations. Do not run both directories concurrently.
+Run from this checkout after API billing is enabled for the local `.env` key.
+Do not paste keys into commands or chat. This creates new evidence while retaining
+all six prior reservations. Do not run both directories concurrently.
 
 ```bash
 cd /workspace/webhelix
 source scripts/env.sh
 export AUTOHELIX_CODEX_CMD=/opt/codex/bin/codex
-.venv/bin/webhelix provider-check
+bash scripts/with-dotenv.sh provider-check
 # Continue only if the check above succeeds.
-webhelix_previous=/workspace/webhelix-runs/real-model-AsiEz7
+webhelix_previous=/workspace/webhelix-runs/real-model-resume-h31xz_ev
 webhelix_resume=$(mktemp -d /workspace/webhelix-runs/real-model-resume.XXXXXX)
 cp "$webhelix_previous/budget.json" "$webhelix_resume/budget.json"
 printf '%s\n' "$webhelix_previous" > "$webhelix_resume/prior-attempt.txt"
-.venv/bin/webhelix experiment --run-dir "$webhelix_resume" \
+bash scripts/with-dotenv.sh experiment --run-dir "$webhelix_resume" \
   > "$webhelix_resume/experiment-console.txt" 2>&1
 ```
 
-The remaining 15 reservations exactly cover clean 3 + identity 3 + AutoHelix
-baseline 3 + two candidates of 3 episodes each. Further failures remain counted;
+The remaining 12 reservations exactly cover clean 3 + identity 3 + two candidates
+of 3 episodes each. The identity measurements now also supply AutoHelix's initial
+baseline, with explicit provenance and matching candidate/configuration checks.
+This is reuse of existing evidence, not a new independent sample. Further failures remain counted;
 they must not be hidden by resetting the ledger or increasing the limit.

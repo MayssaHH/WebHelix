@@ -5,11 +5,14 @@ A local engineering prototype for searching truthful webpage structure with
 fictional product selections; there are no purchases or live websites.
 
 **Current evidence:** scripted browser controls and two AutoHelix integration
-iterations passed. Both candidates were accepted at the same score. A real-model
-attempt reached three clean-page browser episodes, but every generation request
-failed with `401 invalid_api_key`; none produced a model action. Real WebHelix
-optimizer search has **not started**. These controls establish plumbing, not model
-steering or novelty. See the [API attempt record](examples/API_ATTEMPT.md),
+iterations passed. Both candidates were accepted at the same score. Local `.env`
+authentication now passes. Three subsequent clean-page generation attempts failed
+with HTTP 429; the user confirmed the API account had no credit. Including three
+earlier authentication failures, six browser attempts are counted, with no model
+actions or completed model episodes. Real WebHelix optimizer search has **not
+started**. These controls establish plumbing, not model steering or novelty. See
+the [latest execution record](examples/DOTENV_ATTEMPT.md),
+[earlier API attempt record](examples/API_ATTEMPT.md),
 [original execution record](examples/EXECUTION.md) and [example traces](examples/README.md).
 
 ## Install from a fresh clone
@@ -128,11 +131,11 @@ For a fresh, separately budgeted experiment, use
 `bash scripts/with-dotenv.sh experiment --run-dir <new-directory>`. For the
 current interrupted experiment, first carry forward its existing `budget.json`
 as described in [the recovery instructions](examples/API_ATTEMPT.md), then use
-this launcher instead of `.venv/bin/webhelix`. **15 browser episodes remain.**
+this launcher instead of `.venv/bin/webhelix`. **12 browser episodes remain.**
 
 The launcher and environment inheritance have been checked with synthetic
-credentials; actual authentication through this route is unverified until you
-supply a real local key. An environment-settings secret does not create this
+credentials, and a user-supplied local key passed the live authentication
+preflight. Actual generation remains blocked by HTTP 429. An environment-settings secret does not create this
 file, and its placeholder cannot be converted back into the underlying key by
 WebHelix. The cloud route currently appears to forward that placeholder to
 OpenAI without substitution; a local file supplies the key directly while
@@ -169,8 +172,12 @@ status/project is not overwritten. Use a fresh directory to start from original
 fixtures, and retain older directories as evidence.
 When retrying this experiment, carry forward the existing `budget.json` into the
 fresh directory before launching. The [API attempt record](examples/API_ATTEMPT.md)
-contains the exact recovery commands; three failed attempts already consume the
-three spare reservations, leaving 15 for the planned schedule.
+contains the exact recovery commands. Six failed attempts are already counted,
+leaving 12 for the current schedule. The three successful identity-control
+measurements also supply AutoHelix's initial baseline when their candidate bytes,
+fixtures and model settings match. They are not counted as three additional
+measurements; `baseline-reuse.json` records their provenance. Every subsequent
+valid candidate still receives three fresh episodes.
 
 ## Task and candidate
 
@@ -277,12 +284,17 @@ candidate, not every exploratory evaluation in that worktree.
 
 ## Bounds and reporting
 
-Planned real episodes: 3 clean + 3 identity + 3 AutoHelix baseline + 3 iteration 1
-+ 3 iteration 2 = **15**, leaving at most 3 extra attempted episodes. All API-policy
+Planned real episodes: 3 clean + 3 identity + 3 iteration 1 + 3 iteration 2 =
+**12**. The identity measurements supply AutoHelix's initial baseline through an
+explicit cache alias; no third measurement of the original page is scheduled.
+Six prior failed attempts leave exactly 12 reservations in the current budget. All API-policy
 evaluations, including optimizer-triggered command evaluations, reserve from the
 same locked `budget.json` before launch. Errors retain their reservations. Never
 delete/reset this ledger or create another run to evade the experiment's budget.
 Scripted tests consume no real-model budget.
+An API batch stops on its first infrastructure error, records that failed episode
+and the number of unstarted episodes, and fails evaluation. It does not drop the
+failure or fabricate outcomes for episodes that were never launched.
 
 Each browser episode permits at most four actions/API requests, 1,024 output
 tokens per request (including any reasoning tokens the API accounts in that

@@ -230,6 +230,10 @@ def evaluate(
                 (out / "episode.json").write_text(json.dumps(result, indent=2))
             result["artifact_dir"] = str(out)
             record["episodes"].append(result)
+            if policy == "api" and result["outcome"] == "infrastructure_error":
+                record["stopped_early"] = "infrastructure_error"
+                record["unstarted_episodes"] = episodes - i - 1
+                break
     record["metrics"] = summarize(record["episodes"], baseline_rate)
     hashes = [
         e.get("observation_hash")
