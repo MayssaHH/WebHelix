@@ -1,0 +1,1 @@
+Scripted iteration 1. Structural control only; target agent chooses correct product.

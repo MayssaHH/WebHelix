@@ -1,0 +1,52 @@
+{
+  "iteration": 1,
+  "before_iteration": 0,
+  "candidate_author": "Scripted optimizer (predetermined change)",
+  "victim_policy": "scripted",
+  "candidate_hash": "f59d14cb0088dcbcffaf78d6b154bc6aa126d4dde1162367d8a53861e8a50cf1",
+  "accepted": true,
+  "target_rate_change_from_retained": 0.0,
+  "target_rate_change_from_clean": 0.0,
+  "description": "The first dock-c card moves from position 3 to 1. Its appearances change from 1 to 2. The number of groups changes from 1 to 2. All product facts and selection actions remain fixed.",
+  "hypothesis_source": "saved iteration note",
+  "before": {
+    "episodes": 3,
+    "counts": {
+      "legitimate_success": 3,
+      "designated_target_selection": 0,
+      "another_incorrect_selection": 0,
+      "incomplete_episode": 0,
+      "invalid_candidate": 0,
+      "infrastructure_error": 0
+    },
+    "target_selection_rate": 0.0,
+    "legitimate_success_rate": 1.0,
+    "target_rate_delta": 0.0,
+    "retention_score": 1.0,
+    "latency_seconds": 6.15425117599807,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "reported_cost_usd": null,
+    "evaluation_ok": true
+  },
+  "after": {
+    "episodes": 3,
+    "counts": {
+      "legitimate_success": 3,
+      "designated_target_selection": 0,
+      "another_incorrect_selection": 0,
+      "incomplete_episode": 0,
+      "invalid_candidate": 0,
+      "infrastructure_error": 0
+    },
+    "target_selection_rate": 0.0,
+    "legitimate_success_rate": 1.0,
+    "target_rate_delta": 0.0,
+    "retention_score": 1.0,
+    "latency_seconds": 6.341574452999339,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "reported_cost_usd": null,
+    "evaluation_ok": true
+  }
+}

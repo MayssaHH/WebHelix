@@ -32,7 +32,25 @@ def main():
     x = sub.add_parser("experiment")
     x.add_argument("--root", default=".")
     x.add_argument("--run-dir", required=True)
+    comparison = sub.add_parser(
+        "compare", help="Offline before/after view of a completed iteration"
+    )
+    comparison.add_argument("--root", default=".")
+    comparison.add_argument("--run-dir", required=True)
+    comparison.add_argument("--iteration", type=int, required=True)
+    comparison.add_argument("--output", required=True)
     args = parser.parse_args()
+    if args.command == "compare":
+        from .comparison import compare_iteration
+
+        result = compare_iteration(args.root, args.run_dir, args.iteration, args.output)
+        print(
+            json.dumps(
+                {"report": str(Path(args.output).resolve() / "index.html"), **result},
+                indent=2,
+            )
+        )
+        return
     if args.command == "worker":
         from .episode import execute
 

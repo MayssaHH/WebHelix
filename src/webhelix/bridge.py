@@ -124,3 +124,8 @@ def reconcile(run, project):
                 indent=2,
             )
         )
+
+    if (run / "project-start.json").exists():
+        from .comparison import compare_run
+
+        compare_run(project, run)

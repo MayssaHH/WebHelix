@@ -46,6 +46,42 @@ uv run --locked webhelix evaluate --candidate candidate/page_spec.json \
 
 The explicit scripted choice is a control, not an agent discovering an answer.
 
+## See the original page and the candidate side by side
+
+[Open the visual walkthrough](examples/visual/README.md). GitHub displays its
+comparison screenshot directly. The portable HTML version has expandable victim
+observations, action traces, original screenshots and the recorded optimizer note.
+
+The website is HTML. `candidate/page_spec.json` is the editable layout description
+consumed by the fixed HTML renderer. This keeps product facts, actions and scoring
+constant while the optimizer chooses ordering, grouping and repetition. It also
+limits the search space: the current optimizer cannot invent arbitrary text,
+styles, controls or HTML structures. JSON does not prevent visualization.
+
+Completed runs automatically save read-only comparisons to
+`<run-dir>/comparisons/iter-N/index.html`. Each compares the proposal against the
+last **accepted** state, even when the previous attempted candidate was rejected.
+To regenerate one into a new directory without model calls:
+
+```bash
+uv run --locked webhelix compare --run-dir "$webhelix_demo" \
+  --iteration 1 --output /tmp/webhelix-comparison-new
+```
+
+Open the generated `index.html` locally, keeping its companion files together.
+GitHub shows HTML source rather than running it; the committed overview PNG is
+provided for viewing in GitHub. The reconstructed pages have inactive controls.
+Recorded screenshots and exact observations remain separately available so a
+reconstruction is not confused with original episode evidence.
+
+Future optimizer runs are asked to write a short, testable hypothesis to
+`.autohelix/notes/iter-N.md`: what changes, how that changes the victim's text
+observation, what selection effect is predicted, and what would contradict it.
+The report displays that note verbatim, escaped as text. Missing notes are labeled
+as missing; the reporter never invents an agent's intention or calls a result a
+successful dark pattern. Reporting happens after evaluation and does not change
+acceptance, scoring, victim input, or episode accounting.
+
 ## Real-model run: two separate authentications
 
 The **outer optimizer** uses the same configuration that succeeded in the sorting

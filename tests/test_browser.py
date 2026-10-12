@@ -21,6 +21,10 @@ def test_real_autohelix_lifecycle_with_scripted_policies(tmp_path):
     scripted_demo(ROOT, run)
     r = read_json(run / "summary.json")
     assert r["iterations"] == r["accepted"] == 2 and r["improved"] == 0
+    assert (run / "comparisons/iter-1/index.html").exists()
+    assert (
+        read_json(run / "comparisons/iter-2/comparison.json")["before_iteration"] == 1
+    )
     assert (
         len(list((run / "batches").glob("*/report.json"))) == 3
     )  # cached metric reads
@@ -72,6 +76,8 @@ def test_rejected_candidate_evidence_and_notes_survive(tmp_path):
         reconcile(run, project)
         result = read_json_lines(run / "autohelix-history.jsonl")[-1]
         assert not result["accepted"] and "constraint failed" in result["reason"]
+        assert (run / "comparisons/iter-1/index.html").exists()
+        assert not read_json(run / "comparisons/iter-1/comparison.json")["accepted"]
         assert read_json(project / "candidate/page_spec.json") == read_json(
             ROOT / "fixtures/identity.json"
         )

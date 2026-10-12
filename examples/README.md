@@ -1,5 +1,10 @@
 # Inspect the executed evidence
 
+**[See the before/after visual example](visual/README.md).** The original page and
+candidate are rendered side by side, with the recorded victim choices underneath.
+
+[![Before and after, with the recorded result](visual/iteration-1/overview.png)](visual/iteration-1/overview.png)
+
 These are **scripted engineering controls**, not LLM steering results. Paths in
 JSON have been replaced with `<SOURCE_DIR>`, `<CONTROLS_DIR>` and `<DEMO_DIR>`.
 The observation text, browser IDs, actions, outcomes and measurements are retained.
