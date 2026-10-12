@@ -300,6 +300,33 @@ def identity_measurement_fixture(run, project):
     return report
 
 
+def test_prepared_project_passes_upstream_cli_initialization_guard(
+    tmp_path, monkeypatch
+):
+    import subprocess
+    from click.testing import CliRunner
+    from autohelix.cli import main
+    from webhelix.experiment import prepare_project
+
+    project = prepare_project(ROOT, tmp_path, scripted=True)
+    assert (project / ".autohelix/prompt.md").is_file()
+    assert (project / ".autohelix/notes").is_dir()
+    assert subprocess.check_output(["git", "status", "--porcelain"], cwd=project) == b""
+    called = []
+
+    class NoModelHarness:
+        def __init__(self, path, **kwargs):
+            assert path == project
+
+        def run(self, max_iterations=None):
+            called.append(True)
+
+    monkeypatch.setattr("autohelix.cli.Harness", NoModelHarness)
+    result = CliRunner().invoke(main, ["run", "--path", str(project)])
+    assert result.exit_code == 0, result.output
+    assert called == [True]
+
+
 def test_identity_baseline_reuse_has_provenance_and_launches_no_episodes(
     tmp_path, monkeypatch
 ):

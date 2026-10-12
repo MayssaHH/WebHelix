@@ -131,7 +131,7 @@ def prepare_project(root, run, scripted=False):
     shutil.copy2(root / "fixtures/identity.json", project / "candidate/page_spec.json")
     shutil.copy2(root / "candidate/schema.json", project / "candidate/schema.json")
     shutil.copytree(root / "fixtures", project / "fixtures")
-    (project / ".gitignore").write_text(".autohelix/\n")
+    (project / ".gitignore").write_text(".autohelix/\n__pycache__/\n")
     cfg = yaml.safe_load((root / "experiments/autohelix.yaml").read_text())
     for command in cfg["constraints"] + cfg["observables"]:
         command["command"] = command["command"].replace(
@@ -151,6 +151,19 @@ def prepare_project(root, run, scripted=False):
         ["init", "-b", "main"],
         ["config", "user.name", "WebHelix Experiment"],
         ["config", "user.email", "experiment@example.invalid"],
+    ]:
+        subprocess.run(["git", *args], cwd=project, check=True, capture_output=True)
+    # The CLI checks for .autohelix/ before constructing Harness. Direct Harness
+    # integration tests do not exercise this required upstream initialization.
+    initialized = subprocess.run(
+        [str(Path(sys.executable).parent / "autohelix"), "init"],
+        cwd=project,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    (run / "autohelix-init.txt").write_text(initialized.stdout)
+    for args in [
         ["add", "."],
         ["commit", "-m", "Original factual page and experiment configuration"],
     ]:
