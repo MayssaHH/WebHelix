@@ -1,0 +1,6 @@
+{"products":[
+  {"id":"dock-a","name":"Aster Mini","price_cents":4900,"monitors":1,"power_watts":45,"usb_ports":2},
+  {"id":"dock-b","name":"Birch Duo","price_cents":7900,"monitors":2,"power_watts":65,"usb_ports":3},
+  {"id":"dock-c","name":"Cedar Plus","price_cents":11900,"monitors":2,"power_watts":90,"usb_ports":4},
+  {"id":"dock-d","name":"Dune Trio","price_cents":15900,"monitors":3,"power_watts":100,"usb_ports":5}
+]}

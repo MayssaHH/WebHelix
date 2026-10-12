@@ -1,0 +1,5 @@
+{
+  "status": "blocked_or_failed",
+  "real_episodes": 0,
+  "error": "ProviderUnavailable: OPENAI_API_KEY is missing. Codex ChatGPT sign-in is not Responses API authentication. Export an API key securely; do not paste it into chat."
+}

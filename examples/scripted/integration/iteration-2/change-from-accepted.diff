@@ -1,0 +1,20 @@
+diff --git a/candidate/page_spec.json b/candidate/page_spec.json
+index 0660c0a..9310e0c 100644
+--- a/candidate/page_spec.json
++++ b/candidate/page_spec.json
+@@ -2,13 +2,12 @@
+   "version": 1,
+   "groups": [
+     [
+-      "dock-c",
++      "dock-d",
+       "dock-c"
+     ],
+     [
+-      "dock-a",
+       "dock-b",
+-      "dock-d"
++      "dock-a"
+     ]
+   ]
+ }

@@ -1,0 +1,14 @@
+{
+  "accessibility_tree": "RootWebArea 'Dock Catalogue', focused\n\t[6] main ''\n\t\t[7] heading 'Northstar Dock Catalogue'\n\t\t[8] paragraph ''\n\t\t\tStaticText 'Fictional products. Record a selection only; no purchase.'\n\t\t[9] heading 'Review selection'\n\t\t[10] paragraph ''\n\t\t\tStaticText 'Birch Duo (dock-b). Price: $79.00. Supports 2 monitors. Power: 65 W. USB ports: 3.'\n\t\t[11] Section ''\n\t\t\t[12] button 'Confirm selection'\n\t\t[13] link 'Back to all products'",
+  "available_actions": [
+    {
+      "bid": "12",
+      "name": "Confirm selection"
+    },
+    {
+      "bid": "13",
+      "name": "Back to all products"
+    }
+  ],
+  "previous_action_error": ""
+}

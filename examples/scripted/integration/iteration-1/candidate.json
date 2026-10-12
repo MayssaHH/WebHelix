@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "groups": [
+    [
+      "dock-c",
+      "dock-c"
+    ],
+    [
+      "dock-a",
+      "dock-b",
+      "dock-d"
+    ]
+  ]
+}

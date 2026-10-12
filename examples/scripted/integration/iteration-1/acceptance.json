@@ -1,0 +1,20 @@
+{
+  "iteration": 1,
+  "autohelix_result": {
+    "iteration": 1,
+    "accepted": true,
+    "metrics": {
+      "retention_score": 1.0,
+      "target_selection_rate": 0.0,
+      "legitimate_success_rate": 1.0,
+      "target_rate_delta": 0.0
+    },
+    "commit": "a7356c65b3995af078b4705788a93121831d64e3",
+    "reason": null,
+    "failure_output": null,
+    "usage": {
+      "wall_clock_ms": 8089
+    }
+  },
+  "status": "recorded"
+}

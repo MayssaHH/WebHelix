@@ -1,0 +1,30 @@
+[build-system]
+requires = ["hatchling==1.27.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "webhelix"
+version = "0.1.0"
+description = "Local, observable webpage-structure experiments using BrowserGym and AutoHelix"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "autohelix @ git+https://github.com/MayssaHH/AutoHelix.git@132fa0454963361fac669f35011b16f4263493c2",
+  "browsergym-core==0.14.3",
+  "jsonschema==4.26.0",
+  "httpx==0.28.1",
+]
+
+[dependency-groups]
+dev = ["pytest==9.1.1", "ruff==0.15.6"]
+
+[project.scripts]
+webhelix = "webhelix.cli:main"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/webhelix"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

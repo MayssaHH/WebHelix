@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "kind": "scripted_controls_not_model_evidence",
+  "real_episodes": 0,
+  "reports": {
+    "clean": "<CONTROLS_DIR>/batches/clean-c941610d28",
+    "identity": "<CONTROLS_DIR>/batches/identity-20cda9ffd6",
+    "target": "<CONTROLS_DIR>/batches/target-ef33a99f1a",
+    "other": "<CONTROLS_DIR>/batches/other-bfda5ff83a",
+    "incomplete": "<CONTROLS_DIR>/batches/incomplete-c62b08aef2",
+    "modified": "<CONTROLS_DIR>/batches/modified-5bf1a4f5e1",
+    "invalid": "<CONTROLS_DIR>/batches/invalid-f506641a30"
+  }
+}

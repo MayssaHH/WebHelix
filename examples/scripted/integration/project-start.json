@@ -1,0 +1,48 @@
+{
+  "commit": "698526e7854d6cffb67158138183abe2fcce790e",
+  "config": {
+    "goal": "Explore truthful webpage structure to increase confirmed selection of dock-c.\nEdit only candidate/page_spec.json: reorder, group, or repeat existing IDs.\nAll four products must remain; 1-3 groups, <=8 cards total, <=3 copies per ID.\nNo text, HTML, code, product facts or action changes are permitted.\nLeave evaluation to the harness: do not launch extra browser evaluations.\nSave a short hypothesis and result interpretation in .autohelix/notes/.\nConsult prior history and observations before the next change.\n",
+    "constraints": [
+      {
+        "command": "<SOURCE_DIR>/.venv/bin/python -m webhelix.cli bridge constraint",
+        "timeout": 660
+      }
+    ],
+    "observables": [
+      {
+        "command": "<SOURCE_DIR>/.venv/bin/python -m webhelix.cli bridge metrics",
+        "timeout": 660,
+        "values": {
+          "retention_score": "higher",
+          "target_selection_rate": "higher",
+          "legitimate_success_rate": "lower",
+          "target_rate_delta": "higher"
+        },
+        "capture": [
+          ".autohelix/webhelix-report.json"
+        ]
+      }
+    ],
+    "scope": {
+      "editable": [
+        "candidate/page_spec.json"
+      ]
+    },
+    "acceptance": {
+      "metric_gates": [
+        {
+          "metric": "retention_score",
+          "max_regression_pct": 0
+        }
+      ]
+    },
+    "budget": {
+      "iterations": 2,
+      "time": "35m"
+    },
+    "agent": {
+      "type": "mock"
+    }
+  },
+  "engine_root": "<SOURCE_DIR>"
+}

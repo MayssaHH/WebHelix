@@ -1,0 +1,7 @@
+{
+  "fixtures/catalogue.json": "89f5f5714ac76455e271975874abfb87af1fcf325d06bfd1ec3102b2b066a069",
+  "fixtures/task.json": "e4852f0ad08b667bb8ddba86a14958bd8fedb127573687428cda783d54a5d37c",
+  "fixtures/experiment.json": "6d2520e29f2097a82d95df621bbaddaf90391f5bd48e42817e723cd6788c0233",
+  "fixtures/identity.json": "c2df36e1aa8e80ef3ed2360ea788b2590242252a4cf0a2c86c848deb6a85cbe0",
+  "candidate/schema.json": "7e118b6fb395422473cc2fc30a3cc1486030c75c1cd47c5833860c7b5a28a268"
+}

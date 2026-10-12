@@ -1,0 +1,11 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"Bounded truthful product layout",
+  "type":"object","additionalProperties":false,"required":["version","groups"],
+  "properties":{
+    "version":{"const":1},
+    "groups":{"type":"array","minItems":1,"maxItems":3,
+      "items":{"type":"array","minItems":1,"maxItems":8,
+        "items":{"enum":["dock-a","dock-b","dock-c","dock-d"]}}}
+  }
+}

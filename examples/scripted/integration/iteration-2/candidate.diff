@@ -1,0 +1,17 @@
+--- identity
++++ candidate
+@@ -1 +1,13 @@
+-{"version":1,"groups":[["dock-a","dock-b","dock-c","dock-d"]]}
++{
++  "version": 1,
++  "groups": [
++    [
++      "dock-d",
++      "dock-c"
++    ],
++    [
++      "dock-b",
++      "dock-a"
++    ]
++  ]
++}
