@@ -20,7 +20,7 @@ h2{font-size:23px;margin-top:0}h3{font-size:18px}.muted{color:#526177}
 .notice{background:#fff2d4;border-left:5px solid #cb8c13;padding:16px;margin:20px 0}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
 .panel{background:white;border:1px solid #d6dde7;border-radius:12px;padding:20px;margin:16px 0}
-iframe{width:100%;height:1160px;border:1px solid #d6dde7;background:white}
+iframe{width:100%;height:1600px;border:1px solid #d6dde7;background:white}
 pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f4f6fa;padding:15px;font-size:13px}
 table{width:100%;border-collapse:collapse}th,td{text-align:left;border-bottom:1px solid #ddd;padding:9px}
 summary{cursor:pointer;font-weight:600}img{max-width:100%;border:1px solid #ddd}
@@ -106,9 +106,14 @@ def condition_panel(report, name, heading, spec):
     initial = episodes[0].get(
         "normalized_observation", "No browser observation recorded."
     )
+    rates = (
+        f"Target: {m['target_selection_rate']:.0%} · Correct: {m['legitimate_success_rate']:.0%}"
+        if m["evaluation_ok"]
+        else "Unmeasured — evaluation failed; do not interpret rates as behavior"
+    )
     return f"""<section class="panel"><h2>{esc(heading)}</h2>
 <p class="muted">Victim policy: {esc(report["policy"])}. {m["episodes"]} recorded outcomes.</p>
-<p class="metric">Target: {m["target_selection_rate"]:.0%} · Correct: {m["legitimate_success_rate"]:.0%}</p>
+<p class="metric">{esc(rates)}</p>
 <p>{esc(structure(spec) if spec else "Invalid specification")}</p>
 <iframe sandbox="" src="{name}.html" title="{esc(heading)} reconstructed page"></iframe>
 <p class="muted">Read-only reconstruction from saved candidate, using the fixed renderer. Buttons are inactive in this report.</p>
@@ -158,9 +163,19 @@ def compare_iteration(root, run, iteration, output):
     (output / "optimizer-note.txt").write_text(notes)
     decision = read_json(after_batch / "acceptance.json")["autohelix_result"]
     retained = "Accepted" if decision["accepted"] else "Rejected"
+    evaluated = before["metrics"]["evaluation_ok"] and after["metrics"]["evaluation_ok"]
     improvement = (
-        after["metrics"]["target_selection_rate"]
-        - before["metrics"]["target_selection_rate"]
+        (
+            after["metrics"]["target_selection_rate"]
+            - before["metrics"]["target_selection_rate"]
+        )
+        if evaluated
+        else None
+    )
+    measured = (
+        f"{100 * improvement:+.1f} percentage points in target-selection rate versus the previously retained candidate"
+        if evaluated
+        else "Unmeasured — evaluation failed"
     )
     description = (
         describe_change(before_spec, after_spec, target)
@@ -184,7 +199,10 @@ def compare_iteration(root, run, iteration, output):
         "candidate_hash": after.get("candidate_hash"),
         "accepted": decision["accepted"],
         "target_rate_change_from_retained": improvement,
-        "target_rate_change_from_clean": after["metrics"]["target_rate_delta"],
+        "target_rate_change_from_clean": after["metrics"]["target_rate_delta"]
+        if evaluated
+        else None,
+        "evaluation_ok": evaluated,
         "description": description,
         "hypothesis_source": "saved iteration note"
         if notes_path.exists()
@@ -215,7 +233,7 @@ def compare_iteration(root, run, iteration, output):
 <div class="notice">{esc(notice)}</div>
 <section class="panel"><h2>Candidate proposal</h2><p><strong>Author:</strong> {esc(author)}</p>
 <p>{esc(description)}</p>
-<p><strong>Measured change:</strong> {improvement:+.1%} target-selection rate versus the previously retained candidate. Decision: {esc(retained)}.</p>
+<p><strong>Measured change:</strong> {esc(measured)}. Decision: {esc(retained)}.</p>
 <details open><summary>Recorded optimizer note — not an inferred explanation</summary><pre>{esc(notes)}</pre></details>
 <p class="muted">The JSON specifies the layout. Both panels below are HTML rendered from that specification.</p></section>
 <div class="grid">{condition_panel(before, "before", f"Before — retained iteration {before_iteration}", before_spec)}

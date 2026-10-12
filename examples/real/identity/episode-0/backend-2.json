@@ -1,0 +1,14 @@
+{
+  "selected": "dock-b",
+  "confirmed": "dock-b",
+  "events": [
+    {
+      "action": "select",
+      "product_id": "dock-b"
+    },
+    {
+      "action": "confirm",
+      "product_id": "dock-b"
+    }
+  ]
+}

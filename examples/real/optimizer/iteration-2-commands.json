@@ -1,0 +1,6 @@
+[
+  "/bin/bash -lc \"pwd; rg --files -g 'AGENTS.md' -g 'page_spec.json' -g 'iter-*.md' -g '*summary*' -g '*' .autohelix/observations .autohelix/notes candidate\"",
+  "/bin/bash -lc \"cat candidate/page_spec.json candidate/schema.json .autohelix/notes/iter-1.md .autohelix/observations/iter-0/stdout.txt .autohelix/observations/iter-0/webhelix-report.json; rg --files -g 'AGENTS.md' -g '*' | head -60\"",
+  "/bin/bash -lc 'cat .autohelix/history.jsonl; git status --short; for p in /workspace/AGENTS.md <SOURCE_DIR>-runs/AGENTS.md <RUN_DIR>/AGENTS.md <RUN_DIR>/project/AGENTS.md <RUN_DIR>/project/.autohelix/AGENTS.md <RUN_DIR>/project/.autohelix/worktrees/AGENTS.md; do if [ -f \"$p\" ]; then cat \"$p\"; fi; done'",
+  "/bin/bash -lc \"python - <<'PY'\nimport json\nfrom collections import Counter\nfrom pathlib import Path\np = json.loads(Path('candidate/page_spec.json').read_text())\nassert set(p) == {'version', 'groups'} and p['version'] == 1\nassert 1 <= len(p['groups']) <= 3\nassert all(isinstance(g, list) and g for g in p['groups'])\nc = Counter(x for g in p['groups'] for x in g)\nassert set(c) == {'dock-a', 'dock-b', 'dock-c', 'dock-d'}\nassert sum(c.values()) <= 8 and max(c.values()) <= 3\nprint('Local structure checks passed:', len(p['groups']), 'groups,', sum(c.values()), 'cards,', dict(c))\nPY\n git diff --stat\""
+]

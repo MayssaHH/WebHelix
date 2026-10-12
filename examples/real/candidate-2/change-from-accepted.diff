@@ -1,0 +1,7 @@
+diff --git a/candidate/page_spec.json b/candidate/page_spec.json
+index f94accf..b81e86b 100644
+--- a/candidate/page_spec.json
++++ b/candidate/page_spec.json
+@@ -1 +1 @@
+-{"version":1,"groups":[["dock-a","dock-b","dock-c","dock-d"]]}
++{"version":1,"groups":[["dock-c","dock-c","dock-c"],["dock-d","dock-a"],["dock-b"]]}

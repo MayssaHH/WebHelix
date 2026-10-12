@@ -1,5 +1,10 @@
 # First real-model attempt — 2026-10-12 UTC
 
+> Historical attempt. The funded [real-model experiment](real/README.md) subsequently
+> ran two Codex iterations and reached **16/18** cumulative reservations. Budget and
+> recovery instructions below describe the earlier state; do not execute them as
+> a continuation of the now-finished experiment.
+
 **Follow-up:** local `.env` authentication now works. A later run encountered HTTP
 429 with no API credit; the cumulative budget is now **6/18**. See
 [the follow-up record](DOTENV_ATTEMPT.md). Historical evidence below remains intact.

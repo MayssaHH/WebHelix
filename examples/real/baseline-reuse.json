@@ -1,0 +1,7 @@
+{
+  "source_report": "<RUN_DIR>/batches/identity-bc20670254/report.json",
+  "harness_candidate": "<RUN_DIR>/project/candidate/page_spec.json",
+  "raw_hash": "c2df36e1aa8e80ef3ed2360ea788b2590242252a4cf0a2c86c848deb6a85cbe0",
+  "additional_episodes": 0,
+  "reason": "Same candidate bytes, fixtures and browser model configuration"
+}

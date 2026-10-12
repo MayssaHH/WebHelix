@@ -1,0 +1,85 @@
+{
+  "maximum": 18,
+  "reservations": [
+    {
+      "number": 1,
+      "label": "clean-e48c3615be/0",
+      "time": 1791837385.2170658
+    },
+    {
+      "number": 2,
+      "label": "clean-e48c3615be/1",
+      "time": 1791837388.8486264
+    },
+    {
+      "number": 3,
+      "label": "clean-e48c3615be/2",
+      "time": 1791837391.2275257
+    },
+    {
+      "number": 4,
+      "label": "clean-5e70373b62/0",
+      "time": 1791839397.3252444
+    },
+    {
+      "number": 5,
+      "label": "clean-5e70373b62/1",
+      "time": 1791839400.9613485
+    },
+    {
+      "number": 6,
+      "label": "clean-5e70373b62/2",
+      "time": 1791839403.484368
+    },
+    {
+      "number": 7,
+      "label": "clean-d8f0496282/0",
+      "time": 1791839958.8505223
+    },
+    {
+      "number": 8,
+      "label": "clean-d8f0496282/1",
+      "time": 1791839966.2920485
+    },
+    {
+      "number": 9,
+      "label": "clean-d8f0496282/2",
+      "time": 1791839974.0821173
+    },
+    {
+      "number": 10,
+      "label": "identity-bc20670254/0",
+      "time": 1791839981.024244
+    },
+    {
+      "number": 11,
+      "label": "identity-bc20670254/1",
+      "time": 1791839987.8575711
+    },
+    {
+      "number": 12,
+      "label": "identity-bc20670254/2",
+      "time": 1791839994.4016378
+    },
+    {
+      "number": 13,
+      "label": "autohelix-e856015a59/0",
+      "time": 1791840390.8221457
+    },
+    {
+      "number": 14,
+      "label": "autohelix-ee851e794f/0",
+      "time": 1791840477.072843
+    },
+    {
+      "number": 15,
+      "label": "autohelix-ee851e794f/1",
+      "time": 1791840485.9760842
+    },
+    {
+      "number": 16,
+      "label": "autohelix-ee851e794f/2",
+      "time": 1791840493.065593
+    }
+  ]
+}

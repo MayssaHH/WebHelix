@@ -3,8 +3,10 @@
 import json
 import os
 from contextlib import nullcontext
+from pathlib import Path
 
 import httpx
+from dotenv import dotenv_values
 
 ACTION_SCHEMA = {
     "type": "object",
@@ -31,6 +33,34 @@ class ProviderUnavailable(RuntimeError):
 
 class InvalidAction(ValueError):
     pass
+
+
+def provider_key():
+    """Use an explicitly selected credential file even in nested agent workers.
+
+    Never search a candidate directory for credentials or interpolate its env.
+    A selected file fails closed; an inherited placeholder is not a fallback.
+    """
+    path = os.environ.get("WEBHELIX_DOTENV_FILE")
+    values = os.environ
+    if path:
+        selected = Path(path)
+        if not selected.is_absolute() or not selected.is_file():
+            raise ProviderUnavailable("Selected WEBHELIX_DOTENV_FILE is unavailable")
+        try:
+            with selected.open() as stream:
+                values = dotenv_values(stream=stream, interpolate=False)
+        except (OSError, UnicodeError):
+            raise ProviderUnavailable(
+                "Selected WEBHELIX_DOTENV_FILE is unreadable"
+            ) from None
+    key = values.get("WEBHELIX_API_KEY") or values.get("OPENAI_API_KEY")
+    if not key or key == "your_api_key_here":
+        raise ProviderUnavailable(
+            "WEBHELIX_API_KEY (or OPENAI_API_KEY) is missing from the selected source. "
+            "Codex ChatGPT sign-in is not Responses API authentication."
+        )
+    return key
 
 
 def provider_settings():
@@ -77,11 +107,7 @@ def _error_record(response):
 
 def check_provider(client=None):
     """Check metadata and Responses authentication without requesting inference."""
-    key = os.environ.get("WEBHELIX_API_KEY") or os.environ.get("OPENAI_API_KEY")
-    if not key or key == "your_api_key_here":
-        raise ProviderUnavailable(
-            "WEBHELIX_API_KEY (or OPENAI_API_KEY) is missing. Codex ChatGPT sign-in is not Responses API authentication. Export an API key securely; do not paste it into chat."
-        )
+    key = provider_key()
     config = provider_settings()
     with httpx.Client(timeout=15) if client is None else nullcontext(client) as client:
         response = client.get(
@@ -126,9 +152,7 @@ def check_provider(client=None):
 
 class ResponsesPolicy:
     def __init__(self, request, artifact_dir, client=None):
-        key = os.environ.get("WEBHELIX_API_KEY") or os.environ.get("OPENAI_API_KEY")
-        if not key or key == "your_api_key_here":
-            raise ProviderUnavailable("WEBHELIX_API_KEY (or OPENAI_API_KEY) is missing")
+        key = provider_key()
         self.request = request
         self.directory = artifact_dir
         self.settings = provider_settings()

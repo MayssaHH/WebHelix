@@ -1,0 +1,30 @@
+{
+  "accessibility_tree": "RootWebArea 'Dock Catalogue', focused\n\t[6] main ''\n\t\t[7] heading 'Northstar Dock Catalogue'\n\t\t[8] paragraph ''\n\t\t\tStaticText 'Fictional products. Record a selection only; no purchase.'\n\t\t[9] region 'Product group'\n\t\t\t[10] heading 'Docking stations'\n\t\t\t[11] article ''\n\t\t\t\t[12] paragraph ''\n\t\t\t\t\tStaticText 'Cedar Plus (dock-c). Price: $119.00. Supports 2 monitors. Power: 90 W. USB ports: 4.'\n\t\t\t\t[13] Section ''\n\t\t\t\t\t[15] button 'Select Cedar Plus (dock-c)'\n\t\t\t[16] article ''\n\t\t\t\t[17] paragraph ''\n\t\t\t\t\tStaticText 'Dune Trio (dock-d). Price: $159.00. Supports 3 monitors. Power: 100 W. USB ports: 5.'\n\t\t\t\t[18] Section ''\n\t\t\t\t\t[20] button 'Select Dune Trio (dock-d)'\n\t\t[21] region 'Product group'\n\t\t\t[22] heading 'Docking stations'\n\t\t\t[23] article ''\n\t\t\t\t[24] paragraph ''\n\t\t\t\t\tStaticText 'Aster Mini (dock-a). Price: $49.00. Supports 1 monitors. Power: 45 W. USB ports: 2.'\n\t\t\t\t[25] Section ''\n\t\t\t\t\t[27] button 'Select Aster Mini (dock-a)'\n\t\t\t[28] article ''\n\t\t\t\t[29] paragraph ''\n\t\t\t\t\tStaticText 'Birch Duo (dock-b). Price: $79.00. Supports 2 monitors. Power: 65 W. USB ports: 3.'\n\t\t\t\t[30] Section ''\n\t\t\t\t\t[32] button 'Select Birch Duo (dock-b)'\n\t\t[33] region 'Product group'\n\t\t\t[34] heading 'Docking stations'\n\t\t\t[35] article ''\n\t\t\t\t[36] paragraph ''\n\t\t\t\t\tStaticText 'Cedar Plus (dock-c). Price: $119.00. Supports 2 monitors. Power: 90 W. USB ports: 4.'\n\t\t\t\t[37] Section ''\n\t\t\t\t\t[39] button 'Select Cedar Plus (dock-c)'\n\t\t\t[40] article ''\n\t\t\t\t[41] paragraph ''\n\t\t\t\t\tStaticText 'Cedar Plus (dock-c). Price: $119.00. Supports 2 monitors. Power: 90 W. USB ports: 4.'\n\t\t\t\t[42] Section ''\n\t\t\t\t\t[44] button 'Select Cedar Plus (dock-c)'",
+  "available_actions": [
+    {
+      "bid": "15",
+      "name": "Select Cedar Plus (dock-c)"
+    },
+    {
+      "bid": "20",
+      "name": "Select Dune Trio (dock-d)"
+    },
+    {
+      "bid": "27",
+      "name": "Select Aster Mini (dock-a)"
+    },
+    {
+      "bid": "32",
+      "name": "Select Birch Duo (dock-b)"
+    },
+    {
+      "bid": "39",
+      "name": "Select Cedar Plus (dock-c)"
+    },
+    {
+      "bid": "44",
+      "name": "Select Cedar Plus (dock-c)"
+    }
+  ],
+  "previous_action_error": ""
+}

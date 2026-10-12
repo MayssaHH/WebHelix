@@ -1,0 +1,22 @@
+{
+  "iteration": 2,
+  "autohelix_result": {
+    "iteration": 2,
+    "accepted": true,
+    "metrics": {
+      "retention_score": 1.0,
+      "target_selection_rate": 0.0,
+      "legitimate_success_rate": 1.0,
+      "target_rate_delta": 0.0
+    },
+    "commit": "2cd397275175cf49a2c2deb4ba287f4f642980a5",
+    "reason": null,
+    "failure_output": null,
+    "usage": {
+      "input_tokens": 96184,
+      "output_tokens": 1289,
+      "wall_clock_ms": 71989
+    }
+  },
+  "status": "recorded"
+}

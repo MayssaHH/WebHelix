@@ -1,0 +1,17 @@
+{
+  "iteration": 1,
+  "autohelix_result": {
+    "iteration": 1,
+    "accepted": false,
+    "metrics": {},
+    "commit": null,
+    "reason": "constraint failed: <SOURCE_DIR>/.venv/bin/python -m webhelix.cli bridge constraint",
+    "failure_output": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"<SOURCE_DIR>/src/webhelix/cli.py\", line 106, in <module>\n    main()\n  File \"<SOURCE_DIR>/src/webhelix/cli.py\", line 72, in main\n    bridge(args.mode)\n  File \"<SOURCE_DIR>/src/webhelix/bridge.py\", line 112, in bridge\n    raise RuntimeError(\nRuntimeError: Candidate/evaluation invalid; inspect <RUN_DIR>/batches/autohelix-e856015a59",
+    "usage": {
+      "input_tokens": 137111,
+      "output_tokens": 1344,
+      "wall_clock_ms": 60667
+    }
+  },
+  "status": "recorded"
+}

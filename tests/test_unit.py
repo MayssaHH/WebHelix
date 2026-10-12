@@ -5,7 +5,12 @@ import httpx
 import pytest
 
 from webhelix.evaluate import evaluate, reserve_episode, summarize
-from webhelix.policy import ResponsesPolicy, ProviderUnavailable, check_provider
+from webhelix.policy import (
+    ResponsesPolicy,
+    ProviderUnavailable,
+    check_provider,
+    provider_key,
+)
 from webhelix.spec import ground_truth, read_json
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -19,6 +24,7 @@ def isolated_provider_environment(monkeypatch):
         "OPENAI_API_KEY",
         "WEBHELIX_BROWSER_MODEL",
         "WEBHELIX_BROWSER_REASONING",
+        "WEBHELIX_DOTENV_FILE",
     ):
         monkeypatch.delenv(name, raising=False)
 
@@ -151,6 +157,61 @@ def test_missing_api_key_is_explicit(monkeypatch):
     monkeypatch.delenv("OPENAI_API_KEY", raising=False)
     with pytest.raises(ProviderUnavailable, match="Codex ChatGPT"):
         check_provider()
+
+
+def test_explicit_dotenv_survives_nested_environment(tmp_path, monkeypatch):
+    selected = tmp_path / "chosen.env"
+    selected.write_text("WEBHELIX_API_KEY=test-file-only\n")
+    candidate = tmp_path / "candidate"
+    candidate.mkdir()
+    (candidate / ".env").write_text("WEBHELIX_API_KEY=untrusted-candidate\n")
+    monkeypatch.chdir(candidate)
+    monkeypatch.setenv("WEBHELIX_DOTENV_FILE", str(selected))
+    monkeypatch.setenv("WEBHELIX_API_KEY", "inherited-placeholder")
+    calls = []
+
+    def handle(request):
+        calls.append(request)
+        assert request.headers["Authorization"] == "Bearer test-file-only"
+        if request.method == "GET":
+            return httpx.Response(200, json={"object": "model", "id": "gpt-6.1-sol"})
+        return httpx.Response(
+            400, json={"error": {"type": "invalid_request_error", "param": "model"}}
+        )
+
+    with httpx.Client(transport=httpx.MockTransport(handle)) as client:
+        check_provider(client)
+        policy = ResponsesPolicy("legitimate request", candidate, client=client)
+        with pytest.raises(ProviderUnavailable, match="HTTP 400"):
+            policy.act({"accessibility_tree": "truthful page"}, 0)
+    assert len(calls) == 3
+    for artifact in candidate.glob("*.json"):
+        assert "test-file-only" not in artifact.read_text()
+
+
+@pytest.mark.parametrize("content", [None, "", "WEBHELIX_API_KEY=your_api_key_here\n"])
+def test_selected_dotenv_fails_closed(tmp_path, monkeypatch, content):
+    selected = tmp_path / "chosen.env"
+    if content is not None:
+        selected.write_text(content)
+    monkeypatch.setenv("WEBHELIX_DOTENV_FILE", str(selected))
+    monkeypatch.setenv("WEBHELIX_API_KEY", "inherited-placeholder")
+    with pytest.raises(ProviderUnavailable):
+        provider_key()
+
+
+def test_dotenv_disables_interpolation_and_requires_absolute_path(
+    tmp_path, monkeypatch
+):
+    selected = tmp_path / "chosen.env"
+    selected.write_text("OPENAI_API_KEY='test-${INHERITED_SECRET}'\n")
+    monkeypatch.setenv("INHERITED_SECRET", "must-not-expand")
+    monkeypatch.setenv("WEBHELIX_DOTENV_FILE", str(selected))
+    assert provider_key() == "test-${INHERITED_SECRET}"
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setenv("WEBHELIX_DOTENV_FILE", "chosen.env")
+    with pytest.raises(ProviderUnavailable, match="unavailable"):
+        provider_key()
 
 
 @pytest.mark.parametrize("accepted", [False, True])

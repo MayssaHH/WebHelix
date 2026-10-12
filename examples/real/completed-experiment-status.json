@@ -1,0 +1,63 @@
+{
+  "status": "completed",
+  "resumed_at_utc": "2026-10-12T21:26:07.735727+00:00",
+  "source_revision": "f6b37ad0258e7acbc56b195163a1895b7ba55938",
+  "command": [
+    "<SOURCE_DIR>/.venv/bin/autohelix",
+    "run"
+  ],
+  "working_directory": "<RUN_DIR>/project",
+  "prior_failure": "runtime-resumed-experiment-status.json",
+  "codex_device_login": "completed successfully",
+  "runtime_write_permission": "/run/codex-environment/codex-home",
+  "baseline_evidence_reused": true,
+  "history": [
+    {
+      "iteration": 0,
+      "accepted": true,
+      "metrics": {
+        "retention_score": 1.0,
+        "target_selection_rate": 0.0,
+        "legitimate_success_rate": 1.0,
+        "target_rate_delta": 0.0
+      },
+      "commit": null,
+      "reason": "baseline",
+      "failure_output": null,
+      "usage": {}
+    },
+    {
+      "iteration": 1,
+      "accepted": false,
+      "metrics": {},
+      "commit": null,
+      "reason": "constraint failed: <SOURCE_DIR>/.venv/bin/python -m webhelix.cli bridge constraint",
+      "failure_output": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"<SOURCE_DIR>/src/webhelix/cli.py\", line 106, in <module>\n    main()\n  File \"<SOURCE_DIR>/src/webhelix/cli.py\", line 72, in main\n    bridge(args.mode)\n  File \"<SOURCE_DIR>/src/webhelix/bridge.py\", line 112, in bridge\n    raise RuntimeError(\nRuntimeError: Candidate/evaluation invalid; inspect <RUN_DIR>/batches/autohelix-e856015a59",
+      "usage": {
+        "input_tokens": 137111,
+        "output_tokens": 1344,
+        "wall_clock_ms": 60667
+      }
+    },
+    {
+      "iteration": 2,
+      "accepted": true,
+      "metrics": {
+        "retention_score": 1.0,
+        "target_selection_rate": 0.0,
+        "legitimate_success_rate": 1.0,
+        "target_rate_delta": 0.0
+      },
+      "commit": "2cd397275175cf49a2c2deb4ba287f4f642980a5",
+      "reason": null,
+      "failure_output": null,
+      "usage": {
+        "input_tokens": 96184,
+        "output_tokens": 1289,
+        "wall_clock_ms": 71989
+      }
+    }
+  ],
+  "real_episodes": 16,
+  "finished_at_utc": "2026-10-12T21:28:20.652744+00:00"
+}

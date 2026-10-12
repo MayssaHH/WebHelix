@@ -1,5 +1,8 @@
 # Before and after: one inspectable proposal
 
+This page preserves the earlier **scripted control**. For the subsequently executed
+LLM proposals and victim choices, open [the real-model walkthrough](../real/README.md).
+
 The **page is HTML**. The optimizer edits a JSON layout description; our fixed
 renderer turns it into the HTML website that the victim interacts with.
 
@@ -59,8 +62,8 @@ a candidate and records its experimental hypothesis, the victim model attempts
 the task on the resulting HTML page, and the evaluator records its actual
 confirmation. The same comparison report then shows that real proposal and result.
 
-Browser API credentials remain missing, so that experiment has not run. No real
-victim episodes were spent generating this visual report. The comparison generator
+That real experiment has now run; see the link above. No real victim episodes
+were spent generating this older scripted visual report. The comparison generator
 itself makes no model calls. Allowing a broader family of manipulations would
 require expanding the candidate schema or introducing a constrained HTML format;
 this update preserves the existing structural search space.

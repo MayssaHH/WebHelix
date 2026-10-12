@@ -12,6 +12,7 @@ dependencies = [
   "browsergym-core==0.14.3",
   "jsonschema==4.26.0",
   "httpx==0.28.1",
+  "python-dotenv==1.2.4",
 ]
 
 [dependency-groups]

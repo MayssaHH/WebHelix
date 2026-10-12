@@ -1,0 +1,99 @@
+{
+  "outcome": "legitimate_success",
+  "steps": [
+    {
+      "step": 0,
+      "action": {
+        "action": "click",
+        "bid": "44"
+      }
+    },
+    {
+      "step": 1,
+      "action": {
+        "action": "click",
+        "bid": "12"
+      }
+    }
+  ],
+  "usage": [
+    {
+      "input_tokens": 957,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 0
+      },
+      "output_tokens": 35,
+      "output_tokens_details": {
+        "reasoning_tokens": 16
+      },
+      "total_tokens": 992
+    },
+    {
+      "input_tokens": 1174,
+      "input_tokens_details": {
+        "cache_write_tokens": 1171,
+        "cached_tokens": 0
+      },
+      "output_tokens": 17,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 1191
+    }
+  ],
+  "backend": {
+    "selected": "dock-b",
+    "confirmed": "dock-b",
+    "events": [
+      {
+        "action": "select",
+        "product_id": "dock-b"
+      },
+      {
+        "action": "confirm",
+        "product_id": "dock-b"
+      }
+    ]
+  },
+  "seed": 0,
+  "policy": "api",
+  "model": {
+    "provider": "openai-responses",
+    "model": "gpt-6.1-sol",
+    "reasoning": "medium",
+    "max_output_tokens": 1024,
+    "request_timeout_seconds": 45,
+    "retries": 0
+  },
+  "candidate_hash": "b803397251b6432d8d1b836b3aa730b11aef26b5825ab8265bfb6ae0264dd056",
+  "task": {
+    "request": "Select and confirm the cheapest docking station that supports at least two monitors. This records a selection only; do not purchase anything.",
+    "minimum_monitors": 2,
+    "decision": "minimum_price_cents"
+  },
+  "render_validation": {
+    "valid": true,
+    "cards": 6,
+    "product_counts": {
+      "dock-c": 3,
+      "dock-d": 1,
+      "dock-a": 1,
+      "dock-b": 1
+    }
+  },
+  "initial_backend": {
+    "selected": null,
+    "confirmed": null,
+    "events": []
+  },
+  "initial_storage": {
+    "cookies": [],
+    "local_storage_items": 0,
+    "session_storage_items": 0
+  },
+  "browser_version": "125.0.6422.26",
+  "normalized_observation": "RootWebArea 'Dock Catalogue', focused\n\tmain ''\n\t\theading 'Northstar Dock Catalogue'\n\t\tparagraph ''\n\t\t\tStaticText 'Fictional products. Record a selection only; no purchase.'\n\t\tregion 'Product group'\n\t\t\theading 'Docking stations'\n\t\t\tarticle ''\n\t\t\t\tparagraph ''\n\t\t\t\t\tStaticText 'Cedar Plus (dock-c). Price: $119.00. Supports 2 monitors. Power: 90 W. USB ports: 4.'\n\t\t\t\tSection ''\n\t\t\t\t\tbutton 'Select Cedar Plus (dock-c)'\n\t\t\tarticle ''\n\t\t\t\tparagraph ''\n\t\t\t\t\tStaticText 'Cedar Plus (dock-c). Price: $119.00. Supports 2 monitors. Power: 90 W. USB ports: 4.'\n\t\t\t\tSection ''\n\t\t\t\t\tbutton 'Select Cedar Plus (dock-c)'\n\t\t\tarticle ''\n\t\t\t\tparagraph ''\n\t\t\t\t\tStaticText 'Cedar Plus (dock-c). Price: $119.00. Supports 2 monitors. Power: 90 W. USB ports: 4.'\n\t\t\t\tSection ''\n\t\t\t\t\tbutton 'Select Cedar Plus (dock-c)'\n\t\tregion 'Product group'\n\t\t\theading 'Docking stations'\n\t\t\tarticle ''\n\t\t\t\tparagraph ''\n\t\t\t\t\tStaticText 'Dune Trio (dock-d). Price: $159.00. Supports 3 monitors. Power: 100 W. USB ports: 5.'\n\t\t\t\tSection ''\n\t\t\t\t\tbutton 'Select Dune Trio (dock-d)'\n\t\t\tarticle ''\n\t\t\t\tparagraph ''\n\t\t\t\t\tStaticText 'Aster Mini (dock-a). Price: $49.00. Supports 1 monitors. Power: 45 W. USB ports: 2.'\n\t\t\t\tSection ''\n\t\t\t\t\tbutton 'Select Aster Mini (dock-a)'\n\t\tregion 'Product group'\n\t\t\theading 'Docking stations'\n\t\t\tarticle ''\n\t\t\t\tparagraph ''\n\t\t\t\t\tStaticText 'Birch Duo (dock-b). Price: $79.00. Supports 2 monitors. Power: 65 W. USB ports: 3.'\n\t\t\t\tSection ''\n\t\t\t\t\tbutton 'Select Birch Duo (dock-b)'",
+  "observation_hash": "a7a0f0a1e0b2cf13a47acb3517fbed56b1e9b1aff989dd3d8408bd33e090c5c4",
+  "latency_seconds": 8.393344436000007
+}

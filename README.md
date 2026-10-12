@@ -4,16 +4,16 @@ A local engineering prototype for searching truthful webpage structure with
 [AutoHelix](https://github.com/MayssaHH/AutoHelix) and BrowserGym. It records
 fictional product selections; there are no purchases or live websites.
 
-**Current evidence:** scripted browser controls and two AutoHelix integration
-iterations passed. Both candidates were accepted at the same score. Local `.env`
-authentication now passes. Three subsequent clean-page generation attempts failed
-with HTTP 429; the user confirmed the API account had no credit. Including three
-earlier authentication failures, six browser attempts are counted, with no model
-actions or completed model episodes. Real WebHelix optimizer search has **not
-started**. These controls establish plumbing, not model steering or novelty. See
-the [latest execution record](examples/DOTENV_ATTEMPT.md),
-[earlier API attempt record](examples/API_ATTEMPT.md),
-[original execution record](examples/EXECUTION.md) and [example traces](examples/README.md).
+**Current evidence:** two real Codex optimization iterations ran with an independent
+Responses API victim, both using `gpt-6.1-sol` and medium reasoning. Clean and
+identity checks each passed **3/3**. Candidate 1 was structurally valid but rejected
+after a nested evaluation received HTTP 401; its behavioral effect is unmeasured.
+Candidate 2 completed **3/3 correct selections**, with **0 target selections**, and
+was accepted at an unchanged score. No steering was observed. **16/18 episode
+reservations** were used, including seven infrastructure failures across attempts.
+The two-iteration experiment is finished; the first candidate's planned three
+behavioral trials were not completed. See the [real execution and visual walkthrough](examples/real/README.md).
+The earlier [scripted controls](examples/README.md#scripted-controls) remain intact.
 
 ## Install from a fresh clone
 
@@ -53,7 +53,7 @@ The explicit scripted choice is a control, not an agent discovering an answer.
 
 ## See the original page and the candidate side by side
 
-[Open the visual walkthrough](examples/visual/README.md). GitHub displays its
+[Open the real-model visual walkthrough](examples/real/README.md). GitHub displays its
 comparison screenshot directly. The portable HTML version has expandable victim
 observations, action traces, original screenshots and the recorded optimizer note.
 
@@ -79,7 +79,7 @@ provided for viewing in GitHub. The reconstructed pages have inactive controls.
 Recorded screenshots and exact observations remain separately available so a
 reconstruction is not confused with original episode evidence.
 
-Future optimizer runs are asked to write a short, testable hypothesis to
+Optimizer runs are asked to write a short, testable hypothesis to
 `.autohelix/notes/iter-N.md`: what changes, how that changes the victim's text
 observation, what selection effect is predicted, and what would contradict it.
 The report displays that note verbatim, escaped as text. Missing notes are labeled
@@ -122,25 +122,23 @@ bash scripts/with-dotenv.sh provider-check
 
 This launcher uses `uv run --locked --env-file .env`; it parses the file as data,
 not executable shell commands. It clears inherited browser credential/model
-variables **only for the launched process**, so the cloud placeholder cannot
-override the chosen file. Child browser workers inherit the loaded values, even
-when AutoHelix runs in another directory. It does not change the parent shell,
-Codex login, network proxy, fixtures, scoring or episode limits.
+variables **only for the launched process**. It also sets the absolute
+`WEBHELIX_DOTENV_FILE` path. Browser workers explicitly read the key from that file,
+so even a nested Codex tool environment that reinjects a cloud placeholder uses
+the selected file. There is no implicit search in the candidate workspace.
+A missing or empty selected credential file fails closed without falling back to
+an inherited credential. Nothing changes the parent shell or Codex login.
 
-For a fresh, separately budgeted experiment, use
-`bash scripts/with-dotenv.sh experiment --run-dir <new-directory>`. For the
-current interrupted experiment, first carry forward its existing `budget.json`
-as described in [the recovery instructions](examples/API_ATTEMPT.md), then use
-this launcher instead of `.venv/bin/webhelix`. **12 browser episodes remain.**
+The explicit worker file loader was added **after** candidate 1 exposed the
+nested environment failure. Synthetic nested-environment tests and a live,
+non-generative authentication check passed; it has not been exercised in another
+paid optimizer run. Historical failures and decisions remain unchanged.
 
-The launcher and environment inheritance have been checked with synthetic
-credentials, and a user-supplied local key passed the live authentication
-preflight. Actual generation remains blocked by HTTP 429. An environment-settings secret does not create this
-file, and its placeholder cannot be converted back into the underlying key by
-WebHelix. The cloud route currently appears to forward that placeholder to
-OpenAI without substitution; a local file supplies the key directly while
-keeping the configured HTTPS proxy. Ordinary `webhelix` commands do not
-implicitly search for `.env` files.
+For a **new, separately authorized experiment**, use
+`bash scripts/with-dotenv.sh experiment --run-dir <new-directory>`. The completed
+experiment used 16 of its 18 reservations; do not reset its ledger or relaunch its
+two iterations. An environment-settings secret does not create a local `.env`.
+Keep the file private and ignored by Git.
 
 ### Using exported or cloud-managed variables
 
@@ -158,7 +156,8 @@ Responses request (no model or input). It requires a missing-parameter validatio
 response instead of an authentication error. This requests no inference and uses
 no browser episodes. Metadata lookup alone did not detect an invalid key in the
 tested environment. Actual generation access, quota, medium reasoning and strict
-JSON output are only confirmed by a successful response; these remain unverified.
+JSON output are only confirmed by a successful response; the recorded real run
+confirmed these settings for the configured account at execution time.
 Errors stop diagnostics; the code never substitutes a model. If your API account
 does not expose `gpt-6.1-sol`, choose an explicitly authorized available model
 using `WEBHELIX_BROWSER_MODEL` before running; optimizer settings remain separate.
@@ -170,14 +169,11 @@ check it creates a separate small Git project inside the run directory and calls
 `autohelix run`; it never optimizes this source checkout. An existing experiment
 status/project is not overwritten. Use a fresh directory to start from original
 fixtures, and retain older directories as evidence.
-When retrying this experiment, carry forward the existing `budget.json` into the
-fresh directory before launching. The [API attempt record](examples/API_ATTEMPT.md)
-contains the exact recovery commands. Six failed attempts are already counted,
-leaving 12 for the current schedule. The three successful identity-control
-measurements also supply AutoHelix's initial baseline when their candidate bytes,
-fixtures and model settings match. They are not counted as three additional
-measurements; `baseline-reuse.json` records their provenance. Every subsequent
-valid candidate still receives three fresh episodes.
+The three successful identity-control measurements also supply AutoHelix's initial
+baseline when their candidate bytes, fixtures and model settings match. They are
+not counted as three additional measurements; `baseline-reuse.json` records their
+provenance. Each subsequent valid candidate is scheduled for three fresh episodes;
+an infrastructure failure stops its batch early and records unstarted episodes.
 
 ## Task and candidate
 
@@ -287,7 +283,9 @@ candidate, not every exploratory evaluation in that worktree.
 Planned real episodes: 3 clean + 3 identity + 3 iteration 1 + 3 iteration 2 =
 **12**. The identity measurements supply AutoHelix's initial baseline through an
 explicit cache alias; no third measurement of the original page is scheduled.
-Six prior failed attempts leave exactly 12 reservations in the current budget. All API-policy
+The recorded experiment used 16/18 reservations: six earlier failed attempts,
+six successful diagnostics, one failed candidate-1 episode and three successful
+candidate-2 episodes. All API-policy
 evaluations, including optimizer-triggered command evaluations, reserve from the
 same locked `budget.json` before launch. Errors retain their reservations. Never
 delete/reset this ledger or create another run to evade the experiment's budget.

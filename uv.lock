@@ -923,6 +923,7 @@ dependencies = [
     { name = "browsergym-core" },
     { name = "httpx" },
     { name = "jsonschema" },
+    { name = "python-dotenv" },
 ]
 
 [package.dev-dependencies]
@@ -937,6 +938,7 @@ requires-dist = [
     { name = "browsergym-core", specifier = "==0.14.3" },
     { name = "httpx", specifier = "==0.28.1" },
     { name = "jsonschema", specifier = "==4.26.0" },
+    { name = "python-dotenv", specifier = "==1.2.4" },
 ]
 
 [package.metadata.requires-dev]

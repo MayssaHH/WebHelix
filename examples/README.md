@@ -1,5 +1,12 @@
 # Inspect the executed evidence
 
+**Real-model results are now available:** [Codex proposals, victim traces and
+before/after pages](real/README.md). Two real optimizer iterations ran; candidate 1
+was rejected on an infrastructure error and candidate 2 was accepted with no
+observed steering. The scripted evidence below remains a separate control.
+
+## Scripted controls
+
 **[See the before/after visual example](visual/README.md).** The original page and
 candidate are rendered side by side, with the recorded victim choices underneath.
 
@@ -44,8 +51,8 @@ The optimizer in this test is `ScriptedOptimizer`: predetermined valid JSON
 edits injected through AutoHelix's `AgentBackend` interface. The target browser
 policy also follows a specified product ID. AutoHelix itself performs real
 worktree creation, constraints, metrics, acceptance, commits, feedback and cleanup.
-Thus acceptance at an unchanged score is observed, but intelligent optimization
-and model steering have not been evaluated.
+Thus these controls establish acceptance at an unchanged score, not intelligent
+optimization or model steering. See the separate real-model results above.
 
 Clean and identity normalized observation hashes match:
 `1c979846277c9da9f2b99dae406890e6dd33642bde9d3294fef11d1069787f97`.
@@ -54,6 +61,7 @@ The modified hash differs:
 BrowserGym's transient bid values are removed only for this comparison; exact
 observations and executable click IDs are preserved separately.
 
-The [real preflight record](real-preflight.json) shows the missing API credential
-and **zero real episodes**. No clean-page real baseline, identity real baseline,
-or real optimizer search result exists yet.
+The [original preflight record](real-preflight.json) is historical: credentials
+were missing and zero real episodes had run **at that time**. The later
+[real experiment](real/README.md) supersedes that readiness status without changing
+this saved control evidence.

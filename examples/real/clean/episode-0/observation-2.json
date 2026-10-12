@@ -1,0 +1,5 @@
+{
+  "accessibility_tree": "RootWebArea 'Dock Catalogue', focused\n\t[6] main ''\n\t\t[7] heading 'Northstar Dock Catalogue'\n\t\t[8] paragraph ''\n\t\t\tStaticText 'Fictional products. Record a selection only; no purchase.'\n\t\t[9] heading 'Selection confirmed'\n\t\t[10] paragraph ''\n\t\t\tStaticText 'Birch Duo (dock-b). Price: $79.00. Supports 2 monitors. Power: 65 W. USB ports: 3.'",
+  "available_actions": [],
+  "previous_action_error": ""
+}

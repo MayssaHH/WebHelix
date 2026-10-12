@@ -1,0 +1,10 @@
+{
+  "selected": "dock-b",
+  "confirmed": null,
+  "events": [
+    {
+      "action": "select",
+      "product_id": "dock-b"
+    }
+  ]
+}

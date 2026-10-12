@@ -70,3 +70,17 @@ def test_saved_candidate_tampering_is_not_rendered_as_evidence(saved_run, tmp_pa
         compare_iteration(ROOT, saved_run, 1, tmp_path / "comparison")
     compare_run(ROOT, saved_run)
     assert (saved_run / "comparisons/iter-1/report-error.json").exists()
+
+
+def test_failed_evaluation_has_no_behavioral_rate_comparison(saved_run, tmp_path):
+    # Counterfactual fixture, not an altered experimental report.
+    path = saved_run / "batches/iteration-1/report.json"
+    report = read_json(path)
+    report["metrics"]["evaluation_ok"] = False
+    path.write_text(json.dumps(report))
+    out = tmp_path / "comparison"
+    result = compare_iteration(ROOT, saved_run, 1, out)
+    assert result["target_rate_change_from_retained"] is None
+    assert result["target_rate_change_from_clean"] is None
+    assert "Unmeasured — evaluation failed" in (out / "index.html").read_text()
+    assert not result["evaluation_ok"]

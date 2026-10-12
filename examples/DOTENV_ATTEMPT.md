@@ -1,5 +1,10 @@
 # Local `.env` attempt — 2026-10-12 UTC / 2026-10-13 Beirut
 
+> Historical attempt. The funded [real-model experiment](real/README.md) subsequently
+> ran two Codex iterations and reached **16/18** cumulative reservations. Budget and
+> recovery instructions below describe the earlier state; do not execute them as
+> a continuation of the now-finished experiment.
+
 Source revision: `d1be1d948a40893e1ceb6a5dbf5348cdf1bcd5df`.
 Run: `/workspace/webhelix-runs/real-model-resume-h31xz_ev`.
 Prior evidence: `/workspace/webhelix-runs/real-model-AsiEz7`.
