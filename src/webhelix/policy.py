@@ -2,6 +2,7 @@
 
 import json
 import os
+from contextlib import nullcontext
 
 import httpx
 
@@ -43,27 +44,83 @@ def provider_settings():
     }
 
 
-def check_provider():
-    """Read-only account/model access check, not a browser episode."""
+def _error_record(response):
+    """Retain diagnostic codes, never free-form errors that can echo credentials."""
+    try:
+        error = response.json().get("error", {})
+    except (ValueError, AttributeError):
+        error = {}
+    if not isinstance(error, dict):
+        error = {}
+    allowed = {
+        "type": {"invalid_request_error", "authentication_error", "server_error"},
+        "code": {
+            "invalid_api_key",
+            "missing_required_parameter",
+            "model_not_found",
+            "insufficient_quota",
+            "rate_limit_exceeded",
+            "unsupported_parameter",
+            "unsupported_value",
+        },
+        "param": {"model", "input"},
+    }
+    return {
+        "http_status": response.status_code,
+        "error": {
+            field: value if isinstance(value, str) and value in permitted else None
+            for field, permitted in allowed.items()
+            for value in [error.get(field)]
+        },
+    }
+
+
+def check_provider(client=None):
+    """Check metadata and Responses authentication without requesting inference."""
     key = os.environ.get("WEBHELIX_API_KEY") or os.environ.get("OPENAI_API_KEY")
     if not key or key == "your_api_key_here":
         raise ProviderUnavailable(
             "WEBHELIX_API_KEY (or OPENAI_API_KEY) is missing. Codex ChatGPT sign-in is not Responses API authentication. Export an API key securely; do not paste it into chat."
         )
     config = provider_settings()
-    with httpx.Client(timeout=15) as client:
+    with httpx.Client(timeout=15) if client is None else nullcontext(client) as client:
         response = client.get(
             "https://api.openai.com/v1/models/" + config["model"],
             headers={"Authorization": "Bearer " + key},
         )
-    if response.status_code != 200:
+        if response.status_code != 200:
+            raise ProviderUnavailable(
+                f"Model lookup HTTP {response.status_code}; verify the exact model. No model substitution was made."
+            )
+        metadata = response.json()
+        if metadata.get("object") != "model" or metadata.get("id") != config["model"]:
+            raise ProviderUnavailable("Model lookup did not return the requested model")
+        # Model metadata may be accessible without valid authentication. An empty
+        # Responses request cannot generate output; require the expected schema
+        # validation result, rather than treating any non-401 response as success.
+        response = client.post(
+            "https://api.openai.com/v1/responses",
+            json={},
+            headers={"Authorization": "Bearer " + key},
+        )
+    record = _error_record(response)
+    error = record["error"]
+    if not (
+        response.status_code == 400
+        and error["type"] == "invalid_request_error"
+        and (error["code"] == "missing_required_parameter" or error["param"] == "model")
+    ):
         raise ProviderUnavailable(
-            f"Model access check HTTP {response.status_code}; verify the exact model on the API account. No model substitution was made."
+            f"Responses authentication preflight HTTP {response.status_code} "
+            f"({error['code'] or 'unclassified'}); expected missing-model validation. "
+            "Check the API credential and its api.openai.com secret binding. "
+            "No inference was requested."
         )
     return {
         **config,
-        "model_access": "verified",
-        "reasoning_and_schema": "verified only by a successful response call",
+        "model_lookup": "recognized; metadata alone does not prove access",
+        "responses_preflight": "empty request reached parameter validation",
+        "generation_access_reasoning_and_schema": "unverified until a successful response call",
     }
 
 
@@ -111,8 +168,13 @@ class ResponsesPolicy:
             headers={"Authorization": "Bearer " + self.key},
         )
         if response.status_code != 200:
+            record = _error_record(response)
+            (self.directory / f"response-{step}.json").write_text(
+                json.dumps(record, indent=2)
+            )
             raise ProviderUnavailable(
-                f"Responses API HTTP {response.status_code}; no automatic retry"
+                f"Responses API HTTP {response.status_code} "
+                f"({record['error']['code'] or 'unclassified'}); no automatic retry"
             )
         data = response.json()
         record = {

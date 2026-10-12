@@ -11,6 +11,18 @@ from webhelix.spec import ground_truth, read_json
 ROOT = Path(__file__).resolve().parents[1]
 
 
+@pytest.fixture(autouse=True)
+def isolated_provider_environment(monkeypatch):
+    # Unit tests must never use credentials or model overrides from a live run.
+    for name in (
+        "WEBHELIX_API_KEY",
+        "OPENAI_API_KEY",
+        "WEBHELIX_BROWSER_MODEL",
+        "WEBHELIX_BROWSER_REASONING",
+    ):
+        monkeypatch.delenv(name, raising=False)
+
+
 @pytest.mark.parametrize(
     "spec",
     [
@@ -139,6 +151,94 @@ def test_missing_api_key_is_explicit(monkeypatch):
     monkeypatch.delenv("OPENAI_API_KEY", raising=False)
     with pytest.raises(ProviderUnavailable, match="Codex ChatGPT"):
         check_provider()
+
+
+@pytest.mark.parametrize("accepted", [False, True])
+def test_preflight_checks_responses_without_inference(monkeypatch, accepted):
+    monkeypatch.setenv("WEBHELIX_API_KEY", "test-only-not-a-credential")
+    calls = []
+
+    def handle(request):
+        calls.append(request)
+        if request.method == "GET":
+            return httpx.Response(200, json={"object": "model", "id": "gpt-6.1-sol"})
+        return httpx.Response(
+            400 if accepted else 401,
+            json={
+                "error": {
+                    "type": "invalid_request_error",
+                    "code": "missing_required_parameter"
+                    if accepted
+                    else "invalid_api_key",
+                    "param": "model" if accepted else None,
+                    "message": "DO_NOT_SAVE_THIS_SECRET",
+                }
+            },
+        )
+
+    with httpx.Client(transport=httpx.MockTransport(handle)) as client:
+        if accepted:
+            result = check_provider(client)
+            assert result["generation_access_reasoning_and_schema"].startswith(
+                "unverified"
+            )
+        else:
+            with pytest.raises(ProviderUnavailable, match="invalid_api_key") as exc:
+                check_provider(client)
+            assert "DO_NOT_SAVE_THIS_SECRET" not in str(exc.value)
+    assert [r.method for r in calls] == ["GET", "POST"]
+    assert calls[1].url.path == "/v1/responses"
+    assert json.loads(calls[1].content) == {}  # no model, prompt or output tokens
+
+
+def test_failed_api_response_preserves_only_safe_diagnostics(tmp_path, monkeypatch):
+    monkeypatch.setenv("WEBHELIX_API_KEY", "test-only-not-a-credential")
+    with httpx.Client(
+        transport=httpx.MockTransport(
+            lambda request: httpx.Response(
+                401,
+                json={
+                    "error": {
+                        "type": "invalid_request_error",
+                        "code": "invalid_api_key",
+                        "param": "DO_NOT_SAVE_THIS_SECRET",
+                        "message": "DO_NOT_SAVE_THIS_SECRET",
+                    }
+                },
+            )
+        )
+    ) as client:
+        policy = ResponsesPolicy("legitimate request", tmp_path, client=client)
+        with pytest.raises(ProviderUnavailable, match="invalid_api_key") as exc:
+            policy.act({"accessibility_tree": "truthful page"}, 0)
+    artifact = (tmp_path / "response-0.json").read_text()
+    assert "DO_NOT_SAVE_THIS_SECRET" not in artifact + str(exc.value)
+    assert "test-only-not-a-credential" not in artifact
+    assert json.loads(artifact) == {
+        "http_status": 401,
+        "error": {
+            "type": "invalid_request_error",
+            "code": "invalid_api_key",
+            "param": None,
+        },
+    }
+
+
+def test_preflight_failure_starts_no_browser_episodes(tmp_path, monkeypatch):
+    from webhelix.experiment import experiment
+
+    def unavailable():
+        raise ProviderUnavailable("invalid_api_key")
+
+    def forbidden(*args, **kwargs):
+        pytest.fail("Authentication failure started browser evaluation")
+
+    monkeypatch.setattr("webhelix.experiment.check_provider", unavailable)
+    monkeypatch.setattr("webhelix.experiment.evaluate", forbidden)
+    with pytest.raises(ProviderUnavailable, match="invalid_api_key"):
+        experiment(ROOT, tmp_path)
+    assert read_json(tmp_path / "experiment-status.json")["real_episodes"] == 0
+    assert not (tmp_path / "budget.json").exists()
 
 
 def test_worker_failure_preserved(tmp_path, monkeypatch):

@@ -5,10 +5,12 @@ A local engineering prototype for searching truthful webpage structure with
 fictional product selections; there are no purchases or live websites.
 
 **Current evidence:** scripted browser controls and two AutoHelix integration
-iterations passed. Both candidates were accepted at the same score. Real browser
-model baselines and real optimizer search have **not run**: API credentials are
-missing. These controls establish plumbing, not model steering or novelty. See
-[the execution record](examples/EXECUTION.md) and [example traces](examples/README.md).
+iterations passed. Both candidates were accepted at the same score. A real-model
+attempt reached three clean-page browser episodes, but every generation request
+failed with `401 invalid_api_key`; none produced a model action. Real WebHelix
+optimizer search has **not started**. These controls establish plumbing, not model
+steering or novelty. See the [API attempt record](examples/API_ATTEMPT.md),
+[original execution record](examples/EXECUTION.md) and [example traces](examples/README.md).
 
 ## Install from a fresh clone
 
@@ -111,10 +113,13 @@ webhelix_real=$(mktemp -d /tmp/webhelix-real.XXXXXX)
 uv run --locked webhelix experiment --run-dir "$webhelix_real"
 ```
 
-`provider-check` checks API model access with a GET request. Model-specific
-support for medium reasoning and strict JSON output is only confirmed by a
-successful response. That live verification remains unperformed here. HTTP
-errors stop diagnostics; the code never substitutes a model. If your API account
+`provider-check` checks model metadata with a GET request, then sends an empty
+Responses request (no model or input). It requires a missing-parameter validation
+response instead of an authentication error. This requests no inference and uses
+no browser episodes. Metadata lookup alone did not detect an invalid key in the
+tested environment. Actual generation access, quota, medium reasoning and strict
+JSON output are only confirmed by a successful response; these remain unverified.
+Errors stop diagnostics; the code never substitutes a model. If your API account
 does not expose `gpt-6.1-sol`, choose an explicitly authorized available model
 using `WEBHELIX_BROWSER_MODEL` before running; optimizer settings remain separate.
 
@@ -125,6 +130,10 @@ check it creates a separate small Git project inside the run directory and calls
 `autohelix run`; it never optimizes this source checkout. An existing experiment
 status/project is not overwritten. Use a fresh directory to start from original
 fixtures, and retain older directories as evidence.
+When retrying this experiment, carry forward the existing `budget.json` into the
+fresh directory before launching. The [API attempt record](examples/API_ATTEMPT.md)
+contains the exact recovery commands; three failed attempts already consume the
+three spare reservations, leaving 15 for the planned schedule.
 
 ## Task and candidate
 
