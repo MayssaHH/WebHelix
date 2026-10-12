@@ -101,8 +101,45 @@ via httpx, with structured JSON actions and no API tools. It does not reuse Code
 OAuth credentials, the interactive assistant's model, or the optimizer's session.
 Supply `WEBHELIX_API_KEY` securely in environment settings or your shell's secret
 manager (`OPENAI_API_KEY` is an optional fallback). `.env.example` contains only
-placeholders and is not automatically loaded. Do not commit or paste keys into
-chat. API use has separate account/billing requirements from Codex ChatGPT login.
+placeholders. API use has separate account/billing requirements from Codex ChatGPT
+login.
+
+### Using a local `.env` file
+
+You can use a normal local `.env` instead of a cloud-managed secret. Create
+`.env` in the WebHelix project directory from `.env.example` using a private
+editor, and put the actual API key in `WEBHELIX_API_KEY`. Keep the model and
+reasoning settings as shown in the template. Do not overwrite an existing
+`.env`, commit the file, or paste its contents into chat. Git already ignores
+`.env`; on Linux/macOS, restrict its permissions with `chmod 600 .env`.
+
+```bash
+bash scripts/with-dotenv.sh provider-check
+```
+
+This launcher uses `uv run --locked --env-file .env`; it parses the file as data,
+not executable shell commands. It clears inherited browser credential/model
+variables **only for the launched process**, so the cloud placeholder cannot
+override the chosen file. Child browser workers inherit the loaded values, even
+when AutoHelix runs in another directory. It does not change the parent shell,
+Codex login, network proxy, fixtures, scoring or episode limits.
+
+For a fresh, separately budgeted experiment, use
+`bash scripts/with-dotenv.sh experiment --run-dir <new-directory>`. For the
+current interrupted experiment, first carry forward its existing `budget.json`
+as described in [the recovery instructions](examples/API_ATTEMPT.md), then use
+this launcher instead of `.venv/bin/webhelix`. **15 browser episodes remain.**
+
+The launcher and environment inheritance have been checked with synthetic
+credentials; actual authentication through this route is unverified until you
+supply a real local key. An environment-settings secret does not create this
+file, and its placeholder cannot be converted back into the underlying key by
+WebHelix. The cloud route currently appears to forward that placeholder to
+OpenAI without substitution; a local file supplies the key directly while
+keeping the configured HTTPS proxy. Ordinary `webhelix` commands do not
+implicitly search for `.env` files.
+
+### Using exported or cloud-managed variables
 
 ```bash
 source scripts/env.sh
