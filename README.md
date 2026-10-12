@@ -16,7 +16,7 @@ Requirements: Linux, Git, Python 3.12, [uv](https://docs.astral.sh/uv/), and acc
 to this private repository. Tested with Python 3.12.14 and uv 0.12.19.
 
 ```bash
-git clone https://github.com/MayssaHH/webhelix.git
+git clone https://github.com/MayssaHH/WebHelix.git webhelix
 cd webhelix
 source scripts/env.sh
 bash scripts/setup.sh

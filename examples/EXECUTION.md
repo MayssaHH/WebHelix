@@ -122,28 +122,21 @@ A fresh local Git clone into `/tmp/webhelix-fresh.3Tq6Qf` successfully installed
 from `uv.lock` into a new virtual environment. The same 14-test suite passed
 there, including real browser controls and the harness integration tests.
 
-Attempted publication:
+GitHub initially rejected `gh repo create` with `Resource not accessible by
+integration (createRepository)`. The user then created the empty repository at
+`https://github.com/MayssaHH/WebHelix` and this checkout's origin was set to
+`https://github.com/MayssaHH/WebHelix.git`.
+
+The new remote was public. Changing visibility through GitHub's repository update
+API returned HTTP 403 (`Resource not accessible by integration`). Publication is
+paused until the user changes it to private. No implementation code was pushed
+to the public repository. Remaining publication commands, after verifying privacy:
 
 ```bash
-gh repo create MayssaHH/webhelix --private --source . --remote origin --push
-```
-
-GitHub rejected creation: `Resource not accessible by integration
-(createRepository)`. A subsequent repository lookup returned 404. Thus the
-requested private remote has **not** been created or verified, and nothing was
-pushed. Intended URL: `https://github.com/MayssaHH/webhelix`.
-
-Remaining action: create an empty private `MayssaHH/webhelix` repository and grant
-the environment's GitHub integration write access. Then, from this checkout:
-
-```bash
-git remote add origin https://github.com/MayssaHH/webhelix.git
+gh repo view MayssaHH/WebHelix --json url,isPrivate
 git push -u origin main
-gh repo view MayssaHH/webhelix --json url,isPrivate
 git rev-parse HEAD
 git ls-remote origin refs/heads/main
 ```
 
-Verify `isPrivate` and equality of the final two SHAs. Do not initialize remote
-files or overwrite a separately populated repository. The README's HTTPS clone
-commands become usable once this publication prerequisite is resolved.
+Verify `isPrivate` is true and the final two SHAs match before reporting success.
