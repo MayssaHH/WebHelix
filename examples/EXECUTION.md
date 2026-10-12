@@ -128,9 +128,10 @@ integration (createRepository)`. The user then created the empty repository at
 `https://github.com/MayssaHH/WebHelix.git`.
 
 The new remote was public. Changing visibility through GitHub's repository update
-API returned HTTP 403 (`Resource not accessible by integration`). Publication is
-paused until the user changes it to private. No implementation code was pushed
-to the public repository. Remaining publication commands, after verifying privacy:
+API returned HTTP 403 (`Resource not accessible by integration`). The user then
+changed visibility to private, and a subsequent GitHub API check confirmed
+`isPrivate: true`. No implementation code was pushed to the public repository.
+The visibility prerequisite is resolved. Publication and verification commands:
 
 ```bash
 gh repo view MayssaHH/WebHelix --json url,isPrivate
