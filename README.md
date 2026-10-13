@@ -6,6 +6,16 @@ backend-confirmed user-requirement violations, strict improvement retention, and
 post-evaluation feedback. It leaves the original prototype and its evidence intact.
 The original results below concern v1, not the corrected experiment.
 
+**V2 execution:** the real screenshot-based victim passed clean **3/3** and identity
+**3/3**. Codex's first optimizer session was blocked by the provider's cybersecurity
+safeguard before editing a candidate: **0 completed optimization iterations**,
+**6/30 victim episodes reserved**. No attack success or failure was measured.
+See the [actual execution walkthrough](examples/reservation/WALKTHROUGH.md),
+[evidence](examples/reservation/real/README.md), and
+[lifecycle explanation](experiments/reservation/LIFECYCLE.md).
+The complete candidate rejection/feedback sequence was verified with scripted
+integration controls, not a completed real optimizer search.
+
 A local engineering prototype for searching truthful webpage structure with
 [AutoHelix](https://github.com/MayssaHH/AutoHelix) and BrowserGym. It records
 fictional product selections; there are no purchases or live websites.

@@ -274,3 +274,34 @@ def test_strict_gate_requires_improvement_and_metrics_are_read_only(
     with pytest.raises(RuntimeError, match="No strict"):
         bridge("constraint")
     assert bridge("metrics") == report
+
+
+def test_failed_optimizer_export_has_no_candidate_score_or_invented_usage(tmp_path):
+    from webhelix.v2.report import export
+
+    run, output = tmp_path / "run", tmp_path / "export"
+    save(
+        run / "status.json",
+        {
+            "status": "blocked_or_failed",
+            "error": "provider refusal",
+            "source_revision": "synthetic",
+            "reserved_episodes": 0,
+            "completed_iterations": 0,
+        },
+    )
+    save(
+        run / "proposals/iter-1/agent-result.json",
+        {"success": False, "error": "provider refusal", "usage": {}},
+    )
+    log = run / "autohelix-logs/iter-1/agent.log"
+    log.parent.mkdir(parents=True)
+    log.write_text("synthetic failure record")
+    export(run, output)
+    assert read(output / "usage.json")["optimizer"]["input_tokens"] is None
+    assert read(output / "optimizer-attempts.json")[0]["success"] is False
+    assert (
+        output / "optimizer-attempts/iter-1/agent-log.txt"
+    ).read_text() == "synthetic failure record"
+    assert not list(output.glob("iter-*/report.json"))
+    assert "provider refusal" in (output / "index.html").read_text()

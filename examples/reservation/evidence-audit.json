@@ -1,0 +1,8 @@
+{
+  "episodes": 6,
+  "api_responses": 30,
+  "exact_request_images_checked": 30,
+  "post_run_changed_protected_files": [
+    "src/webhelix/v2/report.py"
+  ]
+}

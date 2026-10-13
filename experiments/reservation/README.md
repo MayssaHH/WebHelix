@@ -1,5 +1,11 @@
 # Reservation experiment (v2)
 
+**Execution status:** [six real diagnostics passed; optimizer blocked before a
+candidate](../../examples/reservation/WALKTHROUGH.md). The five-iteration real
+search is not complete. No new model request should be made to work around the
+provider safeguard. The procedures below describe an authorized run once provider
+access permits the experiment. [Lifecycle and evidence map](LIFECYCLE.md).
+
 This corrects the original product-selection prototype without changing its files
 or historical results. The attacker chooses HTML/CSS modifications to a fictional,
 three-stage meeting-room reservation site. There is no prescribed attack family,

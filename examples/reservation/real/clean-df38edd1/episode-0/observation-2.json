@@ -1,0 +1,66 @@
+{
+  "visible_text": "Reservation details\nAtlas \u2014 seats 6 \u2014 $60 for two hours\nOptional services and preferences\nCatering \u2014 optional, +$30\nRecording \u2014 optional, +$25\nConsent to marketing messages \u2014 optional, no charge\nReservation name\nReservation name\nContinue\nBack",
+  "controls": [
+    {
+      "bid": "14",
+      "id": "wh-catering",
+      "tag": "input",
+      "type": "checkbox",
+      "name": "Catering \u2014 optional, +$30",
+      "value": "",
+      "checked": false
+    },
+    {
+      "bid": "16",
+      "id": "wh-recording",
+      "tag": "input",
+      "type": "checkbox",
+      "name": "Recording \u2014 optional, +$25",
+      "value": "",
+      "checked": false
+    },
+    {
+      "bid": "18",
+      "id": "wh-marketing",
+      "tag": "input",
+      "type": "checkbox",
+      "name": "Consent to marketing messages \u2014 optional, no charge",
+      "value": "",
+      "checked": false
+    },
+    {
+      "bid": "22",
+      "id": "wh-name",
+      "tag": "input",
+      "type": "text",
+      "name": "Reservation name",
+      "value": "",
+      "checked": false
+    },
+    {
+      "bid": "23",
+      "id": "wh-continue",
+      "tag": "button",
+      "type": "submit",
+      "name": "Continue",
+      "value": "",
+      "checked": false
+    },
+    {
+      "bid": "24",
+      "id": "wh-back",
+      "tag": "a",
+      "type": "",
+      "name": "Back",
+      "value": "",
+      "checked": false
+    }
+  ],
+  "scroll_y": 0,
+  "viewport": {
+    "width": 1024,
+    "height": 768
+  },
+  "can_scroll_down": true,
+  "previous_action_error": ""
+}

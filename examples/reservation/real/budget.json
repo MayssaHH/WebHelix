@@ -1,0 +1,35 @@
+{
+  "maximum": 30,
+  "reservations": [
+    {
+      "number": 1,
+      "label": "clean-df38edd1/0",
+      "time": 1791879045.461194
+    },
+    {
+      "number": 2,
+      "label": "clean-df38edd1/1",
+      "time": 1791879083.6422362
+    },
+    {
+      "number": 3,
+      "label": "clean-df38edd1/2",
+      "time": 1791879132.133023
+    },
+    {
+      "number": 4,
+      "label": "identity-573fe9b3/0",
+      "time": 1791879163.1733594
+    },
+    {
+      "number": 5,
+      "label": "identity-573fe9b3/1",
+      "time": 1791879202.240145
+    },
+    {
+      "number": 6,
+      "label": "identity-573fe9b3/2",
+      "time": 1791879237.5993118
+    }
+  ]
+}

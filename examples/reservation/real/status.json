@@ -1,0 +1,55 @@
+{
+  "status": "blocked_or_failed",
+  "scripted": false,
+  "started": 1791879041.6306727,
+  "source_revision": "b38c43a48a2c52f150469041ec9adcbd2c30b35a",
+  "source_dirty": false,
+  "model": {
+    "provider": "openai-responses",
+    "model": "gpt-6.1-sol",
+    "reasoning": "medium",
+    "max_output_tokens": 1024,
+    "request_timeout_seconds": 45,
+    "retries": 0
+  },
+  "maximum_real_episodes": 30,
+  "python": "3.12.14",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+  "dependencies": {
+    "autohelix": "0.1.1",
+    "browsergym-core": "0.14.3",
+    "playwright": "1.44.0",
+    "httpx": "0.28.1",
+    "beautifulsoup4": "4.15.0"
+  },
+  "protected_hashes": {
+    "src/webhelix/v2/__init__.py": "851c10469096b1cc3aae2f3dfbbe30e4981bf7c39fcea1af1ac5105643e12753",
+    "src/webhelix/v2/bridge.py": "53acd03135dd398c9f98ffc5b798c956884b3bbb8802d48df0c0f449d5b62c72",
+    "src/webhelix/v2/cli.py": "22d24af7bc4d80c38cf270891b5cf224ae2b2e5c45ae699450e5b1371951dc78",
+    "src/webhelix/v2/contract.py": "b689c62200204c07f5ed4e10bffb793f5b70fd96565ee5535e473c72963ac6e5",
+    "src/webhelix/v2/episode.py": "2975532ecf973c2250c12e5eb2e99dc972b30d9c0cc873776314465b7546491f",
+    "src/webhelix/v2/evaluate.py": "c28fb3435ff4754fff3724d5d7cde604d13dbd26158ed6dc3d3b0c2c0cf158b1",
+    "src/webhelix/v2/experiment.py": "04a71c64cddf130e13d58f0fb9e7358c1808785bf6963f1fc846d662a771ab94",
+    "src/webhelix/v2/isolation.py": "dbc7d568cd839d849fddfbfdf7ddbfa34e3631e17b1a03dab079b96f1918a9eb",
+    "src/webhelix/v2/policy.py": "7c603781c2b4a3747d7f262a6303efc49837701b3d01cdc65daffe4fcc58f6e1",
+    "src/webhelix/v2/report.py": "e331caa5ed33e4d7fa2572296f6b450525516c4e093f6db6961ed4a0bd451208",
+    "src/webhelix/v2/site.py": "01d2de916258a9e7bfe04715c5881c44206b06956dbf45f3db181ebe853fa780",
+    "experiments/reservation/task.json": "0de6b81ef7299319dfbcf9730190822865950d39aa5c3728187da144d60ebe85",
+    "experiments/reservation/CONTRACT.md": "e8f7043fc845f109c69727e3936c2fa6ad38abda827fe916cdb7f454599b6bf7",
+    "experiments/reservation/autohelix.yaml": "a1e6b4feb5d3aa695b4f06bfe94ed6f423e740be23b465796d9e6ec24fb3e601",
+    "uv.lock": "00c395c3580151e31b77cc1ba2385c8d18f7c2ce56f071a2733fac3111479916"
+  },
+  "command": [
+    "webhelix",
+    "reservation",
+    "experiment",
+    "--run-dir",
+    "/workspace/webhelix-runs/reservation-real-20261013-v2"
+  ],
+  "codex_version": "codex-cli 0.159.0-alpha.3",
+  "error": "AutoHelixRunError: Iteration 1 agent failed: This content was flagged for possible cybersecurity risk. If this seems wrong, try rephrasing your request. If you\u2019re doing authorized security work that requires more cyber permissive safeguards, apply for Daybreak access via https://platform.openai.com/settings/organization/status-and-access before retrying.",
+  "finished": 1791879313.2058532,
+  "completed_iterations": 0,
+  "protected_files_unchanged": true,
+  "reserved_episodes": 6
+}

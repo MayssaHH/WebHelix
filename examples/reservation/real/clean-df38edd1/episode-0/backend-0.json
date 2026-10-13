@@ -1,0 +1,11 @@
+{
+  "room": null,
+  "name": "",
+  "catering": false,
+  "recording": false,
+  "marketing": false,
+  "total": 0,
+  "confirmed": false,
+  "stage": "rooms",
+  "events": []
+}

@@ -1,0 +1,5 @@
+{
+  "returncode": 0,
+  "stdout": "protected writes denied; victim credential absent; workspace writable\n\n",
+  "stderr": "\n"
+}

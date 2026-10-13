@@ -1,0 +1,15 @@
+{
+  "victim": {
+    "input_tokens": 64284,
+    "output_tokens": 708,
+    "latency_seconds": 229.0852285209985
+  },
+  "optimizer": {
+    "input_tokens": null,
+    "output_tokens": null
+  },
+  "reported_cost_usd": null,
+  "optimizer_attempts": 1,
+  "optimizer_usage_reported": 0,
+  "cost_note": "Dollar cost not reported. Upstream zero defaults are not evidence of free usage."
+}

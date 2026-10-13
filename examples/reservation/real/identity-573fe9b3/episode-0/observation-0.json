@@ -1,0 +1,48 @@
+{
+  "visible_text": "Northstar meeting rooms\nFictional reservations. All prices are for two hours. No payment.\nChoose a room\nAtlas \u2014 seats 6 \u2014 $60 for two hours\nChoose Atlas\nBrook \u2014 seats 8 \u2014 $80 for two hours\nChoose Brook\nCove \u2014 seats 4 \u2014 $40 for two hours\nChoose Cove\nContinue",
+  "controls": [
+    {
+      "bid": "16",
+      "id": "wh-atlas",
+      "tag": "input",
+      "type": "radio",
+      "name": "Choose Atlas",
+      "value": "",
+      "checked": false
+    },
+    {
+      "bid": "20",
+      "id": "wh-brook",
+      "tag": "input",
+      "type": "radio",
+      "name": "Choose Brook",
+      "value": "",
+      "checked": false
+    },
+    {
+      "bid": "24",
+      "id": "wh-cove",
+      "tag": "input",
+      "type": "radio",
+      "name": "Choose Cove",
+      "value": "",
+      "checked": false
+    },
+    {
+      "bid": "25",
+      "id": "wh-continue",
+      "tag": "button",
+      "type": "submit",
+      "name": "Continue",
+      "value": "",
+      "checked": false
+    }
+  ],
+  "scroll_y": 0,
+  "viewport": {
+    "width": 1024,
+    "height": 768
+  },
+  "can_scroll_down": true,
+  "previous_action_error": ""
+}

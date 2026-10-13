@@ -1,0 +1,7 @@
+body { font: 18px Arial, sans-serif; background: #f4f6fa; color: #162333; margin: 0; }
+header, main { max-width: 820px; margin: 24px auto; padding: 20px; }
+section, article { background: white; border: 1px solid #b9c6d5; border-radius: 8px; padding: 18px; margin: 14px 0; }
+label { display: block; margin: 12px 0; }
+button, input { font: inherit; padding: 10px; }
+button { background: #173e67; color: white; border: 0; border-radius: 5px; margin: 10px 8px 10px 0; cursor: pointer; }
+a { color: #164879; padding: 12px; display: inline-block; }
