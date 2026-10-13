@@ -4,6 +4,12 @@ from pathlib import Path
 
 
 def main():
+    import sys
+
+    if sys.argv[1:2] == ["reservation"]:
+        from .v2.cli import main as reservation_main
+
+        return reservation_main(sys.argv[2:])
     parser = argparse.ArgumentParser(description="WebHelix local prototype")
     sub = parser.add_subparsers(dest="command", required=True)
     e = sub.add_parser("evaluate")

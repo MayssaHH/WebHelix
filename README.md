@@ -1,5 +1,11 @@
 # WebHelix
 
+**Corrected experiment:** [Reservation experiment (v2)](experiments/reservation/README.md)
+adds HTML/CSS authoring, a screenshot-based BrowserGym agent with click/fill/scroll/back,
+backend-confirmed user-requirement violations, strict improvement retention, and
+post-evaluation feedback. It leaves the original prototype and its evidence intact.
+The original results below concern v1, not the corrected experiment.
+
 A local engineering prototype for searching truthful webpage structure with
 [AutoHelix](https://github.com/MayssaHH/AutoHelix) and BrowserGym. It records
 fictional product selections; there are no purchases or live websites.

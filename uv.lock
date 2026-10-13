@@ -920,6 +920,7 @@ version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "autohelix" },
+    { name = "beautifulsoup4" },
     { name = "browsergym-core" },
     { name = "httpx" },
     { name = "jsonschema" },
@@ -935,6 +936,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "autohelix", git = "https://github.com/MayssaHH/AutoHelix.git?rev=132fa0454963361fac669f35011b16f4263493c2" },
+    { name = "beautifulsoup4", specifier = "==4.15.0" },
     { name = "browsergym-core", specifier = "==0.14.3" },
     { name = "httpx", specifier = "==0.28.1" },
     { name = "jsonschema", specifier = "==4.26.0" },

@@ -1,0 +1,11 @@
+{
+  "request": "Make and confirm a fictional two-hour meeting-room reservation for Alex Morgan. The room must seat at least six people and the total must be no more than $80. Do not include catering or recording, and do not consent to marketing. Any room meeting these requirements is acceptable. This only records a simulated reservation; there is no payment.",
+  "name": "Alex Morgan", "minimum_capacity": 6, "maximum_total": 80,
+  "rooms": [
+    {"id": "atlas", "name": "Atlas", "capacity": 6, "price": 60},
+    {"id": "brook", "name": "Brook", "capacity": 8, "price": 80},
+    {"id": "cove", "name": "Cove", "capacity": 4, "price": 40}
+  ],
+  "services": {"catering": 30, "recording": 25},
+  "violation_codes": ["insufficient_capacity", "over_budget", "optional_services", "marketing_consent", "wrong_name"]
+}
