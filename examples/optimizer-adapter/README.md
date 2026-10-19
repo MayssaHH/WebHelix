@@ -6,6 +6,16 @@ The new proposal adapter was developed on `feature/optimizer-adapter`, based on
 `132fa0454963361fac669f35011b16f4263493c2`. Original sorting, v1 and v2 evidence
 was not replaced. See [architecture and executable instructions](../../docs/OPTIMIZER_ADAPTER.md).
 
+**Latest live check:** loading the user's private `.env` explicitly succeeded with
+`gpt-6.1-sol` and medium reasoning. The real model added the requested heading,
+returned a hypothesis note and passed rendered feasibility checks. See
+[the recorded result](real-harmless-check/summary.json),
+[exact request](real-harmless-check/request.json),
+[response](real-harmless-check/response.json) and
+[HTML diff](real-harmless-check/candidate.diff). This neutral check used one model
+request (872 input / 552 output tokens), with zero victim episodes. It verifies
+basic editing compatibility; research-task cooperation remains unverified.
+
 The completed offline test uses deterministic JSON replies through the new HTTP
 client/parser/writer, **real upstream AutoHelix**, and **real Chromium/BrowserGym
 episodes with a scripted victim**. Its replies add an innocuous heading; they are
@@ -40,7 +50,7 @@ application code. Full logs and per-step images remain at
 These small copied files preserve the most useful inspection points without keys,
 Authorization headers, browser profiles or full generated run directories.
 
-## Live compatibility attempt and remaining blocker
+## Earlier live compatibility failures
 
 Two **neutral** editing-check launches were recorded, requesting `gpt-6.1-sol`,
 medium reasoning, Responses API, 4,096 maximum output tokens, 90-second timeout,
@@ -51,7 +61,7 @@ victim episode was sent.
    it failed with `ConnectError` before any HTTP response. This was a transport setup
    defect, fixed by honoring the environment's existing proxy and certificate trust.
 2. After that fix, OpenAI returned **HTTP 401, `invalid_api_key`**. The restored
-   checkout has no private `.env`; the inherited `WEBHELIX_API_KEY` did not
+   checkout then had no private `.env`; the inherited `WEBHELIX_API_KEY` did not
    authenticate. The original credential file was not copied, printed or overwritten.
 
 No model reply, candidate, token usage or dollar cost was reported. The check
@@ -62,13 +72,33 @@ published example because it may echo credential fragments. Raw local evidence:
 - `/workspace/webhelix-runs/adapter-harmless-20261019/`
 - `/workspace/webhelix-runs/adapter-harmless-proxy-20261019/`
 
-Restore a usable credential privately, configure its variable explicitly and rerun
-`webhelix optimizer check` into a new directory. A passing harmless check would
-establish basic editing compatibility only. The earlier research-task service block
-is a separate unresolved deployment prerequisite; this work has not bypassed it
-or established that Codex caused it. No GPU deployment or replacement endpoint was
-available, so model license/runtime/context and genuine research cooperation have
-not been verified for a replacement.
+Subsequent checks confirmed the cloud secret binding and variable were present,
+but generation still returned 401, including after the user refreshed the binding.
+A separate curl POST with an empty body also returned 401; both errors referenced
+the runtime placeholder's prefix. This points toward secret delivery, although the
+exact proxy fault was not established. GET `/v1/models` returned 200 even without
+Authorization and therefore was **not** authentication evidence in this environment.
+
+After the user privately restored `.env`, explicitly selecting that file succeeded:
+
+```bash
+PLAYWRIGHT_BROWSERS_PATH=/workspace/.cache/ms-playwright \
+UV_CACHE_DIR=/workspace/.cache/uv \
+uv run --locked webhelix optimizer check \
+  --config .optimizer.local.json --env-file /workspace/webhelix/.env \
+  --run-dir /workspace/webhelix-runs/adapter-private-env-check-20261019
+```
+
+The local config explicitly selects `api_key_env: WEBHELIX_API_KEY`, so the same
+private key can serve both independent roles without a duplicate variable. The key
+was not printed or copied into committed evidence. The returned model ID and
+reasoning effort match the requested `gpt-6.1-sol` / `medium`; the response reports
+zero reasoning tokens, so no hidden reasoning behavior is inferred.
+
+The earlier research-task service block remains a separate unresolved prerequisite.
+This harmless editing check has not bypassed it or established that Codex caused it.
+No genuine research proposal or new real victim episode was run. No GPU deployment
+or replacement endpoint was available for deployment/license/runtime verification.
 
 ## Reproduce and inspect
 
@@ -120,6 +150,6 @@ uv run --locked webhelix optimizer demo \
 It completed both iterations, rejected both zero scores, retained the original
 files, carried feedback into request 2 and removed the temporary worktrees.
 
-The deployment problem is still open. What is now implemented is a testable,
-inspectable alternative optimizer interface with explicit failure records and
-feedback continuity. It makes no novelty, attack success or model-safety claim.
+Basic live editing compatibility now works through the explicit private credential
+file. Genuine research-task cooperation and the complete real-model optimization
+loop remain unverified. No novelty, attack success or model-safety claim is made.

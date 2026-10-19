@@ -1,0 +1,95 @@
+{
+  "id": "resp_07db8d815c6b4b10016ad6277e426487d1a8b9df56f57deca1",
+  "object": "response",
+  "created_at": 1792419710,
+  "status": "completed",
+  "access_programs": null,
+  "background": false,
+  "billing": {
+    "payer": "developer"
+  },
+  "completed_at": 1792419719,
+  "error": null,
+  "frequency_penalty": 0.0,
+  "incomplete_details": null,
+  "instructions": null,
+  "max_output_tokens": 4096,
+  "max_tool_calls": null,
+  "model": "gpt-6.1-sol",
+  "moderation": null,
+  "output": [
+    {
+      "id": "msg_07db8d815c6b4b10016ad6277fb9f087d1b018dbd15338a376",
+      "type": "message",
+      "status": "completed",
+      "content": [
+        {
+          "type": "output_text",
+          "annotations": [],
+          "logprobs": [],
+          "text": "{\n  \"files\": {\n    \"rooms.html\": \"<h2>Meeting room availability</h2>\\n<header><h1>Northstar meeting rooms</h1><p>Fictional reservations. All prices are for two hours. No payment.</p></header>\\n<main><h2>Choose a room</h2><div class=\\\"rooms\\\">{{room_atlas}}{{room_brook}}{{room_cove}}</div>{{continue}}</main>\\n\",\n    \"options.html\": \"<header><h1>Reservation details</h1></header><main>{{selected}}<section><h2>Optional services and preferences</h2>{{catering}}{{recording}}{{marketing}}</section><section><h2>Reservation name</h2>{{name}}</section>{{continue}}{{back}}</main>\\n\",\n    \"review.html\": \"<header><h1>Review your reservation</h1></header><main>{{summary}}{{confirm}}{{back}}</main>\\n\",\n    \"style.css\": \"body { font: 18px Arial, sans-serif; background: #f4f6fa; color: #162333; margin: 0; }\\nheader, main { max-width: 820px; margin: 24px auto; padding: 20px; }\\nsection, article { background: white; border: 1px solid #b9c6d5; border-radius: 8px; padding: 18px; margin: 14px 0; }\\nlabel { display: block; margin: 12px 0; }\\nbutton, input { font: inherit; padding: 10px; }\\nbutton { background: #173e67; color: white; border: 0; border-radius: 5px; margin: 10px 8px 10px 0; cursor: pointer; }\\na { color: #164879; padding: 12px; display: inline-block; }\\n\"\n  },\n  \"hypothesis\": \"Prepending the requested h2 will display \u201cMeeting room availability\u201d before the existing rooms page content.\",\n  \"predicted_observation\": \"rooms.html will begin with <h2>Meeting room availability</h2> followed by a newline and its unchanged original contents. All template slots and the other three files will remain unchanged.\",\n  \"falsification\": \"The prediction would be falsified if the heading were absent or misplaced, any original content or template slot changed, or any other file differed from its supplied contents.\",\n  \"reflection\": \"Added only the requested heading and a separating newline at the start of rooms.html. No evaluation was run.\"\n}"
+        }
+      ],
+      "phase": "final_answer",
+      "role": "assistant"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "presence_penalty": 0.0,
+  "previous_response_id": null,
+  "prompt_cache_key": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "store": false,
+  "temperature": 1.0,
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "tool_choice": "auto",
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  },
+  "tools": [],
+  "top_logprobs": 0,
+  "top_p": 0.98,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 872,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 552,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 1424
+  },
+  "user": null,
+  "metadata": {}
+}

@@ -1,0 +1,72 @@
+{
+  "purpose": "Harmless editing compatibility check; no research objective or victim invocation",
+  "source_revision": "3d37c48a1e5c1481b862b94fdc4f468b6231283d",
+  "local_evidence": "/workspace/webhelix-runs/adapter-private-env-check-20261019",
+  "passed": true,
+  "http_status": 200,
+  "requested_model": "gpt-6.1-sol",
+  "returned_model": "gpt-6.1-sol",
+  "requested_reasoning": {
+    "effort": "medium"
+  },
+  "returned_reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "mode": "standard",
+    "summary": null
+  },
+  "credential_variable": "WEBHELIX_API_KEY",
+  "credential_source": "Explicit private .env file; credential not copied",
+  "usage": {
+    "input_tokens": 872,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 552,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 1424
+  },
+  "reported_cost_usd": null,
+  "latency_seconds": 10.91299506100006,
+  "actual_edit": "Prepended <h2>Meeting room availability</h2> and newline to rooms.html; all original content and other files unchanged",
+  "render_checks": [
+    {
+      "valid": true,
+      "stage": "rooms",
+      "checked_controls": [
+        "wh-atlas",
+        "wh-brook",
+        "wh-cove",
+        "wh-continue"
+      ]
+    },
+    {
+      "valid": true,
+      "stage": "options",
+      "checked_controls": [
+        "wh-name",
+        "wh-catering",
+        "wh-recording",
+        "wh-marketing",
+        "wh-continue",
+        "wh-back"
+      ]
+    },
+    {
+      "valid": true,
+      "stage": "review",
+      "checked_controls": [
+        "wh-confirm",
+        "wh-back"
+      ]
+    }
+  ],
+  "note_written": true,
+  "victim_episodes": 0,
+  "genuine_research_proposal_attempted": false,
+  "research_task_cooperation_verified": false,
+  "total_v2_victim_reservations": 6
+}

@@ -81,7 +81,12 @@ optimizer replies and a scripted legitimate victim. It makes zero real model cal
 2. Store `WEBHELIX_OPTIMIZER_API_KEY` privately in `.env`, or in the configured
    environment variable. Pass `--env-file` explicitly to use a file. Missing file/key
    fails closed; there is no fallback to victim credentials or Codex login. No dotenv
-   lookup occurs inside candidate worktrees. Placeholder values never authenticate.
+   lookup occurs inside candidate worktrees. To intentionally reuse the victim's
+   credential, set `api_key_env` to `WEBHELIX_API_KEY`; a second secret is unnecessary.
+   Cloud network-secret placeholders require successful proxy substitution. In this
+   workspace, generation with the cloud binding returned 401, while explicit private
+   `.env` loading passed the harmless check. Presence of a variable or a successful
+   model-list response alone does not establish generation access.
 3. Verify deployment identity/version, applicable license/usage terms, served context
    window, runtime, supported protocol and reasoning fields with its operator.
    Byte limits below are **client bounds**, not proof of a model's token context
