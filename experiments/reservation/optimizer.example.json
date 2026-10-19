@@ -1,0 +1,12 @@
+{
+  "endpoint": "https://api.openai.com/v1/responses",
+  "protocol": "responses",
+  "model": "REPLACE_WITH_VERIFIED_MODEL_ID",
+  "api_key_env": "WEBHELIX_OPTIMIZER_API_KEY",
+  "reasoning_effort": null,
+  "timeout_seconds": 90,
+  "max_output_tokens": 4096,
+  "max_input_bytes": 180000,
+  "max_response_bytes": 160000,
+  "max_calls": 2
+}

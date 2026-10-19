@@ -6,6 +6,10 @@ from pathlib import Path
 def main():
     import sys
 
+    if sys.argv[1:2] == ["optimizer"]:
+        from .optimizer.cli import main as optimizer_main
+
+        return optimizer_main(sys.argv[2:])
     if sys.argv[1:2] == ["reservation"]:
         from .v2.cli import main as reservation_main
 

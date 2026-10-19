@@ -48,7 +48,7 @@ def controls(run):
     print("Reservation browser controls passed:", run, flush=True)
 
 
-def prepare(run, scripted):
+def prepare(run, scripted, optimizer=None):
     project = run / "project"
     project.mkdir()
     shutil.copytree(FIXTURES / "candidate", project / "candidate")
@@ -62,6 +62,15 @@ def prepare(run, scripted):
     if scripted:
         config["agent"] = {"type": "mock"}
         config["budget"]["iterations"] = 2
+    if optimizer is not None:
+        # Upstream has a closed backend factory. Bootstrap its inert mock slot,
+        # then replace h.agent with our AgentBackend before run(). Never run MockAgent.
+        config["agent"] = {
+            "type": "mock",
+            "model": optimizer.client.settings.model,
+            "settings": {"webhelix_backend": "bounded_proposal_adapter"},
+        }
+        config["budget"] = {"iterations": 2, "time": "20m"}
     (project / "autohelix.yaml").write_text(yaml.safe_dump(config, sort_keys=False))
     for args in [
         ("init", "-b", "main"),
@@ -224,12 +233,25 @@ class ScriptedAttacker:
         return AgentRunResult(success=True, exit_code=0)
 
 
-def experiment(run, scripted=False):
+def experiment(run, scripted=False, optimizer=None, budget_dir=None):
+    if optimizer is not None and not scripted and budget_dir is None:
+        raise ValueError("Real adapter runs require an existing shared victim budget")
+    if budget_dir is not None:
+        from webhelix.optimizer.budget import check_budget
+
+        check_budget(Path(budget_dir))
     run = run.resolve()
     run.mkdir(parents=True, exist_ok=False)
     status = {
         "status": "starting",
         "scripted": scripted,
+        "optimizer_backend": "bounded_proposal_adapter"
+        if optimizer
+        else ("scripted" if scripted else "codex"),
+        "optimizer_settings": dataclasses.asdict(optimizer.client.settings)
+        if optimizer
+        else None,
+        "victim_budget_dir": str(Path(budget_dir).resolve()) if budget_dir else None,
         "started": time.time(),
         "source_revision": subprocess.check_output(
             ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True
@@ -256,6 +278,8 @@ def experiment(run, scripted=False):
         "protected_hashes": {
             str(path.relative_to(ROOT)): hashlib.sha256(path.read_bytes()).hexdigest()
             for path in sorted((ROOT / "src/webhelix/v2").glob("*.py"))
+            + sorted((ROOT / "src/webhelix/optimizer").glob("*.py"))
+            + sorted((ROOT / "src/webhelix/optimizer").glob("*.schema.json"))
             + [
                 FIXTURES / "task.json",
                 FIXTURES / "CONTRACT.md",
@@ -265,21 +289,31 @@ def experiment(run, scripted=False):
         },
         "command": [
             "webhelix",
-            "reservation",
-            "scripted-demo" if scripted else "experiment",
+            "optimizer" if optimizer is not None else "reservation",
+            ("demo" if optimizer is not None else "scripted-demo")
+            if scripted
+            else "experiment",
             "--run-dir",
             str(run),
         ],
+        "command_note": "Run entry point; optimizer_settings and victim_budget_dir record additional adapter configuration.",
     }
     save(run / "status.json", status)
-    previous = {k: os.environ.get(k) for k in ["WEBHELIX_V2_RUN", "WEBHELIX_V2_POLICY"]}
+    previous = {
+        k: os.environ.get(k)
+        for k in ["WEBHELIX_V2_RUN", "WEBHELIX_V2_POLICY", "WEBHELIX_V2_BUDGET_DIR"]
+    }
     os.environ.update(
         WEBHELIX_V2_RUN=str(run), WEBHELIX_V2_POLICY="scripted" if scripted else "api"
     )
+    if budget_dir:
+        os.environ["WEBHELIX_V2_BUDGET_DIR"] = str(Path(budget_dir).resolve())
+    else:
+        os.environ.pop("WEBHELIX_V2_BUDGET_DIR", None)
     h = None
     try:
-        project = prepare(run, scripted)
-        if not scripted:
+        project = prepare(run, scripted, optimizer)
+        if not scripted and optimizer is None:
             # Fail before any paid calls if the OS boundary cannot be established.
             probe = run / "isolation-workspace"
             probe.mkdir()
@@ -317,6 +351,8 @@ def experiment(run, scripted=False):
             status["codex_version"] = subprocess.check_output(
                 [codex_binary(), "--version"], text=True
             ).strip()
+        elif not scripted:
+            check_provider()
         baseline = {}
         for label, candidate in [
             ("clean", FIXTURES / "candidate"),
@@ -372,17 +408,20 @@ def experiment(run, scripted=False):
             run / "retention.json", {"clean_rate": 0.0, "best_rate": 0.0, "batch": None}
         )
         h = ResearchHarness(project, run)
-        if scripted:
+        if optimizer is not None:
+            h.agent = optimizer
+        elif scripted:
             h.agent = ScriptedAttacker()
-        h.run(max_iterations=2 if scripted else 5)
+        iterations = 2 if scripted or optimizer is not None else 5
+        h.run(max_iterations=iterations)
         status["completed_iterations"] = sum(r.iteration > 0 for r in h.history.load())
-        if status["completed_iterations"] != (2 if scripted else 5):
+        if status["completed_iterations"] != iterations:
             raise RuntimeError(
                 "AutoHelix stopped early; report this as a partial search"
             )
         status["status"] = "search_completed"
         best = read(run / "retention.json")
-        if best["batch"] and not scripted:
+        if best["batch"] and not scripted and optimizer is None:
             # Predeclared winner: earliest candidate attaining the best strictly retained score.
             confirmation = {}
             for label, candidate in [
@@ -402,7 +441,13 @@ def experiment(run, scripted=False):
             )
         else:
             status["confirmation"] = (
-                "not run: no improved candidate" if not scripted else "scripted control"
+                "not scheduled in bounded adapter test"
+                if optimizer is not None
+                else (
+                    "not run: no improved candidate"
+                    if not scripted
+                    else "scripted control"
+                )
             )
     except Exception as exc:
         status.update(status="blocked_or_failed", error=f"{type(exc).__name__}: {exc}")
@@ -426,11 +471,16 @@ def experiment(run, scripted=False):
             hashlib.sha256((ROOT / name).read_bytes()).hexdigest() == value
             for name, value in status["protected_hashes"].items()
         )
-        status["reserved_episodes"] = (
-            len(read(run / "budget.json")["reservations"])
-            if (run / "budget.json").exists()
-            else 0
+        ledger_path = (
+            Path(budget_dir) / "budget.json" if budget_dir else run / "budget.json"
         )
+        status["reserved_episodes"] = (
+            len(read(ledger_path)["reservations"]) if ledger_path.exists() else 0
+        )
+        if budget_dir:
+            shutil.copy2(
+                ledger_path, run / "budget.json"
+            )  # Snapshot; shared path owns reservations.
         save(run / "status.json", status)
         for k, v in previous.items():
             if v is None:

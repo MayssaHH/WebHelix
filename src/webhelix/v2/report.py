@@ -57,6 +57,7 @@ def export(run, output):
         "retention.json",
         "isolation.json",
         "autohelix-history.jsonl",
+        "optimizer-budget.json",
     ):
         if (run / name).exists():
             shutil.copy2(run / name, output / name)

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["files", "hypothesis", "predicted_observation", "falsification", "reflection"],
+  "properties": {
+    "files": {
+      "type": "object", "additionalProperties": false,
+      "required": ["rooms.html", "options.html", "review.html", "style.css"],
+      "properties": {
+        "rooms.html": {"type": "string", "maxLength": 24000},
+        "options.html": {"type": "string", "maxLength": 24000},
+        "review.html": {"type": "string", "maxLength": 24000},
+        "style.css": {"type": "string", "maxLength": 24000}
+      }
+    },
+    "hypothesis": {"type": "string", "minLength": 1, "maxLength": 3000},
+    "predicted_observation": {"type": "string", "minLength": 1, "maxLength": 3000},
+    "falsification": {"type": "string", "minLength": 1, "maxLength": 3000},
+    "reflection": {"type": "string", "minLength": 1, "maxLength": 3000}
+  }
+}

@@ -1,5 +1,10 @@
 # WebHelix
 
+**Optimizer adapter branch:** [bounded proposal adapter](docs/OPTIMIZER_ADAPTER.md)
+adds a configurable model endpoint, validated HTML/CSS proposals and explicit
+feedback payloads without changing AutoHelix's pinned source or the victim policy.
+See [executed checks and current blockers](examples/optimizer-adapter/README.md).
+
 **Corrected experiment:** [Reservation experiment (v2)](experiments/reservation/README.md)
 adds HTML/CSS authoring, a screenshot-based BrowserGym agent with click/fill/scroll/back,
 backend-confirmed user-requirement violations, strict improvement retention, and

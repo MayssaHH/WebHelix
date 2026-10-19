@@ -1,0 +1,40 @@
+{
+  "passed": false,
+  "attempts": [
+    {
+      "local_evidence": "/workspace/webhelix-runs/adapter-harmless-20261019",
+      "purpose": "harmless heading edit only",
+      "status": "transport_error",
+      "requested_model": "gpt-6.1-sol",
+      "returned_model": null,
+      "http_status": null,
+      "request_started": true,
+      "latency_seconds": 5.081024790008087,
+      "usage": {},
+      "cost_usd": null,
+      "error": "ConnectError",
+      "provider_error_code": null,
+      "provider_error_type": null,
+      "reasoning_effort": "medium",
+      "victim_episodes": 0
+    },
+    {
+      "local_evidence": "/workspace/webhelix-runs/adapter-harmless-proxy-20261019",
+      "purpose": "harmless heading edit only",
+      "status": "service_error",
+      "requested_model": "gpt-6.1-sol",
+      "returned_model": null,
+      "http_status": 401,
+      "request_started": true,
+      "latency_seconds": 0.7861670839920407,
+      "usage": {},
+      "cost_usd": null,
+      "error": null,
+      "provider_error_code": "invalid_api_key",
+      "provider_error_type": "invalid_request_error",
+      "reasoning_effort": "medium",
+      "victim_episodes": 0
+    }
+  ],
+  "credential_error_prose_omitted": true
+}

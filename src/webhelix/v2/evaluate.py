@@ -24,7 +24,14 @@ from .episode import feasibility
 
 
 def reserve(run, label):
+    shared = os.environ.get("WEBHELIX_V2_BUDGET_DIR")
+    if shared:
+        from webhelix.optimizer.budget import check_budget
+
+        run = Path(shared).resolve()
     with lock(run / "budget.lock"):
+        if shared:
+            check_budget(run)  # Never initialize a missing shared ledger.
         path = run / "budget.json"
         ledger = read(path) if path.exists() else {"maximum": 30, "reservations": []}
         if ledger["maximum"] != 30 or len(ledger["reservations"]) >= 30:

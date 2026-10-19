@@ -24,3 +24,4 @@ credentials*.json
 auth.json
 *.pem
 *.key
+.optimizer.local.json
