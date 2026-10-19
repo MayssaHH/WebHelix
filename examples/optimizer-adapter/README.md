@@ -32,9 +32,11 @@ because proposal 1 was rejected. This directly demonstrates the difference betwe
 retained code and retained knowledge. `overview.png` compares the clean page with
 proposal 1; all images are actual browser screenshots from this scripted control.
 
-The raw working-tree run records `source_dirty: true`; source file hashes are kept
-in `summary.json` so the execution is not mislabeled as having run an already
-committed release. Full temporary logs and per-step images remain outside Git.
+The final trace ran from clean implementation commit
+`e7a14b7c6c57982b403259bcd61dc995f523349f` (`source_dirty: false`); source file
+hashes are in `summary.json`. This evidence-only follow-up commit does not change
+application code. Full logs and per-step images remain at
+`/workspace/webhelix-runs/adapter-cli-verified-20261019/`.
 These small copied files preserve the most useful inspection points without keys,
 Authorization headers, browser profiles or full generated run directories.
 
@@ -103,6 +105,20 @@ symlinks, both provider protocols, service errors/refusals/timeouts/truncation,
 redaction, call limits, shared victim accounting and halting before evaluation when
 the optimizer produces no valid proposal. Existing tests still cover positive
 strict-gate behavior, zero/tie rejection, confirmed violating states and fresh state.
+
+After the full suite passed, the run-command metadata was corrected to identify the
+new adapter entry point. The final trace was then generated and verified with the
+actual CLI, from the clean implementation commit:
+
+```bash
+PLAYWRIGHT_BROWSERS_PATH=/workspace/.cache/ms-playwright \
+UV_CACHE_DIR=/workspace/.cache/uv \
+uv run --locked webhelix optimizer demo \
+  --run-dir /workspace/webhelix-runs/adapter-cli-verified-20261019
+```
+
+It completed both iterations, rejected both zero scores, retained the original
+files, carried feedback into request 2 and removed the temporary worktrees.
 
 The deployment problem is still open. What is now implemented is a testable,
 inspectable alternative optimizer interface with explicit failure records and

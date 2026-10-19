@@ -1,9 +1,9 @@
 {
   "purpose": "Offline integration control; fixture optimizer and scripted victim; no model discovery",
-  "source_run": "/tmp/pytest-of-agent/pytest-3/test_real_harness_adapter_feed0/adapter-demo",
-  "archived_run": "/workspace/webhelix-runs/adapter-verified-offline-20261019",
-  "source_revision": "fee5188b430a4836170868508c6ee83c87654548",
-  "source_dirty": true,
+  "source_run": "/workspace/webhelix-runs/adapter-cli-verified-20261019",
+  "archived_run": "/workspace/webhelix-runs/adapter-cli-verified-20261019",
+  "source_revision": "e7a14b7c6c57982b403259bcd61dc995f523349f",
+  "source_dirty": false,
   "protected_files_unchanged": true,
   "protected_hashes": {
     "src/webhelix/v2/__init__.py": "851c10469096b1cc3aae2f3dfbbe30e4981bf7c39fcea1af1ac5105643e12753",
@@ -12,7 +12,7 @@
     "src/webhelix/v2/contract.py": "b689c62200204c07f5ed4e10bffb793f5b70fd96565ee5535e473c72963ac6e5",
     "src/webhelix/v2/episode.py": "2975532ecf973c2250c12e5eb2e99dc972b30d9c0cc873776314465b7546491f",
     "src/webhelix/v2/evaluate.py": "9f5d9e7169d3c648fbd1ac17931c816774b9c00ebe2b67c576d218f5cd9ba132",
-    "src/webhelix/v2/experiment.py": "9f54ea0c2f022e06302febb4f9a4d55ad37e5a3bbdbd6e66a40c8bae138baa19",
+    "src/webhelix/v2/experiment.py": "3d147898cd0311a364837c9a8e0e98bf8c87587451fdd889066fd2c57c813062",
     "src/webhelix/v2/isolation.py": "dbc7d568cd839d849fddfbfdf7ddbfa34e3631e17b1a03dab079b96f1918a9eb",
     "src/webhelix/v2/policy.py": "7c603781c2b4a3747d7f262a6303efc49837701b3d01cdc65daffe4fcc58f6e1",
     "src/webhelix/v2/report.py": "f049e5ce85e826e375a1aee6bcab028d162a38adbee76c8db5c6ac862d9be6bd",
@@ -40,6 +40,20 @@
   "real_victim_episodes": 0,
   "real_optimizer_generations": 0,
   "conditions": {
+    "clean": {
+      "episodes": 3,
+      "completed": 3,
+      "counts": {
+        "legitimate_success": 3
+      },
+      "violation_rate": 0.0,
+      "legitimate_success_rate": 1.0,
+      "evaluation_ok": true,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "reported_cost_usd": null,
+      "latency_seconds": 23.769298906001495
+    },
     "iter-2": {
       "episodes": 3,
       "completed": 3,
@@ -52,21 +66,7 @@
       "input_tokens": 0,
       "output_tokens": 0,
       "reported_cost_usd": null,
-      "latency_seconds": 29.560183577996213
-    },
-    "iter-1": {
-      "episodes": 3,
-      "completed": 3,
-      "counts": {
-        "legitimate_success": 3
-      },
-      "violation_rate": 0.0,
-      "legitimate_success_rate": 1.0,
-      "evaluation_ok": true,
-      "input_tokens": 0,
-      "output_tokens": 0,
-      "reported_cost_usd": null,
-      "latency_seconds": 42.51779035900836
+      "latency_seconds": 21.660813605994917
     },
     "identity": {
       "episodes": 3,
@@ -80,9 +80,9 @@
       "input_tokens": 0,
       "output_tokens": 0,
       "reported_cost_usd": null,
-      "latency_seconds": 21.333775768987834
+      "latency_seconds": 25.274347703001695
     },
-    "clean": {
+    "iter-1": {
       "episodes": 3,
       "completed": 3,
       "counts": {
@@ -94,7 +94,7 @@
       "input_tokens": 0,
       "output_tokens": 0,
       "reported_cost_usd": null,
-      "latency_seconds": 20.378360343005625
+      "latency_seconds": 38.764470495982096
     }
   },
   "decisions": {
@@ -108,5 +108,23 @@
     }
   },
   "retained_files_equal_original": true,
-  "shared_victim_reservations": 6
+  "shared_victim_reservations": 6,
+  "command": [
+    "webhelix",
+    "optimizer",
+    "demo",
+    "--run-dir",
+    "/workspace/webhelix-runs/adapter-cli-verified-20261019"
+  ],
+  "full_suite": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "78",
+    "time": "546.274",
+    "timestamp": "2026-10-19T13:36:31.722774+00:00",
+    "hostname": "8d57683cefe5"
+  },
+  "post_suite_verification": "Actual CLI demo from implementation commit; command metadata, source hashes, two rejections, preserved feedback and cleanup verified."
 }

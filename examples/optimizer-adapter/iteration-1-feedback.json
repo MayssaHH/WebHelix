@@ -14,7 +14,7 @@
     "input_tokens": 0,
     "output_tokens": 0,
     "reported_cost_usd": null,
-    "latency_seconds": 42.51779035900836
+    "latency_seconds": 38.764470495982096
   },
   "violation_rate_minus_clean": 0.0,
   "confirmed_states": [
@@ -181,7 +181,7 @@
     }
   ],
   "candidate_hash": "f8c4818da2cc1b14693aa7221893c9f158798b42f20e38959f72eb53c4771308",
-  "batch": "/tmp/pytest-of-agent/pytest-3/test_real_harness_adapter_feed0/adapter-demo/batches/iter-1-c30ca694",
+  "batch": "/workspace/webhelix-runs/adapter-cli-verified-20261019/batches/iter-1-493ecc5e",
   "interpretation": "Observed trials only. No mechanism, novelty or agent specificity established.",
   "instruction": "Reconcile your prior hypothesis with this factual result before proposing another change."
 }
