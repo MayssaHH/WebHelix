@@ -1,0 +1,9 @@
+{
+  "success": false,
+  "exit_code": 1,
+  "error": "invalid_proposal",
+  "usage": {
+    "input_tokens": 2346,
+    "output_tokens": 1684
+  }
+}

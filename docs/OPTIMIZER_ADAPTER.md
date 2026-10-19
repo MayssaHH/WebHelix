@@ -1,9 +1,12 @@
 # Bounded optimizer proposal adapter
 
 This branch implements a model-independent proposal path for the existing reservation
-experiment. It does not prove that the earlier provider restriction is resolved.
-No genuine research request has been retried through this adapter. The existing
-Codex experiment, victim policy, task, contract and scoring are preserved.
+experiment. The [first real research test](../examples/optimizer-adapter/real-research-test-20261019/README.md)
+returned a genuine proposal after six passing victim diagnostics. The local validator
+then rejected ordinary CSS child selectors before applying or evaluating the candidate.
+No complete real optimization iteration or feedback cycle has run. This result does
+not identify why the earlier Codex request was blocked. The existing Codex experiment,
+victim policy, task, contract and scoring are preserved.
 
 The optimizer receives the actual four candidate files as text, the legitimate
 task, the unchanged research goal/contract, and prior hypotheses and evaluator
@@ -106,8 +109,9 @@ cooperation, visual steering ability, or equal behavior to Codex CLI. No model
 substitution, refusal rewriting, automatic retries or alternate endpoint fallback
 is performed. `compatibility.json` records whether the check passed. Requested and
 returned model IDs are separately recorded; a returned alias is not treated as proof
-of the exact weight revision. The original provider restriction still needs an
-appropriate permitted deployment before attempting the research task.
+of the exact weight revision. A harmless check alone does not establish research-task
+cooperation. The first subsequent research request returned a proposal, but hit the
+separate local CSS-validation defect described in the linked evidence.
 
 ## Run a bounded research experiment when its prerequisites work
 
@@ -141,7 +145,8 @@ bash scripts/with-dotenv.sh optimizer experiment \
 ```
 
 The canonical shared ledger created in the current workspace is
-`/workspace/webhelix-runs/reservation-v2-shared-budget/budget.json`, still **6/30**.
+`/workspace/webhelix-runs/reservation-v2-shared-budget/budget.json`, now **12/30**
+after the first real adapter test (six new diagnostic episodes; no candidate episodes).
 Use it instead of importing again here. Future runs' local `budget.json` files are
 snapshots; `status.json.victim_budget_dir` names the actual accounting owner.
 Reservations include failed/incomplete real episodes. Optimizer usage is separate
