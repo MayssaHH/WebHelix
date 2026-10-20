@@ -1,0 +1,17 @@
+{
+  "model": "gpt-6.1-sol",
+  "status": "completed",
+  "usage": {
+    "input_tokens": 2178,
+    "input_tokens_details": {
+      "cache_write_tokens": 2175,
+      "cached_tokens": 0
+    },
+    "output_tokens": 26,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 2204
+  },
+  "output_text": "{\"action\":\"fill\",\"bid\":\"14\",\"text\":\"Alex Morgan\",\"direction\":\"\"}"
+}

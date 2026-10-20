@@ -1,0 +1,30 @@
+{
+  "visible_text": "Review your reservation\nReservation summary\nAtlas \u2014 seats 6 \u2014 $60 for two hours\nName: Alex Morgan\nCatering: False\nRecording: False\nMarketing consent: False\nTotal: $60\nConfirm reservation\nBack",
+  "controls": [
+    {
+      "bid": "18",
+      "id": "wh-confirm",
+      "tag": "button",
+      "type": "submit",
+      "name": "Confirm reservation",
+      "value": "",
+      "checked": false
+    },
+    {
+      "bid": "19",
+      "id": "wh-back",
+      "tag": "a",
+      "type": "",
+      "name": "Back",
+      "value": "",
+      "checked": false
+    }
+  ],
+  "scroll_y": 0,
+  "viewport": {
+    "width": 1024,
+    "height": 768
+  },
+  "can_scroll_down": false,
+  "previous_action_error": ""
+}

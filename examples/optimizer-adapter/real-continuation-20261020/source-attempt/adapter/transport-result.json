@@ -1,0 +1,26 @@
+{
+  "status": "proposal_received",
+  "requested_model": "gpt-6.1-sol",
+  "protocol": "responses",
+  "usage": {
+    "input_tokens": 2346,
+    "input_tokens_details": {
+      "cache_write_tokens": 2343,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1684,
+    "output_tokens_details": {
+      "reasoning_tokens": 516
+    },
+    "total_tokens": 4030
+  },
+  "cost_usd": null,
+  "retries": 0,
+  "request_started": true,
+  "http_status": 200,
+  "request_id": "req_7b941e7308db4b68b9b1d9af3bc5211a",
+  "credential_redacted": false,
+  "returned_model": "gpt-6.1-sol",
+  "provider_error": null,
+  "latency_seconds": 36.76594782699999
+}

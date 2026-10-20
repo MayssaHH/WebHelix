@@ -1,0 +1,17 @@
+{
+  "model": "gpt-6.1-sol",
+  "status": "completed",
+  "usage": {
+    "input_tokens": 2592,
+    "input_tokens_details": {
+      "cache_write_tokens": 2589,
+      "cached_tokens": 0
+    },
+    "output_tokens": 23,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 2615
+  },
+  "output_text": "{\"action\":\"click\",\"bid\":\"23\",\"text\":\"\",\"direction\":\"\"}"
+}

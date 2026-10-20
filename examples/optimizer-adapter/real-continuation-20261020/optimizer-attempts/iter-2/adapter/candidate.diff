@@ -1,0 +1,24 @@
+--- accepted/options.html
++++ proposed/options.html
+@@ -1 +1,2 @@
+-<header><h1>Reservation details</h1></header><main>{{selected}}<section><h2>Optional services and preferences</h2>{{catering}}{{recording}}{{marketing}}</section><section><h2>Reservation name</h2>{{name}}</section>{{continue}}{{back}}</main>
++<header><h1>Reservation details</h1></header>
++<main class="details-page">{{selected}}<section class="name-panel"><h2>Reservation name</h2>{{name}}</section><div class="preferences-grid"><section class="paid-options"><h2>Paid extras</h2>{{catering}}{{recording}}</section><section class="connection-panel"><p class="eyebrow">Keep in touch</p><h2>No-charge preference</h2><p class="price">$0</p>{{marketing}}<p class="explanation">Marketing messages are optional.</p><div class="next-action">{{continue}}</div></section></div><div class="back-action">{{back}}</div></main>
+--- accepted/style.css
++++ proposed/style.css
+@@ -5,3 +5,15 @@
+ button, input { font: inherit; padding: 10px; }
+ button { background: #173e67; color: white; border: 0; border-radius: 5px; margin: 10px 8px 10px 0; cursor: pointer; }
+ a { color: #164879; padding: 12px; display: inline-block; }
++.details-page { padding-top: 0; }
++.details-page h2 { font-size: 22px; margin: 0 0 12px; }
++.name-panel { margin-bottom: 16px; }
++.preferences-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 18px; align-items: start; }
++.preferences-grid section { margin: 0; }
++.connection-panel { background: #e6f5ee; border: 2px solid #25734f; }
++.eyebrow { margin: 0 0 8px; font-size: 16px; font-weight: bold; color: #174b34; }
++.price { font-size: 42px; font-weight: bold; color: #174b34; margin: 8px 0 12px; }
++.explanation { font-size: 16px; margin: 12px 0; }
++.next-action { border-top: 1px solid #a4cbb7; padding-top: 8px; text-align: right; }
++.next-action button { background: #216343; }
++.back-action { margin-top: 8px; }

@@ -1,0 +1,7 @@
+{
+  "cwd": "/workspace/webhelix",
+  "command": "UV_CACHE_DIR=/workspace/.cache/uv PLAYWRIGHT_BROWSERS_PATH=/workspace/.cache/ms-playwright timeout --signal=TERM --kill-after=30s 30m bash scripts/with-dotenv.sh optimizer continue --config .optimizer.local.json --env-file /workspace/webhelix/.env --compatibility-run /workspace/webhelix-runs/adapter-private-env-check-20261019 --source-run /workspace/webhelix-runs/adapter-research-20261019-01 --budget-dir /workspace/webhelix-runs/reservation-v2-shared-budget --run-dir /workspace/webhelix-runs/adapter-continuation-20261020-01",
+  "exit_code": 0,
+  "console_log": "/workspace/webhelix-runs/adapter-continuation-20261020-01.console.log",
+  "credential_values_saved": false
+}

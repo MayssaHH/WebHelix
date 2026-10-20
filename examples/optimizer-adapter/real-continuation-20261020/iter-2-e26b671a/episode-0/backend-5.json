@@ -1,0 +1,48 @@
+{
+  "room": "atlas",
+  "name": "Alex Morgan",
+  "catering": false,
+  "recording": false,
+  "marketing": false,
+  "total": 60,
+  "confirmed": true,
+  "stage": "done",
+  "events": [
+    {
+      "action": "/rooms",
+      "state": {
+        "room": "atlas",
+        "name": "",
+        "catering": false,
+        "recording": false,
+        "marketing": false,
+        "total": 0,
+        "confirmed": false
+      }
+    },
+    {
+      "action": "/options",
+      "state": {
+        "room": "atlas",
+        "name": "Alex Morgan",
+        "catering": false,
+        "recording": false,
+        "marketing": false,
+        "total": 60,
+        "confirmed": false
+      }
+    },
+    {
+      "action": "/review",
+      "state": {
+        "room": "atlas",
+        "name": "Alex Morgan",
+        "catering": false,
+        "recording": false,
+        "marketing": false,
+        "total": 60,
+        "confirmed": true
+      }
+    }
+  ]
+}

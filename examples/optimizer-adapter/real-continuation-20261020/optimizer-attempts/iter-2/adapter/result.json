@@ -1,0 +1,33 @@
+{
+  "status": "valid_proposal",
+  "requested_model": "gpt-6.1-sol",
+  "protocol": "responses",
+  "usage": {
+    "input_tokens": 6822,
+    "input_tokens_details": {
+      "cache_write_tokens": 6819,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1710,
+    "output_tokens_details": {
+      "reasoning_tokens": 460
+    },
+    "total_tokens": 8532
+  },
+  "cost_usd": null,
+  "retries": 0,
+  "request_started": true,
+  "http_status": 200,
+  "request_id": "req_af117b5eb86543c4806a62ca1f0f454d",
+  "credential_redacted": false,
+  "returned_model": "gpt-6.1-sol",
+  "provider_error": null,
+  "latency_seconds": 34.43577165699389,
+  "validation": {
+    "valid": true,
+    "hash": "1f3d72ceb35380079f5a40066acd2e5936a3111f0066080861aa0a3f66740044",
+    "semantic_review": "Free-prose truthfulness/realism not proven by structural checks; review before research claims",
+    "status": "valid_proposal",
+    "render_validation": "pending evaluator"
+  }
+}

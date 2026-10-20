@@ -1,0 +1,33 @@
+{
+  "victim": {
+    "input_tokens": 64941,
+    "output_tokens": 708,
+    "latency_seconds": 97.98832354796468
+  },
+  "reused_baseline_victim_usage": {
+    "input_tokens": 64284,
+    "output_tokens": 708,
+    "latency_seconds": 96.41716209299989
+  },
+  "optimizer": {
+    "input_tokens": 6822,
+    "output_tokens": 1710
+  },
+  "reported_cost_usd": null,
+  "optimizer_attempts": 2,
+  "new_optimizer_requests": 1,
+  "previous_optimizer_usage": {
+    "input_tokens": 2346,
+    "input_tokens_details": {
+      "cache_write_tokens": 2343,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1684,
+    "output_tokens_details": {
+      "reasoning_tokens": 516
+    },
+    "total_tokens": 4030
+  },
+  "optimizer_usage_reported": 1,
+  "cost_note": "Dollar cost not reported. Upstream zero defaults are not evidence of free usage."
+}

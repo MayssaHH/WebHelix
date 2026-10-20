@@ -1,0 +1,19 @@
+[
+  {
+    "iteration": 1,
+    "success": true,
+    "exit_code": 0,
+    "error": null,
+    "usage": {}
+  },
+  {
+    "iteration": 2,
+    "success": true,
+    "exit_code": 0,
+    "error": null,
+    "usage": {
+      "input_tokens": 6822,
+      "output_tokens": 1710
+    }
+  }
+]

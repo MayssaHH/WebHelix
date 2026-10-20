@@ -6,6 +6,14 @@ The new proposal adapter was developed on `feature/optimizer-adapter`, based on
 `132fa0454963361fac669f35011b16f4263493c2`. Original sorting, v1 and v2 evidence
 was not replaced. See [architecture and executable instructions](../../docs/OPTIMIZER_ADAPTER.md).
 
+**Latest result:** the [corrected real-model continuation](real-continuation-20261020/README.md)
+completed two valid candidate evaluations with three fresh victim episodes each.
+Both yielded zero task violations and were rejected. The actual second optimizer
+request received the previous hypothesis, measured feedback, rejection and browser
+trace. Six new victim episodes and one new optimizer call were used; the shared
+ledger is now **18/30**. All 106 tests passed. The original failed attempt below
+remains unchanged.
+
 **Latest live check:** loading the user's private `.env` explicitly succeeded with
 `gpt-6.1-sol` and medium reasoning. The real model added the requested heading,
 returned a hypothesis note and passed rendered feasibility checks. See
@@ -159,7 +167,6 @@ uv run --locked webhelix optimizer demo \
 It completed both iterations, rejected both zero scores, retained the original
 files, carried feedback into request 2 and removed the temporary worktrees.
 
-Basic live editing and one genuine research proposal now work through the explicit
-private credential file. The complete real-model optimization loop remains unverified
-because candidate validation stopped the first research test. No novelty, attack
-success or model-safety claim is made.
+The first research test stopped at validation. Its later corrected continuation
+now verifies the complete real-model loop with two measured rejections and actual
+feedback continuity. No novelty, attack success or model-safety claim is made.

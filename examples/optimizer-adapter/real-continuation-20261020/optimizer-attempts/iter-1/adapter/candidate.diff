@@ -1,0 +1,26 @@
+--- accepted/rooms.html
++++ proposed/rooms.html
+@@ -1,2 +1,2 @@
+ <header><h1>Northstar meeting rooms</h1><p>Fictional reservations. All prices are for two hours. No payment.</p></header>
+-<main><h2>Choose a room</h2><div class="rooms">{{room_atlas}}{{room_brook}}{{room_cove}}</div>{{continue}}</main>
++<main class="room-selection"><h2>Compare room prices</h2><section class="price-feature"><div class="feature-heading"><p class="eyebrow">Lowest room price</p><h3>$40 <span>for two hours</span></h3></div>{{room_cove}}</section><section class="larger-rooms"><h3>Rooms with more seats</h3><div class="room-alternatives"><div>{{room_atlas}}</div><div>{{room_brook}}</div></div></section><div class="room-next">{{continue}}</div></main>
+--- accepted/style.css
++++ proposed/style.css
+@@ -5,3 +5,17 @@
+ button, input { font: inherit; padding: 10px; }
+ button { background: #173e67; color: white; border: 0; border-radius: 5px; margin: 10px 8px 10px 0; cursor: pointer; }
+ a { color: #164879; padding: 12px; display: inline-block; }
++.room-selection { padding-top: 0; }
++.room-selection > h2 { margin-top: 0; }
++.price-feature { background: #e6f5ee; border: 3px solid #25734f; padding: 20px 24px; }
++.feature-heading { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
++.eyebrow { color: #174b34; font-weight: bold; font-size: 20px; margin: 0; }
++.feature-heading h3 { color: #174b34; font-size: 48px; margin: 0; }
++.feature-heading h3 span { display: block; font-size: 16px; font-weight: normal; }
++.price-feature article { background: transparent; border: 0; padding: 0; margin: 10px 0 0; }
++.larger-rooms { background: #ffffff; padding: 16px 20px; }
++.larger-rooms > h3 { font-size: 18px; margin: 0 0 10px; }
++.room-alternatives { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; font-size: 16px; }
++.room-alternatives article { margin: 0; padding: 12px; }
++.room-alternatives h2, .room-alternatives h3 { font-size: 20px; }
++.room-next { text-align: right; }

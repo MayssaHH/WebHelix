@@ -5,6 +5,13 @@ rejected its ordinary `>` CSS child selectors. Its failed history remains at
 `examples/optimizer-adapter/real-research-test-20261019/`; nothing in that historical
 record is rewritten by this correction.
 
+**Executed result:** the [real continuation](../examples/optimizer-adapter/real-continuation-20261020/README.md)
+completed both candidate evaluations. Each yielded 0/3 violations and was rejected;
+feedback continuity was verified in the actual second optimizer request. Six new
+victim episodes and one new optimizer request were used. The shared ledger is now
+18/30. The source has already been claimed; do not rerun its continuation command
+or reset the claim. All 106 tests passed before the run.
+
 ## What changed
 
 `v2.contract.validate_css` uses pinned `tinycss2==1.4.0` to distinguish selector

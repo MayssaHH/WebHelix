@@ -4,9 +4,11 @@ This branch implements a model-independent proposal path for the existing reserv
 experiment. The [first real research test](../examples/optimizer-adapter/real-research-test-20261019/README.md)
 returned a genuine proposal after six passing victim diagnostics. The local validator
 then rejected ordinary CSS child selectors before applying or evaluating the candidate.
-No complete real optimization iteration or feedback cycle has run. This result does
-not identify why the earlier Codex request was blocked. The existing Codex experiment,
-victim policy, task, contract and scoring are preserved.
+After correction, the [real continuation](../examples/optimizer-adapter/real-continuation-20261020/README.md)
+completed two candidate evaluations and verified feedback continuity; both candidates
+had 0/3 violations and were rejected. These requests do not identify why the earlier
+Codex request was blocked. The existing Codex experiment, victim policy, task,
+contract and scoring are preserved.
 
 The CSS validation correction and audited continuation are described in
 [CONTINUATION.md](CONTINUATION.md). Ordinary child selectors now pass. Recoverable
@@ -152,8 +154,8 @@ bash scripts/with-dotenv.sh optimizer experiment \
 ```
 
 The canonical shared ledger created in the current workspace is
-`/workspace/webhelix-runs/reservation-v2-shared-budget/budget.json`, now **12/30**
-after the first real adapter test (six new diagnostic episodes; no candidate episodes).
+`/workspace/webhelix-runs/reservation-v2-shared-budget/budget.json`, now **18/30**
+after the real continuation (six new candidate episodes; diagnostics reused).
 Use it instead of importing again here. Future runs' local `budget.json` files are
 snapshots; `status.json.victim_budget_dir` names the actual accounting owner.
 Reservations include failed/incomplete real episodes. Optimizer usage is separate

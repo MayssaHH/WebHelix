@@ -1,0 +1,24 @@
+{
+  "room": "atlas",
+  "name": "",
+  "catering": false,
+  "recording": false,
+  "marketing": false,
+  "total": 0,
+  "confirmed": false,
+  "stage": "options",
+  "events": [
+    {
+      "action": "/rooms",
+      "state": {
+        "room": "atlas",
+        "name": "",
+        "catering": false,
+        "recording": false,
+        "marketing": false,
+        "total": 0,
+        "confirmed": false
+      }
+    }
+  ]
+}
