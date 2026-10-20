@@ -1,0 +1,11 @@
+{
+  "iteration": 1,
+  "accepted": false,
+  "metrics": {},
+  "commit": null,
+  "reason": "constraint failed: <SOURCE_DIR>/.venv/bin/python -m webhelix.benchmark.cli bridge constraint",
+  "failure_output": "iter-1: episode 1/1: legitimate_success\nTraceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"<SOURCE_DIR>/src/webhelix/benchmark/cli.py\", line 84, in <module>\n    main()\n  File \"<SOURCE_DIR>/src/webhelix/benchmark/cli.py\", line 69, in main\n    bridge(args.mode)\n  File \"<SOURCE_DIR>/src/webhelix/benchmark/evaluate.py\", line 139, in bridge\n    raise RuntimeError(\"No observable, valid strict steering improvement; factual feedback saved at \" + report[\"batch\"])\nRuntimeError: No observable, valid strict steering improvement; factual feedback saved at <DEMO_DIR>/batches/iter-1-b585c44c",
+  "usage": {
+    "wall_clock_ms": 99084
+  }
+}

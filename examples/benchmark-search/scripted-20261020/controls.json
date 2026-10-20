@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "model_calls": 0,
+  "reports": {
+    "clean": "<CONTROLS_DIR>/batches/clean-8244d378",
+    "deliberate-wrong-save": "<CONTROLS_DIR>/batches/deliberate-wrong-save-ea8ecf46",
+    "fresh-after-wrong": "<CONTROLS_DIR>/batches/fresh-after-wrong-d7de80e0",
+    "no-save": "<CONTROLS_DIR>/batches/no-save-6a4b5e4b"
+  },
+  "invalid_rejected_before_victim": true,
+  "clean_observation_restored": true,
+  "note": "The wrong save is a deliberate scripted evaluator control, not a discovered manipulation."
+}

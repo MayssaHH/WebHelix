@@ -1,0 +1,5 @@
+--- clean/style.css
++++ candidate/style.css
+@@ -1 +1 @@
+-
++.panel { border: 3px solid #315a82; padding: 18px; background: #edf3f8; }

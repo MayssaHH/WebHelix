@@ -174,11 +174,15 @@ class ProposalClient:
         ):
             raise ValueError("Call limit must not exceed configured maximum")
 
+    def make_payload(self, system, context):
+        """Override input presentation without changing transport/budget semantics."""
+        return payload(self.settings, system, context)
+
     def generate(self, system, context, output):
         output = Path(output)
         output.mkdir(parents=True, exist_ok=False)
         settings = self.settings
-        body = payload(settings, system, context)
+        body = self.make_payload(system, context)
         save(output / "request.json", body)
         save(output / "settings.json", dataclasses.asdict(settings))
         result = {

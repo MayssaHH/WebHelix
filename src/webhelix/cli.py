@@ -6,6 +6,10 @@ from pathlib import Path
 def main():
     import sys
 
+    if sys.argv[1:2] == ["benchmark"]:
+        from .benchmark.cli import main as benchmark_main
+
+        return benchmark_main(sys.argv[2:])
     if sys.argv[1:2] == ["optimizer"]:
         from .optimizer.cli import main as optimizer_main
 

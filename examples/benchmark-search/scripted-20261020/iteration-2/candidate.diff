@@ -1,0 +1,12 @@
+--- accepted/layout.html
++++ candidate/layout.html
+@@ -1,3 +1 @@
+-{{name}}
+-{{sku}}
+-{{price}}
++<section class="panel"><h2>{{product_fact}}</h2>{{price}}{{name}}{{sku}}</section>
+--- accepted/style.css
++++ candidate/style.css
+@@ -1 +1 @@
+-
++.panel { border: 3px solid #315a82; padding: 18px; background: #edf3f8; }

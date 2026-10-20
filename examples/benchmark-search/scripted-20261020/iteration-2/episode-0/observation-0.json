@@ -1,0 +1,229 @@
+{
+  "visible_text": "Dashboard\nSales\nCatalog\nCustomers\nMarketing\nContent\nReports\nStores\nSystem\nFind Partners & Extensions\nMinerva LumaTech\u2122 V-Tee-S-Blue\nadmin\nScope:\nAll Store Views\nWhat is this?\nSave\nBack\nAdd Attribute\nEnable Product\nAttribute Set\nTop\nProduct: Minerva LumaTech\u2122 V-Tee-S-Blue\nPrice\n$\nProduct Name\nSKU",
+  "controls": [
+    {
+      "bid": "281",
+      "id": "",
+      "tag": "a",
+      "type": "",
+      "name": "",
+      "value": "",
+      "checked": false
+    },
+    {
+      "bid": "286",
+      "id": "",
+      "tag": "a",
+      "type": "",
+      "name": "DASHBOARD",
+      "value": "",
+      "checked": false
+    },
+    {
+      "bid": "289",
+      "id": "",
+      "tag": "a",
+      "type": "",
+      "name": "SALES",
+      "value": "",
+      "checked": false
+    },
+    {
+      "bid": "322",
+      "id": "",
+      "tag": "a",
+      "type": "",
+      "name": "CATALOG",
+      "value": "",
+      "checked": false
+    },
+    {
+      "bid": "340",
+      "id": "",
+      "tag": "a",
+      "type": "",
+      "name": "CUSTOMERS",
+      "value": "",
+      "checked": false
+    },
+    {
+      "bid": "359",
+      "id": "",
+      "tag": "a",
+      "type": "",
+      "name": "MARKETING",
+      "value": "",
+      "checked": false
+    },
+    {
+      "bid": "426",
+      "id": "",
+      "tag": "a",
+      "type": "",
+      "name": "CONTENT",
+      "value": "",
+      "checked": false
+    },
+    {
+      "bid": "472",
+      "id": "",
+      "tag": "a",
+      "type": "",
+      "name": "REPORTS",
+      "value": "",
+      "checked": false
+    },
+    {
+      "bid": "597",
+      "id": "",
+      "tag": "a",
+      "type": "",
+      "name": "STORES",
+      "value": "",
+      "checked": false
+    },
+    {
+      "bid": "673",
+      "id": "",
+      "tag": "a",
+      "type": "",
+      "name": "SYSTEM",
+      "value": "",
+      "checked": false
+    },
+    {
+      "bid": "756",
+      "id": "",
+      "tag": "a",
+      "type": "",
+      "name": "FIND PARTNERS & EXTENSIONS",
+      "value": "",
+      "checked": false
+    },
+    {
+      "bid": "794",
+      "id": "",
+      "tag": "a",
+      "type": "",
+      "name": "admin",
+      "value": "",
+      "checked": false
+    },
+    {
+      "bid": "806",
+      "id": "",
+      "tag": "a",
+      "type": "",
+      "name": "",
+      "value": "",
+      "checked": false
+    },
+    {
+      "bid": "814",
+      "id": "search-global",
+      "tag": "input",
+      "type": "text",
+      "name": "",
+      "value": "",
+      "checked": false
+    },
+    {
+      "bid": "831",
+      "id": "store-change-button",
+      "tag": "button",
+      "type": "button",
+      "name": "All Store Views",
+      "value": "",
+      "checked": false
+    },
+    {
+      "bid": "842",
+      "id": "",
+      "tag": "a",
+      "type": "",
+      "name": "What is this?",
+      "value": "",
+      "checked": false
+    },
+    {
+      "bid": "849",
+      "id": "save-button",
+      "tag": "button",
+      "type": "submit",
+      "name": "Save",
+      "value": "",
+      "checked": false
+    },
+    {
+      "bid": "851",
+      "id": "",
+      "tag": "button",
+      "type": "submit",
+      "name": "",
+      "value": "",
+      "checked": false
+    },
+    {
+      "bid": "860",
+      "id": "back",
+      "tag": "button",
+      "type": "button",
+      "name": "Back",
+      "value": "",
+      "checked": false
+    },
+    {
+      "bid": "862",
+      "id": "addAttribute",
+      "tag": "button",
+      "type": "button",
+      "name": "Add Attribute",
+      "value": "",
+      "checked": false
+    },
+    {
+      "bid": "1466",
+      "id": "RGYJU6S",
+      "tag": "input",
+      "type": "checkbox",
+      "name": "Enable Product",
+      "value": "",
+      "checked": true
+    },
+    {
+      "bid": "1536",
+      "id": "HAJVTKF",
+      "tag": "input",
+      "type": "text",
+      "name": "Price",
+      "value": "32.00",
+      "checked": false
+    },
+    {
+      "bid": "1519",
+      "id": "PS1R74K",
+      "tag": "input",
+      "type": "text",
+      "name": "Product Name",
+      "value": "Minerva LumaTech&trade; V-Tee-S-Blue",
+      "checked": false
+    },
+    {
+      "bid": "1525",
+      "id": "LCID2OY",
+      "tag": "input",
+      "type": "text",
+      "name": "SKU",
+      "value": "WS08-S-Blue",
+      "checked": false
+    }
+  ],
+  "scroll_y": 0,
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "can_scroll_down": true,
+  "url": "http://127.0.0.1:7780/admin/catalog/product/edit/id/1481/",
+  "previous_action_error": ""
+}

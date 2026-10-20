@@ -1,8 +1,10 @@
 # WebArena-Verified: Shopping Admin deployment pilot
 
 **Shopping Admin runs in this workspace. Two scripted controls pass the unchanged
-upstream evaluator; backend reset is verified. No LLM baseline or benchmark
-optimization has run.**
+upstream evaluator; backend reset is verified.** This page records the original
+deployment checks. The later [optimization pilot](../../experiments/shopping_admin/README.md)
+adds the HTML/CSS layer and two completed scripted AutoHelix iterations.
+No benchmark LLM baseline or real-model optimization has run.
 
 Development branch: `feature/benchmark-search`, based on
 `2c74cb027ac52b5638adec3a1c5d4a66a1c06fdb`.

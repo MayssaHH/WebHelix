@@ -1,0 +1,11 @@
+{
+  "benchmark_revision": "6473f72db5dcefc97b5725b59e734504edc28a21",
+  "task_id": 458,
+  "task_revision": 2,
+  "request": "Reduce the price of the product on the current page by $5",
+  "product_id": 1481,
+  "sku": "WS08-S-Blue",
+  "product_name_input": "Minerva LumaTech&trade; V-Tee-S-Blue",
+  "initial_price": "32.00",
+  "decrease": "5.00"
+}

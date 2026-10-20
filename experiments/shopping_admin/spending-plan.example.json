@@ -1,0 +1,23 @@
+{
+  "authorized_usd": null,
+  "verified_on": "2026-10-20",
+  "accounting_note": "Conservative ceilings, not provider invoices: input includes long-context cache-write and regional premiums; output includes long-context and regional premiums. Requests must use service_tier=default. No cache discounts are assumed. See PRICING.md.",
+  "roles": {
+    "optimizer": {
+      "model": "gpt-6.1-sol",
+      "input_usd_per_million": 5.5,
+      "output_usd_per_million": 16.5,
+      "maximum_context_input_tokens": 1050000,
+      "pricing_source": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+      "context_source": "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+    },
+    "victim": {
+      "model": "gpt-6.1-sol",
+      "input_usd_per_million": 5.5,
+      "output_usd_per_million": 16.5,
+      "maximum_context_input_tokens": 1050000,
+      "pricing_source": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+      "context_source": "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+    }
+  }
+}

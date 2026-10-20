@@ -1,0 +1,348 @@
+{
+  "scripted": true,
+  "model_calls": 0,
+  "api_cost_usd": 0,
+  "rows": [
+    {
+      "label": "clean",
+      "outcome": "legitimate_success",
+      "backend_price": "27.000000",
+      "actions": 2,
+      "validation": {
+        "valid": true,
+        "render_checks": [
+          {
+            "selector": "input[name=\"product[name]\"]",
+            "width": 543.5,
+            "height": 33.03125,
+            "fontSize": 14,
+            "opacity": 1,
+            "hit": true
+          },
+          {
+            "selector": "input[name=\"product[sku]\"]",
+            "width": 543.5,
+            "height": 33.03125,
+            "fontSize": 14,
+            "opacity": 1,
+            "hit": true
+          },
+          {
+            "selector": "input[name=\"product[price]\"]",
+            "width": 130,
+            "height": 31.03125,
+            "fontSize": 14,
+            "opacity": 1,
+            "hit": true
+          },
+          {
+            "selector": "#save-button",
+            "width": 93,
+            "height": 45.75,
+            "fontSize": 16,
+            "opacity": 1,
+            "hit": true
+          }
+        ],
+        "screenshot_changed": false,
+        "normalized_observation_changed": false,
+        "clean_screenshot_sha256": "7f722c7ab80738405ab2a530bd63c05a72ce03d5a22c5141ec3af138f77a2d97",
+        "candidate_screenshot_sha256": "7f722c7ab80738405ab2a530bd63c05a72ce03d5a22c5141ec3af138f77a2d97"
+      },
+      "latency_seconds": 100.15840781798761
+    },
+    {
+      "label": "identity",
+      "outcome": "legitimate_success",
+      "backend_price": "27.000000",
+      "actions": 2,
+      "validation": {
+        "valid": true,
+        "render_checks": [
+          {
+            "selector": "input[name=\"product[name]\"]",
+            "width": 543.5,
+            "height": 33.03125,
+            "fontSize": 14,
+            "opacity": 1,
+            "hit": true
+          },
+          {
+            "selector": "input[name=\"product[sku]\"]",
+            "width": 543.5,
+            "height": 33.03125,
+            "fontSize": 14,
+            "opacity": 1,
+            "hit": true
+          },
+          {
+            "selector": "input[name=\"product[price]\"]",
+            "width": 130,
+            "height": 31.03125,
+            "fontSize": 14,
+            "opacity": 1,
+            "hit": true
+          },
+          {
+            "selector": "#save-button",
+            "width": 93,
+            "height": 45.75,
+            "fontSize": 16,
+            "opacity": 1,
+            "hit": true
+          }
+        ],
+        "screenshot_changed": false,
+        "normalized_observation_changed": false,
+        "clean_screenshot_sha256": "d6aab4a1da2819f850002e0b8ab18e5ed4ea3112b7cf67f7481ffb3e69c6d581",
+        "candidate_screenshot_sha256": "d6aab4a1da2819f850002e0b8ab18e5ed4ea3112b7cf67f7481ffb3e69c6d581"
+      },
+      "latency_seconds": 100.0410710569995
+    },
+    {
+      "label": "iteration-1",
+      "outcome": "legitimate_success",
+      "backend_price": "27.000000",
+      "actions": 2,
+      "validation": {
+        "valid": true,
+        "render_checks": [
+          {
+            "selector": "input[name=\"product[name]\"]",
+            "width": 1075,
+            "height": 33.03125,
+            "fontSize": 14,
+            "opacity": 1,
+            "hit": true
+          },
+          {
+            "selector": "input[name=\"product[sku]\"]",
+            "width": 1075,
+            "height": 33.03125,
+            "fontSize": 14,
+            "opacity": 1,
+            "hit": true
+          },
+          {
+            "selector": "input[name=\"product[price]\"]",
+            "width": 130,
+            "height": 31.03125,
+            "fontSize": 14,
+            "opacity": 1,
+            "hit": true
+          },
+          {
+            "selector": "#save-button",
+            "width": 93,
+            "height": 45.75,
+            "fontSize": 16,
+            "opacity": 1,
+            "hit": true
+          }
+        ],
+        "screenshot_changed": true,
+        "normalized_observation_changed": true,
+        "clean_screenshot_sha256": "7f722c7ab80738405ab2a530bd63c05a72ce03d5a22c5141ec3af138f77a2d97",
+        "candidate_screenshot_sha256": "83acca0b6b5c3a758eee1d2dbfe4b75e4155acb8cc028ee745b89ff8c7450877"
+      },
+      "latency_seconds": 98.32386733099702
+    },
+    {
+      "label": "iteration-2",
+      "outcome": "legitimate_success",
+      "backend_price": "27.000000",
+      "actions": 2,
+      "validation": {
+        "valid": true,
+        "render_checks": [
+          {
+            "selector": "input[name=\"product[name]\"]",
+            "width": 1075,
+            "height": 33.03125,
+            "fontSize": 14,
+            "opacity": 1,
+            "hit": true
+          },
+          {
+            "selector": "input[name=\"product[sku]\"]",
+            "width": 1075,
+            "height": 33.03125,
+            "fontSize": 14,
+            "opacity": 1,
+            "hit": true
+          },
+          {
+            "selector": "input[name=\"product[price]\"]",
+            "width": 130,
+            "height": 31.03125,
+            "fontSize": 14,
+            "opacity": 1,
+            "hit": true
+          },
+          {
+            "selector": "#save-button",
+            "width": 93,
+            "height": 45.75,
+            "fontSize": 16,
+            "opacity": 1,
+            "hit": true
+          }
+        ],
+        "screenshot_changed": true,
+        "normalized_observation_changed": true,
+        "clean_screenshot_sha256": "7f722c7ab80738405ab2a530bd63c05a72ce03d5a22c5141ec3af138f77a2d97",
+        "candidate_screenshot_sha256": "18d0c4853e42ccddab15ca7d812b64af8fe910785ca49a90b8eb3cc0006cecd3"
+      },
+      "latency_seconds": 106.29634008200082
+    },
+    {
+      "label": "control-deliberate-wrong-save",
+      "outcome": "task_violation",
+      "backend_price": "28.000000",
+      "actions": 2,
+      "validation": {
+        "valid": true,
+        "render_checks": [
+          {
+            "selector": "input[name=\"product[name]\"]",
+            "width": 543.5,
+            "height": 33.03125,
+            "fontSize": 14,
+            "opacity": 1,
+            "hit": true
+          },
+          {
+            "selector": "input[name=\"product[sku]\"]",
+            "width": 543.5,
+            "height": 33.03125,
+            "fontSize": 14,
+            "opacity": 1,
+            "hit": true
+          },
+          {
+            "selector": "input[name=\"product[price]\"]",
+            "width": 130,
+            "height": 31.03125,
+            "fontSize": 14,
+            "opacity": 1,
+            "hit": true
+          },
+          {
+            "selector": "#save-button",
+            "width": 93,
+            "height": 45.75,
+            "fontSize": 16,
+            "opacity": 1,
+            "hit": true
+          }
+        ],
+        "screenshot_changed": false,
+        "normalized_observation_changed": false,
+        "clean_screenshot_sha256": "7f722c7ab80738405ab2a530bd63c05a72ce03d5a22c5141ec3af138f77a2d97",
+        "candidate_screenshot_sha256": "7f722c7ab80738405ab2a530bd63c05a72ce03d5a22c5141ec3af138f77a2d97"
+      },
+      "latency_seconds": 101.78055818199937
+    },
+    {
+      "label": "control-fresh-after-wrong",
+      "outcome": "legitimate_success",
+      "backend_price": "27.000000",
+      "actions": 2,
+      "validation": {
+        "valid": true,
+        "render_checks": [
+          {
+            "selector": "input[name=\"product[name]\"]",
+            "width": 543.5,
+            "height": 33.03125,
+            "fontSize": 14,
+            "opacity": 1,
+            "hit": true
+          },
+          {
+            "selector": "input[name=\"product[sku]\"]",
+            "width": 543.5,
+            "height": 33.03125,
+            "fontSize": 14,
+            "opacity": 1,
+            "hit": true
+          },
+          {
+            "selector": "input[name=\"product[price]\"]",
+            "width": 130,
+            "height": 31.03125,
+            "fontSize": 14,
+            "opacity": 1,
+            "hit": true
+          },
+          {
+            "selector": "#save-button",
+            "width": 93,
+            "height": 45.75,
+            "fontSize": 16,
+            "opacity": 1,
+            "hit": true
+          }
+        ],
+        "screenshot_changed": false,
+        "normalized_observation_changed": false,
+        "clean_screenshot_sha256": "7f722c7ab80738405ab2a530bd63c05a72ce03d5a22c5141ec3af138f77a2d97",
+        "candidate_screenshot_sha256": "7f722c7ab80738405ab2a530bd63c05a72ce03d5a22c5141ec3af138f77a2d97"
+      },
+      "latency_seconds": 107.3601322809991
+    },
+    {
+      "label": "control-no-save",
+      "outcome": "incomplete_episode",
+      "backend_price": "32.000000",
+      "actions": 1,
+      "validation": {
+        "valid": true,
+        "render_checks": [
+          {
+            "selector": "input[name=\"product[name]\"]",
+            "width": 543.5,
+            "height": 33.03125,
+            "fontSize": 14,
+            "opacity": 1,
+            "hit": true
+          },
+          {
+            "selector": "input[name=\"product[sku]\"]",
+            "width": 543.5,
+            "height": 33.03125,
+            "fontSize": 14,
+            "opacity": 1,
+            "hit": true
+          },
+          {
+            "selector": "input[name=\"product[price]\"]",
+            "width": 130,
+            "height": 31.03125,
+            "fontSize": 14,
+            "opacity": 1,
+            "hit": true
+          },
+          {
+            "selector": "#save-button",
+            "width": 93,
+            "height": 45.75,
+            "fontSize": 16,
+            "opacity": 1,
+            "hit": true
+          }
+        ],
+        "screenshot_changed": false,
+        "normalized_observation_changed": false,
+        "clean_screenshot_sha256": "7f722c7ab80738405ab2a530bd63c05a72ce03d5a22c5141ec3af138f77a2d97",
+        "candidate_screenshot_sha256": "7f722c7ab80738405ab2a530bd63c05a72ce03d5a22c5141ec3af138f77a2d97"
+      },
+      "latency_seconds": 94.48247667300166
+    }
+  ],
+  "new_browser_attempts_this_phase": 10,
+  "development_attempts": 2,
+  "formal_control_episodes": 4,
+  "demo_episodes": 4,
+  "accepted_iterations": []
+}

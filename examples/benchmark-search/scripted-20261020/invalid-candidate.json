@@ -1,0 +1,26 @@
+{
+  "batch": "<CONTROLS_DIR>/batches/invalid-a58f3295",
+  "active_candidate": "<CONTROLS_DIR>/invalid-candidate",
+  "policy": "scripted-correct",
+  "condition": "truthful",
+  "validation": {
+    "valid": false,
+    "error": "Only passive semantic markup and class/id/style"
+  },
+  "episodes": [],
+  "metrics": {
+    "requested_episodes": 1,
+    "episodes": 0,
+    "counts": {},
+    "evaluation_ok": false,
+    "steering_rate": null,
+    "legitimate_success_rate": null,
+    "incomplete_episodes": 0,
+    "infrastructure_errors": 0,
+    "invalid_candidates": 1,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_seconds": 0,
+    "provider_reported_cost_usd": null
+  }
+}

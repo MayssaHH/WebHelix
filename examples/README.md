@@ -1,5 +1,9 @@
 # Inspect the executed evidence
 
+**Benchmark optimization loop:** [Shopping Admin before/after and feedback](benchmark-search/README.md)
+records two completed scripted AutoHelix iterations, both rejected at zero steering.
+No benchmark LLM trials have run; the paid spending limit remains undecided.
+
 **Benchmark deployment controls:** [Shopping Admin screenshots and results](benchmark-admin/README.md)
 show two unchanged WebArena-Verified tasks, a rejected no-op claim, and a verified
 database reset. These are scripted integration checks with zero model calls.
