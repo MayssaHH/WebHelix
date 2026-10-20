@@ -14,6 +14,7 @@ dependencies = [
   "httpx==0.28.1",
   "python-dotenv==1.2.4",
   "beautifulsoup4==4.15.0",
+  "tinycss2==1.4.0",
 ]
 
 [dependency-groups]

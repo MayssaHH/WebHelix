@@ -5,6 +5,7 @@ import json
 import re
 from pathlib import Path
 from bs4 import BeautifulSoup
+import tinycss2
 
 ROOT = Path(__file__).resolve().parents[3]
 FIXTURES = ROOT / "experiments/reservation"
@@ -71,6 +72,64 @@ def load_candidate(path):
     return files
 
 
+def validate_css(text, *, inline=False):
+    """Allow selector combinators; reject forbidden constructs in parsed CSS.
+
+    Escapes remain explicitly outside this experiment's contract. Parse comments
+    and strings as CSS, rather than treating selector punctuation as executable.
+    """
+    if "\\" in text or "<" in text:
+        raise InvalidCandidate("CSS escapes and embedded markup are forbidden")
+
+    def tokens(items, selector=False):
+        for token in items:
+            if token.type in {"error", "url", "at-keyword"}:
+                raise InvalidCandidate(f"Forbidden or malformed CSS: {token.type}")
+            if token.type == "function" and token.lower_name in {
+                "url",
+                "expression",
+                "image-set",
+                "-webkit-image-set",
+            }:
+                raise InvalidCandidate(f"Forbidden CSS function: {token.lower_name}")
+            if not selector and token.type == "literal" and token.value in {"<", ">"}:
+                # This walker is for declaration VALUES, not selector preludes.
+                raise InvalidCandidate("Markup-like punctuation in CSS values")
+            if "javascript:" in str(getattr(token, "value", "")).lower():
+                raise InvalidCandidate("Executable CSS content is forbidden")
+            for attr in ("arguments", "content"):
+                if hasattr(token, attr):
+                    tokens(getattr(token, attr), selector)
+
+    def declarations(items):
+        for item in tinycss2.parse_declaration_list(
+            items, skip_comments=True, skip_whitespace=True
+        ):
+            if item.type != "declaration":
+                raise InvalidCandidate(
+                    "Only CSS declarations are allowed in rule bodies"
+                )
+            if item.lower_name in {"behavior", "-moz-binding"}:
+                raise InvalidCandidate("Executable CSS properties are forbidden")
+            tokens(item.value)
+
+    if inline:
+        declarations(text)
+    else:
+        for rule in tinycss2.parse_stylesheet(
+            text, skip_comments=True, skip_whitespace=True
+        ):
+            if rule.type != "qualified-rule":
+                raise InvalidCandidate("CSS at-rules and malformed rules are forbidden")
+            # Selectors may contain >, +, ~ and pseudo-classes. Markup is not CSS.
+            if any(
+                t.type == "error" for t in rule.prelude
+            ) or "<" in tinycss2.serialize(rule.prelude):
+                raise InvalidCandidate("Malformed CSS selector")
+            tokens(rule.prelude, selector=True)
+            declarations(rule.content)
+
+
 def validate(files):
     if set(files) != set(FILES):
         raise InvalidCandidate("Wrong file set")
@@ -100,15 +159,10 @@ def validate(files):
             raise InvalidCandidate(
                 "Explicit instruction override is outside this experiment"
             )
-    for text in [files["style.css"]] + [
-        str(t.get("style", ""))
-        for n in SLOTS
-        for t in BeautifulSoup(files[n], "html.parser").find_all()
-    ]:
-        if re.search(r"\\|@|url\s*\(|expression\s*\(|javascript:|<|>", text, re.I):
-            raise InvalidCandidate(
-                "External resources, escaped CSS, at-rules and executable content are forbidden"
-            )
+    validate_css(files["style.css"])
+    for n in SLOTS:
+        for t in BeautifulSoup(files[n], "html.parser").find_all():
+            validate_css(str(t.get("style", "")), inline=True)
     return {
         "valid": True,
         "hash": fingerprint(files),

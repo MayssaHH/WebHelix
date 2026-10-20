@@ -1,6 +1,7 @@
 """AutoHelix AgentBackend implementation; fixed file writer, not a coding-agent shell."""
 
 import difflib
+import hashlib
 import json
 from pathlib import Path
 
@@ -63,6 +64,25 @@ def proposal_check(proposal, original):
     }
 
 
+def proposal_note(proposal):
+    """Preserve supplied fields, never invent a model-authored hypothesis."""
+    if not isinstance(proposal, dict):
+        return "No structured optimizer note was supplied.\n"
+    return (
+        "\n\n".join(
+            f"## {name}\n{proposal[name]}"
+            for name in (
+                "hypothesis",
+                "predicted_observation",
+                "falsification",
+                "reflection",
+            )
+            if isinstance(proposal.get(name), str)
+        )
+        or "No structured optimizer note was supplied.\n"
+    )
+
+
 def context_for(workspace, prompt, iteration):
     files = load_candidate(workspace / "candidate")
     previous = []
@@ -80,7 +100,13 @@ def context_for(workspace, prompt, iteration):
                 "candidate_files": {
                     name: safe_read(workspace, base / "candidate" / name, 24000)
                     for name in FILES
+                    if (workspace / base / "candidate" / name).exists()
                 },
+                "raw_proposal": json.loads(
+                    safe_read(workspace, base / "proposal.json", 500000)
+                )
+                if (workspace / base / "proposal.json").exists()
+                else None,
                 "observations": {
                     p.name: json.loads(safe_read(workspace, p.relative_to(workspace)))
                     for p in sorted((workspace / base).glob("observation-*.json"))
@@ -108,11 +134,12 @@ def context_for(workspace, prompt, iteration):
 
 
 class ProposalBackend:
-    def __init__(self, client, run_dir, purpose="research"):
+    def __init__(self, client, run_dir, purpose="research", replay=None):
         self.client, self.run_dir = client, Path(run_dir)
         if purpose not in {"research", "harmless_edit"}:
             raise ValueError("Unknown proposal purpose")
         self.purpose = purpose
+        self.replay = Path(replay) if replay else None
         self.display_name = "Bounded proposal adapter: " + client.settings.model
 
     def run(
@@ -144,7 +171,26 @@ class ProposalBackend:
                 }
             else:
                 context = context_for(workspace, prompt, iteration)
-            result = self.client.generate(SYSTEM, context, output)
+            if self.replay and iteration == 1:
+                output.mkdir(parents=True, exist_ok=False)
+                raw = self.replay.read_bytes()
+                (output / "proposal.json").write_bytes(raw)
+                save(
+                    output / "replay.json",
+                    {
+                        "source": str(self.replay),
+                        "sha256": hashlib.sha256(raw).hexdigest(),
+                        "new_model_request": False,
+                    },
+                )
+                result = {
+                    "status": "proposal_received",
+                    "request_started": False,
+                    "usage": {},
+                    "replayed": True,
+                }
+            else:
+                result = self.client.generate(SYSTEM, context, output)
             raw_usage = result.get("usage", {})
             for standard, alias in (
                 ("input_tokens", "prompt_tokens"),
@@ -155,6 +201,7 @@ class ProposalBackend:
                     usage[standard] = value
             if result["status"] == "proposal_received":
                 proposal = read(output / "proposal.json")
+                (output / "proposal-note.md").write_text(proposal_note(proposal))
                 checked = proposal_check(proposal, context["current_files"])
                 save(output / "validation.json", checked)
                 result.update(status=checked["status"], validation=checked)
@@ -191,15 +238,7 @@ class ProposalBackend:
                             )
                             written.append(name)
                         note.write_text(
-                            "\n\n".join(
-                                f"## {name}\n{proposal[name]}"
-                                for name in (
-                                    "hypothesis",
-                                    "predicted_observation",
-                                    "falsification",
-                                    "reflection",
-                                )
-                            )
+                            proposal_note(proposal)
                             + "\n\nWritten before scheduled evaluation; see separate evaluator feedback.\n"
                         )
                     except OSError:
@@ -209,7 +248,13 @@ class ProposalBackend:
                             )
                         raise
         except InvalidCandidate as exc:
-            result.update(status="invalid_proposal", error=str(exc))
+            checked = {
+                "valid": False,
+                "stage": "proposal_validation",
+                "error": str(exc),
+            }
+            save(output / "validation.json", checked)
+            result.update(status="invalid_proposal", error=str(exc), validation=checked)
         except (ValueError, OSError) as exc:
             result.update(status="local_error", error=str(exc))
         save(output / "result.json", result)

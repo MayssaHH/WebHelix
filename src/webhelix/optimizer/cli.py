@@ -114,7 +114,13 @@ def main(argv=None):
         "demo", help="Offline model replies, real AutoHelix and real browser controls"
     )
     p.add_argument("--run-dir", required=True)
-    for name in ("check", "experiment"):
+    p = sub.add_parser(
+        "inspect-proposal",
+        help="Offline validation and browser inspection; no model calls",
+    )
+    p.add_argument("--proposal", required=True)
+    p.add_argument("--output", required=True)
+    for name in ("check", "experiment", "continue"):
         p = sub.add_parser(name)
         p.add_argument("--config", required=True)
         p.add_argument("--run-dir", required=True)
@@ -122,13 +128,24 @@ def main(argv=None):
             "--env-file",
             help="Explicit private dotenv file; never loaded from a candidate",
         )
-        if name == "experiment":
+        if name in {"experiment", "continue"}:
             p.add_argument("--budget-dir", required=True)
             p.add_argument("--compatibility-run", required=True)
+        if name == "continue":
+            p.add_argument("--source-run", required=True)
     p = sub.add_parser("import-budget")
     p.add_argument("--source", required=True)
     p.add_argument("--budget-dir", required=True)
     args = parser.parse_args(argv)
+    if args.command == "inspect-proposal":
+        from .continuation import inspect_proposal
+
+        print(
+            json.dumps(
+                inspect_proposal(Path(args.proposal), Path(args.output)), indent=2
+            )
+        )
+        return
     if args.command == "import-budget":
         from .budget import import_budget
 
@@ -175,11 +192,23 @@ def main(argv=None):
                 parser.error(
                     "First pass a harmless check with exactly this deployment/configuration"
                 )
-            client = ProposalClient(settings, run, args.env_file)
+            source = (
+                Path(args.source_run).resolve() if args.command == "continue" else None
+            )
+            client = ProposalClient(
+                settings, run, args.env_file, call_limit=1 if source else None
+            )
             experiment(
                 run,
-                optimizer=ProposalBackend(client, run),
+                optimizer=ProposalBackend(
+                    client,
+                    run,
+                    replay=source / "proposals/iter-1/adapter/proposal.json"
+                    if source
+                    else None,
+                ),
                 budget_dir=Path(args.budget_dir),
+                continuation=source,
             )
 
 

@@ -363,16 +363,27 @@ def test_real_harness_stops_before_evaluating_failed_proposal(
     original = load_candidate(FIXTURES / "candidate")
     invalid = proposal(original)
     invalid["files"]["rooms.html"] += "<script>invalid()</script>"
+    contexts = []
+
+    def handle(req):
+        context = json.loads(json.loads(req.content)["input"][1]["content"])
+        contexts.append(context)
+        if len(contexts) == 2:
+            prior = context["prior_feedback"][0]
+            assert prior["evaluator_feedback"]["metrics"] is None
+            assert prior["evaluator_feedback"]["victim_episodes"] == 0
+            assert prior["raw_proposal"] == invalid
+            assert invalid["hypothesis"] in prior["optimizer_note"]
+        return (
+            httpx.Response(403, json={"error": {"code": "synthetic-block"}})
+            if failure == "service_error"
+            else httpx.Response(200, json=response(invalid))
+        )
+
     client = ProposalClient(
         settings(),
         run,
-        transport=httpx.MockTransport(
-            lambda req: (
-                httpx.Response(403, json={"error": {"code": "synthetic-block"}})
-                if failure == "service_error"
-                else httpx.Response(200, json=response(invalid))
-            )
-        ),
+        transport=httpx.MockTransport(handle),
     )
     backend = ProposalBackend(client, run)
     project = prepare(run, scripted=True, optimizer=backend)
@@ -391,12 +402,70 @@ def test_real_harness_stops_before_evaluating_failed_proposal(
     )
     harness = ResearchHarness(project, run)
     harness.agent = backend
-    with pytest.raises(AutoHelixRunError, match=failure):
-        harness.run(max_iterations=1)
+    if failure == "service_error":
+        with pytest.raises(AutoHelixRunError, match=failure):
+            harness.run(max_iterations=2)
+        assert len(contexts) == 1
+        assert [r.iteration for r in harness.history.load()] == [0]
+    else:
+        harness.run(max_iterations=2)
+        assert len(contexts) == 2
+        assert [r.iteration for r in harness.history.load()] == [0, 1, 2]
+        assert [r.metrics for r in harness.history.load()][1:] == [{}, {}]
     assert not (run / "batches").exists()
     assert not (run / "budget.json").exists()
-    assert [r.iteration for r in harness.history.load()] == [0]
     assert load_candidate(project / "candidate") == original
     result = read(run / "proposals/iter-1/adapter/result.json")
     assert result["status"] == failure
     assert not read(run / "proposals/iter-1/agent-result.json")["success"]
+
+
+def test_replay_does_not_call_provider_and_preserves_exact_proposal(
+    workspace, tmp_path
+):
+    from webhelix.v2.contract import ROOT
+
+    source = (
+        ROOT
+        / "examples/optimizer-adapter/real-research-test-20261019/optimizer-proposal.json"
+    )
+    run = tmp_path / "replay"
+    backend = ProposalBackend(
+        ProposalClient(
+            settings(),
+            run,
+            transport=httpx.MockTransport(
+                lambda request: pytest.fail("Replay invoked a model")
+            ),
+            call_limit=1,
+        ),
+        run,
+        replay=source,
+    )
+    result = backend.run(workspace, "replay test", 1, run / "agent.log", lambda e: None)
+    assert result.success and not result.usage
+    assert load_candidate(workspace / "candidate") == read(source)["files"]
+    assert (
+        run / "proposals/iter-1/adapter/proposal.json"
+    ).read_bytes() == source.read_bytes()
+    assert not (run / "optimizer-budget.json").exists()
+    assert (
+        read(source)["hypothesis"]
+        in (workspace / ".autohelix/notes/iter-1.md").read_text()
+    )
+
+
+def test_continuation_call_limit_is_one(tmp_path, monkeypatch):
+    monkeypatch.setenv("WEBHELIX_OPTIMIZER_API_KEY", "synthetic-key")
+    calls = []
+
+    def handle(request):
+        calls.append(request)
+        return httpx.Response(200, json=response({"fixture": True}))
+
+    client = ProposalClient(
+        settings(), tmp_path, transport=httpx.MockTransport(handle), call_limit=1
+    )
+    assert client.generate("test", {}, tmp_path / "one")["request_started"]
+    assert client.generate("test", {}, tmp_path / "two")["status"] == "budget_exhausted"
+    assert len(calls) == 1

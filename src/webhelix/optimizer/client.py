@@ -160,11 +160,19 @@ def extract(data, protocol):
 
 
 class ProposalClient:
-    def __init__(self, settings, run_dir, env_file=None, transport=None):
+    def __init__(
+        self, settings, run_dir, env_file=None, transport=None, call_limit=None
+    ):
         self.settings = settings
         self.run_dir = Path(run_dir)
         self.env_file = env_file
         self.transport = transport
+        self.call_limit = settings.max_calls if call_limit is None else call_limit
+        if (
+            type(self.call_limit) is not int
+            or not 1 <= self.call_limit <= settings.max_calls
+        ):
+            raise ValueError("Call limit must not exceed configured maximum")
 
     def generate(self, system, context, output):
         output = Path(output)
@@ -208,11 +216,11 @@ class ProposalClient:
                 ledger = (
                     read(path)
                     if path.exists()
-                    else {"maximum": settings.max_calls, "calls": []}
+                    else {"maximum": self.call_limit, "calls": []}
                 )
                 if (
-                    ledger["maximum"] != settings.max_calls
-                    or len(ledger["calls"]) >= settings.max_calls
+                    ledger["maximum"] != self.call_limit
+                    or len(ledger["calls"]) >= self.call_limit
                 ):
                     result["status"] = "budget_exhausted"
                     return result

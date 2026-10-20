@@ -58,6 +58,7 @@ def export(run, output):
         "isolation.json",
         "autohelix-history.jsonl",
         "optimizer-budget.json",
+        "continuation.json",
     ):
         if (run / name).exists():
             shutil.copy2(run / name, output / name)
@@ -79,8 +80,10 @@ def export(run, output):
     save(output / "optimizer-attempts.json", attempts)
     reports = sorted((run / "batches").glob("*/report.json"))
     clean = next((p.parent for p in reports if read(p)["label"] == "clean"), None)
+    if (run / "source-attempt").exists():
+        shutil.copytree(run / "source-attempt", output / "source-attempt")
     rows, cards, manifest = [], [], {}
-    totals = Counter()
+    totals, reused_totals = Counter(), Counter()
     for source in reports:
         report = read(source)
         batch = source.parent
@@ -145,7 +148,7 @@ def export(run, output):
                 if src.exists():
                     shutil.copy2(src, target / name)
         m = report["metrics"]
-        totals.update(
+        (reused_totals if report.get("reused_from") else totals).update(
             {k: m[k] for k in ("input_tokens", "output_tokens", "latency_seconds")}
         )
         acceptance = (
@@ -158,8 +161,15 @@ def export(run, output):
             if acceptance
             else "diagnostic"
         )
+        if report.get("reused_from"):
+            decision = "reused diagnostic (zero new episodes)"
+        rate = (
+            f"{m['violation_rate']:.3f}"
+            if report["validation"]["valid"] and m["evaluation_ok"]
+            else "not a valid score"
+        )
         rows.append(
-            f"| [{label}]({batch.name}/report.json) | {m['episodes']} | {m['counts']} | {m['violation_rate']:.3f} | {decision} |"
+            f"| [{label}]({batch.name}/report.json) | {m['episodes']} | {m['counts']} | {rate} | {decision} |"
         )
         image = ""
         if clean and (label.startswith("iter-") or label == "identity"):
@@ -181,11 +191,22 @@ def export(run, output):
         if (run / "autohelix-history.jsonl").exists()
         else []
     )
-    measured_optimizer = [
-        r["usage"] for r in history if r["iteration"] > 0 and r.get("usage")
-    ]
+    # Count all attempted provider calls, including those that fail before history
+    # is written. Replay has no transport record and consumes no new usage.
+    transports = list((run / "proposals").glob("*/adapter/transport-result.json"))
+    measured_optimizer = (
+        [read(p)["usage"] for p in transports if read(p).get("usage")]
+        if transports
+        else [r["usage"] for r in attempts if r.get("usage")]
+    )
+    if not attempts and not transports:
+        measured_optimizer = [
+            r["usage"] for r in history if r["iteration"] > 0 and r.get("usage")
+        ]
+    prior_transport = run / "source-attempt/adapter/transport-result.json"
     usage = {
         "victim": dict(totals),
+        "reused_baseline_victim_usage": dict(reused_totals),
         "optimizer": {
             name: sum(r.get(name, 0) for r in measured_optimizer)
             if measured_optimizer
@@ -194,6 +215,12 @@ def export(run, output):
         },
         "reported_cost_usd": None,
         "optimizer_attempts": len(attempts),
+        "new_optimizer_requests": sum(
+            bool(read(p).get("request_started")) for p in transports
+        ),
+        "previous_optimizer_usage": read(prior_transport).get("usage", {})
+        if prior_transport.exists()
+        else {},
         "optimizer_usage_reported": len(measured_optimizer),
         "cost_note": "Dollar cost not reported. Upstream zero defaults are not evidence of free usage.",
     }
@@ -210,7 +237,7 @@ def export(run, output):
         + "\n\n"
         "Open `index.html` locally or a condition's `overview.png` on GitHub. The left column is the clean episode, and the right is the named condition at the first observation of each stage. An identity comparison is the same page, not an optimizer-generated change. Missing stages are labeled.\n\n"
         "Request bodies replace only the base64 image URL with `artifact:screenshot-N.png`; that image is included. Exact original request bodies and all episodes remain in the local run. Original trace hashes are recorded. No authentication headers are exported. Absolute paths in reports identify original local artifacts.\n\n"
-        "See `usage.json` for separate victim and optimizer token counts. Dollar cost was not reported. Strict empirical improvement is an engineering retention rule, not proof of causality, novelty or agent specificity. Arbitrary new prose still needs research review.\n"
+        "See `usage.json` for new victim and optimizer token counts, with reused baseline usage and the original optimizer request reported separately. Do not count reused evidence as new calls. Dollar cost was not reported. Strict empirical improvement is an engineering retention rule, not proof of causality, novelty or agent specificity. Arbitrary new prose still needs research review.\n"
     )
     (output / "index.html").write_text(
         '<!doctype html><meta charset="utf-8"><title>WebHelix reservation evidence</title><style>body{font:16px system-ui;max-width:1100px;margin:30px auto;background:#fafafa;color:#142335}section{border-top:2px solid #bbc;padding:20px 0}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><h1>Recorded reservation experiment</h1><p>Actual first-episode observations. Proposal notes and evaluation records are separate.</p>'
