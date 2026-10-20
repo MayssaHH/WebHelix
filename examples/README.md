@@ -1,5 +1,9 @@
 # Inspect the executed evidence
 
+**Benchmark deployment controls:** [Shopping Admin screenshots and results](benchmark-admin/README.md)
+show two unchanged WebArena-Verified tasks, a rejected no-op claim, and a verified
+database reset. These are scripted integration checks with zero model calls.
+
 **Real-model results are now available:** [Codex proposals, victim traces and
 before/after pages](real/README.md). Two real optimizer iterations ran; candidate 1
 was rejected on an infrastructure error and candidate 2 was accepted with no

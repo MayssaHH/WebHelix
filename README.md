@@ -1,5 +1,10 @@
 # WebHelix
 
+**Benchmark deployment pilot:** [WebArena-Verified Shopping Admin](benchmarks/webarena_verified/README.md)
+now runs locally with two passing scripted task controls and a verified database
+reset. See [screenshots and recorded results](examples/benchmark-admin/README.md).
+This phase made no model calls; benchmark search is not connected yet.
+
 **Optimizer adapter branch:** [bounded proposal adapter](docs/OPTIMIZER_ADAPTER.md)
 adds a configurable model endpoint, validated HTML/CSS proposals and explicit
 feedback payloads without changing AutoHelix's pinned source or the victim policy.

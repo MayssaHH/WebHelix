@@ -1,0 +1,15 @@
+{
+  "benchmark": "WebArena-Verified",
+  "source_repository": "https://github.com/ServiceNow/webarena-verified",
+  "source_revision": "6473f72db5dcefc97b5725b59e734504edc28a21",
+  "site": "shopping",
+  "source_image": "am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+  "local_image": "webhelix-shopping:3e8cb9b945ea-flat",
+  "container": "webhelix-wa-shopping",
+  "site_url": "http://127.0.0.1:7770",
+  "control_url": "http://127.0.0.1:7771",
+  "disk_reserve_gib": 3,
+  "task_shortlist": [465, 269],
+  "task_deferred_for_instrumentation_audit": [528],
+  "paid_model_calls": 0
+}

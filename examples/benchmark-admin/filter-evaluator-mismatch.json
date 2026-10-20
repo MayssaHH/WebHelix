@@ -1,0 +1,15 @@
+{
+  "task": 677,
+  "upstream_score": 0.0,
+  "actual_filter_requests": [
+    {
+      "url": "http://127.0.0.1:7780/admin/mui/index/render/?namespace=sales_order_grid&paging%5BpageSize%5D=200&paging%5Bcurrent%5D=1&search=&keywordUpdated=false&filters%5Bplaceholder%5D=true&filters%5Bstatus%5D=processing&sorting%5Bfield%5D=created_at&sorting%5Bdirection%5D=desc&isAjax=true",
+      "method": "GET",
+      "response_status": 200,
+      "referer": "http://127.0.0.1:7780/admin/sales/order/"
+    }
+  ],
+  "visible_processing_orders": 2,
+  "database_processing_orders": 2,
+  "disposition": "Deferred: NAVIGATE+GET evaluator selects last document navigation, excluding this AJAX request. Trace and evaluator unchanged."
+}

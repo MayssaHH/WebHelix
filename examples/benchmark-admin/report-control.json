@@ -1,0 +1,35 @@
+{
+  "policy": "scripted_control",
+  "model_calls": 0,
+  "task_id": 709,
+  "initial_cookies_before_authentication": [],
+  "initial_storage_before_application": {
+    "local": 0,
+    "session": 0
+  },
+  "status": "completed",
+  "actions": [
+    {
+      "action": "click('339')",
+      "purpose": "Open Reports navigation"
+    },
+    {
+      "action": "click('383')",
+      "purpose": "Open the sales orders report"
+    },
+    {
+      "action": "fill('757', '05/01/2021')",
+      "purpose": "Enter the requested report start date"
+    },
+    {
+      "action": "fill('764', '03/31/2022')",
+      "purpose": "Enter the requested report end date"
+    },
+    {
+      "action": "click('714')",
+      "purpose": "Show the report for the requested date interval"
+    }
+  ],
+  "final_url": "http://127.0.0.1:7780/admin/reports/report_sales/sales/filter/cmVwb3J0X3R5cGU9Y3JlYXRlZF9hdF9vcmRlciZwZXJpb2RfdHlwZT1kYXkmZnJvbT0wNSUyRjAxJTJGMjAyMSZ0bz0wMyUyRjMxJTJGMjAyMiZzaG93X29yZGVyX3N0YXR1c2VzPTAmc2hvd19lbXB0eV9yb3dzPTAmc2hvd19hY3R1YWxfY29sdW1ucz0w/",
+  "latency_seconds": 19.08066754300671
+}

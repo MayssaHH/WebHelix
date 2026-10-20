@@ -1,0 +1,42 @@
+{
+  "summary.json": {
+    "raw_path": "summary.json",
+    "sha256": "f18b199164829758d28e50c0a4df05e0993adbe7336c9a4c9db9731546b4efc1"
+  },
+  "clean-product.png": {
+    "raw_path": "control-458/screenshot-0.png",
+    "sha256": "7f722c7ab80738405ab2a530bd63c05a72ce03d5a22c5141ec3af138f77a2d97"
+  },
+  "saved-product.png": {
+    "raw_path": "control-458/screenshot-2.png",
+    "sha256": "af8f59bd4786edb8980b75cb5b55098826bc157f0fd8a58823b01d7bedc50ca4"
+  },
+  "orders-report.png": {
+    "raw_path": "control-709/screenshot-5.png",
+    "sha256": "1563217bb81a8f1df80aed5d077b20ce18cc60c75ac3dbdaa098cdeac0465351"
+  },
+  "clean-observation.json": {
+    "raw_path": "control-458/observation-0.json",
+    "sha256": "bc600785b4dd71b2c9b93a252e0ca662cff1301c05eb07ab676646ad4720ab15"
+  },
+  "saved-observation.json": {
+    "raw_path": "control-458/observation-2.json",
+    "sha256": "c80786766033e07f6d71d752079bf5fe7ade89c3f5287d25a97ca0ab91f2300d"
+  },
+  "price-control.json": {
+    "raw_path": "control-458/control.json",
+    "sha256": "c1da46e380f7f0891e9090bb570516f4b663e5b57747699f4883d2d1e103ca05"
+  },
+  "report-control.json": {
+    "raw_path": "control-709/control.json",
+    "sha256": "3f902703159ea7284ef3414b09ff9b8061fb40ffa5ad3e15475f484c95bded08"
+  },
+  "task-458.json": {
+    "raw_path": "tasks/458/agent-input.json",
+    "sha256": "702605613e7a22167bf5a2e3ca8840187abe0cb77353e48acf5072cab76bfbaf"
+  },
+  "task-709.json": {
+    "raw_path": "tasks/709/agent-input.json",
+    "sha256": "fa0332ad28147c1da1056e5e55ceade900b2f5b3c1333e598a54fd1f50bfba2a"
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "kind": "scripted_deployment_controls_not_model_or_attack_results",
+  "checks": {
+    "noop_success_claim_rejected": true,
+    "price_task_passed": true,
+    "report_task_passed": true,
+    "price_saved_and_reset": true,
+    "reset_replaced_container": true,
+    "clean_observation_restored": true,
+    "order_counts_unchanged": true,
+    "fresh_browser_cookies": true,
+    "fresh_browser_storage_in_instrumented_controls": true,
+    "no_model_calls": true
+  },
+  "all_checks_passed": true,
+  "evaluations": {
+    "noop-458": {
+      "task_id": 458,
+      "task_revision": 2,
+      "status": "failure",
+      "score": 0.0,
+      "webarena_verified_version": "1.2.3",
+      "webarena_verified_evaluator_checksum": "35c3385b1db4b3378657589f95f50defd4234bd36e5b93d44733fd561b01db4e",
+      "webarena_verified_data_checksum": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30"
+    },
+    "control-458": {
+      "task_id": 458,
+      "task_revision": 2,
+      "status": "success",
+      "score": 1.0,
+      "webarena_verified_version": "1.2.3",
+      "webarena_verified_evaluator_checksum": "35c3385b1db4b3378657589f95f50defd4234bd36e5b93d44733fd561b01db4e",
+      "webarena_verified_data_checksum": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30"
+    },
+    "control-709": {
+      "task_id": 709,
+      "task_revision": 2,
+      "status": "success",
+      "score": 1.0,
+      "webarena_verified_version": "1.2.3",
+      "webarena_verified_evaluator_checksum": "35c3385b1db4b3378657589f95f50defd4234bd36e5b93d44733fd561b01db4e",
+      "webarena_verified_data_checksum": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30"
+    },
+    "control-677": {
+      "task_id": 677,
+      "task_revision": 2,
+      "status": "failure",
+      "score": 0.0,
+      "webarena_verified_version": "1.2.3",
+      "webarena_verified_evaluator_checksum": "35c3385b1db4b3378657589f95f50defd4234bd36e5b93d44733fd561b01db4e",
+      "webarena_verified_data_checksum": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30"
+    }
+  },
+  "backend_prices": {
+    "initial": "32.000000",
+    "after-458": "27.000000",
+    "after-reset": "32.000000",
+    "after-709": "32.000000"
+  },
+  "order_status_counts": [
+    {
+      "status": "canceled",
+      "count": 142
+    },
+    {
+      "status": "closed",
+      "count": 1
+    },
+    {
+      "status": "complete",
+      "count": 153
+    },
+    {
+      "status": "pending",
+      "count": 10
+    },
+    {
+      "status": "processing",
+      "count": 2
+    }
+  ],
+  "storage_instrumented_attempts": [
+    "clean-after-reset-458",
+    "control-677",
+    "control-677-retry",
+    "control-709"
+  ],
+  "clean_observation_sha256": "69d72305708608a55f49aac8ebe545553e62892beb75719d9525f996932c08e7",
+  "browser_attempts": [
+    {
+      "artifact": "clean-after-reset-458",
+      "status": "completed",
+      "task_id": 458,
+      "latency_seconds": 9.437295711002662,
+      "model_calls": 0,
+      "action_count": 0
+    },
+    {
+      "artifact": "control-458",
+      "status": "completed",
+      "task_id": 458,
+      "latency_seconds": 13.637944212998264,
+      "model_calls": 0,
+      "action_count": 2
+    },
+    {
+      "artifact": "control-677",
+      "status": "infrastructure_error",
+      "task_id": 677,
+      "latency_seconds": 43.52250068000285,
+      "model_calls": 0,
+      "action_count": 2
+    },
+    {
+      "artifact": "control-677-retry",
+      "status": "completed",
+      "task_id": 677,
+      "latency_seconds": 41.31962960200326,
+      "model_calls": 0,
+      "action_count": 5
+    },
+    {
+      "artifact": "control-709",
+      "status": "completed",
+      "task_id": 709,
+      "latency_seconds": 19.08066754300671,
+      "model_calls": 0,
+      "action_count": 5
+    },
+    {
+      "artifact": "noop-458",
+      "status": "completed",
+      "task_id": 458,
+      "latency_seconds": 14.825952304003295,
+      "model_calls": 0,
+      "action_count": 0
+    }
+  ],
+  "limitations": [
+    "Scripted policies; no model baseline or benchmark optimization yet.",
+    "Known task 677 evaluator mismatch is reported separately, not treated as a passed task.",
+    "Backend reset is verified around the price mutation; not claimed between every read-only control.",
+    "Storage assertions cover only the explicitly listed instrumented attempts.",
+    "Clean observation equality is a reset check, not a candidate injection check."
+  ]
+}

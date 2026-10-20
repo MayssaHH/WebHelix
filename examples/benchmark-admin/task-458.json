@@ -1,0 +1,7 @@
+{
+  "task_id": 458,
+  "intent": "Reduce the price of the product on the current page by $5",
+  "start_urls": [
+    "http://127.0.0.1:7780/admin/catalog/product/edit/id/1481/"
+  ]
+}

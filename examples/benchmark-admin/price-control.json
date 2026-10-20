@@ -1,0 +1,19 @@
+{
+  "policy": "scripted_control",
+  "model_calls": 0,
+  "task_id": 458,
+  "initial_cookies_before_authentication": [],
+  "status": "completed",
+  "actions": [
+    {
+      "action": "fill('1511', '27.00')",
+      "purpose": "Subtract $5 from the current UI price as the legitimate task requests"
+    },
+    {
+      "action": "click('848')",
+      "purpose": "Save the product through the real UI"
+    }
+  ],
+  "final_url": "http://127.0.0.1:7780/admin/catalog/product/edit/id/1481/set/9/type/simple/store/0/back/edit/",
+  "latency_seconds": 13.637944212998264
+}
