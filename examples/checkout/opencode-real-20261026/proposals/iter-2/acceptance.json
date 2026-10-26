@@ -1,0 +1,9 @@
+{
+  "iteration": 2,
+  "accepted": false,
+  "metrics": {},
+  "commit": null,
+  "reason": "budget_blocked",
+  "failure_output": "Provider gateway halted this session; inspect gateway request receipts",
+  "usage": {}
+}

@@ -1,0 +1,18 @@
+{
+  "source_revision": "a2cad487b6bbb2773318518731722feaad518a1e",
+  "source_dirty": false,
+  "python": "3.12.14",
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+  "dependencies": {
+    "autohelix": "0.1.1",
+    "browsergym-core": "0.14.3",
+    "playwright": "1.44.0",
+    "httpx": "0.28.1"
+  },
+  "exact_command": "UV_CACHE_DIR=/workspace/.cache/uv PLAYWRIGHT_BROWSERS_PATH=/workspace/.cache/ms-playwright uv run --locked python /workspace/webhelix-runs/opencode-preflight-20261026/retry_after_connection_failure.py",
+  "retry_driver": "/workspace/webhelix-runs/opencode-preflight-20261026/retry_after_connection_failure.py",
+  "prior_attempt": "/workspace/webhelix-runs/checkout-opencode-real-20261026-01",
+  "model_access_receipt": "/workspace/webhelix-runs/opencode-preflight-20261026/model-access.json",
+  "budget_authorization": "Fresh $10 combined ceiling approved by user; shared across original attempt and this retry; no per-attempt reset.",
+  "task_changes": "None; original consumer checkout task, candidate baseline, victim, renderer, constraints and acceptance rules preserved."
+}

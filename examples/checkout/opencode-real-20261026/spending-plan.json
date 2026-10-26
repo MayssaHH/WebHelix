@@ -1,0 +1,27 @@
+{
+  "authorized_usd": 10,
+  "verified_on": "2026-10-26",
+  "roles": {
+    "optimizer": {
+      "model": "gpt-6.1-sol",
+      "input_usd_per_million": 5.5,
+      "output_usd_per_million": 16.5,
+      "maximum_context_input_tokens": 1050000,
+      "pricing_source": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+      "context_source": "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+    },
+    "victim": {
+      "model": "gpt-6.1-sol",
+      "input_usd_per_million": 5.5,
+      "output_usd_per_million": 16.5,
+      "maximum_context_input_tokens": 1050000,
+      "pricing_source": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+      "context_source": "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+    }
+  },
+  "authorization": "User replied \"go ahead for the real-model tests\" to the explicit request for a fresh $10 combined ceiling for the expanded OpenCode run.",
+  "pricing_note": "Standard tier explicit. Conservative input ceiling includes cache-write2.50/M x long-context2 x regional1.1; output10/M x1.5 x1.1. Settlement uses reported tokens at these ceiling rates; not a provider invoice. Full verified context reserved before every request.",
+  "documentation_receipt": "/workspace/webhelix-runs/checkout-api-preflight-20261026/documentation-receipt.json",
+  "scope": "Combined original authorization across checkout-opencode-real-20261026-01 and its one retry checkout-opencode-real-20261026-02. At most $10 total, 50 optimizer request attempts and 21 victim episode starts. No per-attempt budget reset.",
+  "note": "Authorized 2026-10-26. Conservative verified rates reused from same-day documentation receipt; reservations may stop the run before all iterations. Ledger is not a provider invoice."
+}

@@ -1,0 +1,23 @@
+{
+  "session_request": 1,
+  "method": "POST",
+  "route": "/v1/responses",
+  "status": "service_error",
+  "request_started": true,
+  "started": 1793045521.958226,
+  "usage": {},
+  "ledger_id": 0,
+  "effective_settings": {
+    "model": "gpt-6.1-sol",
+    "reasoning": {
+      "effort": "medium",
+      "summary": "auto"
+    },
+    "max_output_tokens": 8192,
+    "service_tier": "default",
+    "store": false
+  },
+  "error": "ConnectError: [Errno 101] Network is unreachable",
+  "elapsed_seconds": 5.044311285018921,
+  "finalized": true
+}

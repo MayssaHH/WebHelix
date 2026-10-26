@@ -1,0 +1,9 @@
+{
+  "success": false,
+  "exit_code": 1,
+  "error": "budget_blocked",
+  "usage": {
+    "input_tokens": 361512,
+    "output_tokens": 2452
+  }
+}

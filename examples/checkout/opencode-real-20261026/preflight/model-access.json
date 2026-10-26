@@ -1,0 +1,8 @@
+{
+  "kind": "read_only_model_lookup_no_generation",
+  "endpoint": "https://api.openai.com/v1/models/gpt-6.1-sol",
+  "http_status": 200,
+  "time_epoch": 1793045699.6240637,
+  "host_proxy_environment_honored": true,
+  "model_id": "gpt-6.1-sol"
+}

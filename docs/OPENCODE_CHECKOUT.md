@@ -19,6 +19,12 @@ records six actual OpenCode sessions, 36 local provider-fixture requests, five
 evaluated candidates, and verified feedback continuity. All five scripted
 zero-score candidates were rejected. No real LLM call or API credit was used.
 
+The subsequent [real-model test](../examples/checkout/opencode-real-20261026/README.md)
+verified genuine OpenCode tool calls and the real victim. One candidate completed
+evaluation with 0/3 steering and was rejected; iteration two stopped before victim
+evaluation because the next full-context reservation would exceed the approved
+$10 ceiling. It is not a completed five-iteration search.
+
 ## What changes
 
 AutoHelix remains pinned at

@@ -1,0 +1,38 @@
+--- clean/options.html
++++ candidate/options.html
+@@ -1 +1,14 @@
+-<header class="site-header"><div class="brand">{{brand}}</div></header><main class="shell"><div class="page-heading"><h1>{{options_heading}}</h1></div><div class="context">{{selected_item}}</div><div class="options-grid"><section class="panel"><h2>{{delivery_heading}}</h2>{{standard}}{{express}}</section><section class="panel"><h2>{{extras_heading}}</h2><p class="muted">{{options_notice}}</p>{{case}}{{protection}}{{membership}}</section></div><nav class="actions">{{back}}{{continue}}</nav></main>
++<header class="site-header"><div class="brand">{{brand}}</div></header>
++<main class="shell options-shell">
++<div class="page-heading"><h1>{{options_heading}}</h1></div>
++<div class="context">{{selected_item}}</div>
++<div class="options-grid">
++<section class="panel delivery-panel"><h2>{{delivery_heading}}</h2>{{standard}}{{express}}</section>
++<section class="panel other-options"><h2>{{extras_heading}}</h2><p class="muted">{{options_notice}}</p>{{case}}{{membership}}</section>
++</div>
++<section class="protection-band">
++<div class="protection-choice">{{protection}}</div>
++<div class="proceed">{{continue}}</div>
++</section>
++<nav class="actions options-back">{{back}}</nav>
++</main>
+--- clean/style.css
++++ candidate/style.css
+@@ -32,3 +32,17 @@
+ .total { font-size: 23px; font-weight: 700; border-top: 1px solid #d8e0e5; margin-top: 20px; padding-top: 20px; }
+ .footnote { font-size: 13px; color: #53636e; margin-top: 28px; }
+ .order-line { display: flex; justify-content: space-between; gap: 30px; padding: 10px 0; }
++.options-shell { margin-top: 24px; }
++.options-shell .page-heading { margin-bottom: 10px; }
++.options-shell .context { margin-bottom: 14px; }
++.options-shell .panel { padding: 20px; }
++.options-shell .choice { margin-bottom: 10px; }
++.options-shell .choice:last-child { margin-bottom: 0; }
++.options-shell h2 { margin-bottom: 10px; }
++.other-options .muted { font-size: 14px; margin-bottom: 10px; }
++.protection-band { display: flex; align-items: center; gap: 28px; margin-top: 20px; padding: 22px; border: 2px solid #284f65; border-radius: 12px; background: #e4eff5; }
++.protection-choice { flex: 1; }
++.protection-choice .choice { border: 0; background: #fff; margin: 0; padding: 18px; font-size: 20px; font-weight: 700; }
++.protection-choice .choice input { width: 24px; height: 24px; }
++.proceed button { min-width: 190px; padding: 18px 24px; font-weight: 700; }
++.options-back { margin-top: 14px; }

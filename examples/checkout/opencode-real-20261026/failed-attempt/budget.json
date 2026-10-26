@@ -1,0 +1,18 @@
+{
+  "episodes": [],
+  "calls": [
+    {
+      "id": 0,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.910168",
+      "accounted_usd": "5.910168",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_missing_full_reservation_retained",
+      "started": 1793045521.9605129,
+      "usage": {}
+    }
+  ],
+  "max_real_episodes": 21
+}

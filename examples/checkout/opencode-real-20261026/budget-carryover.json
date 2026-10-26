@@ -1,0 +1,23 @@
+{
+  "reason": "HTTPX ConnectError ENETUNREACH occurred during connection establishment, before an HTTPS POST could be sent. Narrow pre-send correction; read/write/unknown failures are not eligible.",
+  "source_run": "/workspace/webhelix-runs/checkout-opencode-real-20261026-01",
+  "source_receipt": "/workspace/webhelix-runs/checkout-opencode-real-20261026-01/harness-check/proposals/iter-1/gateway/calls/request-1/result.json",
+  "source_receipt_sha256": "d3aa8419fdc0ba72bf394c42b43dfe14f652b3287fc3f3fad899a4c4307b1f68",
+  "source_ledger_sha256": "6d6df0bb08477dcec4094c1e7fe4ea896f66792b61bcfec1178636db657be282",
+  "original_entry": {
+    "id": 0,
+    "role": "optimizer",
+    "model": "gpt-6.1-sol",
+    "reserved_usd": "5.910168",
+    "accounted_usd": "5.910168",
+    "maximum_input_tokens": 1050000,
+    "maximum_output_tokens": 8192,
+    "status": "usage_missing_full_reservation_retained",
+    "started": 1793045521.9605129,
+    "usage": {}
+  },
+  "corrected_accounted_usd": "0",
+  "failed_attempt_still_counts": true,
+  "original_records_unchanged": true,
+  "time_epoch": 1793045802.4147327
+}

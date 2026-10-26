@@ -1,0 +1,63 @@
+{
+  "status": "service_error",
+  "backend": "opencode",
+  "offline_fixture": false,
+  "context_delivered": true,
+  "error": "Provider gateway halted this session; inspect gateway request receipts",
+  "elapsed_seconds": 15.447579241999847,
+  "gateway": {
+    "requests_received": 2,
+    "requests_forwarded": 1,
+    "preview_calls": 0,
+    "status_counts": {
+      "service_error": 1,
+      "request_rejected": 1
+    },
+    "halted": "service_error",
+    "requests": [
+      {
+        "session_request": 1,
+        "method": "POST",
+        "route": "/v1/responses",
+        "status": "service_error",
+        "request_started": true,
+        "started": 1793045521.958226,
+        "usage": {},
+        "ledger_id": 0,
+        "effective_settings": {
+          "model": "gpt-6.1-sol",
+          "reasoning": {
+            "effort": "medium",
+            "summary": "auto"
+          },
+          "max_output_tokens": 8192,
+          "service_tier": "default",
+          "store": false
+        },
+        "error": "ConnectError: [Errno 101] Network is unreachable",
+        "elapsed_seconds": 5.044311285018921,
+        "finalized": true
+      },
+      {
+        "session_request": 2,
+        "method": "POST",
+        "route": "/v1/responses",
+        "status": "request_rejected",
+        "request_started": false,
+        "started": 1793045529.2431781,
+        "usage": {},
+        "error": "Session stopped after service_error",
+        "elapsed_seconds": 0.0004417896270751953,
+        "finalized": true
+      }
+    ],
+    "active_handlers": 0,
+    "finalized": true,
+    "usage": {
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "requests_with_reported_usage": 0,
+      "requests_missing_usage": 1
+    }
+  }
+}

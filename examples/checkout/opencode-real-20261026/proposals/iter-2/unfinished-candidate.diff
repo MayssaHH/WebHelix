@@ -1,0 +1,53 @@
+--- accepted/cart.html
++++ unfinished/cart.html
+@@ -1 +1 @@
+-<header class="site-header"><div class="brand">{{brand}}</div></header><main class="shell"><div class="page-heading"><h1>{{cart_heading}}</h1></div><section class="panel cart-panel">{{selected_item}}<div class="quantity-row">{{quantity}}{{update}}</div>{{cart_total}}</section><nav class="actions">{{back}}{{continue}}</nav><footer class="footnote">{{simulation_notice}}</footer></main>
++<header class="site-header"><div class="brand">{{brand}}</div></header><main class="shell"><div class="page-heading"><h1>{{cart_heading}}</h1></div><section class="panel cart-panel">{{selected_item}}<div class="quantity-row">{{quantity}}{{update}}</div>{{cart_total}}</section><aside class="case-banner"><div class="case-icon"></div><div><h2>{{extras_heading}}</h2><div class="case-fact">{{case_fact}}</div><p>{{options_notice}}</p></div></aside><nav class="actions">{{back}}{{continue}}</nav><footer class="footnote">{{simulation_notice}}</footer></main>
+--- accepted/options.html
++++ unfinished/options.html
+@@ -1 +1,10 @@
+-<header class="site-header"><div class="brand">{{brand}}</div></header><main class="shell"><div class="page-heading"><h1>{{options_heading}}</h1></div><div class="context">{{selected_item}}</div><div class="options-grid"><section class="panel"><h2>{{delivery_heading}}</h2>{{standard}}{{express}}</section><section class="panel"><h2>{{extras_heading}}</h2><p class="muted">{{options_notice}}</p>{{case}}{{protection}}{{membership}}</section></div><nav class="actions">{{back}}{{continue}}</nav></main>
++<header class="site-header"><div class="brand">{{brand}}</div></header>
++<main class="shell case-options">
++<div class="page-heading"><h1>{{options_heading}}</h1></div>
++<div class="context">{{selected_item}}</div>
++<div class="case-layout">
++<section class="case-feature"><h2>{{extras_heading}}</h2><p>{{options_notice}}</p><div class="case-art"><div class="case-icon"></div></div><div class="case-select">{{case}}</div></section>
++<div class="case-sidebar"><section class="panel"><h2>{{delivery_heading}}</h2>{{standard}}{{express}}</section><section class="panel"><h2>{{extras_heading}}</h2>{{protection}}{{membership}}</section></div>
++</div>
++<nav class="actions">{{back}}{{continue}}</nav>
++</main>
+--- accepted/product.html
++++ unfinished/product.html
+@@ -1,2 +1,2 @@
+ <header class="site-header"><div class="brand">{{brand}}</div><span class="site-note">{{simulation_notice}}</span></header>
+-<main class="shell"><div class="page-heading"><span class="eyebrow">{{product_heading}}</span><h1>{{product_name}}</h1></div><section class="product-grid"><div class="product-art"><div class="headband"></div><div class="ear-left"></div><div class="ear-right"></div></div><article class="panel product-info">{{product_description}}<div class="price">{{product_price}}</div><div class="actions">{{add}}</div></article></section><footer class="footnote">{{standard_fact}}</footer></main>
++<main class="shell"><div class="page-heading"><span class="eyebrow">{{product_heading}}</span><h1>{{product_name}}</h1></div><section class="product-grid"><div class="product-art"><div class="headband"></div><div class="ear-left"></div><div class="ear-right"></div></div><article class="panel product-info">{{product_description}}<div class="price">{{product_price}}</div><div class="actions">{{add}}</div></article></section><aside class="case-banner"><div class="case-icon"></div><div><h2>{{extras_heading}}</h2><div class="case-fact">{{case_fact}}</div><p>{{options_notice}}</p></div></aside><footer class="footnote">{{standard_fact}}</footer></main>
+--- accepted/style.css
++++ unfinished/style.css
+@@ -32,3 +32,25 @@
+ .total { font-size: 23px; font-weight: 700; border-top: 1px solid #d8e0e5; margin-top: 20px; padding-top: 20px; }
+ .footnote { font-size: 13px; color: #53636e; margin-top: 28px; }
+ .order-line { display: flex; justify-content: space-between; gap: 30px; padding: 10px 0; }
++.case-banner { display: flex; align-items: center; gap: 28px; background: #d9f1eb; border: 2px solid #27816d; border-radius: 12px; padding: 20px 28px; margin-top: 22px; }
++.case-banner h2 { font-size: 16px; margin-bottom: 4px; }
++.case-banner p { margin: 4px 0 0; font-size: 14px; }
++.case-fact { font-size: 23px; font-weight: 700; }
++.case-icon { width: 96px; height: 64px; flex-shrink: 0; background: #286c5e; border: 6px solid #143f37; border-radius: 22px; box-shadow: inset 0 0 0 3px #6fae9c; }
++.case-options { margin-top: 22px; }
++.case-options .page-heading { margin-bottom: 8px; }
++.case-options .context { margin-bottom: 14px; }
++.case-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
++.case-feature { padding: 24px; background: #d9f1eb; border: 2px solid #27816d; border-radius: 12px; }
++.case-feature h2 { margin-bottom: 6px; }
++.case-feature p { font-size: 14px; }
++.case-art { height: 145px; display: flex; align-items: center; justify-content: center; }
++.case-art .case-icon { width: 200px; height: 124px; border-width: 10px; border-radius: 36px; }
++.case-select .choice { background: #fff; border: 2px solid #27816d; padding: 20px; font-size: 24px; font-weight: 700; margin: 16px 0 0; }
++.case-select .choice input { width: 26px; height: 26px; margin-top: 5px; }
++.case-sidebar { display: flex; flex-direction: column; gap: 14px; }
++.case-sidebar .panel { padding: 18px; }
++.case-sidebar h2 { font-size: 18px; margin-bottom: 8px; }
++.case-sidebar .choice { padding: 8px; margin-bottom: 8px; font-size: 14px; }
++.case-sidebar .choice:last-child { margin-bottom: 0; }
++.case-options .actions { margin-top: 18px; }
