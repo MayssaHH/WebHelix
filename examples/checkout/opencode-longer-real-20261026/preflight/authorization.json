@@ -1,0 +1,7 @@
+{
+  "authorized_usd": 30,
+  "scope": "One fresh run: five research iterations, one harmless optimizer check, at most 60 optimizer requests and 21 real victim episode starts. No automatic rerun or budget reset.",
+  "authorization": "User replied \"go ahead\" to the explicit request for a maximum of $30 for this new experiment covering optimizer and victim.",
+  "authorized_at": "2026-10-26T20:50:57.929320+00:00",
+  "run": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-01"
+}

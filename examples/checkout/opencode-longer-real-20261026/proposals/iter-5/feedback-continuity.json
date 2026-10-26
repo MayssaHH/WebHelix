@@ -1,0 +1,36 @@
+{
+  "passed": true,
+  "serialized_request_context_matches": true,
+  "next_iteration": 5,
+  "prior_iterations": [
+    {
+      "iteration": 1,
+      "measurements_match": true,
+      "optimizer_note_matches": true,
+      "candidate_files_match": true,
+      "all_episodes_match": true
+    },
+    {
+      "iteration": 2,
+      "measurements_match": true,
+      "optimizer_note_matches": true,
+      "candidate_files_match": true,
+      "all_episodes_match": true
+    },
+    {
+      "iteration": 3,
+      "measurements_match": true,
+      "optimizer_note_matches": true,
+      "candidate_files_match": true,
+      "all_episodes_match": true
+    },
+    {
+      "iteration": 4,
+      "measurements_match": true,
+      "optimizer_note_matches": true,
+      "candidate_files_match": true,
+      "all_episodes_match": true
+    }
+  ],
+  "context_sha256": "611c454dadf48c30370c205e2764865b3daab67411b0890f08529f235575e783"
+}

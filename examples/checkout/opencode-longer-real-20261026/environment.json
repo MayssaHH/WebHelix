@@ -1,0 +1,87 @@
+{
+  "source_revision_initial": "8b50758008429350bbb4e3d2ad4711eafc35489b",
+  "source_revision_continuation": "e75f451351b3c6e2c7c3f528c46843c4f92fa9ec",
+  "autohelix_revision": "132fa0454963361fac669f35011b16f4263493c2",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+  "versions": {
+    "webhelix": "0.1.0",
+    "autohelix": "0.1.1",
+    "browsergym-core": "0.14.3",
+    "playwright": "1.44.0",
+    "httpx": "0.28.1",
+    "python-dotenv": "1.2.4"
+  },
+  "git": "git version 2.52.0",
+  "docker": "Docker version 28.4.0, build d8eb465",
+  "opencode_runtime": {
+    "version": "1.19.4",
+    "platform": "linux/amd64",
+    "image": "webhelix-opencode:1.19.4",
+    "base_image": "python:3.12-slim-bookworm@sha256:6a0e06f5ba0b373d051aabd3fffb9b873f27f9a2a3a14bcbe37dee6f0e3bbc70",
+    "archive_url": "https://github.com/anomalyco/opencode/releases/download/v1.19.4/opencode-linux-x64-baseline.tar.gz",
+    "archive_sha256": "1697ef40558d378bd2f72efa8fafe1bed1f0e664f09247b9357556b95dbc7cbc",
+    "license": "MIT",
+    "source": "https://github.com/anomalyco/opencode/tree/v1.19.4",
+    "git_package_version": "1:2.39.5-0+deb12u3",
+    "image_id": "sha256:2fd904e84bff68c0f16d064e8c57e09827612fd348d77447e1fd0a34d0fbc2ae",
+    "verified_cli_version": "1.19.4",
+    "model_calls": 0
+  },
+  "initial_command": [
+    "bash",
+    "/workspace/webhelix-runs/opencode-longer-preflight-20261026/launch.sh"
+  ],
+  "initial_launch_script": "#!/usr/bin/env bash\nset -euo pipefail\ncd /workspace/webhelix\nexport UV_CACHE_DIR=/workspace/.cache/uv\nexport PLAYWRIGHT_BROWSERS_PATH=/workspace/.cache/ms-playwright\nsource scripts/env.sh\nexec uv run --locked webhelix checkout experiment \\\n  --optimizer-backend opencode \\\n  --pilot-config experiments/checkout/opencode-longer-pilot.json \\\n  --optimizer-config experiments/checkout/opencode.example.json \\\n  --victim-config experiments/checkout/victim.example.json \\\n  --env-file /workspace/webhelix/.env \\\n  --spending-plan /workspace/webhelix-runs/opencode-longer-preflight-20261026/spending-plan.local.json \\\n  --run-dir /workspace/webhelix-runs/checkout-opencode-longer-20261026-01\n",
+  "continuation_preparation_command": [
+    "uv",
+    "run",
+    "--locked",
+    "python",
+    "/workspace/webhelix-runs/opencode-longer-preflight-20261026/continue-run.py"
+  ],
+  "continuation_execution_command": [
+    "uv",
+    "run",
+    "--locked",
+    "python",
+    "/workspace/webhelix-runs/opencode-longer-preflight-20261026/continue-run.py",
+    "--execute"
+  ],
+  "environment_variables": {
+    "UV_CACHE_DIR": "/workspace/.cache/uv",
+    "PLAYWRIGHT_BROWSERS_PATH": "/workspace/.cache/ms-playwright"
+  },
+  "credential_source": "Private .env via configured WEBHELIX_API_KEY; values omitted",
+  "configuration_change": "Early hypothesis note instruction plus per-session request cap 10 to20. Global dollar/request/episode/deadline and task/evaluator/victim preserved. Baselines/check reused without extra model calls.",
+  "initial_execution": {
+    "command": [
+      "bash",
+      "/workspace/webhelix-runs/opencode-longer-preflight-20261026/launch.sh"
+    ],
+    "started_at": "2026-10-26T20:50:58.130281+00:00",
+    "console": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-01-console.txt",
+    "timeout_seconds": 7260,
+    "pid": 74343,
+    "exit_code": 1,
+    "duration_seconds": 242.814,
+    "finished_at": "2026-10-26T20:55:00.943723+00:00"
+  },
+  "continuation_execution": {
+    "command": [
+      "uv",
+      "run",
+      "--locked",
+      "python",
+      "/workspace/webhelix-runs/opencode-longer-preflight-20261026/continue-run.py",
+      "--execute"
+    ],
+    "started_at": "2026-10-26T21:01:45.131844+00:00",
+    "timeout_seconds": 6583,
+    "console": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02-console.txt",
+    "pid": 78495,
+    "exit_code": 0,
+    "duration_seconds": 512.235,
+    "finished_at": "2026-10-26T21:10:17.366683+00:00"
+  }
+}

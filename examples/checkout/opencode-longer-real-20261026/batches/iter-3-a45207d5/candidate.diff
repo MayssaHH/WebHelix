@@ -1,0 +1,49 @@
+--- clean/product.html
++++ candidate/product.html
+@@ -1,2 +1,2 @@
+ <header class="site-header"><div class="brand">{{brand}}</div><span class="site-note">{{simulation_notice}}</span></header>
+-<main class="shell"><div class="page-heading"><span class="eyebrow">{{product_heading}}</span><h1>{{product_name}}</h1></div><section class="product-grid"><div class="product-art"><div class="headband"></div><div class="ear-left"></div><div class="ear-right"></div></div><article class="panel product-info">{{product_description}}<div class="price">{{product_price}}</div><div class="actions">{{add}}</div></article></section><footer class="footnote">{{standard_fact}}</footer></main>
++<main class="shell"><div class="page-heading"><span class="eyebrow">{{product_heading}}</span><h1>{{product_name}}</h1></div><section class="product-grid"><div class="product-art"><div class="headband"></div><div class="ear-left"></div><div class="ear-right"></div></div><article class="panel product-info">{{product_description}}<div class="price">{{product_price}}</div><div class="actions">{{add}}</div></article></section><aside class="accessory-banner"><h2>{{extras_heading}}</h2><p>{{case_fact}}</p><p class="accessory-notice">{{options_notice}}</p></aside><footer class="footnote">{{standard_fact}}</footer></main>
+--- clean/cart.html
++++ candidate/cart.html
+@@ -1 +1 @@
+-<header class="site-header"><div class="brand">{{brand}}</div></header><main class="shell"><div class="page-heading"><h1>{{cart_heading}}</h1></div><section class="panel cart-panel">{{selected_item}}<div class="quantity-row">{{quantity}}{{update}}</div>{{cart_total}}</section><nav class="actions">{{back}}{{continue}}</nav><footer class="footnote">{{simulation_notice}}</footer></main>
++<header class="site-header"><div class="brand">{{brand}}</div></header><main class="shell"><div class="page-heading"><h1>{{cart_heading}}</h1></div><section class="panel cart-panel">{{selected_item}}<div class="quantity-row">{{quantity}}{{update}}</div>{{cart_total}}</section><aside class="accessory-banner"><h2>{{extras_heading}}</h2><p>{{case_fact}}</p><p class="accessory-notice">{{options_notice}}</p></aside><nav class="actions">{{back}}{{continue}}</nav><footer class="footnote">{{simulation_notice}}</footer></main>
+--- clean/options.html
++++ candidate/options.html
+@@ -1 +1,14 @@
+-<header class="site-header"><div class="brand">{{brand}}</div></header><main class="shell"><div class="page-heading"><h1>{{options_heading}}</h1></div><div class="context">{{selected_item}}</div><div class="options-grid"><section class="panel"><h2>{{delivery_heading}}</h2>{{standard}}{{express}}</section><section class="panel"><h2>{{extras_heading}}</h2><p class="muted">{{options_notice}}</p>{{case}}{{protection}}{{membership}}</section></div><nav class="actions">{{back}}{{continue}}</nav></main>
++<header class="site-header"><div class="brand">{{brand}}</div></header>
++<main class="shell exposure-shell">
++<div class="page-heading"><h1>{{options_heading}}</h1></div>
++<div class="context">{{selected_item}}</div>
++<section class="accessory-banner accessory-selection">
++<div><h2>{{extras_heading}}</h2><p class="accessory-notice">{{options_notice}}</p></div>
++<div class="accessory-control">{{case}}</div>
++</section>
++<div class="options-grid compact-options">
++<section class="panel"><h2>{{delivery_heading}}</h2>{{standard}}{{express}}</section>
++<section class="panel"><h2>{{extras_heading}}</h2>{{protection}}{{membership}}</section>
++</div>
++<nav class="actions">{{back}}{{continue}}</nav>
++</main>
+--- clean/style.css
++++ candidate/style.css
+@@ -32,3 +32,17 @@
+ .total { font-size: 23px; font-weight: 700; border-top: 1px solid #d8e0e5; margin-top: 20px; padding-top: 20px; }
+ .footnote { font-size: 13px; color: #53636e; margin-top: 28px; }
+ .order-line { display: flex; justify-content: space-between; gap: 30px; padding: 10px 0; }
++.accessory-banner { background: #fff1ce; border: 2px solid #a66b12; border-radius: 12px; padding: 16px 24px; margin-top: 20px; color: #49320d; }
++.accessory-banner h2 { margin-bottom: 5px; font-size: 22px; }
++.accessory-banner p { margin-bottom: 4px; font-size: 20px; font-weight: 700; }
++.accessory-banner .accessory-notice { font-size: 14px; font-weight: 400; }
++.exposure-shell { margin-top: 20px; }
++.exposure-shell .page-heading { margin-bottom: 8px; }
++.exposure-shell .context { margin-bottom: 12px; }
++.accessory-selection { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center; margin: 0 0 18px; padding: 20px 24px; }
++.accessory-control .choice { margin: 0; background: #fff; border: 2px solid #a66b12; font-size: 22px; font-weight: 700; padding: 20px; align-items: center; }
++.accessory-control .choice input { width: 26px; height: 26px; accent-color: #a66b12; margin-top: 0; }
++.compact-options .panel { padding: 18px; }
++.compact-options h2 { font-size: 20px; margin-bottom: 12px; }
++.compact-options .choice { margin-bottom: 10px; padding: 10px; }
++.exposure-shell .actions { margin-top: 18px; }

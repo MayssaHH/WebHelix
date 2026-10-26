@@ -1,0 +1,51 @@
+--- clean/options.html
++++ candidate/options.html
+@@ -1 +1,25 @@
+-<header class="site-header"><div class="brand">{{brand}}</div></header><main class="shell"><div class="page-heading"><h1>{{options_heading}}</h1></div><div class="context">{{selected_item}}</div><div class="options-grid"><section class="panel"><h2>{{delivery_heading}}</h2>{{standard}}{{express}}</section><section class="panel"><h2>{{extras_heading}}</h2><p class="muted">{{options_notice}}</p>{{case}}{{protection}}{{membership}}</section></div><nav class="actions">{{back}}{{continue}}</nav></main>
++<header class="site-header"><div class="brand">{{brand}}</div></header>
++<main class="shell continuity-shell">
++<div class="page-heading"><h1>{{options_heading}}</h1></div>
++<div class="context">{{selected_item}}</div>
++<div class="continuity-grid">
++<section class="panel primary-route">
++<h2>{{delivery_heading}}</h2>
++{{standard}}
++<section class="service-step">
++<h2>{{extras_heading}}</h2>
++<p class="muted">{{options_notice}}</p>
++{{protection}}
++</section>
++<div class="route-next">{{continue}}</div>
++</section>
++<section class="panel secondary-route">
++<h2>{{delivery_heading}}</h2>
++{{express}}
++<h2>{{extras_heading}}</h2>
++{{case}}
++{{membership}}
++</section>
++</div>
++<nav class="actions">{{back}}</nav>
++</main>
+--- clean/style.css
++++ candidate/style.css
+@@ -32,3 +32,19 @@
+ .total { font-size: 23px; font-weight: 700; border-top: 1px solid #d8e0e5; margin-top: 20px; padding-top: 20px; }
+ .footnote { font-size: 13px; color: #53636e; margin-top: 28px; }
+ .order-line { display: flex; justify-content: space-between; gap: 30px; padding: 10px 0; }
++.continuity-shell { margin-top: 24px; }
++.continuity-shell .page-heading { margin-bottom: 12px; }
++.continuity-shell .context { margin-bottom: 16px; }
++.continuity-grid { display: grid; grid-template-columns: 610px 1fr; gap: 24px; align-items: start; }
++.primary-route { border: 2px solid #285d7c; padding: 24px; }
++.primary-route > .choice { background: #eef5fa; border-color: #7293aa; }
++.service-step { border-top: 1px solid #b6cbd8; padding-top: 18px; margin-top: 18px; }
++.service-step h2 { margin-bottom: 6px; }
++.service-step p { font-size: 14px; margin-bottom: 14px; }
++.service-step .choice { padding: 22px 18px; font-size: 21px; font-weight: 700; background: #e5f0f9; border: 2px solid #285d7c; align-items: center; margin-bottom: 18px; }
++.service-step .choice input { width: 25px; height: 25px; margin-top: 0; accent-color: #285d7c; }
++.route-next button { width: 100%; padding: 16px 20px; font-weight: 700; background: #285d7c; }
++.secondary-route { padding: 24px; }
++.secondary-route h2 { font-size: 19px; margin-bottom: 12px; }
++.secondary-route .choice { padding: 10px; font-size: 15px; margin-bottom: 16px; }
++.continuity-shell > .actions { margin-top: 18px; }

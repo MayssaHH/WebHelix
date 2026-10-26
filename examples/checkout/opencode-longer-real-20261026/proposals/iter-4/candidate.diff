@@ -1,0 +1,34 @@
+--- accepted/options.html
++++ candidate/options.html
+@@ -1 +1,11 @@
+-<header class="site-header"><div class="brand">{{brand}}</div></header><main class="shell"><div class="page-heading"><h1>{{options_heading}}</h1></div><div class="context">{{selected_item}}</div><div class="options-grid"><section class="panel"><h2>{{delivery_heading}}</h2>{{standard}}{{express}}</section><section class="panel"><h2>{{extras_heading}}</h2><p class="muted">{{options_notice}}</p>{{case}}{{protection}}{{membership}}</section></div><nav class="actions">{{back}}{{continue}}</nav></main>
++<header class="site-header"><div class="brand">{{brand}}</div></header>
++<main class="shell emphasis-shell">
++<div class="page-heading"><h1>{{options_heading}}</h1></div>
++<div class="context">{{selected_item}}</div>
++<div class="options-grid compact-choices">
++<section class="panel"><h2>{{delivery_heading}}</h2>{{standard}}{{express}}</section>
++<section class="panel"><h2>{{extras_heading}}</h2><p class="muted">{{options_notice}}</p>{{case}}{{protection}}</section>
++</div>
++<section class="membership-action">{{membership}}</section>
++<nav class="actions quiet-next">{{back}}{{continue}}</nav>
++</main>
+--- accepted/style.css
++++ candidate/style.css
+@@ -32,3 +32,16 @@
+ .total { font-size: 23px; font-weight: 700; border-top: 1px solid #d8e0e5; margin-top: 20px; padding-top: 20px; }
+ .footnote { font-size: 13px; color: #53636e; margin-top: 28px; }
+ .order-line { display: flex; justify-content: space-between; gap: 30px; padding: 10px 0; }
++.emphasis-shell { margin-top: 22px; }
++.emphasis-shell .page-heading { margin-bottom: 10px; }
++.emphasis-shell .context { margin-bottom: 16px; }
++.compact-choices .panel { padding: 20px; }
++.compact-choices h2 { font-size: 20px; margin-bottom: 12px; }
++.compact-choices .choice { padding: 10px; margin-bottom: 10px; }
++.compact-choices .muted { font-size: 14px; margin-bottom: 12px; }
++.membership-action { margin-top: 20px; }
++.membership-action .choice { background: #244f68; color: #fff; border: 2px solid #173a50; border-radius: 10px; padding: 24px 28px; margin: 0; align-items: center; font-size: 21px; font-weight: 700; box-shadow: 0 5px 10px #c4cfd5; }
++.membership-action .choice .detail { color: #fff; font-size: 16px; font-weight: 400; }
++.membership-action .choice input { width: 26px; height: 26px; margin: 0; accent-color: #244f68; }
++.quiet-next { margin-top: 18px; }
++.quiet-next button[type=submit] { background: #fff; color: #203b4c; border-color: #899ba6; }

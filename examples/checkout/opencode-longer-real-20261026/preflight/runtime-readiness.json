@@ -1,0 +1,28 @@
+{
+  "check": "DockerRuntime.preflight",
+  "call_signature": "()",
+  "checked_at_utc": "2026-10-26T20:46:32.320691+00:00",
+  "repository": "/workspace/webhelix",
+  "revision": "4dedcf8b0bdac827660b2d58ac6bfb359e13f846",
+  "working_tree_dirty": true,
+  "python_version": "3.12.14",
+  "scope": "Pinned image labels and actual OpenCode CLI version in a disposable container with no network; does not verify provider authentication or account credit",
+  "model_calls": 0,
+  "environment_files_read": false,
+  "runtime": {
+    "version": "1.19.4",
+    "platform": "linux/amd64",
+    "image": "webhelix-opencode:1.19.4",
+    "base_image": "python:3.12-slim-bookworm@sha256:6a0e06f5ba0b373d051aabd3fffb9b873f27f9a2a3a14bcbe37dee6f0e3bbc70",
+    "archive_url": "https://github.com/anomalyco/opencode/releases/download/v1.19.4/opencode-linux-x64-baseline.tar.gz",
+    "archive_sha256": "1697ef40558d378bd2f72efa8fafe1bed1f0e664f09247b9357556b95dbc7cbc",
+    "license": "MIT",
+    "source": "https://github.com/anomalyco/opencode/tree/v1.19.4",
+    "git_package_version": "1:2.39.5-0+deb12u3",
+    "image_id": "sha256:2fd904e84bff68c0f16d064e8c57e09827612fd348d77447e1fd0a34d0fbc2ae",
+    "verified_cli_version": "1.19.4",
+    "model_calls": 0
+  },
+  "status": "passed",
+  "blockers": []
+}

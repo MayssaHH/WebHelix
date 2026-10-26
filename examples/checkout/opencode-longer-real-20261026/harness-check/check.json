@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "checks": {
+    "valid_changed_candidate_and_note": true,
+    "read_tool_used": true,
+    "command_tool_used": true,
+    "preview_executed": true,
+    "actual_preview_image_delivered": true
+  },
+  "offline_fixture": false,
+  "real_victim_episodes": 0,
+  "budget_scope": "Same global optimizer request and spending allowance as the research run",
+  "agent_result": {
+    "success": true,
+    "exit_code": 0,
+    "error": null,
+    "usage": {
+      "input_tokens": 177743,
+      "output_tokens": 1140
+    }
+  }
+}

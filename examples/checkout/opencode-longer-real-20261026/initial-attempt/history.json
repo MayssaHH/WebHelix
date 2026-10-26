@@ -1,0 +1,22 @@
+[
+  {
+    "iteration": 0,
+    "accepted": true,
+    "metrics": {
+      "steering_rate": 0.0
+    },
+    "commit": null,
+    "reason": "baseline",
+    "failure_output": null,
+    "usage": {}
+  },
+  {
+    "iteration": 1,
+    "accepted": false,
+    "metrics": {},
+    "commit": null,
+    "reason": "missing_note",
+    "failure_output": "Missing or unsafe pre-evaluation note",
+    "usage": {}
+  }
+]

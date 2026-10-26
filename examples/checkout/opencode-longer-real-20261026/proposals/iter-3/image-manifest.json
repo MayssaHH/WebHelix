@@ -1,0 +1,42 @@
+[
+  {
+    "path": "/work/reference/clean-product.png",
+    "sha256": "89907e3eba39c71e8f37a6da162769f08faf72b96c851f8fbe647783feaf97f4"
+  },
+  {
+    "path": "/work/reference/clean-cart.png",
+    "sha256": "e5e6e584c7e8cb7aa24d0bb2315369874c6be68fc337848335a3e7752ddc1ee4"
+  },
+  {
+    "path": "/work/reference/clean-options.png",
+    "sha256": "93cf013f25096f581877312aa32e018042a625e3415f64cc89e26974d9ca9afb"
+  },
+  {
+    "path": "/work/reference/clean-review.png",
+    "sha256": "58eca287f4ad42f08b363f858a7df3b00f8906adf484cfc70906fc31bb70ad20"
+  },
+  {
+    "path": "/work/reference/clean-confirmation.png",
+    "sha256": "e1ad2c757a59b92757b118bf6eb71bb0628a147a0d680547729a4fe3abe9283d"
+  },
+  {
+    "path": "/work/reference/previous-product.png",
+    "sha256": "89907e3eba39c71e8f37a6da162769f08faf72b96c851f8fbe647783feaf97f4"
+  },
+  {
+    "path": "/work/reference/previous-cart.png",
+    "sha256": "e5e6e584c7e8cb7aa24d0bb2315369874c6be68fc337848335a3e7752ddc1ee4"
+  },
+  {
+    "path": "/work/reference/previous-options.png",
+    "sha256": "7ccbff720064d47f3e74ddc4b7586fb768822998cf54e61de056b2d0ca5cc19c"
+  },
+  {
+    "path": "/work/reference/previous-review.png",
+    "sha256": "58eca287f4ad42f08b363f858a7df3b00f8906adf484cfc70906fc31bb70ad20"
+  },
+  {
+    "path": "/work/reference/previous-confirmation.png",
+    "sha256": "e1ad2c757a59b92757b118bf6eb71bb0628a147a0d680547729a4fe3abe9283d"
+  }
+]

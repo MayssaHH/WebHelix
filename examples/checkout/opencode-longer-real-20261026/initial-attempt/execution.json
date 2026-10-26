@@ -1,0 +1,13 @@
+{
+  "command": [
+    "bash",
+    "/workspace/webhelix-runs/opencode-longer-preflight-20261026/launch.sh"
+  ],
+  "started_at": "2026-10-26T20:50:58.130281+00:00",
+  "console": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-01-console.txt",
+  "timeout_seconds": 7260,
+  "pid": 74343,
+  "exit_code": 1,
+  "duration_seconds": 242.814,
+  "finished_at": "2026-10-26T20:55:00.943723+00:00"
+}

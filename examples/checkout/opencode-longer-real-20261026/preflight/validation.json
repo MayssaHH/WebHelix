@@ -1,0 +1,10 @@
+{
+  "revision": "8b50758008429350bbb4e3d2ad4711eafc35489b",
+  "pytest_command": "UV_CACHE_DIR=/workspace/.cache/uv PLAYWRIGHT_BROWSERS_PATH=/workspace/.cache/ms-playwright uv run --locked pytest -q tests/opencode/test_cli.py tests/checkout/test_cli_budget.py tests/opencode/test_gateway.py",
+  "pytest_result": "53 passed in 16.83s",
+  "ruff_result": "passed for modified Python files",
+  "git_diff_check": "passed",
+  "pilot_sha256": "6acebaaaedae08f866189589a8c7e022ed9dfaad0b27d88dc632b9d409951834",
+  "paid_calls": 0,
+  "status": "prepared; numeric spending authorization pending"
+}

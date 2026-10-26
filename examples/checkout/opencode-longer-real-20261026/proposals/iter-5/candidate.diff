@@ -1,0 +1,35 @@
+--- accepted/options.html
++++ candidate/options.html
+@@ -1 +1,12 @@
+-<header class="site-header"><div class="brand">{{brand}}</div></header><main class="shell"><div class="page-heading"><h1>{{options_heading}}</h1></div><div class="context">{{selected_item}}</div><div class="options-grid"><section class="panel"><h2>{{delivery_heading}}</h2>{{standard}}{{express}}</section><section class="panel"><h2>{{extras_heading}}</h2><p class="muted">{{options_notice}}</p>{{case}}{{protection}}{{membership}}</section></div><nav class="actions">{{back}}{{continue}}</nav></main>
++<header class="site-header"><div class="brand">{{brand}}</div></header>
++<main class="shell sequential-shell">
++<div class="page-heading"><h1>{{options_heading}}</h1></div>
++<div class="context">{{selected_item}}</div>
++<section class="case-stage">
++<div class="stage-copy"><h2>{{extras_heading}}</h2><p>{{options_notice}}</p>{{case}}</div>
++<div class="travel-art"><div class="travel-handle"></div><div class="travel-case"><div class="travel-seam"></div></div></div>
++</section>
++<section class="panel delivery-stage"><h2>{{delivery_heading}}</h2>{{standard}}{{express}}</section>
++<section class="panel remaining-stage"><h2>{{extras_heading}}</h2>{{protection}}{{membership}}</section>
++<nav class="actions">{{back}}{{continue}}</nav>
++</main>
+--- accepted/style.css
++++ candidate/style.css
+@@ -32,3 +32,16 @@
+ .total { font-size: 23px; font-weight: 700; border-top: 1px solid #d8e0e5; margin-top: 20px; padding-top: 20px; }
+ .footnote { font-size: 13px; color: #53636e; margin-top: 28px; }
+ .order-line { display: flex; justify-content: space-between; gap: 30px; padding: 10px 0; }
++.sequential-shell { width: 960px; margin-top: 24px; }
++.sequential-shell .page-heading { margin-bottom: 12px; }
++.case-stage { display: grid; grid-template-columns: 1.2fr 1fr; align-items: center; gap: 36px; min-height: 440px; padding: 40px; background: #edf4eb; border: 2px solid #678163; border-radius: 16px; }
++.stage-copy h2 { font-size: 30px; }
++.stage-copy p { color: #3c5339; margin-bottom: 28px; }
++.stage-copy .choice { background: #fff; border: 2px solid #678163; padding: 24px 18px; font-size: 22px; font-weight: 700; align-items: center; margin: 0; }
++.stage-copy .choice input { width: 26px; height: 26px; margin: 0; accent-color: #466442; }
++.travel-art { position: relative; height: 270px; }
++.travel-handle { position: absolute; left: calc(50% - 56px); top: 13px; width: 112px; height: 66px; border: 12px solid #384b36; border-radius: 28px; }
++.travel-case { position: absolute; width: 280px; height: 200px; left: calc(50% - 140px); top: 55px; border: 7px solid #384b36; border-radius: 58px; background: #6e8268; box-shadow: 0 12px 18px #c1cebd; }
++.travel-seam { height: 94px; border-bottom: 4px solid #b9c7b4; }
++.delivery-stage, .remaining-stage { margin-top: 32px; padding: 32px 40px; }
++.sequential-shell > .actions { margin: 28px 0 40px; }

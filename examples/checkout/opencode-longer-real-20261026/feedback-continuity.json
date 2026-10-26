@@ -1,0 +1,107 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "passed": true,
+      "serialized_request_context_matches": true,
+      "next_iteration": 2,
+      "prior_iterations": [
+        {
+          "iteration": 1,
+          "measurements_match": true,
+          "optimizer_note_matches": true,
+          "candidate_files_match": true,
+          "all_episodes_match": true
+        }
+      ],
+      "context_sha256": "35054a7c412cb0a969d9733c8f9cd79c4eb8730409e33d9e4632b1c9072f75d4"
+    },
+    {
+      "passed": true,
+      "serialized_request_context_matches": true,
+      "next_iteration": 3,
+      "prior_iterations": [
+        {
+          "iteration": 1,
+          "measurements_match": true,
+          "optimizer_note_matches": true,
+          "candidate_files_match": true,
+          "all_episodes_match": true
+        },
+        {
+          "iteration": 2,
+          "measurements_match": true,
+          "optimizer_note_matches": true,
+          "candidate_files_match": true,
+          "all_episodes_match": true
+        }
+      ],
+      "context_sha256": "85885b1fc0a9fdce950546c15ced3c76eb951a3e93518ab486c7ccda732b0d9e"
+    },
+    {
+      "passed": true,
+      "serialized_request_context_matches": true,
+      "next_iteration": 4,
+      "prior_iterations": [
+        {
+          "iteration": 1,
+          "measurements_match": true,
+          "optimizer_note_matches": true,
+          "candidate_files_match": true,
+          "all_episodes_match": true
+        },
+        {
+          "iteration": 2,
+          "measurements_match": true,
+          "optimizer_note_matches": true,
+          "candidate_files_match": true,
+          "all_episodes_match": true
+        },
+        {
+          "iteration": 3,
+          "measurements_match": true,
+          "optimizer_note_matches": true,
+          "candidate_files_match": true,
+          "all_episodes_match": true
+        }
+      ],
+      "context_sha256": "7386bff24bec3a28bdef96216d97c2704152485f00814b65ac1a946908926b8c"
+    },
+    {
+      "passed": true,
+      "serialized_request_context_matches": true,
+      "next_iteration": 5,
+      "prior_iterations": [
+        {
+          "iteration": 1,
+          "measurements_match": true,
+          "optimizer_note_matches": true,
+          "candidate_files_match": true,
+          "all_episodes_match": true
+        },
+        {
+          "iteration": 2,
+          "measurements_match": true,
+          "optimizer_note_matches": true,
+          "candidate_files_match": true,
+          "all_episodes_match": true
+        },
+        {
+          "iteration": 3,
+          "measurements_match": true,
+          "optimizer_note_matches": true,
+          "candidate_files_match": true,
+          "all_episodes_match": true
+        },
+        {
+          "iteration": 4,
+          "measurements_match": true,
+          "optimizer_note_matches": true,
+          "candidate_files_match": true,
+          "all_episodes_match": true
+        }
+      ],
+      "context_sha256": "611c454dadf48c30370c205e2764865b3daab67411b0890f08529f235575e783"
+    }
+  ]
+}

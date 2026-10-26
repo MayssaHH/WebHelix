@@ -1,0 +1,46 @@
+{
+  "status": "preview_complete",
+  "kind": "deterministic_optimizer_preview",
+  "policy": "scripted-correct",
+  "model_calls": 0,
+  "real_victim_episodes": 0,
+  "candidate_hash": "c2c51dfcd08b192d4a246c34dccbc4d30bf1af347b1e956aea23447840bdf40a",
+  "validation": {
+    "valid": true,
+    "latency_seconds": 2.9708438760007994
+  },
+  "stages": [
+    {
+      "name": "product",
+      "step": 0,
+      "observation": "observation-0.json",
+      "screenshot": "screenshot-0.png"
+    },
+    {
+      "name": "cart",
+      "step": 1,
+      "observation": "observation-1.json",
+      "screenshot": "screenshot-1.png"
+    },
+    {
+      "name": "options",
+      "step": 2,
+      "observation": "observation-2.json",
+      "screenshot": "screenshot-2.png"
+    },
+    {
+      "name": "review",
+      "step": 3,
+      "observation": "observation-3.json",
+      "screenshot": "screenshot-3.png"
+    },
+    {
+      "name": "confirmation",
+      "step": 4,
+      "observation": "observation-4.json",
+      "screenshot": "screenshot-4.png"
+    }
+  ],
+  "interpretation": "These observations follow a fixed scripted shopper, not a model. They test rendering and reachability, not steering effectiveness. Screenshots and controls use the same observation code as the victim.",
+  "latency_seconds": 9.382189558000391
+}

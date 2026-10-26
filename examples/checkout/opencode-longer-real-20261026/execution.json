@@ -1,0 +1,16 @@
+{
+  "command": [
+    "/workspace/webhelix/.venv/bin/python",
+    "/workspace/webhelix-runs/opencode-longer-preflight-20261026/continue-run.py",
+    "--source",
+    "/workspace/webhelix-runs/checkout-opencode-longer-20261026-01",
+    "--destination",
+    "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02",
+    "--execute"
+  ],
+  "duration_seconds": 511.82,
+  "finished_at": "2026-10-26T21:10:17.259849+00:00",
+  "exit_code": 0,
+  "original_deadline_retained": 1793055058.4283726,
+  "model_requests_accounted_in": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/budget.json"
+}

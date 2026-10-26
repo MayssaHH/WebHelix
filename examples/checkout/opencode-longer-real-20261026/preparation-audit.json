@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "checks": {
+    "all_recorded_original_files_unchanged": true,
+    "budget_identical": true,
+    "plan_identical": true,
+    "baseline_and_identity_identical": true,
+    "history_identical": true,
+    "no_derived_baseline_cache": true,
+    "no_new_proposals": true,
+    "empty_missing_note_preserved": true,
+    "no_private_runtime_configs_copied": true
+  },
+  "source_files_verified": 770,
+  "real_calls_during_preparation": 0
+}

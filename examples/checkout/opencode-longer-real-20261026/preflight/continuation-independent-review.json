@@ -1,0 +1,23 @@
+{
+  "reviewed_at": "2026-10-26T21:01:43.908557+00:00",
+  "ready": true,
+  "reviewer": "independent audit agent",
+  "driver_sha256": "9f89141c86f07ba42f24a709c220f84af71f6f32e168bfd33751c4a9b8b51f22",
+  "source_revision": "e75f451351b3c6e2c7c3f528c46843c4f92fa9ec",
+  "checks_passed": [
+    "exact original ledger and spending plan",
+    "same combined $30/60 optimizer requests/21 episodes/deadline",
+    "only runtime delta: per-session request cap 10 to 20",
+    "history 0 + failed iteration1 preserved",
+    "empty original note preserved without fabrication",
+    "770 original evidence hashes unchanged",
+    "task/catalogue/contract/victim settings unchanged",
+    "actual clean and identity reports reused verbatim",
+    "no cache signatures rewritten",
+    "clean source and prepared project Git states",
+    "native run resumes iteration2 with final iteration5",
+    "one-use continuation state prevents replay"
+  ],
+  "model_calls": 0,
+  "limitation": "41 global optimizer requests remain; per-session20 does not guarantee completion of all four remaining iterations."
+}

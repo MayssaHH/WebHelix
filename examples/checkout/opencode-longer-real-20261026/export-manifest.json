@@ -1,0 +1,3482 @@
+{
+  "exported_at": "2026-10-26T21:13:00.738481+00:00",
+  "raw_run": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02",
+  "run_status": "completed_with_unevaluated_attempts",
+  "run_error": null,
+  "source_revision": "e75f451351b3c6e2c7c3f528c46843c4f92fa9ec",
+  "research_proposals": [
+    {
+      "iteration": 1,
+      "final_note_exists": false,
+      "batch_report_exists": false,
+      "acceptance_receipt_exists": true
+    },
+    {
+      "iteration": 2,
+      "final_note_exists": true,
+      "batch_report_exists": true,
+      "acceptance_receipt_exists": true
+    },
+    {
+      "iteration": 3,
+      "final_note_exists": true,
+      "batch_report_exists": true,
+      "acceptance_receipt_exists": true
+    },
+    {
+      "iteration": 4,
+      "final_note_exists": true,
+      "batch_report_exists": true,
+      "acceptance_receipt_exists": true
+    },
+    {
+      "iteration": 5,
+      "final_note_exists": true,
+      "batch_report_exists": true,
+      "acceptance_receipt_exists": true
+    }
+  ],
+  "selection": "Allowlisted real-run receipts, optimizer context/tool evidence, all episode receipts/observations/actions/responses, screenshots and exact victim requests for episode zero per batch, clean source and per-candidate files. Unfinished candidates may include explicitly labelled deterministic previews.",
+  "omissions": [
+    "Credentials, .env files, authentication headers, private runtime token configuration and browser profiles are not selected.",
+    "Full provider payload history after the first optimizer request, remaining victim screenshots/requests, and most deterministic preview artifacts remain in raw_run.",
+    "Full tested source, Git/worktree internals, worker logs and standalone raw index.html remain in raw_run.",
+    "This is a selection, not the full raw run. Missing optional files are listed; a stopped or invalid candidate has not been relabelled as a completed evaluation."
+  ],
+  "credential_scan": "Parent must verify exact private-secret absence before publication; this exporter does not read credentials.",
+  "optional_files_absent": [
+    "budget-carryover.json",
+    "initial-attempt/summary.json",
+    "project-final.json",
+    "proposals/iter-1/feedback-continuity.json",
+    "proposals/iter-1/optimizer-note.md",
+    "proposals/iter-1/unfinished-candidate.diff",
+    "proposals/iter-2/unfinished-candidate.diff",
+    "proposals/iter-3/unfinished-candidate.diff",
+    "proposals/iter-4/unfinished-candidate.diff",
+    "proposals/iter-5/unfinished-candidate.diff"
+  ],
+  "symlinks_skipped": [],
+  "files": [
+    {
+      "path": "audit.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/audit.json",
+      "sha256": "97269db5f826643677b2ff7c056d72516aaba54d8d560cb151d6262fc5f43850",
+      "bytes": 9151
+    },
+    {
+      "path": "batches/clean-8aea3c8e/candidate-manifest.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/candidate-manifest.json",
+      "sha256": "ccc33816a63bb5ed96745cee2afb84fd222e80b83182682ed31d89eb08ecae47",
+      "bytes": 787
+    },
+    {
+      "path": "batches/clean-8aea3c8e/candidate.diff",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/candidate.diff",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "batches/clean-8aea3c8e/candidate/cart.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/candidate/cart.html",
+      "sha256": "a56e87f0003237fccf5e071ee0afa88202b2cf4d5bd22c5c25dcefd4c8a7fd85",
+      "bytes": 387
+    },
+    {
+      "path": "batches/clean-8aea3c8e/candidate/options.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/candidate/options.html",
+      "sha256": "eb743060534ee871f2cae60e35719628f03b4e902b0e385cfbdbc4bb7cba17ee",
+      "bytes": 502
+    },
+    {
+      "path": "batches/clean-8aea3c8e/candidate/product.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/candidate/product.html",
+      "sha256": "581740ceccb22ed936eb236603ba5b10871518230906c369b4ef2a3966db6f2f",
+      "bytes": 609
+    },
+    {
+      "path": "batches/clean-8aea3c8e/candidate/review.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/candidate/review.html",
+      "sha256": "f34294204096b8ea9bc4ef4cc2c0b1b17fa64a102029c3c8bac6d83ffbdb0410",
+      "bytes": 429
+    },
+    {
+      "path": "batches/clean-8aea3c8e/candidate/style.css",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/candidate/style.css",
+      "sha256": "d0472c28c9e46a6c3d3bf4f9171cc1a107af4a183d3557cc4b847f3509c43f57",
+      "bytes": 2788
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-0/action-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-0/action-0.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-0/action-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-0/action-1.json",
+      "sha256": "f174e439eb3488b7a867dc16552bc7076eb45b5fe48652e71686e696c111ff34",
+      "bytes": 53
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-0/action-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-0/action-2.json",
+      "sha256": "19bad2c25bc80011afebae321d85147b4093293dd06d6e8f42eca7ffa79370b4",
+      "bytes": 53
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-0/action-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-0/action-3.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-0/episode.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-0/episode.json",
+      "sha256": "05219e9ac40a5899bc860ed80603e053564515335b07c348b2a153e9effbc858",
+      "bytes": 6573
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-0/observation-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-0/observation-0.json",
+      "sha256": "ce532d8d1130482ce6757238e7ca2a292824d245bce1f630561866df2dbb97af",
+      "bytes": 702
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-0/observation-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-0/observation-1.json",
+      "sha256": "e64ee48cdff383584a80c191a752a5cc5c1d98dc4388a249a53093325286a34e",
+      "bytes": 1258
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-0/observation-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-0/observation-2.json",
+      "sha256": "7335b57ed59a2e8772eac50c7c801fba116451120decdcd48b7cf00f6d647a0c",
+      "bytes": 2248
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-0/observation-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-0/observation-3.json",
+      "sha256": "3ad2e1f984f72614f1e05db7784e664db79095d724aeab5ff521dbfaf502558a",
+      "bytes": 890
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-0/observation-4.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-0/observation-4.json",
+      "sha256": "07fe5364d744cb5df6d88a10ed3ba520246395581624ee6583bea925eb46a11b",
+      "bytes": 430
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-0/request-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-0/request-0.json",
+      "sha256": "d47945dc074d12c4d398cd3e024239d59de7765bec13f74196e2b477447dd050",
+      "bytes": 63004
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-0/request-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-0/request-1.json",
+      "sha256": "95abe8875444151bc1d6d98a5a25cd2a5f92b6247ca03f3048ffa92138e3779f",
+      "bytes": 55394
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-0/request-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-0/request-2.json",
+      "sha256": "cf25331511ca1631cd4178a6a4a54ec01130f88e5407034fa4d0e7b13782a8c1",
+      "bytes": 101306
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-0/request-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-0/request-3.json",
+      "sha256": "7e30c544ae06f08c4248c427152ff4dd91a6571dc26c7b7103b6217eb532d1f5",
+      "bytes": 65064
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-0/response-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-0/response-0.json",
+      "sha256": "8b55aa524cb2099a6b4c9f6c02b5b84e9cb01aaae9c0ac192743ef0b497c1800",
+      "bytes": 449
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-0/response-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-0/response-1.json",
+      "sha256": "e922c31ee7b39a606d2a3f70c879f93cf9457732c69e34f9a11f7e7197af06ba",
+      "bytes": 449
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-0/response-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-0/response-2.json",
+      "sha256": "f6fe34c4ce1f43f7a5be26029aeb87f8ad8b578e895276350516e99c510380ea",
+      "bytes": 449
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-0/response-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-0/response-3.json",
+      "sha256": "18b58068d071d93cd00d14510dfd896c6ae5031fbd32d6f3f3dc15166b60a4e1",
+      "bytes": 449
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-0/screenshot-0.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-0/screenshot-0.png",
+      "sha256": "89907e3eba39c71e8f37a6da162769f08faf72b96c851f8fbe647783feaf97f4",
+      "bytes": 45208
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-0/screenshot-1.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-0/screenshot-1.png",
+      "sha256": "e5e6e584c7e8cb7aa24d0bb2315369874c6be68fc337848335a3e7752ddc1ee4",
+      "bytes": 38507
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-0/screenshot-2.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-0/screenshot-2.png",
+      "sha256": "93cf013f25096f581877312aa32e018042a625e3415f64cc89e26974d9ca9afb",
+      "bytes": 71229
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-0/screenshot-3.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-0/screenshot-3.png",
+      "sha256": "58eca287f4ad42f08b363f858a7df3b00f8906adf484cfc70906fc31bb70ad20",
+      "bytes": 43285
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-0/screenshot-4.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-0/screenshot-4.png",
+      "sha256": "e1ad2c757a59b92757b118bf6eb71bb0628a147a0d680547729a4fe3abe9283d",
+      "bytes": 29208
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-1/action-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-1/action-0.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-1/action-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-1/action-1.json",
+      "sha256": "f174e439eb3488b7a867dc16552bc7076eb45b5fe48652e71686e696c111ff34",
+      "bytes": 53
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-1/action-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-1/action-2.json",
+      "sha256": "19bad2c25bc80011afebae321d85147b4093293dd06d6e8f42eca7ffa79370b4",
+      "bytes": 53
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-1/action-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-1/action-3.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-1/episode.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-1/episode.json",
+      "sha256": "767c73e4c18ebcb873a7727d0cd1dbece6bec8a4a6e64e3f9b9aa1da60aa7847",
+      "bytes": 6573
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-1/observation-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-1/observation-0.json",
+      "sha256": "f54f458955e50f2af96564a53690a66d5ce51b99f52dcda464119078bf12e987",
+      "bytes": 702
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-1/observation-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-1/observation-1.json",
+      "sha256": "d87e2c5658e94f989beccbb8bea169f2d1d339b9f5ea612250adebbc2ccbdb79",
+      "bytes": 1258
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-1/observation-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-1/observation-2.json",
+      "sha256": "a4a3ab4efd3417782067a46cd767bf93669bb97a18741d653b93b5555978f35b",
+      "bytes": 2248
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-1/observation-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-1/observation-3.json",
+      "sha256": "3c6ef7f1aa4c6d2ad3b8bed5e6123908a05c3547b0534300e2cd8c1f09eb854e",
+      "bytes": 890
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-1/observation-4.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-1/observation-4.json",
+      "sha256": "f0ad5a42c06f789629f4286ccf3376624ff9a3832fdc848a4533b276e34de2c3",
+      "bytes": 430
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-1/response-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-1/response-0.json",
+      "sha256": "8b55aa524cb2099a6b4c9f6c02b5b84e9cb01aaae9c0ac192743ef0b497c1800",
+      "bytes": 449
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-1/response-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-1/response-1.json",
+      "sha256": "e922c31ee7b39a606d2a3f70c879f93cf9457732c69e34f9a11f7e7197af06ba",
+      "bytes": 449
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-1/response-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-1/response-2.json",
+      "sha256": "f6fe34c4ce1f43f7a5be26029aeb87f8ad8b578e895276350516e99c510380ea",
+      "bytes": 449
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-1/response-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-1/response-3.json",
+      "sha256": "18b58068d071d93cd00d14510dfd896c6ae5031fbd32d6f3f3dc15166b60a4e1",
+      "bytes": 449
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-2/action-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-2/action-0.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-2/action-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-2/action-1.json",
+      "sha256": "f174e439eb3488b7a867dc16552bc7076eb45b5fe48652e71686e696c111ff34",
+      "bytes": 53
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-2/action-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-2/action-2.json",
+      "sha256": "19bad2c25bc80011afebae321d85147b4093293dd06d6e8f42eca7ffa79370b4",
+      "bytes": 53
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-2/action-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-2/action-3.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-2/episode.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-2/episode.json",
+      "sha256": "dcf7b21ce30ce0ffcae2ac045c7674da534b7254768814f9ce0c99d74436d4c7",
+      "bytes": 6573
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-2/observation-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-2/observation-0.json",
+      "sha256": "e0de40ceeaf13f07fbbd5c2a0670405ba7cab273a33089596f3973be2ee24367",
+      "bytes": 702
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-2/observation-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-2/observation-1.json",
+      "sha256": "f4a659946aef18ec82b86f73ab2787c03490ef35920db535d9ae5e4bdabf40e4",
+      "bytes": 1258
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-2/observation-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-2/observation-2.json",
+      "sha256": "fdfbc005d849289ba3929cf75b16b94891dda620bc07c41cfcda1822f7e95c8f",
+      "bytes": 2248
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-2/observation-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-2/observation-3.json",
+      "sha256": "1a4123c20e6d8f864c0ed1a12e1dff57b05f3df87a70915b8d3710c180632ede",
+      "bytes": 890
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-2/observation-4.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-2/observation-4.json",
+      "sha256": "e9f6a0f2924225a55505249ed84f4eb94e9caa5e10da0d9958baf5f672905925",
+      "bytes": 430
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-2/response-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-2/response-0.json",
+      "sha256": "8b55aa524cb2099a6b4c9f6c02b5b84e9cb01aaae9c0ac192743ef0b497c1800",
+      "bytes": 449
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-2/response-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-2/response-1.json",
+      "sha256": "e922c31ee7b39a606d2a3f70c879f93cf9457732c69e34f9a11f7e7197af06ba",
+      "bytes": 449
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-2/response-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-2/response-2.json",
+      "sha256": "f6fe34c4ce1f43f7a5be26029aeb87f8ad8b578e895276350516e99c510380ea",
+      "bytes": 449
+    },
+    {
+      "path": "batches/clean-8aea3c8e/episode-2/response-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/episode-2/response-3.json",
+      "sha256": "18b58068d071d93cd00d14510dfd896c6ae5031fbd32d6f3f3dc15166b60a4e1",
+      "bytes": 449
+    },
+    {
+      "path": "batches/clean-8aea3c8e/feasibility/feasibility.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/feasibility/feasibility.json",
+      "sha256": "fc320874133bfba85022c58379190e598a1b24d418fdcdddab1a6b549654c1ca",
+      "bytes": 3728
+    },
+    {
+      "path": "batches/clean-8aea3c8e/report.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/clean-8aea3c8e/report.json",
+      "sha256": "10200b5bd51491e2429ab5e98f036b2c72bab03ab3680ec7f8fb8e7e577329c9",
+      "bytes": 28029
+    },
+    {
+      "path": "batches/harness-check-reference-53ae1bb0/candidate-manifest.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/harness-check-reference-53ae1bb0/candidate-manifest.json",
+      "sha256": "ccc33816a63bb5ed96745cee2afb84fd222e80b83182682ed31d89eb08ecae47",
+      "bytes": 787
+    },
+    {
+      "path": "batches/harness-check-reference-53ae1bb0/candidate.diff",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/harness-check-reference-53ae1bb0/candidate.diff",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "batches/harness-check-reference-53ae1bb0/candidate/cart.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/harness-check-reference-53ae1bb0/candidate/cart.html",
+      "sha256": "a56e87f0003237fccf5e071ee0afa88202b2cf4d5bd22c5c25dcefd4c8a7fd85",
+      "bytes": 387
+    },
+    {
+      "path": "batches/harness-check-reference-53ae1bb0/candidate/options.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/harness-check-reference-53ae1bb0/candidate/options.html",
+      "sha256": "eb743060534ee871f2cae60e35719628f03b4e902b0e385cfbdbc4bb7cba17ee",
+      "bytes": 502
+    },
+    {
+      "path": "batches/harness-check-reference-53ae1bb0/candidate/product.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/harness-check-reference-53ae1bb0/candidate/product.html",
+      "sha256": "581740ceccb22ed936eb236603ba5b10871518230906c369b4ef2a3966db6f2f",
+      "bytes": 609
+    },
+    {
+      "path": "batches/harness-check-reference-53ae1bb0/candidate/review.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/harness-check-reference-53ae1bb0/candidate/review.html",
+      "sha256": "f34294204096b8ea9bc4ef4cc2c0b1b17fa64a102029c3c8bac6d83ffbdb0410",
+      "bytes": 429
+    },
+    {
+      "path": "batches/harness-check-reference-53ae1bb0/candidate/style.css",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/harness-check-reference-53ae1bb0/candidate/style.css",
+      "sha256": "d0472c28c9e46a6c3d3bf4f9171cc1a107af4a183d3557cc4b847f3509c43f57",
+      "bytes": 2788
+    },
+    {
+      "path": "batches/harness-check-reference-53ae1bb0/episode-0/action-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/harness-check-reference-53ae1bb0/episode-0/action-0.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/harness-check-reference-53ae1bb0/episode-0/action-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/harness-check-reference-53ae1bb0/episode-0/action-1.json",
+      "sha256": "f174e439eb3488b7a867dc16552bc7076eb45b5fe48652e71686e696c111ff34",
+      "bytes": 53
+    },
+    {
+      "path": "batches/harness-check-reference-53ae1bb0/episode-0/action-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/harness-check-reference-53ae1bb0/episode-0/action-2.json",
+      "sha256": "19bad2c25bc80011afebae321d85147b4093293dd06d6e8f42eca7ffa79370b4",
+      "bytes": 53
+    },
+    {
+      "path": "batches/harness-check-reference-53ae1bb0/episode-0/action-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/harness-check-reference-53ae1bb0/episode-0/action-3.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/harness-check-reference-53ae1bb0/episode-0/episode.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/harness-check-reference-53ae1bb0/episode-0/episode.json",
+      "sha256": "0c5044a0eeca32ed228fe6f8b59f56dcead03d988f1f6f25f6823c5a8e1e97d6",
+      "bytes": 5498
+    },
+    {
+      "path": "batches/harness-check-reference-53ae1bb0/episode-0/observation-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/harness-check-reference-53ae1bb0/episode-0/observation-0.json",
+      "sha256": "08c2fb1608e246b294e21e9673387462d4253b005839aed3539764282e770b10",
+      "bytes": 702
+    },
+    {
+      "path": "batches/harness-check-reference-53ae1bb0/episode-0/observation-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/harness-check-reference-53ae1bb0/episode-0/observation-1.json",
+      "sha256": "df3901aa39e466132cc75929492eaca2043c2f49e60368fa041a77b5b169c069",
+      "bytes": 1258
+    },
+    {
+      "path": "batches/harness-check-reference-53ae1bb0/episode-0/observation-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/harness-check-reference-53ae1bb0/episode-0/observation-2.json",
+      "sha256": "baaf67e7ac482cbd29a0a3eecc4ef4285f2d2e787f37adee4015bb2df5217d60",
+      "bytes": 2248
+    },
+    {
+      "path": "batches/harness-check-reference-53ae1bb0/episode-0/observation-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/harness-check-reference-53ae1bb0/episode-0/observation-3.json",
+      "sha256": "2b943054c844fc75f1b5dd6948543e88aedb747df196660eeabdf17622aa5ec0",
+      "bytes": 890
+    },
+    {
+      "path": "batches/harness-check-reference-53ae1bb0/episode-0/observation-4.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/harness-check-reference-53ae1bb0/episode-0/observation-4.json",
+      "sha256": "e862452ce7e2ff1920d15987ecedfbff83dd2f5dc78e6c27865643f237af7f53",
+      "bytes": 430
+    },
+    {
+      "path": "batches/harness-check-reference-53ae1bb0/episode-0/screenshot-0.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/harness-check-reference-53ae1bb0/episode-0/screenshot-0.png",
+      "sha256": "89907e3eba39c71e8f37a6da162769f08faf72b96c851f8fbe647783feaf97f4",
+      "bytes": 45208
+    },
+    {
+      "path": "batches/harness-check-reference-53ae1bb0/episode-0/screenshot-1.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/harness-check-reference-53ae1bb0/episode-0/screenshot-1.png",
+      "sha256": "e5e6e584c7e8cb7aa24d0bb2315369874c6be68fc337848335a3e7752ddc1ee4",
+      "bytes": 38507
+    },
+    {
+      "path": "batches/harness-check-reference-53ae1bb0/episode-0/screenshot-2.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/harness-check-reference-53ae1bb0/episode-0/screenshot-2.png",
+      "sha256": "93cf013f25096f581877312aa32e018042a625e3415f64cc89e26974d9ca9afb",
+      "bytes": 71229
+    },
+    {
+      "path": "batches/harness-check-reference-53ae1bb0/episode-0/screenshot-3.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/harness-check-reference-53ae1bb0/episode-0/screenshot-3.png",
+      "sha256": "58eca287f4ad42f08b363f858a7df3b00f8906adf484cfc70906fc31bb70ad20",
+      "bytes": 43285
+    },
+    {
+      "path": "batches/harness-check-reference-53ae1bb0/episode-0/screenshot-4.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/harness-check-reference-53ae1bb0/episode-0/screenshot-4.png",
+      "sha256": "e1ad2c757a59b92757b118bf6eb71bb0628a147a0d680547729a4fe3abe9283d",
+      "bytes": 29208
+    },
+    {
+      "path": "batches/harness-check-reference-53ae1bb0/feasibility/feasibility.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/harness-check-reference-53ae1bb0/feasibility/feasibility.json",
+      "sha256": "1d856328bcc144b2d0d37685394a1ef67009429e16af80640e058b075afda92d",
+      "bytes": 3729
+    },
+    {
+      "path": "batches/harness-check-reference-53ae1bb0/report.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/harness-check-reference-53ae1bb0/report.json",
+      "sha256": "9d814caafeb3d1d9032a1b5ccf6b4b0fdc647d3dbd02e8c485e5f48ffd9e57cb",
+      "bytes": 11682
+    },
+    {
+      "path": "batches/identity-f4cac07c/candidate-manifest.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/candidate-manifest.json",
+      "sha256": "ccc33816a63bb5ed96745cee2afb84fd222e80b83182682ed31d89eb08ecae47",
+      "bytes": 787
+    },
+    {
+      "path": "batches/identity-f4cac07c/candidate.diff",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/candidate.diff",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "batches/identity-f4cac07c/candidate/cart.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/candidate/cart.html",
+      "sha256": "a56e87f0003237fccf5e071ee0afa88202b2cf4d5bd22c5c25dcefd4c8a7fd85",
+      "bytes": 387
+    },
+    {
+      "path": "batches/identity-f4cac07c/candidate/options.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/candidate/options.html",
+      "sha256": "eb743060534ee871f2cae60e35719628f03b4e902b0e385cfbdbc4bb7cba17ee",
+      "bytes": 502
+    },
+    {
+      "path": "batches/identity-f4cac07c/candidate/product.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/candidate/product.html",
+      "sha256": "581740ceccb22ed936eb236603ba5b10871518230906c369b4ef2a3966db6f2f",
+      "bytes": 609
+    },
+    {
+      "path": "batches/identity-f4cac07c/candidate/review.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/candidate/review.html",
+      "sha256": "f34294204096b8ea9bc4ef4cc2c0b1b17fa64a102029c3c8bac6d83ffbdb0410",
+      "bytes": 429
+    },
+    {
+      "path": "batches/identity-f4cac07c/candidate/style.css",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/candidate/style.css",
+      "sha256": "d0472c28c9e46a6c3d3bf4f9171cc1a107af4a183d3557cc4b847f3509c43f57",
+      "bytes": 2788
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-0/action-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-0/action-0.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-0/action-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-0/action-1.json",
+      "sha256": "f174e439eb3488b7a867dc16552bc7076eb45b5fe48652e71686e696c111ff34",
+      "bytes": 53
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-0/action-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-0/action-2.json",
+      "sha256": "19bad2c25bc80011afebae321d85147b4093293dd06d6e8f42eca7ffa79370b4",
+      "bytes": 53
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-0/action-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-0/action-3.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-0/episode.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-0/episode.json",
+      "sha256": "7c8a448029bbe611e2978a5b81281d5863382b11d45a0bec6272f542c2901978",
+      "bytes": 6573
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-0/observation-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-0/observation-0.json",
+      "sha256": "a24e744161ea9bcd9235bf50d6f7135828ceb0700c732815ebc026b00265cbe0",
+      "bytes": 702
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-0/observation-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-0/observation-1.json",
+      "sha256": "d19e53d160460e1d7af9636aa78751bfc6aa4b7be1667c14024e96ea632334f3",
+      "bytes": 1258
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-0/observation-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-0/observation-2.json",
+      "sha256": "e61adf293bfef57ea2a636359ff7a84900205d35522c95c2c2b1a18259a1110b",
+      "bytes": 2248
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-0/observation-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-0/observation-3.json",
+      "sha256": "d39d72c357929480218b3137e802768ef640bb2557c62e9ea29e7f4c085b1d1c",
+      "bytes": 890
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-0/observation-4.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-0/observation-4.json",
+      "sha256": "8811828e4b5f4748dda0338d7ff80765f8fbac313d2e561c4cb6249a4170fa11",
+      "bytes": 430
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-0/request-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-0/request-0.json",
+      "sha256": "c3cf83fb73cde86844e219b770f668966dad6b2f5c1b57851e5754c9d47f361b",
+      "bytes": 63004
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-0/request-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-0/request-1.json",
+      "sha256": "638286bb3c4ed94cd6bfba46d71317351a638818fc05660cbace7b8e72828d33",
+      "bytes": 55394
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-0/request-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-0/request-2.json",
+      "sha256": "7a5654c4f488386519fe9e1381412bfad04a869190811bc1bb97d64fdea549b1",
+      "bytes": 101306
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-0/request-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-0/request-3.json",
+      "sha256": "a54792180d0e0dd8ec00fea1668e9b5f75dabcdc0f4d17ac38872f6436a538c7",
+      "bytes": 65064
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-0/response-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-0/response-0.json",
+      "sha256": "8b55aa524cb2099a6b4c9f6c02b5b84e9cb01aaae9c0ac192743ef0b497c1800",
+      "bytes": 449
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-0/response-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-0/response-1.json",
+      "sha256": "e922c31ee7b39a606d2a3f70c879f93cf9457732c69e34f9a11f7e7197af06ba",
+      "bytes": 449
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-0/response-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-0/response-2.json",
+      "sha256": "f6fe34c4ce1f43f7a5be26029aeb87f8ad8b578e895276350516e99c510380ea",
+      "bytes": 449
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-0/response-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-0/response-3.json",
+      "sha256": "18b58068d071d93cd00d14510dfd896c6ae5031fbd32d6f3f3dc15166b60a4e1",
+      "bytes": 449
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-0/screenshot-0.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-0/screenshot-0.png",
+      "sha256": "89907e3eba39c71e8f37a6da162769f08faf72b96c851f8fbe647783feaf97f4",
+      "bytes": 45208
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-0/screenshot-1.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-0/screenshot-1.png",
+      "sha256": "e5e6e584c7e8cb7aa24d0bb2315369874c6be68fc337848335a3e7752ddc1ee4",
+      "bytes": 38507
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-0/screenshot-2.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-0/screenshot-2.png",
+      "sha256": "93cf013f25096f581877312aa32e018042a625e3415f64cc89e26974d9ca9afb",
+      "bytes": 71229
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-0/screenshot-3.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-0/screenshot-3.png",
+      "sha256": "58eca287f4ad42f08b363f858a7df3b00f8906adf484cfc70906fc31bb70ad20",
+      "bytes": 43285
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-0/screenshot-4.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-0/screenshot-4.png",
+      "sha256": "e1ad2c757a59b92757b118bf6eb71bb0628a147a0d680547729a4fe3abe9283d",
+      "bytes": 29208
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-1/action-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-1/action-0.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-1/action-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-1/action-1.json",
+      "sha256": "f174e439eb3488b7a867dc16552bc7076eb45b5fe48652e71686e696c111ff34",
+      "bytes": 53
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-1/action-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-1/action-2.json",
+      "sha256": "19bad2c25bc80011afebae321d85147b4093293dd06d6e8f42eca7ffa79370b4",
+      "bytes": 53
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-1/action-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-1/action-3.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-1/episode.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-1/episode.json",
+      "sha256": "d108b9f303767bc9bb8e0f1f6bd2beb641c8390acb1c386c0679431d78b5d4a3",
+      "bytes": 6573
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-1/observation-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-1/observation-0.json",
+      "sha256": "1da009b49f2cb6811f6ec8a66b1241389ab6835478daf591af0e72f7eee9b493",
+      "bytes": 702
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-1/observation-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-1/observation-1.json",
+      "sha256": "0a7d27fb9018ac7665e1af9c9fc6744b337ef80c1ccbf167ca448fc67c7b6fa6",
+      "bytes": 1258
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-1/observation-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-1/observation-2.json",
+      "sha256": "5544ceff1257caf9883491a26d49b8a821ecd5e278f7a98d1c186ab53e41197b",
+      "bytes": 2248
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-1/observation-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-1/observation-3.json",
+      "sha256": "10d8c81e90ae0563a97bbd4dc482435580a2df0832479fe2380fa1390065a844",
+      "bytes": 890
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-1/observation-4.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-1/observation-4.json",
+      "sha256": "2965a36f7f0d846509bfb358d9ed8e3e52192385ee51550ff26331d082173320",
+      "bytes": 430
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-1/response-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-1/response-0.json",
+      "sha256": "8b55aa524cb2099a6b4c9f6c02b5b84e9cb01aaae9c0ac192743ef0b497c1800",
+      "bytes": 449
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-1/response-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-1/response-1.json",
+      "sha256": "e922c31ee7b39a606d2a3f70c879f93cf9457732c69e34f9a11f7e7197af06ba",
+      "bytes": 449
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-1/response-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-1/response-2.json",
+      "sha256": "f6fe34c4ce1f43f7a5be26029aeb87f8ad8b578e895276350516e99c510380ea",
+      "bytes": 449
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-1/response-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-1/response-3.json",
+      "sha256": "18b58068d071d93cd00d14510dfd896c6ae5031fbd32d6f3f3dc15166b60a4e1",
+      "bytes": 449
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-2/action-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-2/action-0.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-2/action-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-2/action-1.json",
+      "sha256": "f174e439eb3488b7a867dc16552bc7076eb45b5fe48652e71686e696c111ff34",
+      "bytes": 53
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-2/action-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-2/action-2.json",
+      "sha256": "19bad2c25bc80011afebae321d85147b4093293dd06d6e8f42eca7ffa79370b4",
+      "bytes": 53
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-2/action-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-2/action-3.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-2/episode.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-2/episode.json",
+      "sha256": "8e3e410652c51579f3c887c7571f07edee78fb8b1aaaa227a27bf269d9e7cbe8",
+      "bytes": 6573
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-2/observation-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-2/observation-0.json",
+      "sha256": "b836b0c0630d978c9a86917da9985f3acdc2d9e61ccb331791855f46a4696b40",
+      "bytes": 702
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-2/observation-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-2/observation-1.json",
+      "sha256": "4529a804d3e637b33be3e078343ffeceb24f5b3b8414c1ce376995b9a65b1d65",
+      "bytes": 1258
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-2/observation-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-2/observation-2.json",
+      "sha256": "3160c0dfda462b4393d3b17865312f703911ff0763c8a7f17b331e2d5d5a2908",
+      "bytes": 2248
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-2/observation-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-2/observation-3.json",
+      "sha256": "3670fa24c4d924baac33907d20b6105b9ebdf0f12c79c92b0f08ad4a4f1bb206",
+      "bytes": 890
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-2/observation-4.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-2/observation-4.json",
+      "sha256": "9f55e41cf898d19f1d08e5682533573002bfcc243d9dd5b403e7977e0eea36c7",
+      "bytes": 430
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-2/response-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-2/response-0.json",
+      "sha256": "8b55aa524cb2099a6b4c9f6c02b5b84e9cb01aaae9c0ac192743ef0b497c1800",
+      "bytes": 449
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-2/response-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-2/response-1.json",
+      "sha256": "e922c31ee7b39a606d2a3f70c879f93cf9457732c69e34f9a11f7e7197af06ba",
+      "bytes": 449
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-2/response-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-2/response-2.json",
+      "sha256": "f6fe34c4ce1f43f7a5be26029aeb87f8ad8b578e895276350516e99c510380ea",
+      "bytes": 449
+    },
+    {
+      "path": "batches/identity-f4cac07c/episode-2/response-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/episode-2/response-3.json",
+      "sha256": "18b58068d071d93cd00d14510dfd896c6ae5031fbd32d6f3f3dc15166b60a4e1",
+      "bytes": 449
+    },
+    {
+      "path": "batches/identity-f4cac07c/feasibility/feasibility.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/feasibility/feasibility.json",
+      "sha256": "a3e2c27d78621fc89ffdfeeeb8144ecad50ba2a9b7dc124fb809190fbc512e99",
+      "bytes": 3728
+    },
+    {
+      "path": "batches/identity-f4cac07c/report.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/identity-f4cac07c/report.json",
+      "sha256": "d832e79d7897d6576ea16f315722116611b20ed77b865a6eaf4ba8cb7ee9bd1a",
+      "bytes": 28103
+    },
+    {
+      "path": "batches/iter-2-68a28e02/candidate-manifest.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/candidate-manifest.json",
+      "sha256": "1d10f1b18239ca7b06acfa677106b80da0f92a72898eb5e8709cefda24b12f44",
+      "bytes": 787
+    },
+    {
+      "path": "batches/iter-2-68a28e02/candidate.diff",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/candidate.diff",
+      "sha256": "33e7606a616b7d9b93a72b05126c2318f49061ddec6855419e46bc0f1c4e7630",
+      "bytes": 2810
+    },
+    {
+      "path": "batches/iter-2-68a28e02/candidate/cart.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/candidate/cart.html",
+      "sha256": "a56e87f0003237fccf5e071ee0afa88202b2cf4d5bd22c5c25dcefd4c8a7fd85",
+      "bytes": 387
+    },
+    {
+      "path": "batches/iter-2-68a28e02/candidate/options.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/candidate/options.html",
+      "sha256": "4a463aa30b6e303763f800448403708843d73565a3a828178a179e1e22166a8c",
+      "bytes": 702
+    },
+    {
+      "path": "batches/iter-2-68a28e02/candidate/product.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/candidate/product.html",
+      "sha256": "581740ceccb22ed936eb236603ba5b10871518230906c369b4ef2a3966db6f2f",
+      "bytes": 609
+    },
+    {
+      "path": "batches/iter-2-68a28e02/candidate/review.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/candidate/review.html",
+      "sha256": "f34294204096b8ea9bc4ef4cc2c0b1b17fa64a102029c3c8bac6d83ffbdb0410",
+      "bytes": 429
+    },
+    {
+      "path": "batches/iter-2-68a28e02/candidate/style.css",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/candidate/style.css",
+      "sha256": "afe6de4ec149a3422190562ace6eb120d6c6a9b33e09415841f6aa034a03bd43",
+      "bytes": 3951
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-0/action-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-0/action-0.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-0/action-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-0/action-1.json",
+      "sha256": "f174e439eb3488b7a867dc16552bc7076eb45b5fe48652e71686e696c111ff34",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-0/action-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-0/action-2.json",
+      "sha256": "a2c15104b3e3d5388062c168efdc0c94696be1b32c5d69ec2b3d62f7135c3b34",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-0/action-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-0/action-3.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-0/episode.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-0/episode.json",
+      "sha256": "2ee254b1a4a178609ad086da7a487ad28af141a59ea7f5f9e1aa22196520e803",
+      "bytes": 6567
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-0/observation-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-0/observation-0.json",
+      "sha256": "2739b1127163b84d4efa9d8465a9c78d1c78ab42f1b967d01f9b59cbf74b09a3",
+      "bytes": 702
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-0/observation-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-0/observation-1.json",
+      "sha256": "5786ceb055e2593fea0214905978d10612b8090d667803c4486e1611f95c4caa",
+      "bytes": 1258
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-0/observation-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-0/observation-2.json",
+      "sha256": "f8c1233eb0071532547ccf9d701c5e840ca569095ad49150570661ebc4ddf039",
+      "bytes": 2279
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-0/observation-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-0/observation-3.json",
+      "sha256": "970687ab66b68121883dac4dfe4baf31e024d17cc763b9f61e726287d1ac69b9",
+      "bytes": 890
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-0/observation-4.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-0/observation-4.json",
+      "sha256": "42ff8d9cc55feca3af3c4e42abb4c272be232d3e62bc6a861fa813f0afb95637",
+      "bytes": 430
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-0/request-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-0/request-0.json",
+      "sha256": "29ae282d4b1acfde443842a9d1bf72973018e32ef525758b27e61f5961023585",
+      "bytes": 63004
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-0/request-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-0/request-1.json",
+      "sha256": "68d19a1f241066d6fa5fc0fe8fdc19ddde52fc95b9f0e6ba0b57cc72e0fa5fa3",
+      "bytes": 55394
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-0/request-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-0/request-2.json",
+      "sha256": "aa8396272dae96dd4da4ff71f7f63902ba1908c9418b40d0b1a4c91bee4c1e62",
+      "bytes": 107419
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-0/request-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-0/request-3.json",
+      "sha256": "1b18a7aab789049d886333ddd464c394f586f3414e1537ae47c58803fef15b2e",
+      "bytes": 65097
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-0/response-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-0/response-0.json",
+      "sha256": "8b55aa524cb2099a6b4c9f6c02b5b84e9cb01aaae9c0ac192743ef0b497c1800",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-0/response-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-0/response-1.json",
+      "sha256": "e922c31ee7b39a606d2a3f70c879f93cf9457732c69e34f9a11f7e7197af06ba",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-0/response-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-0/response-2.json",
+      "sha256": "cf39451ebbbeb41350410c8e7a400a87f7a9cadcae20349163854f20fd63ea12",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-0/response-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-0/response-3.json",
+      "sha256": "43ac277b772e3c3dadf2507b66d8274e77fd8280c210c9f6c8fe6012d7d67901",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-0/screenshot-0.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-0/screenshot-0.png",
+      "sha256": "89907e3eba39c71e8f37a6da162769f08faf72b96c851f8fbe647783feaf97f4",
+      "bytes": 45208
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-0/screenshot-1.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-0/screenshot-1.png",
+      "sha256": "e5e6e584c7e8cb7aa24d0bb2315369874c6be68fc337848335a3e7752ddc1ee4",
+      "bytes": 38507
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-0/screenshot-2.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-0/screenshot-2.png",
+      "sha256": "7ccbff720064d47f3e74ddc4b7586fb768822998cf54e61de056b2d0ca5cc19c",
+      "bytes": 75787
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-0/screenshot-3.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-0/screenshot-3.png",
+      "sha256": "58eca287f4ad42f08b363f858a7df3b00f8906adf484cfc70906fc31bb70ad20",
+      "bytes": 43285
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-0/screenshot-4.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-0/screenshot-4.png",
+      "sha256": "e1ad2c757a59b92757b118bf6eb71bb0628a147a0d680547729a4fe3abe9283d",
+      "bytes": 29208
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-1/action-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-1/action-0.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-1/action-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-1/action-1.json",
+      "sha256": "f174e439eb3488b7a867dc16552bc7076eb45b5fe48652e71686e696c111ff34",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-1/action-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-1/action-2.json",
+      "sha256": "a2c15104b3e3d5388062c168efdc0c94696be1b32c5d69ec2b3d62f7135c3b34",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-1/action-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-1/action-3.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-1/episode.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-1/episode.json",
+      "sha256": "887b96e3ad0140f766de2383ab1c273e5059103161a8f32c6db843399bc9b7d7",
+      "bytes": 6568
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-1/observation-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-1/observation-0.json",
+      "sha256": "91a0e5da1ab50823ee73a084bec6c9514ed260d684608c2cf90cefd698791501",
+      "bytes": 702
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-1/observation-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-1/observation-1.json",
+      "sha256": "1bb88e60c2a73496d2a78ecf109b36b7b3a143eeefee11c174532e23438a2219",
+      "bytes": 1258
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-1/observation-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-1/observation-2.json",
+      "sha256": "d4f2289ba346f114536aa134333f0f1fd9f32bf738e2832803d02edeb7bc5853",
+      "bytes": 2279
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-1/observation-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-1/observation-3.json",
+      "sha256": "64f109f50189c93420f1e5383d1dd3ce608c12358d169f9ed07b477005efad73",
+      "bytes": 890
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-1/observation-4.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-1/observation-4.json",
+      "sha256": "0a15a8695a1045d28d04f21395c95011e215f4b9ace6164a5499988a5f1fe353",
+      "bytes": 430
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-1/response-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-1/response-0.json",
+      "sha256": "8b55aa524cb2099a6b4c9f6c02b5b84e9cb01aaae9c0ac192743ef0b497c1800",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-1/response-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-1/response-1.json",
+      "sha256": "e922c31ee7b39a606d2a3f70c879f93cf9457732c69e34f9a11f7e7197af06ba",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-1/response-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-1/response-2.json",
+      "sha256": "cf39451ebbbeb41350410c8e7a400a87f7a9cadcae20349163854f20fd63ea12",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-1/response-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-1/response-3.json",
+      "sha256": "43ac277b772e3c3dadf2507b66d8274e77fd8280c210c9f6c8fe6012d7d67901",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-2/action-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-2/action-0.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-2/action-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-2/action-1.json",
+      "sha256": "f174e439eb3488b7a867dc16552bc7076eb45b5fe48652e71686e696c111ff34",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-2/action-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-2/action-2.json",
+      "sha256": "a2c15104b3e3d5388062c168efdc0c94696be1b32c5d69ec2b3d62f7135c3b34",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-2/action-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-2/action-3.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-2/episode.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-2/episode.json",
+      "sha256": "86a428fed0fcfce5570a6ef7db48f72de69f3d9aa54049668468c4aaad898b5b",
+      "bytes": 6568
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-2/observation-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-2/observation-0.json",
+      "sha256": "67db4e9a4987446bfbe9924d6fe9eb8d25e506708a32c76d88859b3a4e211d0d",
+      "bytes": 702
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-2/observation-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-2/observation-1.json",
+      "sha256": "e6d3252fcfec57ebaeab3cb350840e07fd38faa33f15e77f0630ec8deadd7f17",
+      "bytes": 1258
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-2/observation-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-2/observation-2.json",
+      "sha256": "249e0bce6c43783f5ce271d5741ced33a2a58d26b75dc8274629a176074b2cbf",
+      "bytes": 2279
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-2/observation-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-2/observation-3.json",
+      "sha256": "2e520481cd660ed9b8a3d1c50883247e55f5c91f0b5b5f694ced84c8c3c2a077",
+      "bytes": 890
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-2/observation-4.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-2/observation-4.json",
+      "sha256": "32132127982641411c75a85de612f750813d9e65334ebfd7954ff9ab1741f771",
+      "bytes": 430
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-2/response-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-2/response-0.json",
+      "sha256": "8b55aa524cb2099a6b4c9f6c02b5b84e9cb01aaae9c0ac192743ef0b497c1800",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-2/response-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-2/response-1.json",
+      "sha256": "e922c31ee7b39a606d2a3f70c879f93cf9457732c69e34f9a11f7e7197af06ba",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-2/response-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-2/response-2.json",
+      "sha256": "cf39451ebbbeb41350410c8e7a400a87f7a9cadcae20349163854f20fd63ea12",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-2-68a28e02/episode-2/response-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/episode-2/response-3.json",
+      "sha256": "43ac277b772e3c3dadf2507b66d8274e77fd8280c210c9f6c8fe6012d7d67901",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-2-68a28e02/feasibility/feasibility.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/feasibility/feasibility.json",
+      "sha256": "9b43d1de6f1691254a98179dabed036b11be9203382bcf77f2da355a61cbacb0",
+      "bytes": 3728
+    },
+    {
+      "path": "batches/iter-2-68a28e02/report.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-2-68a28e02/report.json",
+      "sha256": "807dabbf1f674500e9f5817f1921134f178bacc18c7714faa1c079cef3201abf",
+      "bytes": 28111
+    },
+    {
+      "path": "batches/iter-3-a45207d5/candidate-manifest.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/candidate-manifest.json",
+      "sha256": "a6514d3edeeb1bf11f18485d76a43d440e8da65ee519237139b920bb6bd6984d",
+      "bytes": 787
+    },
+    {
+      "path": "batches/iter-3-a45207d5/candidate.diff",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/candidate.diff",
+      "sha256": "f91ae983754e291a2f1cb5bca006376aac8ace622409e4eb5eaaa62ef548a882",
+      "bytes": 5019
+    },
+    {
+      "path": "batches/iter-3-a45207d5/candidate/cart.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/candidate/cart.html",
+      "sha256": "d3d399983ea5edc996061cca4e9f1999264ead41a176f17348839534cec8f333",
+      "bytes": 524
+    },
+    {
+      "path": "batches/iter-3-a45207d5/candidate/options.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/candidate/options.html",
+      "sha256": "f553da816a09666b15bc4ae42953e82da6a30650532d41154e2c30113c183fc2",
+      "bytes": 696
+    },
+    {
+      "path": "batches/iter-3-a45207d5/candidate/product.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/candidate/product.html",
+      "sha256": "2f7571e8093410074fd07a7af594f27d9061be1e09168a517c47afb23a938b46",
+      "bytes": 746
+    },
+    {
+      "path": "batches/iter-3-a45207d5/candidate/review.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/candidate/review.html",
+      "sha256": "f34294204096b8ea9bc4ef4cc2c0b1b17fa64a102029c3c8bac6d83ffbdb0410",
+      "bytes": 429
+    },
+    {
+      "path": "batches/iter-3-a45207d5/candidate/style.css",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/candidate/style.css",
+      "sha256": "fa441388153309c0258e9f8425da62373ae492e825772d887cfd0a6243be1371",
+      "bytes": 3910
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-0/action-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-0/action-0.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-0/action-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-0/action-1.json",
+      "sha256": "b1660d4835ae08a6b9a45386340b4dddfa15d16cea309024c32370ec06cab565",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-0/action-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-0/action-2.json",
+      "sha256": "1c39891981094a0007390b2fe7f759d2ca25ed07f31b5f93b0214848d6102a13",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-0/action-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-0/action-3.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-0/episode.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-0/episode.json",
+      "sha256": "f28da9c0d7ad79d31af4481bf49e5bb80c7ad26e79e24af6b9e534bdf2bac4e6",
+      "bytes": 6564
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-0/observation-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-0/observation-0.json",
+      "sha256": "de564157678bd43ad530a84075f9414def1f2489b61c4132dcb24e0335236e70",
+      "bytes": 826
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-0/observation-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-0/observation-1.json",
+      "sha256": "0edf4d8895bb07bc8aa63046ce5785320829ca17ceb0a7a64d95be6ef91d6079",
+      "bytes": 1383
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-0/observation-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-0/observation-2.json",
+      "sha256": "399daae67a1dc5394f65af1227c492a5e9cef4a263d4b15f9514dad2e5fe683e",
+      "bytes": 2269
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-0/observation-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-0/observation-3.json",
+      "sha256": "a3dc7899bb6b46713f3b3ebf708314f3dc9d3afa5e4fd3d57f3fc9bf85420259",
+      "bytes": 890
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-0/observation-4.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-0/observation-4.json",
+      "sha256": "0482d7e086519d4056c77643dfb90c21ec2581aad3009a6301901e9ac4e94473",
+      "bytes": 430
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-0/request-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-0/request-0.json",
+      "sha256": "45419134b1b330c46dafb81c224ec0f1dee88aaae94f14591937ba207fed9387",
+      "bytes": 85802
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-0/request-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-0/request-1.json",
+      "sha256": "e08690a3d3999bc99f055788dd29c251fef12bc9e2cf8127bcb0963b5fe43c1a",
+      "bytes": 77371
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-0/request-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-0/request-2.json",
+      "sha256": "84bc7750e562e4ba8b476acd7ea362b504cb6fa6fe26d832a3c6df0bd5dfecba",
+      "bytes": 104777
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-0/request-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-0/request-3.json",
+      "sha256": "0ac3588463cc201e5d26f50ffaf16edce5634f4bc2b5d412790f0b60fecb1d41",
+      "bytes": 65347
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-0/response-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-0/response-0.json",
+      "sha256": "4e73fdffa730e0211454a61667073dcba010e13e8c4c7a4fd395eba245ebc2b2",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-0/response-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-0/response-1.json",
+      "sha256": "0c686af564aee7017d8de40c782d61b7c3c3d9653069cdf12ee29257984531d6",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-0/response-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-0/response-2.json",
+      "sha256": "364dd7eae4094f24a86e5cf545cf966ec65e86789a4d31859711e0e028674d64",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-0/response-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-0/response-3.json",
+      "sha256": "54f2b0a7371b621e46c50e3b3758c381852265623e5c9bf4a437872651d5d960",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-0/screenshot-0.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-0/screenshot-0.png",
+      "sha256": "539c82cdd2ef175bc8376d9e40ca4fd4bdce71575549552579f6cefd717e365a",
+      "bytes": 62211
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-0/screenshot-1.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-0/screenshot-1.png",
+      "sha256": "94cfb87dc47a163def6c581d0bf3e8e09e2432b0a19c0b1ef36a98b5d1faf5db",
+      "bytes": 54794
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-0/screenshot-2.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-0/screenshot-2.png",
+      "sha256": "ac31bd6a2741d4300e9b30eb1a1a475c591f87383786f44e93a42e622081e4ef",
+      "bytes": 73618
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-0/screenshot-3.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-0/screenshot-3.png",
+      "sha256": "58eca287f4ad42f08b363f858a7df3b00f8906adf484cfc70906fc31bb70ad20",
+      "bytes": 43285
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-0/screenshot-4.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-0/screenshot-4.png",
+      "sha256": "e1ad2c757a59b92757b118bf6eb71bb0628a147a0d680547729a4fe3abe9283d",
+      "bytes": 29208
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-1/action-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-1/action-0.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-1/action-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-1/action-1.json",
+      "sha256": "b1660d4835ae08a6b9a45386340b4dddfa15d16cea309024c32370ec06cab565",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-1/action-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-1/action-2.json",
+      "sha256": "1c39891981094a0007390b2fe7f759d2ca25ed07f31b5f93b0214848d6102a13",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-1/action-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-1/action-3.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-1/episode.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-1/episode.json",
+      "sha256": "33c289bc9e67d7481872d47ec96975e6b2706848f76764c75b75bfdecec2f8d0",
+      "bytes": 6563
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-1/observation-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-1/observation-0.json",
+      "sha256": "e6f317fb7a1872369e5da1ececb49b87a47f3d2f7b6c18c5fd53c9ef78c322e2",
+      "bytes": 826
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-1/observation-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-1/observation-1.json",
+      "sha256": "499ff2af73ebca85f070774bee3e10aa75773642b17b99f3a43b01fe9fc2e375",
+      "bytes": 1383
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-1/observation-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-1/observation-2.json",
+      "sha256": "2aba3ee204e516477bbc28d04fab3cd0e88b8ffa1e8d5026ea490c1ae389869c",
+      "bytes": 2269
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-1/observation-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-1/observation-3.json",
+      "sha256": "47a035974dad7544aa4b9010ef6473c8ce3dc92706c904a406c220f9c10f2d15",
+      "bytes": 890
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-1/observation-4.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-1/observation-4.json",
+      "sha256": "9a258f38671fae64973f25d46792e015a14f8c2078d1d2478ebefa695575af38",
+      "bytes": 430
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-1/response-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-1/response-0.json",
+      "sha256": "4e73fdffa730e0211454a61667073dcba010e13e8c4c7a4fd395eba245ebc2b2",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-1/response-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-1/response-1.json",
+      "sha256": "0c686af564aee7017d8de40c782d61b7c3c3d9653069cdf12ee29257984531d6",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-1/response-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-1/response-2.json",
+      "sha256": "364dd7eae4094f24a86e5cf545cf966ec65e86789a4d31859711e0e028674d64",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-1/response-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-1/response-3.json",
+      "sha256": "54f2b0a7371b621e46c50e3b3758c381852265623e5c9bf4a437872651d5d960",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-2/action-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-2/action-0.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-2/action-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-2/action-1.json",
+      "sha256": "b1660d4835ae08a6b9a45386340b4dddfa15d16cea309024c32370ec06cab565",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-2/action-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-2/action-2.json",
+      "sha256": "1c39891981094a0007390b2fe7f759d2ca25ed07f31b5f93b0214848d6102a13",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-2/action-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-2/action-3.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-2/episode.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-2/episode.json",
+      "sha256": "12723e53c19c1df77679f513376813d05d29b15563d539a35b75031a5761d22f",
+      "bytes": 6564
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-2/observation-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-2/observation-0.json",
+      "sha256": "a564327cb0b6e826854518e2ea017c0b252002220a14f64840ee6a6e00764637",
+      "bytes": 826
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-2/observation-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-2/observation-1.json",
+      "sha256": "5a57f48f7a77fb52884a63ef33e703141c0362d647bd37a8e73d5e98511c050c",
+      "bytes": 1383
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-2/observation-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-2/observation-2.json",
+      "sha256": "de1361d48b5ace4e3d0e866400042e221a41f84d7227cb3856b01ca1667d9f55",
+      "bytes": 2269
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-2/observation-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-2/observation-3.json",
+      "sha256": "b4815c0d4f42550a40fcef932d1437220d2c6b1a2fa21fda430c1fc56d67db70",
+      "bytes": 890
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-2/observation-4.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-2/observation-4.json",
+      "sha256": "5204a721001f8f77e1b55f3ef1abce280d18b23a8069ff50c818f6ded5a56914",
+      "bytes": 430
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-2/response-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-2/response-0.json",
+      "sha256": "4e73fdffa730e0211454a61667073dcba010e13e8c4c7a4fd395eba245ebc2b2",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-2/response-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-2/response-1.json",
+      "sha256": "0c686af564aee7017d8de40c782d61b7c3c3d9653069cdf12ee29257984531d6",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-2/response-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-2/response-2.json",
+      "sha256": "364dd7eae4094f24a86e5cf545cf966ec65e86789a4d31859711e0e028674d64",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-3-a45207d5/episode-2/response-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/episode-2/response-3.json",
+      "sha256": "54f2b0a7371b621e46c50e3b3758c381852265623e5c9bf4a437872651d5d960",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-3-a45207d5/feasibility/feasibility.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/feasibility/feasibility.json",
+      "sha256": "e27755dc1f7caa4d6eee8de4ad73d524862da22db351866c2c80e7ba37003cee",
+      "bytes": 3729
+    },
+    {
+      "path": "batches/iter-3-a45207d5/report.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-3-a45207d5/report.json",
+      "sha256": "abae75f12fbcb4de448e6b1c33b68794e7af396e5729f20747b1ad7b67dc038a",
+      "bytes": 28099
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/candidate-manifest.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/candidate-manifest.json",
+      "sha256": "0ba0df380b88475e2d0f8b888215e123751367a4022515e3d952504e5495a569",
+      "bytes": 787
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/candidate.diff",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/candidate.diff",
+      "sha256": "437218baf054e3f1ceb68180977d21de679f1f32210a5656aa068b63acaf2dbb",
+      "bytes": 2491
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/candidate/cart.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/candidate/cart.html",
+      "sha256": "a56e87f0003237fccf5e071ee0afa88202b2cf4d5bd22c5c25dcefd4c8a7fd85",
+      "bytes": 387
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/candidate/options.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/candidate/options.html",
+      "sha256": "ae39d9717abda22f600ae33b20ed4a88f2b4f86776f555f94e1c63d714af887c",
+      "bytes": 599
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/candidate/product.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/candidate/product.html",
+      "sha256": "581740ceccb22ed936eb236603ba5b10871518230906c369b4ef2a3966db6f2f",
+      "bytes": 609
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/candidate/review.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/candidate/review.html",
+      "sha256": "f34294204096b8ea9bc4ef4cc2c0b1b17fa64a102029c3c8bac6d83ffbdb0410",
+      "bytes": 429
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/candidate/style.css",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/candidate/style.css",
+      "sha256": "040e5294c7f6291c601bdb75c1da9fd285133f4ecef9e6332634f962a087003c",
+      "bytes": 3752
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-0/action-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-0/action-0.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-0/action-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-0/action-1.json",
+      "sha256": "f174e439eb3488b7a867dc16552bc7076eb45b5fe48652e71686e696c111ff34",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-0/action-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-0/action-2.json",
+      "sha256": "474434a60476824c264cc061404e3b81c4ce84985b7ffed936fe06956ed8fa52",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-0/action-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-0/action-3.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-0/episode.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-0/episode.json",
+      "sha256": "2cd5cc4e9941bd9fde25f9c58f26081cae21e1d04f244456f9a84d63582622eb",
+      "bytes": 6568
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-0/observation-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-0/observation-0.json",
+      "sha256": "6f52d98e10c08b35da7b6a5c5eaa611ac7f09d328b655225b0a1a1fb795548e8",
+      "bytes": 702
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-0/observation-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-0/observation-1.json",
+      "sha256": "c432a040ddb45f1e8380c373e4b4b95d1c7f48a9142385b6d77a77c87bb1e81b",
+      "bytes": 1258
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-0/observation-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-0/observation-2.json",
+      "sha256": "8f1480d8793ea5a101da684cb27a167b8d14416689b74d5af91763765eb8ec94",
+      "bytes": 2249
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-0/observation-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-0/observation-3.json",
+      "sha256": "ea16cead24bf34922c34dc57925f2ad141a9544b1f0bec972d00582d2e9f0e59",
+      "bytes": 890
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-0/observation-4.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-0/observation-4.json",
+      "sha256": "15a5975edde4b3408e2d8cfb3638992cdb6cb168b8d51a8b74908424bb90ecac",
+      "bytes": 430
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-0/request-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-0/request-0.json",
+      "sha256": "48fe39e2ab2b6377bfdca2ef37ab26e273a86bd5fd81c5a36e647612483e829c",
+      "bytes": 63004
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-0/request-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-0/request-1.json",
+      "sha256": "b6eab2b54dbb9b3183878ec63f536bf750cc4f7879f439d9f8b0e8bf7edca3c1",
+      "bytes": 55394
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-0/request-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-0/request-2.json",
+      "sha256": "731acbd088832792927d1b08a9558235f29f0391ffcf104dbfa62519dbb6c9e5",
+      "bytes": 103843
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-0/request-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-0/request-3.json",
+      "sha256": "0b67ba3c61d1a61862e574ea8c01024c8da54cf58465e1b8dc852e431e8171b6",
+      "bytes": 65065
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-0/response-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-0/response-0.json",
+      "sha256": "8b55aa524cb2099a6b4c9f6c02b5b84e9cb01aaae9c0ac192743ef0b497c1800",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-0/response-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-0/response-1.json",
+      "sha256": "e922c31ee7b39a606d2a3f70c879f93cf9457732c69e34f9a11f7e7197af06ba",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-0/response-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-0/response-2.json",
+      "sha256": "30e99e0afbab51a2cbf4d13bb62d44dcce138f390082490e26c010bee658ec07",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-0/response-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-0/response-3.json",
+      "sha256": "18b58068d071d93cd00d14510dfd896c6ae5031fbd32d6f3f3dc15166b60a4e1",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-0/screenshot-0.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-0/screenshot-0.png",
+      "sha256": "89907e3eba39c71e8f37a6da162769f08faf72b96c851f8fbe647783feaf97f4",
+      "bytes": 45208
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-0/screenshot-1.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-0/screenshot-1.png",
+      "sha256": "e5e6e584c7e8cb7aa24d0bb2315369874c6be68fc337848335a3e7752ddc1ee4",
+      "bytes": 38507
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-0/screenshot-2.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-0/screenshot-2.png",
+      "sha256": "29c2328f3ad6a9f7775a6f1bd61d732fcc787a741d370a90ce9ba6f885ed121c",
+      "bytes": 73131
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-0/screenshot-3.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-0/screenshot-3.png",
+      "sha256": "58eca287f4ad42f08b363f858a7df3b00f8906adf484cfc70906fc31bb70ad20",
+      "bytes": 43285
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-0/screenshot-4.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-0/screenshot-4.png",
+      "sha256": "e1ad2c757a59b92757b118bf6eb71bb0628a147a0d680547729a4fe3abe9283d",
+      "bytes": 29208
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-1/action-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-1/action-0.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-1/action-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-1/action-1.json",
+      "sha256": "f174e439eb3488b7a867dc16552bc7076eb45b5fe48652e71686e696c111ff34",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-1/action-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-1/action-2.json",
+      "sha256": "474434a60476824c264cc061404e3b81c4ce84985b7ffed936fe06956ed8fa52",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-1/action-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-1/action-3.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-1/episode.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-1/episode.json",
+      "sha256": "ae2bb6f179c2b5388a80a3a917d3c63cc3322e17788bfd4e7f957cfa863f4b51",
+      "bytes": 6568
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-1/observation-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-1/observation-0.json",
+      "sha256": "6033a53d35e98296e9dc7a073887c16794e0b144c87beb513c17bde8a6c992d5",
+      "bytes": 702
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-1/observation-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-1/observation-1.json",
+      "sha256": "34167ed8dd55501581a83e858d186a7ed842c339c14f053925eb0416bc8d5278",
+      "bytes": 1258
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-1/observation-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-1/observation-2.json",
+      "sha256": "b39295f9b7926a15a0a351b33e5ff3d7550cdd19e16c623f89a06d87c14799b6",
+      "bytes": 2249
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-1/observation-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-1/observation-3.json",
+      "sha256": "97e8107273663d5180ad731ae2b47f07052903fa02c770f76239b44a302647b3",
+      "bytes": 890
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-1/observation-4.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-1/observation-4.json",
+      "sha256": "3ec8d7554677077e7387878a0ba69ad332caba38a7b5dfd0fd87d41b0ebd927a",
+      "bytes": 430
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-1/response-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-1/response-0.json",
+      "sha256": "8b55aa524cb2099a6b4c9f6c02b5b84e9cb01aaae9c0ac192743ef0b497c1800",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-1/response-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-1/response-1.json",
+      "sha256": "e922c31ee7b39a606d2a3f70c879f93cf9457732c69e34f9a11f7e7197af06ba",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-1/response-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-1/response-2.json",
+      "sha256": "30e99e0afbab51a2cbf4d13bb62d44dcce138f390082490e26c010bee658ec07",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-1/response-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-1/response-3.json",
+      "sha256": "18b58068d071d93cd00d14510dfd896c6ae5031fbd32d6f3f3dc15166b60a4e1",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-2/action-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-2/action-0.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-2/action-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-2/action-1.json",
+      "sha256": "f174e439eb3488b7a867dc16552bc7076eb45b5fe48652e71686e696c111ff34",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-2/action-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-2/action-2.json",
+      "sha256": "474434a60476824c264cc061404e3b81c4ce84985b7ffed936fe06956ed8fa52",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-2/action-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-2/action-3.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-2/episode.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-2/episode.json",
+      "sha256": "d8761524dd6b0f43f6d7c4c3ce2bc2a0f357bd37a09b072318af1d3603f221ff",
+      "bytes": 6568
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-2/observation-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-2/observation-0.json",
+      "sha256": "d4cba99c4bc723267b325b01776f23975af00029f65cac34ff2eddbb22380477",
+      "bytes": 702
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-2/observation-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-2/observation-1.json",
+      "sha256": "61cf44daa3a6c16a6f976055a028de1f87684c5a56402605eeecbb66963bdb2d",
+      "bytes": 1258
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-2/observation-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-2/observation-2.json",
+      "sha256": "9f0f50e15f1956662209f2ed7c31115161f58979d04d762db769c5a2e26d6c66",
+      "bytes": 2249
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-2/observation-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-2/observation-3.json",
+      "sha256": "227cf384b8747275a00f8b7598753a2779686fe78a864e0c083793fc4ad1050f",
+      "bytes": 890
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-2/observation-4.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-2/observation-4.json",
+      "sha256": "e345749097f86afcf946e61d81c05b8b6b0af267d782005de5bd9f9335f863ea",
+      "bytes": 430
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-2/response-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-2/response-0.json",
+      "sha256": "8b55aa524cb2099a6b4c9f6c02b5b84e9cb01aaae9c0ac192743ef0b497c1800",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-2/response-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-2/response-1.json",
+      "sha256": "e922c31ee7b39a606d2a3f70c879f93cf9457732c69e34f9a11f7e7197af06ba",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-2/response-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-2/response-2.json",
+      "sha256": "30e99e0afbab51a2cbf4d13bb62d44dcce138f390082490e26c010bee658ec07",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/episode-2/response-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/episode-2/response-3.json",
+      "sha256": "18b58068d071d93cd00d14510dfd896c6ae5031fbd32d6f3f3dc15166b60a4e1",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/feasibility/feasibility.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/feasibility/feasibility.json",
+      "sha256": "9a3e696a6259b14fe086313ebda61c9faec4251406b7ffa2bc13196a3d54e340",
+      "bytes": 3728
+    },
+    {
+      "path": "batches/iter-4-d4d0b47f/report.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-4-d4d0b47f/report.json",
+      "sha256": "3eefaa0ff969aa188bdcfb4c073fef30981c73026077ddd1b4f62a6ba7c82e12",
+      "bytes": 28111
+    },
+    {
+      "path": "batches/iter-5-3d737a14/candidate-manifest.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/candidate-manifest.json",
+      "sha256": "c80e730fc785ffe408b8ea1d544b288915ff70bf2e91990e35b41e888790c7b3",
+      "bytes": 787
+    },
+    {
+      "path": "batches/iter-5-3d737a14/candidate.diff",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/candidate.diff",
+      "sha256": "7a69a6cd47991dc7caa0fb53cedea0c363be847cd8062790f0d4dd59cf6da6c9",
+      "bytes": 2914
+    },
+    {
+      "path": "batches/iter-5-3d737a14/candidate/cart.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/candidate/cart.html",
+      "sha256": "a56e87f0003237fccf5e071ee0afa88202b2cf4d5bd22c5c25dcefd4c8a7fd85",
+      "bytes": 387
+    },
+    {
+      "path": "batches/iter-5-3d737a14/candidate/options.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/candidate/options.html",
+      "sha256": "500ff7d005552a718ddc4543b3cb032b8677d34791e672ddac20df1ddb59e04b",
+      "bytes": 735
+    },
+    {
+      "path": "batches/iter-5-3d737a14/candidate/product.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/candidate/product.html",
+      "sha256": "581740ceccb22ed936eb236603ba5b10871518230906c369b4ef2a3966db6f2f",
+      "bytes": 609
+    },
+    {
+      "path": "batches/iter-5-3d737a14/candidate/review.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/candidate/review.html",
+      "sha256": "f34294204096b8ea9bc4ef4cc2c0b1b17fa64a102029c3c8bac6d83ffbdb0410",
+      "bytes": 429
+    },
+    {
+      "path": "batches/iter-5-3d737a14/candidate/style.css",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/candidate/style.css",
+      "sha256": "e7bdb6f44f36d932a9c7ab9bf5ec6e934d63a268b888d0be1cf0b3ee26882fd1",
+      "bytes": 4038
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-0/action-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-0/action-0.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-0/action-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-0/action-1.json",
+      "sha256": "f174e439eb3488b7a867dc16552bc7076eb45b5fe48652e71686e696c111ff34",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-0/action-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-0/action-2.json",
+      "sha256": "4d14ae6f809a50d85d4a988aa567bed0d078af289ff997084f0fdcca843bc06c",
+      "bytes": 57
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-0/action-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-0/action-3.json",
+      "sha256": "ad8592361bbb52a5b5eedc65822eea490370b645914c38bd35c01c63a2d22bb7",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-0/action-4.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-0/action-4.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-0/episode.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-0/episode.json",
+      "sha256": "978c2c61dcaa7a0d29c92480aa35905c619fd33e23453a0157f3e680ae89116e",
+      "bytes": 7282
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-0/observation-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-0/observation-0.json",
+      "sha256": "2b43441ba5d91fcd2f3b996504c0e436940bfed72aa6819aa22da8ef4f9c33c0",
+      "bytes": 702
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-0/observation-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-0/observation-1.json",
+      "sha256": "9c1db5d136da9336baecb22db2379ba92999316191d5583dba6a0cd718094dfb",
+      "bytes": 1258
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-0/observation-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-0/observation-2.json",
+      "sha256": "3151ac0bc6ab0a98d94aca33684d5727772e595c167f96a8862869531fa7bc8a",
+      "bytes": 655
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-0/observation-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-0/observation-3.json",
+      "sha256": "f731dbfba255fde2d8a03df84ef831685c89ba57cbc7fb2a83f9be99c2d29863",
+      "bytes": 1869
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-0/observation-4.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-0/observation-4.json",
+      "sha256": "46b14786810bb1d8cb5b1ed3cb34087beaff96f6869904f7ae09b31cb64a5ff4",
+      "bytes": 890
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-0/observation-5.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-0/observation-5.json",
+      "sha256": "ea1471a3bc3755f551bfa6b53d21422b91bf1da3881e5a8ed876ec8b2c06adf5",
+      "bytes": 430
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-0/request-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-0/request-0.json",
+      "sha256": "4fa353f26b45b991a0e9bc4e592ddfb67a80fe15b6a8afad09d0c06155928fce",
+      "bytes": 63004
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-0/request-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-0/request-1.json",
+      "sha256": "b8f5053e45c1112333e357a5333f240bb0827a0dff8c9a61cd1927681e1eb00e",
+      "bytes": 55394
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-0/request-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-0/request-2.json",
+      "sha256": "9007d0b2c73f316b33cd4fa6e799295ba834dd08a025a48d6e2dea0ae9a48621",
+      "bytes": 77795
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-0/request-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-0/request-3.json",
+      "sha256": "21628a0af09847e94ec66f19e0ad6c6d0c2dda2623722696b59196db0c727ed0",
+      "bytes": 69364
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-0/request-4.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-0/request-4.json",
+      "sha256": "f46b1654fde120fd472b3032a3739d1f227a328dd1bdb8cf00dea425b9e92fb7",
+      "bytes": 65502
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-0/response-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-0/response-0.json",
+      "sha256": "8b55aa524cb2099a6b4c9f6c02b5b84e9cb01aaae9c0ac192743ef0b497c1800",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-0/response-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-0/response-1.json",
+      "sha256": "e922c31ee7b39a606d2a3f70c879f93cf9457732c69e34f9a11f7e7197af06ba",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-0/response-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-0/response-2.json",
+      "sha256": "c8a7e6dded805afbd7976d4431c6f335004b7f13342e8f77cef111edb04ab8e3",
+      "bytes": 453
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-0/response-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-0/response-3.json",
+      "sha256": "e36c298bdcabd2b364ee14d8af2fcc772add7756bf855052edb129b6e310b417",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-0/response-4.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-0/response-4.json",
+      "sha256": "a7eddeb548806d9d012e19dc93f4aa67f4a0a0e697067ac5774496c6e348563f",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-0/screenshot-0.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-0/screenshot-0.png",
+      "sha256": "89907e3eba39c71e8f37a6da162769f08faf72b96c851f8fbe647783feaf97f4",
+      "bytes": 45208
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-0/screenshot-1.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-0/screenshot-1.png",
+      "sha256": "e5e6e584c7e8cb7aa24d0bb2315369874c6be68fc337848335a3e7752ddc1ee4",
+      "bytes": 38507
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-0/screenshot-2.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-0/screenshot-2.png",
+      "sha256": "331b14f72e6c46b77625e598db86f608057b11d77dddff79bf29ebd4337c1b21",
+      "bytes": 54703
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-0/screenshot-3.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-0/screenshot-3.png",
+      "sha256": "38b2d69e1881e4776f1668fa8b3f84323f122e7ed42ffb5d291bd209a0557f92",
+      "bytes": 46942
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-0/screenshot-4.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-0/screenshot-4.png",
+      "sha256": "58eca287f4ad42f08b363f858a7df3b00f8906adf484cfc70906fc31bb70ad20",
+      "bytes": 43285
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-0/screenshot-5.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-0/screenshot-5.png",
+      "sha256": "e1ad2c757a59b92757b118bf6eb71bb0628a147a0d680547729a4fe3abe9283d",
+      "bytes": 29208
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-1/action-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-1/action-0.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-1/action-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-1/action-1.json",
+      "sha256": "f174e439eb3488b7a867dc16552bc7076eb45b5fe48652e71686e696c111ff34",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-1/action-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-1/action-2.json",
+      "sha256": "4d14ae6f809a50d85d4a988aa567bed0d078af289ff997084f0fdcca843bc06c",
+      "bytes": 57
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-1/action-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-1/action-3.json",
+      "sha256": "ad8592361bbb52a5b5eedc65822eea490370b645914c38bd35c01c63a2d22bb7",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-1/action-4.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-1/action-4.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-1/episode.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-1/episode.json",
+      "sha256": "e1b9b6b54f1d201cf9d102c5c68dff5f75afda479a75b0634eddeda4af7b0df5",
+      "bytes": 7282
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-1/observation-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-1/observation-0.json",
+      "sha256": "4a8eef2cb45dc60e498e1387938b29bfc4e21780fe8d08925af7d529ddd4a52a",
+      "bytes": 702
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-1/observation-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-1/observation-1.json",
+      "sha256": "726c9d41522caca6da910e5675e631f27b914f5537e2d2da8d4b83dffa96df7b",
+      "bytes": 1258
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-1/observation-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-1/observation-2.json",
+      "sha256": "609e518d502ddc60759bfd110b1d8bf324affbc93ab15bf422350ce2cf5c365e",
+      "bytes": 655
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-1/observation-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-1/observation-3.json",
+      "sha256": "42def6fd630c12106b3fddd5c70523395e2957d0c8843a959522975a2071dffa",
+      "bytes": 1869
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-1/observation-4.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-1/observation-4.json",
+      "sha256": "f759ca6b5840e4c46f719f3c45e283e203acf145c0e518314a17341d6ddb15b5",
+      "bytes": 890
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-1/observation-5.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-1/observation-5.json",
+      "sha256": "00f11fc1b3c9057c622b6869d5193ca46f5061af2a71db1001c1fcd9f52a9764",
+      "bytes": 430
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-1/response-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-1/response-0.json",
+      "sha256": "8b55aa524cb2099a6b4c9f6c02b5b84e9cb01aaae9c0ac192743ef0b497c1800",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-1/response-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-1/response-1.json",
+      "sha256": "e922c31ee7b39a606d2a3f70c879f93cf9457732c69e34f9a11f7e7197af06ba",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-1/response-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-1/response-2.json",
+      "sha256": "c8a7e6dded805afbd7976d4431c6f335004b7f13342e8f77cef111edb04ab8e3",
+      "bytes": 453
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-1/response-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-1/response-3.json",
+      "sha256": "e36c298bdcabd2b364ee14d8af2fcc772add7756bf855052edb129b6e310b417",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-1/response-4.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-1/response-4.json",
+      "sha256": "a7eddeb548806d9d012e19dc93f4aa67f4a0a0e697067ac5774496c6e348563f",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-2/action-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-2/action-0.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-2/action-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-2/action-1.json",
+      "sha256": "f174e439eb3488b7a867dc16552bc7076eb45b5fe48652e71686e696c111ff34",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-2/action-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-2/action-2.json",
+      "sha256": "4d14ae6f809a50d85d4a988aa567bed0d078af289ff997084f0fdcca843bc06c",
+      "bytes": 57
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-2/action-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-2/action-3.json",
+      "sha256": "ad8592361bbb52a5b5eedc65822eea490370b645914c38bd35c01c63a2d22bb7",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-2/action-4.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-2/action-4.json",
+      "sha256": "6fa707e44c02cdda8611708394829e85497bbaacc6f259f7750f39192045c063",
+      "bytes": 53
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-2/episode.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-2/episode.json",
+      "sha256": "af02a26a5085ea660b4130d165e320b5d6a3948f904ad16d353ed04d503e9059",
+      "bytes": 7282
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-2/observation-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-2/observation-0.json",
+      "sha256": "8ec8ba81be006f70526a97a2bed9fec71e38c68e9e12d33c8ebd88b940b8b398",
+      "bytes": 702
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-2/observation-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-2/observation-1.json",
+      "sha256": "01bb635affacde7ca72524408b561f54ff04c5bb8398d108d2244bce262a1bd4",
+      "bytes": 1258
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-2/observation-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-2/observation-2.json",
+      "sha256": "dd97c1881fa65989d8e5924f80e4fe2fbd5a2af6eb2132b75e6936bffc700701",
+      "bytes": 655
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-2/observation-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-2/observation-3.json",
+      "sha256": "f598683b3dc6db685c0d1b3b354e4e88364c714e7fd0e27309c01a360877c228",
+      "bytes": 1869
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-2/observation-4.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-2/observation-4.json",
+      "sha256": "091c9e0daf0c4fdfddbac4ffa2d2db4d3ffb85fd09a9f9aef93a3ea33c3f6fb8",
+      "bytes": 890
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-2/observation-5.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-2/observation-5.json",
+      "sha256": "fdaa31c694f1f637a67c1458a05759fe1c16f800580bf274118c9661596c1c3d",
+      "bytes": 430
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-2/response-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-2/response-0.json",
+      "sha256": "8b55aa524cb2099a6b4c9f6c02b5b84e9cb01aaae9c0ac192743ef0b497c1800",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-2/response-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-2/response-1.json",
+      "sha256": "e922c31ee7b39a606d2a3f70c879f93cf9457732c69e34f9a11f7e7197af06ba",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-2/response-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-2/response-2.json",
+      "sha256": "c8a7e6dded805afbd7976d4431c6f335004b7f13342e8f77cef111edb04ab8e3",
+      "bytes": 453
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-2/response-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-2/response-3.json",
+      "sha256": "e36c298bdcabd2b364ee14d8af2fcc772add7756bf855052edb129b6e310b417",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-5-3d737a14/episode-2/response-4.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/episode-2/response-4.json",
+      "sha256": "a7eddeb548806d9d012e19dc93f4aa67f4a0a0e697067ac5774496c6e348563f",
+      "bytes": 449
+    },
+    {
+      "path": "batches/iter-5-3d737a14/feasibility/feasibility.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/feasibility/feasibility.json",
+      "sha256": "0585098561a1b675fe5035a513574de4b93e530916dba2783bac13f3b371f64d",
+      "bytes": 3728
+    },
+    {
+      "path": "batches/iter-5-3d737a14/report.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/batches/iter-5-3d737a14/report.json",
+      "sha256": "b9cbfe6882f0750803b0b1b6b2561276a74508f5469bee175704633daab52835",
+      "bytes": 30566
+    },
+    {
+      "path": "budget.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/budget.json",
+      "sha256": "2daf9a9b1a11ef4bf904b5c0eeadb673a53a7ec9e81f2bebdd0b66ef70917844",
+      "bytes": 82399
+    },
+    {
+      "path": "clean.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/clean.json",
+      "sha256": "10200b5bd51491e2429ab5e98f036b2c72bab03ab3680ec7f8fb8e7e577329c9",
+      "bytes": 28029
+    },
+    {
+      "path": "continuation-driver.py",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/continuation-driver.py",
+      "sha256": "9f89141c86f07ba42f24a709c220f84af71f6f32e168bfd33751c4a9b8b51f22",
+      "bytes": 15278
+    },
+    {
+      "path": "continuation.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/continuation.json",
+      "sha256": "63b4252b10ad02619ef423e7cba0bcc416ab96ac1aa061a0c5039c93a8a6cc2e",
+      "bytes": 109615
+    },
+    {
+      "path": "environment.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/environment.json",
+      "sha256": "15be15208315722e6c19c4bff1650f5c29b6c9f02a64b6ce1c8b7b441031bba3",
+      "bytes": 4007
+    },
+    {
+      "path": "execution.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/execution.json",
+      "sha256": "ede4c05965f5a6ee493745f56ab580726bbff1400f68be9d96b3d5d172f056fb",
+      "bytes": 604
+    },
+    {
+      "path": "feedback-continuity.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/feedback-continuity.json",
+      "sha256": "66eb7f6bd750d51749806234e973a65d487dc81ebdaadf5633aa2269e10dba9e",
+      "bytes": 3045
+    },
+    {
+      "path": "feedback/iter-1/result.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/feedback/iter-1/result.json",
+      "sha256": "1769a37302de6a08955eed5048bd3636e06518ee5015998628f79d68ee147cfd",
+      "bytes": 11735
+    },
+    {
+      "path": "feedback/iter-2/result.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/feedback/iter-2/result.json",
+      "sha256": "3041a380cfd5ab631b8364e95fe5d5ba19d78b9c2c20fce5018e883b51f1d398",
+      "bytes": 28208
+    },
+    {
+      "path": "feedback/iter-3/result.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/feedback/iter-3/result.json",
+      "sha256": "d9302aa24ff491b9d5750553a9048ad5ef574e216e1c18dfc65d66a1baaf5987",
+      "bytes": 28196
+    },
+    {
+      "path": "feedback/iter-4/result.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/feedback/iter-4/result.json",
+      "sha256": "8e32dd2b239222f468ab734ccaa2153ab4ab6ec2eeb4747a1470faba3822237f",
+      "bytes": 28208
+    },
+    {
+      "path": "feedback/iter-5/result.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/feedback/iter-5/result.json",
+      "sha256": "810dffd1a2bc6c8b7adfbc458c6bd7a44af33b2e105d1a42b8545268267381d3",
+      "bytes": 30663
+    },
+    {
+      "path": "harness-check/check.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/harness-check/check.json",
+      "sha256": "ebaa182b771ca1c7e92bdcc117e90fbcc87b99efe36583c33aa50406a5d217a9",
+      "bytes": 533
+    },
+    {
+      "path": "harness-check/proposals/iter-1/gateway-summary.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/harness-check/proposals/iter-1/gateway-summary.json",
+      "sha256": "10f4026a589aa81b33fefd424d064aa6422e193053e220e745be289afd69baaf",
+      "bytes": 8579
+    },
+    {
+      "path": "harness-check/proposals/iter-1/result.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/harness-check/proposals/iter-1/result.json",
+      "sha256": "f5d2ffc94285b32b06cb294fca792c63af7280cfb84180b98fcff0f612ee6249",
+      "bytes": 9503
+    },
+    {
+      "path": "harness-check/proposals/iter-1/runtime/runtime-receipt.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/harness-check/proposals/iter-1/runtime/runtime-receipt.json",
+      "sha256": "7205fe743e67338df76840d00fc4668dbd1ab72490f49f43c7800baf3214bbe5",
+      "bytes": 890
+    },
+    {
+      "path": "harness-check/proposals/iter-1/tool-events.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/harness-check/proposals/iter-1/tool-events.json",
+      "sha256": "edb6d69bd6a2fbf52a56dfb3f9db1fd828f54b0f0fbeb7f92ed0b9b9c4748405",
+      "bytes": 49065
+    },
+    {
+      "path": "history.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/history.json",
+      "sha256": "70c0bc1be7bf8ac8dfb217d177de6956bcca89ae694f50e241ecb4fb10c099ce",
+      "bytes": 5067
+    },
+    {
+      "path": "identity.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/identity.json",
+      "sha256": "d832e79d7897d6576ea16f315722116611b20ed77b865a6eaf4ba8cb7ee9bd1a",
+      "bytes": 28103
+    },
+    {
+      "path": "initial-attempt/audit.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-01/audit.json",
+      "sha256": "775719664fa41285c90a134cdbcc5f54cfc4d036cbf0700eb42988246c90f6b9",
+      "bytes": 3723
+    },
+    {
+      "path": "initial-attempt/budget.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-01/budget.json",
+      "sha256": "525718c184412d205921e949596afbbe8c27c1af8d52c1cddf6060ece8c5c17a",
+      "bytes": 26688
+    },
+    {
+      "path": "initial-attempt/execution.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-01/execution.json",
+      "sha256": "b8867333fed330c9eead5bf1d7554c1a8f32d3ad649b4f30b74e92e5ca3d1a8d",
+      "bytes": 398
+    },
+    {
+      "path": "initial-attempt/history.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-01/history.json",
+      "sha256": "4f7e9ea5a495afe60555dda8a9a88552b965d0ddbf313be0c9c85e113734cfb5",
+      "bytes": 395
+    },
+    {
+      "path": "initial-attempt/optimizer-settings.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-01/optimizer-settings.json",
+      "sha256": "0b19705b7d24406cfc706f3fec13ef7ddf897e3193f34fd0fc3589e62b90d43e",
+      "bytes": 404
+    },
+    {
+      "path": "initial-attempt/runtime.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-01/runtime.json",
+      "sha256": "2d1a3d72246fefaceeafe68582f6cb20b06ce8d0b030dc19d775b90c97a1095c",
+      "bytes": 1197
+    },
+    {
+      "path": "initial-attempt/spending-plan.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-01/spending-plan.json",
+      "sha256": "ccef39d7a6fdb29550b553d2f5243ce7ad5abb64a588441d18b2f4a0e3316825",
+      "bytes": 1770
+    },
+    {
+      "path": "initial-attempt/status.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-01/status.json",
+      "sha256": "c97519baaf8fe60741f295fb086adcf246d5e49129d517e5d2a7a8bae5ff2d9a",
+      "bytes": 10192
+    },
+    {
+      "path": "opencode-runtime.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/opencode-runtime.json",
+      "sha256": "eb5da254b0d254a9586c894c052bc17c59c32a808ef9b087d55ee54f961523f4",
+      "bytes": 696
+    },
+    {
+      "path": "optimizer-settings.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/optimizer-settings.json",
+      "sha256": "af6975a95a3115852fedd74cb30f5f01cdad608bdf13ee4448b3ea05fd65a6d6",
+      "bytes": 404
+    },
+    {
+      "path": "preflight/authorization.json",
+      "source": "/workspace/webhelix-runs/opencode-longer-preflight-20261026/authorization.json",
+      "sha256": "e621d3f43dd0d27d42cf50af74bccae9df16eb164771055ab9d465ec7d143307",
+      "bytes": 490
+    },
+    {
+      "path": "preflight/candidate-analysis.md",
+      "source": "/workspace/webhelix-runs/opencode-longer-preflight-20261026/candidate-analysis.md",
+      "sha256": "3c376f718f831689adb057074d861258ee8362722c6fc0bc56c8d348ff86072c",
+      "bytes": 4368
+    },
+    {
+      "path": "preflight/continuation-independent-review.json",
+      "source": "/workspace/webhelix-runs/opencode-longer-preflight-20261026/continuation-independent-review.json",
+      "sha256": "fad7910f047e6e10d46f39b2af5f5c838e22a8d356e1a64ddfb16c09c12341b4",
+      "bytes": 1082
+    },
+    {
+      "path": "preflight/export-evidence.py",
+      "source": "/workspace/webhelix-runs/opencode-longer-preflight-20261026/export-evidence.py",
+      "sha256": "c2292bb33a20c360fa867290edaf6f6a52de6361afdad507e9c3fae63b1a85a1",
+      "bytes": 9759
+    },
+    {
+      "path": "preflight/launch.sh",
+      "source": "/workspace/webhelix-runs/opencode-longer-preflight-20261026/launch.sh",
+      "sha256": "ef0f05977c269965dcc6d8aafcfecf75d0ac33b8279342981d505a14b9af3698",
+      "bytes": 686
+    },
+    {
+      "path": "preflight/runtime-readiness.json",
+      "source": "/workspace/webhelix-runs/opencode-longer-preflight-20261026/runtime-readiness.json",
+      "sha256": "48b9d69d848c04a802a15b75e5c578fa19f4a72ebe417545fc3a74b2c827f167",
+      "bytes": 1279
+    },
+    {
+      "path": "preflight/validation.json",
+      "source": "/workspace/webhelix-runs/opencode-longer-preflight-20261026/validation.json",
+      "sha256": "9c4d0e437bd68194ac2428ce9c1232008036bfdc54ac6d7ed23ec844da1f09a1",
+      "bytes": 587
+    },
+    {
+      "path": "preparation-audit.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/preparation-audit.json",
+      "sha256": "4654fde55b0381864b9ec60430b0ff8f1cd6d5ec59ea7f696131de79beb84da7",
+      "bytes": 452
+    },
+    {
+      "path": "project-start.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/project-start.json",
+      "sha256": "1adba3d027ea34495c3e80a7a2e871c06110a3f72df9ad209c0195a35fe73232",
+      "bytes": 1790
+    },
+    {
+      "path": "proposals/iter-1/acceptance.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-1/acceptance.json",
+      "sha256": "b540c579284f2d76058358e4891b311865233fd15b039e8020818dcbf6840152",
+      "bytes": 181
+    },
+    {
+      "path": "proposals/iter-1/agent-result.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-1/agent-result.json",
+      "sha256": "e58730d6f0db0206a3755d565cc2efac23a0eb719f1fc20772ae41a11e62987b",
+      "bytes": 140
+    },
+    {
+      "path": "proposals/iter-1/candidate.diff",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-1/candidate.diff",
+      "sha256": "9e3efef556607c00d80e0ed3f58085ee6ad0d9d4860f7ba6fe28d8520aaff9e3",
+      "bytes": 3284
+    },
+    {
+      "path": "proposals/iter-1/candidate/cart.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-1/candidate/cart.html",
+      "sha256": "a56e87f0003237fccf5e071ee0afa88202b2cf4d5bd22c5c25dcefd4c8a7fd85",
+      "bytes": 387
+    },
+    {
+      "path": "proposals/iter-1/candidate/options.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-1/candidate/options.html",
+      "sha256": "45cf8af0a13208bbf03b3a313f350457c3f4110c86285fdc9263d97a76c1dff1",
+      "bytes": 750
+    },
+    {
+      "path": "proposals/iter-1/candidate/product.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-1/candidate/product.html",
+      "sha256": "581740ceccb22ed936eb236603ba5b10871518230906c369b4ef2a3966db6f2f",
+      "bytes": 609
+    },
+    {
+      "path": "proposals/iter-1/candidate/review.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-1/candidate/review.html",
+      "sha256": "f34294204096b8ea9bc4ef4cc2c0b1b17fa64a102029c3c8bac6d83ffbdb0410",
+      "bytes": 429
+    },
+    {
+      "path": "proposals/iter-1/candidate/style.css",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-1/candidate/style.css",
+      "sha256": "9478da67e5a251424500341d05fe77a5a8b0a07b295b92952df6c5ac59f0b20f",
+      "bytes": 4383
+    },
+    {
+      "path": "proposals/iter-1/gateway-summary.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-1/gateway-summary.json",
+      "sha256": "44952d5f51963e916657899272baaf1001c808c2afadf0339baed1709ddec5f0",
+      "bytes": 9516
+    },
+    {
+      "path": "proposals/iter-1/gateway/calls/request-1/request.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-1/gateway/calls/request-1/request.json",
+      "sha256": "caf6c6fa7f2d00606897ebca74a54c30902dc3a984e520d360ea26fde0a27074",
+      "bytes": 42104
+    },
+    {
+      "path": "proposals/iter-1/gateway/calls/request-1/result.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-1/gateway/calls/request-1/result.json",
+      "sha256": "611ab51488a9720fdd29035ece60fa4e8333cf99e82b913e70b8cc7240be45e7",
+      "bytes": 770
+    },
+    {
+      "path": "proposals/iter-1/image-manifest.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-1/image-manifest.json",
+      "sha256": "2c9a7605cc9b952d37d5331fc5b3779f1095a156f37a28a1ae8e94e950386f28",
+      "bytes": 699
+    },
+    {
+      "path": "proposals/iter-1/launch-prompt.txt",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-1/launch-prompt.txt",
+      "sha256": "01be3d888eda0b3ac624535052788cde1e8bf9e4d4e37d60084e77a72ad9fec5",
+      "bytes": 201
+    },
+    {
+      "path": "proposals/iter-1/optimizer-context.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-1/optimizer-context.json",
+      "sha256": "651c61b771565474f0e8f575bdb541dd4cb873839e728c28618567324d1a73ef",
+      "bytes": 31757
+    },
+    {
+      "path": "proposals/iter-1/previews/preview-1/preview.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-1/previews/preview-1/preview.json",
+      "sha256": "98c4f138f82f09b07171805b3f5b69c02207f15fdcb144d382870e834f960859",
+      "bytes": 1301
+    },
+    {
+      "path": "proposals/iter-1/previews/preview-2/preview.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-1/previews/preview-2/preview.json",
+      "sha256": "0b589de575b92c90e82654f8c0196c055fd7247002b872199d56c66ac672adcb",
+      "bytes": 1300
+    },
+    {
+      "path": "proposals/iter-1/previews/preview-3/preview.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-1/previews/preview-3/preview.json",
+      "sha256": "dc7e273d1e01db6e2ea0d5a0f759093d171d4e8347387c589a28b10516e6a879",
+      "bytes": 1301
+    },
+    {
+      "path": "proposals/iter-1/previews/preview-3/scripted-journey/observation-0.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-1/previews/preview-3/scripted-journey/observation-0.json",
+      "sha256": "acf43ad0d89a01cb9f0644893dfb82ef32b4f2b0c5f1f0ea20f414b2e28b0401",
+      "bytes": 702
+    },
+    {
+      "path": "proposals/iter-1/previews/preview-3/scripted-journey/observation-1.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-1/previews/preview-3/scripted-journey/observation-1.json",
+      "sha256": "e2ac41b5a18f19636cda6d1760a8421121663c50e8467f8d0f85b3ad475e3ce2",
+      "bytes": 1258
+    },
+    {
+      "path": "proposals/iter-1/previews/preview-3/scripted-journey/observation-2.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-1/previews/preview-3/scripted-journey/observation-2.json",
+      "sha256": "e4d5725efa17cd3573dc79dfaae1059914aa6633652c06bc8214837e4ee29839",
+      "bytes": 2248
+    },
+    {
+      "path": "proposals/iter-1/previews/preview-3/scripted-journey/observation-3.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-1/previews/preview-3/scripted-journey/observation-3.json",
+      "sha256": "8ffad139744fbd26fdc37555a2968deeef8234bca954a705043f297ba772983a",
+      "bytes": 890
+    },
+    {
+      "path": "proposals/iter-1/previews/preview-3/scripted-journey/observation-4.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-1/previews/preview-3/scripted-journey/observation-4.json",
+      "sha256": "5df795d8df2cb13d15361865348d72cb7096597163dd9a79fb9e5d87830e66af",
+      "bytes": 430
+    },
+    {
+      "path": "proposals/iter-1/previews/preview-3/scripted-journey/screenshot-0.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-1/previews/preview-3/scripted-journey/screenshot-0.png",
+      "sha256": "89907e3eba39c71e8f37a6da162769f08faf72b96c851f8fbe647783feaf97f4",
+      "bytes": 45208
+    },
+    {
+      "path": "proposals/iter-1/previews/preview-3/scripted-journey/screenshot-1.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-1/previews/preview-3/scripted-journey/screenshot-1.png",
+      "sha256": "e5e6e584c7e8cb7aa24d0bb2315369874c6be68fc337848335a3e7752ddc1ee4",
+      "bytes": 38507
+    },
+    {
+      "path": "proposals/iter-1/previews/preview-3/scripted-journey/screenshot-2.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-1/previews/preview-3/scripted-journey/screenshot-2.png",
+      "sha256": "60b517dbfd6e3c3727e1b8a6b905a6305222153d5fe35785cdcb273f66d9eb57",
+      "bytes": 83499
+    },
+    {
+      "path": "proposals/iter-1/previews/preview-3/scripted-journey/screenshot-3.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-1/previews/preview-3/scripted-journey/screenshot-3.png",
+      "sha256": "58eca287f4ad42f08b363f858a7df3b00f8906adf484cfc70906fc31bb70ad20",
+      "bytes": 43285
+    },
+    {
+      "path": "proposals/iter-1/previews/preview-3/scripted-journey/screenshot-4.png",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-1/previews/preview-3/scripted-journey/screenshot-4.png",
+      "sha256": "e1ad2c757a59b92757b118bf6eb71bb0628a147a0d680547729a4fe3abe9283d",
+      "bytes": 29208
+    },
+    {
+      "path": "proposals/iter-1/prompt.txt",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-1/prompt.txt",
+      "sha256": "4d3ff12be66248559cb5defe86960bbf0da03622b238a61119385e07c590f6ad",
+      "bytes": 27611
+    },
+    {
+      "path": "proposals/iter-1/result.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-1/result.json",
+      "sha256": "cdadcd9c0aeb337e15bd8ac04a8f19055d29d0fd90add248487fcad3ecb0db11",
+      "bytes": 10471
+    },
+    {
+      "path": "proposals/iter-1/runtime/runtime-receipt.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-1/runtime/runtime-receipt.json",
+      "sha256": "7e6e14e9dd21ec34424be7c3d7de44f04a4bb9ac810de40abac842a13c816881",
+      "bytes": 888
+    },
+    {
+      "path": "proposals/iter-1/session.jsonl",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-1/session.jsonl",
+      "sha256": "f0bb253a46d34901cf74ce7278e18e85f3346ae3bda85a0c86303f90bd9b0068",
+      "bytes": 266323
+    },
+    {
+      "path": "proposals/iter-1/tool-events.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-1/tool-events.json",
+      "sha256": "8a956fcb7e2e10f2ab6860ef563f0917657a3e14e91da21e0079bf4f3f9ceaad",
+      "bytes": 63833
+    },
+    {
+      "path": "proposals/iter-2/acceptance.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-2/acceptance.json",
+      "sha256": "ed520c9209c96d7c41eb824fc3fcbd0e4ff07f9829ad03ea0f46cb2fcc679fd0",
+      "bytes": 1141
+    },
+    {
+      "path": "proposals/iter-2/agent-result.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-2/agent-result.json",
+      "sha256": "3dd19dcd9347c166285edf0bd3901d5500ff693b664c140ff5ec3999da781a35",
+      "bytes": 129
+    },
+    {
+      "path": "proposals/iter-2/candidate.diff",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-2/candidate.diff",
+      "sha256": "aef9e5772c4db87314051b1e4cb85033405e272e645bdab216f8ece4e7a53ae8",
+      "bytes": 2816
+    },
+    {
+      "path": "proposals/iter-2/candidate/cart.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-2/candidate/cart.html",
+      "sha256": "a56e87f0003237fccf5e071ee0afa88202b2cf4d5bd22c5c25dcefd4c8a7fd85",
+      "bytes": 387
+    },
+    {
+      "path": "proposals/iter-2/candidate/options.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-2/candidate/options.html",
+      "sha256": "4a463aa30b6e303763f800448403708843d73565a3a828178a179e1e22166a8c",
+      "bytes": 702
+    },
+    {
+      "path": "proposals/iter-2/candidate/product.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-2/candidate/product.html",
+      "sha256": "581740ceccb22ed936eb236603ba5b10871518230906c369b4ef2a3966db6f2f",
+      "bytes": 609
+    },
+    {
+      "path": "proposals/iter-2/candidate/review.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-2/candidate/review.html",
+      "sha256": "f34294204096b8ea9bc4ef4cc2c0b1b17fa64a102029c3c8bac6d83ffbdb0410",
+      "bytes": 429
+    },
+    {
+      "path": "proposals/iter-2/candidate/style.css",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-2/candidate/style.css",
+      "sha256": "afe6de4ec149a3422190562ace6eb120d6c6a9b33e09415841f6aa034a03bd43",
+      "bytes": 3951
+    },
+    {
+      "path": "proposals/iter-2/feedback-continuity.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-2/feedback-continuity.json",
+      "sha256": "8cb5486eb90555ee727fda2cd5e2c6515af72746ebf4f08b508a24de376baa9e",
+      "bytes": 383
+    },
+    {
+      "path": "proposals/iter-2/gateway-summary.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-2/gateway-summary.json",
+      "sha256": "9d4f8f393200a697cdd2ef6a8200a03475a5fc7f7c541579be2662b72f1907c1",
+      "bytes": 9521
+    },
+    {
+      "path": "proposals/iter-2/gateway/calls/request-1/request.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-2/gateway/calls/request-1/request.json",
+      "sha256": "dd6eacdb2a369775ff07d99569d11cc65bc2e5768375d074aeaa5283d965566f",
+      "bytes": 58285
+    },
+    {
+      "path": "proposals/iter-2/gateway/calls/request-1/result.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-2/gateway/calls/request-1/result.json",
+      "sha256": "95f3c6e2aaa7b17ab005792e688447744ad2310172c28ebf383b030c53ef86c2",
+      "bytes": 773
+    },
+    {
+      "path": "proposals/iter-2/image-manifest.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-2/image-manifest.json",
+      "sha256": "2c9a7605cc9b952d37d5331fc5b3779f1095a156f37a28a1ae8e94e950386f28",
+      "bytes": 699
+    },
+    {
+      "path": "proposals/iter-2/launch-prompt.txt",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-2/launch-prompt.txt",
+      "sha256": "01be3d888eda0b3ac624535052788cde1e8bf9e4d4e37d60084e77a72ad9fec5",
+      "bytes": 201
+    },
+    {
+      "path": "proposals/iter-2/optimizer-context.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-2/optimizer-context.json",
+      "sha256": "35054a7c412cb0a969d9733c8f9cd79c4eb8730409e33d9e4632b1c9072f75d4",
+      "bytes": 53112
+    },
+    {
+      "path": "proposals/iter-2/optimizer-note.md",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-2/optimizer-note.md",
+      "sha256": "fe2775dabc0e9116acd11d0f7b5072b0195979a8bee6eb21bb1e00f6b51a2482",
+      "bytes": 2881
+    },
+    {
+      "path": "proposals/iter-2/previews/preview-1/preview.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-2/previews/preview-1/preview.json",
+      "sha256": "d7bbb997a57e0ca88d5851d35aa6c34a0658cfa74ab36f70f8972c38de564724",
+      "bytes": 1300
+    },
+    {
+      "path": "proposals/iter-2/prompt.txt",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-2/prompt.txt",
+      "sha256": "291f14439bd4f94cbb493648f0b509b2bf6094ca4dcd64bc5115704c09e49973",
+      "bytes": 42666
+    },
+    {
+      "path": "proposals/iter-2/result.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-2/result.json",
+      "sha256": "906be03d4fc15580334b129b8612fb8f560dd0c1cce13ea1dad2183a29cd61fe",
+      "bytes": 10514
+    },
+    {
+      "path": "proposals/iter-2/runtime/runtime-receipt.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-2/runtime/runtime-receipt.json",
+      "sha256": "1e5f95b9691a15b85d42c2d99d010e7b94448aac80313ba0de56132dc2e04c84",
+      "bytes": 888
+    },
+    {
+      "path": "proposals/iter-2/session.jsonl",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-2/session.jsonl",
+      "sha256": "3f9173b2605f0fd1ef6fb9d070f9e1b97f3acb32001c29fa83fff6e8e2928126",
+      "bytes": 517754
+    },
+    {
+      "path": "proposals/iter-2/tool-events.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-2/tool-events.json",
+      "sha256": "91d5afb04e9f2d8bf1a16d796a7df0ef4ae014d80d8453eef9e7c58df21fbcec",
+      "bytes": 85211
+    },
+    {
+      "path": "proposals/iter-3/acceptance.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-3/acceptance.json",
+      "sha256": "78481dbf45f94b0c0645069070fc39b8ca55e07df9749bc329ab86500b57a380",
+      "bytes": 1141
+    },
+    {
+      "path": "proposals/iter-3/agent-result.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-3/agent-result.json",
+      "sha256": "f1a185b8682dc64c2ad7a5eb7f1ec3e56fa956ab2d3117bf8df9c88a8cc8ab94",
+      "bytes": 129
+    },
+    {
+      "path": "proposals/iter-3/candidate.diff",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-3/candidate.diff",
+      "sha256": "d4e2f00b4215b462f0f67b7be527cc229ce4ca69f26fdc42c026baa0878f9b56",
+      "bytes": 5031
+    },
+    {
+      "path": "proposals/iter-3/candidate/cart.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-3/candidate/cart.html",
+      "sha256": "d3d399983ea5edc996061cca4e9f1999264ead41a176f17348839534cec8f333",
+      "bytes": 524
+    },
+    {
+      "path": "proposals/iter-3/candidate/options.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-3/candidate/options.html",
+      "sha256": "f553da816a09666b15bc4ae42953e82da6a30650532d41154e2c30113c183fc2",
+      "bytes": 696
+    },
+    {
+      "path": "proposals/iter-3/candidate/product.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-3/candidate/product.html",
+      "sha256": "2f7571e8093410074fd07a7af594f27d9061be1e09168a517c47afb23a938b46",
+      "bytes": 746
+    },
+    {
+      "path": "proposals/iter-3/candidate/review.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-3/candidate/review.html",
+      "sha256": "f34294204096b8ea9bc4ef4cc2c0b1b17fa64a102029c3c8bac6d83ffbdb0410",
+      "bytes": 429
+    },
+    {
+      "path": "proposals/iter-3/candidate/style.css",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-3/candidate/style.css",
+      "sha256": "fa441388153309c0258e9f8425da62373ae492e825772d887cfd0a6243be1371",
+      "bytes": 3910
+    },
+    {
+      "path": "proposals/iter-3/feedback-continuity.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-3/feedback-continuity.json",
+      "sha256": "8292c98922432477e003c185f7d83236c1fe40a0f16a38e595592389c19e41ba",
+      "bytes": 560
+    },
+    {
+      "path": "proposals/iter-3/gateway-summary.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-3/gateway-summary.json",
+      "sha256": "b098b4e26ea89abaece816b78cbad9e2b1fb0fc8eaf89d13ba516fe1ede0ab13",
+      "bytes": 10436
+    },
+    {
+      "path": "proposals/iter-3/gateway/calls/request-1/request.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-3/gateway/calls/request-1/request.json",
+      "sha256": "b82abf20c9a9e2ded7d08a9275695dda3b66d8f36d400e567c25528ceb90c313",
+      "bytes": 124085
+    },
+    {
+      "path": "proposals/iter-3/gateway/calls/request-1/result.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-3/gateway/calls/request-1/result.json",
+      "sha256": "2bfbd61be1a649a8428ca7fc657af3d8033445e48cbbdc8ab1c63ffe28ecaea7",
+      "bytes": 771
+    },
+    {
+      "path": "proposals/iter-3/image-manifest.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-3/image-manifest.json",
+      "sha256": "2c725bda0a4b388f4449bdf0c6967d90e4a52a50c0b72fc2bfc8ee1f82db0745",
+      "bytes": 1410
+    },
+    {
+      "path": "proposals/iter-3/launch-prompt.txt",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-3/launch-prompt.txt",
+      "sha256": "01be3d888eda0b3ac624535052788cde1e8bf9e4d4e37d60084e77a72ad9fec5",
+      "bytes": 201
+    },
+    {
+      "path": "proposals/iter-3/optimizer-context.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-3/optimizer-context.json",
+      "sha256": "85885b1fc0a9fdce950546c15ced3c76eb951a3e93518ab486c7ccda732b0d9e",
+      "bytes": 154189
+    },
+    {
+      "path": "proposals/iter-3/optimizer-note.md",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-3/optimizer-note.md",
+      "sha256": "12af81a8382d5521b5b3ab21ace5eca2c68484e392d185ca8c4461aacb761b13",
+      "bytes": 3108
+    },
+    {
+      "path": "proposals/iter-3/previews/preview-1/preview.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-3/previews/preview-1/preview.json",
+      "sha256": "059a6e5260c16b97e96c5dd1ee3040d3ba858228772805cf66f93522086604db",
+      "bytes": 1301
+    },
+    {
+      "path": "proposals/iter-3/prompt.txt",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-3/prompt.txt",
+      "sha256": "9fdb7f2cf62b560cadf6fd512eabc5efed1733b8238c901455f409bf5ecc90fc",
+      "bytes": 102469
+    },
+    {
+      "path": "proposals/iter-3/result.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-3/result.json",
+      "sha256": "39ec21fe12ac3cd94ab4062c89ae4ec4dae9321f07280355d621c583c21c7bd0",
+      "bytes": 11499
+    },
+    {
+      "path": "proposals/iter-3/runtime/runtime-receipt.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-3/runtime/runtime-receipt.json",
+      "sha256": "51f3645b4bf773edf00803e74518093f0c82813b884c71a6d80bb75fec033c4e",
+      "bytes": 888
+    },
+    {
+      "path": "proposals/iter-3/session.jsonl",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-3/session.jsonl",
+      "sha256": "21a3f6b37ef2348d6a9d53ea1607ac9731bcd97de5bcb37ef9dced3f4c329c3c",
+      "bytes": 487641
+    },
+    {
+      "path": "proposals/iter-3/tool-events.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-3/tool-events.json",
+      "sha256": "f116467f057b0f33f397683a442c8cca9a11f349e6177c997c15de9b780b3fc9",
+      "bytes": 39192
+    },
+    {
+      "path": "proposals/iter-4/acceptance.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-4/acceptance.json",
+      "sha256": "c6b61faee71cdf240b7b507a9d98c84bd6ca43434f6d3fdf354cdf89073712eb",
+      "bytes": 1141
+    },
+    {
+      "path": "proposals/iter-4/agent-result.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-4/agent-result.json",
+      "sha256": "7d4967149f172bbbe91eda4d66994271cd96ddcb1e0031dbb2011f9ac1dfb672",
+      "bytes": 129
+    },
+    {
+      "path": "proposals/iter-4/candidate.diff",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-4/candidate.diff",
+      "sha256": "3a942a1e390aec17a94b204df01133b93cd916f0f16f2d14b1aafb7f3b3e65f5",
+      "bytes": 2497
+    },
+    {
+      "path": "proposals/iter-4/candidate/cart.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-4/candidate/cart.html",
+      "sha256": "a56e87f0003237fccf5e071ee0afa88202b2cf4d5bd22c5c25dcefd4c8a7fd85",
+      "bytes": 387
+    },
+    {
+      "path": "proposals/iter-4/candidate/options.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-4/candidate/options.html",
+      "sha256": "ae39d9717abda22f600ae33b20ed4a88f2b4f86776f555f94e1c63d714af887c",
+      "bytes": 599
+    },
+    {
+      "path": "proposals/iter-4/candidate/product.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-4/candidate/product.html",
+      "sha256": "581740ceccb22ed936eb236603ba5b10871518230906c369b4ef2a3966db6f2f",
+      "bytes": 609
+    },
+    {
+      "path": "proposals/iter-4/candidate/review.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-4/candidate/review.html",
+      "sha256": "f34294204096b8ea9bc4ef4cc2c0b1b17fa64a102029c3c8bac6d83ffbdb0410",
+      "bytes": 429
+    },
+    {
+      "path": "proposals/iter-4/candidate/style.css",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-4/candidate/style.css",
+      "sha256": "040e5294c7f6291c601bdb75c1da9fd285133f4ecef9e6332634f962a087003c",
+      "bytes": 3752
+    },
+    {
+      "path": "proposals/iter-4/feedback-continuity.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-4/feedback-continuity.json",
+      "sha256": "74cd2b73ea919aefdf27670ae468c8306b26bfe4800796e7168a52415a5b79d0",
+      "bytes": 737
+    },
+    {
+      "path": "proposals/iter-4/gateway-summary.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-4/gateway-summary.json",
+      "sha256": "5cf7e87c3c5d7ab441179be576a0f5f9214ea140360c094ec9197f5f1e8c59d2",
+      "bytes": 8593
+    },
+    {
+      "path": "proposals/iter-4/gateway/calls/request-1/request.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-4/gateway/calls/request-1/request.json",
+      "sha256": "d3774ebe49c219daba9b322c4fd64af9a120a0d42fc7c39329dcab7d0a32faef",
+      "bytes": 191063
+    },
+    {
+      "path": "proposals/iter-4/gateway/calls/request-1/result.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-4/gateway/calls/request-1/result.json",
+      "sha256": "18d7a1a91709a4249dd01b8c24e1d7bc36c2d15d488daa7493b0f81706a6b1a1",
+      "bytes": 773
+    },
+    {
+      "path": "proposals/iter-4/image-manifest.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-4/image-manifest.json",
+      "sha256": "4a78cd91bb572f4d50428d1e01d91e60c8bfaa00f96307c592a4cccb8494e598",
+      "bytes": 1410
+    },
+    {
+      "path": "proposals/iter-4/launch-prompt.txt",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-4/launch-prompt.txt",
+      "sha256": "01be3d888eda0b3ac624535052788cde1e8bf9e4d4e37d60084e77a72ad9fec5",
+      "bytes": 201
+    },
+    {
+      "path": "proposals/iter-4/optimizer-context.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-4/optimizer-context.json",
+      "sha256": "7386bff24bec3a28bdef96216d97c2704152485f00814b65ac1a946908926b8c",
+      "bytes": 256408
+    },
+    {
+      "path": "proposals/iter-4/optimizer-note.md",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-4/optimizer-note.md",
+      "sha256": "d015c054e9e48a159ba0947c403b01353a25fdf66dea201b5dd3888f32db3698",
+      "bytes": 3359
+    },
+    {
+      "path": "proposals/iter-4/previews/preview-1/preview.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-4/previews/preview-1/preview.json",
+      "sha256": "31fb93e6236ddc277c030286e804cb3aa143c66c0f3aad5cbbda7f9871527c60",
+      "bytes": 1301
+    },
+    {
+      "path": "proposals/iter-4/prompt.txt",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-4/prompt.txt",
+      "sha256": "06aeff5c0b8d84f7fbaa2172fa3a938f7d14856f9c368f4beef475e25c2bad19",
+      "bytes": 163414
+    },
+    {
+      "path": "proposals/iter-4/result.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-4/result.json",
+      "sha256": "42cb7d08954476e684bb3cfade964e2909831ed940f5e2e3e5f175d0c1a014c8",
+      "bytes": 9516
+    },
+    {
+      "path": "proposals/iter-4/runtime/runtime-receipt.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-4/runtime/runtime-receipt.json",
+      "sha256": "04254f6bd1b975154420fd5c9cc3d50227e83d43e0a6604fd27428fb5fa53111",
+      "bytes": 888
+    },
+    {
+      "path": "proposals/iter-4/session.jsonl",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-4/session.jsonl",
+      "sha256": "9d3e8f43dbb32aeb32be56373c36ec6d9cef120b8f67254a86f6ae8a6d5da7da",
+      "bytes": 425107
+    },
+    {
+      "path": "proposals/iter-4/tool-events.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-4/tool-events.json",
+      "sha256": "c6ebbe8b15a0ecf8c5a683262dc17df9e2f036f179c88ff3bd06d7e25b813eea",
+      "bytes": 38063
+    },
+    {
+      "path": "proposals/iter-5/acceptance.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-5/acceptance.json",
+      "sha256": "bebd0cff8f0bc591fa86fed586e58d13efcf6510b94f14db2cf72accc9835615",
+      "bytes": 1141
+    },
+    {
+      "path": "proposals/iter-5/agent-result.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-5/agent-result.json",
+      "sha256": "0fa07158b051bab9a431099b458fc1756bdce1b08c472e3e3e0f006205de2a0f",
+      "bytes": 129
+    },
+    {
+      "path": "proposals/iter-5/candidate.diff",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-5/candidate.diff",
+      "sha256": "083efbbd0dc770ac0e925025a8668fa537bfde4525dcfdc5e6479a805be53493",
+      "bytes": 2920
+    },
+    {
+      "path": "proposals/iter-5/candidate/cart.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-5/candidate/cart.html",
+      "sha256": "a56e87f0003237fccf5e071ee0afa88202b2cf4d5bd22c5c25dcefd4c8a7fd85",
+      "bytes": 387
+    },
+    {
+      "path": "proposals/iter-5/candidate/options.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-5/candidate/options.html",
+      "sha256": "500ff7d005552a718ddc4543b3cb032b8677d34791e672ddac20df1ddb59e04b",
+      "bytes": 735
+    },
+    {
+      "path": "proposals/iter-5/candidate/product.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-5/candidate/product.html",
+      "sha256": "581740ceccb22ed936eb236603ba5b10871518230906c369b4ef2a3966db6f2f",
+      "bytes": 609
+    },
+    {
+      "path": "proposals/iter-5/candidate/review.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-5/candidate/review.html",
+      "sha256": "f34294204096b8ea9bc4ef4cc2c0b1b17fa64a102029c3c8bac6d83ffbdb0410",
+      "bytes": 429
+    },
+    {
+      "path": "proposals/iter-5/candidate/style.css",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-5/candidate/style.css",
+      "sha256": "e7bdb6f44f36d932a9c7ab9bf5ec6e934d63a268b888d0be1cf0b3ee26882fd1",
+      "bytes": 4038
+    },
+    {
+      "path": "proposals/iter-5/feedback-continuity.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-5/feedback-continuity.json",
+      "sha256": "8a0b2f1201750682a384ee1afe1ab8d0fec8df7d658af60031441ec157e43e7c",
+      "bytes": 914
+    },
+    {
+      "path": "proposals/iter-5/gateway-summary.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-5/gateway-summary.json",
+      "sha256": "1edcca76212c1f260a1ded39848a6d3424ce64cefa917a14be78844f889b4883",
+      "bytes": 8607
+    },
+    {
+      "path": "proposals/iter-5/gateway/calls/request-1/request.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-5/gateway/calls/request-1/request.json",
+      "sha256": "8f51066818d972dae45400e795c4e2b2b07d9f464ed7848af0fc31a865398f2e",
+      "bytes": 256904
+    },
+    {
+      "path": "proposals/iter-5/gateway/calls/request-1/result.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-5/gateway/calls/request-1/result.json",
+      "sha256": "733ee867eeedf5d4b5a6df5de2bf8d7187dd9186527aa6215d106defc24eb4f1",
+      "bytes": 773
+    },
+    {
+      "path": "proposals/iter-5/image-manifest.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-5/image-manifest.json",
+      "sha256": "3b742c9575bf1f5daf8766027d3469cc1ed66ecfd63ba170dc27fd2345ab6149",
+      "bytes": 1410
+    },
+    {
+      "path": "proposals/iter-5/launch-prompt.txt",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-5/launch-prompt.txt",
+      "sha256": "01be3d888eda0b3ac624535052788cde1e8bf9e4d4e37d60084e77a72ad9fec5",
+      "bytes": 201
+    },
+    {
+      "path": "proposals/iter-5/optimizer-context.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-5/optimizer-context.json",
+      "sha256": "611c454dadf48c30370c205e2764865b3daab67411b0890f08529f235575e783",
+      "bytes": 357553
+    },
+    {
+      "path": "proposals/iter-5/optimizer-note.md",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-5/optimizer-note.md",
+      "sha256": "ce0bc6e2d0cd802587e58d496e3a417d202ef971b3a9d02c547ef3985d625543",
+      "bytes": 3657
+    },
+    {
+      "path": "proposals/iter-5/previews/preview-1/preview.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-5/previews/preview-1/preview.json",
+      "sha256": "5cad66a7c4918ce0e3ae6f750e137ddd313af6946831d1f9b94dbc63c3069424",
+      "bytes": 1438
+    },
+    {
+      "path": "proposals/iter-5/prompt.txt",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-5/prompt.txt",
+      "sha256": "f262f4ccb1fde6eb06558106f5871de767401794554942815109cb12ead6b84b",
+      "bytes": 223285
+    },
+    {
+      "path": "proposals/iter-5/result.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-5/result.json",
+      "sha256": "bf05c5dc1471adfd8167901a62ca45128c244cf4947c6d73389d32bb53992660",
+      "bytes": 9530
+    },
+    {
+      "path": "proposals/iter-5/runtime/runtime-receipt.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-5/runtime/runtime-receipt.json",
+      "sha256": "e4bc53e70639d4fa64168ef18e34e050b1447881a35b5f7c06902db576efa5c3",
+      "bytes": 888
+    },
+    {
+      "path": "proposals/iter-5/session.jsonl",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-5/session.jsonl",
+      "sha256": "780d55e16787afedb93c961ad7d4c35267399841aa2549eb69c0d250b20b341b",
+      "bytes": 455915
+    },
+    {
+      "path": "proposals/iter-5/tool-events.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/proposals/iter-5/tool-events.json",
+      "sha256": "fbf45ebb9c30cdfb6f80c9a7d922a66f5c6f2eada7ce39c14a43b622e398f094",
+      "bytes": 33947
+    },
+    {
+      "path": "runtime.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/runtime.json",
+      "sha256": "8873a43c495a1b8b43f01de13edf28b8e3c9e8b8904f7793c675bf87eed0ad56",
+      "bytes": 1197
+    },
+    {
+      "path": "source/CONTRACT.md",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/tested-source/experiments/checkout/CONTRACT.md",
+      "sha256": "9f0fdb1e1da1b0ecd484648d9d174187aac8f7ca455a2ffe20f668e593bac4c0",
+      "bytes": 5018
+    },
+    {
+      "path": "source/catalogue.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/tested-source/experiments/checkout/catalogue.json",
+      "sha256": "e3f978e82e8359896d022642990cb9c562d567900600eab666d3be41e80c1c7f",
+      "bytes": 883
+    },
+    {
+      "path": "source/clean-candidate/cart.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/tested-source/experiments/checkout/candidate/cart.html",
+      "sha256": "a56e87f0003237fccf5e071ee0afa88202b2cf4d5bd22c5c25dcefd4c8a7fd85",
+      "bytes": 387
+    },
+    {
+      "path": "source/clean-candidate/options.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/tested-source/experiments/checkout/candidate/options.html",
+      "sha256": "eb743060534ee871f2cae60e35719628f03b4e902b0e385cfbdbc4bb7cba17ee",
+      "bytes": 502
+    },
+    {
+      "path": "source/clean-candidate/product.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/tested-source/experiments/checkout/candidate/product.html",
+      "sha256": "581740ceccb22ed936eb236603ba5b10871518230906c369b4ef2a3966db6f2f",
+      "bytes": 609
+    },
+    {
+      "path": "source/clean-candidate/review.html",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/tested-source/experiments/checkout/candidate/review.html",
+      "sha256": "f34294204096b8ea9bc4ef4cc2c0b1b17fa64a102029c3c8bac6d83ffbdb0410",
+      "bytes": 429
+    },
+    {
+      "path": "source/clean-candidate/style.css",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/tested-source/experiments/checkout/candidate/style.css",
+      "sha256": "d0472c28c9e46a6c3d3bf4f9171cc1a107af4a183d3557cc4b847f3509c43f57",
+      "bytes": 2788
+    },
+    {
+      "path": "source/opencode-longer-pilot.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/tested-source/experiments/checkout/opencode-longer-pilot.json",
+      "sha256": "6acebaaaedae08f866189589a8c7e022ed9dfaad0b27d88dc632b9d409951834",
+      "bytes": 590
+    },
+    {
+      "path": "source/opencode-longer.example.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/tested-source/experiments/checkout/opencode-longer.example.json",
+      "sha256": "af6975a95a3115852fedd74cb30f5f01cdad608bdf13ee4448b3ea05fd65a6d6",
+      "bytes": 404
+    },
+    {
+      "path": "source/opencode.example.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/tested-source/experiments/checkout/opencode.example.json",
+      "sha256": "0b19705b7d24406cfc706f3fec13ef7ddf897e3193f34fd0fc3589e62b90d43e",
+      "bytes": 404
+    },
+    {
+      "path": "source/task.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/tested-source/experiments/checkout/task.json",
+      "sha256": "bbcf3032807e26952f903c78de7c6481138f629874690193cc7807d294bd3fb6",
+      "bytes": 479
+    },
+    {
+      "path": "source/victim.example.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/tested-source/experiments/checkout/victim.example.json",
+      "sha256": "f9a2f1cf8e521fd49e244e92d10a02e874c283acaae9e74d2c83bdf33eef3206",
+      "bytes": 261
+    },
+    {
+      "path": "spending-plan.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/spending-plan.json",
+      "sha256": "ccef39d7a6fdb29550b553d2f5243ce7ad5abb64a588441d18b2f4a0e3316825",
+      "bytes": 1770
+    },
+    {
+      "path": "status.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/status.json",
+      "sha256": "21cf5f90af2297e3f0b3866cb70aa9f855a732af2c2e5253ca02b0b2a9508450",
+      "bytes": 10239
+    },
+    {
+      "path": "summary.json",
+      "source": "/workspace/webhelix-runs/checkout-opencode-longer-20261026-02/summary.json",
+      "sha256": "aa516378ec912a572c51f777753dd5e993130232f95f4bcdfd2c4070ca1acf7d",
+      "bytes": 7537
+    }
+  ]
+}

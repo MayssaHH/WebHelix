@@ -1,0 +1,1020 @@
+{
+  "episodes": [
+    {
+      "label": "clean-8aea3c8e/episode-0",
+      "started": 1793047932.1755984
+    },
+    {
+      "label": "clean-8aea3c8e/episode-1",
+      "started": 1793047947.7383854
+    },
+    {
+      "label": "clean-8aea3c8e/episode-2",
+      "started": 1793047961.2477672
+    },
+    {
+      "label": "identity-f4cac07c/episode-0",
+      "started": 1793047978.2987344
+    },
+    {
+      "label": "identity-f4cac07c/episode-1",
+      "started": 1793047994.0408332
+    },
+    {
+      "label": "identity-f4cac07c/episode-2",
+      "started": 1793048008.8302968
+    }
+  ],
+  "calls": [
+    {
+      "id": 0,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.910168",
+      "accounted_usd": "0.0505395",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793047883.549653,
+      "usage": {
+        "input_tokens": 9123,
+        "input_tokens_details": {
+          "cache_write_tokens": 9120,
+          "cached_tokens": 0
+        },
+        "output_tokens": 22,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 9145
+      }
+    },
+    {
+      "id": 1,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.910168",
+      "accounted_usd": "0.092587",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793047887.0614586,
+      "usage": {
+        "input_tokens": 16666,
+        "input_tokens_details": {
+          "cache_write_tokens": 7543,
+          "cached_tokens": 9120
+        },
+        "output_tokens": 56,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 16722
+      }
+    },
+    {
+      "id": 2,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.910168",
+      "accounted_usd": "0.0941655",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793047889.462472,
+      "usage": {
+        "input_tokens": 16773,
+        "input_tokens_details": {
+          "cache_write_tokens": 107,
+          "cached_tokens": 16663
+        },
+        "output_tokens": 116,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 16889
+      }
+    },
+    {
+      "id": 3,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.910168",
+      "accounted_usd": "0.1055285",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793047892.569217,
+      "usage": {
+        "input_tokens": 18671,
+        "input_tokens_details": {
+          "cache_write_tokens": 1898,
+          "cached_tokens": 16770
+        },
+        "output_tokens": 172,
+        "output_tokens_details": {
+          "reasoning_tokens": 71
+        },
+        "total_tokens": 18843
+      }
+    },
+    {
+      "id": 4,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.910168",
+      "accounted_usd": "0.1041645",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793047897.9220264,
+      "usage": {
+        "input_tokens": 18867,
+        "input_tokens_details": {
+          "cache_write_tokens": 196,
+          "cached_tokens": 18668
+        },
+        "output_tokens": 24,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 18891
+      }
+    },
+    {
+      "id": 5,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.910168",
+      "accounted_usd": "0.1090375",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793047910.3192327,
+      "usage": {
+        "input_tokens": 19300,
+        "input_tokens_details": {
+          "cache_write_tokens": 433,
+          "cached_tokens": 18864
+        },
+        "output_tokens": 175,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 19475
+      }
+    },
+    {
+      "id": 6,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.910168",
+      "accounted_usd": "0.132418",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793047913.7700076,
+      "usage": {
+        "input_tokens": 23632,
+        "input_tokens_details": {
+          "cache_write_tokens": 4332,
+          "cached_tokens": 19297
+        },
+        "output_tokens": 148,
+        "output_tokens_details": {
+          "reasoning_tokens": 16
+        },
+        "total_tokens": 23780
+      }
+    },
+    {
+      "id": 7,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.910168",
+      "accounted_usd": "0.1552925",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793047916.3355243,
+      "usage": {
+        "input_tokens": 27164,
+        "input_tokens_details": {
+          "cache_write_tokens": 3532,
+          "cached_tokens": 23629
+        },
+        "output_tokens": 357,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 27521
+      }
+    },
+    {
+      "id": 8,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.910168",
+      "accounted_usd": "0.1526635",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793047924.3256829,
+      "usage": {
+        "input_tokens": 27547,
+        "input_tokens_details": {
+          "cache_write_tokens": 383,
+          "cached_tokens": 27161
+        },
+        "output_tokens": 70,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 27617
+      }
+    },
+    {
+      "id": 9,
+      "role": "victim",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.808792",
+      "accounted_usd": "0.0086185",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 2048,
+      "status": "usage_reported",
+      "started": 1793047934.1441584,
+      "usage": {
+        "input_tokens": 1504,
+        "input_tokens_details": {
+          "cache_write_tokens": 1501,
+          "cached_tokens": 0
+        },
+        "output_tokens": 21,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1525
+      }
+    },
+    {
+      "id": 10,
+      "role": "victim",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.808792",
+      "accounted_usd": "0.0104225",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 2048,
+      "status": "usage_reported",
+      "started": 1793047937.0785596,
+      "usage": {
+        "input_tokens": 1832,
+        "input_tokens_details": {
+          "cache_write_tokens": 1829,
+          "cached_tokens": 0
+        },
+        "output_tokens": 21,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1853
+      }
+    },
+    {
+      "id": 11,
+      "role": "victim",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.808792",
+      "accounted_usd": "0.0136125",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 2048,
+      "status": "usage_reported",
+      "started": 1793047941.0984056,
+      "usage": {
+        "input_tokens": 2412,
+        "input_tokens_details": {
+          "cache_write_tokens": 2409,
+          "cached_tokens": 0
+        },
+        "output_tokens": 21,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2433
+      }
+    },
+    {
+      "id": 12,
+      "role": "victim",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.808792",
+      "accounted_usd": "0.0149545",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 2048,
+      "status": "usage_reported",
+      "started": 1793047944.3448439,
+      "usage": {
+        "input_tokens": 2656,
+        "input_tokens_details": {
+          "cache_write_tokens": 2653,
+          "cached_tokens": 0
+        },
+        "output_tokens": 21,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2677
+      }
+    },
+    {
+      "id": 13,
+      "role": "victim",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.808792",
+      "accounted_usd": "0.0086185",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 2048,
+      "status": "usage_reported",
+      "started": 1793047949.594935,
+      "usage": {
+        "input_tokens": 1504,
+        "input_tokens_details": {
+          "cache_write_tokens": 1501,
+          "cached_tokens": 0
+        },
+        "output_tokens": 21,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1525
+      }
+    },
+    {
+      "id": 14,
+      "role": "victim",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.808792",
+      "accounted_usd": "0.0104225",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 2048,
+      "status": "usage_reported",
+      "started": 1793047952.3788626,
+      "usage": {
+        "input_tokens": 1832,
+        "input_tokens_details": {
+          "cache_write_tokens": 1829,
+          "cached_tokens": 0
+        },
+        "output_tokens": 21,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1853
+      }
+    },
+    {
+      "id": 15,
+      "role": "victim",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.808792",
+      "accounted_usd": "0.0136125",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 2048,
+      "status": "usage_reported",
+      "started": 1793047955.179869,
+      "usage": {
+        "input_tokens": 2412,
+        "input_tokens_details": {
+          "cache_write_tokens": 2409,
+          "cached_tokens": 0
+        },
+        "output_tokens": 21,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2433
+      }
+    },
+    {
+      "id": 16,
+      "role": "victim",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.808792",
+      "accounted_usd": "0.0149545",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 2048,
+      "status": "usage_reported",
+      "started": 1793047958.0418344,
+      "usage": {
+        "input_tokens": 2656,
+        "input_tokens_details": {
+          "cache_write_tokens": 2653,
+          "cached_tokens": 0
+        },
+        "output_tokens": 21,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2677
+      }
+    },
+    {
+      "id": 17,
+      "role": "victim",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.808792",
+      "accounted_usd": "0.0086185",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 2048,
+      "status": "usage_reported",
+      "started": 1793047963.0450788,
+      "usage": {
+        "input_tokens": 1504,
+        "input_tokens_details": {
+          "cache_write_tokens": 1501,
+          "cached_tokens": 0
+        },
+        "output_tokens": 21,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1525
+      }
+    },
+    {
+      "id": 18,
+      "role": "victim",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.808792",
+      "accounted_usd": "0.0104225",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 2048,
+      "status": "usage_reported",
+      "started": 1793047965.6942794,
+      "usage": {
+        "input_tokens": 1832,
+        "input_tokens_details": {
+          "cache_write_tokens": 1829,
+          "cached_tokens": 0
+        },
+        "output_tokens": 21,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1853
+      }
+    },
+    {
+      "id": 19,
+      "role": "victim",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.808792",
+      "accounted_usd": "0.0136125",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 2048,
+      "status": "usage_reported",
+      "started": 1793047968.9644108,
+      "usage": {
+        "input_tokens": 2412,
+        "input_tokens_details": {
+          "cache_write_tokens": 2409,
+          "cached_tokens": 0
+        },
+        "output_tokens": 21,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2433
+      }
+    },
+    {
+      "id": 20,
+      "role": "victim",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.808792",
+      "accounted_usd": "0.0149545",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 2048,
+      "status": "usage_reported",
+      "started": 1793047972.0085218,
+      "usage": {
+        "input_tokens": 2656,
+        "input_tokens_details": {
+          "cache_write_tokens": 2653,
+          "cached_tokens": 0
+        },
+        "output_tokens": 21,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2677
+      }
+    },
+    {
+      "id": 21,
+      "role": "victim",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.808792",
+      "accounted_usd": "0.0086185",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 2048,
+      "status": "usage_reported",
+      "started": 1793047981.163017,
+      "usage": {
+        "input_tokens": 1504,
+        "input_tokens_details": {
+          "cache_write_tokens": 1501,
+          "cached_tokens": 0
+        },
+        "output_tokens": 21,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1525
+      }
+    },
+    {
+      "id": 22,
+      "role": "victim",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.808792",
+      "accounted_usd": "0.0104225",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 2048,
+      "status": "usage_reported",
+      "started": 1793047984.8080857,
+      "usage": {
+        "input_tokens": 1832,
+        "input_tokens_details": {
+          "cache_write_tokens": 1829,
+          "cached_tokens": 0
+        },
+        "output_tokens": 21,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1853
+      }
+    },
+    {
+      "id": 23,
+      "role": "victim",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.808792",
+      "accounted_usd": "0.0136125",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 2048,
+      "status": "usage_reported",
+      "started": 1793047988.1110506,
+      "usage": {
+        "input_tokens": 2412,
+        "input_tokens_details": {
+          "cache_write_tokens": 2409,
+          "cached_tokens": 0
+        },
+        "output_tokens": 21,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2433
+      }
+    },
+    {
+      "id": 24,
+      "role": "victim",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.808792",
+      "accounted_usd": "0.0149545",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 2048,
+      "status": "usage_reported",
+      "started": 1793047990.9785898,
+      "usage": {
+        "input_tokens": 2656,
+        "input_tokens_details": {
+          "cache_write_tokens": 2653,
+          "cached_tokens": 0
+        },
+        "output_tokens": 21,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2677
+      }
+    },
+    {
+      "id": 25,
+      "role": "victim",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.808792",
+      "accounted_usd": "0.0086185",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 2048,
+      "status": "usage_reported",
+      "started": 1793047996.1923008,
+      "usage": {
+        "input_tokens": 1504,
+        "input_tokens_details": {
+          "cache_write_tokens": 1501,
+          "cached_tokens": 0
+        },
+        "output_tokens": 21,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1525
+      }
+    },
+    {
+      "id": 26,
+      "role": "victim",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.808792",
+      "accounted_usd": "0.0104225",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 2048,
+      "status": "usage_reported",
+      "started": 1793047999.0277286,
+      "usage": {
+        "input_tokens": 1832,
+        "input_tokens_details": {
+          "cache_write_tokens": 1829,
+          "cached_tokens": 0
+        },
+        "output_tokens": 21,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1853
+      }
+    },
+    {
+      "id": 27,
+      "role": "victim",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.808792",
+      "accounted_usd": "0.0136125",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 2048,
+      "status": "usage_reported",
+      "started": 1793048002.328122,
+      "usage": {
+        "input_tokens": 2412,
+        "input_tokens_details": {
+          "cache_write_tokens": 2409,
+          "cached_tokens": 0
+        },
+        "output_tokens": 21,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2433
+      }
+    },
+    {
+      "id": 28,
+      "role": "victim",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.808792",
+      "accounted_usd": "0.0149545",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 2048,
+      "status": "usage_reported",
+      "started": 1793048005.1712282,
+      "usage": {
+        "input_tokens": 2656,
+        "input_tokens_details": {
+          "cache_write_tokens": 2653,
+          "cached_tokens": 0
+        },
+        "output_tokens": 21,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2677
+      }
+    },
+    {
+      "id": 29,
+      "role": "victim",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.808792",
+      "accounted_usd": "0.0086185",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 2048,
+      "status": "usage_reported",
+      "started": 1793048010.7292588,
+      "usage": {
+        "input_tokens": 1504,
+        "input_tokens_details": {
+          "cache_write_tokens": 1501,
+          "cached_tokens": 0
+        },
+        "output_tokens": 21,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1525
+      }
+    },
+    {
+      "id": 30,
+      "role": "victim",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.808792",
+      "accounted_usd": "0.0104225",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 2048,
+      "status": "usage_reported",
+      "started": 1793048013.6563485,
+      "usage": {
+        "input_tokens": 1832,
+        "input_tokens_details": {
+          "cache_write_tokens": 1829,
+          "cached_tokens": 0
+        },
+        "output_tokens": 21,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1853
+      }
+    },
+    {
+      "id": 31,
+      "role": "victim",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.808792",
+      "accounted_usd": "0.0136125",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 2048,
+      "status": "usage_reported",
+      "started": 1793048016.69342,
+      "usage": {
+        "input_tokens": 2412,
+        "input_tokens_details": {
+          "cache_write_tokens": 2409,
+          "cached_tokens": 0
+        },
+        "output_tokens": 21,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2433
+      }
+    },
+    {
+      "id": 32,
+      "role": "victim",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.808792",
+      "accounted_usd": "0.0149545",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 2048,
+      "status": "usage_reported",
+      "started": 1793048019.443164,
+      "usage": {
+        "input_tokens": 2656,
+        "input_tokens_details": {
+          "cache_write_tokens": 2653,
+          "cached_tokens": 0
+        },
+        "output_tokens": 21,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2677
+      }
+    },
+    {
+      "id": 33,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.910168",
+      "accounted_usd": "0.054868",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793048029.3971887,
+      "usage": {
+        "input_tokens": 9910,
+        "input_tokens_details": {
+          "cache_write_tokens": 9907,
+          "cached_tokens": 0
+        },
+        "output_tokens": 22,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 9932
+      }
+    },
+    {
+      "id": 34,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.910168",
+      "accounted_usd": "0.1010735",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793048031.0427346,
+      "usage": {
+        "input_tokens": 18314,
+        "input_tokens_details": {
+          "cache_write_tokens": 8404,
+          "cached_tokens": 9907
+        },
+        "output_tokens": 21,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 18335
+      }
+    },
+    {
+      "id": 35,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.910168",
+      "accounted_usd": "0.1026245",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793048032.891877,
+      "usage": {
+        "input_tokens": 18386,
+        "input_tokens_details": {
+          "cache_write_tokens": 72,
+          "cached_tokens": 18311
+        },
+        "output_tokens": 91,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 18477
+      }
+    },
+    {
+      "id": 36,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.910168",
+      "accounted_usd": "0.1158795",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793048044.7278795,
+      "usage": {
+        "input_tokens": 20238,
+        "input_tokens_details": {
+          "cache_write_tokens": 1852,
+          "cached_tokens": 18383
+        },
+        "output_tokens": 277,
+        "output_tokens_details": {
+          "reasoning_tokens": 76
+        },
+        "total_tokens": 20515
+      }
+    },
+    {
+      "id": 37,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.910168",
+      "accounted_usd": "0.141735",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793048051.2098646,
+      "usage": {
+        "input_tokens": 22746,
+        "input_tokens_details": {
+          "cache_write_tokens": 2508,
+          "cached_tokens": 20235
+        },
+        "output_tokens": 1008,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 23754
+      }
+    },
+    {
+      "id": 38,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.910168",
+      "accounted_usd": "0.1312135",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793048062.8316221,
+      "usage": {
+        "input_tokens": 23785,
+        "input_tokens_details": {
+          "cache_write_tokens": 1039,
+          "cached_tokens": 22743
+        },
+        "output_tokens": 24,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 23809
+      }
+    },
+    {
+      "id": 39,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.910168",
+      "accounted_usd": "0.135344",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793048074.020527,
+      "usage": {
+        "input_tokens": 24197,
+        "input_tokens_details": {
+          "cache_write_tokens": 412,
+          "cached_tokens": 23782
+        },
+        "output_tokens": 137,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 24334
+      }
+    },
+    {
+      "id": 40,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.910168",
+      "accounted_usd": "0.155111",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793048076.2621064,
+      "usage": {
+        "input_tokens": 27368,
+        "input_tokens_details": {
+          "cache_write_tokens": 3171,
+          "cached_tokens": 24194
+        },
+        "output_tokens": 278,
+        "output_tokens_details": {
+          "reasoning_tokens": 38
+        },
+        "total_tokens": 27646
+      }
+    },
+    {
+      "id": 41,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.910168",
+      "accounted_usd": "0.152581",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793048082.850105,
+      "usage": {
+        "input_tokens": 27670,
+        "input_tokens_details": {
+          "cache_write_tokens": 302,
+          "cached_tokens": 27365
+        },
+        "output_tokens": 24,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 27694
+      }
+    },
+    {
+      "id": 42,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "5.910168",
+      "accounted_usd": "0.158048",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793048095.279862,
+      "usage": {
+        "input_tokens": 28229,
+        "input_tokens_details": {
+          "cache_write_tokens": 396,
+          "cached_tokens": 27667
+        },
+        "output_tokens": 169,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 28398
+      }
+    }
+  ],
+  "max_real_episodes": 21
+}

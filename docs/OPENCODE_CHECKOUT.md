@@ -230,39 +230,53 @@ spending limit. The optimizer and victim have separate usage records within the
 combined ceiling. Deterministic previews consume time and compute but no model
 calls or victim-episode allowance.
 
-### Longer run prepared after the first real test
+### Executed longer run and note-completion correction
 
+The [longer real-model experiment](../examples/checkout/opencode-longer-real-20261026/README.md)
+used a newly approved **$30 combined local ceiling**. Its first research attempt
+stopped because the native ten-step OpenCode limit made tools unavailable before
+the optimizer wrote its required note. All provider requests succeeded; the dollar
+limit was not reached. That attempt remains recorded as **not evaluated**.
+
+The correction asks the optimizer to draft its hypothesis note before previewing
+and update it after revisions.
+[`opencode-longer.example.json`](../experiments/checkout/opencode-longer.example.json)
+allows up to **20 requests per optimizer session**, while
 [`opencode-longer-pilot.json`](../experiments/checkout/opencode-longer-pilot.json)
-keeps the same five research iterations, fresh clean/identity controls, 21 maximum
-victim episode starts, task, models and per-session limits. Its shared optimizer
-request allowance is **60**: ten for the harmless check plus ten for each of five
-research sessions. The historical 50-request pilot remains unchanged. Neither
-configuration guarantees completion; the dollar limit, provider failures or other
-caps can still stop a run.
+keeps the shared limit at **60 optimizer requests**, five research attempts and
+21 maximum victim episode starts. The historical configurations remain unchanged.
+The global limit can still stop sessions before their individual allowances.
 
-Select this variant by adding the following option to the real experiment command:
+A reviewed continuation preserved the original ledger, deadline, successful
+controls and failed-attempt feedback, then used native AutoHelix resume numbering
+to run iterations 2–5. It did not reset spending or repeat the controls. Those four
+candidates completed three real victim episodes each; all had zero steering and
+were rejected. Total use was **58 optimizer requests, 18 real victim episodes,
+and $14.6514115 in conservative local accounting**. Feedback continuity passed.
+The authorization covered this experiment only; these amounts are not a verified
+provider invoice or credit balance.
 
-```text
---pilot-config experiments/checkout/opencode-longer-pilot.json
+For a fresh experiment from the original page, prepare a new authorized spending
+plan and a unique output directory, then use:
+
+```bash
+source scripts/env.sh
+uv run --locked webhelix checkout experiment \
+  --optimizer-backend opencode \
+  --pilot-config experiments/checkout/opencode-longer-pilot.json \
+  --optimizer-config experiments/checkout/opencode-longer.example.json \
+  --victim-config experiments/checkout/victim.example.json \
+  --env-file .env \
+  --spending-plan .spending-plan.local.json \
+  --run-dir /workspace/webhelix-runs/checkout-opencode-fresh-UNIQUE
 ```
 
-For the next experiment, a **$30 combined local ceiling is proposed, not yet
-authorized**. The previous run's $10 allowance is not reused. At its stopping point,
-the ledger accounted for $4.364305 using reported tokens and conservative rates;
-the next $5.910168 full-context reservation would have exceeded $10. These figures
-are local accounting, not a verified charge or a provider credit balance.
-
-The proposed ceiling provides more room for growing feedback and multiple tool
-calls. It is a maximum rather than a predicted bill or a promise that all five
-iterations finish. A pending plan must keep `authorized_usd: null`; an informational
-`proposed_authorized_usd` value cannot enable paid execution. Increasing this local
-limit does not add OpenAI credits. The provider may still reject requests for lack
-of quota, and that error must remain visible in the run evidence.
-
-Use a new run directory and fresh baseline episodes. The previous experiment's
-files and ledger remain intact; this repeat does not silently seed its optimizer
-with old rejected candidates. New iterations do receive feedback from earlier
-iterations within their own run.
+This fresh command runs a new capability check and fresh clean/identity controls.
+It does not replay the archived one-off continuation, which verifies specific
+source hashes and historical counters. A pending spending plan must keep
+`authorized_usd: null`; a proposed amount does not enable paid execution. Raising
+WebHelix's local ceiling does not add OpenAI credits, and none of these settings
+guarantees five evaluated candidates or successful steering.
 
 ## Acceptance and feedback
 

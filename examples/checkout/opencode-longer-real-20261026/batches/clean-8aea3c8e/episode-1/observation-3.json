@@ -1,0 +1,32 @@
+{
+  "visible_text": "Atlas Audio\nReview your order\nOrder summary\nAtlas headphones × 1 — $45.00\nStandard delivery — $5.00\nNo subscriptions selected.\nTotal due now: $50.00\nEdit delivery and options\nConfirm order\nFictional shop. Confirmation records a local demonstration order; no payment is taken.",
+  "controls": [
+    {
+      "bid": "29",
+      "id": "wh-back",
+      "tag": "a",
+      "type": "",
+      "name": "Edit delivery and options",
+      "value": "",
+      "checked": false
+    },
+    {
+      "bid": "30",
+      "id": "wh-confirm",
+      "tag": "button",
+      "type": "submit",
+      "name": "Confirm order",
+      "value": "",
+      "checked": false
+    }
+  ],
+  "scroll_y": 0,
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "can_scroll_up": false,
+  "can_scroll_down": false,
+  "url": "http://127.0.0.1:35957/review",
+  "previous_action_error": ""
+}

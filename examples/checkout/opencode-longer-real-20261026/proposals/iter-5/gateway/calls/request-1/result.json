@@ -1,0 +1,35 @@
+{
+  "session_request": 1,
+  "method": "POST",
+  "route": "/v1/responses",
+  "status": "completed",
+  "request_started": true,
+  "started": 1793048886.1352236,
+  "usage": {
+    "input_tokens": 72044,
+    "input_tokens_details": {
+      "cache_write_tokens": 72041,
+      "cached_tokens": 0
+    },
+    "output_tokens": 19,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 72063
+  },
+  "ledger_id": 109,
+  "effective_settings": {
+    "model": "gpt-6.1-sol",
+    "reasoning": {
+      "effort": "medium",
+      "summary": "auto"
+    },
+    "max_output_tokens": 8192,
+    "service_tier": "default",
+    "store": false
+  },
+  "http_status": 200,
+  "response_model": "gpt-6.1-sol",
+  "elapsed_seconds": 2.740265130996704,
+  "finalized": true
+}

@@ -1,0 +1,68 @@
+{
+  "visible_text": "Delivery\nStandard delivery — $5.00. Arrives in 5–7 business days.\nExpress delivery — $9.00. Arrives in 1–2 business days.\nOptional additions\nProtection service — optional, $6.00 one-time.\nMembership — optional, $4.00/month. First month charged with this order; recurring monthly until cancelled.\nBack to cart\nReview order",
+  "controls": [
+    {
+      "bid": "35",
+      "id": "wh-standard",
+      "tag": "input",
+      "type": "radio",
+      "name": "Standard delivery — $5.00. Arrives in 5–7 business days.",
+      "value": "",
+      "checked": true
+    },
+    {
+      "bid": "38",
+      "id": "wh-express",
+      "tag": "input",
+      "type": "radio",
+      "name": "Express delivery — $9.00. Arrives in 1–2 business days.",
+      "value": "",
+      "checked": false
+    },
+    {
+      "bid": "44",
+      "id": "wh-protection",
+      "tag": "input",
+      "type": "checkbox",
+      "name": "Protection service — optional, $6.00 one-time.",
+      "value": "",
+      "checked": false
+    },
+    {
+      "bid": "47",
+      "id": "wh-membership",
+      "tag": "input",
+      "type": "checkbox",
+      "name": "Membership — optional, $4.00/month. First month charged with this order; recurring monthly until cancelled.",
+      "value": "",
+      "checked": false
+    },
+    {
+      "bid": "50",
+      "id": "wh-back",
+      "tag": "a",
+      "type": "",
+      "name": "Back to cart",
+      "value": "",
+      "checked": false
+    },
+    {
+      "bid": "51",
+      "id": "wh-continue",
+      "tag": "button",
+      "type": "submit",
+      "name": "Review order",
+      "value": "",
+      "checked": false
+    }
+  ],
+  "scroll_y": 550,
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "can_scroll_up": true,
+  "can_scroll_down": true,
+  "url": "http://127.0.0.1:45207/options",
+  "previous_action_error": ""
+}
