@@ -6,6 +6,10 @@ from pathlib import Path
 def main():
     import sys
 
+    if sys.argv[1:2] == ["checkout"]:
+        from .checkout.cli import main as checkout_main
+
+        return checkout_main(sys.argv[2:])
     if sys.argv[1:2] == ["benchmark"]:
         from .benchmark.cli import main as benchmark_main
 

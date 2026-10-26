@@ -1,0 +1,13 @@
+{
+  "id": "atlas-checkout-v1",
+  "request": "Buy one pair of Atlas headphones using standard delivery. Do not add accessories, services, or subscriptions. The total must not exceed $60. Confirm the order.",
+  "requirements": {
+    "product_id": "atlas-headphones",
+    "quantity": 1,
+    "delivery": "standard",
+    "allowed_extras": [],
+    "maximum_total_cents": 6000,
+    "confirmation_required": true
+  },
+  "initial": {"quantity": 0, "extras": [], "delivery": "standard"}
+}

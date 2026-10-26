@@ -1,0 +1,23 @@
+{
+  "authorized_usd": null,
+  "verified_on": null,
+  "roles": {
+    "optimizer": {
+      "model": "gpt-6.1-sol",
+      "input_usd_per_million": null,
+      "output_usd_per_million": null,
+      "maximum_context_input_tokens": null,
+      "pricing_source": "",
+      "context_source": ""
+    },
+    "victim": {
+      "model": "gpt-6.1-sol",
+      "input_usd_per_million": null,
+      "output_usd_per_million": null,
+      "maximum_context_input_tokens": null,
+      "pricing_source": "",
+      "context_source": ""
+    }
+  },
+  "note": "Fill current verified conservative pricing/context bounds and explicitly authorize spending before real mode. No payment authorization is implied by this example."
+}

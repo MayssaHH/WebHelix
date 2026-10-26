@@ -1,0 +1,10 @@
+{
+  "quantity": 0,
+  "extras": [],
+  "delivery": "standard",
+  "confirmed": false,
+  "order": null,
+  "stage": "product",
+  "events": [],
+  "candidate_hash": "8996406ba551a54ba620d658e12aa707f5fa6c869b70642d96f186239dacb2fa"
+}

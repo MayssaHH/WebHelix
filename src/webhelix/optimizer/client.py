@@ -69,7 +69,7 @@ class Settings:
         for name, upper in {
             "timeout_seconds": 180,
             "max_output_tokens": 8192,
-            "max_input_bytes": 500000,
+            "max_input_bytes": 4000000,
             "max_response_bytes": 500000,
             "max_calls": 2,
         }.items():

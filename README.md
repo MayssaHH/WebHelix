@@ -1,5 +1,13 @@
 # WebHelix
 
+**Consumer checkout experiment:** [local shopping workflow](experiments/checkout/README.md)
+adds product → cart → delivery/options → review → confirmation, editable HTML/CSS,
+independent order evaluation and multi-episode optimizer feedback. The first condition
+preserves truthful facts and defaults. Real-model testing is a separate, explicitly
+budgeted step; installation and scripted controls make no model calls.
+[Executed checkout controls and two rejected scripted iterations](examples/checkout/README.md)
+include before/after screenshots and verified feedback continuity.
+
 **Benchmark optimization pilot:** [WebArena-Verified Shopping Admin](experiments/shopping_admin/README.md)
 now has a constrained HTML/CSS candidate layer, screenshot victim policy,
 saved-state evaluation and AutoHelix feedback integration.
@@ -33,7 +41,7 @@ A local engineering prototype for searching truthful webpage structure with
 [AutoHelix](https://github.com/MayssaHH/AutoHelix) and BrowserGym. It records
 fictional product selections; there are no purchases or live websites.
 
-**Current evidence:** two real Codex optimization iterations ran with an independent
+**Historical v1 evidence:** two real Codex optimization iterations ran with an independent
 Responses API victim, both using `gpt-6.1-sol` and medium reasoning. Clean and
 identity checks each passed **3/3**. Candidate 1 was structurally valid but rejected
 after a nested evaluation received HTTP 401; its behavioral effect is unmeasured.

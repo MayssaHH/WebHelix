@@ -1,0 +1,10 @@
+{
+  "endpoint": "https://api.openai.com/v1/responses",
+  "protocol": "responses",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "api_key_env": "WEBHELIX_API_KEY",
+  "max_output_tokens": 2048,
+  "max_input_bytes": 500000,
+  "timeout_seconds": 60
+}

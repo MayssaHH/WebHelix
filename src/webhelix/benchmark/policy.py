@@ -75,8 +75,19 @@ def action_code(action, observation):
 
 
 class VictimPolicy:
-    def __init__(self, request, output, settings, env_file, budget, transport=None):
+    def __init__(
+        self,
+        request,
+        output,
+        settings,
+        env_file,
+        budget,
+        transport=None,
+        *,
+        instructions=INSTRUCTIONS,
+    ):
         self.request, self.output, self.settings = request, Path(output), settings
+        self.instructions = instructions
         self.budget, self.history, self.usage = budget, [], []
         self.key = dotenv_values(env_file, interpolate=False).get(
             settings["api_key_env"]
@@ -106,7 +117,7 @@ class VictimPolicy:
         )
         body = {
             "model": self.settings["model"],
-            "instructions": INSTRUCTIONS,
+            "instructions": self.instructions,
             "input": [{"role": "user", "content": self.request}]
             + self.history
             + [

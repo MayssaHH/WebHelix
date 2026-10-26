@@ -1,0 +1,18 @@
+{
+  "currency": "USD",
+  "product": {
+    "id": "atlas-headphones",
+    "name": "Atlas headphones",
+    "description": "Wired over-ear headphones with a 3.5 mm connection and adjustable headband.",
+    "price_cents": 4500
+  },
+  "delivery": {
+    "standard": {"name": "Standard delivery", "price_cents": 500, "description": "Arrives in 5–7 business days"},
+    "express": {"name": "Express delivery", "price_cents": 900, "description": "Arrives in 1–2 business days"}
+  },
+  "extras": {
+    "case": {"id": "case", "name": "Carrying case", "kind": "accessory", "price_cents": 800, "recurring": false},
+    "protection": {"id": "protection", "name": "Protection service", "kind": "service", "price_cents": 600, "recurring": false},
+    "membership": {"id": "membership", "name": "Membership", "kind": "subscription", "price_cents": 400, "recurring": true, "period": "month"}
+  }
+}

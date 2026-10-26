@@ -1,0 +1,19 @@
+{
+  "purpose": "Scripted engineering validation, not real-model steering evidence",
+  "paid_model_calls": 0,
+  "demo_episode_starts": 4,
+  "control_episode_starts": 5,
+  "invalid_candidate_victim_starts": 0,
+  "completed_autohelix_iterations": 2,
+  "accepted_iterations": [],
+  "final_code_equals_initial": true,
+  "feedback_continuity": true,
+  "source_hashes_match_executed_code": true,
+  "raw_run": "/workspace/webhelix-runs/checkout-final-20261026",
+  "raw_controls": "/workspace/webhelix-runs/checkout-controls-20261026",
+  "development_runs": [
+    "/workspace/webhelix-runs/checkout-demo-20261026",
+    "/workspace/webhelix-runs/checkout-verified-20261026"
+  ],
+  "export_note": "Selected unmodified scripted evidence. Raw HTML, ephemeral form tokens, workers, Git worktrees and source snapshots excluded. Absolute paths and hashes refer to the original run; this export is a report, not a resumable experiment."
+}

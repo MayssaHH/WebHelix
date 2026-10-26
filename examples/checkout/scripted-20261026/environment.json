@@ -1,0 +1,20 @@
+{
+  "python": "3.12.14",
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+  "dependencies": {
+    "autohelix": "0.1.1",
+    "browsergym-core": "0.14.3",
+    "playwright": "1.44.0",
+    "httpx": "0.28.1",
+    "beautifulsoup4": "4.15.0",
+    "tinycss2": "1.4.0"
+  },
+  "autohelix_revision": "132fa0454963361fac669f35011b16f4263493c2",
+  "branch": "feature/consumer-checkout",
+  "base_commit": "e60b326906564fc19c0110fb1629d034aff37367",
+  "commands": [
+    "PLAYWRIGHT_BROWSERS_PATH=/workspace/.cache/ms-playwright .venv/bin/python -m webhelix.checkout.cli controls --run-dir /workspace/webhelix-runs/checkout-controls-20261026",
+    "PLAYWRIGHT_BROWSERS_PATH=/workspace/.cache/ms-playwright .venv/bin/python -m webhelix.checkout.cli demo --run-dir /workspace/webhelix-runs/checkout-final-20261026"
+  ],
+  "paid_model_calls": 0
+}

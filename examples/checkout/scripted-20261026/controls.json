@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "model_calls": 0,
+  "reports": {
+    "clean": "/workspace/webhelix-runs/checkout-controls-20261026/batches/clean-769ab987",
+    "deliberate-extra": "/workspace/webhelix-runs/checkout-controls-20261026/batches/deliberate-extra-453714ca",
+    "fresh-after-extra": "/workspace/webhelix-runs/checkout-controls-20261026/batches/fresh-after-extra-317a71b2",
+    "remove-extra": "/workspace/webhelix-runs/checkout-controls-20261026/batches/remove-extra-b6829371",
+    "stop": "/workspace/webhelix-runs/checkout-controls-20261026/batches/stop-085e3d8d"
+  },
+  "invalid_rejected_before_victim": true,
+  "fresh_state_after_wrong_order": true,
+  "note": "Scripted policies intentionally choose actions; no learned manipulation or LLM susceptibility measured."
+}

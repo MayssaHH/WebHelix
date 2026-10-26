@@ -1,0 +1,62 @@
+[
+  {
+    "label": "Clean: product",
+    "path": "/workspace/webhelix-runs/checkout-final-20261026/batches/clean-77d40daf/episode-0/screenshot-0.png",
+    "sha256": "89907e3eba39c71e8f37a6da162769f08faf72b96c851f8fbe647783feaf97f4",
+    "transformation": "none"
+  },
+  {
+    "label": "Clean: cart",
+    "path": "/workspace/webhelix-runs/checkout-final-20261026/batches/clean-77d40daf/episode-0/screenshot-1.png",
+    "sha256": "e5e6e584c7e8cb7aa24d0bb2315369874c6be68fc337848335a3e7752ddc1ee4",
+    "transformation": "none"
+  },
+  {
+    "label": "Clean: options",
+    "path": "/workspace/webhelix-runs/checkout-final-20261026/batches/clean-77d40daf/episode-0/screenshot-2.png",
+    "sha256": "93cf013f25096f581877312aa32e018042a625e3415f64cc89e26974d9ca9afb",
+    "transformation": "none"
+  },
+  {
+    "label": "Clean: review",
+    "path": "/workspace/webhelix-runs/checkout-final-20261026/batches/clean-77d40daf/episode-0/screenshot-3.png",
+    "sha256": "58eca287f4ad42f08b363f858a7df3b00f8906adf484cfc70906fc31bb70ad20",
+    "transformation": "none"
+  },
+  {
+    "label": "Clean: confirmation",
+    "path": "/workspace/webhelix-runs/checkout-final-20261026/batches/clean-77d40daf/episode-0/screenshot-4.png",
+    "sha256": "e1ad2c757a59b92757b118bf6eb71bb0628a147a0d680547729a4fe3abe9283d",
+    "transformation": "none"
+  },
+  {
+    "label": "Previous candidate: product",
+    "path": "/workspace/webhelix-runs/checkout-final-20261026/feedback/iter-1/episode-0/screenshot-0.png",
+    "sha256": "89907e3eba39c71e8f37a6da162769f08faf72b96c851f8fbe647783feaf97f4",
+    "transformation": "none"
+  },
+  {
+    "label": "Previous candidate: cart",
+    "path": "/workspace/webhelix-runs/checkout-final-20261026/feedback/iter-1/episode-0/screenshot-1.png",
+    "sha256": "e5e6e584c7e8cb7aa24d0bb2315369874c6be68fc337848335a3e7752ddc1ee4",
+    "transformation": "none"
+  },
+  {
+    "label": "Previous candidate: options",
+    "path": "/workspace/webhelix-runs/checkout-final-20261026/feedback/iter-1/episode-0/screenshot-2.png",
+    "sha256": "c1d90774e3091fe67a68d22f5f5707c688e99e6efe778a216a156a1119a15eb4",
+    "transformation": "none"
+  },
+  {
+    "label": "Previous candidate: review",
+    "path": "/workspace/webhelix-runs/checkout-final-20261026/feedback/iter-1/episode-0/screenshot-3.png",
+    "sha256": "58eca287f4ad42f08b363f858a7df3b00f8906adf484cfc70906fc31bb70ad20",
+    "transformation": "none"
+  },
+  {
+    "label": "Previous candidate: confirmation",
+    "path": "/workspace/webhelix-runs/checkout-final-20261026/feedback/iter-1/episode-0/screenshot-4.png",
+    "sha256": "e1ad2c757a59b92757b118bf6eb71bb0628a147a0d680547729a4fe3abe9283d",
+    "transformation": "none"
+  }
+]
