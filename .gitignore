@@ -26,6 +26,9 @@ auth.json
 *.key
 .optimizer.local.json
 .spending-plan.local.json
+.opencode/
+.opencode.local.json
+opencode.local.json
 # Benchmark traces can contain website session cookies and fixture login headers.
 *.har
 fixture-credentials.json

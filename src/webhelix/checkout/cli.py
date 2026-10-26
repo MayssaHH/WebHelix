@@ -10,6 +10,63 @@ import time
 from .contract import FIXTURES, load, read, save, validate
 
 
+def _pilot_settings(path, *, scripted):
+    """Allow bounded run settings, not changes to the task or acceptance logic."""
+    settings = read(path)
+    expected = set(read(FIXTURES / "pilot.json"))
+    if not isinstance(settings, dict) or set(settings) != expected:
+        raise ValueError(
+            "Pilot configuration must contain only the documented run settings"
+        )
+    settings = copy.deepcopy(settings)
+    if settings["condition"] != "truthful":
+        raise ValueError("This checkout repeat preserves the truthful condition")
+    for field, upper in {
+        "iterations": 10,
+        "max_optimizer_calls": 200,
+        "max_real_episodes": 36,
+        "max_actions": 24,
+        "episode_timeout_seconds": 480,
+        "worker_grace_seconds": 30,
+        "run_timeout_seconds": 7200,
+    }.items():
+        value = settings[field]
+        if type(value) is not int or not 1 <= value <= upper:
+            raise ValueError(f"{field} must be an integer in 1..{upper}")
+    episodes = settings["episodes_per_condition"]
+    if type(episodes) is not int or episodes not in ((1, 3) if scripted else (3,)):
+        raise ValueError("Real conditions require three fresh episodes")
+    expected_episodes = (settings["iterations"] + 2) * episodes
+    if settings["max_real_episodes"] < expected_episodes:
+        raise ValueError(
+            "Episode allowance must include clean, identity and all candidates"
+        )
+    if settings["viewport"] != {"width": 1280, "height": 720}:
+        raise ValueError("This repeat preserves the 1280 by 720 victim viewport")
+    return settings
+
+
+def _offline_plan(optimizer, victim):
+    """Synthetic accounting only: this is never accepted for real execution."""
+    role = {
+        "input_usd_per_million": 0.001,
+        "output_usd_per_million": 0.001,
+        "maximum_context_input_tokens": 1050000,
+        "pricing_source": "offline fixture; no upstream requests or monetary charge",
+        "context_source": "offline fixture transport limit, not a model-access claim",
+    }
+    return {
+        "offline_fixture": True,
+        "authorized_usd": 10,
+        "verified_on": "offline-fixture",
+        "note": "Synthetic ledger exercise. This file does not authorize paid calls.",
+        "roles": {
+            "optimizer": {**role, "model": optimizer.model},
+            "victim": {**role, "model": victim["model"]},
+        },
+    }
+
+
 def initialize(
     run,
     *,
@@ -18,6 +75,8 @@ def initialize(
     spending_plan=None,
     optimizer_config=None,
     victim_config=None,
+    optimizer_backend="proposal-api",
+    pilot_config=None,
 ):
     """Prepare a new, non-overwriting experiment; never infer paid authorization."""
     from webhelix.optimizer.client import Settings
@@ -26,17 +85,40 @@ def initialize(
     run = Path(run).resolve()
     if run.exists():
         raise ValueError("Run directory already exists; choose a new directory")
-    settings = copy.deepcopy(read(FIXTURES / "pilot.json"))
+    if optimizer_backend not in {"proposal-api", "opencode"}:
+        raise ValueError("Select the proposal-api or opencode optimizer backend")
+    pilot_config = pilot_config or FIXTURES / (
+        "opencode-pilot.json" if optimizer_backend == "opencode" else "pilot.json"
+    )
+    settings = _pilot_settings(pilot_config, scripted=scripted)
     if victim_config:
         settings["victim"] = read(victim_config)
     settings.update(
+        optimizer_backend=optimizer_backend,
         policy="scripted-correct" if scripted else "api",
         env_file=str(Path(env_file).resolve()) if env_file else None,
         run_deadline_epoch=time.time() + settings["run_timeout_seconds"],
     )
+    optimizer = None
+    if optimizer_backend == "opencode":
+        from webhelix.opencode.config import OpenCodeSettings
+
+        if optimizer_config is None and scripted:
+            optimizer_config = FIXTURES / "opencode.example.json"
+        if optimizer_config is not None:
+            optimizer = OpenCodeSettings.load(optimizer_config)
+            if settings["max_optimizer_calls"] > (
+                settings["iterations"] * optimizer.max_requests_per_session
+            ):
+                raise ValueError(
+                    "Optimizer request allowance exceeds iterations times the session request cap"
+                )
+            settings["optimizer_settings"] = optimizer.as_dict()
     plan = None
     if scripted:
         settings.update(episodes_per_condition=1, max_real_episodes=0)
+        if optimizer_backend == "opencode":
+            plan = _offline_plan(optimizer, settings["victim"])
     else:
         if not all((env_file, spending_plan, optimizer_config)):
             raise ValueError(
@@ -44,7 +126,8 @@ def initialize(
             )
         if not Path(env_file).is_file():
             raise ValueError("Private credential file does not exist")
-        optimizer = Settings.load(optimizer_config)
+        if optimizer_backend == "proposal-api":
+            optimizer = Settings.load(optimizer_config)
         victim = settings["victim"]
         if (
             victim.get("endpoint") != "https://api.openai.com/v1/responses"
@@ -63,9 +146,15 @@ def initialize(
             max_output_tokens=victim["max_output_tokens"],
             max_input_bytes=victim["max_input_bytes"],
         )
-        if optimizer.max_calls != settings["max_optimizer_calls"]:
-            raise ValueError("Optimizer config must match the two-request pilot limit")
+        if optimizer_backend == "proposal-api" and (
+            optimizer.max_calls != settings["max_optimizer_calls"]
+        ):
+            raise ValueError("Optimizer config must match the pilot request limit")
         plan = read(spending_plan)
+        if plan.get("offline_fixture"):
+            raise ValueError(
+                "Offline fixture accounting never authorizes real model calls"
+            )
         validate_plan(plan, {"optimizer": optimizer.model, "victim": victim["model"]})
         from dotenv import dotenv_values
 
@@ -100,8 +189,15 @@ def main(argv=None):
     for name in ("controls", "demo", "experiment", "evaluate"):
         command = sub.add_parser(name)
         command.add_argument("--run-dir", type=Path, required=True)
-        if name in {"experiment", "evaluate"}:
+        if name in {"demo", "experiment", "evaluate"}:
+            command.add_argument(
+                "--optimizer-backend",
+                choices=["proposal-api", "opencode"],
+                default="proposal-api",
+            )
+            command.add_argument("--pilot-config", type=Path)
             command.add_argument("--optimizer-config", type=Path)
+        if name in {"experiment", "evaluate"}:
             command.add_argument("--victim-config", type=Path)
             command.add_argument("--env-file", type=Path)
             command.add_argument("--spending-plan", type=Path)
@@ -166,6 +262,8 @@ def main(argv=None):
         spending_plan=getattr(args, "spending_plan", None),
         optimizer_config=getattr(args, "optimizer_config", None),
         victim_config=getattr(args, "victim_config", None),
+        optimizer_backend=getattr(args, "optimizer_backend", "proposal-api"),
+        pilot_config=getattr(args, "pilot_config", None),
     )
     if args.command == "controls":
         from .controls import controls

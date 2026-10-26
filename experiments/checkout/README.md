@@ -1,5 +1,12 @@
 # Consumer checkout experiment
 
+**Interactive optimizer option:** [OpenCode setup, architecture and rerun guide](../../docs/OPENCODE_CHECKOUT.md)
+documents `--optimizer-backend opencode`: a real coding-agent CLI with file/command
+tools, bounded browser previews and a shared request budget. Its five-iteration
+repeat retains this task, contract, victim and scoring. The default `proposal-api`
+path and its saved evidence remain available. OpenCode installation/offline tests
+do not constitute a paid model run.
+
 **Executed real-model pilot:** [results and visual walkthrough](../../examples/checkout/REAL_MODEL_RUN.md).
 Both genuine optimizer proposals were valid and exposed, but all 12 victim
 episodes completed the legitimate task. Both candidates were rejected; reported
@@ -27,7 +34,9 @@ requirement. Confirmation records a fictional order; there is no payment service
 ## Installation and preview
 
 Requirements: Linux, Git, Python 3.12, uv, and access to the private repository.
-No Docker or additional database service is needed.
+The website preview and proposal API backend need no Docker or additional database
+service. The OpenCode backend additionally uses the pinned Docker runtime described
+in its [installation guide](../../docs/OPENCODE_CHECKOUT.md#installation).
 
 ```bash
 git clone --branch feature/consumer-checkout https://github.com/MayssaHH/WebHelix.git webhelix
@@ -52,7 +61,7 @@ before sourcing `scripts/env.sh` to reuse it. A fresh clone instead uses its own
 is neither copied nor changed. Existing sorting, reservation and Admin examples
 are retained.
 
-## Implemented architecture
+## Default proposal API architecture
 
 ```text
 AutoHelix accepted-state worktree
@@ -68,13 +77,19 @@ AutoHelix accepted-state worktree
   -> next optimizer receives the prior hypothesis, files and all episode evidence
 ```
 
-The optimizer backend is a bounded direct-API proposal adapter, **not Codex CLI**.
+The default optimizer backend is a bounded direct-API proposal adapter, **not Codex CLI or OpenCode**.
 It receives the actual objective, contract, current files, clean workflow frames,
 and previous measurements. It returns whole replacement files plus a hypothesis,
 predicted observation, falsification criterion and reflection. Trusted code writes
 only the declared candidate files. AutoHelix's closed backend registry requires an
 inert `mock` factory entry, replaced with `CheckoutBackend` before `Harness.run`;
 the upstream mock backend never generates a real proposal.
+
+Selecting `--optimizer-backend opencode` replaces that proposal-generation step
+with native `OpenCodeAgent` sessions and direct file edits. It adds deterministic
+preview tools before independent evaluation. See the [OpenCode lifecycle](../../docs/OPENCODE_CHECKOUT.md#what-changes)
+for its distinct runtime, request accounting and evidence; the scoring described
+below is shared.
 
 The victim receives only its legitimate request, current screenshot and visible
 text/controls, and its own action history. Its tools are click, fill, select, scroll,
@@ -184,9 +199,12 @@ uv run --locked webhelix checkout evaluate \
 uv run --locked webhelix checkout report "$checkout_parent/demo"
 ```
 
-## Later real-model test — not launched by setup
+## Proposal API real-model test — not launched by setup
 
 Defaults request `gpt-6.1-sol`, medium reasoning independently for both roles.
+The commands in this section select the historical two-iteration proposal API
+pilot. The [OpenCode repeat](../../docs/OPENCODE_CHECKOUT.md#paid-five-iteration-repeat)
+has a separate configuration and spending authorization.
 The provider interface is OpenAI Responses with visual input and bounded output.
 Neither model availability, current pricing, account funds nor real-model competence
 is established by offline tests. Validate those before the paid pilot, and record

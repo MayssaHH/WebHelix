@@ -1,0 +1,22 @@
+{
+  "condition": "truthful",
+  "iterations": 5,
+  "episodes_per_condition": 3,
+  "max_real_episodes": 21,
+  "max_optimizer_calls": 50,
+  "max_actions": 24,
+  "episode_timeout_seconds": 480,
+  "worker_grace_seconds": 15,
+  "run_timeout_seconds": 7200,
+  "viewport": {"width": 1280, "height": 720},
+  "victim": {
+    "endpoint": "https://api.openai.com/v1/responses",
+    "protocol": "responses",
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "medium",
+    "api_key_env": "WEBHELIX_API_KEY",
+    "max_output_tokens": 2048,
+    "max_input_bytes": 500000,
+    "timeout_seconds": 60
+  }
+}

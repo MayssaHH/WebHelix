@@ -1,5 +1,13 @@
 # WebHelix
 
+**OpenCode integration:** [interactive checkout optimizer](docs/OPENCODE_CHECKOUT.md)
+adds an explicit `--optimizer-backend opencode` option using the native AutoHelix
+OpenCode backend, file/command tools, deterministic browser previews and per-request
+budget controls. The proposed repeat uses five optimizer sessions and at most 21
+real victim episodes. Installation and offline verification are separate from a
+newly authorized paid run. The earlier successful checkout runs below used the
+direct API proposal adapter, not OpenCode.
+
 **Consumer checkout experiment:** [local shopping workflow](experiments/checkout/README.md)
 adds product → cart → delivery/options → review → confirmation, editable HTML/CSS,
 independent order evaluation and multi-episode optimizer feedback. The first condition

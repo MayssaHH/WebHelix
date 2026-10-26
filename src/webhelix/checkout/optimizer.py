@@ -123,7 +123,7 @@ def stage_images(directory):
     return list(selected.items())
 
 
-def context_for(workspace, run, iteration, prompt):
+def context_for(workspace, run, iteration, prompt, *, clean_report=None):
     workspace, run = Path(workspace), Path(run)
     settings = read(run / "runtime.json")
     files = load(workspace / "candidate", settings["condition"])
@@ -155,7 +155,7 @@ def context_for(workspace, run, iteration, prompt):
                 else None,
             }
         )
-    clean = read(run / "clean.json")
+    clean = clean_report if clean_report is not None else read(run / "clean.json")
     return {
         "iteration": iteration,
         "autohelix_prompt": prompt,

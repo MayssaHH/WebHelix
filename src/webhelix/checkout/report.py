@@ -31,6 +31,8 @@ def build_report(run):
         "feedback-continuity.json",
         "budget.json",
         "runtime.json",
+        "opencode-runtime.json",
+        "harness-check/check.json",
     ):
         path = run / name
         if path.exists():
@@ -99,7 +101,22 @@ def build_report(run):
     blocks.append("<h2>Optimizer requests and feedback</h2>")
     for directory in (run / "proposals", run / "feedback"):
         for path in sorted(directory.glob("iter-*/*")):
-            if path.is_file() and path.suffix in {".json", ".md", ".diff"}:
+            if path.is_file() and path.suffix in {
+                ".json",
+                ".md",
+                ".diff",
+                ".txt",
+                ".jsonl",
+            }:
+                blocks.append("<p>" + link(path, str(path.relative_to(run))) + "</p>")
+    for directory in sorted((run / "proposals").glob("iter-*")):
+        for relative in (
+            "runtime/opencode-config.json",
+            "runtime/runtime-receipt.json",
+            "gateway/summary.json",
+        ):
+            path = directory / relative
+            if path.is_file():
                 blocks.append("<p>" + link(path, str(path.relative_to(run))) + "</p>")
     destination = run / "index.html"
     destination.write_text("\n".join(blocks))

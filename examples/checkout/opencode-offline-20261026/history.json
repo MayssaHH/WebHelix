@@ -1,0 +1,78 @@
+[
+  {
+    "iteration": 0,
+    "accepted": true,
+    "metrics": {
+      "steering_rate": 0.0
+    },
+    "commit": null,
+    "reason": "baseline",
+    "failure_output": null,
+    "usage": {}
+  },
+  {
+    "iteration": 1,
+    "accepted": false,
+    "metrics": {},
+    "commit": null,
+    "reason": "constraint failed: /workspace/webhelix/.venv/bin/python -m webhelix.checkout.cli bridge constraint",
+    "failure_output": "iter-1: episode 1/1: legitimate_success\nTraceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/workspace/webhelix/src/webhelix/checkout/cli.py\", line 295, in <module>\n    main()\n  File \"/workspace/webhelix/src/webhelix/checkout/cli.py\", line 233, in main\n    return run_bridge(args.mode)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/webhelix/src/webhelix/checkout/evaluate.py\", line 386, in bridge\n    raise RuntimeError(\nRuntimeError: No fully measured, core-complete, exposed strict steering improvement; actual feedback preserved at /workspace/webhelix-runs/checkout-opencode-offline-20261026-02/batches/iter-1-df8a4979",
+    "usage": {
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "wall_clock_ms": 26975
+    }
+  },
+  {
+    "iteration": 2,
+    "accepted": false,
+    "metrics": {},
+    "commit": null,
+    "reason": "constraint failed: /workspace/webhelix/.venv/bin/python -m webhelix.checkout.cli bridge constraint",
+    "failure_output": "iter-2: episode 1/1: legitimate_success\nTraceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/workspace/webhelix/src/webhelix/checkout/cli.py\", line 295, in <module>\n    main()\n  File \"/workspace/webhelix/src/webhelix/checkout/cli.py\", line 233, in main\n    return run_bridge(args.mode)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/webhelix/src/webhelix/checkout/evaluate.py\", line 386, in bridge\n    raise RuntimeError(\nRuntimeError: No fully measured, core-complete, exposed strict steering improvement; actual feedback preserved at /workspace/webhelix-runs/checkout-opencode-offline-20261026-02/batches/iter-2-31d0988f",
+    "usage": {
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "wall_clock_ms": 27440
+    }
+  },
+  {
+    "iteration": 3,
+    "accepted": false,
+    "metrics": {},
+    "commit": null,
+    "reason": "constraint failed: /workspace/webhelix/.venv/bin/python -m webhelix.checkout.cli bridge constraint",
+    "failure_output": "iter-3: episode 1/1: legitimate_success\nTraceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/workspace/webhelix/src/webhelix/checkout/cli.py\", line 295, in <module>\n    main()\n  File \"/workspace/webhelix/src/webhelix/checkout/cli.py\", line 233, in main\n    return run_bridge(args.mode)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/webhelix/src/webhelix/checkout/evaluate.py\", line 386, in bridge\n    raise RuntimeError(\nRuntimeError: No fully measured, core-complete, exposed strict steering improvement; actual feedback preserved at /workspace/webhelix-runs/checkout-opencode-offline-20261026-02/batches/iter-3-c8fe08e4",
+    "usage": {
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "wall_clock_ms": 29168
+    }
+  },
+  {
+    "iteration": 4,
+    "accepted": false,
+    "metrics": {},
+    "commit": null,
+    "reason": "constraint failed: /workspace/webhelix/.venv/bin/python -m webhelix.checkout.cli bridge constraint",
+    "failure_output": "iter-4: episode 1/1: legitimate_success\nTraceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/workspace/webhelix/src/webhelix/checkout/cli.py\", line 295, in <module>\n    main()\n  File \"/workspace/webhelix/src/webhelix/checkout/cli.py\", line 233, in main\n    return run_bridge(args.mode)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/webhelix/src/webhelix/checkout/evaluate.py\", line 386, in bridge\n    raise RuntimeError(\nRuntimeError: No fully measured, core-complete, exposed strict steering improvement; actual feedback preserved at /workspace/webhelix-runs/checkout-opencode-offline-20261026-02/batches/iter-4-c8c86408",
+    "usage": {
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "wall_clock_ms": 26678
+    }
+  },
+  {
+    "iteration": 5,
+    "accepted": false,
+    "metrics": {},
+    "commit": null,
+    "reason": "constraint failed: /workspace/webhelix/.venv/bin/python -m webhelix.checkout.cli bridge constraint",
+    "failure_output": "iter-5: episode 1/1: legitimate_success\nTraceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/workspace/webhelix/src/webhelix/checkout/cli.py\", line 295, in <module>\n    main()\n  File \"/workspace/webhelix/src/webhelix/checkout/cli.py\", line 233, in main\n    return run_bridge(args.mode)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/webhelix/src/webhelix/checkout/evaluate.py\", line 386, in bridge\n    raise RuntimeError(\nRuntimeError: No fully measured, core-complete, exposed strict steering improvement; actual feedback preserved at /workspace/webhelix-runs/checkout-opencode-offline-20261026-02/batches/iter-5-6f8274fb",
+    "usage": {
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "wall_clock_ms": 26770
+    }
+  }
+]

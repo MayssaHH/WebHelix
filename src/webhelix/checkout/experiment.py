@@ -59,6 +59,14 @@ def prepare(run, model):
         shutil.copy2(FIXTURES / source, project / name)
     (project / ".gitignore").write_text(".autohelix/\n")
     command = shlex.quote(sys.executable) + " -m webhelix.checkout.cli bridge "
+    opencode_launcher = run / "opencode-launcher"
+    if settings.get("optimizer_backend") == "opencode":
+        opencode_launcher.write_text(
+            "#!/bin/sh\nexec "
+            + shlex.quote(sys.executable)
+            + ' -m webhelix.opencode.launcher "$@"\n'
+        )
+        opencode_launcher.chmod(0o700)
     constraint_timeout = (
         settings["episodes_per_condition"]
         * (
@@ -85,9 +93,17 @@ def prepare(run, model):
             "iterations": settings["iterations"],
             "time": f"{max(1, int(settings['run_deadline_epoch'] - time.time()))}s",
         },
-        # Upstream's closed registry needs a factory entry. Replace the agent before run().
-        "agent": {"type": "mock", "model": model},
+        # The OpenCode wrapper delegates to upstream's real CLI backend. The API
+        # proposal path retains its inert constructor entry for compatibility.
+        "agent": {
+            "type": "opencode"
+            if settings.get("optimizer_backend") == "opencode"
+            else "mock",
+            "model": model,
+        },
     }
+    if settings.get("optimizer_backend") == "opencode":
+        config["agent"]["command"] = str(opencode_launcher)
     (project / "autohelix.yaml").write_text(yaml.safe_dump(config, sort_keys=False))
     for args in (
         ["init", "-b", "main"],
@@ -148,6 +164,10 @@ def feedback_continuity(run, iteration):
                 except (TypeError, ValueError):
                     pass
     request_matches = request_context == context
+    if read(run / "runtime.json").get("optimizer_backend") == "opencode":
+        from webhelix.opencode.backend import provider_context_matches
+
+        request_matches = provider_context_matches(path.parent, context)
     checks = []
     for previous in context["prior_feedback"]:
         number = previous["iteration"]
@@ -348,6 +368,7 @@ def _source_receipt(run):
     paths = (
         list((ROOT / "src/webhelix").rglob("*.py"))
         + list((FIXTURES / "candidate").glob("*"))
+        + [p for p in (FIXTURES / "opencode-runtime").glob("*") if p.is_file()]
         + [
             FIXTURES / "catalogue.json",
             FIXTURES / "task.json",
@@ -355,8 +376,11 @@ def _source_receipt(run):
             FIXTURES / "pilot.json",
             FIXTURES / "optimizer.example.json",
             FIXTURES / "victim.example.json",
+            FIXTURES / "opencode.example.json",
+            FIXTURES / "opencode-pilot.json",
             ROOT / "pyproject.toml",
             ROOT / "uv.lock",
+            ROOT / "scripts/setup-opencode.py",
         ]
     )
     hashes = {}
@@ -373,21 +397,33 @@ def _source_receipt(run):
 def experiment(run, scripted=True, optimizer_config=None):
     run = Path(run)
     settings = read(run / "runtime.json")
-    client = (
-        FixtureClient()
-        if scripted
-        else VisualProposalClient(
-            Settings.load(optimizer_config), run, env_file=settings["env_file"]
+    use_opencode = settings.get("optimizer_backend") == "opencode"
+    if use_opencode:
+        from webhelix.opencode.backend import CheckoutOpenCodeBackend
+        from webhelix.opencode.config import OpenCodeSettings
+
+        backend = CheckoutOpenCodeBackend(
+            run, OpenCodeSettings(**settings["optimizer_settings"]), scripted=scripted
         )
-    )
+        model = backend.settings.model
+    else:
+        client = (
+            FixtureClient()
+            if scripted
+            else VisualProposalClient(
+                Settings.load(optimizer_config), run, env_file=settings["env_file"]
+            )
+        )
+        backend = CheckoutBackend(run, client)
+        model = client.settings.model
     status = {
         "started": time.time(),
         "status": "starting",
         "scripted": scripted,
-        "optimizer_backend": "scripted-fixture"
-        if scripted
-        else "bounded-visual-proposal",
-        "optimizer_model": client.settings.model,
+        "optimizer_backend": ("opencode-offline-fixture" if scripted else "opencode")
+        if use_opencode
+        else ("scripted-fixture" if scripted else "bounded-visual-proposal"),
+        "optimizer_model": model,
         "victim_settings": settings["victim"],
         "condition": settings["condition"],
         "source_revision": subprocess.check_output(
@@ -409,7 +445,24 @@ def experiment(run, scripted=True, optimizer_config=None):
     os.environ["WEBHELIX_CHECKOUT_RUN"] = str(run)
     harness = None
     try:
-        project = prepare(run, client.settings.model)
+        if use_opencode:
+            backend.preflight()  # Fail before spending on clean/identity episodes.
+        project = prepare(run, model)
+        if use_opencode:
+            from webhelix.opencode.backend import editing_check
+
+            reference = evaluate(
+                project / "candidate",
+                run,
+                "scripted-correct",
+                1,
+                "harness-check-reference",
+            )
+            if not reference["metrics"]["evaluation_ok"]:
+                raise RuntimeError("Deterministic harness-check reference failed")
+            status["harness_check"] = editing_check(
+                run, backend.settings, reference, scripted=scripted
+            )
         diagnostics = {}
         for label, candidate in (
             ("clean", FIXTURES / "candidate"),
@@ -446,7 +499,7 @@ def experiment(run, scripted=True, optimizer_config=None):
         )
         check_deadline(run)
         harness = CheckoutHarness(project, run)
-        harness.agent = CheckoutBackend(run, client)
+        harness.agent = backend
         harness.run(max_iterations=settings["iterations"])
         rows = [dataclasses.asdict(row) for row in harness.history.load()]
         iterations = [row for row in rows if row["iteration"] > 0]

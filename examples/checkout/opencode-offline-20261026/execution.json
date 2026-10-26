@@ -1,0 +1,17 @@
+{
+  "working_tree_at_start": "uncommitted implementation on feature/checkout-opencode; exact executed source files and hashes are recorded in status.json and tested-source/",
+  "commands": [
+    "UV_CACHE_DIR=/workspace/.cache/uv PLAYWRIGHT_BROWSERS_PATH=/workspace/.cache/ms-playwright uv run --locked webhelix checkout demo --optimizer-backend opencode --run-dir /workspace/webhelix-runs/checkout-opencode-offline-20261026-02"
+  ],
+  "validation": {
+    "full_suite": "292 passed in 262.50s before final launcher integration",
+    "focused_suite": "77 passed in 40.92s after launcher integration",
+    "test_import_independence": "8 backend tests passed standalone after making test helpers importable",
+    "lint": "Ruff and git diff --check passed"
+  },
+  "prior_failed_attempt": {
+    "path": "/workspace/webhelix-runs/checkout-opencode-offline-20261026-01",
+    "cause": "Harmless tool check passed, but native AutoHelix preflight looked for a host opencode executable; no research iteration ran. Fixed with an actual host dispatcher to the prepared isolated session, then repeated from a new directory."
+  },
+  "targeted_test_environment_fix": "A focused test command omitted PLAYWRIGHT_BROWSERS_PATH and could not locate installed Chromium; rerun with scripts/env.sh-equivalent environment passed. No fixture, task or validator change."
+}

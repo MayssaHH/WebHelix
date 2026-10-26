@@ -1,0 +1,798 @@
+{
+  "episodes": [],
+  "calls": [
+    {
+      "id": 0,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793044681.1299224,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 1,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793044681.402132,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 2,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793044681.433743,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 3,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793044681.6041496,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 4,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793044691.0968466,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 5,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793044691.193484,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 6,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793044716.5533292,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 7,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793044716.9052322,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 8,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793044716.9551175,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 9,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793044717.1459255,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 10,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793044726.5613308,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 11,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793044726.6774993,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 12,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793044743.4195428,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 13,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793044743.7897055,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 14,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793044743.8435593,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 15,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793044744.0272164,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 16,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793044753.8203866,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 17,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793044753.9341104,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 18,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793044770.7058132,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 19,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793044771.1132197,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 20,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793044771.1989832,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 21,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793044771.420699,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 22,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793044781.9006665,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 23,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793044782.1279097,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 24,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793044799.805408,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 25,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793044800.215266,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 26,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793044800.277566,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 27,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793044800.4967282,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 28,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793044809.8232276,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 29,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793044809.9317286,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 30,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793044826.4955595,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 31,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793044826.854313,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 32,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793044826.899509,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 33,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793044827.0954902,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 34,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793044836.3789334,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 35,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793044836.485571,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    }
+  ],
+  "max_real_episodes": 0
+}
