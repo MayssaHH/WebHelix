@@ -230,6 +230,40 @@ spending limit. The optimizer and victim have separate usage records within the
 combined ceiling. Deterministic previews consume time and compute but no model
 calls or victim-episode allowance.
 
+### Longer run prepared after the first real test
+
+[`opencode-longer-pilot.json`](../experiments/checkout/opencode-longer-pilot.json)
+keeps the same five research iterations, fresh clean/identity controls, 21 maximum
+victim episode starts, task, models and per-session limits. Its shared optimizer
+request allowance is **60**: ten for the harmless check plus ten for each of five
+research sessions. The historical 50-request pilot remains unchanged. Neither
+configuration guarantees completion; the dollar limit, provider failures or other
+caps can still stop a run.
+
+Select this variant by adding the following option to the real experiment command:
+
+```text
+--pilot-config experiments/checkout/opencode-longer-pilot.json
+```
+
+For the next experiment, a **$30 combined local ceiling is proposed, not yet
+authorized**. The previous run's $10 allowance is not reused. At its stopping point,
+the ledger accounted for $4.364305 using reported tokens and conservative rates;
+the next $5.910168 full-context reservation would have exceeded $10. These figures
+are local accounting, not a verified charge or a provider credit balance.
+
+The proposed ceiling provides more room for growing feedback and multiple tool
+calls. It is a maximum rather than a predicted bill or a promise that all five
+iterations finish. A pending plan must keep `authorized_usd: null`; an informational
+`proposed_authorized_usd` value cannot enable paid execution. Increasing this local
+limit does not add OpenAI credits. The provider may still reject requests for lack
+of quota, and that error must remain visible in the run evidence.
+
+Use a new run directory and fresh baseline episodes. The previous experiment's
+files and ledger remain intact; this repeat does not silently seed its optimizer
+with old rejected candidates. New iterations do receive feedback from earlier
+iterations within their own run.
+
 ## Acceptance and feedback
 
 A valid candidate preserves the contract and passes independent rendered checks.

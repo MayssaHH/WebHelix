@@ -108,10 +108,11 @@ def initialize(
         if optimizer_config is not None:
             optimizer = OpenCodeSettings.load(optimizer_config)
             if settings["max_optimizer_calls"] > (
-                settings["iterations"] * optimizer.max_requests_per_session
+                (settings["iterations"] + 1) * optimizer.max_requests_per_session
             ):
                 raise ValueError(
-                    "Optimizer request allowance exceeds iterations times the session request cap"
+                    "Optimizer request allowance exceeds research iterations plus the "
+                    "harmless check times the session request cap"
                 )
             settings["optimizer_settings"] = optimizer.as_dict()
     plan = None

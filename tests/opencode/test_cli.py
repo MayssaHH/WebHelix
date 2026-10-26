@@ -39,6 +39,42 @@ def test_opencode_real_requires_new_authorized_plan_before_creating_run(tmp_path
     assert not run.exists()
 
 
+def test_longer_pilot_allows_ten_requests_for_check_and_each_research_session(tmp_path):
+    original = read(FIXTURES / "opencode-pilot.json")
+    longer = read(FIXTURES / "opencode-longer-pilot.json")
+    assert original["max_optimizer_calls"] == 50
+    assert longer == {**original, "max_optimizer_calls": 60}
+    settings = initialize(
+        tmp_path / "longer-offline",
+        optimizer_backend="opencode",
+        pilot_config=FIXTURES / "opencode-longer-pilot.json",
+    )
+    assert settings["max_optimizer_calls"] == (
+        settings["iterations"] + 1
+    ) * settings["optimizer_settings"]["max_requests_per_session"]
+
+
+def test_proposed_dollar_ceiling_does_not_authorize_longer_real_run(tmp_path):
+    plan = read(FIXTURES / "spending-plan.example.json")
+    plan["proposed_authorized_usd"] = 30
+    source = tmp_path / "proposed-plan.json"
+    save(source, plan)
+    env = tmp_path / "unit-test.env"
+    env.write_text("WEBHELIX_API_KEY=offline-test-only\n")
+    run = tmp_path / "not-created"
+    with pytest.raises(BudgetBlocked, match="positive authorized amount"):
+        initialize(
+            run,
+            scripted=False,
+            optimizer_backend="opencode",
+            pilot_config=FIXTURES / "opencode-longer-pilot.json",
+            optimizer_config=FIXTURES / "opencode.example.json",
+            spending_plan=source,
+            env_file=env,
+        )
+    assert not run.exists()
+
+
 def test_offline_plan_cannot_be_reused_to_authorize_real_requests(tmp_path):
     demo = tmp_path / "demo"
     initialize(demo, optimizer_backend="opencode")
@@ -67,7 +103,7 @@ def test_offline_plan_cannot_be_reused_to_authorize_real_requests(tmp_path):
         ("max_real_episodes", 20, "clean, identity"),
         ("max_actions", 25, "max_actions"),
         ("episode_timeout_seconds", 481, "episode_timeout_seconds"),
-        ("max_optimizer_calls", 51, "session request cap"),
+        ("max_optimizer_calls", 61, "session request cap"),
         ("viewport", {"width": 640, "height": 480}, "viewport"),
     ],
 )
