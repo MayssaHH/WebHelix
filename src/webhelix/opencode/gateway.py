@@ -435,7 +435,10 @@ class Gateway:
                 transport=self.transport,
                 timeout=timeout,
                 follow_redirects=False,
-                trust_env=False,
+                # The trusted HOST may require an outbound HTTPS proxy. The
+                # sandbox still has no external egress or provider credential;
+                # deterministic transports remain independent of host proxies.
+                trust_env=self.transport is None,
             )
             with self._lock:
                 self._clients.add(client)
@@ -533,6 +536,17 @@ class Gateway:
         except BudgetBlocked as exc:
             record.update(status="budget_blocked", error=str(exc))
             self._error(handler, stream_started, 429, record)
+        except httpx.ConnectError as exc:
+            # HTTPX distinguishes failure to establish a connection from read /
+            # write failures after sending. Only this pre-send case can release
+            # a reservation without a provider usage report.
+            record.update(
+                status="connection_error",
+                request_started=False,
+                delivery="connection_failed_before_http_request",
+                error=f"{type(exc).__name__}: {exc}",
+            )
+            self._error(handler, stream_started, 502, record)
         except (TimeoutError, httpx.TimeoutException) as exc:
             record.update(status="timeout", error=f"{type(exc).__name__}: {exc}")
             self._error(handler, stream_started, 504, record)

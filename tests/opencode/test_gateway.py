@@ -561,3 +561,62 @@ def test_concurrent_request_cannot_bypass_single_inflight_limit(tmp_path):
         assert summary["finalized"]
         assert summary["status_counts"] == {"completed": 1, "request_rejected": 1}
     assert len(calls) == 1 and len(read(tmp_path / "budget.json")["calls"]) == 1
+
+
+@pytest.mark.parametrize(
+    "failure, released",
+    [(httpx.ConnectError, True), (httpx.ReadTimeout, False), (httpx.WriteError, False)],
+)
+def test_only_known_connection_failure_releases_unsent_reservation(
+    tmp_path, failure, released
+):
+    settings = setup(tmp_path)
+
+    def transport(request):
+        raise failure("offline transport failure")
+
+    with Gateway(
+        tmp_path,
+        tmp_path / "gateway",
+        settings,
+        "offline-secret",
+        transport=httpx.MockTransport(transport),
+    ) as gateway:
+        assert post(gateway).status_code >= 500
+        summary = gateway.finalized_summary()
+        assert summary["finalized"]
+    ledger = read(tmp_path / "budget.json")
+    assert len(ledger["calls"]) == 1  # The failed attempt is never erased.
+    call = ledger["calls"][0]
+    if released:
+        assert call["status"] == "not_sent" and call["accounted_usd"] == "0"
+        assert summary["halted"] == "connection_error"
+        assert (
+            summary["requests"][0]["delivery"]
+            == "connection_failed_before_http_request"
+        )
+    else:
+        assert call["status"] == "usage_missing_full_reservation_retained"
+        assert call["accounted_usd"] == call["reserved_usd"]
+
+
+def test_real_host_transport_honors_proxy_environment_without_exposing_it(
+    tmp_path, monkeypatch
+):
+    settings = setup(tmp_path)
+    original = httpx.Client
+    flags = []
+
+    def client(*args, **kwargs):
+        if "transport" in kwargs:
+            flags.append(kwargs["trust_env"])
+            kwargs["transport"] = httpx.MockTransport(
+                lambda request: httpx.Response(200, json=completed())
+            )
+        return original(*args, **kwargs)
+
+    monkeypatch.setattr(httpx, "Client", client)
+    with Gateway(tmp_path, tmp_path / "gateway", settings, "offline-secret") as gateway:
+        assert post(gateway).status_code == 200
+        assert gateway.finalized_summary()["finalized"]
+    assert flags == [True]

@@ -106,6 +106,12 @@ permits requests to the trusted service; it is not the real OpenAI API key.
 Editable-file instructions remain workflow controls; a Git worktree alone is not
 the isolation mechanism.
 
+The trusted host's provider client honors its configured HTTPS proxy and TLS
+settings, as required in some cloud workspaces. Proxy settings remain cleared
+inside the agent container. A connection-establishment failure is recorded as
+an unsent request; read/write failures with uncertain delivery retain their full
+budget reservation. Failed attempts remain in the ledger in either case.
+
 ## Offline verification
 
 ```bash
