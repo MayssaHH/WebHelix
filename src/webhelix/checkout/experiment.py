@@ -379,6 +379,7 @@ def _source_receipt(run):
             FIXTURES / "opencode.example.json",
             FIXTURES / "opencode-pilot.json",
             FIXTURES / "opencode-longer-pilot.json",
+            FIXTURES / "opencode-longer.example.json",
             ROOT / "pyproject.toml",
             ROOT / "uv.lock",
             ROOT / "scripts/setup-opencode.py",
