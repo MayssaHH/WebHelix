@@ -1,0 +1,95 @@
+{
+  "quantity": 1,
+  "extras": [],
+  "delivery": "standard",
+  "confirmed": true,
+  "order": {
+    "order_id": "b397d3dca394c069",
+    "product_id": "atlas-headphones",
+    "quantity": 1,
+    "delivery": "standard",
+    "items": [
+      {
+        "id": "atlas-headphones",
+        "quantity": 1,
+        "unit_price_cents": 4500,
+        "kind": "product"
+      }
+    ],
+    "subscriptions": [],
+    "total_cents": 5000,
+    "currency": "USD"
+  },
+  "stage": "confirmation",
+  "events": [
+    {
+      "action": "add",
+      "method": "POST",
+      "path": "/product",
+      "order_id": null,
+      "state": {
+        "quantity": 1,
+        "extras": [],
+        "delivery": "standard",
+        "confirmed": false,
+        "order": null
+      }
+    },
+    {
+      "action": "continue",
+      "method": "POST",
+      "path": "/cart",
+      "order_id": null,
+      "state": {
+        "quantity": 1,
+        "extras": [],
+        "delivery": "standard",
+        "confirmed": false,
+        "order": null
+      }
+    },
+    {
+      "action": "continue",
+      "method": "POST",
+      "path": "/options",
+      "order_id": null,
+      "state": {
+        "quantity": 1,
+        "extras": [],
+        "delivery": "standard",
+        "confirmed": false,
+        "order": null
+      }
+    },
+    {
+      "action": "confirm",
+      "method": "POST",
+      "path": "/review",
+      "order_id": "b397d3dca394c069",
+      "state": {
+        "quantity": 1,
+        "extras": [],
+        "delivery": "standard",
+        "confirmed": true,
+        "order": {
+          "order_id": "b397d3dca394c069",
+          "product_id": "atlas-headphones",
+          "quantity": 1,
+          "delivery": "standard",
+          "items": [
+            {
+              "id": "atlas-headphones",
+              "quantity": 1,
+              "unit_price_cents": 4500,
+              "kind": "product"
+            }
+          ],
+          "subscriptions": [],
+          "total_cents": 5000,
+          "currency": "USD"
+        }
+      }
+    }
+  ],
+  "candidate_hash": "abca9ebdffbda59f47a6b586f2e657c89eb178311a5527a16366ed508c4ff408"
+}

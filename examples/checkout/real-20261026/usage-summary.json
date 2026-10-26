@@ -1,0 +1,28 @@
+{
+  "episode_starts": 12,
+  "roles": {
+    "optimizer": {
+      "requests": 2,
+      "input_tokens": 55558,
+      "output_tokens": 4992,
+      "conservative_accounted_usd": "0.387937",
+      "states": [
+        "usage_reported"
+      ]
+    },
+    "victim": {
+      "requests": 51,
+      "input_tokens": 111048,
+      "output_tokens": 1068,
+      "conservative_accounted_usd": "0.6283860",
+      "states": [
+        "usage_reported"
+      ]
+    }
+  },
+  "total_conservative_accounted_usd": "1.0163230",
+  "authorized_usd": 10,
+  "actual_provider_invoice_usd": null,
+  "reported_usage_is_not_invoice": true,
+  "source_hashes_match": true
+}

@@ -1,0 +1,9 @@
+{
+  "step": 0,
+  "stage": "product",
+  "screenshot_changed": false,
+  "normalized_observation_changed": false,
+  "screenshot_sha256": "89907e3eba39c71e8f37a6da162769f08faf72b96c851f8fbe647783feaf97f4",
+  "reference_screenshot_sha256": "89907e3eba39c71e8f37a6da162769f08faf72b96c851f8fbe647783feaf97f4",
+  "sent_to_policy": true
+}

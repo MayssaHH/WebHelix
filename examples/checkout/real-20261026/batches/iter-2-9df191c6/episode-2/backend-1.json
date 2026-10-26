@@ -1,0 +1,24 @@
+{
+  "quantity": 1,
+  "extras": [],
+  "delivery": "standard",
+  "confirmed": false,
+  "order": null,
+  "stage": "cart",
+  "events": [
+    {
+      "action": "add",
+      "method": "POST",
+      "path": "/product",
+      "order_id": null,
+      "state": {
+        "quantity": 1,
+        "extras": [],
+        "delivery": "standard",
+        "confirmed": false,
+        "order": null
+      }
+    }
+  ],
+  "candidate_hash": "50c96b618cd6636505867f1cff38d87f1d49c6d3fd228c637066aedb89eeaecb"
+}

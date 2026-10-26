@@ -1,0 +1,25 @@
+{
+  "authorized_usd": 10,
+  "verified_on": "2026-10-26",
+  "roles": {
+    "optimizer": {
+      "model": "gpt-6.1-sol",
+      "input_usd_per_million": 5.5,
+      "output_usd_per_million": 16.5,
+      "maximum_context_input_tokens": 1050000,
+      "pricing_source": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+      "context_source": "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+    },
+    "victim": {
+      "model": "gpt-6.1-sol",
+      "input_usd_per_million": 5.5,
+      "output_usd_per_million": 16.5,
+      "maximum_context_input_tokens": 1050000,
+      "pricing_source": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+      "context_source": "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+    }
+  },
+  "authorization": "User selected $10 maximum for this pilot, combined across both roles. No authorization for a new run beyond this allowance.",
+  "pricing_note": "Standard tier explicit. Conservative input ceiling includes cache-write2.50/M x long-context2 x regional1.1; output10/M x1.5 x1.1. Settlement uses reported tokens at these ceiling rates; not a provider invoice. Full verified context reserved before every request.",
+  "documentation_receipt": "/workspace/webhelix-runs/checkout-api-preflight-20261026/documentation-receipt.json"
+}

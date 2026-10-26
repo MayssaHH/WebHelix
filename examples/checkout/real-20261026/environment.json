@@ -1,0 +1,18 @@
+{
+  "python": "3.12.14",
+  "dependencies": {
+    "autohelix": "0.1.1",
+    "browsergym-core": "0.14.3",
+    "playwright": "1.44.0",
+    "httpx": "0.28.1",
+    "beautifulsoup4": "4.15.0",
+    "tinycss2": "1.4.0"
+  },
+  "autohelix_revision": "132fa0454963361fac669f35011b16f4263493c2",
+  "webhelix_revision": "5b931602345e79a5166e49699de62ff52443e234",
+  "source_dirty_at_launch": false,
+  "branch": "feature/consumer-checkout",
+  "command": "UV_CACHE_DIR=/workspace/.cache/uv PLAYWRIGHT_BROWSERS_PATH=/workspace/.cache/ms-playwright uv run --locked webhelix checkout experiment --run-dir /workspace/webhelix-runs/checkout-real-20261026-01 --optimizer-config /workspace/webhelix-runs/checkout-api-preflight-20261026/optimizer.json --victim-config experiments/checkout/victim.example.json --env-file /workspace/webhelix/.env --spending-plan /workspace/webhelix-runs/checkout-api-preflight-20261026/spending-plan.json",
+  "local_setup_change": "Optimizer api_key_env selects the existing WEBHELIX_API_KEY; both roles have independent conversations. No credential values exported.",
+  "pricing_sources_verified_on": "2026-10-26"
+}

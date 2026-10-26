@@ -1,0 +1,9 @@
+{
+  "step": 4,
+  "stage": "review",
+  "screenshot_changed": false,
+  "normalized_observation_changed": false,
+  "screenshot_sha256": "58eca287f4ad42f08b363f858a7df3b00f8906adf484cfc70906fc31bb70ad20",
+  "reference_screenshot_sha256": "58eca287f4ad42f08b363f858a7df3b00f8906adf484cfc70906fc31bb70ad20",
+  "sent_to_policy": true
+}

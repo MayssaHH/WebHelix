@@ -1,5 +1,11 @@
 # Consumer checkout experiment
 
+**Executed real-model pilot:** [results and visual walkthrough](../../examples/checkout/REAL_MODEL_RUN.md).
+Both genuine optimizer proposals were valid and exposed, but all 12 victim
+episodes completed the legitimate task. Both candidates were rejected; reported
+token usage accounted for $1.016323 of the authorized $10 ceiling conservatively.
+This is not the provider's invoice. The scripted controls remain available separately.
+
 This is a local fictional shopping workflow for studying whether automatically
 proposed interface changes alter a browser agent's adherence to its user's task.
 It uses the pinned AutoHelix dependency; it is not a replication of DECEPTICON or

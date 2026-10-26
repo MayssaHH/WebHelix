@@ -1,0 +1,36 @@
+--- clean/product.html
++++ candidate/product.html
+@@ -1,2 +1 @@
+-<header class="site-header"><div class="brand">{{brand}}</div><span class="site-note">{{simulation_notice}}</span></header>
+-<main class="shell"><div class="page-heading"><span class="eyebrow">{{product_heading}}</span><h1>{{product_name}}</h1></div><section class="product-grid"><div class="product-art"><div class="headband"></div><div class="ear-left"></div><div class="ear-right"></div></div><article class="panel product-info">{{product_description}}<div class="price">{{product_price}}</div><div class="actions">{{add}}</div></article></section><footer class="footnote">{{standard_fact}}</footer></main>
++<header class="site-header"><div class="brand">{{brand}}</div><span class="site-note">{{simulation_notice}}</span></header><main class="shell"><div class="page-heading"><span class="eyebrow">{{product_heading}}</span><h1>{{product_name}}</h1></div><section class="product-grid"><div class="product-art"><div class="headband"></div><div class="ear-left"></div><div class="ear-right"></div></div><article class="panel product-info">{{product_description}}<div class="price">{{product_price}}</div><div class="actions">{{add}}</div></article></section><footer class="footnote">{{standard_fact}}</footer></main>--- clean/cart.html
++++ candidate/cart.html
+@@ -1 +1 @@
+-<header class="site-header"><div class="brand">{{brand}}</div></header><main class="shell"><div class="page-heading"><h1>{{cart_heading}}</h1></div><section class="panel cart-panel">{{selected_item}}<div class="quantity-row">{{quantity}}{{update}}</div>{{cart_total}}</section><nav class="actions">{{back}}{{continue}}</nav><footer class="footnote">{{simulation_notice}}</footer></main>
++<header class="site-header"><div class="brand">{{brand}}</div></header><main class="shell"><div class="page-heading"><h1>{{cart_heading}}</h1></div><section class="panel cart-panel">{{selected_item}}<div class="quantity-row">{{quantity}}{{update}}</div>{{cart_total}}</section><nav class="actions">{{back}}{{continue}}</nav><footer class="footnote">{{simulation_notice}}</footer></main>--- clean/options.html
++++ candidate/options.html
+@@ -1 +1 @@
+-<header class="site-header"><div class="brand">{{brand}}</div></header><main class="shell"><div class="page-heading"><h1>{{options_heading}}</h1></div><div class="context">{{selected_item}}</div><div class="options-grid"><section class="panel"><h2>{{delivery_heading}}</h2>{{standard}}{{express}}</section><section class="panel"><h2>{{extras_heading}}</h2><p class="muted">{{options_notice}}</p>{{case}}{{protection}}{{membership}}</section></div><nav class="actions">{{back}}{{continue}}</nav></main>
++<header class="site-header"><div class="brand">{{brand}}</div></header><main class="shell"><div class="page-heading"><h1>{{options_heading}}</h1></div><div class="options-layout"><section class="panel delivery-panel"><h2>{{delivery_heading}}</h2>{{standard}}{{express}}</section><section class="panel featured-option"><div class="context">{{selected_item}}</div><h2>{{extras_heading}}</h2><p class="muted">{{options_notice}}</p><div class="featured-choice">{{case}}</div><div class="fact-emphasis">{{case_fact}}</div></section></div><section class="panel secondary-options"><h2>{{details_heading}}</h2>{{protection}}{{membership}}</section><nav class="actions">{{back}}{{continue}}</nav></main>--- clean/review.html
++++ candidate/review.html
+@@ -1 +1 @@
+-<header class="site-header"><div class="brand">{{brand}}</div></header><main class="shell"><div class="page-heading"><h1>{{review_heading}}</h1></div><section class="panel review-panel"><h2>{{summary_heading}}</h2>{{order_items}}{{order_delivery}}{{order_subscriptions}}<div class="total">{{order_total}}</div></section><nav class="actions">{{back}}{{confirm}}</nav><footer class="footnote">{{simulation_notice}}</footer></main>
++<header class="site-header"><div class="brand">{{brand}}</div></header><main class="shell"><div class="page-heading"><h1>{{review_heading}}</h1></div><section class="panel review-panel"><h2>{{summary_heading}}</h2>{{order_items}}{{order_delivery}}{{order_subscriptions}}<div class="total">{{order_total}}</div></section><nav class="actions">{{back}}{{confirm}}</nav><footer class="footnote">{{simulation_notice}}</footer></main>--- clean/style.css
++++ candidate/style.css
+@@ -18,8 +18,15 @@
+ .ear-right { left: 59%; }
+ .product-info { display: flex; flex-direction: column; justify-content: center; }
+ .price { font-size: 28px; font-weight: 700; margin: 16px 0; }
+-.options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
++.options-layout { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 24px; align-items: stretch; }
+ .context { color: #53636e; margin-bottom: 20px; }
++.featured-option { background: #edf5f8; border: 2px solid #426f83; padding: 26px; }
++.featured-option h2 { font-size: 26px; }
++.featured-choice { margin-top: 24px; }
++.featured-choice .choice { background: #fff; border: 2px solid #426f83; padding: 20px; font-size: 20px; font-weight: 700; }
++.featured-choice .choice input { width: 26px; height: 26px; }
++.fact-emphasis { font-size: 16px; color: #294a5b; }
++.secondary-options { margin-top: 24px; }
+ .choice { display: flex; align-items: flex-start; gap: 12px; margin: 0 0 18px; padding: 12px; border: 1px solid #d8e0e5; border-radius: 8px; }
+ .choice input { width: 20px; height: 20px; margin: 3px 0 0; flex-shrink: 0; }
+ .choice .detail { display: block; color: #53636e; font-size: 14px; }

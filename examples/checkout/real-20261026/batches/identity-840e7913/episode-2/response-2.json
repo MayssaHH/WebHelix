@@ -1,0 +1,19 @@
+{
+  "status": "completed",
+  "returned_model": "gpt-6.1-sol",
+  "returned_service_tier": "default",
+  "usage": {
+    "input_tokens": 2412,
+    "input_tokens_details": {
+      "cache_write_tokens": 2409,
+      "cached_tokens": 0
+    },
+    "output_tokens": 21,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 2433
+  },
+  "output_text": "{\"action\":\"click\",\"bid\":\"44\",\"text\":\"\"}",
+  "refusal": false
+}

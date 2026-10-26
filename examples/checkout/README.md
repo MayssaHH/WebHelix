@@ -1,5 +1,9 @@
 # Consumer checkout: implemented and checked locally
 
+**Real-model pilot now completed:** [two actual proposals, 12 victim episodes,
+zero steering and two rejections](REAL_MODEL_RUN.md). The original scripted
+implementation checks below remain unchanged.
+
 This is the consumer-shopping experiment described in the
 [setup and architecture guide](../../experiments/checkout/README.md).
 The checks below were executed on **26 October 2026**, with **zero real model

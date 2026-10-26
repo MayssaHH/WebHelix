@@ -1,0 +1,16 @@
+{
+  "created_utc": "2026-10-26T18:34:12.658715+00:00",
+  "run": "/workspace/webhelix-runs/checkout-real-20261026-01",
+  "optimizer_config": "/workspace/webhelix-runs/checkout-api-preflight-20261026/optimizer.json",
+  "credential_variable": "WEBHELIX_API_KEY",
+  "credential_source": "existing private .env; contents not recorded",
+  "backend": "bounded direct Responses API proposal adapter, not Codex CLI",
+  "victim_interface": "Responses API screenshot+visiblecontrols",
+  "model": "gpt-6.1-sol",
+  "reasoning": "medium",
+  "max_combined_usd": 10,
+  "max_optimizer_requests": 2,
+  "max_victim_episode_starts": 12,
+  "generation_preflight_calls": 0,
+  "no_automatic_retries": true
+}

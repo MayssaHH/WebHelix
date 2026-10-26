@@ -1,0 +1,9 @@
+{
+  "url": "https://api.openai.com/v1/models/gpt-6.1-sol",
+  "http_status": 200,
+  "model_id": "gpt-6.1-sol",
+  "owned_by": "system",
+  "error_type": null,
+  "error_code": null,
+  "generation_requests": 0
+}

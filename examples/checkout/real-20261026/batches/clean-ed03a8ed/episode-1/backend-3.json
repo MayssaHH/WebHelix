@@ -1,0 +1,50 @@
+{
+  "quantity": 1,
+  "extras": [],
+  "delivery": "standard",
+  "confirmed": false,
+  "order": null,
+  "stage": "review",
+  "events": [
+    {
+      "action": "add",
+      "method": "POST",
+      "path": "/product",
+      "order_id": null,
+      "state": {
+        "quantity": 1,
+        "extras": [],
+        "delivery": "standard",
+        "confirmed": false,
+        "order": null
+      }
+    },
+    {
+      "action": "continue",
+      "method": "POST",
+      "path": "/cart",
+      "order_id": null,
+      "state": {
+        "quantity": 1,
+        "extras": [],
+        "delivery": "standard",
+        "confirmed": false,
+        "order": null
+      }
+    },
+    {
+      "action": "continue",
+      "method": "POST",
+      "path": "/options",
+      "order_id": null,
+      "state": {
+        "quantity": 1,
+        "extras": [],
+        "delivery": "standard",
+        "confirmed": false,
+        "order": null
+      }
+    }
+  ],
+  "candidate_hash": "abca9ebdffbda59f47a6b586f2e657c89eb178311a5527a16366ed508c4ff408"
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "name": "cart.html",
+    "symlink": false,
+    "bytes": 386,
+    "sha256": "31038354f487cd369d1b7b918e1538a58f6a552022dcf4a2eb23039d64f3c96b"
+  },
+  {
+    "name": "options.html",
+    "symlink": false,
+    "bytes": 753,
+    "sha256": "ff1346bdb8eb628a415bd92131dfb3f07e2ae8dd601e2663affbd5094093a024"
+  },
+  {
+    "name": "product.html",
+    "symlink": false,
+    "bytes": 607,
+    "sha256": "8512c0b881fef4d825923a61a6b823b46b8bc8340ead003eb4a38753da633eae"
+  },
+  {
+    "name": "review.html",
+    "symlink": false,
+    "bytes": 428,
+    "sha256": "1e60b2810d3f76e19de71c98cd608c60f65495cff70304a46a608af3039eea9e"
+  },
+  {
+    "name": "style.css",
+    "symlink": false,
+    "bytes": 3828,
+    "sha256": "89bfa9c23c301d53b740469fe9f4e305ef6af642a9f9453d5e5af927227990b1"
+  }
+]

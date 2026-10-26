@@ -7,6 +7,10 @@ preserves truthful facts and defaults. Real-model testing is a separate, explici
 budgeted step; installation and scripted controls make no model calls.
 [Executed checkout controls and two rejected scripted iterations](examples/checkout/README.md)
 include before/after screenshots and verified feedback continuity.
+The [real-model pilot](examples/checkout/REAL_MODEL_RUN.md) also completed: two
+genuine API optimizer proposals, 12 independent victim episodes, no steering,
+two rejections and verified feedback continuity. Both roles used `gpt-6.1-sol`
+with medium reasoning. All confirmed orders were the legitimate $50 purchase.
 
 **Benchmark optimization pilot:** [WebArena-Verified Shopping Admin](experiments/shopping_admin/README.md)
 now has a constrained HTML/CSS candidate layer, screenshot victim policy,
