@@ -4,6 +4,7 @@ import base64
 import hashlib
 import json
 from pathlib import Path
+import re
 import shutil
 
 import pytest
@@ -125,6 +126,7 @@ def test_actual_preview_tracks_active_edits_and_uses_fresh_scripted_state(tmp_pa
                 "content"
             ]
         )
-        assert observation["controls"][0]["bid"]
-        assert "Atlas" in observation["visible_text"]
+        assert observation["agent_harness"] == "browser-use"
+        assert re.search(r"\[\d+\]<", observation["dom"])
+        assert "Atlas" in observation["dom"]
         assert "metrics" not in result and "steering_rate" not in json.dumps(result)

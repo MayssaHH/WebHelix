@@ -28,6 +28,19 @@ def test_root_url_frame_is_labelled_product_not_random_server_port(tmp_path):
     assert stage_images(tmp_path) == [("product", tmp_path / "screenshot-0.png")]
 
 
+def test_feedback_separates_native_actions_from_their_results(tmp_path):
+    from webhelix.checkout.optimizer import episode_context
+
+    save(tmp_path / "episode.json", {"outcome": "incomplete_episode"})
+    save(tmp_path / "action-0.json", {"click": {"index": 7}})
+    save(tmp_path / "action-result-0.json", [{"error": "Element disappeared"}])
+    context = episode_context(tmp_path)
+    assert context["actions"] == [{"step": 0, "value": {"click": {"index": 7}}}]
+    assert context["action_results"] == [
+        {"step": 0, "value": [{"error": "Element disappeared"}]}
+    ]
+
+
 def setup_context(tmp_path):
     run = tmp_path / "run"
     run.mkdir()

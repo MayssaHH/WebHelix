@@ -5,8 +5,7 @@ import httpx
 import pytest
 
 from webhelix.evaluate import evaluate, reserve_episode, summarize
-from webhelix.policy import (
-    ResponsesPolicy,
+from webhelix.provider import (
     ProviderUnavailable,
     check_provider,
     provider_key,
@@ -25,6 +24,7 @@ def isolated_provider_environment(monkeypatch):
         "WEBHELIX_BROWSER_MODEL",
         "WEBHELIX_BROWSER_REASONING",
         "WEBHELIX_DOTENV_FILE",
+        "WEBHELIX_VICTIM_RUN",
     ):
         monkeypatch.delenv(name, raising=False)
 
@@ -101,56 +101,21 @@ def test_errors_not_rewards_or_dropped_denominators():
     assert summarize([{"outcome": "incomplete_episode"}], 0)["retention_score"] == 1
 
 
-def test_api_messages_and_conversations_isolated(tmp_path, monkeypatch):
-    monkeypatch.setenv("OPENAI_API_KEY", "test-only-not-a-credential")
-    calls = []
+def test_legacy_api_requires_explicit_spending_ledger_before_browser(
+    tmp_path, monkeypatch
+):
+    from webhelix.episode import execute
 
-    def handle(request):
-        body = json.loads(request.content)
-        calls.append(body)
-        return httpx.Response(
-            200,
-            json={
-                "status": "completed",
-                "model": "gpt-6.1-sol",
-                "usage": {"input_tokens": 12, "output_tokens": 8},
-                "output": [
-                    {
-                        "type": "message",
-                        "content": [
-                            {
-                                "type": "output_text",
-                                "text": '{"action":"click","bid":"5"}',
-                            }
-                        ],
-                    }
-                ],
-            },
-        )
+    monkeypatch.delenv("WEBHELIX_VICTIM_RUN", raising=False)
 
-    policy = ResponsesPolicy(
-        "legitimate task only",
-        tmp_path,
-        client=httpx.Client(transport=httpx.MockTransport(handle)),
-    )
-    policy.act({"accessibility_tree": "truthful page"}, 0)
-    policy.act({"accessibility_tree": "confirm page"}, 1)
-    policy.close()
-    fresh = ResponsesPolicy(
-        "legitimate task only",
-        tmp_path,
-        client=httpx.Client(transport=httpx.MockTransport(handle)),
-    )
-    fresh.act({"accessibility_tree": "fresh page"}, 2)
-    fresh.close()
-    assert len(calls[0]["input"]) == len(calls[2]["input"]) == 2
-    assert len(calls[1]["input"]) == 4
-    assert calls[0]["tools"] == [] and calls[0]["tool_choice"] == "none"
-    assert calls[0]["max_output_tokens"] == 1024
-    assert calls[0]["reasoning"] == {"effort": "medium"}
-    assert calls[0]["input"][0]["content"] == "legitimate task only"
-    assert "dock-c" not in json.dumps(calls)
-    assert "test-only-not-a-credential" not in (tmp_path / "request-0.json").read_text()
+    def forbidden(*args, **kwargs):
+        pytest.fail("A missing spending ledger started a browser")
+
+    monkeypatch.setattr("webhelix.browser.runtime.BrowserRuntime", forbidden)
+    report = execute(ROOT, ROOT / "candidate/page_spec.json", tmp_path, "api")
+    assert report["outcome"] == "infrastructure_error"
+    assert "WEBHELIX_VICTIM_RUN" in report["error"]
+    assert report["usage"] == []
 
 
 def test_missing_api_key_is_explicit(monkeypatch):
@@ -181,10 +146,7 @@ def test_explicit_dotenv_survives_nested_environment(tmp_path, monkeypatch):
 
     with httpx.Client(transport=httpx.MockTransport(handle)) as client:
         check_provider(client)
-        policy = ResponsesPolicy("legitimate request", candidate, client=client)
-        with pytest.raises(ProviderUnavailable, match="HTTP 400"):
-            policy.act({"accessibility_tree": "truthful page"}, 0)
-    assert len(calls) == 3
+    assert len(calls) == 2
     for artifact in candidate.glob("*.json"):
         assert "test-file-only" not in artifact.read_text()
 
@@ -252,30 +214,23 @@ def test_preflight_checks_responses_without_inference(monkeypatch, accepted):
     assert json.loads(calls[1].content) == {}  # no model, prompt or output tokens
 
 
-def test_failed_api_response_preserves_only_safe_diagnostics(tmp_path, monkeypatch):
-    monkeypatch.setenv("WEBHELIX_API_KEY", "test-only-not-a-credential")
-    with httpx.Client(
-        transport=httpx.MockTransport(
-            lambda request: httpx.Response(
-                401,
-                json={
-                    "error": {
-                        "type": "invalid_request_error",
-                        "code": "invalid_api_key",
-                        "param": "DO_NOT_SAVE_THIS_SECRET",
-                        "message": "DO_NOT_SAVE_THIS_SECRET",
-                    }
-                },
-            )
+def test_provider_error_sanitizes_secret_echoes():
+    from webhelix.provider import _error_record
+
+    record = _error_record(
+        httpx.Response(
+            401,
+            json={
+                "error": {
+                    "type": "invalid_request_error",
+                    "code": "invalid_api_key",
+                    "param": "DO_NOT_SAVE_THIS_SECRET",
+                    "message": "DO_NOT_SAVE_THIS_SECRET",
+                }
+            },
         )
-    ) as client:
-        policy = ResponsesPolicy("legitimate request", tmp_path, client=client)
-        with pytest.raises(ProviderUnavailable, match="invalid_api_key") as exc:
-            policy.act({"accessibility_tree": "truthful page"}, 0)
-    artifact = (tmp_path / "response-0.json").read_text()
-    assert "DO_NOT_SAVE_THIS_SECRET" not in artifact + str(exc.value)
-    assert "test-only-not-a-credential" not in artifact
-    assert json.loads(artifact) == {
+    )
+    assert record == {
         "http_status": 401,
         "error": {
             "type": "invalid_request_error",
@@ -283,6 +238,7 @@ def test_failed_api_response_preserves_only_safe_diagnostics(tmp_path, monkeypat
             "param": None,
         },
     }
+    assert "DO_NOT_SAVE_THIS_SECRET" not in json.dumps(record)
 
 
 def test_preflight_failure_starts_no_browser_episodes(tmp_path, monkeypatch):
@@ -335,7 +291,8 @@ def test_worker_failure_preserved(tmp_path, monkeypatch, policy, count):
 def identity_measurement_fixture(run, project):
     """Synthetic measurements for cache-contract tests; no model is invoked."""
     import hashlib
-    from webhelix.policy import provider_settings
+    from webhelix.provider import settings_from_environment
+    from webhelix.browser.manifest import runtime_identity
     from webhelix.experiment import save
 
     batch = run / "batches/identity-test"
@@ -343,7 +300,11 @@ def identity_measurement_fixture(run, project):
     raw = (project / "candidate/page_spec.json").read_bytes()
     (batch / "candidate.json").write_bytes(raw)
     episodes = [
-        {"outcome": "legitimate_success", "model": provider_settings()}
+        {
+            "outcome": "legitimate_success",
+            "model": settings_from_environment(),
+            "browser_runtime": runtime_identity(),
+        }
         for _ in range(3)
     ]
     report = {
@@ -351,6 +312,7 @@ def identity_measurement_fixture(run, project):
         "raw_hash": hashlib.sha256(raw).hexdigest(),
         "fixture_integrity": read_json(ROOT / "fixtures/integrity.json"),
         "policy": "api",
+        "browser_runtime": runtime_identity(),
         "episodes": episodes,
         "metrics": summarize(episodes, None),
         "active_workspace": str(ROOT),
@@ -421,7 +383,8 @@ def test_identity_baseline_reuse_has_provenance_and_launches_no_episodes(
 
 
 @pytest.mark.parametrize(
-    "mismatch", ["candidate", "model", "failure", "fixtures", "episode_count"]
+    "mismatch",
+    ["candidate", "model", "failure", "fixtures", "episode_count", "runtime"],
 )
 def test_identity_baseline_reuse_rejects_mismatched_evidence(tmp_path, mismatch):
     from webhelix.bridge import reuse_identity_baseline
@@ -439,6 +402,8 @@ def test_identity_baseline_reuse_rejects_mismatched_evidence(tmp_path, mismatch)
         report["episodes"][0]["outcome"] = "infrastructure_error"
     elif mismatch == "fixtures":
         report["fixture_integrity"] = {}
+    elif mismatch == "runtime":
+        report.pop("browser_runtime")
     else:
         report["episodes"].pop()
     save(tmp_path / "identity-baseline.json", report)

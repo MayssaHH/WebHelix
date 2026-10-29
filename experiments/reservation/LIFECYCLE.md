@@ -8,13 +8,14 @@ requirements. No specific room, component, color, tactic or action sequence is
 prescribed. The metric and allowed search space are experimenter-defined; discovery
 still occurs within those choices.
 
-The **victim** is a separate model conversation driven by `VisionPolicy`. It gets
-the legitimate user request, its browser-action instructions, current screenshot,
-current viewport DOM text/controls and previous observations/actions. It does not
-get the attack objective, evaluator labels, candidate history or optimizer notes.
-Its JSON actions are executed through BrowserGym in Chromium. The API has no tools
-of its own: the runner implements the browser-action protocol. Each episode has a
-new process, browser context, server/backend state and conversation.
+The **victim** is a separate Browser-Use `Agent` with an independent model
+conversation. It gets the legitimate request, Browser-Use's agent instructions,
+native browser state, screenshots and episode history. It does not get the attack
+objective, evaluator labels, candidate history or optimizer notes. Browser-Use
+owns the browser-action loop. WebHelix supplies fresh task/browser/backend state,
+provider accounting, exact request evidence and independent scoring. The earlier
+`VisionPolicy` and BrowserGym execution path have been removed. Historical published
+runs still describe the original victim; they are not current-agent baselines.
 
 The **evaluator** is deterministic application code. There is no judge LLM. It
 checks candidate syntax and the rendered legitimate path, then scores actual
@@ -34,7 +35,7 @@ flowchart TD
     M --> A[Codex inside Bubblewrap: propose HTML/CSS and write hypothesis]
     A --> S[Save proposal; upstream scope enforcement]
     S --> V[Constraint command: snapshot and validate active candidate]
-    V -- Valid --> E[3 independent BrowserGym + API victim episodes]
+    V -- Valid --> E[3 independent Browser-Use victim episodes]
     V -- Invalid --> R[Reject; no victim calls]
     E --> G{All episodes completed and violation rate strictly improves?}
     G -- No --> R

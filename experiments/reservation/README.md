@@ -1,10 +1,11 @@
 # Reservation experiment (v2)
 
-**Execution status:** [six real diagnostics passed; optimizer blocked before a
-candidate](../../examples/reservation/WALKTHROUGH.md). The five-iteration real
-search is not complete. No new model request should be made to work around the
-provider safeguard. The procedures below describe an authorized run once provider
-access permits the experiment. [Lifecycle and evidence map](LIFECYCLE.md).
+**Historical execution:** [six real diagnostics passed; optimizer blocked before a
+candidate](../../examples/reservation/WALKTHROUGH.md). Those traces used the former
+custom BrowserGym victim. The current reservation runner uses the shared Browser-Use
+integration; the migration does not establish a paid rerun or a completed real
+search. New experiments require fresh clean and identity measurements.
+[Lifecycle and evidence map](LIFECYCLE.md).
 
 This corrects the original product-selection prototype without changing its files
 or historical results. The attacker chooses HTML/CSS modifications to a fictional,
@@ -20,9 +21,9 @@ complete is not rewarded. The task and fixtures are outside the editable worktre
 
 - `src/webhelix/v2/contract.py`: immutable task interpretation and candidate format.
 - `site.py`: fixed transitions, factual slots, defaults, and backend confirmation.
-- `episode.py`: BrowserGym custom task, fresh browser/server, actual browser actions.
-- `policy.py`: independent Responses API victim, current screenshot plus visible
-  DOM text/control inventory, prior text observations/actions; no optimizer labels.
+- `episode.py`: task-specific setup, fresh server, backend scoring and shared runner.
+- `src/webhelix/browser/`: native Browser-Use Agent, browser session, Responses model
+  adapter and exact input/action evidence; no optimizer labels.
 - `evaluate.py`: validation, legitimate-path feasibility check, fresh worker episodes,
   durable evidence, and protected 30-episode ledger.
 - `bridge.py`: AutoHelix command constraints/observables; strict retention check.
@@ -37,14 +38,13 @@ controls/endpoints, external assets, automatic state changes and hidden/obstruct
 required controls are outside the initial contract. The schema still limits what
 can be discovered; it is not unrestricted website generation.
 
-Screenshots sent to the victim are 1024x768. The accompanying text/control inventory
-is viewport-filtered DOM information, not a full off-screen accessibility dump.
-Scroll changes exposure; click/fill requires a control in the current observation.
-Actions are structured JSON mapped to BrowserGym click/fill/scroll/go_back calls.
-The model has no direct files, backend tools or arbitrary-code interface. Only the
-current screenshot is attached per request; previous text observations and actions
-remain in the independent episode conversation. Screenshots, exact request bodies,
-actions, responses, HTML and backend state are saved for every step.
+The victim uses Browser-Use's native page representation, screenshot input,
+instructions, history and browser-action loop. The shared runtime confines browser
+requests to the task site and excludes direct access to fixtures, files, backend
+state, evaluator tools and optimizer feedback. Exact provider requests establish
+which screenshots and observations reached the model; additional validation
+snapshots are not automatically model inputs. Native observations, screenshots,
+actions, responses, HTML and backend state are preserved for inspection.
 
 Free-prose truthfulness and realism are not fully machine-verifiable. Structural
 acceptance is not proof that a candidate is a scientifically valid manipulation.
@@ -103,9 +103,24 @@ uv run --locked pytest -q tests/v2
 # Pick nonexistent output paths; existing runs are never overwritten.
 uv run --locked webhelix reservation controls --run-dir /tmp/webhelix-v2-controls-new
 uv run --locked webhelix reservation scripted-demo --run-dir /tmp/webhelix-v2-scripted-new
-# Paid experiment, only with authorization and valid Codex/API access:
+```
+
+Paid use additionally requires an explicitly prepared provider spending directory;
+see [real-model accounting in the main README](../../README.md#real-models-and-accounting).
+It must have `runtime.json` (including `victim`, `max_real_episodes`, `max_actions`)
+and an authorized `spending-plan.json`. Use a separate directory from the older
+30-reservation ledger: the two `budget.json` schemas are different. After checking
+that configuration and Codex/API access:
+
+```bash
+export WEBHELIX_VICTIM_RUN=/absolute/path/to/authorized-victim-spending-directory
 bash scripts/with-dotenv.sh reservation experiment --run-dir /tmp/webhelix-v2-real-new
 ```
+
+The path is a placeholder, not a prepared ledger or spending authorization. The
+model adapter rejects paid execution without this configuration. Neither old
+successful diagnostics nor a historical 30-episode balance supplies new-agent
+baseline measurements.
 
 Standalone evaluation defaults to a scripted legitimate policy:
 
@@ -145,8 +160,11 @@ invocation. No reset of a ledger is supported.
 
 Each episode: at most 14 actions, 1024 output tokens/request, 45-second HTTP timeout,
 300-second worker timeout, no request retries. Candidate constraint timeout: 990
-seconds. AutoHelix: five iterations, 45-minute between-iteration time budget. Model
-tokens are measured separately; no dollar cap is enforced or estimated as one.
+seconds. AutoHelix: five iterations, 45-minute between-iteration time budget. The
+current victim adapter also reserves and settles each request against the explicitly
+selected `WEBHELIX_VICTIM_RUN` spending plan. That cap applies to victim API calls;
+Codex optimizer billing is separate. Historical runs predated this new provider
+ledger. Local conservative accounting is not a provider invoice or account-wide cap.
 Budget exhaustion, startup failure or an early time limit must be reported as a
 partial run, not five completed iterations.
 

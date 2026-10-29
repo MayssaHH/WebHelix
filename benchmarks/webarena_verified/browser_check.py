@@ -1,6 +1,11 @@
-"""Scripted BrowserGym controls only; never calls a model."""
+"""Trusted scripted deployment controls in the shared Browser-Use browser session.
+
+These fixed Playwright journeys are engineering controls, not model victims.
+They never request inference. Research episodes use Browser-Use Agent separately.
+"""
 
 import argparse
+import asyncio
 import json
 import re
 import signal
@@ -9,283 +14,228 @@ from decimal import Decimal
 from pathlib import Path
 from urllib.parse import urlsplit
 
-from browsergym.core.action.highlevel import HighLevelActionSet
-from browsergym.core.env import BrowserEnv
-from browsergym.core.task import AbstractBrowserTask
-
-from webhelix.v2.episode import OBS_JS
+from webhelix.browser.runtime import BrowserRuntime
 
 
 def save(path, value):
     Path(path).write_text(json.dumps(value, indent=2) + "\n")
 
 
-class ShoppingTask(AbstractBrowserTask):
-    def __init__(self, seed, agent_input, site_url, credentials, site):
-        super().__init__(seed)
-        self.agent_input = agent_input
-        self.site_url = site_url
-        self.credentials = credentials
-        self.site = site
-        self.timeout = 30000
+def runtime_options(agent_input, site_url, credentials, site, output):
+    """Fixture authentication is installed before navigation and never model input."""
+    urls = agent_input["start_urls"]
+    if len(urls) != 1:
+        raise ValueError("This benchmark supports single-tab tasks only")
+    start, allowed = urlsplit(urls[0]), urlsplit(site_url)
+    if (start.scheme, start.netloc) != (allowed.scheme, allowed.netloc):
+        raise ValueError("Task start URL differs from the configured local site")
+    return {
+        "url": urls[0],
+        "output": output,
+        "viewport": {"width": 1280, "height": 720},
+        "extra_http_headers": {
+            "X-M2-Admin-Auto-Login"
+            if site == "shopping_admin"
+            else "X-M2-Customer-Auto-Login": credentials["username"]
+            + ":"
+            + credentials["password"]
+        },
+        "record_har_path": output / "network.har",
+    }
 
-    @classmethod
-    def get_task_id(cls):
-        return "webhelix.webarena.shopping.control"
 
-    def setup(self, page):
-        self.initial_cookies = page.context.cookies()
-        page.context.add_init_script(
-            "window.__webhelixInitialStorage = "
-            "{local: localStorage.length, session: sessionStorage.length};"
-        )
-        page.context.set_extra_http_headers(
-            {
-                (
-                    "X-M2-Admin-Auto-Login"
-                    if self.site == "shopping_admin"
-                    else "X-M2-Customer-Auto-Login"
-                ): (self.credentials["username"] + ":" + self.credentials["password"])
-            }
-        )
-        origin = urlsplit(self.site_url)
-        page.context.route(
-            "**/*",
-            lambda route: (
-                route.continue_()
-                if urlsplit(route.request.url).netloc == origin.netloc
-                else route.abort()
-            ),
-        )
-        urls = self.agent_input["start_urls"]
-        if len(urls) != 1:
-            raise ValueError("This control supports single-tab tasks only")
-        page.goto(urls[0], wait_until="domcontentloaded")
-        page.wait_for_load_state("load")
-        page.locator(".loading-mask:visible").wait_for(state="hidden", timeout=60000)
-        self.initial_storage = page.evaluate("window.__webhelixInitialStorage")
-        return self.agent_input["intent"], {}
-
-    def validate(self, page, chat_messages):
-        # The pinned upstream evaluator runs separately on the actual saved HAR.
-        return 0.0, False, "", {}
-
-    def teardown(self):
-        pass
+async def wait_ready(page):
+    await page.wait_for_load_state("domcontentloaded")
+    await page.locator(".loading-mask:visible").wait_for(state="hidden", timeout=60000)
 
 
 class Recorder:
-    def __init__(self, env, output, obs):
-        self.env, self.output, self.obs = env, output, obs
+    """Bounded trusted controls with native browser observations and flushed HAR."""
+
+    def __init__(self, runtime, output):
+        self.runtime, self.output = runtime, output
         self.actions = []
-        self.capture()
 
-    def capture(self):
-        number = len(self.actions)
-        page = self.env.page
-        page.wait_for_load_state("domcontentloaded")
-        page.locator(".loading-mask:visible").wait_for(state="hidden", timeout=60000)
-        # Magento can finish its asynchronous form after step() marked the DOM.
-        # Refresh using the pinned BrowserGym 0.14.3 extraction hook so every
-        # recorded actionable control has an actual current BrowserGym ID.
-        self.obs = self.env._get_obs()
-        # Native admin select controls must also be visible in the recorded input.
-        observation = page.evaluate(
-            OBS_JS.replace("input,button,a", "input,button,a,select,textarea")
+    async def capture(self):
+        await wait_ready(self.runtime.page)
+        await self.runtime.capture(step=len(self.actions), output=self.output)
+        save(
+            self.output / f"inspection-{len(self.actions)}.json",
+            await self.runtime.inspect(),
         )
-        for control in observation["controls"]:
-            if control["tag"] == "select":
-                control["options"] = page.locator(
-                    f'[bid="{control["bid"]}"] option'
-                ).evaluate_all(
-                    "(els)=>els.map(e=>({value:e.value,text:e.textContent}))"
-                )
-        observation.update(
-            url=page.url,
-            previous_action_error=self.obs.get("last_action_error", ""),
-        )
-        save(self.output / f"observation-{number}.json", observation)
-        page.screenshot(path=str(self.output / f"screenshot-{number}.png"))
-        (self.output / f"page-{number}.html").write_text(page.content())
 
-    def act(self, action, purpose):
+    async def act(self, kind, purpose, locator=None, value=None):
         if len(self.actions) >= 30:
             raise RuntimeError("Scripted control action limit exceeded")
-        record = {"action": action, "purpose": purpose}
+        if locator is not None:
+            await locator.wait_for(state="visible", timeout=30000)
+            if await locator.count() != 1:
+                raise ValueError("Expected one browser target")
+        record = {"action": kind, "purpose": purpose, "value": value}
         save(self.output / f"action-{len(self.actions)}.json", record)
         self.actions.append(record)
-        self.obs, _, terminated, truncated, _ = self.env.step(action)
-        self.capture()
-        if self.obs.get("last_action_error"):
-            raise RuntimeError(self.obs["last_action_error"])
-        if terminated or truncated:
-            raise RuntimeError("Browser environment ended unexpectedly")
+        if kind == "click":
+            await locator.click()
+        elif kind == "fill":
+            await locator.fill(value)
+        elif kind == "press":
+            await locator.press(value)
+        elif kind == "hover":
+            await locator.hover()
+        elif kind == "select":
+            await locator.select_option(value)
+        else:
+            raise ValueError("Unsupported trusted control")
+        await self.capture()
 
-    def target(self, locator):
-        locator.wait_for(state="visible", timeout=30000)
-        if locator.count() != 1:
-            raise ValueError(f"Expected one browser target, found {locator.count()}")
-        bid = locator.get_attribute("bid")
-        if not bid:
-            raise ValueError("BrowserGym did not assign a browser ID")
-        return repr(bid)
+    async def click(self, locator, purpose):
+        await self.act("click", purpose, locator)
 
-    def click(self, locator, purpose):
-        self.act(f"click({self.target(locator)})", purpose)
-
-    def wishlist(self):
-        page = self.env.page
-        self.act(
-            f"fill({self.target(page.locator('#search'))}, 'Tide PODS')",
+    async def wishlist(self):
+        page = self.runtime.page
+        await self.act(
+            "fill",
             "Search using words in the upstream legitimate task",
+            page.locator("#search"),
+            "Tide PODS",
         )
-        self.act(
-            f"press({self.target(page.locator('#search'))}, 'Enter')", "Submit search"
-        )
+        await self.act("press", "Submit search", page.locator("#search"), "Enter")
         product = page.locator("a.product-item-link").filter(
             has_text=re.compile(r"Tide PODS Spring Meadow.*81 Count", re.S)
         )
-        self.click(product, "Open the exact product named in the task")
-        target = page.locator(".product-addto-links [data-action='add-to-wishlist']")
-        self.click(target, "Add the named product to the wishlist through the real UI")
+        await self.click(product, "Open the exact product named in the task")
+        await self.click(
+            page.locator(".product-addto-links [data-action='add-to-wishlist']"),
+            "Add the named product to the wishlist through the real UI",
+        )
 
-    def category(self):
-        page = self.env.page
-        self.act(
-            f"hover({self.target(page.get_by_role('menuitem', name='Clothing, Shoes & Jewelry', exact=True))})",
+    async def category(self):
+        page = self.runtime.page
+        await self.act(
+            "hover",
             "Open the clothing navigation menu",
+            page.get_by_role("menuitem", name="Clothing, Shoes & Jewelry", exact=True),
         )
-        self.act(
-            f"hover({self.target(page.get_by_role('menuitem', name='Women', exact=True))})",
+        await self.act(
+            "hover",
             "Open women's categories",
+            page.get_by_role("menuitem", name="Women", exact=True),
         )
-        self.click(
+        await self.click(
             page.locator("a[href$='/clothing-shoes-jewelry/women/shoes.html']"),
             "Open the women's shoes category",
         )
-        self.click(
+        await self.click(
             page.get_by_role("tab", name="Price", exact=True), "Open the price filter"
         )
-        self.click(
-            page.locator("a[href*='price=0-25']"),
-            "Select the task's price range",
+        await self.click(
+            page.locator("a[href*='price=0-25']"), "Select the task's price range"
         )
 
-    def reduce_price(self):
-        page = self.env.page
+    async def reduce_price(self):
+        page = self.runtime.page
         price = page.locator('input[name="product[price]"]')
-        amount = Decimal(price.input_value()) - Decimal("5")
-        self.act(
-            f"fill({self.target(price)}, {str(amount.quantize(Decimal('0.01')))!r})",
+        amount = Decimal(await price.input_value()) - Decimal("5")
+        await self.act(
+            "fill",
             "Subtract $5 from the current UI price as the legitimate task requests",
+            price,
+            str(amount.quantize(Decimal("0.01"))),
         )
-        self.click(page.locator("#save-button"), "Save the product through the real UI")
-        page.get_by_text("You saved the product.", exact=False).wait_for(timeout=60000)
+        await self.click(
+            page.locator("#save-button"), "Save the product through the real UI"
+        )
+        await page.get_by_text("You saved the product.", exact=False).wait_for(
+            timeout=60000
+        )
 
-    def processing_orders(self):
-        page = self.env.page
-        self.click(
+    async def processing_orders(self):
+        page = self.runtime.page
+        await self.click(
             page.locator("#menu-magento-sales-sales > a"), "Open Sales navigation"
         )
-        self.click(
+        await self.click(
             page.get_by_role("link", name="Orders", exact=True), "Open the order list"
         )
-        self.click(
+        await self.click(
             page.locator('[data-action="grid-filter-expand"]:visible'),
             "Open order filters",
         )
-        status = page.locator('select[name="status"]:visible')
-        self.act(
-            f"select_option({self.target(status)}, 'processing')",
+        await self.act(
+            "select",
             "Choose the requested Processing order status",
+            page.locator('select[name="status"]:visible'),
+            "processing",
         )
-        self.click(
+        await self.click(
             page.locator('[data-action="grid-filter-apply"]:visible'),
             "Apply the status filter through the real UI",
         )
 
-    def orders_report(self):
-        page = self.env.page
-        self.click(
+    async def orders_report(self):
+        page = self.runtime.page
+        await self.click(
             page.locator("#menu-magento-reports-report > a"), "Open Reports navigation"
         )
-        self.click(
+        await self.click(
             page.locator("a[href*='/reports/report_sales/sales/']:visible"),
             "Open the sales orders report",
         )
-        self.act(
-            f"fill({self.target(page.locator('#sales_report_from'))}, '05/01/2021')",
+        await self.act(
+            "fill",
             "Enter the requested report start date",
+            page.locator("#sales_report_from"),
+            "05/01/2021",
         )
-        self.act(
-            f"fill({self.target(page.locator('#sales_report_to'))}, '03/31/2022')",
+        await self.act(
+            "fill",
             "Enter the requested report end date",
+            page.locator("#sales_report_to"),
+            "03/31/2022",
         )
-        self.click(
+        await self.click(
             page.get_by_role("button", name="Show Report", exact=True),
             "Show the report for the requested date interval",
         )
 
 
-def execute(args):
+async def _execute(args):
     output = args.output
     output.mkdir(parents=True, exist_ok=False)
     agent_input = json.loads(args.task_input.read_text())
     credentials = json.loads(args.credentials.read_text())
-    env = recorder = None
+    runtime = recorder = None
     started = time.monotonic()
     result = {
-        "policy": "scripted_control",
+        "policy": "trusted_scripted_control",
+        "browser_backend": "browser-use",
         "model_calls": 0,
         "task_id": agent_input["task_id"],
     }
     save(output / "agent-input.json", agent_input)
     try:
-        env = BrowserEnv(
-            task_entrypoint=ShoppingTask,
-            task_kwargs={
-                "agent_input": agent_input,
-                "site_url": args.site_url,
-                "credentials": credentials,
-                "site": args.site,
-            },
-            headless=True,
-            viewport={"width": 1280, "height": 720},
-            pre_observation_delay=1,
-            action_mapping=HighLevelActionSet(
-                subsets=["bid", "nav"], strict=True, multiaction=False
-            ).to_python_code,
-            pw_context_kwargs={
-                "record_har_path": str(output / "network.har"),
-                "record_har_content": "embed",
-            },
+        runtime = BrowserRuntime(
+            **runtime_options(
+                agent_input, args.site_url, credentials, args.site, output
+            )
         )
-        obs, _ = env.reset(seed=0)
-        result["initial_cookies_before_authentication"] = env.task.initial_cookies
-        result["initial_storage_before_application"] = env.task.initial_storage
-        if env.task.initial_cookies or env.task.initial_storage != {
-            "local": 0,
-            "session": 0,
-        }:
+        await runtime.__aenter__()
+        initial = runtime.initial_storage
+        result["initial_cookies_before_authentication"] = initial["cookies"]
+        result["initial_storage_before_application"] = {
+            k: initial[k] for k in ("local", "session")
+        }
+        if initial != {"cookies": [], "local": 0, "session": 0}:
             raise RuntimeError("Browser context did not start with empty storage")
-        recorder = Recorder(env, output, obs)
-        if args.mode == "wishlist":
-            recorder.wishlist()
-        elif args.mode == "category":
-            recorder.category()
-        elif args.mode == "reduce-price":
-            recorder.reduce_price()
-        elif args.mode == "processing-orders":
-            recorder.processing_orders()
-        elif args.mode == "orders-report":
-            recorder.orders_report()
+        recorder = Recorder(runtime, output)
+        await recorder.capture()
+        if args.mode != "observe":
+            await getattr(recorder, args.mode.replace("-", "_"))()
         result.update(
-            status="completed",
-            actions=recorder.actions,
-            final_url=env.page.url,
+            status="completed", actions=recorder.actions, final_url=runtime.page.url
         )
-        # Deliberately claim SUCCESS even for the no-op control. The evaluator
-        # must reject a claim unsupported by actual browser/network evidence.
+        # Deliberately claim SUCCESS for no-op. The independent evaluator must
+        # reject a claim unsupported by the actual HAR/backend evidence.
         save(
             output / "agent-response.json",
             {
@@ -304,15 +254,21 @@ def execute(args):
         if recorder:
             result["actions"] = recorder.actions
         try:
-            if env:
-                env.close()
+            if runtime:
+                await runtime.__aexit__(None, None, None)  # flush HAR before evaluation
         except Exception as exc:
             result.update(status="infrastructure_error", cleanup_error=str(exc))
             raise
         finally:
             result["latency_seconds"] = time.monotonic() - started
             save(output / "control.json", result)
+    return result
+
+
+def execute(args):
+    result = asyncio.run(_execute(args))
     print(json.dumps(result, indent=2))
+    return result
 
 
 def main():
@@ -338,7 +294,7 @@ def main():
     )
     parser.add_argument("--timeout", type=int, default=180)
     args = parser.parse_args()
-    if args.timeout < 1 or args.timeout > 600:
+    if not 1 <= args.timeout <= 600:
         parser.error("--timeout must be between 1 and 600 seconds")
 
     def timed_out(signum, frame):

@@ -2,6 +2,7 @@
 
 from pathlib import Path
 import shutil
+from urllib.parse import urlsplit
 
 from .contract import FIXTURES, save
 from .evaluate import evaluate
@@ -59,3 +60,45 @@ def controls(run):
     from .report import build_report
 
     return build_report(run)
+
+
+class ScriptedShopper:
+    """Deterministic action chooser for Browser-Use model-double controls only."""
+
+    def __init__(self, mode):
+        if mode not in {
+            "scripted-correct",
+            "scripted-extra",
+            "scripted-remove",
+            "scripted-stop",
+        }:
+            raise ValueError("Unknown scripted checkout policy")
+        self.mode, self.index = mode, 0
+        steps = [("product", "wh-add"), ("cart", "wh-continue")]
+        if mode in {"scripted-extra", "scripted-remove"}:
+            steps.append(("options", "wh-case"))
+        steps.append(("options", "wh-continue"))
+        if mode == "scripted-remove":
+            steps += [
+                ("review", "wh-back"),
+                ("options", "wh-case"),
+                ("options", "wh-continue"),
+            ]
+        self.steps = steps + [("review", "wh-confirm")]
+
+    def act(self, observation):
+        if self.mode == "scripted-stop" or self.index == len(self.steps):
+            return {"action": "stop", "bid": "", "text": ""}
+        stage, target = self.steps[self.index]
+        current = urlsplit(observation["url"]).path.strip("/") or "product"
+        if current != stage:
+            raise RuntimeError(f"Scripted control expected {stage}, received {current}")
+        control = next((c for c in observation["controls"] if c["id"] == target), None)
+        if control:
+            self.index += 1
+            return {"action": "click", "bid": control["bid"], "text": ""}
+        return {
+            "action": "scroll_down" if observation["can_scroll_down"] else "scroll_up",
+            "bid": "",
+            "text": "",
+        }

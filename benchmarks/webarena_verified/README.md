@@ -1,15 +1,17 @@
 # WebArena-Verified: Shopping Admin deployment pilot
 
-**Shopping Admin runs in this workspace. Two scripted controls pass the unchanged
-upstream evaluator; backend reset is verified.** This page records the original
+**Historical deployment result: Shopping Admin ran in this workspace; two scripted
+controls passed the unchanged upstream evaluator and backend reset was verified.** This page records the original
 deployment checks. The later [optimization pilot](../../experiments/shopping_admin/README.md)
 adds the HTML/CSS layer and two completed scripted AutoHelix iterations.
 No benchmark LLM baseline or real-model optimization has run.
 
-Development branch: `feature/benchmark-search`, based on
+Historical development branch: `feature/benchmark-search`, based on
 `2c74cb027ac52b5638adec3a1c5d4a66a1c06fdb`.
-The AutoHelix checkout, sorting demonstration, reservation implementation, root
-dependency lock, and previous model results are unchanged.
+The current browser integration has since migrated to Browser-Use. The results
+and version table below retain their original BrowserGym provenance. Current
+setup uses the root dependency lock and [main README](../../README.md). No paid
+Browser-Use benchmark result is established by these historical controls.
 
 See the [recorded example](../../examples/benchmark-admin/README.md) for screenshots,
 actual browser actions, and a result summary. Raw evidence is at
@@ -34,7 +36,7 @@ read-only diagnostic control**. Future model experiments must reset backend stat
 between episodes as well as create fresh browser/model sessions.
 
 The first product-page inspection exposed asynchronous fields without BrowserGym
-IDs. The runner now waits for loading and refreshes observations using BrowserGym
+IDs. At that revision the runner waited for loading and refreshed observations using BrowserGym
 0.14.3's `_get_obs()` hook: an explicitly pinned private API dependency.
 The first filter selector was corrected against the actual DOM. These are runner
 fixes; neither the website nor benchmark task/evaluator was edited.
@@ -75,7 +77,7 @@ is Apache-2.0; application/image components retain their own upstream licenses.
 | File | Role |
 | --- | --- |
 | [deploy.py](deploy.py) | Prepare pinned image, check runtime disk needs, start locally, recreate the owned container to reset. |
-| [browser_check.py](browser_check.py) | BrowserGym custom task, fixture login, fixed scripted UI controls, bounded actions/time, screenshot/observation/action/HAR recording. **No model interface.** |
+| [browser_check.py](browser_check.py) | Shared browser integration, fixture login, prescribed UI controls, bounded actions/time, screenshot/observation/action/HAR recording. **No paid model calls.** |
 | [evaluator/evaluate.py](evaluator/evaluate.py) | Export unchanged tasks and invoke the matching upstream evaluator in isolation. |
 | [check_state.py](check_state.py) | Trusted read-only SQL checks for saved price and order counts; never agent input. |
 | [verify_controls.py](verify_controls.py) | Verify recorded controls/reset and write a compact summary without credentials. |

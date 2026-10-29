@@ -1,8 +1,13 @@
 # OpenCode checkout optimizer
 
-This branch adds a full OpenCode coding-agent harness to the existing consumer
+WebHelix provides a full OpenCode coding-agent harness for the consumer
 checkout experiment. Select it explicitly with `--optimizer-backend opencode`.
 The existing `proposal-api` backend remains available and remains the CLI default.
+
+All linked 26 October runs below predate the Browser-Use migration and used the
+former custom BrowserGym victim. They retain their original provenance. New runs
+use Browser-Use and must establish fresh clean/identity baselines. No paid
+Browser-Use result is established by those historical artifacts.
 
 The [26 October real-model results](../examples/checkout/REAL_MODEL_RUN.md) used
 the **direct API proposal adapter**, not OpenCode. They must not be relabelled as
@@ -52,20 +57,24 @@ AutoHelix candidate worktree and preserved feedback
 The optimizer reads and edits files directly. It does not return a JSON object of
 replacement files as the old adapter did. `wh-preview` serves a validated snapshot
 of the active iteration's files, then uses a deterministic shopper to record the
-same screenshot and visible-control observation format as the victim. A successful
+configured native browser observation channel used by the current victim.
+Additional validation snapshots are labeled as diagnostics, not model inputs. A successful
 preview is engineering evidence, **not** a measured victim outcome. The optimizer
 has no paid victim-evaluation tool in this first repeat.
 
 The optimizer receives the actual task, experimental objective, contract, current
 candidate, reference images, previous hypotheses and trusted results. Its prompt
-explains that the victim sees screenshots plus visible text/control labels and
-checked states, and clicks exact browser IDs. No particular manipulation is
+describes the current Browser-Use observation and action interface. Native Agent
+messages and screenshots establish what the victim actually received. No particular manipulation is
 prescribed. The optimizer must write `optimizer-note.md` with four sections:
 `hypothesis`, `predicted_observation`, `falsification`, and `reflection`.
 
-The task, renderer, truthful presentation contract, victim policy and scoring are
-unchanged. The victim still uses its own Responses API conversation and
-BrowserGym/Chromium; it does not receive optimizer instructions or feedback.
+The task, renderer, truthful presentation contract and independent scoring are
+preserved. The victim now uses Browser-Use's Agent and browser integration with
+its own Responses API model conversation. Browser-Use supplies the instructions,
+observations, history and browser-action loop; the former custom policy and
+BrowserGym runtime are removed. The victim receives no optimizer objective,
+notes, feedback or protected evaluator data.
 
 ## Installation
 
@@ -133,7 +142,7 @@ the command creates it and refuses to overwrite an existing run. Outside the clo
 workspace, choose an equivalent writable directory.
 
 This demo exercises the actual OpenCode CLI with a local deterministic provider
-fixture and a scripted browser policy. It does not contact OpenAI, require an API
+fixture and deterministic browser-agent controls. It does not contact OpenAI, require an API
 key, or measure an LLM's steering ability. It runs the harmless editing check and
 five search sessions, using one scripted victim episode per condition. Its synthetic
 spending plan is marked `offline_fixture`; real-mode initialization explicitly
@@ -151,7 +160,9 @@ prove that account/model access works.
 ## Paid five-iteration repeat
 
 The initial requested model is `gpt-6.1-sol` with medium reasoning for both roles,
-in independent conversations. OpenCode uses the configured local provider name
+in independent conversations. The Browser-Use migration has not run a paid
+compatibility check or victim baseline with that configuration. Historical
+OpenCode/model access does not establish the new victim's live compatibility. OpenCode uses the configured local provider name
 `webhelix/gpt-6.1-sol`; the gateway forwards the underlying provider model ID.
 Model names and reasoning settings come from explicit configuration, not from the
 interactive assistant's model selection.
@@ -230,7 +241,7 @@ spending limit. The optimizer and victim have separate usage records within the
 combined ceiling. Deterministic previews consume time and compute but no model
 calls or victim-episode allowance.
 
-### Executed longer run and note-completion correction
+### Historical longer run and note-completion correction
 
 The [longer real-model experiment](../examples/checkout/opencode-longer-real-20261026/README.md)
 used a newly approved **$30 combined local ceiling**. Its first research attempt
@@ -308,6 +319,7 @@ Open `<run>/index.html`, then inspect these artifacts:
 | `proposals/iter-N/previews/preview-*/` | Candidate hash, validation and deterministic browser images/observations |
 | `proposals/iter-N/optimizer-note.md`, `candidate.diff`, `result.json` | Prediction made before evaluation, actual edit and proposal status |
 | `batches/`, `feedback/`, `history.json`, `feedback-continuity.json` | Independent victim results, decisions and preserved memory |
+| `batches/*/episode-*/browser-runtime.json`, `agent-input-*.json`, `request-*.json`, `call-*.json` | Effective Browser-Use identity, native model messages, provider payload and dispatch/accounting evidence |
 | `budget.json`, `proposals/iter-N/gateway-summary.json` | Request/episode accounting and provider outcomes |
 
 Keep full runs outside Git; publish only reviewed, sanitized selections. Preserve

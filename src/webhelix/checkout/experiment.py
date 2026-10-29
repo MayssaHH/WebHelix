@@ -14,6 +14,7 @@ import time
 from autohelix.harness import AutoHelixRunError, Harness
 from autohelix.history import IterationResult
 import yaml
+from webhelix.browser.manifest import runtime_identity
 
 from webhelix.optimizer.client import Settings
 from .contract import FILES, FIXTURES, ROOT, fingerprint, load, read, save, task
@@ -427,6 +428,7 @@ def experiment(run, scripted=True, optimizer_config=None):
         else ("scripted-fixture" if scripted else "bounded-visual-proposal"),
         "optimizer_model": model,
         "victim_settings": settings["victim"],
+        "browser_runtime": runtime_identity(),
         "condition": settings["condition"],
         "source_revision": subprocess.check_output(
             ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True

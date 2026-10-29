@@ -5,6 +5,7 @@ import signal
 from pathlib import Path
 
 from .contract import FIXTURES, read, save
+from webhelix.browser.manifest import runtime_identity
 
 
 def initialize(
@@ -25,6 +26,7 @@ def initialize(
         if not path.is_file():
             raise ValueError("Missing deployment receipt or fixture credential file")
     settings.update(
+        browser_runtime=runtime_identity(),
         condition=condition,
         preparation=str(Path(preparation).resolve()),
         credentials=str(Path(credentials).resolve()),

@@ -6,12 +6,14 @@ import os
 from pathlib import Path
 
 from .evaluate import evaluate, lock, summarize, verify_integrity
-from .policy import provider_settings
+from .provider import configured_victim_settings
 from .spec import read_json
+from .browser.manifest import runtime_identity
 
 
 def cache_key(workspace, raw):
-    return hashlib.sha256(str(workspace).encode() + b"\0" + raw).hexdigest()
+    identity = json.dumps(runtime_identity(), sort_keys=True).encode()
+    return hashlib.sha256(str(workspace).encode() + b"\0" + raw + identity).hexdigest()
 
 
 def reuse_identity_baseline(root, run, project):
@@ -27,6 +29,7 @@ def reuse_identity_baseline(root, run, project):
     raw = (project / "candidate/page_spec.json").read_bytes()
     if (
         not source_batch.is_relative_to(run.resolve())
+        or report.get("browser_runtime") != runtime_identity()
         or report["policy"] != "api"
         or report["raw_hash"] != hashlib.sha256(raw).hexdigest()
         or (source_batch / "candidate.json").read_bytes() != raw
@@ -35,7 +38,7 @@ def reuse_identity_baseline(root, run, project):
         or not report["metrics"]["evaluation_ok"]
         or any(
             e["outcome"] != "legitimate_success"
-            or e.get("model") != provider_settings()
+            or e.get("model") != configured_victim_settings()
             for e in report["episodes"]
         )
     ):

@@ -80,6 +80,19 @@ def test_cached_results_reject_changed_candidate_or_configuration(
         bridge("metrics")
 
 
+def test_cache_signature_includes_browser_agent_version(monkeypatch):
+    monkeypatch.setattr(
+        "webhelix.checkout.evaluate.runtime_identity",
+        lambda: {"browser_use_version": "0.13.14"},
+    )
+    first = evaluation_signature("candidate-hash", {}, "api", 3)
+    monkeypatch.setattr(
+        "webhelix.checkout.evaluate.runtime_identity",
+        lambda: {"browser_use_version": "0.13.15"},
+    )
+    assert evaluation_signature("candidate-hash", {}, "api", 3) != first
+
+
 def test_preflight_infrastructure_failure_is_not_invalid_candidate(
     tmp_path, monkeypatch
 ):

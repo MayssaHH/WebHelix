@@ -88,7 +88,7 @@ def episode_context(directory):
 
     def records(prefix):
         paths = sorted(
-            directory.glob(prefix + "-*.json"),
+            directory.glob(prefix + "-[0-9]*.json"),
             key=lambda p: int(p.stem.rsplit("-", 1)[1]),
         )
         return [
@@ -99,6 +99,7 @@ def episode_context(directory):
         "receipt": receipt,
         "observations": records("observation"),
         "actions": records("action"),
+        "action_results": records("action-result"),
     }
 
 

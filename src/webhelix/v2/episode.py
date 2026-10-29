@@ -1,54 +1,13 @@
-"""Fresh BrowserGym episode, screenshot + viewport controls, backend-only scoring."""
+"""Reservation task using the common Browser-Use agent and independent scoring."""
 
+import asyncio
 import time
 from pathlib import Path
-import jsonschema
-from browsergym.core.task import AbstractBrowserTask
 from .contract import InvalidCandidate, load_candidate, task, classify, save
 from .site import ReservationSite
-from .policy import VisionPolicy, ControlPolicy, SCHEMA
-from webhelix.policy import InvalidAction
-
-
-class ReservationTask(AbstractBrowserTask):
-    @classmethod
-    def get_task_id(cls):
-        return "webhelix.reservation.v2"
-
-    def __init__(self, seed, site):
-        super().__init__(seed)
-        self.site = site
-        self.slow_mo = 0
-        self.timeout = 5000
-
-    def setup(self, page):
-        origin = self.site.url
-        page.context.route(
-            "**/*",
-            lambda route: (
-                route.continue_()
-                if route.request.url.startswith(origin)
-                else route.abort()
-            ),
-        )
-        page.goto(origin)
-        return task()["request"], {}
-
-    def validate(self, page, chat_messages):
-        return 0.0, self.site.state["confirmed"], "", {}
-
-    def teardown(self):
-        pass
-
-
-# No off-screen text or controls are forwarded. Browser IDs refer to actual DOM.
-OBS_JS = """() => {
- const visible = el => {const r=el.getBoundingClientRect();for(let n=el;n;n=n.parentElement){const s=getComputedStyle(n);if(s.visibility!=='visible'||s.display==='none'||Number(s.opacity)<=0)return false;}return r.width>0&&r.height>0&&r.bottom>0&&r.right>0&&r.top<innerHeight&&r.left<innerWidth;};
- const controls=[...document.querySelectorAll('input,button,a')].filter(visible).filter(el=>!el.disabled).map(el=>({bid:el.getAttribute('bid'),id:el.id,tag:el.tagName.toLowerCase(),type:el.type||'',name:(el.labels?.[0]?.innerText||el.innerText||'').trim(),value:el.type==='text'?el.value:'',checked:!!el.checked}));
- const text=[]; const walk=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let n;
- while(n=walk.nextNode()){if(!n.textContent.trim()||!visible(n.parentElement))continue;const range=document.createRange();range.selectNodeContents(n);const r=range.getBoundingClientRect();if(r.bottom>0&&r.top<innerHeight)text.push(n.textContent.trim());}
- return {visible_text:text.join('\\n').slice(0,12000),controls,scroll_y:scrollY,viewport:{width:innerWidth,height:innerHeight},can_scroll_down:scrollY+innerHeight<document.documentElement.scrollHeight-2};
-}"""
+from webhelix.browser.manifest import runtime_identity
+from webhelix.provider import InvalidAction
+from webhelix.search.budget import BudgetBlocked
 
 
 def validate_page(page, site):
@@ -115,11 +74,9 @@ def feasibility(files):
             browser.close()
 
 
-def execute(
-    candidate, output, policy="scripted", violation=False, seed=0, max_actions=14
-):
-    from browsergym.core.env import BrowserEnv
-    from browsergym.core.action.highlevel import HighLevelActionSet
+async def _execute(candidate, output, policy, violation, seed, max_actions):
+    from webhelix.browser.model import ScriptedModel, model_from_environment
+    from webhelix.browser.runtime import BrowserRuntime, native_action
 
     output = Path(output)
     output.mkdir(parents=True, exist_ok=True)
@@ -130,87 +87,92 @@ def execute(
         "usage": [],
         "seed": seed,
         "policy": policy,
+        "browser_runtime": runtime_identity(),
     }
-    env = agent = site = None
+    model = site = None
     try:
         files = load_candidate(candidate)
+        if policy == "api":
+            model = model_from_environment(output)
+            report["model"] = model.settings
         with ReservationSite(files) as site:
-            env = BrowserEnv(
-                task_entrypoint=ReservationTask,
-                task_kwargs={"site": site},
-                viewport={"width": 1024, "height": 768},
-                headless=True,
-                action_mapping=HighLevelActionSet(
-                    subsets=["bid", "nav"], strict=True, multiaction=False
-                ).to_python_code,
-                pre_observation_delay=0.05,
-            )
-            obs, _ = env.reset(seed=seed)
-            report["initial_backend"] = site.snapshot()
-            report["initial_storage"] = {
-                "cookies": env.context.cookies(),
-                "local": env.page.evaluate("localStorage.length"),
-                "session": env.page.evaluate("sessionStorage.length"),
-            }
-            assert report["initial_storage"] == {
-                "cookies": [],
-                "local": 0,
-                "session": 0,
-            }
-            agent = (
-                VisionPolicy(task()["request"], output)
-                if policy == "api"
-                else ControlPolicy(violation)
-            )
-            for step in range(max_actions + 1):
-                observation = env.page.evaluate(OBS_JS)
-                observation["previous_action_error"] = obs.get("last_action_error", "")
-                save(output / f"observation-{step}.json", observation)
-                screenshot = output / f"screenshot-{step}.png"
-                env.page.screenshot(path=str(screenshot))
-                save(output / f"backend-{step}.json", site.snapshot())
-                (output / f"page-{step}.html").write_text(env.page.content())
-                if step == max_actions or site.state["confirmed"]:
-                    break
-                try:
-                    action = agent.act(observation, screenshot, step)
-                    jsonschema.validate(action, SCHEMA)
-                    report["actions"].append(action)
-                    save(output / f"action-{step}.json", action)
-                    kind = action["action"]
-                    bid = action["bid"]
-                    controls = {c["bid"]: c for c in observation["controls"]}
-                    if kind == "stop":
-                        break
-                    if kind in ("click", "fill"):
-                        if bid not in controls:
-                            raise InvalidAction("Control is not in current viewport")
-                        if kind == "fill" and controls[bid]["type"] != "text":
-                            raise InvalidAction("Not a text field")
-                        cmd = (
-                            f"click({bid!r})"
-                            if kind == "click"
-                            else f"fill({bid!r}, {action['text'][:200]!r})"
-                        )
-                    elif kind == "scroll":
-                        if action["direction"] not in ("up", "down"):
-                            raise InvalidAction("Scroll direction required")
-                        cmd = (
-                            "scroll(0, "
-                            + ("600" if action["direction"] == "down" else "-600")
-                            + ")"
-                        )
-                    else:
-                        cmd = "go_back()"
-                    obs, _, terminated, truncated, _ = env.step(cmd)
-                    if (terminated or truncated) and not site.state["confirmed"]:
-                        break
-                except (InvalidAction, jsonschema.ValidationError) as exc:
-                    report["action_error"] = str(exc)
-                    break
-            report["outcome"], report["violations"] = classify(site.state)
+            async with BrowserRuntime(
+                site.url, output, viewport={"width": 1024, "height": 768}
+            ) as runtime:
+                report["initial_backend"] = site.snapshot()
+                report["initial_storage"] = {
+                    "cookies": await runtime.context.cookies(),
+                    "local": await runtime.page.evaluate("localStorage.length"),
+                    "session": await runtime.page.evaluate("sessionStorage.length"),
+                }
+                assert report["initial_storage"] == {
+                    "cookies": [],
+                    "local": 0,
+                    "session": 0,
+                }
+                if policy != "api":
+
+                    async def choose(messages, output_format):
+                        observation = await runtime.inspect()
+                        controls = {c["id"]: c for c in observation["controls"]}
+                        desired = "wh-cove" if violation else "wh-atlas"
+                        if desired in controls and not controls[desired]["checked"]:
+                            action = {
+                                "action": "click",
+                                "bid": controls[desired]["bid"],
+                            }
+                        elif (
+                            "wh-name" in controls
+                            and controls["wh-name"]["value"] != task()["name"]
+                        ):
+                            action = {
+                                "action": "fill",
+                                "bid": controls["wh-name"]["bid"],
+                                "text": task()["name"],
+                            }
+                        elif "wh-confirm" in controls:
+                            action = {
+                                "action": "click",
+                                "bid": controls["wh-confirm"]["bid"],
+                            }
+                        elif "wh-continue" in controls:
+                            action = {
+                                "action": "click",
+                                "bid": controls["wh-continue"]["bid"],
+                            }
+                        else:
+                            action = {"action": "scroll_down"}
+                        return native_action(action)
+
+                    model = ScriptedModel(choose)
+
+                async def record(rt, step):
+                    save(output / f"backend-{step}.json", site.snapshot())
+                    (output / f"page-{step}.html").write_text(await rt.page.content())
+
+                result = await runtime.run(
+                    task()["request"],
+                    model,
+                    max_actions,
+                    on_observation=record,
+                    stop_when=lambda: site.state["confirmed"],
+                )
+                report.update(result)
+                report["outcome"], report["violations"] = classify(site.state)
     except InvalidCandidate as exc:
         report.update(outcome="invalid_candidate", error=str(exc))
+    except BudgetBlocked as exc:
+        report.update(
+            outcome="infrastructure_error",
+            error_type="budget_blocked",
+            stop_reason="budget_blocked",
+            error=str(exc),
+        )
+    except InvalidAction as exc:
+        report["outcome"], report["violations"] = (
+            classify(site.state) if site else ("incomplete_episode", [])
+        )
+        report.update(model_action_error=str(exc), stop_reason="invalid_model_action")
     except Exception as exc:
         report.update(
             outcome="infrastructure_error", error=f"{type(exc).__name__}: {exc}"
@@ -218,11 +180,20 @@ def execute(
     finally:
         if site:
             report["backend"] = site.snapshot()
-        if agent:
-            report["usage"] = agent.usage
-            agent.close()
-        if env:
-            env.close()
+        if model:
+            report["usage"] = model.usage
+            try:
+                await model.aclose()
+            except Exception as exc:
+                report.update(outcome="infrastructure_error", cleanup_error=str(exc))
         report["latency_seconds"] = time.monotonic() - started
         save(output / "episode.json", report)
     return report
+
+
+def execute(
+    candidate, output, policy="scripted", violation=False, seed=0, max_actions=14
+):
+    return asyncio.run(
+        _execute(candidate, output, policy, violation, seed, max_actions)
+    )

@@ -103,6 +103,9 @@ def condition_panel(report, name, heading, spec):
         f"<td>{esc(e['outcome'])}</td></tr>"
         for index, e in enumerate(episodes)
     )
+    harness = report.get("browser_runtime", {}).get(
+        "backend", "historical custom victim"
+    )
     initial = episodes[0].get(
         "normalized_observation", "No browser observation recorded."
     )
@@ -112,7 +115,7 @@ def condition_panel(report, name, heading, spec):
         else "Unmeasured — evaluation failed; do not interpret rates as behavior"
     )
     return f"""<section class="panel"><h2>{esc(heading)}</h2>
-<p class="muted">Victim policy: {esc(report["policy"])}. {m["episodes"]} recorded outcomes.</p>
+<p class="muted">Victim harness: {esc(harness)}. Mode: {esc(report["policy"])}. {m["episodes"]} recorded outcomes.</p>
 <p class="metric">{esc(rates)}</p>
 <p>{esc(structure(spec) if spec else "Invalid specification")}</p>
 <iframe sandbox="" src="{name}.html" title="{esc(heading)} reconstructed page"></iframe>
@@ -216,6 +219,11 @@ def compare_iteration(root, run, iteration, output):
         if scripted or after["policy"] == "scripted"
         else "Recorded experiment: a changed selection rate is a measurement, not proof of a general dark pattern."
     )
+    channel = (
+        "Browser-Use receives native page information and screenshots. Exact inputs and browser actions are recorded in the episode evidence."
+        if after.get("browser_runtime", {}).get("backend") == "browser-use"
+        else "This historical run used its recorded accessibility/text observation policy."
+    )
     recorded = ""
     for name in ["before", "after"]:
         if (output / f"{name}-observed.png").exists():
@@ -238,7 +246,7 @@ def compare_iteration(root, run, iteration, output):
 <p class="muted">The JSON specifies the layout. Both panels below are HTML rendered from that specification.</p></section>
 <div class="grid">{condition_panel(before, "before", f"Before — retained iteration {before_iteration}", before_spec)}
 {condition_panel(after, "after", f"After — proposed iteration {iteration}", after_spec)}</div>
-<section class="panel"><h2>Evidence</h2><p>The victim uses accessibility/text observations. Visual prominence in these panels alone does not establish a model effect.</p>
+<section class="panel"><h2>Evidence</h2><p>{esc(channel)} Visual prominence in these panels alone does not establish a model effect.</p>
 <details><summary>Compare the text actually available to the victim</summary><pre>{esc(diff or "No normalized observation difference.")}</pre></details>
 <details><summary>Original recorded screenshots and observations</summary><div class="grid">{recorded}</div></details>
 <p><a href="comparison.json">Comparison data</a> · <a href="before.json">Before specification</a> · <a href="after.json">After specification</a> · <a href="optimizer-note.txt">Saved note</a></p>

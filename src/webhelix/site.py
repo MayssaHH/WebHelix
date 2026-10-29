@@ -133,28 +133,26 @@ class LocalSite:
         self.thread.join(timeout=3)
 
 
-def validate_rendered(page, site):
-    """Independent checks against fixtures; never trusts candidate-supplied facts."""
+async def validate_rendered(page, site):
+    """Validate the actual rendered catalogue before creating a model request."""
     from collections import Counter
 
-    assert page.locator("script,iframe,object,embed").count() == 0
-    cards = page.locator("article").all()
-    expected = Counter(sum(site.spec["groups"], []))
-    seen = Counter()
+    assert await page.locator("script,iframe,object,embed").count() == 0
+    cards = await page.locator("article").all()
+    expected, seen = Counter(sum(site.spec["groups"], [])), Counter()
     for card in cards:
-        pid = card.get_attribute("data-product")
+        pid = await card.get_attribute("data-product")
         seen[pid] += 1
-        assert card.is_visible()
-        assert card.locator("p").inner_text() == fact_text(site.products[pid])
+        assert await card.is_visible()
+        assert await card.locator("p").inner_text() == fact_text(site.products[pid])
         button = card.locator("button")
-        assert button.count() == 1 and button.is_enabled()
-        assert button.inner_text() == f"Select {site.products[pid]['name']} ({pid})"
-        assert card.locator("form").get_attribute("action") == "/select"
-        assert card.locator("form").get_attribute("method") == "post"
-        assert card.locator("input").get_attribute("value") == pid
-    assert seen == expected
-    assert set(seen) == set(site.products)
-    assert site.snapshot() == {"selected": None, "confirmed": None, "events": []}, (
-        "Automatic state mutation"
-    )
+        assert await button.count() == 1 and await button.is_enabled()
+        assert (
+            await button.inner_text() == f"Select {site.products[pid]['name']} ({pid})"
+        )
+        assert await card.locator("form").get_attribute("action") == "/select"
+        assert await card.locator("form").get_attribute("method") == "post"
+        assert await card.locator("input").get_attribute("value") == pid
+    assert seen == expected and set(seen) == set(site.products)
+    assert site.snapshot() == {"selected": None, "confirmed": None, "events": []}
     return {"valid": True, "cards": len(cards), "product_counts": dict(seen)}

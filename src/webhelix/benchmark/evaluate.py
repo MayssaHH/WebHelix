@@ -10,6 +10,8 @@ import subprocess
 import sys
 import uuid
 
+from webhelix.browser.manifest import runtime_identity
+
 from .contract import FILES, FIXTURES, InvalidCandidate, fingerprint, load, read, save
 
 
@@ -71,6 +73,7 @@ def evaluate(candidate, run, policy, episodes=3, label="candidate"):
     batch.mkdir(parents=True)
     report = {
         "batch": str(batch),
+        "browser_runtime": runtime_identity(),
         "active_candidate": str(candidate),
         "policy": policy,
         "condition": settings["condition"],
@@ -186,6 +189,10 @@ def bridge(mode):
     path = cache_path(run, workspace)
     if path.exists():
         report = read(path)
+        if report.get("browser_runtime") != runtime_identity():
+            raise RuntimeError(
+                "Cached benchmark result uses a different browser agent; start a fresh run"
+            )
         if report.get("candidate_hash") != fingerprint(
             load(workspace / "candidate", read(run / "runtime.json")["condition"])
         ):

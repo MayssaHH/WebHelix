@@ -1,6 +1,6 @@
 """Audited, single-use continuation of a proposal rejected before evaluation."""
 
-import ast
+import asyncio
 import dataclasses
 import hashlib
 import importlib.metadata
@@ -12,7 +12,9 @@ import sys
 from pathlib import Path
 
 from webhelix.evaluate import lock
-from webhelix.policy import provider_settings
+from webhelix.provider import configured_victim_settings
+from webhelix.browser.manifest import runtime_identity
+from webhelix.browser.observations import normalize_observation as normalized
 from webhelix.v2.contract import (
     ROOT,
     FIXTURES,
@@ -24,7 +26,7 @@ from webhelix.v2.contract import (
     save,
     task,
 )
-from webhelix.v2.episode import OBS_JS, ReservationTask, feasibility
+from webhelix.v2.episode import feasibility
 from webhelix.v2.site import ReservationSite
 from .backend import proposal_check
 from .budget import check_budget
@@ -34,20 +36,24 @@ def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
-def normalized(observation):
-    # BrowserGym's DOM identifiers are episode-local; all other fields must match.
-    observation = {
-        **observation,
-        "previous_action_error": observation.get("previous_action_error", ""),
-    }
-    observation["controls"] = [
-        {k: v for k, v in c.items() if k != "bid"} for c in observation["controls"]
-    ]
-    return observation
+def victim_input_hashes():
+    """Fingerprint every local module that can change this victim or its task."""
+    paths = [
+        "src/webhelix/browser/runtime.py",
+        "src/webhelix/browser/model.py",
+        "src/webhelix/provider.py",
+        "src/webhelix/v2/episode.py",
+        "src/webhelix/v2/site.py",
+        "src/webhelix/v2/contract.py",
+        "experiments/reservation/task.json",
+        "experiments/reservation/CONTRACT.md",
+        "experiments/reservation/autohelix.yaml",
+    ] + ["experiments/reservation/candidate/" + name for name in FILES]
+    return {name: sha(ROOT / name) for name in paths}
 
 
 def inspect_proposal(proposal_path, output):
-    """Keep BrowserGym's process-global Playwright loop out of the orchestrator."""
+    """Bound inspection and browser cleanup in a separate worker process."""
     output = Path(output).resolve()
     output.mkdir(parents=True, exist_ok=False)
     with (output / "inspection.log").open("w") as log:
@@ -76,9 +82,9 @@ def inspect_proposal(proposal_path, output):
 
 
 def _inspect_proposal(proposal_path, output):
-    """No model calls: validate, traverse a legitimate path and capture actual input."""
-    from browsergym.core.env import BrowserEnv
-    from browsergym.core.action.highlevel import HighLevelActionSet
+    """No model calls: capture the actual native Browser-Use observation channel."""
+    from webhelix.browser.model import ScriptedModel
+    from webhelix.browser.runtime import BrowserRuntime
 
     output = Path(output)
     proposal = read(proposal_path)
@@ -88,28 +94,44 @@ def _inspect_proposal(proposal_path, output):
         raise ValueError("Continuation requires a changed, valid proposal")
     checks = feasibility(proposal["files"])
     observations, images = {}, {}
-    for label, files in (("clean", original), ("candidate", proposal["files"])):
-        with ReservationSite(files) as site:
-            env = BrowserEnv(
-                task_entrypoint=ReservationTask,
-                task_kwargs={"site": site},
-                viewport={"width": 1024, "height": 768},
-                headless=True,
-                action_mapping=HighLevelActionSet(
-                    subsets=["bid", "nav"], strict=True, multiaction=False
-                ).to_python_code,
-                pre_observation_delay=0.05,
-            )
-            try:
-                env.reset(seed=0)
-                observations[label] = normalized(env.page.evaluate(OBS_JS))
-                save(output / f"{label}-observation.json", observations[label])
-                images[label] = env.page.screenshot(path=output / f"{label}.png")
-            finally:
-                env.close()
+
+    async def capture():
+        for label, files in (("clean", original), ("candidate", proposal["files"])):
+            with ReservationSite(files) as site:
+                async with BrowserRuntime(
+                    site.url, output / label, viewport={"width": 1024, "height": 768}
+                ) as runtime:
+
+                    async def record(rt, step):
+                        if step == 0:
+                            observations[label] = normalized(rt.observation)
+                            save(
+                                output / f"{label}-observation.json",
+                                observations[label],
+                            )
+                            images[label] = (
+                                output / label / "screenshot-0.png"
+                            ).read_bytes()
+                            (output / f"{label}.png").write_bytes(images[label])
+
+                    model = ScriptedModel(
+                        lambda messages, output_format: {
+                            "done": {
+                                "success": False,
+                                "text": "Deterministic initial-state inspection",
+                            }
+                        }
+                    )
+                    await runtime.run(
+                        task()["request"], model, 1, on_observation=record
+                    )
+                    await model.aclose()
+
+    asyncio.run(capture())
     result = {
         "proposal_sha256": sha(proposal_path),
         "candidate_hash": fingerprint(proposal["files"]),
+        "browser_runtime": runtime_identity(),
         "validation": validation,
         "render_checks": checks,
         "screenshot_changed": images["clean"] != images["candidate"],
@@ -129,6 +151,12 @@ def verify_source(source, settings, budget_dir):
     """Fail closed when measurements, task, models or original accounting differ."""
     source, budget_dir = Path(source).resolve(), Path(budget_dir).resolve()
     status = read(source / "status.json")
+    if status.get("browser_runtime") != runtime_identity():
+        raise ValueError(
+            "Incompatible browser-agent harness; collect new clean and identity baselines"
+        )
+    if status.get("victim_input_hashes") != victim_input_hashes():
+        raise ValueError("Baseline victim/task implementation changed")
     if (
         status["optimizer_backend"] != "bounded_proposal_adapter"
         or status["status"] != "blocked_or_failed"
@@ -137,7 +165,7 @@ def verify_source(source, settings, budget_dir):
         or not status["protected_files_unchanged"]
         or Path(status["victim_budget_dir"]).resolve() != budget_dir
         or status["optimizer_settings"] != dataclasses.asdict(settings)
-        or status["model"] != provider_settings()
+        or status["model"] != configured_victim_settings()
     ):
         raise ValueError("Incompatible source run, victim settings or shared budget")
     adapter = source / "proposals/iter-1/adapter"
@@ -153,41 +181,6 @@ def verify_source(source, settings, budget_dir):
     for name, version in status["dependencies"].items():
         if importlib.metadata.version(name) != version:
             raise ValueError(f"Baseline dependency changed: {name}")
-    # Files that can affect the victim or the task must be byte-identical.
-    paths = [
-        "src/webhelix/v2/policy.py",
-        "src/webhelix/v2/episode.py",
-        "src/webhelix/v2/site.py",
-        "src/webhelix/policy.py",
-        "experiments/reservation/task.json",
-        "experiments/reservation/CONTRACT.md",
-        "experiments/reservation/autohelix.yaml",
-    ] + ["experiments/reservation/candidate/" + n for n in FILES]
-    for name in paths:
-        before = subprocess.check_output(
-            ["git", "show", f"{status['source_revision']}:{name}"], cwd=ROOT
-        )
-        if before != (ROOT / name).read_bytes():
-            raise ValueError(f"Baseline input/policy changed: {name}")
-    # contract.py changed for CSS parsing; ground truth must not change with it.
-    old = ast.parse(
-        subprocess.check_output(
-            ["git", "show", f"{status['source_revision']}:src/webhelix/v2/contract.py"],
-            cwd=ROOT,
-        )
-    )
-    current = ast.parse((ROOT / "src/webhelix/v2/contract.py").read_text())
-    for name in ("task", "classify"):
-        nodes = [
-            next(
-                n
-                for n in tree.body
-                if isinstance(n, ast.FunctionDef) and n.name == name
-            )
-            for tree in (old, current)
-        ]
-        if ast.dump(nodes[0]) != ast.dump(nodes[1]):
-            raise ValueError(f"Ground truth changed: {name}")
     ledger = check_budget(budget_dir)
     original = load_candidate(FIXTURES / "candidate")
     reports = {}
@@ -209,6 +202,14 @@ def verify_source(source, settings, budget_dir):
         ):
             raise ValueError("Baseline is incompatible or incomplete")
         for i, episode in enumerate(report["episodes"]):
+            if episode.get("model") != status["model"]:
+                raise ValueError(
+                    "Baseline episode used a different victim model configuration"
+                )
+            if episode.get("browser_runtime") != runtime_identity():
+                raise ValueError(
+                    "Baseline episode used a different browser-agent harness"
+                )
             if episode != read(batch / f"episode-{i}/episode.json"):
                 raise ValueError("Episode differs from saved trace")
             if classify(episode["backend"]) != ("legitimate_success", []):

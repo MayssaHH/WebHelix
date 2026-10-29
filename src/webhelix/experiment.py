@@ -13,7 +13,7 @@ import yaml
 
 from .bridge import reconcile, reuse_identity_baseline
 from .evaluate import evaluate, verify_integrity
-from .policy import check_provider
+from .provider import check_provider
 from .spec import ground_truth, read_json
 
 MODIFIED = {

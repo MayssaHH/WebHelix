@@ -5,6 +5,7 @@ import os
 from pathlib import Path
 from .contract import read, save, load_candidate, fingerprint
 from .evaluate import evaluate
+from webhelix.browser.manifest import runtime_identity
 
 
 def bridge(mode):
@@ -16,6 +17,8 @@ def bridge(mode):
     )
     if index.exists():
         result = read(index)
+        if result.get("browser_runtime") != runtime_identity():
+            raise RuntimeError("Browser-agent configuration changed; start a fresh run")
         if result.get("candidate_hash") != fingerprint(
             load_candidate(workspace / "candidate")
         ):

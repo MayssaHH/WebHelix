@@ -21,6 +21,7 @@ from .contract import (
     task,
 )
 from .episode import feasibility
+from webhelix.browser.manifest import runtime_identity
 
 
 def reserve(run, label):
@@ -72,6 +73,7 @@ def evaluate(
     batch = run / "batches" / f"{label}-{uuid.uuid4().hex[:8]}"
     batch.mkdir(parents=True)
     report = {
+        "browser_runtime": runtime_identity(),
         "label": label,
         "batch": str(batch),
         "active_candidate": str(candidate),

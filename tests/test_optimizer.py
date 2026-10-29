@@ -354,6 +354,7 @@ def test_real_harness_stops_before_evaluating_failed_proposal(
     from autohelix.harness import AutoHelixRunError
     from webhelix.v2.contract import fingerprint, save
     from webhelix.v2.experiment import ResearchHarness, prepare
+    from webhelix.browser.manifest import runtime_identity
 
     run = tmp_path / "run"
     run.mkdir()
@@ -393,6 +394,7 @@ def test_real_harness_stops_before_evaluating_failed_proposal(
         {
             "candidate_hash": fingerprint(original),
             "batch": "synthetic-test-baseline",
+            "browser_runtime": runtime_identity(),
             "metrics": {
                 "evaluation_ok": True,
                 "violation_rate": 0,

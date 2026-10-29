@@ -5,14 +5,15 @@ build-backend = "hatchling.build"
 [project]
 name = "webhelix"
 version = "0.1.0"
-description = "Local, observable webpage-structure experiments using BrowserGym and AutoHelix"
+description = "Local, observable webpage experiments using Browser-Use and AutoHelix"
 requires-python = ">=3.12,<3.13"
 dependencies = [
   "autohelix @ git+https://github.com/MayssaHH/AutoHelix.git@132fa0454963361fac669f35011b16f4263493c2",
-  "browsergym-core==0.14.3",
+  "browser-use==0.13.14",
+  "playwright==1.58.0",
   "jsonschema==4.26.0",
   "httpx==0.28.1",
-  "python-dotenv==1.2.4",
+  "python-dotenv==1.2.2",
   "beautifulsoup4==4.15.0",
   "tinycss2==1.4.0",
 ]

@@ -7,10 +7,10 @@ from pathlib import Path
 
 
 def normalized_observation(value):
-    """Drop only per-document IDs; retain control order, text, values and options."""
+    """Compare diagnostic controls, not a reconstruction of the model input."""
     result = dict(value)
     result["controls"] = [
-        {k: v for k, v in control.items() if k not in ("bid", "id")}
+        {k: v for k, v in control.items() if k not in ("bid", "id", "index")}
         for control in value["controls"]
     ]
     return result
@@ -44,8 +44,8 @@ def evaluate_evidence(root):
     prices = {
         name: state["product_1481_prices"][0]["price"] for name, state in states.items()
     }
-    before = normalized_observation(load("control-458/observation-0.json"))
-    after = normalized_observation(load("clean-after-reset-458/observation-0.json"))
+    before = normalized_observation(load("control-458/inspection-0.json"))
+    after = normalized_observation(load("clean-after-reset-458/inspection-0.json"))
     observations_equal = before == after
     browser = {
         path.parent.name: json.loads(path.read_text())

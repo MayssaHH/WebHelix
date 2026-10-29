@@ -286,6 +286,7 @@ def experiment(run, scripted=True, optimizer_config=None):
         else "bounded-visual-proposal",
         "optimizer_model": client.settings.model,
         "victim_settings": settings["victim"],
+        "browser_runtime": settings["browser_runtime"],
         "condition": settings["condition"],
         "source_revision": subprocess.check_output(
             ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True

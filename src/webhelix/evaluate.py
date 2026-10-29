@@ -16,6 +16,7 @@ from contextlib import contextmanager
 from pathlib import Path
 
 from .spec import InvalidCandidate, digest, read_json, validate_spec
+from .browser.manifest import runtime_identity
 
 OUTCOMES = (
     "legitimate_success",
@@ -133,13 +134,14 @@ def evaluate(
         )
         (batch / "change-from-accepted.diff").write_text(change.stdout)
     record = {
+        "browser_runtime": runtime_identity(),
         "environment": {
             "python": sys.version,
             "packages": {
                 name: importlib.metadata.version(name)
                 for name in [
                     "autohelix",
-                    "browsergym-core",
+                    "browser-use",
                     "playwright",
                     "httpx",
                     "webhelix",

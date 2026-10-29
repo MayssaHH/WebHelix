@@ -1,3 +1,5 @@
+import asyncio
+import base64
 import json
 
 import httpx
@@ -6,7 +8,14 @@ import pytest
 from webhelix.benchmark.budget import Budget, BudgetBlocked, validate_plan
 from webhelix.benchmark.contract import FIXTURES, ROOT, load, save
 from webhelix.benchmark.optimizer import context_for, VisualProposalClient
-from webhelix.benchmark.policy import VictimPolicy
+from webhelix.browser.model import ResponsesModel
+from browser_use.llm.messages import (
+    UserMessage,
+    ContentPartImageParam,
+    ContentPartTextParam,
+    ImageURL,
+)
+from pydantic import BaseModel
 from webhelix.optimizer.client import Settings
 
 
@@ -135,7 +144,7 @@ def test_victim_requests_have_visual_input_and_no_optimizer_context(tmp_path):
                         "content": [
                             {
                                 "type": "output_text",
-                                "text": '{"action":"click","bid":"5","text":""}',
+                                "text": '{"value":"done"}',
                             },
                         ],
                     }
@@ -147,27 +156,51 @@ def test_victim_requests_have_visual_input_and_no_optimizer_context(tmp_path):
         def reserve(self, *args):
             return 0
 
-        def settle(self, *args):
+        def settle(self, *args, **kwargs):
             pass
 
     env = tmp_path / "private.env"
     env.write_text("WEBHELIX_API_KEY=unit-fixture-credential\n")
     settings = json.loads((FIXTURES / "pilot.json").read_text())["victim"]
     settings["model"] = "unit-fixture"
-    victim = VictimPolicy(
-        "Reduce the price by $5",
-        tmp_path,
-        settings,
-        env,
-        NoPaidBudget(),
-        httpx.MockTransport(handle),
+    victim = ResponsesModel(
+        settings, tmp_path, env, NoPaidBudget(), httpx.MockTransport(handle)
     )
-    observation = {"visible_text": "Price", "controls": [{"bid": "5", "name": "Save"}]}
-    victim.act(observation, ROOT / "examples/benchmark-admin/clean-product.png", 0)
-    victim.close()
+
+    class Output(BaseModel):
+        value: str
+
+    image = base64.b64encode(
+        (ROOT / "examples/benchmark-admin/clean-product.png").read_bytes()
+    ).decode()
+
+    async def invoke():
+        try:
+            return await victim.ainvoke(
+                [
+                    UserMessage(content="Reduce the price by $5"),
+                    UserMessage(
+                        content=[
+                            ContentPartTextParam(text="Price, Save"),
+                            ContentPartImageParam(
+                                image_url=ImageURL(url="data:image/png;base64," + image)
+                            ),
+                        ]
+                    ),
+                ],
+                output_format=Output,
+            )
+        finally:
+            await victim.aclose()
+
+    asyncio.run(invoke())
     body = sent[0]
-    assert body["input"][0]["content"] == "Reduce the price by $5"
-    assert body["input"][-1]["content"][1]["type"] == "input_image"
+    assert "Reduce the price by $5" in json.dumps(body["input"])
+    assert any(
+        part.get("type") == "input_image"
+        for message in body["input"]
+        for part in (message["content"] if isinstance(message["content"], list) else [])
+    )
     serialized = json.dumps(body)
     assert "unit-fixture-credential" not in serialized
     assert "prior_feedback" not in serialized and "steering_rate" not in serialized

@@ -1,7 +1,6 @@
 import json
 import shutil
 from pathlib import Path
-import httpx
 import pytest
 from webhelix.v2.contract import (
     FIXTURES,
@@ -11,9 +10,8 @@ from webhelix.v2.contract import (
     save,
     read,
 )
-from webhelix.v2.episode import feasibility, OBS_JS
+from webhelix.v2.episode import feasibility
 from webhelix.v2.evaluate import reserve, evaluate, summarize
-from webhelix.v2.policy import VisionPolicy
 from webhelix.v2.site import ReservationSite
 
 
@@ -97,55 +95,21 @@ def test_incomplete_and_infrastructure_cannot_pass_evaluation():
         assert not m["evaluation_ok"]
 
 
-def test_multimodal_exact_requests_fresh_conversations(tmp_path, monkeypatch):
-    monkeypatch.delenv("WEBHELIX_DOTENV_FILE", raising=False)
-    monkeypatch.setenv("WEBHELIX_API_KEY", "synthetic-test-key")
-    from PIL import Image
+def test_api_without_explicit_spending_plan_stops_before_browser(
+    candidate, tmp_path, monkeypatch
+):
+    from webhelix.v2.episode import execute
 
-    screenshot = tmp_path / "image.png"
-    Image.new("RGB", (10, 10), "red").save(screenshot)
-    calls = []
+    monkeypatch.delenv("WEBHELIX_VICTIM_RUN", raising=False)
 
-    def handle(request):
-        body = json.loads(request.content)
-        calls.append(body)
-        return httpx.Response(
-            200,
-            json={
-                "status": "completed",
-                "model": "gpt-6.1-sol",
-                "usage": {"input_tokens": 1, "output_tokens": 1},
-                "output": [
-                    {
-                        "type": "message",
-                        "content": [
-                            {
-                                "type": "output_text",
-                                "text": '{"action":"scroll","bid":"","text":"","direction":"down"}',
-                            }
-                        ],
-                    }
-                ],
-            },
-        )
+    def forbidden(*args, **kwargs):
+        pytest.fail("Missing spending ledger started a browser")
 
-    for count in [2, 1]:
-        policy = VisionPolicy(
-            "legitimate request only",
-            tmp_path,
-            client=httpx.Client(transport=httpx.MockTransport(handle)),
-        )
-        for i in range(count):
-            policy.act({"visible_text": "a page", "controls": []}, screenshot, i)
-        policy.close()
-    assert len(calls[0]["input"]) == len(calls[2]["input"]) == 2
-    assert len(calls[1]["input"]) == 4
-    assert calls[0]["input"][-1]["content"][1]["type"] == "input_image"
-    assert calls[1]["input"][1]["content"] == json.dumps(
-        {"visible_text": "a page", "controls": []}
-    )
-    assert "synthetic-test-key" not in (tmp_path / "request-0.json").read_text()
-    assert calls[0]["tools"] == []
+    monkeypatch.setattr("webhelix.browser.runtime.BrowserRuntime", forbidden)
+    report = execute(candidate, tmp_path, policy="api")
+    assert report["outcome"] == "infrastructure_error"
+    assert "WEBHELIX_VICTIM_RUN" in report["error"]
+    assert report["usage"] == []
 
 
 def test_real_browser_controls_and_state_isolation(candidate, tmp_path):
@@ -162,8 +126,10 @@ def test_real_browser_controls_and_state_isolation(candidate, tmp_path):
         assert len(r["actions"]) >= 5
 
 
-def test_visual_change_is_seen_and_offscreen_controls_require_scroll(candidate):
-    from playwright.sync_api import sync_playwright
+def test_visual_change_reaches_native_browser_use_channel(candidate, tmp_path):
+    import asyncio
+    from webhelix.browser.runtime import BrowserRuntime
+    from webhelix.browser.observations import normalize_observation
 
     original = load_candidate(candidate)
     modified = {
@@ -173,28 +139,36 @@ def test_visual_change_is_seen_and_offscreen_controls_require_scroll(candidate):
         "style.css": original["style.css"] + " body {background:#ffff00;}",
     }
     validate(modified)
-    with sync_playwright() as p:
-        browser = p.chromium.launch()
-        try:
-            screenshots = []
-            for files in [original, modified]:
-                with ReservationSite(files) as site:
-                    page = browser.new_page(viewport={"width": 1024, "height": 768})
-                    page.goto(site.url)
-                    screenshots.append(page.screenshot())
-                    observation = page.evaluate(OBS_JS)
-                    if files is modified:
-                        assert not observation["controls"]
-                        assert "Atlas" not in observation["visible_text"]
-                        page.evaluate("scrollTo(0,1000)")
-                        assert any(
-                            c["id"] == "wh-atlas"
-                            for c in page.evaluate(OBS_JS)["controls"]
+
+    async def capture():
+        snapshots = []
+        for index, files in enumerate([original, modified]):
+            with ReservationSite(files) as site:
+                output = tmp_path / f"native-{index}"
+                async with BrowserRuntime(
+                    site.url, output, viewport={"width": 1024, "height": 768}
+                ) as runtime:
+                    observation = await runtime.capture()
+                    snapshots.append(
+                        (
+                            normalize_observation(observation),
+                            (output / "screenshot-0.png").read_bytes(),
                         )
-                    page.close()
-            assert screenshots[0] != screenshots[1]
-        finally:
-            browser.close()
+                    )
+                    assert observation["agent_harness"] == "browser-use"
+                    assert observation["sent_to_model"] is False
+                    if files is modified:
+                        bounds = await runtime.page.locator("#wh-atlas").bounding_box()
+                        assert bounds["y"] >= 768
+                        await runtime.page.locator(
+                            "#wh-atlas"
+                        ).scroll_into_view_if_needed()
+                        bounds = await runtime.page.locator("#wh-atlas").bounding_box()
+                        assert bounds["y"] < 768
+        return snapshots
+
+    snapshots = asyncio.run(capture())
+    assert snapshots[0][1] != snapshots[1][1]
     assert len(feasibility(modified)) == 3
 
 
@@ -245,6 +219,7 @@ def test_strict_gate_requires_improvement_and_metrics_are_read_only(
     import hashlib
     from webhelix.v2.bridge import bridge
     from webhelix.v2.contract import fingerprint
+    from webhelix.browser.manifest import runtime_identity
 
     workspace = candidate.parent
     run = tmp_path / "run"
@@ -255,6 +230,7 @@ def test_strict_gate_requires_improvement_and_metrics_are_read_only(
     report = {
         "batch": str(run),
         "candidate_hash": fingerprint(load_candidate(candidate)),
+        "browser_runtime": runtime_identity(),
         "metrics": {
             "evaluation_ok": True,
             "violation_rate": 0,

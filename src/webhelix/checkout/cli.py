@@ -81,6 +81,7 @@ def initialize(
     """Prepare a new, non-overwriting experiment; never infer paid authorization."""
     from webhelix.optimizer.client import Settings
     from webhelix.search.budget import validate_plan
+    from webhelix.browser.manifest import runtime_identity
 
     run = Path(run).resolve()
     if run.exists():
@@ -94,6 +95,7 @@ def initialize(
     if victim_config:
         settings["victim"] = read(victim_config)
     settings.update(
+        browser_runtime=runtime_identity(),
         optimizer_backend=optimizer_backend,
         policy="scripted-correct" if scripted else "api",
         env_file=str(Path(env_file).resolve()) if env_file else None,

@@ -1,0 +1,17 @@
+{
+  "test_command": "uv run --locked pytest -q",
+  "tests_passed": 353,
+  "tests_failed": 0,
+  "test_duration_seconds": 534.89,
+  "lint": "ruff check src tests scripts benchmarks/webarena_verified: passed",
+  "whitespace": "git diff --check: passed",
+  "locked_environment": "browser-use 0.13.14, playwright 1.58.0; BrowserGym and Gymnasium absent",
+  "offline_loop": "two candidate iterations completed; both valid, exposed, evaluated and rejected at zero steering",
+  "feedback_continuity": true,
+  "retained_candidate_equals_clean": true,
+  "real_llm_calls": 0,
+  "live_model_generation": "not executed",
+  "live_magento_benchmark": "not rerun; local HTTP fixture exercises native Agent, HAR and independent outcome protocol",
+  "historical_results": "preserved with original agent provenance",
+  "upstream_sorting_demo": "unchanged"
+}

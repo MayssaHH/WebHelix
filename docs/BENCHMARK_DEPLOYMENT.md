@@ -1,5 +1,10 @@
 # Benchmark deployment feasibility
 
+> Historical deployment audit: package checks, version numbers and measured
+> results below describe the 20 October environment. BrowserGym is not a dependency
+> of current WebHelix. Current browser-agent setup is in the [main README](../README.md);
+> the benchmark application and independent evaluator remain separately pinned.
+
 Initial read-only checks and execution follow-up on 2026-10-20.
 **Follow-up result: Shopping Admin is deployed and two scripted task controls
 pass the pinned upstream evaluator.** The storefront launch exhausted disk under

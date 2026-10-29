@@ -1,5 +1,9 @@
 # Consumer checkout: implemented and checked locally
 
+The current Browser-Use implementation is verified by the
+[29 October offline loop](browser-use-offline-20261029/README.md). The results below
+are historical checks of the former BrowserGym victim, preserved as originally run.
+
 **Real-model pilot now completed:** [two actual proposals, 12 victim episodes,
 zero steering and two rejections](REAL_MODEL_RUN.md). The original scripted
 implementation checks below remain unchanged.

@@ -15,7 +15,8 @@ import yaml
 from autohelix.harness import Harness, AutoHelixRunError
 from autohelix.agents import AgentRunResult
 from autohelix.history import IterationResult
-from webhelix.policy import check_provider, provider_settings
+from webhelix.provider import check_provider, configured_victim_settings
+from webhelix.browser.manifest import runtime_identity
 from .contract import (
     ROOT,
     FIXTURES,
@@ -287,6 +288,8 @@ class ScriptedAttacker:
 
 
 def experiment(run, scripted=False, optimizer=None, budget_dir=None, continuation=None):
+    from webhelix.optimizer.continuation import victim_input_hashes
+
     if optimizer is not None and not scripted and budget_dir is None:
         raise ValueError("Real adapter runs require an existing shared victim budget")
     if budget_dir is not None:
@@ -316,7 +319,9 @@ def experiment(run, scripted=False, optimizer=None, budget_dir=None, continuatio
                 ["git", "status", "--porcelain"], cwd=ROOT, text=True
             )
         ),
-        "model": provider_settings(),
+        "model": configured_victim_settings(),
+        "browser_runtime": runtime_identity(),
+        "victim_input_hashes": victim_input_hashes(),
         "maximum_real_episodes": 30,
         "python": platform.python_version(),
         "platform": platform.platform(),
@@ -324,7 +329,7 @@ def experiment(run, scripted=False, optimizer=None, budget_dir=None, continuatio
             name: importlib.metadata.version(name)
             for name in (
                 "autohelix",
-                "browsergym-core",
+                "browser-use",
                 "playwright",
                 "httpx",
                 "beautifulsoup4",
@@ -449,7 +454,7 @@ def experiment(run, scripted=False, optimizer=None, budget_dir=None, continuatio
                 raise RuntimeError(
                     f"{label} diagnostics failed; inspect traces before search"
                 )
-        # Original bytes and normalized observations must agree. Browser IDs may vary.
+        # Original bytes and native observations must agree after transport normalization.
         assert (
             baseline["clean"]["candidate_hash"]
             == baseline["identity"]["candidate_hash"]
@@ -457,10 +462,10 @@ def experiment(run, scripted=False, optimizer=None, budget_dir=None, continuatio
         for i in range(3):
 
             def normalized(report):
+                from webhelix.optimizer.continuation import normalized as normalize
+
                 value = read(Path(report["batch"]) / f"episode-{i}/observation-0.json")
-                for c in value["controls"]:
-                    c.pop("bid", None)
-                return value
+                return normalize(value)
 
             assert normalized(baseline["clean"]) == normalized(baseline["identity"])
             assert (

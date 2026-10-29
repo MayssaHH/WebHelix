@@ -18,21 +18,23 @@ spec.loader.exec_module(browser)
 
 def test_cleanup_failure_preserves_setup_failure(tmp_path, monkeypatch):
     task = tmp_path / "task.json"
-    task.write_text(json.dumps({"task_id": 458}))
+    task.write_text(
+        json.dumps({"task_id": 458, "start_urls": ["http://127.0.0.1:7780/admin"]})
+    )
     credentials = tmp_path / "fixture-credentials.json"
-    credentials.write_text("{}")
+    credentials.write_text('{"username":"fixture","password":"fixture"}')
 
     class BrokenEnvironment:
         def __init__(self, **kwargs):
             pass
 
-        def reset(self, **kwargs):
+        async def __aenter__(self):
             raise RuntimeError("setup failed")
 
-        def close(self):
+        async def __aexit__(self, *args):
             raise RuntimeError("close failed")
 
-    monkeypatch.setattr(browser, "BrowserEnv", BrokenEnvironment)
+    monkeypatch.setattr(browser, "BrowserRuntime", BrokenEnvironment)
     args = SimpleNamespace(
         output=tmp_path / "episode",
         task_input=task,

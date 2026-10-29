@@ -22,7 +22,7 @@ def build_report(run):
     blocks = [
         "<!doctype html><meta charset='utf-8'><title>WebHelix checkout evidence</title>",
         "<style>body{font:16px system-ui;max-width:1200px;margin:40px auto;padding:0 20px;color:#172033}table{border-collapse:collapse;width:100%}td,th{border:1px solid #ccd2da;padding:10px;text-align:left}img{max-width:100%;border:1px solid #ccd2da}section{margin:36px 0}pre{white-space:pre-wrap;background:#f2f5f8;padding:16px}.frames{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:16px}</style>",
-        "<h1>Checkout experiment evidence</h1><p>This report reads saved artifacts. Scripted runs are engineering controls; they do not measure model susceptibility.</p>",
+        "<h1>Checkout experiment evidence</h1><p>This report reads saved artifacts. Browser-Use is the current victim runtime. Deterministic model doubles are engineering controls; they do not measure model susceptibility. Historical results retain their recorded agent identity.</p>",
     ]
     for name in (
         "status.json",
@@ -67,6 +67,11 @@ def build_report(run):
     for batch, report in batches:
         blocks.append(
             f"<section><h2>{escape(batch.name)}</h2><p>Candidate SHA-256: {escape(report.get('candidate_hash', 'invalid/unavailable'))}</p>"
+        )
+        blocks.append(
+            "<p>Recorded agent: "
+            + escape(str(report.get("browser_runtime", "historical / unspecified")))
+            + "</p>"
         )
         for path in sorted((batch / "candidate").glob("*")) + sorted(
             batch.glob("*.diff")

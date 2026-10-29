@@ -1,14 +1,15 @@
 # Bounded optimizer proposal adapter
 
-This branch implements a model-independent proposal path for the existing reservation
+This module implements a model-independent proposal path for the existing reservation
 experiment. The [first real research test](../examples/optimizer-adapter/real-research-test-20261019/README.md)
 returned a genuine proposal after six passing victim diagnostics. The local validator
 then rejected ordinary CSS child selectors before applying or evaluating the candidate.
 After correction, the [real continuation](../examples/optimizer-adapter/real-continuation-20261020/README.md)
 completed two candidate evaluations and verified feedback continuity; both candidates
 had 0/3 violations and were rejected. These requests do not identify why the earlier
-Codex request was blocked. The existing Codex experiment, victim policy, task,
-contract and scoring are preserved.
+Codex request was blocked. Those recorded runs used the former custom BrowserGym victim. The task, contract
+and independent scoring are preserved, while current executions use the shared
+Browser-Use Agent and require fresh baseline measurements.
 
 The CSS validation correction and audited continuation are described in
 [CONTINUATION.md](CONTINUATION.md). Ordinary child selectors now pass. Recoverable
@@ -35,7 +36,7 @@ flowchart LR
     V --> B
     D -->|refusal or service/transport error| S[Preserve attempt and stop]
     E --> F[Existing renderer feasibility checks]
-    F -->|valid| G[Three fresh BrowserGym victim episodes]
+    F -->|valid| G[Three fresh Browser-Use victim episodes]
     F -->|invalid| R[Reject; no victim calls]
     G --> H[Confirmed backend state and metrics]
     H --> I[Strict improvement rule]
@@ -131,41 +132,45 @@ It runs three clean and three identity diagnostics first (maximum 12 new victim
 episodes including both proposals). It stops if clean task competence fails.
 No extra confirmation run is scheduled in this small adapter diagnostic.
 
-For this restored workspace the original full v2 run directory is absent; the
-committed `examples/reservation/real/budget.json` preserves its six reservations.
-An import receipt records the source hash. All continuations must use the same
-canonical directory; importing copies into several directories would defeat global
-accounting and is not supported practice. Never import an older ledger if a newer
-live ledger exists. The separate v1 16/18 budget is not used or reset.
+Current paid reservation-adapter runs require two explicit accounting locations:
+
+- `--budget-dir`: the reservation workflow's `{maximum, reservations}` ledger,
+  checked by `optimizer.budget.check_budget`.
+- `WEBHELIX_VICTIM_RUN`: a separate absolute directory with `runtime.json` (public
+  victim model settings, `max_real_episodes`, `max_actions`) and an authorized
+  `spending-plan.json`. The shared Browser-Use provider creates the request/episode
+  spending ledger there. This is required even when API credentials are already set.
+
+Do not point both settings at the same directory: their `budget.json` formats are
+different. Follow the [current model-accounting requirements](../README.md#real-models-and-accounting)
+and prepare a new bounded experiment before launching paid calls. The optimizer
+adapter retains its independent request allowance and usage records; the victim's
+spending ceiling is not a combined cap on this older optimizer path. Use the
+[checkout experiment](OPENCODE_CHECKOUT.md) for the current combined role budget.
+
+After preparing the two locations and passing the harmless compatibility check
+with the identical optimizer configuration, the command shape is:
 
 ```bash
-# ONCE, only if the original live v2 ledger is unavailable:
-uv run --locked webhelix optimizer import-budget \
-  --source examples/reservation/real/budget.json \
-  --budget-dir "$PWD/runs/reservation-shared-budget"
-
-# Reuse that directory for ALL continuation runs. This command spends model calls.
-# Restore victim WEBHELIX_API_KEY separately; the existing launcher loads it privately.
+export WEBHELIX_VICTIM_RUN=/absolute/path/to/authorized-victim-spending-directory
 bash scripts/with-dotenv.sh optimizer experiment \
   --config .optimizer.local.json --env-file "$PWD/.env" \
-  --compatibility-run "$PWD/runs/optimizer-check-01" \
-  --budget-dir "$PWD/runs/reservation-shared-budget" \
-  --run-dir "$PWD/runs/adapter-research-01"
+  --compatibility-run /absolute/path/to/new-optimizer-check \
+  --budget-dir /absolute/path/to/reservation-episode-ledger \
+  --run-dir /absolute/path/to/new-adapter-experiment
 ```
 
-The canonical shared ledger created in the current workspace is
-`/workspace/webhelix-runs/reservation-v2-shared-budget/budget.json`, now **18/30**
-after the real continuation (six new candidate episodes; diagnostics reused).
-Use it instead of importing again here. Future runs' local `budget.json` files are
-snapshots; `status.json.victim_budget_dir` names the actual accounting owner.
-Reservations include failed/incomplete real episodes. Optimizer usage is separate
-in `optimizer-budget.json` and `proposals/iter-N/adapter/transport-result.json`.
-Reported cost is `null` when unavailable; no dollar cap is claimed. The default
-per-request cap is 4,096 output tokens, 180,000 input bytes, 160,000 response bytes,
-90 seconds total wall time and zero retries. The hard configurable ceilings are
-8,192 output tokens, 500,000 bytes, 180 seconds and two calls. The experiment's
-AutoHelix time budget is 20 minutes between iterations; existing per-episode/action
-bounds still apply. A shell-level wall timeout is useful for whole-process control.
+These are placeholders, not existing authorizations. Fresh clean/identity Browser-Use
+episodes are required. The completed 20 October continuation used a historical
+18/30 reservation ledger; do not import, reset or reuse it as authorization for this
+migration. Its provenance is recorded in [CONTINUATION.md](CONTINUATION.md).
+
+For the optimizer adapter, the default per-request cap remains 4,096 output tokens,
+180,000 input bytes, 160,000 response bytes, 90 seconds total wall time and zero
+retries. Hard configurable ceilings are 8,192 output tokens, 500,000 bytes,
+180 seconds and two calls. The experiment's AutoHelix time budget is 20 minutes
+between iterations; victim action/request/time bounds and the new provider
+spending ledger apply separately.
 
 ## What survives an attempt
 
@@ -201,7 +206,7 @@ backend states and the decision. The next **fresh** optimizer request includes t
 records plus the rejected proposal and first episode's text observations/actions.
 It does not receive victim API requests, credentials or a shared provider conversation.
 Optimizer screenshot input is not implemented in this adapter; the victim's existing
-screenshot-based observation policy is unchanged. The model cannot inspect extra
+Browser-Use observation loop is independent of this proposal adapter. The model cannot inspect extra
 files interactively. If context exceeds the byte bound, the call fails locally
 instead of silently dropping feedback.
 

@@ -80,7 +80,7 @@ def main():
         print(json.dumps(validate_spec(args.root, args.candidate)))
         return
     if args.command == "provider-check":
-        from .policy import check_provider
+        from .provider import check_provider
 
         print(json.dumps(check_provider(), indent=2))
         return

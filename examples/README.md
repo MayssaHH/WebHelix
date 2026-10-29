@@ -1,5 +1,14 @@
 # Inspect the executed evidence
 
+**Current runtime verification:** [Browser-Use with two offline OpenCode iterations](checkout/browser-use-offline-20261029/README.md)
+records native browser execution, rejection at zero steering, and verified feedback
+continuity. All model responses were deterministic controls; no paid inference ran.
+
+> Historical evidence: the earlier runs below predate the Browser-Use
+> migration. They retain their original BrowserGym/custom-victim provenance and
+> are not Browser-Use measurements. Current setup and architecture are in the
+> [main README](../README.md). New runs require fresh agent-specific baselines.
+
 **Benchmark optimization loop:** [Shopping Admin before/after and feedback](benchmark-search/README.md)
 records two completed scripted AutoHelix iterations, both rejected at zero steering.
 No benchmark LLM trials have run; the paid spending limit remains undecided.

@@ -11,6 +11,7 @@ import subprocess
 import sys
 import time
 import uuid
+from webhelix.browser.manifest import runtime_identity
 
 from webhelix.evaluate import lock
 from webhelix.search.budget import Budget, BudgetBlocked
@@ -30,6 +31,7 @@ POLICIES = {
 def evaluation_signature(candidate_hash, settings, policy, episodes):
     """Invalidate a cached measurement after any candidate/config/fixture change."""
     value = {
+        "browser_runtime": runtime_identity(),
         "candidate": candidate_hash,
         "settings": settings,
         "policy": policy,
@@ -225,6 +227,7 @@ def _evaluate(candidate, run, policy, episodes, label, settings):
     batch = run / "batches" / f"{label}-{uuid.uuid4().hex[:8]}"
     batch.mkdir(parents=True)
     report = {
+        "browser_runtime": runtime_identity(),
         "batch": str(batch),
         "label": label,
         "active_candidate": str(candidate),

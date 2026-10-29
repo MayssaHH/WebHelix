@@ -1,5 +1,10 @@
 # Continuing the first real proposal test
 
+> Historical continuation record: the execution and commands below concern the
+> original BrowserGym/custom-victim revision. Current Browser-Use runs cannot reuse
+> those baselines or resume that completed ledger as a compatible new-agent run.
+> See the [current architecture and setup](../README.md).
+
 The first API optimizer request returned a genuine proposal, but the old validator
 rejected its ordinary `>` CSS child selectors. Its failed history remains at
 `examples/optimizer-adapter/real-research-test-20261019/`; nothing in that historical

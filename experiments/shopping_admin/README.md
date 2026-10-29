@@ -5,7 +5,9 @@ in the local Magento Admin deployment. AutoHelix remains the pinned dependency
 `132fa0454963361fac669f35011b16f4263493c2`; none of its source is copied or edited.
 The benchmark revision is `6473f72db5dcefc97b5725b59e734504edc28a21`, task revision 2.
 
-The real-model experiment is **not yet executed**. The API spending limit is
+The real-model experiment is **not yet executed**. The current runner uses the
+shared Browser-Use Agent; published deployment and scripted results predate that
+migration and retain their original provenance. The API spending limit is
 undecided. Read the [executed evidence](../../examples/benchmark-search/README.md)
 for the distinction between local scripted checks and model results.
 
@@ -86,8 +88,8 @@ flowchart TD
 | --- | --- |
 | Candidate validation | `src/webhelix/benchmark/contract.py`: `load`, `validate` |
 | Live rendering and feasibility | `render.py`: `apply`, `protected`, `feasible` |
-| Independent screenshot victim | `policy.py`: `VictimPolicy`, `action_code` |
-| Fresh BrowserGym episode | `episode.py`: `execute`, `observe`, `classify` |
+| Independent browser agent | `src/webhelix/browser/`: native Browser-Use Agent, Responses adapter and recording |
+| Fresh task episode | `episode.py`: setup, backend checks and shared runner integration |
 | Batch evaluation and cached AutoHelix commands | `evaluate.py`: `evaluate`, `bridge`, `eligible` |
 | Optimizer context and fixed-file proposal writer | `optimizer.py`: `context_for`, `VisualProposalClient`, `BenchmarkBackend` |
 | AutoHelix worktree/history integration | `experiment.py`: `prepare`, `BenchmarkHarness`, `experiment` |
@@ -110,14 +112,14 @@ Trusted code writes outcome feedback **afterwards**. These two authorships remai
 separate. `feedback-continuity.json` compares the actual next context against
 the saved previous measurements, note, and candidate.
 
-The victim uses fresh model history per episode. Each request has the legitimate
-instruction, current viewport screenshot, visible text/control IDs, and its own
-prior text observations/actions. Available browser actions are click, fill, select,
-scroll, back, and stop. It has no fixture, shell, filesystem, evaluator or optimizer
-tools. Network routing is restricted to the local site's origin. BrowserGym
-0.14.3 executes the constrained actions; its pinned `_get_obs()` hook refreshes
-dynamic browser IDs. Screenshots, exact requests, responses, observations and
-actions are saved separately.
+The victim uses Browser-Use's Agent and fresh model history per episode. It
+receives the legitimate instruction, native browser observations and screenshots.
+Browser-Use supplies its instructions, memory and browser-action loop. It has no
+fixture, shell, filesystem, evaluator or optimizer tools; browser requests are
+restricted to the local site. Exact provider payloads establish what reached the
+model. Native observations and screenshots, requests, responses, actions and
+separate trusted validation snapshots are preserved. The former custom victim
+policy and BrowserGym environment are removed.
 
 ## Evaluation and retention
 
@@ -163,7 +165,7 @@ auditing, held-out tasks, stronger controls and confidence intervals.
 From a fresh private clone:
 
 ```bash
-git clone --branch feature/benchmark-search https://github.com/MayssaHH/WebHelix.git webhelix
+git clone --branch feature/checkout-opencode https://github.com/MayssaHH/WebHelix.git webhelix
 cd webhelix
 source scripts/env.sh
 bash scripts/setup.sh
