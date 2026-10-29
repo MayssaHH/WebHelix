@@ -1,0 +1,17 @@
+{
+  "offline_replay": true,
+  "new_model_calls": 0,
+  "parsed": {
+    "http_status": 429,
+    "error": {
+      "type": "insufficient_quota",
+      "code": "credit_balance_exhausted",
+      "param": null,
+      "message": "You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/."
+    },
+    "body_shape": "json_error_object",
+    "headers": {
+      "x-request-id": "req_fdc0181ebd234e639c944c2b71b2d631"
+    }
+  }
+}

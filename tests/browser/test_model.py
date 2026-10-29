@@ -196,6 +196,51 @@ def test_budget_denial_prevents_http_request(tmp_path):
     assert json.loads((tmp_path / "evidence/call-0.json").read_text())["sent"] is False
 
 
+def test_quota_diagnostics_reach_episode_error_without_exposing_credentials(tmp_path):
+    ledger = Budget()
+    calls = []
+
+    def handler(request):
+        calls.append(request)
+        return httpx.Response(
+            429,
+            headers={"x-request-id": "req_quota-test", "retry-after": "60"},
+            json={
+                "error": {
+                    "type": "insufficient_quota",
+                    "code": "credit_balance_exhausted",
+                    "message": "No credits remain for unit-test-placeholder. Add credits.",
+                }
+            },
+        )
+
+    llm = model(tmp_path, handler, ledger)
+
+    async def run():
+        try:
+            for _ in range(2):
+                with pytest.raises(
+                    ProviderUnavailable, match=r"HTTP 429 \(credit_balance_exhausted\)"
+                ) as caught:
+                    await llm.ainvoke([UserMessage(content="Task")], Output)
+                assert "unit-test-placeholder" not in str(caught.value)
+        finally:
+            await llm.aclose()
+
+    asyncio.run(run())
+    assert len(calls) == 1
+    assert ledger.events[-1] == ("settle", 17, {}, True)
+    record = json.loads((tmp_path / "evidence/response-0.json").read_text())
+    assert (
+        record["error"]["message"] == "No credits remain for [REDACTED]. Add credits."
+    )
+    assert record["headers"] == {"retry-after": "60", "x-request-id": "req_quota-test"}
+    assert (
+        "unit-test-placeholder"
+        not in (tmp_path / "evidence/response-0.json").read_text()
+    )
+
+
 @pytest.mark.parametrize(
     "payload,message",
     [

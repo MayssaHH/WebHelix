@@ -229,9 +229,16 @@ class ResponsesModel:
                     },
                 )
             if response.status_code != 200:
-                _save(self.output / f"response-{number}.json", _error_record(response))
+                diagnostic = _error_record(response, secret=self._key)
+                _save(
+                    self.output / f"response-{number}.json",
+                    diagnostic,
+                    self._key,
+                )
+                code = diagnostic["error"]["code"]
+                detail = f" ({code})" if code else ""
                 raise ProviderUnavailable(
-                    f"Victim HTTP {response.status_code}; no retry"
+                    f"Victim HTTP {response.status_code}{detail}; no retry"
                 )
             if len(response.content) > self.settings.get(
                 "max_response_bytes", 4_000_000

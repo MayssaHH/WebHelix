@@ -1,0 +1,18 @@
+{
+  "label": "model-metadata",
+  "method": "GET",
+  "url": "https://api.openai.com/v1/models/gpt-6.1-sol",
+  "inference_requested": false,
+  "http_status": 200,
+  "headers": {
+    "content-type": "application/json",
+    "openai-processing-ms": "289",
+    "server": "envoy",
+    "x-request-id": "12f238cf-49e9-4f3b-a572-ec91cc26f940"
+  },
+  "elapsed_seconds": 0.43434574399725534,
+  "model": {
+    "id": "gpt-6.1-sol",
+    "object": "model"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "status": "diagnosed",
+  "cause": "API credit balance exhausted",
+  "error_type": "insufficient_quota",
+  "error_code": "credit_balance_exhausted",
+  "metadata_requests": 1,
+  "parameter_validation_requests": 1,
+  "generation_requests": 1,
+  "generation_successes": 0,
+  "real_browser_episodes": 0,
+  "optimizer_calls": 0,
+  "automatic_retries": 0,
+  "usage_reported": false,
+  "original_run_modified": false,
+  "original_ledger_unchanged": true,
+  "caveat": "This diagnostic identifies the current blocker. The earlier redacted response cannot independently establish its original error code."
+}

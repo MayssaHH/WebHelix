@@ -1,5 +1,9 @@
 # Inspect the executed evidence
 
+**API429 diagnosis:** a [small follow-up probe](checkout/provider-diagnostic-20261030/README.md)
+returned `credit_balance_exhausted` on 30 October. The provider reports no API
+credits remaining. No browser episode or optimizer search was restarted.
+
 **Partial live search:** [OpenCode with Browser-Use](checkout/browser-use-search-20261030/README.md)
 produced one valid candidate on 30 October. Two victim episodes completed the
 legitimate task; the third returned HTTP 429. The batch is incomplete and

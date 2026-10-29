@@ -1,0 +1,17 @@
+{
+  "focused_tests_passed": 64,
+  "test_paths": [
+    "tests/test_provider_diagnostics.py",
+    "tests/browser/test_model.py",
+    "tests/test_unit.py"
+  ],
+  "ruff_passed": true,
+  "whitespace_passed": true,
+  "actual_response_offline_replay_passed": true,
+  "original_experiment_unchanged": true,
+  "generation_probes": 1,
+  "successful_generations": 0,
+  "browser_episodes": 0,
+  "optimizer_calls": 0,
+  "runtime_identity_note": "Only diagnostics changed; old baseline evidence retains its original implementation hash."
+}

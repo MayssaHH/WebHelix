@@ -1,0 +1,25 @@
+{
+  "purpose": "One user-requested diagnostic; not an experimental episode",
+  "inference_requested": true,
+  "max_generation_requests": 1,
+  "automatic_retries": 0,
+  "request_bytes": 190,
+  "model": "gpt-6.1-sol",
+  "reasoning": "medium",
+  "max_output_tokens": 32,
+  "original_ledger_sha256_before": "e28153eaa121b8c414a3e03cd21bdbb3187cb1fd2f8422691dedd77494d8736f",
+  "sent": true,
+  "http_status": 429,
+  "headers": {
+    "content-type": "application/json",
+    "server": "envoy",
+    "openai-processing-ms": "648",
+    "x-request-id": "req_fdc0181ebd234e639c944c2b71b2d631"
+  },
+  "sanitized_body": "{\n  \"error\": {\n    \"message\": \"You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.\",\n    \"type\": \"insufficient_quota\",\n    \"param\": null,\n    \"code\": \"credit_balance_exhausted\"\n  }\n}",
+  "usage": null,
+  "elapsed_seconds": 0.971282456011977,
+  "original_ledger_sha256_after": "e28153eaa121b8c414a3e03cd21bdbb3187cb1fd2f8422691dedd77494d8736f",
+  "original_ledger_unchanged": true,
+  "provider_invoice_usd": null
+}

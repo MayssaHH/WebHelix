@@ -1,0 +1,15 @@
+{
+  "label": "empty-responses-auth-check",
+  "method": "POST",
+  "url": "https://api.openai.com/v1/responses",
+  "inference_requested": false,
+  "http_status": 400,
+  "headers": {
+    "content-type": "application/json",
+    "server": "envoy",
+    "openai-processing-ms": "11",
+    "x-request-id": "req_c37d01f2136c4c878c4c908ccd599e8d"
+  },
+  "elapsed_seconds": 0.33909566298825666,
+  "sanitized_body": "{\n  \"error\": {\n    \"message\": \"Missing required parameter: 'model'.\",\n    \"type\": \"invalid_request_error\",\n    \"param\": \"model\",\n    \"code\": \"missing_required_parameter\"\n  }\n}"
+}

@@ -145,6 +145,9 @@ configuration. This diagnostic made no optimizer calls and ran no search.
 The subsequent [live OpenCode search](examples/checkout/browser-use-search-20261030/README.md)
 produced one valid candidate. Two Browser-Use episodes completed correctly; the
 third returned HTTP 429, leaving the batch incomplete. Iteration 2 did not run.
+A [follow-up diagnostic](examples/checkout/provider-diagnostic-20261030/README.md)
+identified the current blocker as `credit_balance_exhausted`; the API reports no
+credits remaining. The earlier failed episode and accounting remain preserved.
 No model is substituted automatically. Paid searches require compatible clean
 and identity diagnostics; former BrowserGym measurements are not Browser-Use baselines.
 

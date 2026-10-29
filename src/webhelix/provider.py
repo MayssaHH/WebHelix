@@ -2,7 +2,9 @@
 
 import json
 import os
+import re
 from contextlib import nullcontext
+from email.utils import parsedate_to_datetime
 from pathlib import Path
 
 import httpx
@@ -61,28 +63,97 @@ def provider_settings():
     }
 
 
-def _error_record(response):
-    """Retain diagnostic codes, never free-form errors that can echo credentials."""
+def _diagnostic_text(value, secret, limit=None):
+    """Redact complete credential values before applying any output bound."""
+    if not isinstance(value, str):
+        return None
+    value = value.replace(secret, "[REDACTED]")
+    value = re.sub(r"\bBearer\s+[^\s\"'<>]+", "Bearer [REDACTED]", value, flags=re.I)
+    value = re.sub(r"\bsk-[A-Za-z0-9_-]{8,}\b", "[REDACTED]", value)
+    value = " ".join(value.split())
+    return value if limit is None else value[:limit]
+
+
+def _diagnostic_headers(response, secret):
+    """Only retain bounded response identifiers and documented retry/rate fields."""
+    result = {}
+    names = {
+        "x-request-id",
+        "retry-after",
+        "retry-after-ms",
+        "x-ratelimit-limit-requests",
+        "x-ratelimit-limit-tokens",
+        "x-ratelimit-remaining-requests",
+        "x-ratelimit-remaining-tokens",
+        "x-ratelimit-reset-requests",
+        "x-ratelimit-reset-tokens",
+    }
+    for name in sorted(names):
+        value = _diagnostic_text(response.headers.get(name), secret)
+        if not value or len(value) > 160 or "[REDACTED]" in value:
+            continue
+        if name == "x-request-id":
+            valid = re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}", value)
+        elif "reset" in name:
+            valid = re.fullmatch(r"(?:\d+(?:\.\d+)?(?:ms|s|m|h|d))+", value)
+        else:
+            valid = re.fullmatch(r"\d+(?:\.\d+)?", value)
+            if not valid and name == "retry-after":
+                try:
+                    valid = parsedate_to_datetime(value).tzinfo is not None
+                except (TypeError, ValueError, OverflowError):
+                    valid = False
+        if valid:
+            result[name] = value
+    return result
+
+
+def _error_record(response, *, secret=None):
+    """Keep legacy safe codes; add redacted diagnostics when the caller knows the key.
+
+    Unknown machine codes remain diagnostic values, not inferred classifications.
+    No request headers or unfiltered response headers are retained.
+    """
     try:
-        error = response.json().get("error", {})
-    except (ValueError, AttributeError):
-        error = {}
+        body = response.json()
+    except ValueError:
+        body = None
+        shape, message = "non_json", response.text
+    else:
+        if isinstance(body, dict):
+            value = body.get("error")
+            if isinstance(value, dict):
+                shape, message = "json_error_object", value.get("message")
+            elif isinstance(value, str):
+                shape, message = "json_error_string", value
+            else:
+                shape, message = "json_object_without_error_object", body.get("message")
+        else:
+            shape, message = "json_non_object", None
+    error = body.get("error", {}) if isinstance(body, dict) else {}
     if not isinstance(error, dict):
         error = {}
     allowed = {
-        "type": {"invalid_request_error", "authentication_error", "server_error"},
+        "type": {
+            "invalid_request_error",
+            "authentication_error",
+            "server_error",
+            "insufficient_quota",
+            "rate_limit_exceeded",
+        },
         "code": {
             "invalid_api_key",
             "missing_required_parameter",
             "model_not_found",
             "insufficient_quota",
+            "credit_balance_exhausted",
             "rate_limit_exceeded",
             "unsupported_parameter",
             "unsupported_value",
         },
         "param": {"model", "input"},
     }
-    return {
+    record = {
         "http_status": response.status_code,
         "error": {
             field: value if isinstance(value, str) and value in permitted else None
@@ -90,6 +161,20 @@ def _error_record(response):
             for value in [error.get(field)]
         },
     }
+    if secret:
+        # Preserve benign provider-specific codes without permitting free-form or
+        # credential-shaped values into fields used by exception summaries.
+        for field in ("type", "code"):
+            value = _diagnostic_text(error.get(field), secret)
+            record["error"][field] = (
+                value
+                if value and re.fullmatch(r"[A-Za-z][A-Za-z0-9_.:-]{0,127}", value)
+                else None
+            )
+        record["error"]["message"] = _diagnostic_text(message, secret, 1000)
+        record["body_shape"] = shape
+        record["headers"] = _diagnostic_headers(response, secret)
+    return record
 
 
 def check_provider(client=None):
@@ -123,7 +208,7 @@ def check_provider(client=None):
             json={},
             headers={"Authorization": "Bearer " + key},
         )
-    record = _error_record(response)
+    record = _error_record(response, secret=key)
     error = record["error"]
     if not (
         response.status_code == 400
