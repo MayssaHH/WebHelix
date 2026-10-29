@@ -138,11 +138,12 @@ Checkout model settings are explicit JSON configuration:
   contains placeholders for an explicitly authorized combined spending ceiling
   and verified pricing/context bounds. Its null amount blocks paid execution.
 
-Both model configurations request `gpt-6.1-sol` with medium reasoning. These are
-requested settings, not proof of present account access or Browser-Use competence.
-No model is substituted automatically. Live Browser-Use generation using this model
-and account has not been tested by the migration. A new paid run needs fresh clean
-and identity diagnostics; the former BrowserGym measurements are not reusable Browser-Use baselines.
+Both model configurations request `gpt-6.1-sol` with medium reasoning. The
+[30 October live Browser-Use baseline](examples/checkout/browser-use-real-baseline-20261030/README.md)
+passed all three clean and three identity checkout episodes with that victim
+configuration. This diagnostic made no optimizer calls and ran no search.
+No model is substituted automatically. New paid searches still run their own clean
+and identity diagnostics; former BrowserGym measurements are not Browser-Use baselines.
 
 Keep credentials in the ignored `.env`, using the variable named by each model
 configuration. `.env.example` contains placeholders only. Do not commit keys,

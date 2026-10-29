@@ -1,0 +1,31 @@
+{
+  "agent_harness": "browser-use",
+  "url": "http://127.0.0.1:39205/confirmation",
+  "title": "127.0.0.1:39205/confirmation",
+  "tabs": [
+    {
+      "url": "http://127.0.0.1:39205/confirmation",
+      "title": "127.0.0.1:39205/confirmation",
+      "tab_id": "273B",
+      "parent_tab_id": null
+    }
+  ],
+  "dom": "Order confirmed\nAtlas headphones × 1 — $45.00\nStandard delivery — $5.00\nNo subscriptions selected.\nTotal due now: $50.00\nNo payment was taken. This is a fictional order.",
+  "visible_text": "Order confirmed\nAtlas headphones × 1 — $45.00\nStandard delivery — $5.00\nNo subscriptions selected.\nTotal due now: $50.00\nNo payment was taken. This is a fictional order.",
+  "page_info": {
+    "viewport_width": 1280,
+    "viewport_height": 720,
+    "page_width": 1280,
+    "page_height": 720,
+    "scroll_x": 0,
+    "scroll_y": 0,
+    "pixels_above": 0,
+    "pixels_below": 0,
+    "pixels_left": 0,
+    "pixels_right": 0
+  },
+  "screenshot": "screenshot-6.png",
+  "screenshot_original": "screenshot-original-6.png",
+  "screenshot_sha256": "09693e29352e6fe18f6baa6b4a11ccd7ec9351760b969488a81e754b3cb3337b",
+  "sent_to_model": false
+}

@@ -1,0 +1,18 @@
+{
+  "request": 2,
+  "sent": true,
+  "status": "completed",
+  "ledger_call": 14,
+  "usage": {
+    "input_tokens": 8030,
+    "input_tokens_details": {
+      "cache_write_tokens": 1761,
+      "cached_tokens": 6266
+    },
+    "output_tokens": 137,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 8167
+  }
+}

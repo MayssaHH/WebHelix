@@ -160,9 +160,11 @@ prove that account/model access works.
 ## Paid five-iteration repeat
 
 The initial requested model is `gpt-6.1-sol` with medium reasoning for both roles,
-in independent conversations. The Browser-Use migration has not run a paid
-compatibility check or victim baseline with that configuration. Historical
-OpenCode/model access does not establish the new victim's live compatibility. OpenCode uses the configured local provider name
+in independent conversations. The
+[30 October Browser-Use diagnostic](../examples/checkout/browser-use-real-baseline-20261030/README.md)
+passed three clean and three identity checkout episodes with that victim configuration.
+It made no optimizer calls and did not run a search; a real optimization run with
+the migrated victim remains to be tested. OpenCode uses the configured local provider name
 `webhelix/gpt-6.1-sol`; the gateway forwards the underlying provider model ID.
 Model names and reasoning settings come from explicit configuration, not from the
 interactive assistant's model selection.

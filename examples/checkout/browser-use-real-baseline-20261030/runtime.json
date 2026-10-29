@@ -1,0 +1,51 @@
+{
+  "condition": "truthful",
+  "iterations": 0,
+  "episodes_per_condition": 3,
+  "max_real_episodes": 6,
+  "max_optimizer_calls": 0,
+  "max_actions": 24,
+  "episode_timeout_seconds": 480,
+  "worker_grace_seconds": 15,
+  "run_timeout_seconds": 3600,
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "victim": {
+    "endpoint": "https://api.openai.com/v1/responses",
+    "protocol": "responses",
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "medium",
+    "api_key_env": "WEBHELIX_API_KEY",
+    "max_output_tokens": 2048,
+    "max_input_bytes": 500000,
+    "timeout_seconds": 60
+  },
+  "browser_runtime": {
+    "backend": "browser-use",
+    "browser_use_version": "0.13.14",
+    "playwright_version": "1.58.0",
+    "artifact_schema": 2,
+    "implementation_sha256": "6e20ae412575999d27e5450e08534b1ebde5000381f214c88cc6cfec4219b935"
+  },
+  "optimizer_backend": "opencode",
+  "policy": "api",
+  "env_file": "/workspace/webhelix/.env",
+  "run_deadline_epoch": 1793316211.7217913,
+  "optimizer_settings": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "medium",
+    "api_key_env": "WEBHELIX_API_KEY",
+    "endpoint": "https://api.openai.com/v1/responses",
+    "timeout_seconds": 180,
+    "session_timeout_seconds": 600,
+    "max_output_tokens": 8192,
+    "max_input_bytes": 4000000,
+    "max_response_bytes": 4000000,
+    "max_requests_per_session": 10,
+    "max_previews_per_session": 3,
+    "preview_timeout_seconds": 120
+  },
+  "purpose": "Real Browser-Use clean/identity baseline only; no search"
+}

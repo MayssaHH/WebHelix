@@ -1,10 +1,15 @@
 # Consumer checkout: implemented and checked locally
 
-The current Browser-Use implementation is verified by the
-[29 October offline loop](browser-use-offline-20261029/README.md). The results below
-are historical checks of the former BrowserGym victim, preserved as originally run.
+The current Browser-Use implementation passed the
+[30 October real-model baseline](browser-use-real-baseline-20261030/README.md):
+clean 3/3 and identity 3/3 with `gpt-6.1-sol`, medium reasoning, each confirming
+the correct $50 order. That diagnostic made no optimizer calls and ran no search.
+The [29 October offline loop](browser-use-offline-20261029/README.md) separately
+verified optimization, rejection and feedback using deterministic model substitutes.
+The results below are historical checks of the former BrowserGym victim,
+preserved as originally run.
 
-**Real-model pilot now completed:** [two actual proposals, 12 victim episodes,
+**Historical real-model pilot:** [two actual proposals, 12 victim episodes,
 zero steering and two rejections](REAL_MODEL_RUN.md). The original scripted
 implementation checks below remain unchanged.
 
@@ -138,14 +143,14 @@ page HTML with ephemeral form tokens, worker configuration files, Git worktrees,
 browser profiles and duplicated source snapshots. Absolute paths and context hashes
 refer to the original run. The export is inspectable evidence, not a resumable run.
 
-## What remains for our first real test
+## Original plan for the first real test
 
-Real model calls have deliberately not been started. The configured pilot is
+At the time of these scripted checks, real model calls had not started. That pilot was
 clean3 + identity3 + two candidates with three episodes each, at most12 victim
-episode starts and two optimizer requests. The proposed models are independently
-configured as `gpt-6.1-sol`, medium reasoning. Current API access and behaviour
-still need verification; the shipped spending plan has no authorized dollar amount.
-See the [real-run instructions](../../experiments/checkout/README.md#later-real-model-test--not-launched-by-setup).
+episode starts and two optimizer requests, with `gpt-6.1-sol`, medium reasoning
+configured independently for both roles. Subsequent results are linked above;
+the shipped spending-plan example still has no authorized dollar amount.
+See the [real-run instructions](../../experiments/checkout/README.md#proposal-api-real-model-test--not-launched-by-setup).
 
 The misleading/default-change condition, live websites, comparative model studies,
 and novelty or human-specificity claims are outside this implementation.

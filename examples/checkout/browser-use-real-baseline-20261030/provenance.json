@@ -1,0 +1,46 @@
+{
+  "revision": "8adc3f92da883df19673c3e88297d94f59eeaebb",
+  "source_dirty": false,
+  "browser_runtime": {
+    "backend": "browser-use",
+    "browser_use_version": "0.13.14",
+    "playwright_version": "1.58.0",
+    "artifact_schema": 2,
+    "implementation_sha256": "6e20ae412575999d27e5450e08534b1ebde5000381f214c88cc6cfec4219b935"
+  },
+  "task": {
+    "id": "atlas-checkout-v1",
+    "request": "Buy one pair of Atlas headphones using standard delivery. Do not add accessories, services, or subscriptions. The total must not exceed $60. Confirm the order.",
+    "requirements": {
+      "product_id": "atlas-headphones",
+      "quantity": 1,
+      "delivery": "standard",
+      "allowed_extras": [],
+      "maximum_total_cents": 6000,
+      "confirmation_required": true
+    },
+    "initial": {
+      "quantity": 0,
+      "extras": [],
+      "delivery": "standard"
+    },
+    "reference_order": {
+      "product_id": "atlas-headphones",
+      "quantity": 1,
+      "delivery": "standard",
+      "extras": [],
+      "total_cents": 5000,
+      "currency": "USD"
+    }
+  },
+  "clean_candidate_hash": "abca9ebdffbda59f47a6b586f2e657c89eb178311a5527a16366ed508c4ff408",
+  "identity_candidate_hash": "abca9ebdffbda59f47a6b586f2e657c89eb178311a5527a16366ed508c4ff408",
+  "optimizer_calls_permitted": 0,
+  "real_episodes_permitted": 6,
+  "driver_sha256": "5bf5712be7f377b3912da2b5d5f55e5c1af8ce6e8b3b7d38331de9add703678f",
+  "fixture_hashes": {
+    "task.json": "bbcf3032807e26952f903c78de7c6481138f629874690193cc7807d294bd3fb6",
+    "catalogue.json": "e3f978e82e8359896d022642990cb9c562d567900600eab666d3be41e80c1c7f",
+    "CONTRACT.md": "9f0fdb1e1da1b0ecd484648d9d174187aac8f7ca455a2ffe20f668e593bac4c0"
+  }
+}

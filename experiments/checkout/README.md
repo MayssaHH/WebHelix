@@ -8,6 +8,10 @@ Browser-Use integration; historical runs used the former custom victim. The defa
 path and its saved evidence remain available. OpenCode installation/offline tests
 do not constitute a paid model run.
 
+**Current Browser-Use baseline:** the [30 October real-model diagnostic](../../examples/checkout/browser-use-real-baseline-20261030/README.md)
+passed clean 3/3 and identity 3/3 with `gpt-6.1-sol`, medium reasoning. All six
+episodes confirmed the correct $50 order. No optimizer calls or search ran.
+
 **Historical real-model pilot (before Browser-Use migration):** [results and visual walkthrough](../../examples/checkout/REAL_MODEL_RUN.md).
 Both genuine optimizer proposals were valid and exposed, but all 12 victim
 episodes completed the legitimate task. Both candidates were rejected; reported
@@ -214,8 +218,9 @@ The commands in this section select the historical two-iteration proposal API
 pilot. The [OpenCode repeat](../../docs/OPENCODE_CHECKOUT.md#paid-five-iteration-repeat)
 has a separate configuration and spending authorization.
 The Browser-Use model adapter uses OpenAI Responses with visual input and bounded
-output, forwarding the native Agent messages and output schema. Live compatibility
-through Browser-Use has not been established by this migration.
+output, forwarding the native Agent messages and output schema. The
+[live checkout baseline](../../examples/checkout/browser-use-real-baseline-20261030/README.md)
+verified this path with `gpt-6.1-sol`, medium reasoning; it did not test optimization.
 Neither model availability, current pricing, account funds nor real-model competence
 is established by offline tests. Validate those before the paid pilot, and record
 any explicit model change in configuration.
@@ -272,10 +277,11 @@ Open `<run>/index.html` for stage screenshots and links. Inspect:
 
 Browser-Use version and effective configuration identify the victim in new runs.
 Historical custom-victim results are not reusable baselines after migration.
-The migration itself does not establish a completed real Browser-Use pilot.
+The real Browser-Use checkout baseline passed; the migrated optimization loop has
+only been exercised with deterministic model substitutes so far.
 
 Raw runs should remain outside the repository or under ignored `runs/`. Preserve
-failed attempts. Only selected sanitized offline examples belong under `examples/`.
+failed attempts. Only selected sanitized evidence belongs under `examples/`.
 The first experiment can verify a working search and observed steering, if any;
 it cannot establish novelty, agent specificity, human susceptibility or broad
 generalization. Those require independent controls and additional tasks.

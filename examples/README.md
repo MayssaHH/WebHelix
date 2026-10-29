@@ -1,5 +1,10 @@
 # Inspect the executed evidence
 
+**Current real-model baseline:** [Browser-Use clean and identity checkout](checkout/browser-use-real-baseline-20261030/README.md)
+passed all six episodes on 30 October with `gpt-6.1-sol`, medium reasoning.
+Each confirmed the correct $50 order. This diagnostic made no optimizer calls
+and ran no search.
+
 **Current runtime verification:** [Browser-Use with two offline OpenCode iterations](checkout/browser-use-offline-20261029/README.md)
 records native browser execution, rejection at zero steering, and verified feedback
 continuity. All model responses were deterministic controls; no paid inference ran.
