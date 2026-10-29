@@ -1,0 +1,1 @@
+Read /work/reference/context.json and inspect the candidate. Complete the task in your WebHelix instructions using file, command and preview tools. Write /work/notes/optimizer-note.md before finishing.

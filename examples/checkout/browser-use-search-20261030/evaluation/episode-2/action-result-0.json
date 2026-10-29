@@ -1,0 +1,8 @@
+[
+  {
+    "is_done": false,
+    "error": "Victim HTTP 429; no retry",
+    "include_extracted_content_only_once": false,
+    "include_in_memory": false
+  }
+]

@@ -4,6 +4,9 @@ The current Browser-Use implementation passed the
 [30 October real-model baseline](browser-use-real-baseline-20261030/README.md):
 clean 3/3 and identity 3/3 with `gpt-6.1-sol`, medium reasoning, each confirming
 the correct $50 order. That diagnostic made no optimizer calls and ran no search.
+The subsequent [live OpenCode search](browser-use-search-20261030/README.md) produced
+one valid candidate. Two victim episodes confirmed the legitimate $50 order;
+HTTP 429 interrupted the third. The batch is incomplete and iteration 2 did not run.
 The [29 October offline loop](browser-use-offline-20261029/README.md) separately
 verified optimization, rejection and feedback using deterministic model substitutes.
 The results below are historical checks of the former BrowserGym victim,

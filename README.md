@@ -142,7 +142,10 @@ Both model configurations request `gpt-6.1-sol` with medium reasoning. The
 [30 October live Browser-Use baseline](examples/checkout/browser-use-real-baseline-20261030/README.md)
 passed all three clean and three identity checkout episodes with that victim
 configuration. This diagnostic made no optimizer calls and ran no search.
-No model is substituted automatically. New paid searches still run their own clean
+The subsequent [live OpenCode search](examples/checkout/browser-use-search-20261030/README.md)
+produced one valid candidate. Two Browser-Use episodes completed correctly; the
+third returned HTTP 429, leaving the batch incomplete. Iteration 2 did not run.
+No model is substituted automatically. Paid searches require compatible clean
 and identity diagnostics; former BrowserGym measurements are not Browser-Use baselines.
 
 Keep credentials in the ignored `.env`, using the variable named by each model

@@ -1,0 +1,8 @@
+{
+  "request": 0,
+  "sent": true,
+  "status": "failed",
+  "ledger_call": 52,
+  "error_type": "ProviderUnavailable",
+  "usage": {}
+}

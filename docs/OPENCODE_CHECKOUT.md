@@ -163,8 +163,11 @@ The initial requested model is `gpt-6.1-sol` with medium reasoning for both role
 in independent conversations. The
 [30 October Browser-Use diagnostic](../examples/checkout/browser-use-real-baseline-20261030/README.md)
 passed three clean and three identity checkout episodes with that victim configuration.
-It made no optimizer calls and did not run a search; a real optimization run with
-the migrated victim remains to be tested. OpenCode uses the configured local provider name
+It made no optimizer calls and did not run a search. The subsequent
+[live search](../examples/checkout/browser-use-search-20261030/README.md) produced one
+valid OpenCode candidate, with two legitimate victim completions before HTTP 429
+stopped the third episode. That batch is incomplete; iteration 2 did not run.
+OpenCode uses the configured local provider name
 `webhelix/gpt-6.1-sol`; the gateway forwards the underlying provider model ID.
 Model names and reasoning settings come from explicit configuration, not from the
 interactive assistant's model selection.

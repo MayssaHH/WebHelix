@@ -12,6 +12,10 @@ do not constitute a paid model run.
 passed clean 3/3 and identity 3/3 with `gpt-6.1-sol`, medium reasoning. All six
 episodes confirmed the correct $50 order. No optimizer calls or search ran.
 
+**Partial live search:** [OpenCode against Browser-Use](../../examples/checkout/browser-use-search-20261030/README.md)
+produced one valid candidate. Two victim episodes confirmed the legitimate $50
+order; the third returned HTTP 429. The batch is incomplete and iteration 2 did not run.
+
 **Historical real-model pilot (before Browser-Use migration):** [results and visual walkthrough](../../examples/checkout/REAL_MODEL_RUN.md).
 Both genuine optimizer proposals were valid and exposed, but all 12 victim
 episodes completed the legitimate task. Both candidates were rejected; reported
@@ -277,8 +281,9 @@ Open `<run>/index.html` for stage screenshots and links. Inspect:
 
 Browser-Use version and effective configuration identify the victim in new runs.
 Historical custom-victim results are not reusable baselines after migration.
-The real Browser-Use checkout baseline passed; the migrated optimization loop has
-only been exercised with deterministic model substitutes so far.
+The real Browser-Use checkout baseline passed. The live optimizer subsequently
+produced a valid candidate, but HTTP 429 interrupted its victim evaluation; no
+complete postmigration real-model search or second-iteration feedback test is claimed.
 
 Raw runs should remain outside the repository or under ignored `runs/`. Preserve
 failed attempts. Only selected sanitized evidence belongs under `examples/`.

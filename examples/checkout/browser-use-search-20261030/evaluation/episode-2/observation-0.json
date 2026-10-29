@@ -1,0 +1,32 @@
+{
+  "agent_harness": "browser-use",
+  "url": "http://127.0.0.1:37769/",
+  "title": "Atlas Audio — fictional shop",
+  "tabs": [
+    {
+      "url": "http://127.0.0.1:37769/",
+      "title": "Atlas Audio — fictional shop",
+      "tab_id": "7F0F",
+      "parent_tab_id": null
+    }
+  ],
+  "dom": "Atlas Audio\nFictional shop. Confirmation records a local demonstration order; no payment is taken.\nHeadphones\nAtlas headphones\nWired over-ear headphones with a 3.5 mm connection and adjustable headband.\n$45.00\n[6]<button id=wh-add type=submit name=action value=add />\n\tAdd to cart\nStandard delivery — $5.00. Arrives in 5–7 business days.",
+  "visible_text": "Atlas Audio\nFictional shop. Confirmation records a local demonstration order; no payment is taken.\nHeadphones\nAtlas headphones\nWired over-ear headphones with a 3.5 mm connection and adjustable headband.\n$45.00\n[6]<button id=wh-add type=submit name=action value=add />\n\tAdd to cart\nStandard delivery — $5.00. Arrives in 5–7 business days.",
+  "page_info": {
+    "viewport_width": 1280,
+    "viewport_height": 720,
+    "page_width": 1280,
+    "page_height": 720,
+    "scroll_x": 0,
+    "scroll_y": 0,
+    "pixels_above": 0,
+    "pixels_below": 0,
+    "pixels_left": 0,
+    "pixels_right": 0
+  },
+  "screenshot": "screenshot-0.png",
+  "screenshot_original": "screenshot-original-0.png",
+  "screenshot_sha256": "51f3bd8126f6b9c9b1f91719953e8158ce4600ee3af1ed1d69b2a28a03e73c4a",
+  "sent_to_model": true,
+  "submitted_to_model_adapter": true
+}
