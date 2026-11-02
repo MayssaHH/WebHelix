@@ -35,6 +35,10 @@ from .optimizer import (
     FixtureClient,
     VisualProposalClient,
     episode_context,
+    evidence_manifest,
+    manifest_digest,
+    summarized_feedback,
+    SUMMARY_MEMORY_POLICY,
 )
 
 GOAL = SEARCH_GOAL
@@ -198,6 +202,36 @@ def feedback_continuity(run, iteration):
             if (base / "optimizer-note.md").is_file()
             else ""
         )
+        if context.get("memory_policy") == SUMMARY_MEMORY_POLICY:
+            expected_feedback = summarized_feedback(
+                base, number, note, read(run / "runtime.json")["condition"]
+            )
+            mounted = path.parent / "reference/history" / f"iter-{number}"
+            evidence_matches = False
+            manifest_matches = False
+            try:
+                source_manifest = evidence_manifest(base)
+                saved_manifest = read(mounted / "manifest.json")
+                copied_manifest = evidence_manifest(mounted)
+                copied_index = copied_manifest["files"].pop("manifest.json")
+                copied_manifest["total_bytes"] -= copied_index["bytes"]
+                manifest_matches = (
+                    saved_manifest == source_manifest
+                    and manifest_digest(source_manifest)
+                    == previous["evidence"]["manifest_sha256"]
+                )
+                evidence_matches = copied_manifest == source_manifest
+            except (OSError, ValueError, KeyError):
+                pass
+            checks.append(
+                {
+                    "iteration": number,
+                    "summary_matches": previous == expected_feedback,
+                    "evidence_manifest_matches": manifest_matches,
+                    "complete_readonly_evidence_matches": evidence_matches,
+                }
+            )
+            continue
         files = {
             name: (base / "candidate" / name).read_text()
             for name in candidate_files(read(run / "runtime.json")["condition"])
@@ -403,6 +437,7 @@ def _source_receipt(run):
             FIXTURES / "opencode-pilot.json",
             FIXTURES / "opencode-longer-pilot.json",
             FIXTURES / "opencode-longer.example.json",
+            FIXTURES / "opencode-discovery.example.json",
             FIXTURES / "discovery-pilot.json",
             ROOT / "pyproject.toml",
             ROOT / "uv.lock",

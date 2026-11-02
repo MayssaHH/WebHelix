@@ -1,4 +1,4 @@
-"""One clean smoke episode followed by a single six-iteration combined search."""
+"""One clean smoke episode followed by a bounded combined search."""
 
 import argparse
 from dataclasses import asdict
@@ -35,22 +35,24 @@ def prepare_discovery(root, *, scripted, env_file=None, spending_plan=None):
         raise ValueError(
             "Choose a fresh discovery directory; existing evidence is preserved"
         )
-    optimizer = OpenCodeSettings.load(FIXTURES / "opencode-longer.example.json")
+    optimizer = OpenCodeSettings.load(FIXTURES / "opencode-discovery.example.json")
     settings = _pilot_settings(
         FIXTURES / "discovery-pilot.json", scripted=scripted, clean_smoke=True
     )
+    scheduled = 1 + settings["iterations"] * settings["episodes_per_condition"]
+    optimizer_requests = settings["iterations"] * optimizer.max_requests_per_session
     if (
-        settings["condition"],
-        settings["iterations"],
-        settings["episodes_per_condition"],
-        settings["max_real_episodes"],
-        settings["max_optimizer_calls"],
-    ) != ("combined", 6, 3, 19, 120):
+        settings["condition"] != "combined"
+        or settings["episodes_per_condition"] != 3
+        or settings["max_real_episodes"] != scheduled
+        or settings["max_optimizer_calls"] != optimizer_requests
+    ):
         raise ValueError(
-            "This discovery pilot requires one clean + six combined candidates × three episodes"
+            "Discovery limits must match one clean + iterations × three episodes and the optimizer session request bounds"
         )
     settings.update(
         workflow="discovery-v1",
+        memory_policy="summary-with-readonly-evidence-v1",
         baseline_episodes=1,
         browser_runtime=runtime_identity(),
         optimizer_backend="opencode",
@@ -98,10 +100,10 @@ def prepare_discovery(root, *, scripted, env_file=None, spending_plan=None):
             "prepared_runtime_hash": _hash(settings),
             "baseline_episodes": 1,
             "episodes_per_valid_candidate": 3,
-            "maximum_scheduled_episodes": 19,
-            "maximum_real_episode_starts": 0 if scripted else 19,
-            "maximum_optimizer_sessions": 6,
-            "maximum_optimizer_requests": 120,
+            "maximum_scheduled_episodes": scheduled,
+            "maximum_real_episode_starts": 0 if scripted else scheduled,
+            "maximum_optimizer_sessions": settings["iterations"],
+            "maximum_optimizer_requests": optimizer_requests,
             "meaning": "One clean competence smoke check, not a reliable baseline-rate estimate. Retention is provisional. Scripted runs are engineering controls, not discovered steering.",
         },
     )
@@ -142,6 +144,13 @@ def _execute_discovery(root):
                 "victim": settings["victim"]["model"],
             },
         )
+        if (
+            plan["roles"]["optimizer"]["maximum_context_input_tokens"]
+            != settings["optimizer_settings"]["context_window_tokens"]
+        ):
+            raise ValueError(
+                "Optimizer accounting and advertised context bounds disagree"
+            )
         from webhelix.provider import provider_key
 
         old_env = os.environ.get("WEBHELIX_DOTENV_FILE")

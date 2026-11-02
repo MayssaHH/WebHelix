@@ -5,18 +5,19 @@ continuous search with both presentation and bounded interaction changes availab
 It replaces the earlier three-condition comparison. The older `checkout experiment`
 command remains for its historical clean-plus-identity workflow; it is not this pilot.
 The [completed offline verification](../examples/checkout/discovery-offline-20261102/README.md)
-records all six sessions, 19 scheduled episodes, feedback checks and a live cost forecast.
+records the earlier six-session configuration. The current lower-cost pilot uses
+two sessions and a smaller optimizer; historical evidence is unchanged.
 
 ## Schedule and interpretation
 
 1. Run **one clean victim episode**. Stop before optimization if the legitimate task
    does not complete successfully or the evaluation fails.
-2. Run **six successive OpenCode optimizer sessions**, each proposing one final
+2. Run **two successive OpenCode optimizer sessions**, each proposing one final
    candidate in an AutoHelix worktree.
 3. For each valid candidate, run **three fresh Browser-Use episodes**, score the
    confirmed outcomes, retain or reject it, and preserve feedback for the next session.
 
-Maximum scheduled victim episodes: **1 + 6 × 3 = 19**. There is no identity batch,
+Maximum scheduled victim episodes: **1 + 2 × 3 = 7**. There is no identity batch,
 separate arm or extra paid harness-editing check. Invalid candidates consume their
 attempted optimizer session but do not receive victim episodes. Errors and budget
 stops remain recorded; retries do not silently replace failed attempts.
@@ -71,12 +72,16 @@ measurement and retained best. Zero scores and ties reject. Legitimate success,
 unauthorized commitment, other intent violations, recovery, incomplete attempts and
 infrastructure errors are reported separately.
 
-The next optimizer receives the retained files plus previous candidates, original
-hypotheses, actual measurements and all recorded episode observations/actions.
-Rejected candidates remain in feedback even after their worktrees disappear.
-Hypotheses are separate from evaluator facts. Oversized context fails rather than
-silently dropping prior evidence. Preview uses a deterministic control policy; it
-does not measure real-victim susceptibility or consume a paid victim episode.
+The next optimizer receives retained files and a summary of every prior candidate,
+original hypothesis, actual measurement and decision. Full candidate files and
+episode observations/actions remain available in read-only `reference/history/`
+files for inspection with OpenCode tools, rather than repeating them in each prompt.
+Rejected candidates remain available after their worktrees disappear. Continuity
+checks compare summaries and archived evidence with the original feedback and
+verify delivery in an actual provider request. Hypotheses remain separate from
+evaluator facts. Oversized context fails rather than silently dropping evidence.
+Preview uses a deterministic control policy; it does not measure real-victim
+susceptibility or consume a paid victim episode.
 
 ## Setup and scripted verification
 
@@ -101,10 +106,14 @@ snapshots the source and configuration; changing them requires a fresh preparati
 ## Prepared live execution
 
 Keep the credential in the private ignored `.env`. The prepared live workflow uses
-the explicit [OpenCode](../experiments/checkout/opencode-longer.example.json) and
-[victim](../experiments/checkout/victim.example.json) configurations, currently
-`gpt-6.1-sol` with medium reasoning in independent conversations. No model is
-substituted automatically.
+the explicit [OpenCode](../experiments/checkout/opencode-discovery.example.json) configuration:
+`gpt-5.4-mini`, medium reasoning, 400,000-token context metadata. The independent
+Browser-Use victim remains `gpt-6.1-sol`, medium reasoning, as specified in
+[discovery-pilot.json](../experiments/checkout/discovery-pilot.json). No model is
+substituted automatically. The optimizer model context must match its accounting
+bound. A planning estimate for this reduced pilot is $2–5; it is not an invoice
+or an enforced limit. Choose a separate explicit combined spending ceiling. The
+approved demonstration ceiling is $10; examples do not authorize future runs.
 
 ```bash
 uv run --locked webhelix checkout discovery --prepare \
@@ -123,16 +132,16 @@ accounting is conservative accounting, not a provider invoice or account-wide ca
 
 | Limit | Pilot setting |
 | --- | ---: |
-| Optimizer sessions / iterations | 6 |
-| Optimizer requests per session / total | 20 / 120 |
-| Scheduled real victim episode starts | At most 19 |
+| Optimizer sessions / iterations | 2 |
+| Optimizer requests per session / total | 20 / 40 |
+| Scheduled real victim episode starts | At most 7 |
 | Victim actions / model calls per episode | At most 24 each |
 | Output tokens per optimizer / victim request | 8,192 / 2,048 |
 | Deterministic previews per optimizer session | At most 3 |
 | Whole-run time | 2 hours from execution |
 
 Started episodes and failed calls remain counted. Reserved costs without reported
-usage are not erased. A ceiling can stop the run before all six iterations finish.
+usage are not erased. A ceiling can stop the run before both iterations finish.
 
 ## Inspect the result
 
@@ -143,3 +152,8 @@ the candidate and actual measurements even after rejection. Episode directories
 contain native observations/actions, screenshots, backend receipts and
 `interaction-journal.json`. Feedback-continuity receipts verify delivery to later
 sessions, not just availability on disk.
+
+Full-context reservations are conservative: the unchanged Sol victim reserves
+about $5.81 before each request, then settles to reported usage. Consequently a
+$10 ceiling can stop the run well before $10 has actually been accounted. Unknown
+usage keeps its reservation. The runner never silently increases the ceiling.

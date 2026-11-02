@@ -46,11 +46,15 @@ def test_live_prepare_is_offline_and_null_budget_blocks_before_browser(
 def test_single_search_configuration_has_no_identity_or_arm(tmp_path):
     run = prepare_discovery(tmp_path / "run", scripted=True)
     settings, status = read(run / "runtime.json"), read(run / "status.json")
-    assert settings["condition"] == "combined" and settings["iterations"] == 6
+    assert settings["condition"] == "combined" and settings["iterations"] == 2
     assert settings["episodes_per_condition"] == 3
-    assert settings["max_optimizer_calls"] == 120
+    assert settings["max_optimizer_calls"] == 40
     assert settings["max_real_episodes"] == 0
-    assert status["maximum_scheduled_episodes"] == 19
+    assert status["maximum_scheduled_episodes"] == 7
+    assert settings["optimizer_settings"]["model"] == "gpt-5.4-mini"
+    assert settings["optimizer_settings"]["context_window_tokens"] == 400000
+    assert settings["victim"]["model"] == "gpt-6.1-sol"
+    assert settings["memory_policy"] == "summary-with-readonly-evidence-v1"
     assert status["baseline_episodes"] == 1
     assert not (run / "identity.json").exists() and not (run / "arms").exists()
     assert fingerprint(initial_files("combined")) == fingerprint(
@@ -96,6 +100,32 @@ def test_prepared_runtime_changes_block_before_any_execution(tmp_path, monkeypat
         execute_discovery(run)
 
 
+def test_live_context_accounting_must_match_optimizer_metadata(tmp_path, monkeypatch):
+    secret = tmp_path / "private.env"
+    secret.write_text("WEBHELIX_API_KEY=not-a-real-key\n")
+    run = prepare_discovery(tmp_path / "run", scripted=False, env_file=secret)
+    plan = read(run / "spending-plan.json")
+    plan.update(authorized_usd=10, verified_on="test")
+    for role, model in (("optimizer", "gpt-5.4-mini"), ("victim", "gpt-6.1-sol")):
+        plan["roles"][role].update(
+            model=model,
+            input_usd_per_million=1,
+            output_usd_per_million=1,
+            maximum_context_input_tokens=1050000,
+            pricing_source="test",
+            context_source="test",
+        )
+    save(run / "spending-plan.json", plan)
+    monkeypatch.setattr(
+        "webhelix.checkout.discovery.DockerRuntime.preflight",
+        lambda: pytest.fail("Mismatched context reached Docker"),
+    )
+    with pytest.raises(ValueError, match="context bounds disagree"):
+        execute_discovery(run)
+    assert read(run / "status.json")["status"] == "prepared"
+    assert not (run / "budget.json").exists()
+
+
 def test_one_api_episode_is_only_for_pristine_single_use_smoke(tmp_path, monkeypatch):
     run = prepare_discovery(tmp_path / "run", scripted=True)
     candidate = run / "reference/candidate"
@@ -120,16 +150,16 @@ def test_one_api_episode_is_only_for_pristine_single_use_smoke(tmp_path, monkeyp
         evaluate(candidate, run, "api", 1, "clean", purpose="clean_smoke")
 
 
-def test_single_run_counts_all_nineteen_started_episodes(tmp_path):
-    settings = {"max_real_episodes": 19, "max_optimizer_calls": 120, "max_actions": 24}
+def test_single_run_counts_all_seven_started_episodes(tmp_path):
+    settings = {"max_real_episodes": 7, "max_optimizer_calls": 40, "max_actions": 24}
     budget = Budget(tmp_path, settings)
     budget.episode("clean/episode-0")
-    for iteration in range(1, 7):
+    for iteration in range(1, 3):
         for episode in range(3):
             budget.episode(f"iter-{iteration}/episode-{episode}")
     with pytest.raises(BudgetBlocked, match="episode limit"):
         budget.episode("unapproved-retry")
-    assert len(read(tmp_path / "budget.json")["episodes"]) == 19
+    assert len(read(tmp_path / "budget.json")["episodes"]) == 7
 
 
 def test_all_arms_share_one_financial_reservation_and_episode_cap(tmp_path):

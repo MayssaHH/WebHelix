@@ -5,7 +5,10 @@ import copy
 import difflib
 import hashlib
 import json
+import os
 from pathlib import Path
+import shutil
+import stat
 import time
 from types import SimpleNamespace
 from urllib.parse import urlsplit
@@ -34,6 +37,7 @@ NOTE_FIELDS = ("hypothesis", "predicted_observation", "falsification", "reflecti
 # Preserve complete feedback; the provider gateway still enforces the full
 # serialized request bound and rejects oversize requests without truncation.
 MAX_FEEDBACK_BYTES = 4_000_000
+SUMMARY_MEMORY_POLICY = "summary-with-readonly-evidence-v1"
 SCHEMA = {
     "type": "object",
     "additionalProperties": False,
@@ -148,14 +152,165 @@ def stage_images(directory):
     return list(selected.items())
 
 
+def evidence_manifest(directory):
+    """Hash the complete trusted feedback tree; reject unsafe or unexpected files."""
+    directory = Path(directory)
+    if directory.is_symlink() or not directory.is_dir():
+        raise ValueError("Feedback evidence must be a regular directory")
+    files = {}
+    total = 0
+    for path in sorted(directory.rglob("*")):
+        if path.is_symlink():
+            raise ValueError("Feedback evidence cannot contain symlinks")
+        if path.is_dir():
+            continue
+        if path.suffix not in {
+            ".json",
+            ".jsonl",
+            ".html",
+            ".css",
+            ".png",
+            ".md",
+            ".txt",
+            ".log",
+            ".diff",
+        }:
+            raise ValueError("Unexpected feedback artifact type")
+        fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
+        with os.fdopen(fd, "rb") as source:
+            info = os.fstat(source.fileno())
+            if not stat.S_ISREG(info.st_mode) or info.st_size > 64_000_000:
+                raise ValueError("Unsafe or oversized feedback artifact")
+            data = source.read(64_000_001)
+        if len(data) > 64_000_000:
+            raise ValueError("Oversized feedback artifact")
+        total += len(data)
+        files[path.relative_to(directory).as_posix()] = {
+            "sha256": hashlib.sha256(data).hexdigest(),
+            "bytes": len(data),
+        }
+        if total > 512_000_000 or len(files) > 10000:
+            raise ValueError("Feedback evidence archive exceeds its bounded size")
+    return {"files": files, "total_bytes": total}
+
+
+def manifest_digest(manifest):
+    return hashlib.sha256(json.dumps(manifest, sort_keys=True).encode()).hexdigest()
+
+
+def summarized_feedback(base, number, note, condition):
+    """Deterministic factual summary; full observations stay in the read-only archive."""
+    base = Path(base)
+    measurements = read(base / "result.json")
+    root = f"/work/reference/history/iter-{number}"
+    manifest = evidence_manifest(base)
+    episodes = []
+    for directory in sorted(base.glob("episode-*")):
+        if not directory.is_dir():
+            continue
+        receipt = read(directory / "episode.json")
+        # These large fields are available verbatim in episode.json and individual
+        # step files. Keep every outcome/error/usage field, including failed episodes.
+        summary = {
+            key: value
+            for key, value in receipt.items()
+            if key
+            not in {
+                "actions",
+                "exposures",
+                "backend_before",
+                "backend_after",
+                "browser_runtime",
+            }
+        }
+        backend = receipt.get("backend_after", {})
+        summary["confirmed_backend"] = {
+            key: backend[key]
+            for key in ("confirmed", "order", "quantity", "extras", "delivery", "stage")
+            if key in backend
+        }
+        summary["action_count"] = len(receipt.get("actions", []))
+        episodes.append(
+            {
+                "episode": directory.name,
+                "summary": summary,
+                "evidence_directory": root + "/" + directory.name,
+                "receipt_path": root + "/" + directory.name + "/episode.json",
+            }
+        )
+    return {
+        "iteration": number,
+        "optimizer_note": note,
+        "measurements": {
+            key: value for key, value in measurements.items() if key != "episodes"
+        },
+        "candidate_files": {
+            name: {
+                "path": root + "/candidate/" + name,
+                **manifest["files"]["candidate/" + name],
+            }
+            for name in candidate_files(condition)
+            if "candidate/" + name in manifest["files"]
+        },
+        "episodes": episodes,
+        "evidence": {
+            "directory": root,
+            "manifest_path": root + "/manifest.json",
+            "manifest_sha256": manifest_digest(manifest),
+            "file_count": len(manifest["files"]),
+            "total_bytes": manifest["total_bytes"],
+            "measurements_path": root + "/result.json",
+            "diff_path": root + "/candidate.diff"
+            if "candidate.diff" in manifest["files"]
+            else None,
+            "proposal_path": root + "/proposal.json"
+            if "proposal.json" in manifest["files"]
+            else None,
+        },
+    }
+
+
+def materialize_feedback_evidence(workspace, reference, context):
+    """Copy exact archived feedback into the optimizer's read-only reference mount."""
+    if context.get("memory_policy") != SUMMARY_MEMORY_POLICY:
+        return
+    for previous in context["prior_feedback"]:
+        number = previous["iteration"]
+        source = Path(workspace) / ".autohelix/observations" / f"iter-{number}"
+        manifest = evidence_manifest(source)
+        if "manifest.json" in manifest["files"]:
+            raise ValueError("Feedback archive uses the reserved manifest name")
+        if manifest_digest(manifest) != previous["evidence"]["manifest_sha256"]:
+            raise ValueError("Feedback evidence changed after context construction")
+        target = Path(reference) / "history" / f"iter-{number}"
+        for relative in manifest["files"]:
+            destination = target / relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(source / relative, destination)
+        if evidence_manifest(target) != manifest:
+            raise ValueError("Read-only feedback copy differs from archived evidence")
+        save(target / "manifest.json", manifest)
+
+
 def context_for(workspace, run, iteration, prompt, *, clean_report=None):
     workspace, run = Path(workspace), Path(run)
     settings = read(run / "runtime.json")
     files = load(workspace / "candidate", settings["condition"])
     previous = []
+    memory_policy = settings.get("memory_policy")
     for number in range(1, iteration):
         relative = Path(".autohelix/observations") / f"iter-{number}"
         base = workspace / relative
+        if memory_policy == SUMMARY_MEMORY_POLICY:
+            previous.append(
+                summarized_feedback(
+                    base,
+                    number,
+                    safe_read(workspace, f".autohelix/notes/iter-{number}.md"),
+                    settings["condition"],
+                )
+            )
+            continue
         previous.append(
             {
                 "iteration": number,
@@ -205,6 +360,14 @@ def context_for(workspace, run, iteration, prompt, *, clean_report=None):
         if (workspace / ".autohelix/history.jsonl").is_file()
         else "",
         "context_policy": "Every previous episode's recorded observations and actions are included. Visual input selects the first observed frame per stage from episode 0 of the clean and preceding candidate journeys. All other screenshots remain in the evidence archive. Oversized requests fail before sending; no silent history truncation.",
+        **(
+            {
+                "memory_policy": SUMMARY_MEMORY_POLICY,
+                "context_policy": "Every previous hypothesis, measured aggregate, acceptance decision and episode outcome/error is summarized here without selecting successes. Full candidate files, notes, measurements, observations, actions, backend states, screenshots and traces are preserved verbatim in the read-only /work/reference/history directories. Each manifest hashes every archived file. Use read/bash tools to inspect the referenced evidence when choosing or revising a mechanism. The clean journey remains inline. No unobserved causal conclusions are supplied; no iteration is silently dropped.",
+            }
+            if memory_policy == SUMMARY_MEMORY_POLICY
+            else {}
+        ),
     }
 
 

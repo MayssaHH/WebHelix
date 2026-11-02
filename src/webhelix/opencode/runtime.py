@@ -20,7 +20,15 @@ LOCK = ROOT / "experiments/checkout/opencode-runtime/lock.json"
 
 
 def opencode_config(
-    gateway_url, token, model, reasoning, max_steps, max_output=8192, agent_prompt=None
+    gateway_url,
+    token,
+    model,
+    reasoning,
+    max_steps,
+    max_output=8192,
+    agent_prompt=None,
+    *,
+    context_window_tokens=1050000,
 ):
     """Only the local gateway can service model requests; no real key is included."""
     config = {
@@ -76,7 +84,10 @@ def opencode_config(
                         "attachment": True,
                         "reasoning": True,
                         "tool_call": True,
-                        "limit": {"context": 1050000, "output": max_output},
+                        "limit": {
+                            "context": context_window_tokens,
+                            "output": max_output,
+                        },
                         "modalities": {"input": ["text", "image"], "output": ["text"]},
                         "options": {"reasoningEffort": reasoning, "store": False},
                         "variants": {reasoning: {"reasoningEffort": reasoning}},
@@ -108,6 +119,7 @@ class DockerRuntime:
         reasoning="medium",
         max_steps=10,
         max_output=8192,
+        context_window_tokens=1050000,
         image=None,
     ):
         self.workspace = Path(workspace).resolve()
@@ -117,6 +129,7 @@ class DockerRuntime:
         self.image = image or self.lock["image"]
         self.model, self.reasoning = model, reasoning
         self.max_steps, self.max_output = max_steps, max_output
+        self.context_window_tokens = context_window_tokens
         self.name = "webhelix-opencode-" + uuid.uuid4().hex[:12]
         self.network = self.name + "-net"
         self.gateway_host = None
@@ -226,6 +239,8 @@ class DockerRuntime:
                 "model": f"webhelix/{self.model}",
                 "reasoning_variant": self.reasoning,
                 "maximum_agent_steps": self.max_steps,
+                "context_window_tokens": self.context_window_tokens,
+                "maximum_output_tokens": self.max_output,
                 "read_only_rootfs": True,
                 "capabilities_dropped": "ALL",
                 "real_credentials_in_container": False,
@@ -251,6 +266,7 @@ class DockerRuntime:
             self.max_steps,
             self.max_output,
             agent_prompt,
+            context_window_tokens=self.context_window_tokens,
         )
         config_file = config_dir / "opencode.json"
         config_file.write_text(json.dumps(config, indent=2))

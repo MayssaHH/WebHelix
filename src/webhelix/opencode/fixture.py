@@ -122,6 +122,7 @@ class ToolFixture:
         # does not write the workspace. These commands run only inside OpenCode.
         script = f"""from pathlib import Path
 import json
+import hashlib
 p = Path('/work/candidate/options.html')
 p.write_text('<section class="fixture-panel-{self.iteration}">\\n' + p.read_text() + '\\n</section>\\n')
 css = Path('/work/candidate/style.css')
@@ -135,6 +136,17 @@ if condition in ('interaction', 'combined'):
     program = {{'version':1, 'rules':[{{'id':'fixture-{self.iteration}', 'on':{{'stage':'product','action':'add'}}, 'effects':[{{'op':'set_extra','id':{'"case"' if self.iteration == 1 else '"protection"'},'selected':True}}]}}]}}
     Path('/work/candidate/interaction.json').write_text(json.dumps(program)+'\\n')
 previous = context.get('prior_feedback', [])
+if previous and context.get('memory_policy') == 'summary-with-readonly-evidence-v1':
+    evidence = previous[-1]['evidence']
+    archive = Path(evidence['directory'])
+    manifest = json.loads(Path(evidence['manifest_path']).read_text())
+    for relative, expected in manifest['files'].items():
+        data = (archive / relative).read_bytes()
+        assert len(data) == expected['bytes']
+        assert hashlib.sha256(data).hexdigest() == expected['sha256']
+    actual = json.loads((archive / 'result.json').read_text())
+    assert {{k:v for k,v in actual.items() if k != 'episodes'}} == previous[-1]['measurements']
+    print(json.dumps({{'verified_readonly_prior_feedback': previous[-1]['iteration'], 'verified_files': len(manifest['files'])}}))
 measurement = previous[-1]['measurements'] if previous else {{}}
 summary = {{key: measurement.get(key) for key in ('accepted', 'decision', 'metrics')}}
 reflection = 'No previous iteration.' if not previous else 'Actual previous measurements: ' + json.dumps(summary, sort_keys=True)
@@ -179,7 +191,12 @@ WEBHELIX_PREVIEW"""
             if self.turn == 0:
                 tool, arguments = "read", {"filePath": "/work/reference/context.json"}
             elif self.turn == 1:
-                tool, arguments = "read", {"filePath": "/work/candidate/options.html"}
+                path = (
+                    f"/work/reference/history/iter-{self.iteration - 1}/result.json"
+                    if self.iteration > 1 and "summary-with-readonly-evidence-v1" in raw
+                    else "/work/candidate/options.html"
+                )
+                tool, arguments = "read", {"filePath": path}
             elif self.turn == 2:
                 tool, arguments = (
                     "bash",

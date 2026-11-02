@@ -22,6 +22,7 @@ def test_provider_and_tools_are_explicit_and_no_remote_plugins():
     model = config["provider"]["webhelix"]["models"]["gpt-6.1-sol"]
     assert model["variants"]["medium"]["reasoningEffort"] == "medium"
     assert model["modalities"]["input"] == ["text", "image"]
+    assert model["limit"]["context"] == 1050000
     assert config["plugin"] == [] and config["autoupdate"] is False
 
 
@@ -39,13 +40,13 @@ def test_large_authoritative_context_is_configured_not_shell_interpolated():
     assert config["agent"]["webhelix"]["prompt"] == context
 
 
-def runtime_fixture(tmp_path, monkeypatch, wrong_image=False):
+def runtime_fixture(tmp_path, monkeypatch, wrong_image=False, **settings):
     workspace = tmp_path / "workspace"
     (workspace / "candidate").mkdir(parents=True)
     (workspace / ".env").write_text("MUST_NOT_MOUNT=private\n")
     context = tmp_path / "context"
     context.mkdir()
-    runtime = DockerRuntime(workspace, context, tmp_path / "evidence")
+    runtime = DockerRuntime(workspace, context, tmp_path / "evidence", **settings)
     calls = []
 
     def docker(*args, **kwargs):
@@ -79,6 +80,25 @@ def runtime_fixture(tmp_path, monkeypatch, wrong_image=False):
 
     monkeypatch.setattr(runtime, "_docker", docker)
     return runtime, calls
+
+
+def test_mini_context_metadata_reaches_runtime_and_saved_receipt(tmp_path, monkeypatch):
+    runtime, _ = runtime_fixture(
+        tmp_path,
+        monkeypatch,
+        model="gpt-5.4-mini",
+        context_window_tokens=400000,
+        max_output=8192,
+    )
+    with runtime:
+        runtime.start("http://172.18.0.1:1234", "scoped-test-token")
+        config = json.loads((runtime.output / "opencode-config.json").read_text())
+        model = config["provider"]["webhelix"]["models"]["gpt-5.4-mini"]
+        assert model["limit"] == {"context": 400000, "output": 8192}
+        receipt = json.loads((runtime.output / "runtime-receipt.json").read_text())
+        assert receipt["model"] == "webhelix/gpt-5.4-mini"
+        assert receipt["context_window_tokens"] == 400000
+        assert receipt["maximum_output_tokens"] == 8192
 
 
 def test_only_candidate_notes_previews_writable_and_scoped_token_removed(

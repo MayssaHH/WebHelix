@@ -53,6 +53,28 @@ def test_auxiliary_requests_do_not_skip_file_inspection():
     assert call(fixture).json()["output"][0]["name"] == "read"
 
 
+def test_second_compact_session_reads_actual_prior_archive_through_native_tool():
+    fixture = ToolFixture(2)
+    body = {
+        "model": "gpt-5.4-mini",
+        "instructions": "memory_policy: summary-with-readonly-evidence-v1",
+        "tools": [{"type": "function", "name": name} for name in ("read", "bash")],
+    }
+    responses = [
+        fixture(
+            httpx.Request("POST", "https://fixture.invalid/v1/responses", json=body)
+        ).json()
+        for _ in range(3)
+    ]
+    assert (
+        json.loads(responses[1]["output"][0]["arguments"])["filePath"]
+        == "/work/reference/history/iter-1/result.json"
+    )
+    command = json.loads(responses[2]["output"][0]["arguments"])["command"]
+    assert "verified_readonly_prior_feedback" in command
+    assert "hashlib.sha256(data)" in command
+
+
 def test_stream_has_complete_function_call_lifecycle_and_zero_usage():
     response = call(ToolFixture(1), streaming=True)
     events = [

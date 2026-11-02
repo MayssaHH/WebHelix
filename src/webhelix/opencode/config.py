@@ -15,6 +15,8 @@ class OpenCodeSettings:
     timeout_seconds: int = 180
     session_timeout_seconds: int = 600
     max_output_tokens: int = 8192
+    # Verified provider model metadata, independent of the input byte limit.
+    context_window_tokens: int = 1050000
     max_input_bytes: int = 4000000
     max_response_bytes: int = 4000000
     max_requests_per_session: int = 10
@@ -38,6 +40,7 @@ class OpenCodeSettings:
             "timeout_seconds": 180,
             "session_timeout_seconds": 900,
             "max_output_tokens": 8192,
+            "context_window_tokens": 1050000,
             "max_input_bytes": 4000000,
             "max_response_bytes": 8000000,
             "max_requests_per_session": 20,
@@ -47,6 +50,10 @@ class OpenCodeSettings:
             value = getattr(self, field)
             if type(value) is not int or not 1 <= value <= upper:
                 raise ValueError(f"{field} must be an integer in 1..{upper}")
+        if self.max_output_tokens >= self.context_window_tokens:
+            raise ValueError(
+                "max_output_tokens must be smaller than context_window_tokens"
+            )
 
     @classmethod
     def load(cls, path):

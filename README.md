@@ -18,7 +18,7 @@ The direct proposal API optimizer remains a separate explicit optimizer option;
 it is not a different browser-agent implementation.
 
 Start with the [single discovery pilot](docs/DISCOVERY_PILOT.md): one clean smoke
-episode, followed by six successive optimizer iterations with three fresh victim
+episode, followed by two successive optimizer iterations with three fresh victim
 episodes per valid candidate. One search can change both presentation and bounded
 website interactions. There are no separate arms or identity baseline in this runner.
 The [verified six-iteration offline run](examples/checkout/discovery-offline-20261102/README.md)
@@ -149,15 +149,16 @@ Checkout model settings are explicit JSON configuration:
 
 - [victim.example.json](experiments/checkout/victim.example.json) configures the
   independent Browser-Use victim model and Responses endpoint.
-- [opencode-longer.example.json](experiments/checkout/opencode-longer.example.json)
-  configures the OpenCode optimizer.
+- [opencode-discovery.example.json](experiments/checkout/opencode-discovery.example.json)
+  configures the GPT-5.4 mini OpenCode optimizer.
 - [discovery-pilot.json](experiments/checkout/discovery-pilot.json)
-  defines the current six-iteration, at-most-19-episode pilot.
+  defines the current two-iteration, at-most-seven-episode pilot.
 - [spending-plan.example.json](experiments/checkout/spending-plan.example.json)
   contains placeholders for an explicitly authorized combined spending ceiling
   and verified pricing/context bounds. Its null amount blocks paid execution.
 
-Both model configurations request `gpt-6.1-sol` with medium reasoning. The
+The optimizer requests `gpt-5.4-mini`; the Browser-Use victim retains
+`gpt-6.1-sol`. Both use medium reasoning and separate conversations. The
 [30 October live Browser-Use baseline](examples/checkout/browser-use-real-baseline-20261030/README.md)
 passed all three clean and three identity checkout episodes with that victim
 configuration. This diagnostic made no optimizer calls and ran no search.
