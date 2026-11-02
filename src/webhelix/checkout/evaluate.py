@@ -51,6 +51,7 @@ def evaluation_signature(candidate_hash, settings, policy, episodes):
             for name in (
                 "task.json",
                 "catalogue.json",
+                "evaluation.json",
                 "CONTRACT.md"
                 if settings.get("condition", "truthful") == "truthful"
                 else "INTERACTION_CONTRACT.md",
@@ -223,7 +224,15 @@ def _snapshot(candidate, destination):
     return manifest
 
 
-def evaluate(candidate, run, policy="scripted-correct", episodes=3, label="candidate"):
+def evaluate(
+    candidate,
+    run,
+    policy="scripted-correct",
+    episodes=3,
+    label="candidate",
+    *,
+    purpose="candidate",
+):
     # Do not resolve the candidate itself: a directory symlink must remain invalid.
     run, candidate = Path(run).resolve(), Path(candidate).absolute()
     settings = read(run / "runtime.json")
@@ -231,16 +240,36 @@ def evaluate(candidate, run, policy="scripted-correct", episodes=3, label="candi
         raise ValueError(
             "Use one scripted control or three experimental episodes and a known policy"
         )
-    if policy == "api" and episodes != 3:
+    if purpose not in {"candidate", "clean_smoke"}:
+        raise ValueError("Unknown evaluation purpose")
+    if policy == "api" and episodes != 3 and purpose != "clean_smoke":
         raise ValueError("Real-model conditions require three fresh episodes")
     if not re.fullmatch(r"[A-Za-z0-9_.-]{1,100}", label):
         raise ValueError("Invalid batch label")
     # A concurrent manual evaluation must not interleave with the scheduled search.
     with lock(run / "evaluation.lock"):
-        return _evaluate(candidate, run, policy, episodes, label, settings)
+        if purpose == "clean_smoke":
+            if (
+                episodes != 1
+                or label != "clean"
+                or settings.get("workflow") != "discovery-v1"
+                or settings.get("condition") != "combined"
+                or fingerprint(load(candidate, settings["condition"]))
+                != fingerprint(initial_files(settings["condition"]))
+            ):
+                raise ValueError(
+                    "The one-episode exception requires the pristine discovery baseline"
+                )
+            claim = run / "clean-smoke-attempt.json"
+            if claim.exists():
+                raise ValueError(
+                    "Clean smoke check already attempted; no automatic retry"
+                )
+            save(claim, {"started": time.time(), "policy": policy, "purpose": purpose})
+        return _evaluate(candidate, run, policy, episodes, label, settings, purpose)
 
 
-def _evaluate(candidate, run, policy, episodes, label, settings):
+def _evaluate(candidate, run, policy, episodes, label, settings, purpose="candidate"):
     batch = run / "batches" / f"{label}-{uuid.uuid4().hex[:8]}"
     batch.mkdir(parents=True)
     report = {
@@ -249,6 +278,7 @@ def _evaluate(candidate, run, policy, episodes, label, settings):
         "label": label,
         "active_candidate": str(candidate),
         "policy": policy,
+        "purpose": purpose,
         "condition": settings["condition"],
         "requested_episodes": episodes,
         "validation": {"valid": False},

@@ -10,7 +10,7 @@ import time
 from .contract import CONDITIONS, FIXTURES, initial_files, load, read, save, validate
 
 
-def _pilot_settings(path, *, scripted):
+def _pilot_settings(path, *, scripted, clean_smoke=False):
     """Allow bounded run settings, not changes to the task or acceptance logic."""
     settings = read(path)
     expected = set(read(FIXTURES / "pilot.json"))
@@ -38,10 +38,16 @@ def _pilot_settings(path, *, scripted):
     episodes = settings["episodes_per_condition"]
     if type(episodes) is not int or episodes not in ((1, 3) if scripted else (3,)):
         raise ValueError("Real conditions require three fresh episodes")
-    expected_episodes = (settings["iterations"] + 2) * episodes
+    expected_episodes = (
+        1 + settings["iterations"] * episodes
+        if clean_smoke
+        else (settings["iterations"] + 2) * episodes
+    )
     if settings["max_real_episodes"] < expected_episodes:
         raise ValueError(
-            "Episode allowance must include clean, identity and all candidates"
+            "Episode allowance must include one clean smoke check and all candidates"
+            if clean_smoke
+            else "Episode allowance must include clean, identity and all candidates"
         )
     if settings["viewport"] != {"width": 1280, "height": 720}:
         raise ValueError("This repeat preserves the 1280 by 720 victim viewport")
@@ -184,14 +190,15 @@ def main(argv=None):
     import sys
 
     argv = sys.argv[1:] if argv is None else argv
-    if argv[:1] == ["comparison"]:
-        from .comparison import main as comparison_main
+    if argv[:1] == ["discovery"]:
+        from .discovery import main as discovery_main
 
-        return comparison_main(argv[1:])
+        return discovery_main(argv[1:])
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
     sub.add_parser(
-        "comparison", help="Matched presentation/interaction/combined pilot; use --help"
+        "discovery",
+        help="One clean episode, six combined search iterations; use --help",
     )
     interaction_controls = sub.add_parser(
         "interaction-controls",

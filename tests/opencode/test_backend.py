@@ -98,6 +98,9 @@ def test_no_candidate_or_provider_failure_never_becomes_valid(
 
     class Sandbox:
         def __init__(self, workspace, reference, output, **kwargs):
+            assert read(reference / "EVALUATION.json") == read(
+                project / "EVALUATION.json"
+            )
             self.gateway_host = "127.0.0.1"
             self.command_path = "/bin/false"
             self.note_path = output / "note.md"
