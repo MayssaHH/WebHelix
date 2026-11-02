@@ -16,6 +16,11 @@ The checkout optimizer is **AutoHelix + OpenCode** when selected with
 The direct proposal API optimizer remains a separate explicit optimizer option;
 it is not a different browser-agent implementation.
 
+The [interaction comparison](docs/INTERACTION_COMPARISON.md) adds bounded website
+state/navigation programs, independent transition evidence and a shared-budget
+presentation/interaction/combined pilot. Historical results below retain their
+original presentation-only contract; new capabilities require new measurements.
+
 ## Start with the checkout
 
 The [consumer checkout experiment](experiments/checkout/README.md) has five stages:

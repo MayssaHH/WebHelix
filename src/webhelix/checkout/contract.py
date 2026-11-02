@@ -13,6 +13,25 @@ from webhelix.v2.contract import InvalidCandidate, TAGS, validate_css
 ROOT = Path(__file__).resolve().parents[3]
 FIXTURES = ROOT / "experiments/checkout"
 FILES = ("product.html", "cart.html", "options.html", "review.html", "style.css")
+CONDITIONS = ("truthful", "presentation", "interaction", "combined")
+
+
+def candidate_files(condition="truthful"):
+    if condition not in CONDITIONS:
+        raise InvalidCandidate("Unknown checkout research condition")
+    return FILES if condition == "truthful" else (*FILES, "interaction.json")
+
+
+def initial_files(condition="truthful"):
+    files = {name: (FIXTURES / "candidate" / name).read_text() for name in FILES}
+    if condition != "truthful":
+        from .interaction import IDENTITY
+
+        files["interaction.json"] = IDENTITY
+    validate(files, condition)
+    return files
+
+
 MAX_FILE_BYTES = 24000
 SLOTS = {
     "product.html": ("product_name", "product_description", "product_price", "add"),
@@ -137,13 +156,13 @@ def load(path, condition="truthful"):
     if (
         path.is_symlink()
         or not path.is_dir()
-        or set(p.name for p in path.iterdir()) != set(FILES)
+        or set(p.name for p in path.iterdir()) != set(candidate_files(condition))
     ):
         raise InvalidCandidate(
-            "Exactly product.html, cart.html, options.html, review.html and style.css are required"
+            "Candidate must contain exactly the files declared by its condition"
         )
     files = {}
-    for name in FILES:
+    for name in candidate_files(condition):
         item = path / name
         if (
             item.is_symlink()
@@ -188,17 +207,29 @@ def _css(text, inline=False):
 
 
 def validate(files, condition="truthful"):
-    if condition != "truthful":
+    if condition not in CONDITIONS:
         raise InvalidCandidate(
             "Only the truthful presentation condition is implemented; defaults/wording conditions need a separate experiment"
         )
-    if set(files) != set(FILES):
+    if set(files) != set(candidate_files(condition)):
         raise InvalidCandidate("Wrong candidate file set")
     if any(
         not isinstance(text, str) or len(text.encode()) > MAX_FILE_BYTES
         for text in files.values()
     ):
         raise InvalidCandidate("Each candidate file must be text <=24KB")
+    if condition != "truthful":
+        from .interaction import parse_program
+
+        program = parse_program(files["interaction.json"])
+        if condition == "presentation" and program["rules"]:
+            raise InvalidCandidate("Presentation condition requires identity behavior")
+        if condition == "interaction" and any(
+            files[name] != (FIXTURES / "candidate" / name).read_text() for name in FILES
+        ):
+            raise InvalidCandidate(
+                "Interaction condition requires unchanged presentation"
+            )
     for name, required in SLOTS.items():
         text = files[name]
         tokens = re.findall(r"{{([^{}]+)}}", text)
@@ -249,5 +280,5 @@ def validate(files, condition="truthful"):
         "valid": True,
         "condition": condition,
         "candidate_hash": fingerprint(files),
-        "files": list(FILES),
+        "files": list(candidate_files(condition)),
     }

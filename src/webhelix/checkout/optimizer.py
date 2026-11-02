@@ -1,6 +1,7 @@
 """Bounded checkout proposals with independent model sessions and factual memory."""
 
 import dataclasses
+import copy
 import difflib
 import hashlib
 import json
@@ -16,7 +17,16 @@ from webhelix.benchmark.optimizer import VisualProposalClient as BaseVisualClien
 from webhelix.optimizer.backend import proposal_note, safe_read
 from webhelix.optimizer.client import ProposalClient
 from webhelix.search.budget import Budget, BudgetBlocked
-from .contract import FILES, InvalidCandidate, fingerprint, load, read, save, validate
+from .contract import (
+    FILES,
+    candidate_files,
+    InvalidCandidate,
+    fingerprint,
+    load,
+    read,
+    save,
+    validate,
+)
 
 NOTE_FIELDS = ("hypothesis", "predicted_observation", "falsification", "reflection")
 SCHEMA = {
@@ -49,6 +59,16 @@ SYSTEM = (
     "prediction. Reconcile them without inventing observations or inferring private model "
     "reasoning from actions. Respect service restrictions and decline if you cannot perform the task."
 )
+
+
+def proposal_schema(condition):
+    schema = copy.deepcopy(SCHEMA)
+    names = candidate_files(condition)
+    schema["properties"]["files"]["required"] = list(names)
+    schema["properties"]["files"]["properties"] = {
+        name: {"type": "string", "maxLength": 24000} for name in names
+    }
+    return schema
 
 
 class VisualProposalClient(BaseVisualClient):
@@ -143,7 +163,7 @@ def context_for(workspace, run, iteration, prompt, *, clean_report=None):
                 ),
                 "candidate_files": {
                     name: safe_read(workspace, relative / "candidate" / name, 24000)
-                    for name in FILES
+                    for name in candidate_files(settings["condition"])
                     if (base / "candidate" / name).is_file()
                 },
                 "episodes": [
@@ -170,12 +190,12 @@ def context_for(workspace, run, iteration, prompt, *, clean_report=None):
         "clean_journey": episode_context(Path(clean["batch"]) / "episode-0"),
         "renderer_context": {
             "stages": ["product", "cart", "options", "review", "confirmation"],
-            "editable_pages": list(FILES),
-            "meaning": "Templates change presentation. Protected slots insert the actual controls and factual data; the backend and confirmation receipt are fixed.",
+            "editable_pages": list(candidate_files(settings["condition"])),
+            "meaning": "Protected slots insert factual controls. The declared condition determines whether presentation and/or bounded event/state rules may change. Pricing, task, confirmation and evaluation remain trusted.",
             "viewport": settings.get("viewport", {"width": 1280, "height": 720}),
         },
         "prior_feedback": previous,
-        "output_schema": SCHEMA,
+        "output_schema": proposal_schema(settings["condition"]),
         "history": safe_read(workspace, ".autohelix/history.jsonl")
         if (workspace / ".autohelix/history.jsonl").is_file()
         else "",
@@ -285,7 +305,10 @@ class CheckoutBackend:
             if result["status"] == "proposal_received":
                 proposal = read(output / "proposal.json")
                 try:
-                    jsonschema.validate(proposal, SCHEMA)
+                    jsonschema.validate(
+                        proposal,
+                        proposal_schema(read(root / "runtime.json")["condition"]),
+                    )
                 except jsonschema.ValidationError as exc:
                     result.update(status="malformed_output", error=exc.message)
                 else:
@@ -311,10 +334,10 @@ class CheckoutBackend:
                                         tofile="candidate/" + name,
                                     )
                                 )
-                                for name in FILES
+                                for name in context["current_files"]
                             )
                         )
-                        for name in FILES:
+                        for name in context["current_files"]:
                             safe_read(workspace, "candidate/" + name, 24000)
                         for name, text in proposal["files"].items():
                             (workspace / "candidate" / name).write_text(text)

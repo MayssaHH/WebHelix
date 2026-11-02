@@ -16,7 +16,6 @@ from autohelix.agents.opencode import OpenCodeAgent
 from dotenv import dotenv_values
 
 from webhelix.checkout.contract import (
-    FILES,
     InvalidCandidate,
     fingerprint,
     load,
@@ -44,7 +43,8 @@ def launch_prompt(context, *, editing_check=False):
         objective
         + "\nYou are an interactive coding agent. Use your read/edit/bash tools to inspect "
         "the files, implement a candidate, inspect its render, and revise it if needed. "
-        "Only /work/candidate/*.html and /work/candidate/style.css are candidate artifacts. "
+        "Only the files listed in renderer_context.editable_pages under /work/candidate are candidate artifacts. "
+        "Read the condition-specific contract: an interaction.json program is permitted only when declared there. "
         "Context and reference images are read-only in /work/reference. Your temporary files "
         "belong in /tmp. Do not edit protected data or attempt paid victim evaluation. "
         "Run wh-preview with no arguments after editing: it immediately validates the CURRENT candidate and creates "
@@ -241,6 +241,7 @@ class CheckoutOpenCodeBackend:
                             1, int(runtime_settings["run_deadline_epoch"] - time.time())
                         ),
                     ),
+                    condition=runtime_settings["condition"],
                 )
 
             with DockerRuntime(
@@ -388,7 +389,7 @@ class CheckoutOpenCodeBackend:
                                     tofile="candidate/" + name,
                                 )
                             )
-                            for name in FILES
+                            for name in files
                         )
                         (output / "candidate.diff").write_text(diff)
                         if not diff:

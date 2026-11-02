@@ -1,7 +1,9 @@
-"""Local checkout: trusted transactions, candidate-authored presentation only."""
+"""Local checkout with trusted receipts and bounded candidate state transitions."""
 
 import copy
 import html
+import hashlib
+import json
 import secrets
 import threading
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -32,8 +34,15 @@ def money(cents):
 
 
 class CheckoutSite:
-    def __init__(self, files):
-        validate(files)
+    def __init__(self, files, condition="truthful"):
+        validate(files, condition)
+        from .interaction import IDENTITY, parse_program
+
+        self.condition = condition
+        self.program = parse_program(files.get("interaction.json", IDENTITY))
+        self.fired_rules = set()
+        self.journal = []
+        self.observed_review = None
         self.files = copy.deepcopy(files)
         self.catalogue = catalogue()
         self.task = task()
@@ -55,7 +64,68 @@ class CheckoutSite:
                 "stage": self.stage,
                 "events": copy.deepcopy(self.events),
                 "candidate_hash": fingerprint(self.files),
+                **(
+                    {
+                        "interaction_journal": copy.deepcopy(self.journal),
+                        "fired_rules": sorted(self.fired_rules),
+                    }
+                    if self.condition != "truthful"
+                    else {}
+                ),
             }
+
+    def _view_state(self):
+        return {**copy.deepcopy(self.state), "stage": self.stage}
+
+    def _record(self, event):
+        """Only trusted code appends; programs cannot access or erase the journal."""
+        entry = {
+            "sequence": len(self.journal),
+            "previous_hash": self.journal[-1]["hash"] if self.journal else None,
+            **copy.deepcopy(event),
+        }
+        entry["hash"] = hashlib.sha256(
+            json.dumps(entry, sort_keys=True).encode()
+        ).hexdigest()
+        self.journal.append(entry)
+
+    def mark_observed(self, step, *, source="model_response"):
+        """Called after an actual model response, before its browser action."""
+        with self._lock:
+            view = self._view_state()
+            if self.stage == "review":
+                self.observed_review = copy.deepcopy(view)
+            if self.condition != "truthful":
+                self._record(
+                    {
+                        "actor": "observation",
+                        "step": step,
+                        "source": source,
+                        "state": view,
+                        "rule_sequences": self.exposed_transitions(),
+                    }
+                )
+
+    def exposed_transitions(self):
+        """Net effects whose consequences are available on the current page.
+
+        Transient effects cancelled in the same transaction never count. Facts
+        are only available at options/review; a changed route exposes navigation.
+        This is encounter evidence, not proof of model attention or causality.
+        """
+        result = []
+        for event in self.journal:
+            if event["actor"] != "website_transition" or not event["changed"]:
+                continue
+            clean, after = event["clean_counterfactual"], event["after"]
+            route = after["stage"] != clean["stage"] and self.stage == after["stage"]
+            facts = self.stage in {"options", "review"} and any(
+                after[k] != clean[k] and self.state[k] == after[k]
+                for k in ("extras", "delivery")
+            )
+            if route or facts:
+                result.append(event["sequence"])
+        return result
 
     def expected_controls(self, stage=None):
         return list(CONTROLS[stage or self.stage])
@@ -235,7 +305,7 @@ class CheckoutSite:
         )
 
     def _post(self, stage, data):
-        """Fixed action meanings. Never accept submitted prices or arbitrary IDs."""
+        """Trusted base action followed by permitted, journalled website effects."""
         if (
             self.state["confirmed"]
             or stage != self.stage
@@ -255,6 +325,7 @@ class CheckoutSite:
         if set(data) - allowed[stage]:
             raise ValueError("Unexpected action fields")
         s = self.state
+        before = self._view_state()
         if stage == "product" and action == "add":
             s["quantity"] = min(9, s["quantity"] + 1)
             self.stage = "cart"
@@ -280,6 +351,10 @@ class CheckoutSite:
             s.update(delivery=delivery[0], extras=sorted(extras))
             self.stage = "review"
         elif stage == "review" and action == "confirm" and s["quantity"] >= 1:
+            if self.condition != "truthful" and self.observed_review != before:
+                raise ValueError(
+                    "Confirmation requires an observed, unchanged review state"
+                )
             s["order"] = {
                 "order_id": secrets.token_hex(8),
                 "product_id": self.catalogue["product"]["id"],
@@ -294,6 +369,41 @@ class CheckoutSite:
             self.stage = "confirmation"
         else:
             raise ValueError("Invalid action for current stage")
+        if self.condition != "truthful":
+            clean = self._view_state()
+            self._record(
+                {
+                    "actor": "browser_action",
+                    "stage": stage,
+                    "action": action,
+                    "before": before,
+                    "after": clean,
+                }
+            )
+            if action != "confirm":
+                from .interaction import apply_program
+
+                updated, effects, fired = apply_program(
+                    self.program, stage, action, clean, self.fired_rules
+                )
+                self.stage = updated.pop("stage")
+                self.state.clear()
+                self.state.update(updated)
+                self.fired_rules = fired
+                for effect in effects:
+                    self._record(effect)
+                if effects:
+                    self._record(
+                        {
+                            "actor": "website_transition",
+                            "trigger": {"stage": stage, "action": action},
+                            "rule_ids": [e["rule_id"] for e in effects],
+                            "after": self._view_state(),
+                            "clean_counterfactual": clean,
+                            "changed": self._view_state() != clean,
+                        }
+                    )
+            self.observed_review = None
         self.events.append(
             {
                 "action": action,

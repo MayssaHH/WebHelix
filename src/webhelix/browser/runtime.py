@@ -107,13 +107,14 @@ def native_action(action):
 class _ModelBoundary:
     """Record native Browser-Use input without reconstructing an agent policy."""
 
-    def __init__(self, model, runtime, on_observation, maximum):
+    def __init__(self, model, runtime, on_observation, maximum, on_response=None):
         self._model = model
         self._runtime = runtime
         self._on_observation = on_observation
         self._maximum = maximum
         self.calls = 0
         self.failure = None
+        self._on_response = on_response
 
     def __getattr__(self, name):
         return getattr(self._model, name)
@@ -161,6 +162,7 @@ class _ModelBoundary:
             save(runtime.output / f"observation-{number}.json", runtime.observation)
             dispatched = True
             result = await self._model.ainvoke(messages, output_format, **kwargs)
+            await _call(self._on_response, runtime, number)
             completion = result.completion
             if hasattr(completion, "model_dump"):
                 save(
@@ -485,6 +487,7 @@ class BrowserRuntime:
         after_step=None,
         stop_when=None,
         on_observation=None,
+        on_model_response=None,
         max_model_calls=None,
         step_timeout=120,
     ):
@@ -496,7 +499,11 @@ class BrowserRuntime:
             if name not in BROWSER_ACTIONS:
                 tools.exclude_action(name)
         boundary = _ModelBoundary(
-            model, self, on_observation, max_model_calls or max_actions
+            model,
+            self,
+            on_observation,
+            max_model_calls or max_actions,
+            on_model_response,
         )
         failure = None
         calls_before_step = 0

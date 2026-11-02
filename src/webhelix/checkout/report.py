@@ -37,6 +37,12 @@ def build_report(run):
         path = run / name
         if path.exists():
             blocks.append(link(path) + " &nbsp; ")
+    arms = sorted((run / "arms").glob("*/index.html"))
+    if arms:
+        blocks.append("<h2>Comparison conditions</h2><ul>")
+        for path in arms:
+            blocks.append("<li>" + link(path, path.parent.name) + "</li>")
+        blocks.append("</ul>")
     rows, batches = [], []
     for path in sorted((run / "batches").glob("*/report.json")):
         report = data(path)

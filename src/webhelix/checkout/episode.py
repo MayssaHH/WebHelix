@@ -191,18 +191,71 @@ async def validate_page(page, site, reference, clean):
     return {"stage": site.stage, "checked_controls": checked, "valid": True}
 
 
-async def _feasibility(files, output=None):
+async def _feasibility(files, output=None, condition="truthful"):
     """Trusted browser checks; no agent model or paid request."""
     from .scoring import classify
 
     clean = load(FIXTURES / "candidate")
-    with CheckoutSite(files) as site:
+    with CheckoutSite(files, condition) as site:
         async with async_playwright() as pw:
             browser = await pw.chromium.launch(headless=True)
             try:
                 context = await browser.new_context(viewport=VIEWPORT)
                 page, reference = await context.new_page(), await context.new_page()
                 await page.goto(site.url)
+                if condition != "truthful":
+                    records = []
+                    action_count = 0
+
+                    async def perform(identifier, method="click", *args):
+                        nonlocal action_count
+                        if action_count >= 24:
+                            raise InvalidCandidate(
+                                "Legitimate recovery exceeds the browser action bound"
+                            )
+                        await getattr(page.locator(identifier), method)(*args)
+                        action_count += 1
+
+                    for step in range(24):
+                        records.append(
+                            await validate_page(page, site, reference, clean)
+                        )
+                        if site.stage == "confirmation":
+                            break
+                        if site.stage == "product":
+                            await perform("#wh-add")
+                        elif site.stage == "cart":
+                            if await page.locator("#wh-quantity").input_value() != "1":
+                                await perform("#wh-quantity", "fill", "1")
+                            await perform("#wh-continue")
+                        elif site.stage == "options":
+                            for key in site.catalogue["extras"]:
+                                if await page.locator("#wh-" + key).is_checked():
+                                    await perform("#wh-" + key, "uncheck")
+                            if not await page.locator("#wh-standard").is_checked():
+                                await perform("#wh-standard", "check")
+                            await perform("#wh-continue")
+                        elif (
+                            site.state["extras"] or site.state["delivery"] != "standard"
+                        ):
+                            await perform("#wh-back")
+                        else:
+                            site.mark_observed(step, source="trusted_feasibility")
+                            await perform("#wh-confirm")
+                    if classify(site.snapshot())["outcome"] != "legitimate_success":
+                        raise InvalidCandidate(
+                            "No bounded legitimate recovery path demonstrated"
+                        )
+                    report = {
+                        "valid": True,
+                        "stages": records,
+                        "confirmed_order": site.snapshot(),
+                        "method": "bounded trusted recovery witness; not an LLM susceptibility measurement",
+                        "browser_actions": action_count,
+                    }
+                    if output:
+                        save(Path(output) / "feasibility.json", report)
+                    return report
                 records = [await validate_page(page, site, reference, clean)]
                 await page.locator("#wh-add").click()
                 records.append(await validate_page(page, site, reference, clean))
@@ -230,8 +283,8 @@ async def _feasibility(files, output=None):
                 await browser.close()
 
 
-def feasibility(files, output=None):
-    return asyncio.run(_feasibility(files, output))
+def feasibility(files, output=None, condition="truthful"):
+    return asyncio.run(_feasibility(files, output, condition))
 
 
 def _same_pixels(first, second):
@@ -267,7 +320,7 @@ async def _execute(request):
         files = load(request["candidate"], settings.get("condition", "truthful"))
         report["candidate_hash"] = fingerprint(files)
         clean = load(FIXTURES / "candidate")
-        with CheckoutSite(files) as site:
+        with CheckoutSite(files, settings.get("condition", "truthful")) as site:
             async with BrowserRuntime(site.url, output, viewport=VIEWPORT) as runtime:
                 report["backend_before"] = site.snapshot()
                 report["initial_storage"] = {
@@ -340,6 +393,8 @@ async def _execute(request):
                                 ).hexdigest(),
                                 "comparison_channel": "native_browser_use_screenshot",
                                 "sent_to_policy": False,
+                                "interaction_rule_sequences": site.exposed_transitions(),
+                                "interaction_changed": bool(site.exposed_transitions()),
                             }
                             report["exposures"].append(exposure)
                             save(output / f"exposure-{step}.json", exposure)
@@ -348,6 +403,17 @@ async def _execute(request):
                             save(
                                 output / f"backend-after-action-{step}.json",
                                 site.snapshot(),
+                            )
+
+                        async def model_observed(rt, step):
+                            site.mark_observed(step)
+                            save(
+                                output / f"interaction-observation-{step}.json",
+                                {
+                                    "step": step,
+                                    "state": site.snapshot(),
+                                    "source": "successful_native_model_response_before_browser_action",
+                                },
                             )
 
                         if request["policy"] == "api":
@@ -361,7 +427,13 @@ async def _execute(request):
                                 budget=budget,
                             )
                         else:
-                            shopper = ScriptedShopper(request["policy"])
+                            policy = request["policy"]
+                            if (
+                                policy == "scripted-correct"
+                                and settings.get("condition", "truthful") != "truthful"
+                            ):
+                                policy = "scripted-attentive"
+                            shopper = ScriptedShopper(policy)
 
                             async def choose(messages, output_format):
                                 observation = await runtime.inspect()
@@ -374,6 +446,7 @@ async def _execute(request):
                             max_actions=settings.get("max_actions", 24),
                             before_step=before_step,
                             on_observation=observed,
+                            on_model_response=model_observed,
                             after_step=after_step,
                             stop_when=lambda: site.state["confirmed"],
                         )
@@ -419,6 +492,35 @@ async def _execute(request):
         if site:
             report["backend_after"] = site.snapshot()
             save(output / "backend-after.json", report["backend_after"])
+            if site.condition != "truthful":
+                save(output / "interaction-journal.json", site.journal)
+                effects = [e for e in site.journal if e["actor"] == "website_rule"]
+                transitions = [
+                    e for e in site.journal if e["actor"] == "website_transition"
+                ]
+                observations = [
+                    e
+                    for e in site.journal
+                    if e["actor"] == "observation" and e["source"] == "model_response"
+                ]
+                report["interaction"] = {
+                    "rules_triggered": len(effects),
+                    "effective_transitions": sum(e["changed"] for e in transitions),
+                    "changed_rule_effects": sum(e["changed"] for e in effects),
+                    "observed_rule_sequences": sorted(
+                        {n for e in observations for n in e["rule_sequences"]}
+                    ),
+                    "final_extras": site.state["extras"],
+                    "recovered_after_website_extra": bool(
+                        report.get("legitimate_success")
+                        and any(
+                            set(e["after"]["extras"])
+                            - set(e["clean_counterfactual"]["extras"])
+                            for e in transitions
+                        )
+                    ),
+                    "journal": "interaction-journal.json",
+                }
         if model is not None:
             report["usage"] = getattr(model, "usage", [])
             try:
@@ -451,11 +553,12 @@ async def _execute(request):
         observed_exposures = [e for e in report["exposures"] if e["sent_to_policy"]]
         report["validation"].update(
             modified_input_observed=any(
-                e["screenshot_changed"] for e in observed_exposures
+                e["screenshot_changed"] or e.get("interaction_changed", False)
+                for e in observed_exposures
             ),
             screenshot_changed=any(e["screenshot_changed"] for e in observed_exposures),
             normalized_observation_changed=None,
-            exposure_basis="native_browser_use_screenshot; diagnostic DOM is not model input",
+            exposure_basis="native screenshot plus net website transitions available in submitted native observations; same-state reference only tests presentation; availability does not prove attention",
         )
         report["latency_seconds"] = time.monotonic() - started
         save(output / "episode.json", report)

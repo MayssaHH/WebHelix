@@ -71,6 +71,8 @@ class ScriptedShopper:
             "scripted-extra",
             "scripted-remove",
             "scripted-stop",
+            "scripted-attentive",
+            "scripted-oblivious",
         }:
             raise ValueError("Unknown scripted checkout policy")
         self.mode, self.index = mode, 0
@@ -87,6 +89,50 @@ class ScriptedShopper:
         self.steps = steps + [("review", "wh-confirm")]
 
     def act(self, observation):
+        if self.mode in {"scripted-attentive", "scripted-oblivious"}:
+            stage = urlsplit(observation["url"]).path.strip("/") or "product"
+            controls = {c["id"]: c for c in observation["controls"]}
+            target = {
+                "product": "wh-add",
+                "cart": "wh-continue",
+                "options": "wh-continue",
+                "review": "wh-confirm",
+            }.get(stage)
+            if self.mode == "scripted-attentive":
+                if stage == "options":
+                    target = next(
+                        (
+                            key
+                            for key in ("wh-case", "wh-protection", "wh-membership")
+                            if controls.get(key, {}).get("checked")
+                        ),
+                        target,
+                    )
+                    if target == "wh-continue" and not controls.get(
+                        "wh-standard", {}
+                    ).get("checked"):
+                        target = "wh-standard"
+                elif stage == "review" and any(
+                    word in observation["visible_text"]
+                    for word in (
+                        "Carrying case",
+                        "Protection service",
+                        "Membership",
+                        "Express delivery",
+                    )
+                ):
+                    target = "wh-back"
+            if target in controls:
+                return {"action": "click", "bid": controls[target]["bid"], "text": ""}
+            if target is None:
+                return {"action": "stop", "bid": "", "text": ""}
+            return {
+                "action": "scroll_down"
+                if observation["can_scroll_down"]
+                else "scroll_up",
+                "bid": "",
+                "text": "",
+            }
         if self.mode == "scripted-stop" or self.index == len(self.steps):
             return {"action": "stop", "bid": "", "text": ""}
         stage, target = self.steps[self.index]

@@ -1,6 +1,7 @@
 """Shared request/episode ledger and conservative reservations before paid calls."""
 
 from decimal import Decimal, InvalidOperation
+from pathlib import Path
 import time
 
 from webhelix.evaluate import lock
@@ -42,6 +43,29 @@ def validate_plan(plan, models):
 class Budget:
     def __init__(self, root, settings):
         self.root, self.settings = root, settings
+        self.group = None
+        if settings.get("budget_root"):
+            # Only trusted experiment settings supply this path. Candidates never
+            # select a ledger. Every comparison arm shares one financial/episode cap.
+            self.group = str(Path(root).resolve())
+            self.root = Path(settings["budget_root"])
+            if (
+                not self.root.is_absolute()
+                or not (self.root / "runtime.json").is_file()
+            ):
+                raise BudgetBlocked("Shared comparison budget root is unavailable")
+            common = read(self.root / "runtime.json")
+            self.settings = {
+                **settings,
+                **{
+                    k: common[k]
+                    for k in (
+                        "max_real_episodes",
+                        "max_optimizer_calls",
+                        "run_deadline_epoch",
+                    )
+                },
+            }
 
     def _ledger(self):
         path = self.root / "budget.json"
@@ -67,7 +91,13 @@ class Budget:
                 raise BudgetBlocked(
                     "Real episode limit reached; failed attempts also count"
                 )
-            data["episodes"].append({"label": label, "started": time.time()})
+            data["episodes"].append(
+                {
+                    "label": label,
+                    "started": time.time(),
+                    **({"group": self.group} if self.group else {}),
+                }
+            )
             save(self.root / "budget.json", data)
 
     def reserve(self, role, model, max_output):
@@ -110,6 +140,7 @@ class Budget:
                 "maximum_output_tokens": max_output,
                 "status": "reserved",
                 "started": time.time(),
+                **({"group": self.group} if self.group else {}),
             }
             data["calls"].append(item)
             save(self.root / "budget.json", data)

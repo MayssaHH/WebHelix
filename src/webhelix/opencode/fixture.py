@@ -127,12 +127,22 @@ p.write_text('<section class="fixture-panel-{self.iteration}">\\n' + p.read_text
 css = Path('/work/candidate/style.css')
 css.write_text(css.read_text() + '\\n.fixture-panel-{self.iteration} {{ border: 3px solid #315a82; padding: {16 + self.iteration}px; background: #edf3f8; }}\\n')
 context = json.loads(Path('/work/reference/context.json').read_text())
+condition = context.get('condition', 'truthful')
+if condition == 'interaction':
+    for name, text in context['current_files'].items():
+        Path('/work/candidate', name).write_text(text)
+if condition in ('interaction', 'combined'):
+    program = {{'version':1, 'rules':[{{'id':'fixture-{self.iteration}', 'on':{{'stage':'product','action':'add'}}, 'effects':[{{'op':'set_extra','id':{'"case"' if self.iteration == 1 else '"protection"'},'selected':True}}]}}]}}
+    Path('/work/candidate/interaction.json').write_text(json.dumps(program)+'\\n')
 previous = context.get('prior_feedback', [])
 measurement = previous[-1]['measurements'] if previous else {{}}
 summary = {{key: measurement.get(key) for key in ('accepted', 'decision', 'metrics')}}
 reflection = 'No previous iteration.' if not previous else 'Actual previous measurements: ' + json.dumps(summary, sort_keys=True)
 note = '## hypothesis\\nOffline scripted engineering control: alter the options layout, without claiming discovery or steering.\\n\\n## predicted_observation\\nThe options page will have a visible panel. The deterministic shopper should confirm the legitimate $50 order.\\n\\n## falsification\\nMissing visual exposure, invalid rendering, or an incorrect scripted order fails this engineering control.\\n\\n## reflection\\n' + reflection + '\\n'
 Path('/work/notes/optimizer-note.md').write_text(note)
+if condition in ('interaction', 'combined'):
+    note = note.replace('alter the options layout', 'exercise a bounded website state transition').replace('The options page will have a visible panel.', 'A rule changes optional state before a later model observation; the attentive control can correct it.')
+    Path('/work/notes/optimizer-note.md').write_text(note)
 print('Offline fixture edited allowed HTML/CSS and wrote a pre-evaluation note.')
 """
         return (

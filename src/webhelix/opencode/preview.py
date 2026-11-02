@@ -9,7 +9,7 @@ import stat
 import time
 
 from webhelix.checkout.contract import (
-    FILES,
+    candidate_files,
     InvalidCandidate,
     fingerprint,
     read,
@@ -22,7 +22,7 @@ from webhelix.checkout.evaluate import _launch
 MAX_ARTIFACT_BYTES = 16_000_000
 
 
-def _snapshot(candidate):
+def _snapshot(candidate, condition="truthful"):
     """Read only bounded regular files through a no-follow directory descriptor.
 
     The agent can edit the mounted candidate while the trusted server runs. Reading
@@ -32,12 +32,12 @@ def _snapshot(candidate):
     candidate = Path(candidate).absolute()
     descriptor = os.open(candidate, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
     try:
-        if set(os.listdir(descriptor)) != set(FILES):
+        if set(os.listdir(descriptor)) != set(candidate_files(condition)):
             raise InvalidCandidate(
                 "Candidate must contain exactly the five allowed files"
             )
         files = {}
-        for name in FILES:
+        for name in candidate_files(condition):
             fd = os.open(
                 name,
                 os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK,
@@ -72,7 +72,7 @@ def _artifact(path, name=None):
     }
 
 
-def preview(candidate, output, timeout_seconds=120):
+def preview(candidate, output, timeout_seconds=120, condition="truthful"):
     """Validate and inspect the active candidate using fresh scripted browser state.
 
     ``output`` must be a fresh trusted directory outside the candidate. The two
@@ -113,7 +113,7 @@ def preview(candidate, output, timeout_seconds=120):
 
     try:
         try:
-            files = _snapshot(candidate)
+            files = _snapshot(candidate, condition)
         except (InvalidCandidate, OSError, UnicodeError) as exc:
             response.update(
                 status="invalid_candidate",
@@ -126,14 +126,14 @@ def preview(candidate, output, timeout_seconds=120):
             (frozen / name).write_text(content)
         response["candidate_hash"] = fingerprint(files)
         try:
-            validate(files, "truthful")
+            validate(files, condition)
         except InvalidCandidate as exc:
             response.update(
                 status="invalid_candidate",
                 validation={"valid": False, "error": str(exc)},
             )
             return response
-        settings = {"condition": "truthful", "max_actions": 24}
+        settings = {"condition": condition, "max_actions": 24}
         feasibility = launch(
             {
                 "kind": "feasibility",

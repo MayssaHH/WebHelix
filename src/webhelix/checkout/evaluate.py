@@ -15,7 +15,15 @@ from webhelix.browser.manifest import runtime_identity
 
 from webhelix.evaluate import lock
 from webhelix.search.budget import Budget, BudgetBlocked
-from .contract import FILES, FIXTURES, InvalidCandidate, fingerprint, load, read, save
+from .contract import (
+    FIXTURES,
+    InvalidCandidate,
+    fingerprint,
+    initial_files,
+    load,
+    read,
+    save,
+)
 from .scoring import eligible, summarize
 from .scoring import retain as retain
 
@@ -25,6 +33,8 @@ POLICIES = {
     "scripted-extra",
     "scripted-remove",
     "scripted-stop",
+    "scripted-attentive",
+    "scripted-oblivious",
 }
 
 
@@ -38,7 +48,13 @@ def evaluation_signature(candidate_hash, settings, policy, episodes):
         "episodes": episodes,
         "fixtures": {
             name: hashlib.sha256((FIXTURES / name).read_bytes()).hexdigest()
-            for name in ("task.json", "catalogue.json", "CONTRACT.md")
+            for name in (
+                "task.json",
+                "catalogue.json",
+                "CONTRACT.md"
+                if settings.get("condition", "truthful") == "truthful"
+                else "INTERACTION_CONTRACT.md",
+            )
         },
     }
     return hashlib.sha256(json.dumps(value, sort_keys=True).encode()).hexdigest()
@@ -57,6 +73,7 @@ def worker(request):
         result = feasibility(
             load(request["candidate"], request["settings"]["condition"]),
             output=output,
+            condition=request["settings"]["condition"],
         )
         receipt = {"valid": True, "checks": result}
     except InvalidCandidate as exc:
@@ -252,13 +269,13 @@ def _evaluate(candidate, run, policy, episodes, label, settings):
         diff = "".join(
             "".join(
                 difflib.unified_diff(
-                    (FIXTURES / "candidate" / name).read_text().splitlines(True),
+                    initial_files(settings["condition"])[name].splitlines(True),
                     files[name].splitlines(True),
                     fromfile="clean/" + name,
                     tofile="candidate/" + name,
                 )
             )
-            for name in FILES
+            for name in files
         )
         (batch / "candidate.diff").write_text(diff)
         report["validation"] = _launch(

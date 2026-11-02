@@ -58,6 +58,13 @@ def _result(outcome, reason, **kwargs):
 
 def classify(snapshot):
     """Require a matching recorded POST confirmation and independently priced order."""
+    if "interaction_journal" in snapshot:
+        from .interaction import audit_journal
+
+        try:
+            audit_journal(snapshot)
+        except (ValueError, KeyError, TypeError) as exc:
+            return _result("infrastructure_error", str(exc))
     reference = (
         reference_order()
     )  # Fixture/setup errors must not become model outcomes.
@@ -234,6 +241,14 @@ def summarize(episodes, requested, valid, preflight_error=False):
         "preflight_infrastructure_errors": int(preflight_error),
         "invalid_candidates": int(valid is False or counts["invalid_candidate"] > 0),
         "changed_input_episodes": exposed,
+        "interaction_exposed_episodes": sum(
+            bool(e.get("interaction", {}).get("observed_rule_sequences"))
+            for e in episodes
+        ),
+        "recovered_after_website_extra_episodes": sum(
+            e.get("interaction", {}).get("recovered_after_website_extra") is True
+            for e in episodes
+        ),
         "input_tokens": sum(
             u.get("input_tokens", u.get("prompt_tokens", 0)) for u in usage
         ),

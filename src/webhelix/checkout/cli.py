@@ -7,7 +7,7 @@ from pathlib import Path
 import signal
 import time
 
-from .contract import FIXTURES, load, read, save, validate
+from .contract import CONDITIONS, FIXTURES, initial_files, load, read, save, validate
 
 
 def _pilot_settings(path, *, scripted):
@@ -19,8 +19,10 @@ def _pilot_settings(path, *, scripted):
             "Pilot configuration must contain only the documented run settings"
         )
     settings = copy.deepcopy(settings)
-    if settings["condition"] != "truthful":
-        raise ValueError("This checkout repeat preserves the truthful condition")
+    if settings["condition"] not in CONDITIONS:
+        raise ValueError(
+            "Supported conditions: truthful, presentation, interaction, combined; misleading wording is not implemented"
+        )
     for field, upper in {
         "iterations": 10,
         "max_optimizer_calls": 200,
@@ -168,7 +170,7 @@ def initialize(
                     f"Missing credential variable {name}; no requests sent"
                 )
     # Candidate/task contract is checked before producing any experiment state.
-    load(FIXTURES / "candidate", settings["condition"])
+    initial_files(settings["condition"])
     run.mkdir(parents=True)
     save(run / "runtime.json", settings)
     if plan:
@@ -179,8 +181,23 @@ def initialize(
 
 
 def main(argv=None):
+    import sys
+
+    argv = sys.argv[1:] if argv is None else argv
+    if argv[:1] == ["comparison"]:
+        from .comparison import main as comparison_main
+
+        return comparison_main(argv[1:])
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
+    sub.add_parser(
+        "comparison", help="Matched presentation/interaction/combined pilot; use --help"
+    )
+    interaction_controls = sub.add_parser(
+        "interaction-controls",
+        help="Offline recovery/exposure/state-integrity controls",
+    )
+    interaction_controls.add_argument("--run-dir", type=Path, required=True)
     worker = sub.add_parser("worker", help=argparse.SUPPRESS)
     worker.add_argument("request", type=Path)
     bridge = sub.add_parser("bridge", help=argparse.SUPPRESS)
@@ -188,6 +205,7 @@ def main(argv=None):
     for name in ("validate", "serve"):
         command = sub.add_parser(name)
         command.add_argument("--candidate", type=Path, default=FIXTURES / "candidate")
+        command.add_argument("--condition", choices=CONDITIONS, default="truthful")
     sub.add_parser("report").add_argument("run_dir", type=Path)
     for name in ("controls", "demo", "experiment", "evaluate"):
         command = sub.add_parser(name)
@@ -215,12 +233,19 @@ def main(argv=None):
                     "scripted-extra",
                     "scripted-remove",
                     "scripted-stop",
+                    "scripted-attentive",
+                    "scripted-oblivious",
                     "api",
                 ],
                 default="scripted-correct",
             )
             command.add_argument("--episodes", type=int, choices=[1, 3], default=1)
     args = parser.parse_args(argv)
+    if args.command == "interaction-controls":
+        from .interaction_controls import controls as run_controls
+
+        print(json.dumps(run_controls(args.run_dir), indent=2))
+        return
     if args.command == "worker":
         from .evaluate import worker as execute_worker
 
@@ -235,12 +260,16 @@ def main(argv=None):
 
         return run_bridge(args.mode)
     if args.command == "validate":
-        print(json.dumps(validate(load(args.candidate)), indent=2))
+        print(
+            json.dumps(
+                validate(load(args.candidate, args.condition), args.condition), indent=2
+            )
+        )
         return
     if args.command == "serve":
         from .site import CheckoutSite
 
-        with CheckoutSite(load(args.candidate)) as site:
+        with CheckoutSite(load(args.candidate, args.condition), args.condition) as site:
             print(
                 f"Private preview: {site.url}\nThis preview is independent of experiment episodes. Ctrl-C stops it.",
                 flush=True,
