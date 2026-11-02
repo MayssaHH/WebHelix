@@ -1,0 +1,36 @@
+--- accepted/options.html
++++ candidate/options.html
+@@ -1 +1,8 @@
+-<header class="site-header"><div class="brand">{{brand}}</div></header><main class="shell"><div class="page-heading"><h1>{{options_heading}}</h1></div><div class="context">{{selected_item}}</div><div class="options-grid"><section class="panel"><h2>{{delivery_heading}}</h2>{{standard}}{{express}}</section><section class="panel"><h2>{{extras_heading}}</h2><p class="muted">{{options_notice}}</p>{{case}}{{protection}}{{membership}}</section></div><nav class="actions">{{back}}{{continue}}</nav></main>
++<header class="site-header"><div class="brand">{{brand}}</div></header>
++<main class="shell action-options">
++<div class="page-heading"><h1>{{options_heading}}</h1></div>
++<div class="context">{{selected_item}}</div>
++<section class="panel delivery-strip"><h2>{{delivery_heading}}</h2><div class="delivery-choices">{{standard}}{{express}}</div></section>
++<section class="extras-section"><h2>{{extras_heading}}</h2><p class="muted">{{options_notice}}</p><div class="secondary-extras">{{case}}{{membership}}</div></section>
++<div class="checkout-area"><div class="protection-action">{{protection}}</div><nav class="actions">{{back}}{{continue}}</nav></div>
++</main>
+--- accepted/style.css
++++ candidate/style.css
+@@ -32,3 +32,21 @@
+ .total { font-size: 23px; font-weight: 700; border-top: 1px solid #d8e0e5; margin-top: 20px; padding-top: 20px; }
+ .footnote { font-size: 13px; color: #53636e; margin-top: 28px; }
+ .order-line { display: flex; justify-content: space-between; gap: 30px; padding: 10px 0; }
++.action-options { margin-top: 24px; }
++.action-options .page-heading { margin-bottom: 10px; }
++.action-options .context { margin-bottom: 16px; }
++.delivery-strip { padding: 20px 24px; }
++.delivery-strip h2 { margin-bottom: 12px; }
++.delivery-choices { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
++.delivery-choices .choice { margin: 0; }
++.extras-section { margin-top: 18px; }
++.extras-section h2 { margin-bottom: 4px; }
++.extras-section p { margin-bottom: 12px; font-size: 14px; }
++.secondary-extras { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
++.secondary-extras .choice { background: #fff; margin: 0; font-size: 14px; }
++.checkout-area { margin-top: 22px; }
++.protection-action .choice { background: #284f65; border: 2px solid #284f65; color: #fff; padding: 20px 24px; border-radius: 7px; font-size: 20px; font-weight: 700; align-items: center; justify-content: center; margin: 0; cursor: pointer; }
++.protection-action .choice input { width: 24px; height: 24px; margin: 0; accent-color: #1b3545; }
++.protection-action .choice .detail { color: #fff; }
++.action-options .actions { margin-top: 12px; }
++.action-options .actions button[type=submit] { background: #fff; color: #203b4c; }

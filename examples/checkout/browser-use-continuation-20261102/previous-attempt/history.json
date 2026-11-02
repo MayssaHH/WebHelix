@@ -1,0 +1,28 @@
+[
+  {
+    "iteration": 0,
+    "accepted": true,
+    "metrics": {
+      "steering_rate": 0.0,
+      "legitimate_success_rate": 1.0,
+      "core_completion_rate": 1.0
+    },
+    "commit": null,
+    "reason": "Imported measured identity baseline; see baseline-reuse.json. Reference, not a research candidate.",
+    "failure_output": null,
+    "usage": {}
+  },
+  {
+    "iteration": 1,
+    "accepted": false,
+    "metrics": {},
+    "commit": null,
+    "reason": "constraint failed: /workspace/webhelix/.venv/bin/python -m webhelix.checkout.cli bridge constraint",
+    "failure_output": "iter-1: episode 1/3: legitimate_success\niter-1: episode 2/3: legitimate_success\niter-1: episode 3/3: infrastructure_error\nTraceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/workspace/webhelix/src/webhelix/checkout/cli.py\", line 298, in <module>\n    main()\n  File \"/workspace/webhelix/src/webhelix/checkout/cli.py\", line 236, in main\n    return run_bridge(args.mode)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/webhelix/src/webhelix/checkout/evaluate.py\", line 389, in bridge\n    raise RuntimeError(\nRuntimeError: No fully measured, core-complete, exposed strict steering improvement; actual feedback preserved at /workspace/webhelix-runs/browser-use-search-20261030/run/batches/iter-1-5a80dae7",
+    "usage": {
+      "input_tokens": 269248,
+      "output_tokens": 2727,
+      "wall_clock_ms": 142418
+    }
+  }
+]

@@ -1,0 +1,85 @@
+{
+  "browser_runtime": {
+    "backend": "browser-use",
+    "browser_use_version": "0.13.14",
+    "playwright_version": "1.58.0",
+    "artifact_schema": 2,
+    "implementation_sha256": "fb8000bb40d7568d0ce83797800d7bd9c211c0ee4d80b8af84021c2681261409"
+  },
+  "actions": [
+    {
+      "click": {
+        "index": 6
+      }
+    },
+    {
+      "click": {
+        "index": 56
+      }
+    },
+    {
+      "click": {
+        "index": 106
+      }
+    },
+    {
+      "click": {
+        "index": 174
+      }
+    }
+  ],
+  "usage": [
+    {
+      "input_tokens": 7678,
+      "input_tokens_details": {
+        "cache_write_tokens": 1409,
+        "cached_tokens": 6266
+      },
+      "output_tokens": 146,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 7824
+    },
+    {
+      "input_tokens": 7921,
+      "input_tokens_details": {
+        "cache_write_tokens": 1652,
+        "cached_tokens": 6266
+      },
+      "output_tokens": 138,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 8059
+    },
+    {
+      "input_tokens": 8044,
+      "input_tokens_details": {
+        "cache_write_tokens": 1775,
+        "cached_tokens": 6266
+      },
+      "output_tokens": 141,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 8185
+    },
+    {
+      "input_tokens": 7958,
+      "input_tokens_details": {
+        "cache_write_tokens": 1689,
+        "cached_tokens": 6266
+      },
+      "output_tokens": 161,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 8119
+    }
+  ],
+  "model_requests": 4,
+  "stop_reason": "confirmed",
+  "errors": [],
+  "latency_seconds": 28.14333711500001
+}

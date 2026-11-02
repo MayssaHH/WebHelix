@@ -1,8 +1,16 @@
 # Inspect the executed evidence
 
-**API429 diagnosis:** a [small follow-up probe](checkout/provider-diagnostic-20261030/README.md)
-returned `credit_balance_exhausted` on 30 October. The provider reports no API
-credits remaining. No browser episode or optimizer search was restarted.
+**Completed real continuation:** [Browser-Use and OpenCode on 2 November](checkout/browser-use-continuation-20261102/README.md)
+re-evaluated the saved candidate, then generated and evaluated one new proposal.
+Both scored 0/3 steering and 3/3 legitimate success, so both were rejected. The
+actual new optimizer request contained the previous hypothesis and fresh measured
+feedback. Six new episodes and one optimizer session added $3.90 in conservative
+usage accounting. Inspect the clean/modified screenshots, notes, tool calls and
+confirmed orders in the report.
+
+**Historical API429 diagnosis:** a [small follow-up probe](checkout/provider-diagnostic-20261030/README.md)
+returned `credit_balance_exhausted` on 30 October. A replacement credential restored
+generation access on 2 November; the earlier failed attempt remains preserved.
 
 **Partial live search:** [OpenCode with Browser-Use](checkout/browser-use-search-20261030/README.md)
 produced one valid candidate on 30 October. Two victim episodes completed the

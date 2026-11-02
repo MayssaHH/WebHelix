@@ -1,0 +1,2408 @@
+{
+  "raw_run": "/workspace/webhelix-runs/browser-use-continuation-20261102/run",
+  "files": [
+    {
+      "path": "status.json",
+      "sha256": "889288532f262bc8d5f65a13ec1715b64920259e4ce939b6ff93676271db601a",
+      "bytes": 11197
+    },
+    {
+      "path": "runtime.json",
+      "sha256": "5fdfebe4a464439d4bee785ea42c1905d0f56d34f2df5272d74223a0db9e7d8b",
+      "bytes": 1451
+    },
+    {
+      "path": "optimizer-settings.json",
+      "sha256": "af6975a95a3115852fedd74cb30f5f01cdad608bdf13ee4448b3ea05fd65a6d6",
+      "bytes": 404
+    },
+    {
+      "path": "opencode-runtime.json",
+      "sha256": "eb5da254b0d254a9586c894c052bc17c59c32a808ef9b087d55ee54f961523f4",
+      "bytes": 696
+    },
+    {
+      "path": "history.json",
+      "sha256": "54034cc95f38de666f861ced836008094610c91c92bbd535859eb586e19b499f",
+      "bytes": 2751
+    },
+    {
+      "path": "feedback-continuity.json",
+      "sha256": "65567402235f650b0e0c1c247e262a1eeeb9487afca51f3dfef9b9432a3b4f03",
+      "bytes": 383
+    },
+    {
+      "path": "budget.json",
+      "sha256": "2c20dd0ed862ce9ffd0dce8931276234258ae8fc8197f0402c37ba8b53d37206",
+      "bytes": 55414
+    },
+    {
+      "path": "audit.json",
+      "sha256": "3baa7322b59305de689114b4a3199d2c56d6f19bcdfb12884ef8447ff356648a",
+      "bytes": 33761
+    },
+    {
+      "path": "baseline-reuse.json",
+      "sha256": "85e846d2fdbf86bc59b68a4a973e6037dbbca4f1b1baefa5cbafa27b87ec435a",
+      "bytes": 5747
+    },
+    {
+      "path": "remeasurement.json",
+      "sha256": "80a47b42584b6f0efef1203b5a84e37ea3957a6225c7e5887466bd84536bf81e",
+      "bytes": 31896
+    },
+    {
+      "path": "retention.json",
+      "sha256": "9bb927b54ace33b6110f3baf1451f038d7f1610930eea59bebf18f948f99a735",
+      "bytes": 61
+    },
+    {
+      "path": "project-start.json",
+      "sha256": "fedfa204cd2a308615bcfbd4f255623089616412e6542a746a0537874daed1e9",
+      "bytes": 1791
+    },
+    {
+      "path": "spending-plan.json",
+      "sha256": "afc44a89a518ea9c0fd8d6d58502fdc0986c40d5a656a0019dbae97e1e0e0643",
+      "bytes": 1769
+    },
+    {
+      "path": "clean.json",
+      "sha256": "1f4d14fdaced124735e664a32f4fe593e1996109f275476ff3f5071b64eba36b",
+      "bytes": 31119
+    },
+    {
+      "path": "identity.json",
+      "sha256": "539e369a977ee7c62f4739b856a3a47f72f0111452113e9e09b98585f84845e3",
+      "bytes": 33369
+    },
+    {
+      "path": "continue_search.py",
+      "sha256": "29cbe6e3a85fcd539da883b3b5a2f7df4bccfce67c6630661ddf28890261ee0f",
+      "bytes": 17634
+    },
+    {
+      "path": "audit.py",
+      "sha256": "1ce47baa85622b1b728cafaa8a66a6ef799c9c8209b1e884429848e33d09ecd1",
+      "bytes": 15879
+    },
+    {
+      "path": "pilot.json",
+      "sha256": "3304ce6843255445dddc38ff04fc6a49408399ee0989d6530a2ba82f5906b4f5",
+      "bytes": 602
+    },
+    {
+      "path": "commands.txt",
+      "sha256": "f01f81998d3c428d3dd9b3b390c2181fc2e9f6f3746472b309a7f33cae7a1a8f",
+      "bytes": 1410
+    },
+    {
+      "path": "verification.txt",
+      "sha256": "24ff006645a621c03e6ed221614bb9b1f52db1f239cf19c6439da635bca101b0",
+      "bytes": 893
+    },
+    {
+      "path": "previous-attempt/history.json",
+      "sha256": "03e03bcaa88179958da4a2ea314de4526e7b04fc292f3b03d7ea51ca48eedd13",
+      "bytes": 1523
+    },
+    {
+      "path": "previous-attempt/runtime.json",
+      "sha256": "4825b4d88f1e98bc2232f8552cc5749dcd515c88354d16b6162871f4b347e445",
+      "bytes": 1451
+    },
+    {
+      "path": "previous-attempt/spending-plan.json",
+      "sha256": "fdd470fe266c5a2f5252884ce763ee307284eb57b61a876c2de6e827bba90047",
+      "bytes": 1781
+    },
+    {
+      "path": "previous-attempt/status.json",
+      "sha256": "874e65780488d482d7773d58b18c41196ed8c8738d756c2563eaeb83f438fd95",
+      "bytes": 11282
+    },
+    {
+      "path": "previous-attempt/incomplete-feedback.json",
+      "sha256": "11f7bf4390a55c110b5af926bfa9bb8e3f8fb1be08188be412a42b7117b7d1b5",
+      "bytes": 24802
+    },
+    {
+      "path": "previous-attempt/budget.json",
+      "sha256": "e28153eaa121b8c414a3e03cd21bdbb3187cb1fd2f8422691dedd77494d8736f",
+      "bytes": 32853
+    },
+    {
+      "path": "proposals/iter-1/optimizer-note.md",
+      "sha256": "7e2267a45145e87f20662183fbb8a13f69b5df09ae237588c4d70386f491d747",
+      "bytes": 3178
+    },
+    {
+      "path": "proposals/iter-1/candidate.diff",
+      "sha256": "742f272b35a7a02c6f03446749cac21ebc906f6d31369d400a56e5df23a27839",
+      "bytes": 3010
+    },
+    {
+      "path": "proposals/iter-1/result.json",
+      "sha256": "e2354cb258ad825c4903e2615c13b1c5ea6ab79d4b50ca1f922f3f1522ef81d6",
+      "bytes": 606
+    },
+    {
+      "path": "proposals/iter-1/acceptance.json",
+      "sha256": "bf4f98aa05adfff169739c296ae28968ace5576a063573f7d6f0bac8aa3a24b3",
+      "bytes": 1186
+    },
+    {
+      "path": "proposals/iter-1/agent-result.json",
+      "sha256": "6ef48e264f652416ebb9ce20a5e2fc760efa752c9a405888672280f43bdc27a4",
+      "bytes": 173
+    },
+    {
+      "path": "proposals/iter-1/candidate/options.html",
+      "sha256": "3f488d8bbcde03ccb09d427f5a40aed63095dc5557b2e6e9dd5b07a62cc1c5dc",
+      "bytes": 686
+    },
+    {
+      "path": "proposals/iter-1/candidate/review.html",
+      "sha256": "f34294204096b8ea9bc4ef4cc2c0b1b17fa64a102029c3c8bac6d83ffbdb0410",
+      "bytes": 429
+    },
+    {
+      "path": "proposals/iter-1/candidate/style.css",
+      "sha256": "b8d0ab6387f90f64722e5c6a286fd31463b92ca27383c64d4298ec0d073b154b",
+      "bytes": 4175
+    },
+    {
+      "path": "proposals/iter-1/candidate/product.html",
+      "sha256": "581740ceccb22ed936eb236603ba5b10871518230906c369b4ef2a3966db6f2f",
+      "bytes": 609
+    },
+    {
+      "path": "proposals/iter-1/candidate/cart.html",
+      "sha256": "a56e87f0003237fccf5e071ee0afa88202b2cf4d5bd22c5c25dcefd4c8a7fd85",
+      "bytes": 387
+    },
+    {
+      "path": "feedback/iter-1/result.json",
+      "sha256": "80a47b42584b6f0efef1203b5a84e37ea3957a6225c7e5887466bd84536bf81e",
+      "bytes": 31896
+    },
+    {
+      "path": "proposals/iter-2/optimizer-note.md",
+      "sha256": "c0c2653432b8118a4a21761cf5d684bf51bcab7585e5f717e6d282774e0282e0",
+      "bytes": 3451
+    },
+    {
+      "path": "proposals/iter-2/candidate.diff",
+      "sha256": "d2e885a046e072892420cb8a9dc10a7bd5dd2fbd51d33a796dc57f8ca6abb1d4",
+      "bytes": 2796
+    },
+    {
+      "path": "proposals/iter-2/result.json",
+      "sha256": "d2f801043fd31e12733b4f30495ad40fae622fce52b9126d692274361a1faf03",
+      "bytes": 11500
+    },
+    {
+      "path": "proposals/iter-2/acceptance.json",
+      "sha256": "f65d545271dbae285311e60917ed9be39cd90a82e50373ac38827c7c1df0671e",
+      "bytes": 1142
+    },
+    {
+      "path": "proposals/iter-2/agent-result.json",
+      "sha256": "5ca3890ea566188bebd9f39335fc910557bfdb2e26d463d1d76583c0f231e102",
+      "bytes": 129
+    },
+    {
+      "path": "proposals/iter-2/native-agent-result.json",
+      "sha256": "85620a8bbb564f41b8b63b93220561ed21af398eef2f6ee45acd49b212428541",
+      "bytes": 93
+    },
+    {
+      "path": "proposals/iter-2/optimizer-context.json",
+      "sha256": "93f43816e4efed6b74fd0a7143de2a3b7c88968a7c48dd61a15dc9cf40d6c54f",
+      "bytes": 163544
+    },
+    {
+      "path": "proposals/iter-2/prompt.txt",
+      "sha256": "c17f0fa0cf1a6560fc0c21d2d68425b8223578f33abb326cc5988b0390ccc6df",
+      "bytes": 115628
+    },
+    {
+      "path": "proposals/iter-2/launch-prompt.txt",
+      "sha256": "01be3d888eda0b3ac624535052788cde1e8bf9e4d4e37d60084e77a72ad9fec5",
+      "bytes": 201
+    },
+    {
+      "path": "proposals/iter-2/tool-events.json",
+      "sha256": "894b8487e30ec43b3bc4c979faf904b3d6705715da9823208cbc4e206c144c3c",
+      "bytes": 35250
+    },
+    {
+      "path": "proposals/iter-2/gateway-summary.json",
+      "sha256": "db44930fb02591c00e2c376f84de8554ab5933d518104d5702f67aaa003ef5a7",
+      "bytes": 10437
+    },
+    {
+      "path": "proposals/iter-2/feedback-continuity.json",
+      "sha256": "65567402235f650b0e0c1c247e262a1eeeb9487afca51f3dfef9b9432a3b4f03",
+      "bytes": 383
+    },
+    {
+      "path": "proposals/iter-2/image-manifest.json",
+      "sha256": "f74ee319be1f79f97c612a80d072525d5b0cc594edb56b21d0dfab1101ddf955",
+      "bytes": 1410
+    },
+    {
+      "path": "proposals/iter-2/runtime/runtime-receipt.json",
+      "sha256": "76ea486b42aa29f6f6f1dc5c478d078a9ac3cadd55f565b96cf4bfba9a8572dd",
+      "bytes": 890
+    },
+    {
+      "path": "proposals/iter-2/candidate/options.html",
+      "sha256": "0b3c9bcd88df953fe2d390ae863918bf575c815255ac9bcb45b2e246edb16d40",
+      "bytes": 658
+    },
+    {
+      "path": "proposals/iter-2/candidate/review.html",
+      "sha256": "f34294204096b8ea9bc4ef4cc2c0b1b17fa64a102029c3c8bac6d83ffbdb0410",
+      "bytes": 429
+    },
+    {
+      "path": "proposals/iter-2/candidate/style.css",
+      "sha256": "f4791fa60451289bd9cd9b1c0e87b70c5cf27406c9c87932a703431da3e755a3",
+      "bytes": 3991
+    },
+    {
+      "path": "proposals/iter-2/candidate/product.html",
+      "sha256": "581740ceccb22ed936eb236603ba5b10871518230906c369b4ef2a3966db6f2f",
+      "bytes": 609
+    },
+    {
+      "path": "proposals/iter-2/candidate/cart.html",
+      "sha256": "a56e87f0003237fccf5e071ee0afa88202b2cf4d5bd22c5c25dcefd4c8a7fd85",
+      "bytes": 387
+    },
+    {
+      "path": "feedback/iter-2/result.json",
+      "sha256": "b873993d518034500e22457da8e250ab95aeff85bdd6af32cf6a580d55023ad1",
+      "bytes": 31050
+    },
+    {
+      "path": "proposals/iter-2/first-provider-request/request.json",
+      "sha256": "b2ccfd515097d196455b6cc8af38f1384ea85275a4bfd2591b2d1afdc2bd4049",
+      "bytes": 136648
+    },
+    {
+      "path": "proposals/iter-2/first-provider-request/result.json",
+      "sha256": "b977a785c00f97b4d90cba5abb1819d7c3d735692bbfd1242f0d56da19ba7fef",
+      "bytes": 773
+    },
+    {
+      "path": "evaluation-1/report.json",
+      "sha256": "cdca8f1b1a1f169d29598fa6df037ce7056203cff5a4948dec2ca5543cfa0979",
+      "bytes": 31203
+    },
+    {
+      "path": "evaluation-1/acceptance.json",
+      "sha256": "bf4f98aa05adfff169739c296ae28968ace5576a063573f7d6f0bac8aa3a24b3",
+      "bytes": 1186
+    },
+    {
+      "path": "evaluation-1/candidate-manifest.json",
+      "sha256": "e57cdbea0895ee9011cd376d93a93d6948c7d700107eeca11c02a1a2f86aad2c",
+      "bytes": 787
+    },
+    {
+      "path": "evaluation-1/candidate.diff",
+      "sha256": "32e955129d1c241abe3a7ece4b7134dfbb3c1a00ba43f5cfaf0f84e960dce543",
+      "bytes": 3004
+    },
+    {
+      "path": "evaluation-1/feasibility/feasibility.json",
+      "sha256": "763d07a1ae84ab8046973cb3c70ef73bf03e4a7a8842c407d6e1468d9185a773",
+      "bytes": 3728
+    },
+    {
+      "path": "evaluation-1/episode-0/agent-input-0.json",
+      "sha256": "1768c667868a1d79b2457983a66b05e9fbc1fc95f108a00eea8092f1155b4b96",
+      "bytes": 82841
+    },
+    {
+      "path": "evaluation-1/episode-0/reference-diagnostic-1.json",
+      "sha256": "0f07e4a7dc7cdbcde416af79019bb8e8760b9f47a846de77f1ae87bfaf59a7d7",
+      "bytes": 1111
+    },
+    {
+      "path": "evaluation-1/episode-0/reference-diagnostic-3.json",
+      "sha256": "1c7cf2a87a2c03ccc3a73ee284f20b6d06e675b0695251d122cb0bad39a8de43",
+      "bytes": 779
+    },
+    {
+      "path": "evaluation-1/episode-0/request-1.json",
+      "sha256": "2ea68b782451950c96c1fd5094e0ce23d1666ee4accba4afd524ccb999d0edf2",
+      "bytes": 91629
+    },
+    {
+      "path": "evaluation-1/episode-0/screenshot-1.png",
+      "sha256": "854d52f2e3d442da52715876d8a0d49b9ea74f3c386b6b61e26e0e767a39301f",
+      "bytes": 38467
+    },
+    {
+      "path": "evaluation-1/episode-0/agent-output-2.json",
+      "sha256": "b903250d4031ab4e03f3700536d06215e7a341e921ad27be7c860bde72ed95ad",
+      "bytes": 724
+    },
+    {
+      "path": "evaluation-1/episode-0/reference-screenshot-2.png",
+      "sha256": "af75521196c4ee32d9908f3a5683a0c52fede2c9ffedd9eb06fbab7f81758d5e",
+      "bytes": 66326
+    },
+    {
+      "path": "evaluation-1/episode-0/call-1.json",
+      "sha256": "b72b26ab9b0f8226fa2a245584b817f2fb601d398caf7c718cd4b69bc0b4c057",
+      "bytes": 340
+    },
+    {
+      "path": "evaluation-1/episode-0/agent-output-1.json",
+      "sha256": "5c5e739e7badfe7ac0e37abd91a06106d158b56a1a69896a286d71d2ab864bc6",
+      "bytes": 620
+    },
+    {
+      "path": "evaluation-1/episode-0/backend-2.json",
+      "sha256": "4fdafde55031eb5d29ea69f632c5e1f4f2e025480745d0a4e3ea2a9879928a47",
+      "bytes": 755
+    },
+    {
+      "path": "evaluation-1/episode-0/agent-run.json",
+      "sha256": "09c2176f257dc2df29c7f06fc2f943ad777f6d371d26a17b42bfc1d51e3ea67c",
+      "bytes": 1732
+    },
+    {
+      "path": "evaluation-1/episode-0/screenshot-original-2.png",
+      "sha256": "22391a5cd51bce53be6733ff6a8d08ca9913b03ddc4be903d727e243817227d4",
+      "bytes": 69028
+    },
+    {
+      "path": "evaluation-1/episode-0/action-result-1.json",
+      "sha256": "2000807e812d3d7723418607a847bc8e8110070a4df84804dc4e34ff2cc4d533",
+      "bytes": 292
+    },
+    {
+      "path": "evaluation-1/episode-0/backend-3.json",
+      "sha256": "71d11d02adeaf00194f6cb1fbce8d946499eebbfcfab9badd8e4b96f34e19132",
+      "bytes": 1021
+    },
+    {
+      "path": "evaluation-1/episode-0/call-2.json",
+      "sha256": "cb4afde6810b6a83500ee6d84ff8ec145f0ce0a136e6d1c5f01fb41958226391",
+      "bytes": 340
+    },
+    {
+      "path": "evaluation-1/episode-0/reference-diagnostic-0.json",
+      "sha256": "fe4eb920ca04d5d7683899e2d806f689c0f5695eb18b26efe532eb1159bb7891",
+      "bytes": 616
+    },
+    {
+      "path": "evaluation-1/episode-0/diagnostic-observation-2.json",
+      "sha256": "bcecbe35aaaf93d330679b881259dcf93528976d77deb08752a92118ec89b74e",
+      "bytes": 2042
+    },
+    {
+      "path": "evaluation-1/episode-0/reference-diagnostic-2.json",
+      "sha256": "4fde116416cd95e31cfae11e9809683eeded7ad4ff107df61c89050db9450695",
+      "bytes": 2041
+    },
+    {
+      "path": "evaluation-1/episode-0/action-1.json",
+      "sha256": "ae5ddddf80491913d827aef04e5bd4541d2573e19b7c115b338a46a73829d1fc",
+      "bytes": 36
+    },
+    {
+      "path": "evaluation-1/episode-0/exposure-0.json",
+      "sha256": "d51c64e51230d43499f36cc5f593849bbd7369778765ef6a625c539f89f0f12d",
+      "bytes": 425
+    },
+    {
+      "path": "evaluation-1/episode-0/backend-after-action-0.json",
+      "sha256": "3a3510257de96739eda94c54249212e9874fe7f84f7a3c1330cfa2ae45cdb975",
+      "bytes": 488
+    },
+    {
+      "path": "evaluation-1/episode-0/action-0.json",
+      "sha256": "3a76afd2d6890dd7f695eac05b50b6c6e217301a2a444e206fdb355ce894a035",
+      "bytes": 35
+    },
+    {
+      "path": "evaluation-1/episode-0/screenshot-original-1.png",
+      "sha256": "af908c4994217cd6f4c59f25dc900fb2302036da1c61ab47781d4717673df3ad",
+      "bytes": 36530
+    },
+    {
+      "path": "evaluation-1/episode-0/response-2.json",
+      "sha256": "486c95949f56d4b68833c26aaac80d02b096ae95841748bbdef3795f54920606",
+      "bytes": 18495
+    },
+    {
+      "path": "evaluation-1/episode-0/observation-1.json",
+      "sha256": "a231b4e52d20cf77e6c882555aa418fc826ef5287f7659edc93882fe62cc5c2d",
+      "bytes": 2290
+    },
+    {
+      "path": "evaluation-1/episode-0/reference-screenshot-3.png",
+      "sha256": "47276728e6c49902ebd61a70f5e04fba384c651d8f0a26e56a890d37d23f3787",
+      "bytes": 40581
+    },
+    {
+      "path": "evaluation-1/episode-0/exposure-1.json",
+      "sha256": "0ee9fab8254fb8f309544f2c6f6b4328114a3c434aa9ff59f6be26693da020dd",
+      "bytes": 422
+    },
+    {
+      "path": "evaluation-1/episode-0/screenshot-original-0.png",
+      "sha256": "51f3bd8126f6b9c9b1f91719953e8158ce4600ee3af1ed1d69b2a28a03e73c4a",
+      "bytes": 42498
+    },
+    {
+      "path": "evaluation-1/episode-0/response-1.json",
+      "sha256": "14a70f5055648f1644eb7f4a78a6f0e04612fd140ecaf0ca733cbf24862bf1a2",
+      "bytes": 18391
+    },
+    {
+      "path": "evaluation-1/episode-0/request-0.json",
+      "sha256": "ba7d01a4b639723b4defedcd634242834d448988a150799f05f6118b00d76c9a",
+      "bytes": 98724
+    },
+    {
+      "path": "evaluation-1/episode-0/action-result-2.json",
+      "sha256": "3e4da34fa49392dd29a87ae202d5ed228860a6b349ffaf1c92d565f887a1ba62",
+      "bytes": 284
+    },
+    {
+      "path": "evaluation-1/episode-0/agent-history.json",
+      "sha256": "cc240601d678af0a0e0b16c037ccf24df1a1fab224af3290d6d058f49efbd48b",
+      "bytes": 19006
+    },
+    {
+      "path": "evaluation-1/episode-0/diagnostic-observation-1.json",
+      "sha256": "0f07e4a7dc7cdbcde416af79019bb8e8760b9f47a846de77f1ae87bfaf59a7d7",
+      "bytes": 1111
+    },
+    {
+      "path": "evaluation-1/episode-0/worker.json",
+      "sha256": "c746a8604e2b94cec065259a99ee574557fbb83b08fb75934d78e1029c3c24e9",
+      "bytes": 1929
+    },
+    {
+      "path": "evaluation-1/episode-0/reference-screenshot-1.png",
+      "sha256": "af908c4994217cd6f4c59f25dc900fb2302036da1c61ab47781d4717673df3ad",
+      "bytes": 36530
+    },
+    {
+      "path": "evaluation-1/episode-0/observation-4.json",
+      "sha256": "9fb2121a4fdabe517eae05da26e6d7d43d136740f74608b68c4a7ef2fbff71a0",
+      "bytes": 1161
+    },
+    {
+      "path": "evaluation-1/episode-0/agent-messages-1.json",
+      "sha256": "836596806038d48cc115359fbe01516f4373a70ae9c35e46966e937f35bc68f2",
+      "bytes": 75746
+    },
+    {
+      "path": "evaluation-1/episode-0/diagnostic-observation-3.json",
+      "sha256": "1c7cf2a87a2c03ccc3a73ee284f20b6d06e675b0695251d122cb0bad39a8de43",
+      "bytes": 779
+    },
+    {
+      "path": "evaluation-1/episode-0/screenshot-3.png",
+      "sha256": "b851a93740c5f1188abadc5276bb9fa3881cd618bf10209413be7ad385e25d41",
+      "bytes": 42822
+    },
+    {
+      "path": "evaluation-1/episode-0/agent-output-0.json",
+      "sha256": "fc8a88ce4678f1a2bdbe4ca17d6ea1793cca05f0e3285995265290af2db6aac2",
+      "bytes": 726
+    },
+    {
+      "path": "evaluation-1/episode-0/request-2.json",
+      "sha256": "6aaf2d8b301c2531616bb07d1c74915d15614919428084186de4407d37846239",
+      "bytes": 135574
+    },
+    {
+      "path": "evaluation-1/episode-0/exposure-4.json",
+      "sha256": "103af3533648945282e530beb495e42a640ec3d94ba29b1f501a93e451d06469",
+      "bytes": 431
+    },
+    {
+      "path": "evaluation-1/episode-0/exposure-2.json",
+      "sha256": "0b9c5e5119480c445ed72995cee513a9a7f4eff9a4614435e28798b887fdba82",
+      "bytes": 423
+    },
+    {
+      "path": "evaluation-1/episode-0/agent-input-1.json",
+      "sha256": "836596806038d48cc115359fbe01516f4373a70ae9c35e46966e937f35bc68f2",
+      "bytes": 75746
+    },
+    {
+      "path": "evaluation-1/episode-0/action-3.json",
+      "sha256": "ce8310d0e785e6bc312fec03b3eb9fd6ed23b0c1a4f3638839bcc9bde5f9d200",
+      "bytes": 37
+    },
+    {
+      "path": "evaluation-1/episode-0/backend-after.json",
+      "sha256": "cd46880ecf65c7ac55b3d5c41c42952421857f8667c0078e5d591978df702ef1",
+      "bytes": 2098
+    },
+    {
+      "path": "evaluation-1/episode-0/backend-1.json",
+      "sha256": "3a3510257de96739eda94c54249212e9874fe7f84f7a3c1330cfa2ae45cdb975",
+      "bytes": 488
+    },
+    {
+      "path": "evaluation-1/episode-0/screenshot-4.png",
+      "sha256": "1727a59df197017d918cb943ba63610f48e769d5735c72bc5197e0b6e47fe0aa",
+      "bytes": 29214
+    },
+    {
+      "path": "evaluation-1/episode-0/backend-0.json",
+      "sha256": "1b63c4ceac61f2c4bf7212736c51347217d1d9e8f1a29e554b329dcdd16786f1",
+      "bytes": 227
+    },
+    {
+      "path": "evaluation-1/episode-0/reference-diagnostic-4.json",
+      "sha256": "d2303f9afec7b468793e78483c25f0373aa4dbee503429eca9a69262ff91bda8",
+      "bytes": 351
+    },
+    {
+      "path": "evaluation-1/episode-0/browser-cleanup.json",
+      "sha256": "594ab8e7b8af77c6311ad1557f621eaa1e62e9c9a7ca09e4bbcdee271479d942",
+      "bytes": 64
+    },
+    {
+      "path": "evaluation-1/episode-0/agent-messages-2.json",
+      "sha256": "78885a8eaca1791ab3d243327386e92a851de00b0c21fbcdf5a323190eb01a68",
+      "bytes": 119691
+    },
+    {
+      "path": "evaluation-1/episode-0/agent-messages-3.json",
+      "sha256": "b7b133e9540863533f3f512eefde15d4ef3adb270b30011d8685c56abae0c1b0",
+      "bytes": 81488
+    },
+    {
+      "path": "evaluation-1/episode-0/screenshot-original-4.png",
+      "sha256": "09693e29352e6fe18f6baa6b4a11ccd7ec9351760b969488a81e754b3cb3337b",
+      "bytes": 27939
+    },
+    {
+      "path": "evaluation-1/episode-0/agent-input-2.json",
+      "sha256": "78885a8eaca1791ab3d243327386e92a851de00b0c21fbcdf5a323190eb01a68",
+      "bytes": 119691
+    },
+    {
+      "path": "evaluation-1/episode-0/action-2.json",
+      "sha256": "e94bfc99d0bf77bbb21836c4104a0713f79aedf18aabd4aabd7eb90023de0593",
+      "bytes": 37
+    },
+    {
+      "path": "evaluation-1/episode-0/agent-output-3.json",
+      "sha256": "b401a7dcf733cd007e54f3b3574b0cdd1cb9a14bb5628a5885a6a4ca3b75c3fb",
+      "bytes": 754
+    },
+    {
+      "path": "evaluation-1/episode-0/backend-after-action-2.json",
+      "sha256": "71d11d02adeaf00194f6cb1fbce8d946499eebbfcfab9badd8e4b96f34e19132",
+      "bytes": 1021
+    },
+    {
+      "path": "evaluation-1/episode-0/reference-screenshot-0.png",
+      "sha256": "51f3bd8126f6b9c9b1f91719953e8158ce4600ee3af1ed1d69b2a28a03e73c4a",
+      "bytes": 42498
+    },
+    {
+      "path": "evaluation-1/episode-0/backend-4.json",
+      "sha256": "cd46880ecf65c7ac55b3d5c41c42952421857f8667c0078e5d591978df702ef1",
+      "bytes": 2098
+    },
+    {
+      "path": "evaluation-1/episode-0/observation-2.json",
+      "sha256": "ac05f71ea7e695e6077ae5df998361d34ec1596bc15312b8f7068374fa66fc9c",
+      "bytes": 2906
+    },
+    {
+      "path": "evaluation-1/episode-0/backend-after-action-1.json",
+      "sha256": "4fdafde55031eb5d29ea69f632c5e1f4f2e025480745d0a4e3ea2a9879928a47",
+      "bytes": 755
+    },
+    {
+      "path": "evaluation-1/episode-0/screenshot-0.png",
+      "sha256": "cab222b9c597c4075750718961115a19abce551df9d4127f3ca2da94e9a8c041",
+      "bytes": 44978
+    },
+    {
+      "path": "evaluation-1/episode-0/exposure-3.json",
+      "sha256": "c66e3e917c7457a23342a64d73abedc0a82a985ad591fd4931f61bdcc1de645f",
+      "bytes": 424
+    },
+    {
+      "path": "evaluation-1/episode-0/agent-input-3.json",
+      "sha256": "b7b133e9540863533f3f512eefde15d4ef3adb270b30011d8685c56abae0c1b0",
+      "bytes": 81488
+    },
+    {
+      "path": "evaluation-1/episode-0/response-3.json",
+      "sha256": "3905567815a372e476d1218ca1de5330535b132a4b35a92c1af96bf1edd95d20",
+      "bytes": 18525
+    },
+    {
+      "path": "evaluation-1/episode-0/action-result-0.json",
+      "sha256": "fc057b2e8bfde0dc5aa255abf665ec72a057b9ddc58999d161b7d2dc8e0db6e7",
+      "bytes": 274
+    },
+    {
+      "path": "evaluation-1/episode-0/backend-after-action-3.json",
+      "sha256": "cd46880ecf65c7ac55b3d5c41c42952421857f8667c0078e5d591978df702ef1",
+      "bytes": 2098
+    },
+    {
+      "path": "evaluation-1/episode-0/diagnostic-observation-4.json",
+      "sha256": "d2303f9afec7b468793e78483c25f0373aa4dbee503429eca9a69262ff91bda8",
+      "bytes": 351
+    },
+    {
+      "path": "evaluation-1/episode-0/browser-runtime.json",
+      "sha256": "80c9f7d9a649ce461a8f4a6b1f844b801abfac616fa42dc4debe43d3fde73862",
+      "bytes": 892
+    },
+    {
+      "path": "evaluation-1/episode-0/request-3.json",
+      "sha256": "79ae82539e46d95a956b9831b03fa99434725ff58d2579334bb785670f20053d",
+      "bytes": 97371
+    },
+    {
+      "path": "evaluation-1/episode-0/episode.json",
+      "sha256": "b7d4de3f67027c1f3534a0ff7dfe446c09fdd0314c2a6f8533b113706c1067c3",
+      "bytes": 7432
+    },
+    {
+      "path": "evaluation-1/episode-0/reference-screenshot-4.png",
+      "sha256": "09693e29352e6fe18f6baa6b4a11ccd7ec9351760b969488a81e754b3cb3337b",
+      "bytes": 27939
+    },
+    {
+      "path": "evaluation-1/episode-0/action-result-3.json",
+      "sha256": "6cdf4dcb08fa5ad2432744899ad2d71f41e85be43a5423b18c23d12519a3b891",
+      "bytes": 282
+    },
+    {
+      "path": "evaluation-1/episode-0/observation-3.json",
+      "sha256": "269b62ef0c204d9a79fcd9f0f72d9c656344ba190ebe36e56d71baa9c3008e3a",
+      "bytes": 1590
+    },
+    {
+      "path": "evaluation-1/episode-0/call-0.json",
+      "sha256": "7955151ea8d7f246b45a364e1df5f61ec2060e796ec1a2868628682afcb4d96a",
+      "bytes": 337
+    },
+    {
+      "path": "evaluation-1/episode-0/diagnostic-observation-0.json",
+      "sha256": "fe4eb920ca04d5d7683899e2d806f689c0f5695eb18b26efe532eb1159bb7891",
+      "bytes": 616
+    },
+    {
+      "path": "evaluation-1/episode-0/response-0.json",
+      "sha256": "774c44d428b243f7f71a7b7e03d642902fcfaf4b66dc43701ce114834a752c1e",
+      "bytes": 18493
+    },
+    {
+      "path": "evaluation-1/episode-0/call-3.json",
+      "sha256": "b8f464b8371de2e7ba867dacfeee112fe788460003e17c0488a8799cc89213eb",
+      "bytes": 340
+    },
+    {
+      "path": "evaluation-1/episode-0/screenshot-original-3.png",
+      "sha256": "47276728e6c49902ebd61a70f5e04fba384c651d8f0a26e56a890d37d23f3787",
+      "bytes": 40581
+    },
+    {
+      "path": "evaluation-1/episode-0/agent-messages-0.json",
+      "sha256": "1768c667868a1d79b2457983a66b05e9fbc1fc95f108a00eea8092f1155b4b96",
+      "bytes": 82841
+    },
+    {
+      "path": "evaluation-1/episode-0/screenshot-2.png",
+      "sha256": "def7a462087df81d43edaa1dd0b1f92c7d71704dda92682bbc04a952e398fbaa",
+      "bytes": 72923
+    },
+    {
+      "path": "evaluation-1/episode-0/observation-0.json",
+      "sha256": "f66c8b027dd5f349e1b069dce9d7924ae8f970216258ebb29fbe423129941291",
+      "bytes": 1520
+    },
+    {
+      "path": "evaluation-1/episode-1/agent-input-0.json",
+      "sha256": "a72d46fb2971c9bd6158eedd160ed286d15459b47138f88cc616d53beb049b9f",
+      "bytes": 82841
+    },
+    {
+      "path": "evaluation-1/episode-1/reference-diagnostic-1.json",
+      "sha256": "0f07e4a7dc7cdbcde416af79019bb8e8760b9f47a846de77f1ae87bfaf59a7d7",
+      "bytes": 1111
+    },
+    {
+      "path": "evaluation-1/episode-1/reference-diagnostic-3.json",
+      "sha256": "1c7cf2a87a2c03ccc3a73ee284f20b6d06e675b0695251d122cb0bad39a8de43",
+      "bytes": 779
+    },
+    {
+      "path": "evaluation-1/episode-1/agent-output-2.json",
+      "sha256": "d1a151f21c4c7e0e0361c347fd0376444595f5b01f670d4397ddafac7512a759",
+      "bytes": 673
+    },
+    {
+      "path": "evaluation-1/episode-1/call-1.json",
+      "sha256": "f51b895c6f4ee2d950836406033c08f66397e50d24e235c3da2b5748b08bd782",
+      "bytes": 340
+    },
+    {
+      "path": "evaluation-1/episode-1/agent-output-1.json",
+      "sha256": "7656a73551958c3d6cc99f61ffbb7cd2b983dfcb46a01b98bac3aa42670f6e00",
+      "bytes": 639
+    },
+    {
+      "path": "evaluation-1/episode-1/backend-2.json",
+      "sha256": "4fdafde55031eb5d29ea69f632c5e1f4f2e025480745d0a4e3ea2a9879928a47",
+      "bytes": 755
+    },
+    {
+      "path": "evaluation-1/episode-1/agent-run.json",
+      "sha256": "537a121ceaf19ac9e5518542311e7cf4454279f1a3b8665280ab326a542d74ff",
+      "bytes": 1729
+    },
+    {
+      "path": "evaluation-1/episode-1/action-result-1.json",
+      "sha256": "2000807e812d3d7723418607a847bc8e8110070a4df84804dc4e34ff2cc4d533",
+      "bytes": 292
+    },
+    {
+      "path": "evaluation-1/episode-1/backend-3.json",
+      "sha256": "71d11d02adeaf00194f6cb1fbce8d946499eebbfcfab9badd8e4b96f34e19132",
+      "bytes": 1021
+    },
+    {
+      "path": "evaluation-1/episode-1/call-2.json",
+      "sha256": "1ac15c1187c406a7778aeea9cecf58030b8ec80aae6dde4e837def3382dfe321",
+      "bytes": 340
+    },
+    {
+      "path": "evaluation-1/episode-1/reference-diagnostic-0.json",
+      "sha256": "fe4eb920ca04d5d7683899e2d806f689c0f5695eb18b26efe532eb1159bb7891",
+      "bytes": 616
+    },
+    {
+      "path": "evaluation-1/episode-1/diagnostic-observation-2.json",
+      "sha256": "bcecbe35aaaf93d330679b881259dcf93528976d77deb08752a92118ec89b74e",
+      "bytes": 2042
+    },
+    {
+      "path": "evaluation-1/episode-1/reference-diagnostic-2.json",
+      "sha256": "4fde116416cd95e31cfae11e9809683eeded7ad4ff107df61c89050db9450695",
+      "bytes": 2041
+    },
+    {
+      "path": "evaluation-1/episode-1/action-1.json",
+      "sha256": "ae5ddddf80491913d827aef04e5bd4541d2573e19b7c115b338a46a73829d1fc",
+      "bytes": 36
+    },
+    {
+      "path": "evaluation-1/episode-1/exposure-0.json",
+      "sha256": "d51c64e51230d43499f36cc5f593849bbd7369778765ef6a625c539f89f0f12d",
+      "bytes": 425
+    },
+    {
+      "path": "evaluation-1/episode-1/backend-after-action-0.json",
+      "sha256": "3a3510257de96739eda94c54249212e9874fe7f84f7a3c1330cfa2ae45cdb975",
+      "bytes": 488
+    },
+    {
+      "path": "evaluation-1/episode-1/action-0.json",
+      "sha256": "3a76afd2d6890dd7f695eac05b50b6c6e217301a2a444e206fdb355ce894a035",
+      "bytes": 35
+    },
+    {
+      "path": "evaluation-1/episode-1/response-2.json",
+      "sha256": "0fb515b3efe5c98e4af2de25c14e7fb860bfbee793b9e24b879b81c0772c3637",
+      "bytes": 18444
+    },
+    {
+      "path": "evaluation-1/episode-1/exposure-1.json",
+      "sha256": "0ee9fab8254fb8f309544f2c6f6b4328114a3c434aa9ff59f6be26693da020dd",
+      "bytes": 422
+    },
+    {
+      "path": "evaluation-1/episode-1/response-1.json",
+      "sha256": "a766c294752a0eb08e01652d2a8cabef29c08779244a82a290aa8958a0bbbd5c",
+      "bytes": 18410
+    },
+    {
+      "path": "evaluation-1/episode-1/action-result-2.json",
+      "sha256": "3e4da34fa49392dd29a87ae202d5ed228860a6b349ffaf1c92d565f887a1ba62",
+      "bytes": 284
+    },
+    {
+      "path": "evaluation-1/episode-1/agent-history.json",
+      "sha256": "c23607878352f8032d51aebcde1ac58cb8dca5d8b08a1df5e4e031eeb4287507",
+      "bytes": 19076
+    },
+    {
+      "path": "evaluation-1/episode-1/diagnostic-observation-1.json",
+      "sha256": "0f07e4a7dc7cdbcde416af79019bb8e8760b9f47a846de77f1ae87bfaf59a7d7",
+      "bytes": 1111
+    },
+    {
+      "path": "evaluation-1/episode-1/worker.json",
+      "sha256": "da898f0c09a91f6481501ec072cd482b77ac50fb3a11e1020ddce20627652c19",
+      "bytes": 1929
+    },
+    {
+      "path": "evaluation-1/episode-1/agent-messages-1.json",
+      "sha256": "9037bf16b7839d9af8027a6081f8c3a1c774a01464fe4e52510340dbcdfc6ba3",
+      "bytes": 75759
+    },
+    {
+      "path": "evaluation-1/episode-1/diagnostic-observation-3.json",
+      "sha256": "1c7cf2a87a2c03ccc3a73ee284f20b6d06e675b0695251d122cb0bad39a8de43",
+      "bytes": 779
+    },
+    {
+      "path": "evaluation-1/episode-1/agent-output-0.json",
+      "sha256": "d5de6a9c69340d2db453cb86773b378c7194f9d4d309129b18b162c7a75f0bc1",
+      "bytes": 785
+    },
+    {
+      "path": "evaluation-1/episode-1/exposure-4.json",
+      "sha256": "103af3533648945282e530beb495e42a640ec3d94ba29b1f501a93e451d06469",
+      "bytes": 431
+    },
+    {
+      "path": "evaluation-1/episode-1/exposure-2.json",
+      "sha256": "0b9c5e5119480c445ed72995cee513a9a7f4eff9a4614435e28798b887fdba82",
+      "bytes": 423
+    },
+    {
+      "path": "evaluation-1/episode-1/agent-input-1.json",
+      "sha256": "9037bf16b7839d9af8027a6081f8c3a1c774a01464fe4e52510340dbcdfc6ba3",
+      "bytes": 75759
+    },
+    {
+      "path": "evaluation-1/episode-1/action-3.json",
+      "sha256": "ce8310d0e785e6bc312fec03b3eb9fd6ed23b0c1a4f3638839bcc9bde5f9d200",
+      "bytes": 37
+    },
+    {
+      "path": "evaluation-1/episode-1/backend-after.json",
+      "sha256": "52bf7d66086632945a8a139c42e95aa643a6bf0df847d66cf2bdb7ccce3ca31f",
+      "bytes": 2098
+    },
+    {
+      "path": "evaluation-1/episode-1/backend-1.json",
+      "sha256": "3a3510257de96739eda94c54249212e9874fe7f84f7a3c1330cfa2ae45cdb975",
+      "bytes": 488
+    },
+    {
+      "path": "evaluation-1/episode-1/backend-0.json",
+      "sha256": "1b63c4ceac61f2c4bf7212736c51347217d1d9e8f1a29e554b329dcdd16786f1",
+      "bytes": 227
+    },
+    {
+      "path": "evaluation-1/episode-1/reference-diagnostic-4.json",
+      "sha256": "d2303f9afec7b468793e78483c25f0373aa4dbee503429eca9a69262ff91bda8",
+      "bytes": 351
+    },
+    {
+      "path": "evaluation-1/episode-1/browser-cleanup.json",
+      "sha256": "594ab8e7b8af77c6311ad1557f621eaa1e62e9c9a7ca09e4bbcdee271479d942",
+      "bytes": 64
+    },
+    {
+      "path": "evaluation-1/episode-1/agent-messages-2.json",
+      "sha256": "de27301cb9ddd37c2fa353ff1c1df10c5ca9ec27417d5598b23c4cf53c069d77",
+      "bytes": 119707
+    },
+    {
+      "path": "evaluation-1/episode-1/agent-messages-3.json",
+      "sha256": "5ed8f6a78ff486b3eea96d2540785f747ed43ad5341e07df35846983c4e2905e",
+      "bytes": 81490
+    },
+    {
+      "path": "evaluation-1/episode-1/agent-input-2.json",
+      "sha256": "de27301cb9ddd37c2fa353ff1c1df10c5ca9ec27417d5598b23c4cf53c069d77",
+      "bytes": 119707
+    },
+    {
+      "path": "evaluation-1/episode-1/action-2.json",
+      "sha256": "e94bfc99d0bf77bbb21836c4104a0713f79aedf18aabd4aabd7eb90023de0593",
+      "bytes": 37
+    },
+    {
+      "path": "evaluation-1/episode-1/agent-output-3.json",
+      "sha256": "ad7dfd7f878955d47ea7c8ca196b4fc10a47a912f1b1c2ada20b04837814026a",
+      "bytes": 767
+    },
+    {
+      "path": "evaluation-1/episode-1/backend-after-action-2.json",
+      "sha256": "71d11d02adeaf00194f6cb1fbce8d946499eebbfcfab9badd8e4b96f34e19132",
+      "bytes": 1021
+    },
+    {
+      "path": "evaluation-1/episode-1/backend-4.json",
+      "sha256": "52bf7d66086632945a8a139c42e95aa643a6bf0df847d66cf2bdb7ccce3ca31f",
+      "bytes": 2098
+    },
+    {
+      "path": "evaluation-1/episode-1/backend-after-action-1.json",
+      "sha256": "4fdafde55031eb5d29ea69f632c5e1f4f2e025480745d0a4e3ea2a9879928a47",
+      "bytes": 755
+    },
+    {
+      "path": "evaluation-1/episode-1/exposure-3.json",
+      "sha256": "c66e3e917c7457a23342a64d73abedc0a82a985ad591fd4931f61bdcc1de645f",
+      "bytes": 424
+    },
+    {
+      "path": "evaluation-1/episode-1/agent-input-3.json",
+      "sha256": "5ed8f6a78ff486b3eea96d2540785f747ed43ad5341e07df35846983c4e2905e",
+      "bytes": 81490
+    },
+    {
+      "path": "evaluation-1/episode-1/response-3.json",
+      "sha256": "03966dec3742ae61809b4c053acae8cd323f3dd8f73afb3a7355f48851658bff",
+      "bytes": 18538
+    },
+    {
+      "path": "evaluation-1/episode-1/action-result-0.json",
+      "sha256": "fc057b2e8bfde0dc5aa255abf665ec72a057b9ddc58999d161b7d2dc8e0db6e7",
+      "bytes": 274
+    },
+    {
+      "path": "evaluation-1/episode-1/backend-after-action-3.json",
+      "sha256": "52bf7d66086632945a8a139c42e95aa643a6bf0df847d66cf2bdb7ccce3ca31f",
+      "bytes": 2098
+    },
+    {
+      "path": "evaluation-1/episode-1/diagnostic-observation-4.json",
+      "sha256": "d2303f9afec7b468793e78483c25f0373aa4dbee503429eca9a69262ff91bda8",
+      "bytes": 351
+    },
+    {
+      "path": "evaluation-1/episode-1/browser-runtime.json",
+      "sha256": "dc9eb1c61733d10780304f767cd53b6df192d6f268a78847adb9fb2d2adcc611",
+      "bytes": 892
+    },
+    {
+      "path": "evaluation-1/episode-1/episode.json",
+      "sha256": "e2fce895f778bd3128b50087ae207e359cace3ec582e1f310ec6d95ed60b7927",
+      "bytes": 7436
+    },
+    {
+      "path": "evaluation-1/episode-1/action-result-3.json",
+      "sha256": "6cdf4dcb08fa5ad2432744899ad2d71f41e85be43a5423b18c23d12519a3b891",
+      "bytes": 282
+    },
+    {
+      "path": "evaluation-1/episode-1/call-0.json",
+      "sha256": "ac36f454f404cfcad8c872a6a49a0000a9063d6b4b6142256d448e4860112010",
+      "bytes": 340
+    },
+    {
+      "path": "evaluation-1/episode-1/diagnostic-observation-0.json",
+      "sha256": "fe4eb920ca04d5d7683899e2d806f689c0f5695eb18b26efe532eb1159bb7891",
+      "bytes": 616
+    },
+    {
+      "path": "evaluation-1/episode-1/response-0.json",
+      "sha256": "21b09b364b13ea12e04b9072cceaa10d85e8e5fac6337d4b19a94f99beeb8c7b",
+      "bytes": 18555
+    },
+    {
+      "path": "evaluation-1/episode-1/call-3.json",
+      "sha256": "9f91127f08105d808e10dc917eb2b3542c5b91c464203b126dfb97393d3f9e11",
+      "bytes": 340
+    },
+    {
+      "path": "evaluation-1/episode-1/agent-messages-0.json",
+      "sha256": "a72d46fb2971c9bd6158eedd160ed286d15459b47138f88cc616d53beb049b9f",
+      "bytes": 82841
+    },
+    {
+      "path": "evaluation-1/episode-1/screenshot-2.png",
+      "sha256": "def7a462087df81d43edaa1dd0b1f92c7d71704dda92682bbc04a952e398fbaa",
+      "bytes": 72923
+    },
+    {
+      "path": "evaluation-1/episode-2/agent-input-0.json",
+      "sha256": "ac341b3dee59464ea1046d243a2dba96825c3f75badef15468c52dffa2332432",
+      "bytes": 82841
+    },
+    {
+      "path": "evaluation-1/episode-2/reference-diagnostic-1.json",
+      "sha256": "0f07e4a7dc7cdbcde416af79019bb8e8760b9f47a846de77f1ae87bfaf59a7d7",
+      "bytes": 1111
+    },
+    {
+      "path": "evaluation-1/episode-2/reference-diagnostic-3.json",
+      "sha256": "1c7cf2a87a2c03ccc3a73ee284f20b6d06e675b0695251d122cb0bad39a8de43",
+      "bytes": 779
+    },
+    {
+      "path": "evaluation-1/episode-2/agent-output-2.json",
+      "sha256": "27b2bdb46c31477a276a8b73c9beae98c5bd5e206fba9f8707af0c7bed7140b3",
+      "bytes": 731
+    },
+    {
+      "path": "evaluation-1/episode-2/call-1.json",
+      "sha256": "1a60984c733901ba8a1bb1245f93d827a0e69248b070457524406a12926885aa",
+      "bytes": 340
+    },
+    {
+      "path": "evaluation-1/episode-2/agent-output-1.json",
+      "sha256": "7aceada204cce117d720b4d5aa013d586b831707bc1fc5c0c2ddd060820cd768",
+      "bytes": 630
+    },
+    {
+      "path": "evaluation-1/episode-2/backend-2.json",
+      "sha256": "4fdafde55031eb5d29ea69f632c5e1f4f2e025480745d0a4e3ea2a9879928a47",
+      "bytes": 755
+    },
+    {
+      "path": "evaluation-1/episode-2/agent-run.json",
+      "sha256": "59f45cfc66f9bacc8bd2ee59a6a01205d2d9521758326722d2a5064d94ade02c",
+      "bytes": 1735
+    },
+    {
+      "path": "evaluation-1/episode-2/action-result-1.json",
+      "sha256": "2000807e812d3d7723418607a847bc8e8110070a4df84804dc4e34ff2cc4d533",
+      "bytes": 292
+    },
+    {
+      "path": "evaluation-1/episode-2/backend-3.json",
+      "sha256": "71d11d02adeaf00194f6cb1fbce8d946499eebbfcfab9badd8e4b96f34e19132",
+      "bytes": 1021
+    },
+    {
+      "path": "evaluation-1/episode-2/call-2.json",
+      "sha256": "13961f3cd160c73dacbeff6cafc5a79b60e16c3f64f077424a6f92f6d8f5e985",
+      "bytes": 340
+    },
+    {
+      "path": "evaluation-1/episode-2/reference-diagnostic-0.json",
+      "sha256": "fe4eb920ca04d5d7683899e2d806f689c0f5695eb18b26efe532eb1159bb7891",
+      "bytes": 616
+    },
+    {
+      "path": "evaluation-1/episode-2/diagnostic-observation-2.json",
+      "sha256": "bcecbe35aaaf93d330679b881259dcf93528976d77deb08752a92118ec89b74e",
+      "bytes": 2042
+    },
+    {
+      "path": "evaluation-1/episode-2/reference-diagnostic-2.json",
+      "sha256": "4fde116416cd95e31cfae11e9809683eeded7ad4ff107df61c89050db9450695",
+      "bytes": 2041
+    },
+    {
+      "path": "evaluation-1/episode-2/action-1.json",
+      "sha256": "ae5ddddf80491913d827aef04e5bd4541d2573e19b7c115b338a46a73829d1fc",
+      "bytes": 36
+    },
+    {
+      "path": "evaluation-1/episode-2/exposure-0.json",
+      "sha256": "d51c64e51230d43499f36cc5f593849bbd7369778765ef6a625c539f89f0f12d",
+      "bytes": 425
+    },
+    {
+      "path": "evaluation-1/episode-2/backend-after-action-0.json",
+      "sha256": "3a3510257de96739eda94c54249212e9874fe7f84f7a3c1330cfa2ae45cdb975",
+      "bytes": 488
+    },
+    {
+      "path": "evaluation-1/episode-2/action-0.json",
+      "sha256": "3a76afd2d6890dd7f695eac05b50b6c6e217301a2a444e206fdb355ce894a035",
+      "bytes": 35
+    },
+    {
+      "path": "evaluation-1/episode-2/response-2.json",
+      "sha256": "2a3449b3ab8fd7d3d0e36002b51f6719b6a377469a1d9a6b37b2184aa39dd1f9",
+      "bytes": 18502
+    },
+    {
+      "path": "evaluation-1/episode-2/exposure-1.json",
+      "sha256": "0ee9fab8254fb8f309544f2c6f6b4328114a3c434aa9ff59f6be26693da020dd",
+      "bytes": 422
+    },
+    {
+      "path": "evaluation-1/episode-2/response-1.json",
+      "sha256": "f19f59a5ad0c9756a0b97a2d486d13d37748210c8217c60bc7dea6e125c7e48a",
+      "bytes": 18401
+    },
+    {
+      "path": "evaluation-1/episode-2/action-result-2.json",
+      "sha256": "3e4da34fa49392dd29a87ae202d5ed228860a6b349ffaf1c92d565f887a1ba62",
+      "bytes": 284
+    },
+    {
+      "path": "evaluation-1/episode-2/agent-history.json",
+      "sha256": "b0eacb69d1f2e0293c1b1c0029e8f359d52c223e4108fcbe2b0373bbad0bc78a",
+      "bytes": 19136
+    },
+    {
+      "path": "evaluation-1/episode-2/diagnostic-observation-1.json",
+      "sha256": "0f07e4a7dc7cdbcde416af79019bb8e8760b9f47a846de77f1ae87bfaf59a7d7",
+      "bytes": 1111
+    },
+    {
+      "path": "evaluation-1/episode-2/worker.json",
+      "sha256": "db27634de832b73bba5317a50aa280c351a536f1dc7707fe18143698761fc184",
+      "bytes": 1929
+    },
+    {
+      "path": "evaluation-1/episode-2/agent-messages-1.json",
+      "sha256": "02d49033d40ca31c1dbf0367706895dbf5a18daebe7c93f9a0295ce0eaefd575",
+      "bytes": 75759
+    },
+    {
+      "path": "evaluation-1/episode-2/diagnostic-observation-3.json",
+      "sha256": "1c7cf2a87a2c03ccc3a73ee284f20b6d06e675b0695251d122cb0bad39a8de43",
+      "bytes": 779
+    },
+    {
+      "path": "evaluation-1/episode-2/agent-output-0.json",
+      "sha256": "71f2ebd2d572e017c0a255974383194f674f391766c7d57941a4a2d45c749895",
+      "bytes": 745
+    },
+    {
+      "path": "evaluation-1/episode-2/exposure-4.json",
+      "sha256": "103af3533648945282e530beb495e42a640ec3d94ba29b1f501a93e451d06469",
+      "bytes": 431
+    },
+    {
+      "path": "evaluation-1/episode-2/exposure-2.json",
+      "sha256": "0b9c5e5119480c445ed72995cee513a9a7f4eff9a4614435e28798b887fdba82",
+      "bytes": 423
+    },
+    {
+      "path": "evaluation-1/episode-2/agent-input-1.json",
+      "sha256": "02d49033d40ca31c1dbf0367706895dbf5a18daebe7c93f9a0295ce0eaefd575",
+      "bytes": 75759
+    },
+    {
+      "path": "evaluation-1/episode-2/action-3.json",
+      "sha256": "ce8310d0e785e6bc312fec03b3eb9fd6ed23b0c1a4f3638839bcc9bde5f9d200",
+      "bytes": 37
+    },
+    {
+      "path": "evaluation-1/episode-2/backend-after.json",
+      "sha256": "3af2a708234936ba4b6a0ff0ac0398c70f23646be327c56eda71e57a27c810fe",
+      "bytes": 2098
+    },
+    {
+      "path": "evaluation-1/episode-2/backend-1.json",
+      "sha256": "3a3510257de96739eda94c54249212e9874fe7f84f7a3c1330cfa2ae45cdb975",
+      "bytes": 488
+    },
+    {
+      "path": "evaluation-1/episode-2/backend-0.json",
+      "sha256": "1b63c4ceac61f2c4bf7212736c51347217d1d9e8f1a29e554b329dcdd16786f1",
+      "bytes": 227
+    },
+    {
+      "path": "evaluation-1/episode-2/reference-diagnostic-4.json",
+      "sha256": "d2303f9afec7b468793e78483c25f0373aa4dbee503429eca9a69262ff91bda8",
+      "bytes": 351
+    },
+    {
+      "path": "evaluation-1/episode-2/browser-cleanup.json",
+      "sha256": "594ab8e7b8af77c6311ad1557f621eaa1e62e9c9a7ca09e4bbcdee271479d942",
+      "bytes": 64
+    },
+    {
+      "path": "evaluation-1/episode-2/agent-messages-2.json",
+      "sha256": "0a21df9b0d62c0d7d7f8c572ca227fb466887f8e3f41b44c220a9b466090fd06",
+      "bytes": 119699
+    },
+    {
+      "path": "evaluation-1/episode-2/agent-messages-3.json",
+      "sha256": "55b5a01caec962cfcf73eb9a7e3fbdd0f8799161fb48851109ea369fdb69318e",
+      "bytes": 81499
+    },
+    {
+      "path": "evaluation-1/episode-2/agent-input-2.json",
+      "sha256": "0a21df9b0d62c0d7d7f8c572ca227fb466887f8e3f41b44c220a9b466090fd06",
+      "bytes": 119699
+    },
+    {
+      "path": "evaluation-1/episode-2/action-2.json",
+      "sha256": "e94bfc99d0bf77bbb21836c4104a0713f79aedf18aabd4aabd7eb90023de0593",
+      "bytes": 37
+    },
+    {
+      "path": "evaluation-1/episode-2/agent-output-3.json",
+      "sha256": "8940ffab46d50cc4209264471d4e2fa04d16f33ee478bef2e76fb43b2c5ad949",
+      "bytes": 821
+    },
+    {
+      "path": "evaluation-1/episode-2/backend-after-action-2.json",
+      "sha256": "71d11d02adeaf00194f6cb1fbce8d946499eebbfcfab9badd8e4b96f34e19132",
+      "bytes": 1021
+    },
+    {
+      "path": "evaluation-1/episode-2/backend-4.json",
+      "sha256": "3af2a708234936ba4b6a0ff0ac0398c70f23646be327c56eda71e57a27c810fe",
+      "bytes": 2098
+    },
+    {
+      "path": "evaluation-1/episode-2/backend-after-action-1.json",
+      "sha256": "4fdafde55031eb5d29ea69f632c5e1f4f2e025480745d0a4e3ea2a9879928a47",
+      "bytes": 755
+    },
+    {
+      "path": "evaluation-1/episode-2/exposure-3.json",
+      "sha256": "c66e3e917c7457a23342a64d73abedc0a82a985ad591fd4931f61bdcc1de645f",
+      "bytes": 424
+    },
+    {
+      "path": "evaluation-1/episode-2/agent-input-3.json",
+      "sha256": "55b5a01caec962cfcf73eb9a7e3fbdd0f8799161fb48851109ea369fdb69318e",
+      "bytes": 81499
+    },
+    {
+      "path": "evaluation-1/episode-2/response-3.json",
+      "sha256": "7ec92fef345b8e6721966971a941f32e3b78424dd1122b7a497f414a4e620069",
+      "bytes": 20878
+    },
+    {
+      "path": "evaluation-1/episode-2/action-result-0.json",
+      "sha256": "fc057b2e8bfde0dc5aa255abf665ec72a057b9ddc58999d161b7d2dc8e0db6e7",
+      "bytes": 274
+    },
+    {
+      "path": "evaluation-1/episode-2/backend-after-action-3.json",
+      "sha256": "3af2a708234936ba4b6a0ff0ac0398c70f23646be327c56eda71e57a27c810fe",
+      "bytes": 2098
+    },
+    {
+      "path": "evaluation-1/episode-2/diagnostic-observation-4.json",
+      "sha256": "d2303f9afec7b468793e78483c25f0373aa4dbee503429eca9a69262ff91bda8",
+      "bytes": 351
+    },
+    {
+      "path": "evaluation-1/episode-2/browser-runtime.json",
+      "sha256": "7b56365a25cd0d18b7ae52152a7f41e43fe5650d5731de12af3a82dcada96c73",
+      "bytes": 892
+    },
+    {
+      "path": "evaluation-1/episode-2/episode.json",
+      "sha256": "3765ed8864277fcc4a3dab8288dc53525612d484f7afb3190aaccd3d0c5bc9b9",
+      "bytes": 7436
+    },
+    {
+      "path": "evaluation-1/episode-2/action-result-3.json",
+      "sha256": "6cdf4dcb08fa5ad2432744899ad2d71f41e85be43a5423b18c23d12519a3b891",
+      "bytes": 282
+    },
+    {
+      "path": "evaluation-1/episode-2/call-0.json",
+      "sha256": "2e6ec6bcea8bc74cb632e742004187d41efe905c871fcf155cfa73870e360696",
+      "bytes": 340
+    },
+    {
+      "path": "evaluation-1/episode-2/diagnostic-observation-0.json",
+      "sha256": "fe4eb920ca04d5d7683899e2d806f689c0f5695eb18b26efe532eb1159bb7891",
+      "bytes": 616
+    },
+    {
+      "path": "evaluation-1/episode-2/response-0.json",
+      "sha256": "b6bf27c4ba2b87cc7727f86e6b75480c25919e4f770b26061f7038d5392ff889",
+      "bytes": 18515
+    },
+    {
+      "path": "evaluation-1/episode-2/call-3.json",
+      "sha256": "dee69a91dec94f1957a179a609c7416247d18fba465203f92c4935c58862aa77",
+      "bytes": 341
+    },
+    {
+      "path": "evaluation-1/episode-2/agent-messages-0.json",
+      "sha256": "ac341b3dee59464ea1046d243a2dba96825c3f75badef15468c52dffa2332432",
+      "bytes": 82841
+    },
+    {
+      "path": "evaluation-1/episode-2/screenshot-2.png",
+      "sha256": "def7a462087df81d43edaa1dd0b1f92c7d71704dda92682bbc04a952e398fbaa",
+      "bytes": 72923
+    },
+    {
+      "path": "evaluation-2/report.json",
+      "sha256": "4683e8b59bc2ceb298d9870ea4edf9ce81b76598dcc9c75af87e571f2ffff062",
+      "bytes": 31209
+    },
+    {
+      "path": "evaluation-2/acceptance.json",
+      "sha256": "f65d545271dbae285311e60917ed9be39cd90a82e50373ac38827c7c1df0671e",
+      "bytes": 1142
+    },
+    {
+      "path": "evaluation-2/candidate-manifest.json",
+      "sha256": "63d65ccb5bcc7a462e0754ea26db70e3559c58fc3408124eaa6504d43e3f3d91",
+      "bytes": 787
+    },
+    {
+      "path": "evaluation-2/candidate.diff",
+      "sha256": "5ca26a886e92b58bf11d0de3b059ffc964f9c5a0b74519248b9e7232ed357aba",
+      "bytes": 2790
+    },
+    {
+      "path": "evaluation-2/feasibility/feasibility.json",
+      "sha256": "61a68c9a6113611cc5d2f883b4dd1bf9bc8587671fe5411eb36169b4ffa29ca1",
+      "bytes": 3728
+    },
+    {
+      "path": "evaluation-2/episode-0/agent-input-0.json",
+      "sha256": "27de9567b02464af7afaf8af264d59e3e5f0ce9f472dca82a6c117ff3c9f0ee1",
+      "bytes": 82841
+    },
+    {
+      "path": "evaluation-2/episode-0/reference-diagnostic-1.json",
+      "sha256": "0f07e4a7dc7cdbcde416af79019bb8e8760b9f47a846de77f1ae87bfaf59a7d7",
+      "bytes": 1111
+    },
+    {
+      "path": "evaluation-2/episode-0/reference-diagnostic-3.json",
+      "sha256": "1c7cf2a87a2c03ccc3a73ee284f20b6d06e675b0695251d122cb0bad39a8de43",
+      "bytes": 779
+    },
+    {
+      "path": "evaluation-2/episode-0/request-1.json",
+      "sha256": "40028bafa194ea44c1173b2df4d9b624c16bb29a373bf26fbd44549f6118afc3",
+      "bytes": 91632
+    },
+    {
+      "path": "evaluation-2/episode-0/screenshot-1.png",
+      "sha256": "854d52f2e3d442da52715876d8a0d49b9ea74f3c386b6b61e26e0e767a39301f",
+      "bytes": 38467
+    },
+    {
+      "path": "evaluation-2/episode-0/agent-output-2.json",
+      "sha256": "c382cbcb5abc9136cc3538a9ef9bcfeb0a7838d499c1882f73c9d5b2b2858a6b",
+      "bytes": 729
+    },
+    {
+      "path": "evaluation-2/episode-0/reference-screenshot-2.png",
+      "sha256": "af75521196c4ee32d9908f3a5683a0c52fede2c9ffedd9eb06fbab7f81758d5e",
+      "bytes": 66326
+    },
+    {
+      "path": "evaluation-2/episode-0/call-1.json",
+      "sha256": "9e80138e4730ee60fefca4a891f51ab920324fb75e116613b6824a525836810c",
+      "bytes": 340
+    },
+    {
+      "path": "evaluation-2/episode-0/agent-output-1.json",
+      "sha256": "bcfc85b44888cfaae6c5de1e65fd6c2854e7900e3c7d449e2cf228ca232aa6a7",
+      "bytes": 673
+    },
+    {
+      "path": "evaluation-2/episode-0/backend-2.json",
+      "sha256": "263bd29c80ab2b28cfe6fb70e3f9c94ec314dc0de09ce1ba10b974bd790937b5",
+      "bytes": 755
+    },
+    {
+      "path": "evaluation-2/episode-0/agent-run.json",
+      "sha256": "0402fecefcc5b391c3f97c872965d48a539a267cd79b6a443b768f754700b0e7",
+      "bytes": 1734
+    },
+    {
+      "path": "evaluation-2/episode-0/screenshot-original-2.png",
+      "sha256": "381e6ea3bdbb7272e7f9508031e43f940e6a811784832fc731932ccaca97b318",
+      "bytes": 59114
+    },
+    {
+      "path": "evaluation-2/episode-0/action-result-1.json",
+      "sha256": "2000807e812d3d7723418607a847bc8e8110070a4df84804dc4e34ff2cc4d533",
+      "bytes": 292
+    },
+    {
+      "path": "evaluation-2/episode-0/backend-3.json",
+      "sha256": "c4d1cec314421e0b105832b26e2edcb54ac893402baaec792854a4ad0098628d",
+      "bytes": 1021
+    },
+    {
+      "path": "evaluation-2/episode-0/call-2.json",
+      "sha256": "36ced1cdf87063cfbff399b7c01d593658a4509b0379736cf219c435de912760",
+      "bytes": 340
+    },
+    {
+      "path": "evaluation-2/episode-0/reference-diagnostic-0.json",
+      "sha256": "fe4eb920ca04d5d7683899e2d806f689c0f5695eb18b26efe532eb1159bb7891",
+      "bytes": 616
+    },
+    {
+      "path": "evaluation-2/episode-0/diagnostic-observation-2.json",
+      "sha256": "4d457454d7d4eaf46491d5e9953457a06c0396af62c15866ca1e8f69aba85535",
+      "bytes": 2042
+    },
+    {
+      "path": "evaluation-2/episode-0/reference-diagnostic-2.json",
+      "sha256": "4fde116416cd95e31cfae11e9809683eeded7ad4ff107df61c89050db9450695",
+      "bytes": 2041
+    },
+    {
+      "path": "evaluation-2/episode-0/action-1.json",
+      "sha256": "ae5ddddf80491913d827aef04e5bd4541d2573e19b7c115b338a46a73829d1fc",
+      "bytes": 36
+    },
+    {
+      "path": "evaluation-2/episode-0/exposure-0.json",
+      "sha256": "d51c64e51230d43499f36cc5f593849bbd7369778765ef6a625c539f89f0f12d",
+      "bytes": 425
+    },
+    {
+      "path": "evaluation-2/episode-0/backend-after-action-0.json",
+      "sha256": "fcdb123d5b54445855a961ecd1ad188bb7b33e59a1efb5e21547e8a1675cea6c",
+      "bytes": 488
+    },
+    {
+      "path": "evaluation-2/episode-0/action-0.json",
+      "sha256": "3a76afd2d6890dd7f695eac05b50b6c6e217301a2a444e206fdb355ce894a035",
+      "bytes": 35
+    },
+    {
+      "path": "evaluation-2/episode-0/screenshot-original-1.png",
+      "sha256": "af908c4994217cd6f4c59f25dc900fb2302036da1c61ab47781d4717673df3ad",
+      "bytes": 36530
+    },
+    {
+      "path": "evaluation-2/episode-0/response-2.json",
+      "sha256": "62bebe34bbfa24c093728119fab857add3d42c3f7e1bdccdeba9e21ceefb4414",
+      "bytes": 18500
+    },
+    {
+      "path": "evaluation-2/episode-0/observation-1.json",
+      "sha256": "b03e9e800e6c3dab7166182b9e98a426094701a2c03c5407f313376bcc683a22",
+      "bytes": 2290
+    },
+    {
+      "path": "evaluation-2/episode-0/reference-screenshot-3.png",
+      "sha256": "47276728e6c49902ebd61a70f5e04fba384c651d8f0a26e56a890d37d23f3787",
+      "bytes": 40581
+    },
+    {
+      "path": "evaluation-2/episode-0/exposure-1.json",
+      "sha256": "0ee9fab8254fb8f309544f2c6f6b4328114a3c434aa9ff59f6be26693da020dd",
+      "bytes": 422
+    },
+    {
+      "path": "evaluation-2/episode-0/screenshot-original-0.png",
+      "sha256": "51f3bd8126f6b9c9b1f91719953e8158ce4600ee3af1ed1d69b2a28a03e73c4a",
+      "bytes": 42498
+    },
+    {
+      "path": "evaluation-2/episode-0/response-1.json",
+      "sha256": "8b2d59740019ca961b7d7e8e7a892c2ce02f144752701bab9ba906829d254b08",
+      "bytes": 18444
+    },
+    {
+      "path": "evaluation-2/episode-0/request-0.json",
+      "sha256": "94ad5ad79826286db92a725223878977408a5caff90a26181f9c880d605f8f53",
+      "bytes": 98724
+    },
+    {
+      "path": "evaluation-2/episode-0/action-result-2.json",
+      "sha256": "b98f7950081a2ea523e40f62a8bdad81430ce2353421d39f2b9f80f05522bbf4",
+      "bytes": 284
+    },
+    {
+      "path": "evaluation-2/episode-0/agent-history.json",
+      "sha256": "5fc8d93e914d0dfb92e721be958730dddecffcc6f2275ef707f585cc265023eb",
+      "bytes": 19085
+    },
+    {
+      "path": "evaluation-2/episode-0/diagnostic-observation-1.json",
+      "sha256": "0f07e4a7dc7cdbcde416af79019bb8e8760b9f47a846de77f1ae87bfaf59a7d7",
+      "bytes": 1111
+    },
+    {
+      "path": "evaluation-2/episode-0/worker.json",
+      "sha256": "94acfd38d94f128b6cde7f03790af646baa07fe48068d45e945b15b55cb078c3",
+      "bytes": 1929
+    },
+    {
+      "path": "evaluation-2/episode-0/reference-screenshot-1.png",
+      "sha256": "af908c4994217cd6f4c59f25dc900fb2302036da1c61ab47781d4717673df3ad",
+      "bytes": 36530
+    },
+    {
+      "path": "evaluation-2/episode-0/observation-4.json",
+      "sha256": "3cc687f4f4635114a04aee3e98778792a5798ee1e2aac387919c23743f9eb11f",
+      "bytes": 1161
+    },
+    {
+      "path": "evaluation-2/episode-0/agent-messages-1.json",
+      "sha256": "64b4f035daca5e1d32c3aa784973f8dab416aa156735da7bce99261075b93625",
+      "bytes": 75749
+    },
+    {
+      "path": "evaluation-2/episode-0/diagnostic-observation-3.json",
+      "sha256": "1c7cf2a87a2c03ccc3a73ee284f20b6d06e675b0695251d122cb0bad39a8de43",
+      "bytes": 779
+    },
+    {
+      "path": "evaluation-2/episode-0/screenshot-3.png",
+      "sha256": "b851a93740c5f1188abadc5276bb9fa3881cd618bf10209413be7ad385e25d41",
+      "bytes": 42822
+    },
+    {
+      "path": "evaluation-2/episode-0/agent-output-0.json",
+      "sha256": "e702d345819a443ab778819e746309ff42d5a96a2babdbba0a2b906a42e8e721",
+      "bytes": 697
+    },
+    {
+      "path": "evaluation-2/episode-0/request-2.json",
+      "sha256": "87256a35546598269b05205bc8a35f1b3e9e5f4cd3726e947036060b6b3222b5",
+      "bytes": 122373
+    },
+    {
+      "path": "evaluation-2/episode-0/exposure-4.json",
+      "sha256": "103af3533648945282e530beb495e42a640ec3d94ba29b1f501a93e451d06469",
+      "bytes": 431
+    },
+    {
+      "path": "evaluation-2/episode-0/exposure-2.json",
+      "sha256": "8a0acb6cf986ce17012aa13defcf46cd0cd048884e3ef40529e89b023e66f93e",
+      "bytes": 423
+    },
+    {
+      "path": "evaluation-2/episode-0/agent-input-1.json",
+      "sha256": "64b4f035daca5e1d32c3aa784973f8dab416aa156735da7bce99261075b93625",
+      "bytes": 75749
+    },
+    {
+      "path": "evaluation-2/episode-0/action-3.json",
+      "sha256": "201dd4d72fadbaeb95b23528977a19d1e7759012fddde9bd39a23f141c981df0",
+      "bytes": 37
+    },
+    {
+      "path": "evaluation-2/episode-0/backend-after.json",
+      "sha256": "1df6894b12f044010efb2f28d0d614415ffed09d47fd87f6c6799b298902e575",
+      "bytes": 2098
+    },
+    {
+      "path": "evaluation-2/episode-0/backend-1.json",
+      "sha256": "fcdb123d5b54445855a961ecd1ad188bb7b33e59a1efb5e21547e8a1675cea6c",
+      "bytes": 488
+    },
+    {
+      "path": "evaluation-2/episode-0/screenshot-4.png",
+      "sha256": "1727a59df197017d918cb943ba63610f48e769d5735c72bc5197e0b6e47fe0aa",
+      "bytes": 29214
+    },
+    {
+      "path": "evaluation-2/episode-0/backend-0.json",
+      "sha256": "aa5e5cef8bbc13fa0f18d4fc380bf6ca288c2c6f5e92f0d59c2062b3048f0e77",
+      "bytes": 227
+    },
+    {
+      "path": "evaluation-2/episode-0/reference-diagnostic-4.json",
+      "sha256": "d2303f9afec7b468793e78483c25f0373aa4dbee503429eca9a69262ff91bda8",
+      "bytes": 351
+    },
+    {
+      "path": "evaluation-2/episode-0/browser-cleanup.json",
+      "sha256": "594ab8e7b8af77c6311ad1557f621eaa1e62e9c9a7ca09e4bbcdee271479d942",
+      "bytes": 64
+    },
+    {
+      "path": "evaluation-2/episode-0/agent-messages-2.json",
+      "sha256": "be0c49deade3225d95f1b17b086ff2a13a8a5237832853be5f51a3496fe72060",
+      "bytes": 106490
+    },
+    {
+      "path": "evaluation-2/episode-0/agent-messages-3.json",
+      "sha256": "09c87d98d825b916875c5da5541bfd6e0b4df200c3c93e603061311a78f5aac8",
+      "bytes": 81495
+    },
+    {
+      "path": "evaluation-2/episode-0/screenshot-original-4.png",
+      "sha256": "09693e29352e6fe18f6baa6b4a11ccd7ec9351760b969488a81e754b3cb3337b",
+      "bytes": 27939
+    },
+    {
+      "path": "evaluation-2/episode-0/agent-input-2.json",
+      "sha256": "be0c49deade3225d95f1b17b086ff2a13a8a5237832853be5f51a3496fe72060",
+      "bytes": 106490
+    },
+    {
+      "path": "evaluation-2/episode-0/action-2.json",
+      "sha256": "e94bfc99d0bf77bbb21836c4104a0713f79aedf18aabd4aabd7eb90023de0593",
+      "bytes": 37
+    },
+    {
+      "path": "evaluation-2/episode-0/agent-output-3.json",
+      "sha256": "4f2e22348d568e153f5c7c82a0a6dc68937939ef972b4aa31d11409c94ee7b33",
+      "bytes": 771
+    },
+    {
+      "path": "evaluation-2/episode-0/backend-after-action-2.json",
+      "sha256": "c4d1cec314421e0b105832b26e2edcb54ac893402baaec792854a4ad0098628d",
+      "bytes": 1021
+    },
+    {
+      "path": "evaluation-2/episode-0/reference-screenshot-0.png",
+      "sha256": "51f3bd8126f6b9c9b1f91719953e8158ce4600ee3af1ed1d69b2a28a03e73c4a",
+      "bytes": 42498
+    },
+    {
+      "path": "evaluation-2/episode-0/backend-4.json",
+      "sha256": "1df6894b12f044010efb2f28d0d614415ffed09d47fd87f6c6799b298902e575",
+      "bytes": 2098
+    },
+    {
+      "path": "evaluation-2/episode-0/observation-2.json",
+      "sha256": "e809477874ebbebcd68931f919b5483859b2a7f3e5e05b57151eb86017c81113",
+      "bytes": 2940
+    },
+    {
+      "path": "evaluation-2/episode-0/backend-after-action-1.json",
+      "sha256": "263bd29c80ab2b28cfe6fb70e3f9c94ec314dc0de09ce1ba10b974bd790937b5",
+      "bytes": 755
+    },
+    {
+      "path": "evaluation-2/episode-0/screenshot-0.png",
+      "sha256": "cab222b9c597c4075750718961115a19abce551df9d4127f3ca2da94e9a8c041",
+      "bytes": 44978
+    },
+    {
+      "path": "evaluation-2/episode-0/exposure-3.json",
+      "sha256": "c66e3e917c7457a23342a64d73abedc0a82a985ad591fd4931f61bdcc1de645f",
+      "bytes": 424
+    },
+    {
+      "path": "evaluation-2/episode-0/agent-input-3.json",
+      "sha256": "09c87d98d825b916875c5da5541bfd6e0b4df200c3c93e603061311a78f5aac8",
+      "bytes": 81495
+    },
+    {
+      "path": "evaluation-2/episode-0/response-3.json",
+      "sha256": "b6b45e205dc46a41e5fc11a0d8a8f4c2591afdd121fafd09fb9dbca0b254b53f",
+      "bytes": 18542
+    },
+    {
+      "path": "evaluation-2/episode-0/action-result-0.json",
+      "sha256": "fc057b2e8bfde0dc5aa255abf665ec72a057b9ddc58999d161b7d2dc8e0db6e7",
+      "bytes": 274
+    },
+    {
+      "path": "evaluation-2/episode-0/backend-after-action-3.json",
+      "sha256": "1df6894b12f044010efb2f28d0d614415ffed09d47fd87f6c6799b298902e575",
+      "bytes": 2098
+    },
+    {
+      "path": "evaluation-2/episode-0/diagnostic-observation-4.json",
+      "sha256": "d2303f9afec7b468793e78483c25f0373aa4dbee503429eca9a69262ff91bda8",
+      "bytes": 351
+    },
+    {
+      "path": "evaluation-2/episode-0/browser-runtime.json",
+      "sha256": "8ecb8b47ad6f1ca4c60919c339ac518fc8298f448e5598a098887f0cc27c4c77",
+      "bytes": 892
+    },
+    {
+      "path": "evaluation-2/episode-0/request-3.json",
+      "sha256": "e7f0f274e70a97b0ac2d578ffc4b9f1e2abe579fd0745d7789dec889c214d3eb",
+      "bytes": 97378
+    },
+    {
+      "path": "evaluation-2/episode-0/episode.json",
+      "sha256": "b4bf5739cca795c53c2593707ac59ecc4c52ac164f32fb34ee11615b6b5fd485",
+      "bytes": 7435
+    },
+    {
+      "path": "evaluation-2/episode-0/reference-screenshot-4.png",
+      "sha256": "09693e29352e6fe18f6baa6b4a11ccd7ec9351760b969488a81e754b3cb3337b",
+      "bytes": 27939
+    },
+    {
+      "path": "evaluation-2/episode-0/action-result-3.json",
+      "sha256": "6cdf4dcb08fa5ad2432744899ad2d71f41e85be43a5423b18c23d12519a3b891",
+      "bytes": 282
+    },
+    {
+      "path": "evaluation-2/episode-0/observation-3.json",
+      "sha256": "90049cbe50fa1fb0b7ccbdf0add055fefc8e8d5fba567bab01923de4d4a44c48",
+      "bytes": 1590
+    },
+    {
+      "path": "evaluation-2/episode-0/call-0.json",
+      "sha256": "e8efc824da5bad5ebf0f077f203ee297d68b9ce1dac9f1f074ac35a5c740d50e",
+      "bytes": 340
+    },
+    {
+      "path": "evaluation-2/episode-0/diagnostic-observation-0.json",
+      "sha256": "fe4eb920ca04d5d7683899e2d806f689c0f5695eb18b26efe532eb1159bb7891",
+      "bytes": 616
+    },
+    {
+      "path": "evaluation-2/episode-0/response-0.json",
+      "sha256": "c5093a29fabfdae422a29ba7f4a148fc736114b3e14290067a0e8bd0f5d5a38e",
+      "bytes": 18467
+    },
+    {
+      "path": "evaluation-2/episode-0/call-3.json",
+      "sha256": "accd2e12c82f9b076a048c73cee9a1f531f2739dc954225e650351827971b51e",
+      "bytes": 340
+    },
+    {
+      "path": "evaluation-2/episode-0/screenshot-original-3.png",
+      "sha256": "47276728e6c49902ebd61a70f5e04fba384c651d8f0a26e56a890d37d23f3787",
+      "bytes": 40581
+    },
+    {
+      "path": "evaluation-2/episode-0/agent-messages-0.json",
+      "sha256": "27de9567b02464af7afaf8af264d59e3e5f0ce9f472dca82a6c117ff3c9f0ee1",
+      "bytes": 82841
+    },
+    {
+      "path": "evaluation-2/episode-0/screenshot-2.png",
+      "sha256": "9b928167fcae0764a2dd20832363e9f0861395bd984adf68a11124e7a4191df5",
+      "bytes": 62735
+    },
+    {
+      "path": "evaluation-2/episode-0/observation-0.json",
+      "sha256": "0265f62edfe5163ba97e98b9b499d66c9986259da813069fd1fa6dc65e63613e",
+      "bytes": 1520
+    },
+    {
+      "path": "evaluation-2/episode-1/agent-input-0.json",
+      "sha256": "b438ba5af0c3bb0605cf6b4ed408eec02ba24866dee4288245c8ece6ba509fef",
+      "bytes": 82841
+    },
+    {
+      "path": "evaluation-2/episode-1/reference-diagnostic-1.json",
+      "sha256": "0f07e4a7dc7cdbcde416af79019bb8e8760b9f47a846de77f1ae87bfaf59a7d7",
+      "bytes": 1111
+    },
+    {
+      "path": "evaluation-2/episode-1/reference-diagnostic-3.json",
+      "sha256": "1c7cf2a87a2c03ccc3a73ee284f20b6d06e675b0695251d122cb0bad39a8de43",
+      "bytes": 779
+    },
+    {
+      "path": "evaluation-2/episode-1/agent-output-2.json",
+      "sha256": "105e9ca144e4232eb8913271767de6327cb31f4ab0c6706b257c9f11114f04ea",
+      "bytes": 738
+    },
+    {
+      "path": "evaluation-2/episode-1/call-1.json",
+      "sha256": "f32a93e35ca1adf20bec245a4cb5484196a6726a93f7deca893c1b698d8e9990",
+      "bytes": 340
+    },
+    {
+      "path": "evaluation-2/episode-1/agent-output-1.json",
+      "sha256": "457b16fc0966bcbbf2d68501afa9eec10774af4203ca1ee2d6e34cc8fb2a709f",
+      "bytes": 715
+    },
+    {
+      "path": "evaluation-2/episode-1/backend-2.json",
+      "sha256": "263bd29c80ab2b28cfe6fb70e3f9c94ec314dc0de09ce1ba10b974bd790937b5",
+      "bytes": 755
+    },
+    {
+      "path": "evaluation-2/episode-1/agent-run.json",
+      "sha256": "d761e3364660156cc5300b55dc6ea7228aed3acfdca2380ec887676e37324a5c",
+      "bytes": 1735
+    },
+    {
+      "path": "evaluation-2/episode-1/action-result-1.json",
+      "sha256": "2000807e812d3d7723418607a847bc8e8110070a4df84804dc4e34ff2cc4d533",
+      "bytes": 292
+    },
+    {
+      "path": "evaluation-2/episode-1/backend-3.json",
+      "sha256": "c4d1cec314421e0b105832b26e2edcb54ac893402baaec792854a4ad0098628d",
+      "bytes": 1021
+    },
+    {
+      "path": "evaluation-2/episode-1/call-2.json",
+      "sha256": "7edd3cfaea21e732efcf4dc4288762818e8d502619d220df0f6438b2ba4b0a18",
+      "bytes": 340
+    },
+    {
+      "path": "evaluation-2/episode-1/reference-diagnostic-0.json",
+      "sha256": "fe4eb920ca04d5d7683899e2d806f689c0f5695eb18b26efe532eb1159bb7891",
+      "bytes": 616
+    },
+    {
+      "path": "evaluation-2/episode-1/diagnostic-observation-2.json",
+      "sha256": "4d457454d7d4eaf46491d5e9953457a06c0396af62c15866ca1e8f69aba85535",
+      "bytes": 2042
+    },
+    {
+      "path": "evaluation-2/episode-1/reference-diagnostic-2.json",
+      "sha256": "4fde116416cd95e31cfae11e9809683eeded7ad4ff107df61c89050db9450695",
+      "bytes": 2041
+    },
+    {
+      "path": "evaluation-2/episode-1/action-1.json",
+      "sha256": "ae5ddddf80491913d827aef04e5bd4541d2573e19b7c115b338a46a73829d1fc",
+      "bytes": 36
+    },
+    {
+      "path": "evaluation-2/episode-1/exposure-0.json",
+      "sha256": "d51c64e51230d43499f36cc5f593849bbd7369778765ef6a625c539f89f0f12d",
+      "bytes": 425
+    },
+    {
+      "path": "evaluation-2/episode-1/backend-after-action-0.json",
+      "sha256": "fcdb123d5b54445855a961ecd1ad188bb7b33e59a1efb5e21547e8a1675cea6c",
+      "bytes": 488
+    },
+    {
+      "path": "evaluation-2/episode-1/action-0.json",
+      "sha256": "3a76afd2d6890dd7f695eac05b50b6c6e217301a2a444e206fdb355ce894a035",
+      "bytes": 35
+    },
+    {
+      "path": "evaluation-2/episode-1/response-2.json",
+      "sha256": "e60c5a6dd26bd4f621ba3b9580f38d2548a23e6e0d7a31aa787984a199cc4592",
+      "bytes": 18509
+    },
+    {
+      "path": "evaluation-2/episode-1/exposure-1.json",
+      "sha256": "0ee9fab8254fb8f309544f2c6f6b4328114a3c434aa9ff59f6be26693da020dd",
+      "bytes": 422
+    },
+    {
+      "path": "evaluation-2/episode-1/response-1.json",
+      "sha256": "0c82066cea0af0da155b3a9877245c53701b31706182c06dd92353b7e4e92460",
+      "bytes": 18486
+    },
+    {
+      "path": "evaluation-2/episode-1/action-result-2.json",
+      "sha256": "b98f7950081a2ea523e40f62a8bdad81430ce2353421d39f2b9f80f05522bbf4",
+      "bytes": 284
+    },
+    {
+      "path": "evaluation-2/episode-1/agent-history.json",
+      "sha256": "50e0090a0ca2ec8230dae975e35208d0596c05dc24d1f00b8fa63bb0584a781d",
+      "bytes": 19294
+    },
+    {
+      "path": "evaluation-2/episode-1/diagnostic-observation-1.json",
+      "sha256": "0f07e4a7dc7cdbcde416af79019bb8e8760b9f47a846de77f1ae87bfaf59a7d7",
+      "bytes": 1111
+    },
+    {
+      "path": "evaluation-2/episode-1/worker.json",
+      "sha256": "1e5450829d29e7191288ef59c8892b80955e62b19fb2825a428df9287e6b290d",
+      "bytes": 1929
+    },
+    {
+      "path": "evaluation-2/episode-1/agent-messages-1.json",
+      "sha256": "04ec6b73dc6a4555fc4f7fc37ff9f20ed1ea3095649d9e84ae90ae841854a0bd",
+      "bytes": 75750
+    },
+    {
+      "path": "evaluation-2/episode-1/diagnostic-observation-3.json",
+      "sha256": "1c7cf2a87a2c03ccc3a73ee284f20b6d06e675b0695251d122cb0bad39a8de43",
+      "bytes": 779
+    },
+    {
+      "path": "evaluation-2/episode-1/agent-output-0.json",
+      "sha256": "d12fff4bafd1c80bf3c79817755cb3b63bbdcc8658304031d37a3b06b0f7d392",
+      "bytes": 748
+    },
+    {
+      "path": "evaluation-2/episode-1/exposure-4.json",
+      "sha256": "103af3533648945282e530beb495e42a640ec3d94ba29b1f501a93e451d06469",
+      "bytes": 431
+    },
+    {
+      "path": "evaluation-2/episode-1/exposure-2.json",
+      "sha256": "8a0acb6cf986ce17012aa13defcf46cd0cd048884e3ef40529e89b023e66f93e",
+      "bytes": 423
+    },
+    {
+      "path": "evaluation-2/episode-1/agent-input-1.json",
+      "sha256": "04ec6b73dc6a4555fc4f7fc37ff9f20ed1ea3095649d9e84ae90ae841854a0bd",
+      "bytes": 75750
+    },
+    {
+      "path": "evaluation-2/episode-1/action-3.json",
+      "sha256": "201dd4d72fadbaeb95b23528977a19d1e7759012fddde9bd39a23f141c981df0",
+      "bytes": 37
+    },
+    {
+      "path": "evaluation-2/episode-1/backend-after.json",
+      "sha256": "602dcf01365bb8731672f19da0f67bfd4a3456e93e4d781651348f5109202d92",
+      "bytes": 2098
+    },
+    {
+      "path": "evaluation-2/episode-1/backend-1.json",
+      "sha256": "fcdb123d5b54445855a961ecd1ad188bb7b33e59a1efb5e21547e8a1675cea6c",
+      "bytes": 488
+    },
+    {
+      "path": "evaluation-2/episode-1/backend-0.json",
+      "sha256": "aa5e5cef8bbc13fa0f18d4fc380bf6ca288c2c6f5e92f0d59c2062b3048f0e77",
+      "bytes": 227
+    },
+    {
+      "path": "evaluation-2/episode-1/reference-diagnostic-4.json",
+      "sha256": "d2303f9afec7b468793e78483c25f0373aa4dbee503429eca9a69262ff91bda8",
+      "bytes": 351
+    },
+    {
+      "path": "evaluation-2/episode-1/browser-cleanup.json",
+      "sha256": "594ab8e7b8af77c6311ad1557f621eaa1e62e9c9a7ca09e4bbcdee271479d942",
+      "bytes": 64
+    },
+    {
+      "path": "evaluation-2/episode-1/agent-messages-2.json",
+      "sha256": "12279fba1480912dfb6a7e960fb7c2cc19c9eda33150ef826bf0ec22ba2b6364",
+      "bytes": 106509
+    },
+    {
+      "path": "evaluation-2/episode-1/agent-messages-3.json",
+      "sha256": "f025a2f5f282533329b9baf021e76932e0aefbc981fd515eaf2be9d25daf625e",
+      "bytes": 81508
+    },
+    {
+      "path": "evaluation-2/episode-1/agent-input-2.json",
+      "sha256": "12279fba1480912dfb6a7e960fb7c2cc19c9eda33150ef826bf0ec22ba2b6364",
+      "bytes": 106509
+    },
+    {
+      "path": "evaluation-2/episode-1/action-2.json",
+      "sha256": "e94bfc99d0bf77bbb21836c4104a0713f79aedf18aabd4aabd7eb90023de0593",
+      "bytes": 37
+    },
+    {
+      "path": "evaluation-2/episode-1/agent-output-3.json",
+      "sha256": "ffed38c98f0de1b6f56a27d5d090b1e2b5b400088dac730c63310e3cf04d5790",
+      "bytes": 843
+    },
+    {
+      "path": "evaluation-2/episode-1/backend-after-action-2.json",
+      "sha256": "c4d1cec314421e0b105832b26e2edcb54ac893402baaec792854a4ad0098628d",
+      "bytes": 1021
+    },
+    {
+      "path": "evaluation-2/episode-1/backend-4.json",
+      "sha256": "602dcf01365bb8731672f19da0f67bfd4a3456e93e4d781651348f5109202d92",
+      "bytes": 2098
+    },
+    {
+      "path": "evaluation-2/episode-1/backend-after-action-1.json",
+      "sha256": "263bd29c80ab2b28cfe6fb70e3f9c94ec314dc0de09ce1ba10b974bd790937b5",
+      "bytes": 755
+    },
+    {
+      "path": "evaluation-2/episode-1/exposure-3.json",
+      "sha256": "c66e3e917c7457a23342a64d73abedc0a82a985ad591fd4931f61bdcc1de645f",
+      "bytes": 424
+    },
+    {
+      "path": "evaluation-2/episode-1/agent-input-3.json",
+      "sha256": "f025a2f5f282533329b9baf021e76932e0aefbc981fd515eaf2be9d25daf625e",
+      "bytes": 81508
+    },
+    {
+      "path": "evaluation-2/episode-1/response-3.json",
+      "sha256": "ee09962a78c2cf20d2c3cc290bb8de2feda64fe108fec8599652d05a4590d935",
+      "bytes": 18614
+    },
+    {
+      "path": "evaluation-2/episode-1/action-result-0.json",
+      "sha256": "fc057b2e8bfde0dc5aa255abf665ec72a057b9ddc58999d161b7d2dc8e0db6e7",
+      "bytes": 274
+    },
+    {
+      "path": "evaluation-2/episode-1/backend-after-action-3.json",
+      "sha256": "602dcf01365bb8731672f19da0f67bfd4a3456e93e4d781651348f5109202d92",
+      "bytes": 2098
+    },
+    {
+      "path": "evaluation-2/episode-1/diagnostic-observation-4.json",
+      "sha256": "d2303f9afec7b468793e78483c25f0373aa4dbee503429eca9a69262ff91bda8",
+      "bytes": 351
+    },
+    {
+      "path": "evaluation-2/episode-1/browser-runtime.json",
+      "sha256": "78e51a94c00831db0af474c288eee2643e61b553ec1ebd2fb542fce82b83776d",
+      "bytes": 892
+    },
+    {
+      "path": "evaluation-2/episode-1/episode.json",
+      "sha256": "050306a4bdba285d3b1b5ea8cbc032a6167019ad83c76049111e60b777e6b692",
+      "bytes": 7436
+    },
+    {
+      "path": "evaluation-2/episode-1/action-result-3.json",
+      "sha256": "6cdf4dcb08fa5ad2432744899ad2d71f41e85be43a5423b18c23d12519a3b891",
+      "bytes": 282
+    },
+    {
+      "path": "evaluation-2/episode-1/call-0.json",
+      "sha256": "2d1a8200a678159feac93c3f68e3d2b4a412b66b5b210835076fa6817d7feede",
+      "bytes": 340
+    },
+    {
+      "path": "evaluation-2/episode-1/diagnostic-observation-0.json",
+      "sha256": "fe4eb920ca04d5d7683899e2d806f689c0f5695eb18b26efe532eb1159bb7891",
+      "bytes": 616
+    },
+    {
+      "path": "evaluation-2/episode-1/response-0.json",
+      "sha256": "bcd32fca3e877fa77d88d590427a977e67fc4ef8dc08d531284a80d2101d8828",
+      "bytes": 18518
+    },
+    {
+      "path": "evaluation-2/episode-1/call-3.json",
+      "sha256": "a3f01205d4d50d99c076a81a46c574ad611d6af9014b721c0e6d139bfc4c8f64",
+      "bytes": 340
+    },
+    {
+      "path": "evaluation-2/episode-1/agent-messages-0.json",
+      "sha256": "b438ba5af0c3bb0605cf6b4ed408eec02ba24866dee4288245c8ece6ba509fef",
+      "bytes": 82841
+    },
+    {
+      "path": "evaluation-2/episode-1/screenshot-2.png",
+      "sha256": "9b928167fcae0764a2dd20832363e9f0861395bd984adf68a11124e7a4191df5",
+      "bytes": 62735
+    },
+    {
+      "path": "evaluation-2/episode-2/agent-input-0.json",
+      "sha256": "3db1a64fe90d88e68df68b517885d3468a256a779f3b1d5ba4d8d0a7912bf191",
+      "bytes": 82841
+    },
+    {
+      "path": "evaluation-2/episode-2/reference-diagnostic-1.json",
+      "sha256": "0f07e4a7dc7cdbcde416af79019bb8e8760b9f47a846de77f1ae87bfaf59a7d7",
+      "bytes": 1111
+    },
+    {
+      "path": "evaluation-2/episode-2/reference-diagnostic-3.json",
+      "sha256": "1c7cf2a87a2c03ccc3a73ee284f20b6d06e675b0695251d122cb0bad39a8de43",
+      "bytes": 779
+    },
+    {
+      "path": "evaluation-2/episode-2/agent-output-2.json",
+      "sha256": "a55af517210140c53376a6931c50c2b86b8df54110dd068243a06145fe232e69",
+      "bytes": 702
+    },
+    {
+      "path": "evaluation-2/episode-2/call-1.json",
+      "sha256": "45d158ee78d4496434ec0a060188a1350560ad70246b79fd1ce8000e82bd5fb8",
+      "bytes": 340
+    },
+    {
+      "path": "evaluation-2/episode-2/agent-output-1.json",
+      "sha256": "841f7c0b7c86c601b79ff24abbeed1e658b8175fc8c462795618e1b1cfb5c91d",
+      "bytes": 646
+    },
+    {
+      "path": "evaluation-2/episode-2/backend-2.json",
+      "sha256": "263bd29c80ab2b28cfe6fb70e3f9c94ec314dc0de09ce1ba10b974bd790937b5",
+      "bytes": 755
+    },
+    {
+      "path": "evaluation-2/episode-2/agent-run.json",
+      "sha256": "030c74e609e4c5ae95c16c5ed8d563d56dc9941131892a5b7a008f1283342394",
+      "bytes": 1735
+    },
+    {
+      "path": "evaluation-2/episode-2/action-result-1.json",
+      "sha256": "2000807e812d3d7723418607a847bc8e8110070a4df84804dc4e34ff2cc4d533",
+      "bytes": 292
+    },
+    {
+      "path": "evaluation-2/episode-2/backend-3.json",
+      "sha256": "c4d1cec314421e0b105832b26e2edcb54ac893402baaec792854a4ad0098628d",
+      "bytes": 1021
+    },
+    {
+      "path": "evaluation-2/episode-2/call-2.json",
+      "sha256": "c22e1903c5a389becf8b8d6afba282cbd6622409358092dec685701a137c2c50",
+      "bytes": 340
+    },
+    {
+      "path": "evaluation-2/episode-2/reference-diagnostic-0.json",
+      "sha256": "fe4eb920ca04d5d7683899e2d806f689c0f5695eb18b26efe532eb1159bb7891",
+      "bytes": 616
+    },
+    {
+      "path": "evaluation-2/episode-2/diagnostic-observation-2.json",
+      "sha256": "4d457454d7d4eaf46491d5e9953457a06c0396af62c15866ca1e8f69aba85535",
+      "bytes": 2042
+    },
+    {
+      "path": "evaluation-2/episode-2/reference-diagnostic-2.json",
+      "sha256": "4fde116416cd95e31cfae11e9809683eeded7ad4ff107df61c89050db9450695",
+      "bytes": 2041
+    },
+    {
+      "path": "evaluation-2/episode-2/action-1.json",
+      "sha256": "ae5ddddf80491913d827aef04e5bd4541d2573e19b7c115b338a46a73829d1fc",
+      "bytes": 36
+    },
+    {
+      "path": "evaluation-2/episode-2/exposure-0.json",
+      "sha256": "d51c64e51230d43499f36cc5f593849bbd7369778765ef6a625c539f89f0f12d",
+      "bytes": 425
+    },
+    {
+      "path": "evaluation-2/episode-2/backend-after-action-0.json",
+      "sha256": "fcdb123d5b54445855a961ecd1ad188bb7b33e59a1efb5e21547e8a1675cea6c",
+      "bytes": 488
+    },
+    {
+      "path": "evaluation-2/episode-2/action-0.json",
+      "sha256": "3a76afd2d6890dd7f695eac05b50b6c6e217301a2a444e206fdb355ce894a035",
+      "bytes": 35
+    },
+    {
+      "path": "evaluation-2/episode-2/response-2.json",
+      "sha256": "48e4958ce6368884ff82e5d668559b801f25eb9a816b9cb7665f4befa9d2339b",
+      "bytes": 18473
+    },
+    {
+      "path": "evaluation-2/episode-2/exposure-1.json",
+      "sha256": "0ee9fab8254fb8f309544f2c6f6b4328114a3c434aa9ff59f6be26693da020dd",
+      "bytes": 422
+    },
+    {
+      "path": "evaluation-2/episode-2/response-1.json",
+      "sha256": "443d62e124a89c5d365ff84a98451b40ef72175ff574c7b0fe0aad24c1ecaf17",
+      "bytes": 18417
+    },
+    {
+      "path": "evaluation-2/episode-2/action-result-2.json",
+      "sha256": "b98f7950081a2ea523e40f62a8bdad81430ce2353421d39f2b9f80f05522bbf4",
+      "bytes": 284
+    },
+    {
+      "path": "evaluation-2/episode-2/agent-history.json",
+      "sha256": "baf533e922cae1aa1496df64930ad20f28fa59c6c25ae66082ea313fec72fbfc",
+      "bytes": 19328
+    },
+    {
+      "path": "evaluation-2/episode-2/diagnostic-observation-1.json",
+      "sha256": "0f07e4a7dc7cdbcde416af79019bb8e8760b9f47a846de77f1ae87bfaf59a7d7",
+      "bytes": 1111
+    },
+    {
+      "path": "evaluation-2/episode-2/worker.json",
+      "sha256": "1c11e7d037cba5bc39521fe3fd9cb38e273936347aac56a82a5427c7308698c0",
+      "bytes": 1929
+    },
+    {
+      "path": "evaluation-2/episode-2/agent-messages-1.json",
+      "sha256": "29e090a3358d6e5d8b538d6764e05f3b6f9622a74258b71b97b56a5c3e762c9a",
+      "bytes": 75801
+    },
+    {
+      "path": "evaluation-2/episode-2/diagnostic-observation-3.json",
+      "sha256": "1c7cf2a87a2c03ccc3a73ee284f20b6d06e675b0695251d122cb0bad39a8de43",
+      "bytes": 779
+    },
+    {
+      "path": "evaluation-2/episode-2/agent-output-0.json",
+      "sha256": "204963d1a9dbbf038778ca8aad58602137f388ea11d75787c52b44c4464f7df4",
+      "bytes": 825
+    },
+    {
+      "path": "evaluation-2/episode-2/exposure-4.json",
+      "sha256": "103af3533648945282e530beb495e42a640ec3d94ba29b1f501a93e451d06469",
+      "bytes": 431
+    },
+    {
+      "path": "evaluation-2/episode-2/exposure-2.json",
+      "sha256": "8a0acb6cf986ce17012aa13defcf46cd0cd048884e3ef40529e89b023e66f93e",
+      "bytes": 423
+    },
+    {
+      "path": "evaluation-2/episode-2/agent-input-1.json",
+      "sha256": "29e090a3358d6e5d8b538d6764e05f3b6f9622a74258b71b97b56a5c3e762c9a",
+      "bytes": 75801
+    },
+    {
+      "path": "evaluation-2/episode-2/action-3.json",
+      "sha256": "201dd4d72fadbaeb95b23528977a19d1e7759012fddde9bd39a23f141c981df0",
+      "bytes": 37
+    },
+    {
+      "path": "evaluation-2/episode-2/backend-after.json",
+      "sha256": "a177e9664af5a256c7f7f14e706090d45b7bbd2441400c151a1b156e84dc489a",
+      "bytes": 2098
+    },
+    {
+      "path": "evaluation-2/episode-2/backend-1.json",
+      "sha256": "fcdb123d5b54445855a961ecd1ad188bb7b33e59a1efb5e21547e8a1675cea6c",
+      "bytes": 488
+    },
+    {
+      "path": "evaluation-2/episode-2/backend-0.json",
+      "sha256": "aa5e5cef8bbc13fa0f18d4fc380bf6ca288c2c6f5e92f0d59c2062b3048f0e77",
+      "bytes": 227
+    },
+    {
+      "path": "evaluation-2/episode-2/reference-diagnostic-4.json",
+      "sha256": "d2303f9afec7b468793e78483c25f0373aa4dbee503429eca9a69262ff91bda8",
+      "bytes": 351
+    },
+    {
+      "path": "evaluation-2/episode-2/browser-cleanup.json",
+      "sha256": "594ab8e7b8af77c6311ad1557f621eaa1e62e9c9a7ca09e4bbcdee271479d942",
+      "bytes": 64
+    },
+    {
+      "path": "evaluation-2/episode-2/agent-messages-2.json",
+      "sha256": "0bdccfa1eb9f994d5c49d5baae73596174e12575cfa787018a644998afd4f45e",
+      "bytes": 106537
+    },
+    {
+      "path": "evaluation-2/episode-2/agent-messages-3.json",
+      "sha256": "3a5135dbd0fd981d490bbf2528be6aaefec93a5c28ca27ae1b9aabf4e0783fdc",
+      "bytes": 81529
+    },
+    {
+      "path": "evaluation-2/episode-2/agent-input-2.json",
+      "sha256": "0bdccfa1eb9f994d5c49d5baae73596174e12575cfa787018a644998afd4f45e",
+      "bytes": 106537
+    },
+    {
+      "path": "evaluation-2/episode-2/action-2.json",
+      "sha256": "e94bfc99d0bf77bbb21836c4104a0713f79aedf18aabd4aabd7eb90023de0593",
+      "bytes": 37
+    },
+    {
+      "path": "evaluation-2/episode-2/agent-output-3.json",
+      "sha256": "4ea558bff475181779c8c38bb90c4f22eecf5ac9b45ea72c2d9ae095ff05af37",
+      "bytes": 806
+    },
+    {
+      "path": "evaluation-2/episode-2/backend-after-action-2.json",
+      "sha256": "c4d1cec314421e0b105832b26e2edcb54ac893402baaec792854a4ad0098628d",
+      "bytes": 1021
+    },
+    {
+      "path": "evaluation-2/episode-2/backend-4.json",
+      "sha256": "a177e9664af5a256c7f7f14e706090d45b7bbd2441400c151a1b156e84dc489a",
+      "bytes": 2098
+    },
+    {
+      "path": "evaluation-2/episode-2/backend-after-action-1.json",
+      "sha256": "263bd29c80ab2b28cfe6fb70e3f9c94ec314dc0de09ce1ba10b974bd790937b5",
+      "bytes": 755
+    },
+    {
+      "path": "evaluation-2/episode-2/exposure-3.json",
+      "sha256": "c66e3e917c7457a23342a64d73abedc0a82a985ad591fd4931f61bdcc1de645f",
+      "bytes": 424
+    },
+    {
+      "path": "evaluation-2/episode-2/agent-input-3.json",
+      "sha256": "3a5135dbd0fd981d490bbf2528be6aaefec93a5c28ca27ae1b9aabf4e0783fdc",
+      "bytes": 81529
+    },
+    {
+      "path": "evaluation-2/episode-2/response-3.json",
+      "sha256": "05a2309cbb64b4576cecd914d627177fad5cbde0cd8be4cfcf712050640160f1",
+      "bytes": 18577
+    },
+    {
+      "path": "evaluation-2/episode-2/action-result-0.json",
+      "sha256": "fc057b2e8bfde0dc5aa255abf665ec72a057b9ddc58999d161b7d2dc8e0db6e7",
+      "bytes": 274
+    },
+    {
+      "path": "evaluation-2/episode-2/backend-after-action-3.json",
+      "sha256": "a177e9664af5a256c7f7f14e706090d45b7bbd2441400c151a1b156e84dc489a",
+      "bytes": 2098
+    },
+    {
+      "path": "evaluation-2/episode-2/diagnostic-observation-4.json",
+      "sha256": "d2303f9afec7b468793e78483c25f0373aa4dbee503429eca9a69262ff91bda8",
+      "bytes": 351
+    },
+    {
+      "path": "evaluation-2/episode-2/browser-runtime.json",
+      "sha256": "c4728edfc34e3c148295f281e96a3d61fa2147f3940ac31c8bd1ada6090f2a3e",
+      "bytes": 892
+    },
+    {
+      "path": "evaluation-2/episode-2/episode.json",
+      "sha256": "dea621d224756ebe8b37090a1724e46bdb9260164a3e657f481f1cf58448647f",
+      "bytes": 7435
+    },
+    {
+      "path": "evaluation-2/episode-2/action-result-3.json",
+      "sha256": "6cdf4dcb08fa5ad2432744899ad2d71f41e85be43a5423b18c23d12519a3b891",
+      "bytes": 282
+    },
+    {
+      "path": "evaluation-2/episode-2/call-0.json",
+      "sha256": "7324fb63985b573cc3588b214adc6a94df3047e40c6bde36039d0aa983489ada",
+      "bytes": 340
+    },
+    {
+      "path": "evaluation-2/episode-2/diagnostic-observation-0.json",
+      "sha256": "fe4eb920ca04d5d7683899e2d806f689c0f5695eb18b26efe532eb1159bb7891",
+      "bytes": 616
+    },
+    {
+      "path": "evaluation-2/episode-2/response-0.json",
+      "sha256": "6906e32e017a33a8770386bf326994df8f4a20d439086b6405ae23496c85d72a",
+      "bytes": 18595
+    },
+    {
+      "path": "evaluation-2/episode-2/call-3.json",
+      "sha256": "77eb78365bb8aa284d71bcb83a88b981e4da02cfc09a2d5648bbd053a19d74d5",
+      "bytes": 340
+    },
+    {
+      "path": "evaluation-2/episode-2/agent-messages-0.json",
+      "sha256": "3db1a64fe90d88e68df68b517885d3468a256a779f3b1d5ba4d8d0a7912bf191",
+      "bytes": 82841
+    },
+    {
+      "path": "evaluation-2/episode-2/screenshot-2.png",
+      "sha256": "9b928167fcae0764a2dd20832363e9f0861395bd984adf68a11124e7a4191df5",
+      "bytes": 62735
+    },
+    {
+      "path": "clean/screenshot-2.png",
+      "sha256": "cc37605efdd412ba1cc477fa931fd18a17d7d895c746d859c661f3d4b334117e",
+      "bytes": 70154
+    },
+    {
+      "path": "clean/episode.json",
+      "sha256": "fdb5c53720a09c6518f8bc664239fa0d7d3124723bff326cbd73d66d1ebaf388",
+      "bytes": 7437
+    },
+    {
+      "path": "clean/backend-after.json",
+      "sha256": "4c9cca98fa093a891c1431fdaf0153f8fe10e34e2ed2c09db6e2f1785ba059d8",
+      "bytes": 2098
+    },
+    {
+      "path": "credential-check/generation.json",
+      "sha256": "fa5d5455808fc191885c234f6eb54969e956dc2b5a13c7fdfde088a00129ccd3",
+      "bytes": 1761
+    },
+    {
+      "path": "credential-check/generation-request.json",
+      "sha256": "b54aac15cd1ec7ce54ed7fa3600dec7c7d923d5d419bcfa33521efbe4e1e6a54",
+      "bytes": 217
+    }
+  ],
+  "credential_scan_matches": 0,
+  "selection": "Allowlisted receipts, candidate files, original hypotheses, actual tool events/context/first forwarded optimizer request, full first-episode exchanges per candidate, all episode outcomes/state/actions/usage/cleanup. Full raw evidence remains in raw_run. No private config, credentials or browser profiles.",
+  "audit_source": "/workspace/webhelix-runs/browser-use-continuation-20261102/run/audit.json"
+}

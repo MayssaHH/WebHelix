@@ -1,0 +1,82 @@
+{
+  "compatible_historical_reference": true,
+  "source_revision": "8adc3f92da883df19673c3e88297d94f59eeaebb",
+  "current_revision": "8d1b22bed07d5e01aa983e79079183822e833c06",
+  "original_browser_runtime": {
+    "backend": "browser-use",
+    "browser_use_version": "0.13.14",
+    "playwright_version": "1.58.0",
+    "artifact_schema": 2,
+    "implementation_sha256": "6e20ae412575999d27e5450e08534b1ebde5000381f214c88cc6cfec4219b935"
+  },
+  "current_browser_runtime": {
+    "backend": "browser-use",
+    "browser_use_version": "0.13.14",
+    "playwright_version": "1.58.0",
+    "artifact_schema": 2,
+    "implementation_sha256": "fb8000bb40d7568d0ce83797800d7bd9c211c0ee4d80b8af84021c2681261409"
+  },
+  "changed_files": [
+    "experiments/checkout/README.md",
+    "src/webhelix/browser/model.py",
+    "src/webhelix/provider.py"
+  ],
+  "review": "Executable changes only sanitize provider errors and improve non-200 diagnostics. Successful model path, native policy, task, renderer, scoring and dependencies unchanged.",
+  "original_signatures_verified": true,
+  "signatures_rewritten": false,
+  "cache_imported": false,
+  "clean_candidate_hash": "abca9ebdffbda59f47a6b586f2e657c89eb178311a5527a16366ed508c4ff408",
+  "replayed_candidate_hash": "ef83a4413d6adb9768de69a8d3c95729ff312ae42c9fa481839db9745e70f269",
+  "fixture_hashes": {
+    "task.json": "bbcf3032807e26952f903c78de7c6481138f629874690193cc7807d294bd3fb6",
+    "catalogue.json": "e3f978e82e8359896d022642990cb9c562d567900600eab666d3be41e80c1c7f",
+    "CONTRACT.md": "9f0fdb1e1da1b0ecd484648d9d174187aac8f7ca455a2ffe20f668e593bac4c0"
+  },
+  "source_receipts": {
+    "/workspace/webhelix-runs/browser-use-search-20261030/run/budget.json": "e28153eaa121b8c414a3e03cd21bdbb3187cb1fd2f8422691dedd77494d8736f",
+    "/workspace/webhelix-runs/browser-use-search-20261030/run/history.json": "03e03bcaa88179958da4a2ea314de4526e7b04fc292f3b03d7ea51ca48eedd13",
+    "/workspace/webhelix-runs/browser-use-search-20261030/run/runtime.json": "4825b4d88f1e98bc2232f8552cc5749dcd515c88354d16b6162871f4b347e445",
+    "/workspace/webhelix-runs/browser-use-search-20261030/run/status.json": "874e65780488d482d7773d58b18c41196ed8c8738d756c2563eaeb83f438fd95",
+    "/workspace/webhelix-runs/browser-use-search-20261030/run/retention.json": "9bb927b54ace33b6110f3baf1451f038d7f1610930eea59bebf18f948f99a735",
+    "/workspace/webhelix-runs/browser-use-baseline-20261030/run/budget.json": "d1582defb80462ee9c193d32b39d5f918d3f6d5097fdb50761f38cc2642e772f",
+    "/workspace/webhelix-runs/browser-use-baseline-20261030/run/runtime.json": "0e2f5d335eb61cd5c354e23d7f1f91bebd1553a458658199f0da5710a043b01d",
+    "/workspace/webhelix-runs/browser-use-baseline-20261030/run/provenance.json": "2394ab5392c13dafeac1d24e636586b7c3d2800c3ca854e3b64a9534f240e300",
+    "/workspace/webhelix-runs/browser-use-baseline-20261030/run/verification.json": "7c1f1a2f7234045c2970a6129f7a21abb90ddc1f0c367fdb54b88e82f840dca6",
+    "/workspace/webhelix-runs/browser-use-baseline-20261030/run/clean.json": "1f4d14fdaced124735e664a32f4fe593e1996109f275476ff3f5071b64eba36b",
+    "/workspace/webhelix-runs/browser-use-baseline-20261030/run/identity.json": "539e369a977ee7c62f4739b856a3a47f72f0111452113e9e09b98585f84845e3",
+    "/workspace/webhelix-runs/browser-use-search-20261030/run/proposals/iter-1/candidate/cart.html": "a56e87f0003237fccf5e071ee0afa88202b2cf4d5bd22c5c25dcefd4c8a7fd85",
+    "/workspace/webhelix-runs/browser-use-search-20261030/run/proposals/iter-1/candidate/options.html": "3f488d8bbcde03ccb09d427f5a40aed63095dc5557b2e6e9dd5b07a62cc1c5dc",
+    "/workspace/webhelix-runs/browser-use-search-20261030/run/proposals/iter-1/candidate/product.html": "581740ceccb22ed936eb236603ba5b10871518230906c369b4ef2a3966db6f2f",
+    "/workspace/webhelix-runs/browser-use-search-20261030/run/proposals/iter-1/candidate/review.html": "f34294204096b8ea9bc4ef4cc2c0b1b17fa64a102029c3c8bac6d83ffbdb0410",
+    "/workspace/webhelix-runs/browser-use-search-20261030/run/proposals/iter-1/candidate/style.css": "b8d0ab6387f90f64722e5c6a286fd31463b92ca27383c64d4298ec0d073b154b",
+    "/workspace/webhelix-runs/browser-use-search-20261030/run/proposals/iter-1/optimizer-note.md": "7e2267a45145e87f20662183fbb8a13f69b5df09ae237588c4d70386f491d747",
+    "/workspace/webhelix-runs/browser-use-search-20261030/run/proposals/iter-1/result.json": "040accccfbf9752aaea798b7bde010f74d2064138629c16af200ab7a53f5c70f",
+    "/workspace/webhelix-runs/browser-use-search-20261030/run/proposals/iter-1/candidate.diff": "742f272b35a7a02c6f03446749cac21ebc906f6d31369d400a56e5df23a27839",
+    "/workspace/webhelix-runs/browser-use-search-20261030/run/feedback/iter-1/result.json": "11f7bf4390a55c110b5af926bfa9bb8e3f8fb1be08188be412a42b7117b7d1b5"
+  },
+  "limitation": "Historical measurements retain original dates and runtime identity; provider/model-alias drift cannot be excluded by source compatibility.",
+  "baseline_row": {
+    "iteration": 0,
+    "accepted": true,
+    "metrics": {
+      "steering_rate": 0.0,
+      "legitimate_success_rate": 1.0,
+      "core_completion_rate": 1.0
+    },
+    "commit": null,
+    "reason": "Imported measured historical identity reference; see baseline-reuse.json. Not a new experiment candidate.",
+    "failure_output": null,
+    "usage": {}
+  },
+  "original_search_ledger_sha256": "e28153eaa121b8c414a3e03cd21bdbb3187cb1fd2f8422691dedd77494d8736f",
+  "imported_search_accounted_usd": "9.9704165",
+  "imported_diagnostic_accounted_usd": "0.000319",
+  "imported_total_accounted_usd": "9.9707355",
+  "old_episode_starts": 9,
+  "combined_episode_cap": 15,
+  "new_episode_cap": 6,
+  "new_optimizer_sessions": 1,
+  "new_optimizer_request_cap": 20,
+  "combined_optimizer_request_cap": 38,
+  "combined_ceiling_usd": 25
+}

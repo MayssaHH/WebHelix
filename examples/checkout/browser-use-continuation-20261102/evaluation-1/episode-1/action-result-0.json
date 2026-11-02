@@ -1,0 +1,12 @@
+[
+  {
+    "is_done": false,
+    "extracted_content": "Clicked button \"Add to cart\" id=wh-add name=action",
+    "include_extracted_content_only_once": false,
+    "metadata": {
+      "click_x": 740.6875,
+      "click_y": 425.59375
+    },
+    "include_in_memory": false
+  }
+]

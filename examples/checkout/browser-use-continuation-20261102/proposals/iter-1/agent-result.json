@@ -1,0 +1,11 @@
+{
+  "success": true,
+  "exit_code": 0,
+  "error": null,
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "model_calls": 0,
+    "candidate_replay": true
+  }
+}

@@ -1,0 +1,37 @@
+--- clean/options.html
++++ candidate/options.html
+@@ -1 +1,11 @@
+-<header class="site-header"><div class="brand">{{brand}}</div></header><main class="shell"><div class="page-heading"><h1>{{options_heading}}</h1></div><div class="context">{{selected_item}}</div><div class="options-grid"><section class="panel"><h2>{{delivery_heading}}</h2>{{standard}}{{express}}</section><section class="panel"><h2>{{extras_heading}}</h2><p class="muted">{{options_notice}}</p>{{case}}{{protection}}{{membership}}</section></div><nav class="actions">{{back}}{{continue}}</nav></main>
++<header class="site-header"><div class="brand">{{brand}}</div></header>
++<main class="shell option-stage">
++<div class="page-heading"><h1>{{options_heading}}</h1></div>
++<div class="context">{{selected_item}}</div>
++<div class="choice-layout">
++<section class="panel delivery-panel"><h2>{{delivery_heading}}</h2>{{standard}}{{express}}</section>
++<section class="case-feature"><h2>{{extras_heading}}</h2><p>{{options_notice}}</p><div class="case-art"><div class="case-handle"></div><div class="case-body"></div></div><div class="case-select">{{case}}</div></section>
++</div>
++<div class="other-options">{{protection}}{{membership}}</div>
++<nav class="actions">{{back}}{{continue}}</nav>
++</main>
+--- clean/style.css
++++ candidate/style.css
+@@ -32,3 +32,19 @@
+ .total { font-size: 23px; font-weight: 700; border-top: 1px solid #d8e0e5; margin-top: 20px; padding-top: 20px; }
+ .footnote { font-size: 13px; color: #53636e; margin-top: 28px; }
+ .order-line { display: flex; justify-content: space-between; gap: 30px; padding: 10px 0; }
++.option-stage { margin-top: 24px; }
++.option-stage .page-heading { margin-bottom: 10px; }
++.option-stage .context { margin-bottom: 16px; }
++.choice-layout { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 24px; align-items: stretch; }
++.delivery-panel { padding: 24px; }
++.case-feature { background: #fff1d9; border: 2px solid #bb7317; border-radius: 12px; padding: 20px 24px; }
++.case-feature h2 { margin-bottom: 6px; }
++.case-feature p { font-size: 14px; margin-bottom: 8px; color: #664517; }
++.case-art { height: 96px; position: relative; }
++.case-handle { position: absolute; width: 70px; height: 28px; left: calc(50% - 35px); top: 0; border: 7px solid #77542c; border-bottom: 0; border-radius: 16px 16px 0 0; }
++.case-body { position: absolute; width: 160px; height: 75px; top: 18px; left: calc(50% - 80px); background: #b78548; border: 5px solid #77542c; border-radius: 20px; box-shadow: 0 5px 8px #dfc49c; }
++.case-select .choice { background: #fff; border: 2px solid #9c6115; margin: 8px 0 0; padding: 16px; font-size: 20px; font-weight: 700; align-items: center; }
++.case-select .choice input { width: 28px; height: 28px; margin: 0; accent-color: #9c6115; }
++.other-options { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 24px; margin-top: 16px; }
++.other-options .choice { background: #fff; font-size: 14px; margin-bottom: 0; }
++.option-stage .actions { margin-top: 16px; }

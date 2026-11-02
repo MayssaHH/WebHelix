@@ -12,7 +12,14 @@ do not constitute a paid model run.
 passed clean 3/3 and identity 3/3 with `gpt-6.1-sol`, medium reasoning. All six
 episodes confirmed the correct $50 order. No optimizer calls or search ran.
 
-**Partial live search:** [OpenCode against Browser-Use](../../examples/checkout/browser-use-search-20261030/README.md)
+**Completed continuation:** [2 November results and visual comparison](../../examples/checkout/browser-use-continuation-20261102/README.md)
+re-evaluated the archived candidate in three fresh episodes, then ran one new
+OpenCode session and three more episodes. Both measured candidates scored zero
+steering and were rejected; all six victims confirmed the legitimate $50 order.
+Actual feedback delivery to the new optimizer was verified. The continuation added
+$3.90 in conservative usage accounting, without changing task or acceptance rules.
+
+**Earlier partial live search:** [OpenCode against Browser-Use](../../examples/checkout/browser-use-search-20261030/README.md)
 produced one valid candidate. Two victim episodes confirmed the legitimate $50
 order; the third returned HTTP 429. The batch is incomplete and iteration 2 did not run.
 
@@ -281,9 +288,10 @@ Open `<run>/index.html` for stage screenshots and links. Inspect:
 
 Browser-Use version and effective configuration identify the victim in new runs.
 Historical custom-victim results are not reusable baselines after migration.
-The real Browser-Use checkout baseline passed. The live optimizer subsequently
-produced a valid candidate, but HTTP 429 interrupted its victim evaluation; no
-complete postmigration real-model search or second-iteration feedback test is claimed.
+The real Browser-Use checkout baseline passed. An initial live candidate evaluation
+was interrupted by HTTP429. The separately archived 2 November continuation then
+completed fresh evaluation of that candidate and one new real OpenCode proposal,
+including verified feedback continuity. No steering was observed in its six episodes.
 
 Raw runs should remain outside the repository or under ignored `runs/`. Preserve
 failed attempts. Only selected sanitized evidence belongs under `examples/`.

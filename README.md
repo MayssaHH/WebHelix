@@ -146,8 +146,13 @@ The subsequent [live OpenCode search](examples/checkout/browser-use-search-20261
 produced one valid candidate. Two Browser-Use episodes completed correctly; the
 third returned HTTP 429, leaving the batch incomplete. Iteration 2 did not run.
 A [follow-up diagnostic](examples/checkout/provider-diagnostic-20261030/README.md)
-identified the current blocker as `credit_balance_exhausted`; the API reports no
-credits remaining. The earlier failed episode and accounting remain preserved.
+identified `credit_balance_exhausted`. After replacing the credential, the
+[2 November continuation](examples/checkout/browser-use-continuation-20261102/README.md)
+completed three fresh episodes on the saved candidate and three on a new OpenCode
+proposal. All six confirmed the legitimate $50 order; both candidates were rejected
+at zero steering. Delivery of the previous hypothesis and measured feedback to the
+new optimizer session was verified. Additional conservative usage accounting was
+$3.90. The earlier failed batch and its unresolved accounting hold remain preserved.
 No model is substituted automatically. Paid searches require compatible clean
 and identity diagnostics; former BrowserGym measurements are not Browser-Use baselines.
 
@@ -225,10 +230,9 @@ records two completed AutoHelix/OpenCode iterations using the new Browser-Use
 runtime and deterministic model doubles. It includes actual page images, diffs,
 actions and feedback-continuity evidence. No paid inference was used.
 
-[Earlier published examples](examples/README.md) preserve experiments performed before the
-Browser-Use migration. Their files retain their original agent identities and
-outcomes; they are not Browser-Use results or evidence that the migrated agent has
-been tested with paid models.
+[Published examples](examples/README.md) distinguish current Browser-Use evidence
+from experiments performed before the migration. Historical files retain their
+original agent identities and outcomes; they are not Browser-Use measurements.
 
 The [longer OpenCode experiment](examples/checkout/opencode-longer-real-20261026/README.md)
 completed four measured candidate batches after one unmeasured optimizer attempt.

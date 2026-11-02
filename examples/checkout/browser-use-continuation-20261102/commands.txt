@@ -1,0 +1,17 @@
+Working directory: /workspace/webhelix
+Execution revision: 8d1b22bed07d5e01aa983e79079183822e833c06
+
+# Offline preparation; one-shot driver archived alongside the run.
+UV_CACHE_DIR=/workspace/.cache/uv PLAYWRIGHT_BROWSERS_PATH=/workspace/.cache/ms-playwright .venv/bin/python /workspace/webhelix-runs/browser-use-continuation-20261102/continue_search.py
+
+# Focused offline checks: 86 passed in 18.04 seconds.
+UV_CACHE_DIR=/workspace/.cache/uv PLAYWRIGHT_BROWSERS_PATH=/workspace/.cache/ms-playwright .venv/bin/pytest -q tests/checkout/test_scoring.py tests/checkout/test_cli_budget.py tests/opencode/test_gateway.py tests/browser/test_model.py tests/test_provider_diagnostics.py
+
+# Exactly one live launch; archived replay + one real OpenCode session.
+UV_CACHE_DIR=/workspace/.cache/uv PLAYWRIGHT_BROWSERS_PATH=/workspace/.cache/ms-playwright ANONYMIZED_TELEMETRY=false BROWSER_USE_CLOUD_SYNC=false BROWSER_USE_CLOUD_HINTS=false .venv/bin/python /workspace/webhelix-runs/browser-use-continuation-20261102/continue_search.py --execute > /workspace/webhelix-runs/browser-use-continuation-20261102/console.log 2>&1
+
+# Independent read-only evidence audit; no paid requests.
+.venv/bin/python /workspace/webhelix-runs/browser-use-continuation-20261102/audit.py
+
+# Allowlisted evidence export; no credentials or runtime profiles.
+.venv/bin/python /workspace/webhelix-runs/browser-use-continuation-20261102/export.py

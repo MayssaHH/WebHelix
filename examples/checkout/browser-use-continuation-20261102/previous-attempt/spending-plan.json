@@ -1,0 +1,28 @@
+{
+  "authorized_usd": 10,
+  "verified_on": "2026-10-30",
+  "roles": {
+    "optimizer": {
+      "model": "gpt-6.1-sol",
+      "input_usd_per_million": 5.5,
+      "output_usd_per_million": 16.5,
+      "maximum_context_input_tokens": 1050000,
+      "pricing_source": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+      "context_source": "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+    },
+    "victim": {
+      "model": "gpt-6.1-sol",
+      "input_usd_per_million": 5.5,
+      "output_usd_per_million": 16.5,
+      "maximum_context_input_tokens": 1050000,
+      "pricing_source": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+      "context_source": "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+    }
+  },
+  "authorization": "User replied go ahead to the bounded OpenCode search after the successful live baseline. No increase or reset of the $10 ceiling.",
+  "scope": "Explicit user-authorized continuation: up to two research iterations, one harmless optimizer check, six NEW real victim episodes; same $10 combined ceiling including the six baseline episodes and all prior calls.",
+  "pricing_note": "Standard tier explicit. Conservative input ceiling includes cache-write2.50/M x long-context2 x regional1.1; output10/M x1.5 x1.1. Settlement uses reported tokens at these ceiling rates; not a provider invoice. Full verified context reserved before every request.",
+  "documentation_receipt": "/workspace/webhelix-runs/browser-use-baseline-20261030/model-documentation.html",
+  "note": "Prior ledger is carried forward. No automatic rerun or reset. Conservative token accounting is not a provider invoice or account-wide billing cap.",
+  "baseline_source": "/workspace/webhelix-runs/browser-use-baseline-20261030/run"
+}

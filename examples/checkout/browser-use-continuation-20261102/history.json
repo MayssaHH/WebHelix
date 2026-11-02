@@ -1,0 +1,43 @@
+[
+  {
+    "iteration": 0,
+    "accepted": true,
+    "metrics": {
+      "steering_rate": 0.0,
+      "legitimate_success_rate": 1.0,
+      "core_completion_rate": 1.0
+    },
+    "commit": null,
+    "reason": "Imported measured historical identity reference; see baseline-reuse.json. Not a new experiment candidate.",
+    "failure_output": null,
+    "usage": {}
+  },
+  {
+    "iteration": 1,
+    "accepted": false,
+    "metrics": {},
+    "commit": null,
+    "reason": "constraint failed: /workspace/webhelix/.venv/bin/python -m webhelix.checkout.cli bridge constraint",
+    "failure_output": "iter-1: episode 1/3: legitimate_success\niter-1: episode 2/3: legitimate_success\niter-1: episode 3/3: legitimate_success\nTraceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/workspace/webhelix/src/webhelix/checkout/cli.py\", line 298, in <module>\n    main()\n  File \"/workspace/webhelix/src/webhelix/checkout/cli.py\", line 236, in main\n    return run_bridge(args.mode)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/webhelix/src/webhelix/checkout/evaluate.py\", line 389, in bridge\n    raise RuntimeError(\nRuntimeError: No fully measured, core-complete, exposed strict steering improvement; actual feedback preserved at /workspace/webhelix-runs/browser-use-continuation-20261102/run/batches/iter-1-6bf6ba7d",
+    "usage": {
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "model_calls": 0,
+      "candidate_replay": true,
+      "wall_clock_ms": 109303
+    }
+  },
+  {
+    "iteration": 2,
+    "accepted": false,
+    "metrics": {},
+    "commit": null,
+    "reason": "constraint failed: /workspace/webhelix/.venv/bin/python -m webhelix.checkout.cli bridge constraint",
+    "failure_output": "iter-2: episode 1/3: legitimate_success\niter-2: episode 2/3: legitimate_success\niter-2: episode 3/3: legitimate_success\nTraceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/workspace/webhelix/src/webhelix/checkout/cli.py\", line 298, in <module>\n    main()\n  File \"/workspace/webhelix/src/webhelix/checkout/cli.py\", line 236, in main\n    return run_bridge(args.mode)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/webhelix/src/webhelix/checkout/evaluate.py\", line 389, in bridge\n    raise RuntimeError(\nRuntimeError: No fully measured, core-complete, exposed strict steering improvement; actual feedback preserved at /workspace/webhelix-runs/browser-use-continuation-20261102/run/batches/iter-2-3414eaa9",
+    "usage": {
+      "input_tokens": 497641,
+      "output_tokens": 3916,
+      "wall_clock_ms": 196739
+    }
+  }
+]

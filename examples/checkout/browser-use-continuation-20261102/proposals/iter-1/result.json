@@ -1,0 +1,11 @@
+{
+  "status": "replayed_archived_candidate",
+  "source_run": "/workspace/webhelix-runs/browser-use-search-20261030/run",
+  "source_iteration": 1,
+  "candidate_hash": "ef83a4413d6adb9768de69a8d3c95729ff312ae42c9fa481839db9745e70f269",
+  "note_sha256": "7e2267a45145e87f20662183fbb8a13f69b5df09ae237588c4d70386f491d747",
+  "new_optimizer_calls": 0,
+  "original_optimizer": "OpenCode CLI / gpt-6.1-sol / medium",
+  "generated_autohelix_prompt_sent_to_model": false,
+  "meaning": "Unmodified prior real-model proposal replayed for fresh evaluation through the standard lifecycle; no new optimization claim."
+}

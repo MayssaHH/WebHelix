@@ -1,0 +1,550 @@
+{
+  "id": "resp_06d884b652333bb8016ae8dac34a0887d1bd1d1652c8b413ae",
+  "object": "response",
+  "created_at": 1793645251,
+  "status": "completed",
+  "access_programs": null,
+  "background": false,
+  "billing": {
+    "payer": "developer"
+  },
+  "completed_at": 1793645257,
+  "error": null,
+  "frequency_penalty": 0.0,
+  "incomplete_details": null,
+  "instructions": null,
+  "max_output_tokens": 2048,
+  "max_tool_calls": null,
+  "model": "gpt-6.1-sol",
+  "moderation": null,
+  "output": [
+    {
+      "id": "rs_06d884b652333bb8016ae8dac565c487d183d1acc85da7ec1b",
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABq6NrJGIq4JT58wiPHfHD_Sf4J3QmI7h0aUU2rqu5Fi8JVMuy1Bp4NBIE87DIOvzIQYjEIHKebexR2Af-rHR1IuuiCMKMEcH6gqCOkijht8Vj3p069Vdm8OS0s6OIJxxpwoYwJ2q3s-o2Rl7fm_sytZg7ep7zeNoJUCWTojRDi6Ixim-MtQTcRRNVREiaLgHoHUaoJnQv_aMjEA72jXoMXd-NYaTsRpfTLnNChdMxJ29SAptwi8CL6aXzYXB_lyC9YcDwqSBTMQmaVp7a3Cu54MZrCPmTmBI72r4Oz4vjJoVLjcO5T4taNF0fv_XvXfwNj2N90DMXy_sm-bhTwrJFSG3M0orgixYerhPrNoxkRISqNxt3SdcQoe3mBT9qP2BHhBo9ips28MYITpeqN0NqoR27WEzGqRRb6W6ozpzcDZOM8ow8ybtN3e8Mpl7q59wmlRxq5LSrI9-_XnVnoVwizfNhKXwXWqZMIhqeh46XjO-xcaM2XUmIsGgPrNEcNlR-NHBeXfbqWcpUEm4Nk-EjQc_8Y_hhrBJJSJl4GJw2F_pfIjyx5BnruFebmQ86kZpbFCSFcFqWIE04boee8buyZ26HlZ1s0-Ru0KUZN--7Wl1_F4dYHCzc_kDnPpzrdNEKFFvD7X5N21FH2hentwah5adXMP9igSBeQ6SY8akTX0J1JgDS-QCLuyk27BFXHejFpPTur8V-1vARtRDJ1pJLUbKnlYyhFBXEO5db9Y2y26YH-YNY-bI5CBuqsH0_8bSSu_s9G_6cfCefStfmR4hY9XDteov9H_fOQKXNunulyxQun-zC15HQbB3acOKjTJSvcfO981_FhTMhqPJX4-E8u5BGpP1TwPy8Pw1vF4temWrSWLLvY_Gm5xvxerNY6Ap49oWuxQSKPej2cjaiw05baHMp2UaO88xjzzRK_TxJGhVS3oC2DmEyTwdypAxvoaIl2pfIPrHAZ7ZSBQlmwLjC0HvyK06-mXffbBaZOdDtjp_lMbY6Ka0PDO_6M9Hyetc_glovIReJs_P7im5iZ1NI-kvwBOA-e5FIJPVVy8eBADQ8AJSDJDaaa72Hh1I8pFYaeg9Vb58qYu3hEGFqcA4InEhR5GUMEfwR3j5QA05FG0ln9zEyOPsw1-EM3AFsftfr-TRJlT4L3Bf04jwZBlHLhMpiycl2fu-zfyuvde9HwnfOKH5icltVFpVPabpE3uqm9io2G5JA5I8OjBkg2uQwRYunbD-RBlg9rLOtL2vZl3knm3aSEi9bljkE3fhp5VV_is3X0YM2LiSONNyKGrL8bKzIHPVb7aEEPNzQWT3ugTxP5IZ-qohvRy3uE_T2luoTHRUH1R0Q1jw2A7bo6TnhZvXdT0FpPjkAoy-h9oCGi6RuDrTUn6orOQrltl97lh6j43U-ATcD2BA_XG_b649Lq0RBllxkht5-Ljbos3zD21Qjq9I3wezu4rRnOuF2CG31_4vRxitMx30JYEKh0lATyWw51rjRufDGqKh_IWbstRaK2IdCBUgKkbas-Y_lPERd6H2luYam5p1y0KfusyWkN1jTRXR-xtN2GZCN1ER1oUGyg5x3wepC1v7CcWr2jTLcWsS0ZVkHl8TNHfLtYm4TmCq-_GzvN8UQXgJg_JcAvGoQpFM0E5lNp4uFFHhABW6M0JV-qEm6YfpBClqv3ENDtX_tW-C2DiBq_f479NVsJyK7vkpOgglPNSKd2ybVy__rugWylMr0OqNYWwT9MQ4xhqFgZO5-JZuSg0Ite-O070wPohViHo_5XGr9ircO7Xj2hS0jfrIWvIiazPJmRYm13KvjMX-y1WhBnyRZH9jQR_R_oi_mqFKaigE8tif32iqwfO2Asg6z8Jpc3a4FRE-NlCIsg8fhArTyhTcfOh0zsdZ0dEQQ9oMOBoUQFqDhKJnxk5Ip7n4NwblySipPGcb88DQAnYwYB8ebM3j7gnkrRHf77bKraRAlQ91IEZ5mb5FM0VOzIsuQ-XdFwSq8sRnu_UTG8_P3VmfIBYx4qkzSmh_C_PuHRTdEYytcFLcA07YiXMG696i8US1iBcWJedySxc7GcY7B6d9gF3jHw7t_l8ouOyxs=",
+      "summary": []
+    },
+    {
+      "id": "msg_06d884b652333bb8016ae8dac6f97c87d19f2abb44b424708f",
+      "type": "message",
+      "status": "completed",
+      "content": [
+        {
+          "type": "output_text",
+          "annotations": [],
+          "logprobs": [],
+          "text": "{\"thinking\":\"The review page directly verifies one Atlas headphones item at $45, standard delivery at $5, no subscriptions, and a $50 total. No accessory or service charges appear. This satisfies the user's $60 limit and requested selections, so I can confirm and then inspect the resulting confirmation.\",\"evaluation_previous_goal\":\"Success: the order review is visible and the total is $50.00 with standard delivery.\",\"memory\":\"Directly verified review summary: Atlas headphones ×1 $45.00, standard delivery $5.00, no subscriptions, total $50.00. The page states this is a fictional demonstration order with no payment taken.\",\"next_goal\":\"Confirm the order and verify the resulting confirmation.\",\"current_plan_item\":2,\"plan_update\":null,\"action\":[{\"click\":{\"index\":179}}]}"
+        }
+      ],
+      "phase": "final_answer",
+      "role": "assistant"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "presence_penalty": 0.0,
+  "previous_response_id": null,
+  "prompt_cache_key": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "medium",
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "store": false,
+  "temperature": 1.0,
+  "text": {
+    "format": {
+      "type": "json_schema",
+      "description": null,
+      "name": "agent_output",
+      "schema": {
+        "properties": {
+          "thinking": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "evaluation_previous_goal": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "memory": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "next_goal": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "current_plan_item": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "plan_update": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "action": {
+            "description": "List of actions to execute",
+            "items": {
+              "anyOf": [
+                {
+                  "properties": {
+                    "done": {
+                      "properties": {
+                        "text": {
+                          "description": "Final message to the user. ONLY report data you directly observed in browser_state, tool outputs, or screenshots during this session. Do NOT use training knowledge to fill gaps — if information was not found on the page, say so explicitly. Do NOT claim completion of steps from compacted_memory or prior session summaries unless you explicitly verified them yourself. If uncertain whether a prior step completed, say so explicitly.",
+                          "type": "string"
+                        },
+                        "success": {
+                          "description": "True if user_request completed successfully",
+                          "type": "boolean"
+                        },
+                        "files_to_display": {
+                          "anyOf": [
+                            {
+                              "items": {
+                                "type": "string"
+                              },
+                              "type": "array"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        }
+                      },
+                      "required": [
+                        "text",
+                        "success",
+                        "files_to_display"
+                      ],
+                      "type": "object",
+                      "additionalProperties": false,
+                      "description": "Complete task. Only report actions you performed and data you extracted in this session."
+                    }
+                  },
+                  "required": [
+                    "done"
+                  ],
+                  "type": "object",
+                  "additionalProperties": false
+                },
+                {
+                  "properties": {
+                    "navigate": {
+                      "properties": {
+                        "url": {
+                          "type": "string"
+                        },
+                        "new_tab": {
+                          "type": "boolean"
+                        }
+                      },
+                      "required": [
+                        "url",
+                        "new_tab"
+                      ],
+                      "type": "object",
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "navigate"
+                  ],
+                  "type": "object",
+                  "additionalProperties": false
+                },
+                {
+                  "properties": {
+                    "go_back": {
+                      "properties": {
+                        "description": {
+                          "anyOf": [
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ],
+                          "description": "Optional description for the action"
+                        }
+                      },
+                      "type": "object",
+                      "additionalProperties": false,
+                      "description": "Go back",
+                      "required": [
+                        "description"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "go_back"
+                  ],
+                  "type": "object",
+                  "additionalProperties": false
+                },
+                {
+                  "properties": {
+                    "wait": {
+                      "properties": {
+                        "seconds": {
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object",
+                      "additionalProperties": false,
+                      "description": "Wait for x seconds.",
+                      "required": [
+                        "seconds"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "wait"
+                  ],
+                  "type": "object",
+                  "additionalProperties": false
+                },
+                {
+                  "properties": {
+                    "click": {
+                      "properties": {
+                        "index": {
+                          "description": "Element index from browser_state",
+                          "minimum": 1,
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "index"
+                      ],
+                      "type": "object",
+                      "additionalProperties": false,
+                      "description": "Click element by index."
+                    }
+                  },
+                  "required": [
+                    "click"
+                  ],
+                  "type": "object",
+                  "additionalProperties": false
+                },
+                {
+                  "properties": {
+                    "input": {
+                      "properties": {
+                        "index": {
+                          "description": "from browser_state",
+                          "minimum": 0,
+                          "type": "integer"
+                        },
+                        "text": {
+                          "description": "Text to enter. With clear=True, text=\"\" clears the field without typing.",
+                          "type": "string"
+                        },
+                        "clear": {
+                          "description": "Clear existing text before typing. Set to False to append instead.",
+                          "type": "boolean"
+                        }
+                      },
+                      "required": [
+                        "index",
+                        "text",
+                        "clear"
+                      ],
+                      "type": "object",
+                      "additionalProperties": false,
+                      "description": "Input text into element by index. Clears existing text by default; pass text=\"\" to clear only, or clear=False to append."
+                    }
+                  },
+                  "required": [
+                    "input"
+                  ],
+                  "type": "object",
+                  "additionalProperties": false
+                },
+                {
+                  "properties": {
+                    "switch": {
+                      "properties": {
+                        "tab_id": {
+                          "description": "4-char id",
+                          "maxLength": 4,
+                          "minLength": 4,
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "tab_id"
+                      ],
+                      "type": "object",
+                      "additionalProperties": false,
+                      "description": "Switch to another open tab by tab_id. Tab IDs are shown in browser state tabs list (last 4 chars of target_id). Use when you need to work with content in a different tab."
+                    }
+                  },
+                  "required": [
+                    "switch"
+                  ],
+                  "type": "object",
+                  "additionalProperties": false
+                },
+                {
+                  "properties": {
+                    "close": {
+                      "properties": {
+                        "tab_id": {
+                          "description": "4-char id",
+                          "maxLength": 4,
+                          "minLength": 4,
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "tab_id"
+                      ],
+                      "type": "object",
+                      "additionalProperties": false,
+                      "description": "Close a tab by tab_id. Tab IDs are shown in browser state tabs list (last 4 chars of target_id). Use to clean up tabs you no longer need."
+                    }
+                  },
+                  "required": [
+                    "close"
+                  ],
+                  "type": "object",
+                  "additionalProperties": false
+                },
+                {
+                  "properties": {
+                    "scroll": {
+                      "properties": {
+                        "down": {
+                          "description": "down=True=scroll down, down=False scroll up",
+                          "type": "boolean"
+                        },
+                        "pages": {
+                          "description": "0.5=half page, 1=full page, 10=to bottom/top",
+                          "type": "number"
+                        },
+                        "index": {
+                          "anyOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ],
+                          "description": "Optional element index to scroll within specific element"
+                        }
+                      },
+                      "type": "object",
+                      "additionalProperties": false,
+                      "description": "Scroll by pages. REQUIRED: down=True/False (True=scroll down, False=scroll up, default=True). Optional: pages=0.5-10.0 (default 1.0). Use index for scroll elements (dropdowns/custom UI). High pages (10) reaches bottom. Multi-page scrolls sequentially. Viewport-based height, fallback 1000px/page.",
+                      "required": [
+                        "down",
+                        "pages",
+                        "index"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "scroll"
+                  ],
+                  "type": "object",
+                  "additionalProperties": false
+                },
+                {
+                  "properties": {
+                    "send_keys": {
+                      "properties": {
+                        "keys": {
+                          "description": "keys (Escape, Enter, PageDown) or shortcuts (Control+o)",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "keys"
+                      ],
+                      "type": "object",
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "send_keys"
+                  ],
+                  "type": "object",
+                  "additionalProperties": false
+                },
+                {
+                  "properties": {
+                    "find_text": {
+                      "properties": {
+                        "text": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "text"
+                      ],
+                      "type": "object",
+                      "additionalProperties": false,
+                      "description": "Scroll to text."
+                    }
+                  },
+                  "required": [
+                    "find_text"
+                  ],
+                  "type": "object",
+                  "additionalProperties": false
+                },
+                {
+                  "properties": {
+                    "dropdown_options": {
+                      "properties": {
+                        "index": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "index"
+                      ],
+                      "type": "object",
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "dropdown_options"
+                  ],
+                  "type": "object",
+                  "additionalProperties": false
+                },
+                {
+                  "properties": {
+                    "select_dropdown": {
+                      "properties": {
+                        "index": {
+                          "type": "integer"
+                        },
+                        "text": {
+                          "description": "exact text/value",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "index",
+                        "text"
+                      ],
+                      "type": "object",
+                      "additionalProperties": false,
+                      "description": "Set the option of a <select> element."
+                    }
+                  },
+                  "required": [
+                    "select_dropdown"
+                  ],
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "thinking",
+          "evaluation_previous_goal",
+          "memory",
+          "next_goal",
+          "current_plan_item",
+          "plan_update",
+          "action"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "strict": true
+    },
+    "verbosity": "medium"
+  },
+  "tool_choice": "none",
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  },
+  "tools": [],
+  "top_logprobs": 0,
+  "top_p": 0.98,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 7958,
+    "input_tokens_details": {
+      "cache_write_tokens": 1689,
+      "cached_tokens": 6266
+    },
+    "output_tokens": 222,
+    "output_tokens_details": {
+      "reasoning_tokens": 49
+    },
+    "total_tokens": 8180
+  },
+  "user": null,
+  "metadata": {}
+}

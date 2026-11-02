@@ -1,0 +1,11 @@
+{
+  "step": 2,
+  "stage": "options",
+  "screenshot_changed": true,
+  "normalized_observation_changed": null,
+  "diagnostic_content_changed": true,
+  "screenshot_sha256": "22391a5cd51bce53be6733ff6a8d08ca9913b03ddc4be903d727e243817227d4",
+  "reference_screenshot_sha256": "af75521196c4ee32d9908f3a5683a0c52fede2c9ffedd9eb06fbab7f81758d5e",
+  "comparison_channel": "native_browser_use_screenshot",
+  "sent_to_policy": true
+}
