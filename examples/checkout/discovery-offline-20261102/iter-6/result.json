@@ -1,0 +1,231 @@
+{
+  "status": "valid_proposal",
+  "backend": "opencode",
+  "offline_fixture": true,
+  "context_delivered": true,
+  "candidate_hash": "63bc84b646a4ac4b5fb5023a0474863ebfdf9dc5a2aa05b7a09082259ab20dec",
+  "elapsed_seconds": 28.380340535999494,
+  "gateway": {
+    "requests_received": 6,
+    "requests_forwarded": 6,
+    "preview_calls": 1,
+    "status_counts": {
+      "completed": 6
+    },
+    "halted": null,
+    "requests": [
+      {
+        "session_request": 1,
+        "method": "POST",
+        "route": "/v1/responses",
+        "status": "completed",
+        "request_started": true,
+        "started": 1793655269.8588238,
+        "usage": {
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "input_tokens_details": {
+            "cached_tokens": 0
+          },
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "ledger_id": 30,
+        "effective_settings": {
+          "model": "gpt-6.1-sol",
+          "reasoning": {
+            "effort": "medium",
+            "summary": "auto"
+          },
+          "max_output_tokens": 8192,
+          "service_tier": "default",
+          "store": false
+        },
+        "http_status": 200,
+        "response_model": "gpt-6.1-sol",
+        "elapsed_seconds": 0.023772716522216797,
+        "finalized": true
+      },
+      {
+        "session_request": 2,
+        "method": "POST",
+        "route": "/v1/responses",
+        "status": "completed",
+        "request_started": true,
+        "started": 1793655270.2960095,
+        "usage": {
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "input_tokens_details": {
+            "cached_tokens": 0
+          },
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "ledger_id": 31,
+        "effective_settings": {
+          "model": "gpt-6.1-sol",
+          "reasoning": {
+            "effort": "medium",
+            "summary": "auto"
+          },
+          "max_output_tokens": 8192,
+          "service_tier": "default",
+          "store": false
+        },
+        "http_status": 200,
+        "response_model": "gpt-6.1-sol",
+        "elapsed_seconds": 0.026814937591552734,
+        "finalized": true
+      },
+      {
+        "session_request": 3,
+        "method": "POST",
+        "route": "/v1/responses",
+        "status": "completed",
+        "request_started": true,
+        "started": 1793655270.382908,
+        "usage": {
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "input_tokens_details": {
+            "cached_tokens": 0
+          },
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "ledger_id": 32,
+        "effective_settings": {
+          "model": "gpt-6.1-sol",
+          "reasoning": {
+            "effort": "medium",
+            "summary": "auto"
+          },
+          "max_output_tokens": 8192,
+          "service_tier": "default",
+          "store": false
+        },
+        "http_status": 200,
+        "response_model": "gpt-6.1-sol",
+        "elapsed_seconds": 0.026715755462646484,
+        "finalized": true
+      },
+      {
+        "session_request": 4,
+        "method": "POST",
+        "route": "/v1/responses",
+        "status": "completed",
+        "request_started": true,
+        "started": 1793655270.6190698,
+        "usage": {
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "input_tokens_details": {
+            "cached_tokens": 0
+          },
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "ledger_id": 33,
+        "effective_settings": {
+          "model": "gpt-6.1-sol",
+          "reasoning": {
+            "effort": "medium",
+            "summary": "auto"
+          },
+          "max_output_tokens": 8192,
+          "service_tier": "default",
+          "store": false
+        },
+        "http_status": 200,
+        "response_model": "gpt-6.1-sol",
+        "elapsed_seconds": 0.022406578063964844,
+        "finalized": true
+      },
+      {
+        "session_request": 5,
+        "method": "POST",
+        "route": "/v1/responses",
+        "status": "completed",
+        "request_started": true,
+        "started": 1793655291.1561744,
+        "usage": {
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "input_tokens_details": {
+            "cached_tokens": 0
+          },
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "ledger_id": 34,
+        "effective_settings": {
+          "model": "gpt-6.1-sol",
+          "reasoning": {
+            "effort": "medium",
+            "summary": "auto"
+          },
+          "max_output_tokens": 8192,
+          "service_tier": "default",
+          "store": false
+        },
+        "http_status": 200,
+        "response_model": "gpt-6.1-sol",
+        "elapsed_seconds": 0.02150106430053711,
+        "finalized": true
+      },
+      {
+        "session_request": 6,
+        "method": "POST",
+        "route": "/v1/responses",
+        "status": "completed",
+        "request_started": true,
+        "started": 1793655291.2826025,
+        "usage": {
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "input_tokens_details": {
+            "cached_tokens": 0
+          },
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "ledger_id": 35,
+        "effective_settings": {
+          "model": "gpt-6.1-sol",
+          "reasoning": {
+            "effort": "medium",
+            "summary": "auto"
+          },
+          "max_output_tokens": 8192,
+          "service_tier": "default",
+          "store": false
+        },
+        "http_status": 200,
+        "response_model": "gpt-6.1-sol",
+        "elapsed_seconds": 0.02415180206298828,
+        "finalized": true
+      }
+    ],
+    "active_handlers": 0,
+    "finalized": true,
+    "usage": {
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "requests_with_reported_usage": 6,
+      "requests_missing_usage": 0
+    }
+  }
+}

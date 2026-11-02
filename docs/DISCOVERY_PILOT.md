@@ -4,6 +4,8 @@ The recommended checkout entrypoint is `webhelix checkout discovery`. It runs on
 continuous search with both presentation and bounded interaction changes available.
 It replaces the earlier three-condition comparison. The older `checkout experiment`
 command remains for its historical clean-plus-identity workflow; it is not this pilot.
+The [completed offline verification](../examples/checkout/discovery-offline-20261102/README.md)
+records all six sessions, 19 scheduled episodes, feedback checks and a live cost forecast.
 
 ## Schedule and interpretation
 
@@ -47,6 +49,7 @@ Each candidate contains `product.html`, `cart.html`, `options.html`, `review.htm
 allows passive presentation changes plus one-shot event/state rules for optional
 selections, delivery and navigation among existing stages. New components, arbitrary
 JavaScript, misleading prose and additional stages are not implemented.
+Both surfaces are available; the optimizer may choose either or both for a candidate.
 
 ## Measurement and feedback
 

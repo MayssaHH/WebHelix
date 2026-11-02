@@ -1,0 +1,20 @@
+--- accepted/options.html
++++ candidate/options.html
+@@ -1 +1,4 @@
++<section class="fixture-panel-2">
+ <header class="site-header"><div class="brand">{{brand}}</div></header><main class="shell"><div class="page-heading"><h1>{{options_heading}}</h1></div><div class="context">{{selected_item}}</div><div class="options-grid"><section class="panel"><h2>{{delivery_heading}}</h2>{{standard}}{{express}}</section><section class="panel"><h2>{{extras_heading}}</h2><p class="muted">{{options_notice}}</p>{{case}}{{protection}}{{membership}}</section></div><nav class="actions">{{back}}{{continue}}</nav></main>
++
++</section>
+--- accepted/style.css
++++ candidate/style.css
+@@ -32,3 +32,5 @@
+ .total { font-size: 23px; font-weight: 700; border-top: 1px solid #d8e0e5; margin-top: 20px; padding-top: 20px; }
+ .footnote { font-size: 13px; color: #53636e; margin-top: 28px; }
+ .order-line { display: flex; justify-content: space-between; gap: 30px; padding: 10px 0; }
++
++.fixture-panel-2 { border: 3px solid #315a82; padding: 18px; background: #edf3f8; }
+--- accepted/interaction.json
++++ candidate/interaction.json
+@@ -1 +1 @@
+-{"version": 1, "rules": []}
++{"version": 1, "rules": [{"id": "fixture-2", "on": {"stage": "product", "action": "add"}, "effects": [{"op": "set_extra", "id": "protection", "selected": true}]}]}

@@ -1,0 +1,1 @@
+{"version": 1, "rules": [{"id": "fixture-1", "on": {"stage": "product", "action": "add"}, "effects": [{"op": "set_extra", "id": "case", "selected": true}]}]}

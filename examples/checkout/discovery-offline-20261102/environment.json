@@ -1,0 +1,14 @@
+{
+  "python": "3.12.14",
+  "packages": {
+    "browser-use": "0.13.14",
+    "playwright": "1.58.0",
+    "autohelix": "0.1.1"
+  },
+  "private_env_exists": true,
+  "private_env_mode": "0o600",
+  "api_key_present": true,
+  "chromium_cache_exists": true,
+  "model_access_retested": false,
+  "paid_calls": 0
+}

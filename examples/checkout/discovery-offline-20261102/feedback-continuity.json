@@ -1,0 +1,150 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "passed": true,
+      "serialized_request_context_matches": true,
+      "next_iteration": 2,
+      "prior_iterations": [
+        {
+          "iteration": 1,
+          "measurements_match": true,
+          "optimizer_note_matches": true,
+          "candidate_files_match": true,
+          "all_episodes_match": true
+        }
+      ],
+      "context_sha256": "84ce2fa9bc39fe7b54aeab434eb32fea3c751f61a693f76995ee2255bd26ab38"
+    },
+    {
+      "passed": true,
+      "serialized_request_context_matches": true,
+      "next_iteration": 3,
+      "prior_iterations": [
+        {
+          "iteration": 1,
+          "measurements_match": true,
+          "optimizer_note_matches": true,
+          "candidate_files_match": true,
+          "all_episodes_match": true
+        },
+        {
+          "iteration": 2,
+          "measurements_match": true,
+          "optimizer_note_matches": true,
+          "candidate_files_match": true,
+          "all_episodes_match": true
+        }
+      ],
+      "context_sha256": "30588c9aa91f12fa6286a2c79ad3f4488b90f722d8960c9f7ee0d3a8fab78507"
+    },
+    {
+      "passed": true,
+      "serialized_request_context_matches": true,
+      "next_iteration": 4,
+      "prior_iterations": [
+        {
+          "iteration": 1,
+          "measurements_match": true,
+          "optimizer_note_matches": true,
+          "candidate_files_match": true,
+          "all_episodes_match": true
+        },
+        {
+          "iteration": 2,
+          "measurements_match": true,
+          "optimizer_note_matches": true,
+          "candidate_files_match": true,
+          "all_episodes_match": true
+        },
+        {
+          "iteration": 3,
+          "measurements_match": true,
+          "optimizer_note_matches": true,
+          "candidate_files_match": true,
+          "all_episodes_match": true
+        }
+      ],
+      "context_sha256": "935c718691848212ebc01c7671b6aad0808d39c6fbc6528431e1b2d8bcd8eb86"
+    },
+    {
+      "passed": true,
+      "serialized_request_context_matches": true,
+      "next_iteration": 5,
+      "prior_iterations": [
+        {
+          "iteration": 1,
+          "measurements_match": true,
+          "optimizer_note_matches": true,
+          "candidate_files_match": true,
+          "all_episodes_match": true
+        },
+        {
+          "iteration": 2,
+          "measurements_match": true,
+          "optimizer_note_matches": true,
+          "candidate_files_match": true,
+          "all_episodes_match": true
+        },
+        {
+          "iteration": 3,
+          "measurements_match": true,
+          "optimizer_note_matches": true,
+          "candidate_files_match": true,
+          "all_episodes_match": true
+        },
+        {
+          "iteration": 4,
+          "measurements_match": true,
+          "optimizer_note_matches": true,
+          "candidate_files_match": true,
+          "all_episodes_match": true
+        }
+      ],
+      "context_sha256": "7db2b0ac620e64efb7b3fd1f7fb8811ff430da1aa7156bedd9a06509829e1733"
+    },
+    {
+      "passed": true,
+      "serialized_request_context_matches": true,
+      "next_iteration": 6,
+      "prior_iterations": [
+        {
+          "iteration": 1,
+          "measurements_match": true,
+          "optimizer_note_matches": true,
+          "candidate_files_match": true,
+          "all_episodes_match": true
+        },
+        {
+          "iteration": 2,
+          "measurements_match": true,
+          "optimizer_note_matches": true,
+          "candidate_files_match": true,
+          "all_episodes_match": true
+        },
+        {
+          "iteration": 3,
+          "measurements_match": true,
+          "optimizer_note_matches": true,
+          "candidate_files_match": true,
+          "all_episodes_match": true
+        },
+        {
+          "iteration": 4,
+          "measurements_match": true,
+          "optimizer_note_matches": true,
+          "candidate_files_match": true,
+          "all_episodes_match": true
+        },
+        {
+          "iteration": 5,
+          "measurements_match": true,
+          "optimizer_note_matches": true,
+          "candidate_files_match": true,
+          "all_episodes_match": true
+        }
+      ],
+      "context_sha256": "4345b9600e212f261834b91e1590cc7a862e8b39d00dddc63bb7b4873fdda23b"
+    }
+  ]
+}

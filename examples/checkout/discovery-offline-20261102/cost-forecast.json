@@ -1,0 +1,394 @@
+{
+  "kind": "offline_cost_sensitivity_forecast_not_invoice_or_enforced_cap",
+  "complete_six_contexts": true,
+  "historical_real_sessions": [
+    {
+      "session": "/workspace/webhelix-runs/browser-use-search-20261030/run/proposals/iter-1",
+      "compact_context_bytes": 31805,
+      "requests": 10,
+      "first_request_input_tokens": 11916,
+      "mean_request_input_tokens": 26924.8,
+      "mean_history_tool_image_overhead_tokens_per_request": 15008.8,
+      "input_tokens": 269248,
+      "output_tokens": 2727,
+      "conservative_accounted_usd": 1.5258595
+    },
+    {
+      "session": "/workspace/webhelix-runs/browser-use-continuation-20261102/run/proposals/iter-2",
+      "compact_context_bytes": 113233,
+      "requests": 11,
+      "first_request_input_tokens": 37569,
+      "mean_request_input_tokens": 45240.09090909091,
+      "mean_history_tool_image_overhead_tokens_per_request": 7671.090909090912,
+      "input_tokens": 497641,
+      "output_tokens": 3916,
+      "conservative_accounted_usd": 2.8016395
+    }
+  ],
+  "new_scripted_contexts": [
+    {
+      "iteration": 1,
+      "compact_context_bytes": 37592,
+      "context_file_bytes": 46255,
+      "actual_effective_request_max_file_bytes": 205692,
+      "scripted_transport_requests": 6,
+      "prior_iterations": []
+    },
+    {
+      "iteration": 2,
+      "compact_context_bytes": 162290,
+      "context_file_bytes": 254995,
+      "actual_effective_request_max_file_bytes": 353565,
+      "scripted_transport_requests": 6,
+      "prior_iterations": [
+        1
+      ]
+    },
+    {
+      "iteration": 3,
+      "compact_context_bytes": 288280,
+      "context_file_bytes": 465023,
+      "actual_effective_request_max_file_bytes": 490567,
+      "scripted_transport_requests": 6,
+      "prior_iterations": [
+        1,
+        2
+      ]
+    },
+    {
+      "iteration": 4,
+      "compact_context_bytes": 414271,
+      "context_file_bytes": 675052,
+      "actual_effective_request_max_file_bytes": 628626,
+      "scripted_transport_requests": 6,
+      "prior_iterations": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "iteration": 5,
+      "compact_context_bytes": 540264,
+      "context_file_bytes": 885083,
+      "actual_effective_request_max_file_bytes": 766135,
+      "scripted_transport_requests": 6,
+      "prior_iterations": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "iteration": 6,
+      "compact_context_bytes": 666157,
+      "context_file_bytes": 1095014,
+      "actual_effective_request_max_file_bytes": 903039,
+      "scripted_transport_requests": 6,
+      "prior_iterations": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    }
+  ],
+  "calibration": {
+    "input_usd_per_million": 5.5,
+    "output_usd_per_million": 16.5,
+    "marginal_input_tokens_per_context_byte": 0.31503905290563444,
+    "first_request_intercept_tokens": 1896.1829223362965,
+    "method": "Fit first-request context sensitivity to two real native sessions; add observed mean per-request tool/history/image overhead. Project actual six scripted-context sizes with10 or15 requests per real session. Only two historical sessions; not a fitted general token model.",
+    "output_tokens_per_request_scenario": 350,
+    "victim_reference_cost_per_episode": 0.18372016666666666,
+    "victim_reference_actions_per_episode": 4
+  },
+  "historical_victim_batches": [
+    {
+      "batch": "/workspace/webhelix-runs/browser-use-continuation-20261102/run/batches/iter-1-6bf6ba7d",
+      "episodes": 3,
+      "input_tokens": 94775,
+      "output_tokens": 1800,
+      "actions": [
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "batch": "/workspace/webhelix-runs/browser-use-continuation-20261102/run/batches/iter-2-3414eaa9",
+      "episodes": 3,
+      "input_tokens": 94823,
+      "output_tokens": 1808,
+      "actions": [
+        4,
+        4,
+        4
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "label": "lower",
+      "assumed_optimizer_requests_per_session": 10,
+      "assumed_victim_actions_per_episode": 5,
+      "optimizer_usd": 40.04412554256522,
+      "victim_usd": 4.363353958333333,
+      "combined_usd": 44.40747950089855,
+      "optimizer_sessions": [
+        {
+          "iteration": 1,
+          "assumed_requests": 10,
+          "estimated_input_tokens": 214102.21908255818,
+          "assumed_output_tokens": 3500,
+          "estimated_conservative_usd": 1.2353122049540701
+        },
+        {
+          "iteration": 2,
+          "assumed_requests": 10,
+          "estimated_input_tokens": 606949.6172748263,
+          "assumed_output_tokens": 3500,
+          "estimated_conservative_usd": 3.395972895011545
+        },
+        {
+          "iteration": 3,
+          "assumed_requests": 10,
+          "estimated_input_tokens": 1003867.3200306352,
+          "assumed_output_tokens": 3500,
+          "estimated_conservative_usd": 5.579020260168494
+        },
+        {
+          "iteration": 4,
+          "assumed_requests": 10,
+          "estimated_input_tokens": 1400788.1731769731,
+          "assumed_output_tokens": 3500,
+          "estimated_conservative_usd": 7.7620849524733515
+        },
+        {
+          "iteration": 5,
+          "assumed_requests": 10,
+          "estimated_input_tokens": 1797715.3271043692,
+          "assumed_output_tokens": 3500,
+          "estimated_conservative_usd": 9.94518429907403
+        },
+        {
+          "iteration": 6,
+          "assumed_requests": 10,
+          "estimated_input_tokens": 2194327.4419788592,
+          "assumed_output_tokens": 3500,
+          "estimated_conservative_usd": 12.126550930883726
+        }
+      ]
+    },
+    {
+      "label": "higher",
+      "assumed_optimizer_requests_per_session": 15,
+      "assumed_victim_actions_per_episode": 10,
+      "optimizer_usd": 63.698354313847815,
+      "victim_usd": 8.726707916666665,
+      "combined_usd": 72.42506223051448,
+      "optimizer_sessions": [
+        {
+          "iteration": 1,
+          "assumed_requests": 15,
+          "estimated_input_tokens": 431218.96498747356,
+          "assumed_output_tokens": 5250,
+          "estimated_conservative_usd": 2.4583293074311046
+        },
+        {
+          "iteration": 2,
+          "assumed_requests": 15,
+          "estimated_input_tokens": 1020490.0622758756,
+          "assumed_output_tokens": 5250,
+          "estimated_conservative_usd": 5.699320342517315
+        },
+        {
+          "iteration": 3,
+          "assumed_requests": 15,
+          "estimated_input_tokens": 1615866.616409589,
+          "assumed_output_tokens": 5250,
+          "estimated_conservative_usd": 8.973891390252739
+        },
+        {
+          "iteration": 4,
+          "assumed_requests": 15,
+          "estimated_input_tokens": 2211247.896129096,
+          "assumed_output_tokens": 5250,
+          "estimated_conservative_usd": 12.24848842871003
+        },
+        {
+          "iteration": 5,
+          "assumed_requests": 15,
+          "estimated_input_tokens": 2806638.6270201895,
+          "assumed_output_tokens": 5250,
+          "estimated_conservative_usd": 15.523137448611044
+        },
+        {
+          "iteration": 6,
+          "assumed_requests": 15,
+          "estimated_input_tokens": 3401556.7993319253,
+          "assumed_output_tokens": 5250,
+          "estimated_conservative_usd": 18.795187396325588
+        }
+      ]
+    },
+    {
+      "label": "twenty_call_sensitivity",
+      "assumed_optimizer_requests_per_session": 20,
+      "assumed_victim_actions_per_episode": 10,
+      "optimizer_usd": 84.93113908513043,
+      "victim_usd": 8.726707916666665,
+      "combined_usd": 93.6578470017971,
+      "optimizer_sessions": [
+        {
+          "iteration": 1,
+          "assumed_requests": 20,
+          "estimated_input_tokens": 574958.6199832981,
+          "assumed_output_tokens": 7000,
+          "estimated_conservative_usd": 3.2777724099081396
+        },
+        {
+          "iteration": 2,
+          "assumed_requests": 20,
+          "estimated_input_tokens": 1360653.4163678342,
+          "assumed_output_tokens": 7000,
+          "estimated_conservative_usd": 7.599093790023089
+        },
+        {
+          "iteration": 3,
+          "assumed_requests": 20,
+          "estimated_input_tokens": 2154488.821879452,
+          "assumed_output_tokens": 7000,
+          "estimated_conservative_usd": 11.965188520336985
+        },
+        {
+          "iteration": 4,
+          "assumed_requests": 20,
+          "estimated_input_tokens": 2948330.528172128,
+          "assumed_output_tokens": 7000,
+          "estimated_conservative_usd": 16.331317904946705
+        },
+        {
+          "iteration": 5,
+          "assumed_requests": 20,
+          "estimated_input_tokens": 3742184.8360269195,
+          "assumed_output_tokens": 7000,
+          "estimated_conservative_usd": 20.69751659814806
+        },
+        {
+          "iteration": 6,
+          "assumed_requests": 20,
+          "estimated_input_tokens": 4535409.0657759,
+          "assumed_output_tokens": 7000,
+          "estimated_conservative_usd": 25.060249861767453
+        }
+      ]
+    }
+  ],
+  "conservative_full_context_holds_usd": {
+    "optimizer": 5.910168,
+    "victim": 5.808792
+  },
+  "limitations": [
+    "Historical conservative accounting rates are not actual provider invoice rates; cache discounts are not assumed.",
+    "Real model-generated candidates, failures, longer victim traces and tool use can change context sizes and call counts.",
+    "Native fixture reported usage is synthetic zero and is never treated as measured model tokens.",
+    "The20-request scenario is a sensitivity calculation, not a maximum possible charge.",
+    "A monetary reservation ceiling can stop execution before all19 episodes or six sessions finish. Unknown-usage calls retain their entire hold.",
+    "This forecast neither authorizes spending nor releases historical holds."
+  ],
+  "sources": [
+    {
+      "path": "/workspace/webhelix-runs/browser-use-search-20261030/run/proposals/iter-1/optimizer-context.json",
+      "sha256": "d6badc1802b4e899d967c05c26da2824b69cc2bf570e454780324df3827fc129",
+      "bytes": 38218
+    },
+    {
+      "path": "/workspace/webhelix-runs/browser-use-search-20261030/run/proposals/iter-1/gateway-summary.json",
+      "sha256": "e357383978eb456afca1e9be46a35c600f01effa9c8ee43f7088c1ee3a3e6df6",
+      "bytes": 9521
+    },
+    {
+      "path": "/workspace/webhelix-runs/browser-use-continuation-20261102/run/proposals/iter-2/optimizer-context.json",
+      "sha256": "93f43816e4efed6b74fd0a7143de2a3b7c88968a7c48dd61a15dc9cf40d6c54f",
+      "bytes": 163544
+    },
+    {
+      "path": "/workspace/webhelix-runs/browser-use-continuation-20261102/run/proposals/iter-2/gateway-summary.json",
+      "sha256": "db44930fb02591c00e2c376f84de8554ab5933d518104d5702f67aaa003ef5a7",
+      "bytes": 10437
+    },
+    {
+      "path": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-1/optimizer-context.json",
+      "sha256": "9c9c932c538ea37e241f754294913de63ccff977694c1bb95f8eb0c6ea8e1889",
+      "bytes": 46255
+    },
+    {
+      "path": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-1/gateway-summary.json",
+      "sha256": "17951857531f7936f474dcd943d3472c48e55f1da8826311967656ddfd2bd014",
+      "bytes": 5542
+    },
+    {
+      "path": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-2/optimizer-context.json",
+      "sha256": "84ce2fa9bc39fe7b54aeab434eb32fea3c751f61a693f76995ee2255bd26ab38",
+      "bytes": 254995
+    },
+    {
+      "path": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-2/gateway-summary.json",
+      "sha256": "f543d1d034710237089fb44779e541138e252f881a4ca31918189bf7936fb823",
+      "bytes": 5546
+    },
+    {
+      "path": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-3/optimizer-context.json",
+      "sha256": "30588c9aa91f12fa6286a2c79ad3f4488b90f722d8960c9f7ee0d3a8fab78507",
+      "bytes": 465023
+    },
+    {
+      "path": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-3/gateway-summary.json",
+      "sha256": "b28ff954028b03bb4f4d98f0ea4508e85aaa72e67a209756d3b2c7113e38d478",
+      "bytes": 5548
+    },
+    {
+      "path": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-4/optimizer-context.json",
+      "sha256": "935c718691848212ebc01c7671b6aad0808d39c6fbc6528431e1b2d8bcd8eb86",
+      "bytes": 675052
+    },
+    {
+      "path": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-4/gateway-summary.json",
+      "sha256": "d3f569410968b2ac2e72b59ab3ebad5ffdf0e47d4b81974ed3220e766e2635ef",
+      "bytes": 5545
+    },
+    {
+      "path": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-5/optimizer-context.json",
+      "sha256": "7db2b0ac620e64efb7b3fd1f7fb8811ff430da1aa7156bedd9a06509829e1733",
+      "bytes": 885083
+    },
+    {
+      "path": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-5/gateway-summary.json",
+      "sha256": "6407783ef88295c23b23fd1184c8feb0eea52d679dbf0b48cf0347fd76fe6ed0",
+      "bytes": 5544
+    },
+    {
+      "path": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-6/optimizer-context.json",
+      "sha256": "4345b9600e212f261834b91e1590cc7a862e8b39d00dddc63bb7b4873fdda23b",
+      "bytes": 1095014
+    },
+    {
+      "path": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-6/gateway-summary.json",
+      "sha256": "e742f1d5368912091cb1db88ac9537821b2c49396309c6dc49d45c692ed6e4e1",
+      "bytes": 5547
+    },
+    {
+      "path": "/workspace/webhelix-runs/browser-use-continuation-20261102/run/batches/iter-1-6bf6ba7d/report.json",
+      "sha256": "cdca8f1b1a1f169d29598fa6df037ce7056203cff5a4948dec2ca5543cfa0979",
+      "bytes": 31203
+    },
+    {
+      "path": "/workspace/webhelix-runs/browser-use-continuation-20261102/run/batches/iter-2-3414eaa9/report.json",
+      "sha256": "4683e8b59bc2ceb298d9870ea4edf9ce81b76598dcc9c75af87e571f2ffff062",
+      "bytes": 31209
+    }
+  ]
+}

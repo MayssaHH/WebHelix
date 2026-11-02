@@ -1,0 +1,704 @@
+{
+  "offline_only": true,
+  "raw_run": "/workspace/webhelix-runs/discovery-offline-20261102",
+  "files": [
+    {
+      "path": "audit.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/audit.json",
+      "sha256": "ed175a785d7912cde1975094ad04fd8f36c12d86f0351030c572dd02aa6d4c33",
+      "bytes": 29120
+    },
+    {
+      "path": "history.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/history.json",
+      "sha256": "5ff8386634579b6cc5aa846854bbdd440e5beed3f2d359e7ff7dcdb3212d5160",
+      "bytes": 7235
+    },
+    {
+      "path": "feedback-continuity.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/feedback-continuity.json",
+      "sha256": "aaefc4a6b348d0e81690bd2b68147aa7befadcb41bf457ad02bc67ddf755854b",
+      "bytes": 4309
+    },
+    {
+      "path": "budget.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/budget.json",
+      "sha256": "1a5f2851c165bb206c8fc7b7cfe8f56f458a79a1297fb2f838516adc3b6d14c3",
+      "bytes": 20207
+    },
+    {
+      "path": "opencode-runtime.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/opencode-runtime.json",
+      "sha256": "eb5da254b0d254a9586c894c052bc17c59c32a808ef9b087d55ee54f961523f4",
+      "bytes": 696
+    },
+    {
+      "path": "environment.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-environment-20261102.json",
+      "sha256": "0c4c62ea66f844a81d94a74332d60494a07a6b90070940b34f1bb1849dcdf6e1",
+      "bytes": 304
+    },
+    {
+      "path": "iter-1/optimizer-note.md",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-1/optimizer-note.md",
+      "sha256": "f8a05209d94ab98772712b28f46bde8b81a5862fb60466d8d5a11e9ed352c4f7",
+      "bytes": 495
+    },
+    {
+      "path": "iter-1/candidate.diff",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-1/candidate.diff",
+      "sha256": "24411641ea86120f0993b096bf3733d6e07817c5fa6a524510447f5dceba1004",
+      "bytes": 1305
+    },
+    {
+      "path": "iter-1/acceptance.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-1/acceptance.json",
+      "sha256": "47e20a4ca988451be950a263dce34355f6a3110b93a58fcd942dc4cb9f4f805c",
+      "bytes": 1122
+    },
+    {
+      "path": "iter-1/result.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-1/result.json",
+      "sha256": "dfb013666543c36a7119f09ab689521ee90295f739563f7f02590091b229a3a8",
+      "bytes": 6243
+    },
+    {
+      "path": "iter-1/candidate/options.html",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-1/candidate/options.html",
+      "sha256": "98d5f365e4545c0885a724e5342025e8923de9f00f508fcdda8b649bde8c6c61",
+      "bytes": 548
+    },
+    {
+      "path": "iter-1/candidate/review.html",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-1/candidate/review.html",
+      "sha256": "f34294204096b8ea9bc4ef4cc2c0b1b17fa64a102029c3c8bac6d83ffbdb0410",
+      "bytes": 429
+    },
+    {
+      "path": "iter-1/candidate/style.css",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-1/candidate/style.css",
+      "sha256": "84fed97efd6943d9aef703cf470d09917e7648bb50c17fa59f1d529484522cbf",
+      "bytes": 2873
+    },
+    {
+      "path": "iter-1/candidate/product.html",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-1/candidate/product.html",
+      "sha256": "581740ceccb22ed936eb236603ba5b10871518230906c369b4ef2a3966db6f2f",
+      "bytes": 609
+    },
+    {
+      "path": "iter-1/candidate/cart.html",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-1/candidate/cart.html",
+      "sha256": "a56e87f0003237fccf5e071ee0afa88202b2cf4d5bd22c5c25dcefd4c8a7fd85",
+      "bytes": 387
+    },
+    {
+      "path": "iter-1/candidate/interaction.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-1/candidate/interaction.json",
+      "sha256": "44b5a45598aa55eb2d52d8d69ba8ce7815d8d33fce0d123db8881294e8d4c5a3",
+      "bytes": 158
+    },
+    {
+      "path": "iter-2/optimizer-note.md",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-2/optimizer-note.md",
+      "sha256": "cc0788712392576f37d64036fc3da985554f77f0add40285e0ca3d743e505b40",
+      "bytes": 1298
+    },
+    {
+      "path": "iter-2/candidate.diff",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-2/candidate.diff",
+      "sha256": "3cd9b82aa1dfd662ade8ebcf0f6b541d93bfc220da981fdcc1f9b42f15e904c6",
+      "bytes": 1311
+    },
+    {
+      "path": "iter-2/acceptance.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-2/acceptance.json",
+      "sha256": "358def8ca906eb156cafc62d41cdb5dc7ff11a0c1dc85df89ba8befef5f2bed2",
+      "bytes": 1122
+    },
+    {
+      "path": "iter-2/result.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-2/result.json",
+      "sha256": "3e0741642145cf44d1d35887c4b37458399fac2a2cd6e3afd2f10a0d54f09426",
+      "bytes": 6247
+    },
+    {
+      "path": "iter-2/candidate/options.html",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-2/candidate/options.html",
+      "sha256": "21a8ee08db34c10400a1649f7295b59304fd091d42e90d438f1af51ccc5f7480",
+      "bytes": 548
+    },
+    {
+      "path": "iter-2/candidate/review.html",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-2/candidate/review.html",
+      "sha256": "f34294204096b8ea9bc4ef4cc2c0b1b17fa64a102029c3c8bac6d83ffbdb0410",
+      "bytes": 429
+    },
+    {
+      "path": "iter-2/candidate/style.css",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-2/candidate/style.css",
+      "sha256": "1269d06c83bcdab9b6902a07247a725a859d43f4bfcf464391d86169e24b5fc3",
+      "bytes": 2873
+    },
+    {
+      "path": "iter-2/candidate/product.html",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-2/candidate/product.html",
+      "sha256": "581740ceccb22ed936eb236603ba5b10871518230906c369b4ef2a3966db6f2f",
+      "bytes": 609
+    },
+    {
+      "path": "iter-2/candidate/cart.html",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-2/candidate/cart.html",
+      "sha256": "a56e87f0003237fccf5e071ee0afa88202b2cf4d5bd22c5c25dcefd4c8a7fd85",
+      "bytes": 387
+    },
+    {
+      "path": "iter-2/candidate/interaction.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-2/candidate/interaction.json",
+      "sha256": "2058dd78a4d3305a8552bc49e0c9a0de9dfe79731db29b60bdedde669c0e3d96",
+      "bytes": 164
+    },
+    {
+      "path": "iter-3/optimizer-note.md",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-3/optimizer-note.md",
+      "sha256": "159ebaa3b3cfab72d08cbc31ee5f659e8ce9ca9d2e366e380bf188b8ae4ef45f",
+      "bytes": 1298
+    },
+    {
+      "path": "iter-3/candidate.diff",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-3/candidate.diff",
+      "sha256": "dc1864bc76107f71b657ab828658d9adeb40b4b185b3175bb34f8c1d6ff3c582",
+      "bytes": 1311
+    },
+    {
+      "path": "iter-3/acceptance.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-3/acceptance.json",
+      "sha256": "a19a432cf4dfbdee5621654a24da8bcd43fe869a0baa4234543822585d1ca1d5",
+      "bytes": 1122
+    },
+    {
+      "path": "iter-3/result.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-3/result.json",
+      "sha256": "e213f256204744aeb48a6eb5fc4892315985b6a6b37d1e291735cc82f19d6c00",
+      "bytes": 6249
+    },
+    {
+      "path": "iter-3/candidate/options.html",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-3/candidate/options.html",
+      "sha256": "94e6a558b4b86b583cbefa3a7ec79a5509f6907c680eef8e691f1960851d7fbf",
+      "bytes": 548
+    },
+    {
+      "path": "iter-3/candidate/review.html",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-3/candidate/review.html",
+      "sha256": "f34294204096b8ea9bc4ef4cc2c0b1b17fa64a102029c3c8bac6d83ffbdb0410",
+      "bytes": 429
+    },
+    {
+      "path": "iter-3/candidate/style.css",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-3/candidate/style.css",
+      "sha256": "369a0191efbc1af277b69f79657814524100e544a17adb8e648ae26bd2f46ae9",
+      "bytes": 2873
+    },
+    {
+      "path": "iter-3/candidate/product.html",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-3/candidate/product.html",
+      "sha256": "581740ceccb22ed936eb236603ba5b10871518230906c369b4ef2a3966db6f2f",
+      "bytes": 609
+    },
+    {
+      "path": "iter-3/candidate/cart.html",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-3/candidate/cart.html",
+      "sha256": "a56e87f0003237fccf5e071ee0afa88202b2cf4d5bd22c5c25dcefd4c8a7fd85",
+      "bytes": 387
+    },
+    {
+      "path": "iter-3/candidate/interaction.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-3/candidate/interaction.json",
+      "sha256": "3e601f250374eb151135c2511a5db37c7bb02da22dd8e02db7a465a8e607b561",
+      "bytes": 164
+    },
+    {
+      "path": "iter-4/optimizer-note.md",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-4/optimizer-note.md",
+      "sha256": "3de2a6d8470c0e0db97a4ea16dc4ead3e18ff773e374049877c2c7b622f35175",
+      "bytes": 1299
+    },
+    {
+      "path": "iter-4/candidate.diff",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-4/candidate.diff",
+      "sha256": "81b7bb7b9197d6a836892dd4717c520e09573be4cc527440e6fb2612f64c013f",
+      "bytes": 1311
+    },
+    {
+      "path": "iter-4/acceptance.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-4/acceptance.json",
+      "sha256": "c114362f9fbffb33922f5dacb13e29851a90c44afc96aa381cf19b2e675dbae5",
+      "bytes": 1122
+    },
+    {
+      "path": "iter-4/result.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-4/result.json",
+      "sha256": "f13398e973da8f8e739299634a061d8045ea9b168e2f222ed1c7c75d6a458370",
+      "bytes": 6245
+    },
+    {
+      "path": "iter-4/candidate/options.html",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-4/candidate/options.html",
+      "sha256": "be574668e22ee56286d0e2cd824e6a7622ee23ebcec24f904c72491638adfad0",
+      "bytes": 548
+    },
+    {
+      "path": "iter-4/candidate/review.html",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-4/candidate/review.html",
+      "sha256": "f34294204096b8ea9bc4ef4cc2c0b1b17fa64a102029c3c8bac6d83ffbdb0410",
+      "bytes": 429
+    },
+    {
+      "path": "iter-4/candidate/style.css",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-4/candidate/style.css",
+      "sha256": "4d7415c142f6324df75f6d5072f513ff65cefe5b9dbf678942863a465c44323c",
+      "bytes": 2873
+    },
+    {
+      "path": "iter-4/candidate/product.html",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-4/candidate/product.html",
+      "sha256": "581740ceccb22ed936eb236603ba5b10871518230906c369b4ef2a3966db6f2f",
+      "bytes": 609
+    },
+    {
+      "path": "iter-4/candidate/cart.html",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-4/candidate/cart.html",
+      "sha256": "a56e87f0003237fccf5e071ee0afa88202b2cf4d5bd22c5c25dcefd4c8a7fd85",
+      "bytes": 387
+    },
+    {
+      "path": "iter-4/candidate/interaction.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-4/candidate/interaction.json",
+      "sha256": "8e66e284493100239086e3b37b53eaf452276a1e9f8928c47d34c0d1f546bedd",
+      "bytes": 164
+    },
+    {
+      "path": "iter-5/optimizer-note.md",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-5/optimizer-note.md",
+      "sha256": "096afc93f04b3affcb841ccfc46fe0a0f38e30be52a55c3b1d9566da2f70c4dc",
+      "bytes": 1298
+    },
+    {
+      "path": "iter-5/candidate.diff",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-5/candidate.diff",
+      "sha256": "391286b35b57984f45a06bc7eead0a5a2893f654b78d30d3051f7fcfb496d001",
+      "bytes": 1311
+    },
+    {
+      "path": "iter-5/acceptance.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-5/acceptance.json",
+      "sha256": "397ad18a765c3aafedeacf1c8009ab377cf3d148e4285636452c80d2d401708c",
+      "bytes": 1122
+    },
+    {
+      "path": "iter-5/result.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-5/result.json",
+      "sha256": "334cf7dd7a24c3a95b87e5af508a8c4e39bffb4e737c127f6a274420012d3258",
+      "bytes": 6245
+    },
+    {
+      "path": "iter-5/candidate/options.html",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-5/candidate/options.html",
+      "sha256": "34fee03abcfbe22c6e7c27c36595a16c282ade703bb0ee3ac289195c30c5149a",
+      "bytes": 548
+    },
+    {
+      "path": "iter-5/candidate/review.html",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-5/candidate/review.html",
+      "sha256": "f34294204096b8ea9bc4ef4cc2c0b1b17fa64a102029c3c8bac6d83ffbdb0410",
+      "bytes": 429
+    },
+    {
+      "path": "iter-5/candidate/style.css",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-5/candidate/style.css",
+      "sha256": "5b5484eceb8dcd15e5ae648db79803038d2bc052d51f04536550faf8223237f2",
+      "bytes": 2873
+    },
+    {
+      "path": "iter-5/candidate/product.html",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-5/candidate/product.html",
+      "sha256": "581740ceccb22ed936eb236603ba5b10871518230906c369b4ef2a3966db6f2f",
+      "bytes": 609
+    },
+    {
+      "path": "iter-5/candidate/cart.html",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-5/candidate/cart.html",
+      "sha256": "a56e87f0003237fccf5e071ee0afa88202b2cf4d5bd22c5c25dcefd4c8a7fd85",
+      "bytes": 387
+    },
+    {
+      "path": "iter-5/candidate/interaction.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-5/candidate/interaction.json",
+      "sha256": "354632e99059e3512c32f13ec7e557729b512a214d52a55fee49354712f2dfb7",
+      "bytes": 164
+    },
+    {
+      "path": "iter-6/optimizer-note.md",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-6/optimizer-note.md",
+      "sha256": "2381f46c8d07a15ca36c7733c2c2f266b2b46797d85b0d946500ced8b0b92bff",
+      "bytes": 1299
+    },
+    {
+      "path": "iter-6/candidate.diff",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-6/candidate.diff",
+      "sha256": "141269e292b2e30a16ec904bf03d2e918030091c591ef7596440b8d08820ca7b",
+      "bytes": 1311
+    },
+    {
+      "path": "iter-6/acceptance.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-6/acceptance.json",
+      "sha256": "3c8ef6528dbba0055ab9d8df733cef4ced99e9a8bdb8549ccd9cf576cccb7d29",
+      "bytes": 1122
+    },
+    {
+      "path": "iter-6/result.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-6/result.json",
+      "sha256": "5367829d265a53de296114a0e1530f9df5adcc4bf5bc67f77cad2e9bfc5001e3",
+      "bytes": 6248
+    },
+    {
+      "path": "iter-6/candidate/options.html",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-6/candidate/options.html",
+      "sha256": "771f7313997a068663892b2763f85e24d6122c42eb42f6d34121d1601f7434cb",
+      "bytes": 548
+    },
+    {
+      "path": "iter-6/candidate/review.html",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-6/candidate/review.html",
+      "sha256": "f34294204096b8ea9bc4ef4cc2c0b1b17fa64a102029c3c8bac6d83ffbdb0410",
+      "bytes": 429
+    },
+    {
+      "path": "iter-6/candidate/style.css",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-6/candidate/style.css",
+      "sha256": "a9ed2bbed929411051260cfd49e767d3cf642cda87d7f134322713b885a7676b",
+      "bytes": 2873
+    },
+    {
+      "path": "iter-6/candidate/product.html",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-6/candidate/product.html",
+      "sha256": "581740ceccb22ed936eb236603ba5b10871518230906c369b4ef2a3966db6f2f",
+      "bytes": 609
+    },
+    {
+      "path": "iter-6/candidate/cart.html",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-6/candidate/cart.html",
+      "sha256": "a56e87f0003237fccf5e071ee0afa88202b2cf4d5bd22c5c25dcefd4c8a7fd85",
+      "bytes": 387
+    },
+    {
+      "path": "iter-6/candidate/interaction.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/proposals/iter-6/candidate/interaction.json",
+      "sha256": "ffcde7dfe1de69a57f09c249864edab5b9355ac57375ffb882354075cda47bad",
+      "bytes": 164
+    },
+    {
+      "path": "clean/episode-0/episode.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/batches/clean-b14e7e3f/episode-0/episode.json",
+      "sha256": "e4516e3ed45c908462f66544c1dd1bdd66237915c24e926b0eba37a49b0504b7",
+      "bytes": 12544
+    },
+    {
+      "path": "clean/episode-0/backend-after.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/batches/clean-b14e7e3f/episode-0/backend-after.json",
+      "sha256": "8df5c4c61af316c113b14246e3460c506719432e6dc0f50f5d36716bf0417fa4",
+      "bytes": 7123
+    },
+    {
+      "path": "clean/episode-0/interaction-journal.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/batches/clean-b14e7e3f/episode-0/interaction-journal.json",
+      "sha256": "7c06d29bb1d92d03174ddae940d778521eccd7a078d33d1f7890855961006c60",
+      "bytes": 4616
+    },
+    {
+      "path": "clean/episode-0/observation-1.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/batches/clean-b14e7e3f/episode-0/observation-1.json",
+      "sha256": "3c33b4922977aaedb321f7b249e261d22fa3e1828a24037a68018aaec6547e65",
+      "bytes": 2290
+    },
+    {
+      "path": "clean/episode-0/observation-4.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/batches/clean-b14e7e3f/episode-0/observation-4.json",
+      "sha256": "c28353b67b8a46dfb33d6538a9c817baeba8ba491380ef592d7b549289f0144f",
+      "bytes": 1161
+    },
+    {
+      "path": "clean/episode-0/observation-2.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/batches/clean-b14e7e3f/episode-0/observation-2.json",
+      "sha256": "994bfd2ac9e3839cb8e44f84152f4c5c66ff6b44dbbfdb309fee0cf8bb66ea6b",
+      "bytes": 2904
+    },
+    {
+      "path": "clean/episode-0/observation-3.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/batches/clean-b14e7e3f/episode-0/observation-3.json",
+      "sha256": "9be2c6caecf688db81e64c3d6c257b681fdb034fab1add7dd119dde1dc0decf1",
+      "bytes": 1590
+    },
+    {
+      "path": "clean/episode-0/observation-0.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/batches/clean-b14e7e3f/episode-0/observation-0.json",
+      "sha256": "fd20e5453b4e597acd125c243f87e64a131f8373212861e34cecacc1285eff9f",
+      "bytes": 1520
+    },
+    {
+      "path": "clean/episode-0/action-1.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/batches/clean-b14e7e3f/episode-0/action-1.json",
+      "sha256": "ae5ddddf80491913d827aef04e5bd4541d2573e19b7c115b338a46a73829d1fc",
+      "bytes": 36
+    },
+    {
+      "path": "clean/episode-0/action-0.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/batches/clean-b14e7e3f/episode-0/action-0.json",
+      "sha256": "3a76afd2d6890dd7f695eac05b50b6c6e217301a2a444e206fdb355ce894a035",
+      "bytes": 35
+    },
+    {
+      "path": "clean/episode-0/action-3.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/batches/clean-b14e7e3f/episode-0/action-3.json",
+      "sha256": "7c8ba2210b5a86be6159b1829f41eba98d422258d086a8bef54706441fd764b0",
+      "bytes": 37
+    },
+    {
+      "path": "clean/episode-0/action-2.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/batches/clean-b14e7e3f/episode-0/action-2.json",
+      "sha256": "e94bfc99d0bf77bbb21836c4104a0713f79aedf18aabd4aabd7eb90023de0593",
+      "bytes": 37
+    },
+    {
+      "path": "clean/episode-0/exposure-0.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/batches/clean-b14e7e3f/episode-0/exposure-0.json",
+      "sha256": "430414e8119d944f1e926b2b030af20d6f574f2d7e28d94f5bb08ad7c86082dd",
+      "bytes": 493
+    },
+    {
+      "path": "clean/episode-0/exposure-1.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/batches/clean-b14e7e3f/episode-0/exposure-1.json",
+      "sha256": "a4224d43da160a2f851d3202395247208926ba2df8238770edd96e829b56ce41",
+      "bytes": 490
+    },
+    {
+      "path": "clean/episode-0/exposure-4.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/batches/clean-b14e7e3f/episode-0/exposure-4.json",
+      "sha256": "489293dbe03db8e82f241d4f4fd423c9beeb0fe3186aaac57e9d7aa1ec94aee5",
+      "bytes": 499
+    },
+    {
+      "path": "clean/episode-0/exposure-2.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/batches/clean-b14e7e3f/episode-0/exposure-2.json",
+      "sha256": "30bdcb387e332deb80665f0536e2813fd1c43ad8d9021becba1bad3441850573",
+      "bytes": 493
+    },
+    {
+      "path": "clean/episode-0/exposure-3.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/batches/clean-b14e7e3f/episode-0/exposure-3.json",
+      "sha256": "1c789017598a2183e8b3859a1e510ff51b2d39506dbe8a7eb819889e5752ce24",
+      "bytes": 492
+    },
+    {
+      "path": "clean/episode-0/screenshot-1.png",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/batches/clean-b14e7e3f/episode-0/screenshot-1.png",
+      "sha256": "854d52f2e3d442da52715876d8a0d49b9ea74f3c386b6b61e26e0e767a39301f",
+      "bytes": 38467
+    },
+    {
+      "path": "clean/episode-0/screenshot-3.png",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/batches/clean-b14e7e3f/episode-0/screenshot-3.png",
+      "sha256": "b851a93740c5f1188abadc5276bb9fa3881cd618bf10209413be7ad385e25d41",
+      "bytes": 42822
+    },
+    {
+      "path": "clean/episode-0/screenshot-4.png",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/batches/clean-b14e7e3f/episode-0/screenshot-4.png",
+      "sha256": "1727a59df197017d918cb943ba63610f48e769d5735c72bc5197e0b6e47fe0aa",
+      "bytes": 29214
+    },
+    {
+      "path": "clean/episode-0/screenshot-0.png",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/batches/clean-b14e7e3f/episode-0/screenshot-0.png",
+      "sha256": "cab222b9c597c4075750718961115a19abce551df9d4127f3ca2da94e9a8c041",
+      "bytes": 44978
+    },
+    {
+      "path": "clean/episode-0/screenshot-2.png",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/batches/clean-b14e7e3f/episode-0/screenshot-2.png",
+      "sha256": "cc37605efdd412ba1cc477fa931fd18a17d7d895c746d859c661f3d4b334117e",
+      "bytes": 70154
+    },
+    {
+      "path": "iter-1/episode-0/episode.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/feedback/iter-1/episode-0/episode.json",
+      "sha256": "7aeb28b493b55138edabfb745a849064c93024bef17cb7459fc170eb823d1ddc",
+      "bytes": 15903
+    },
+    {
+      "path": "iter-1/episode-0/backend-after.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/feedback/iter-1/episode-0/backend-after.json",
+      "sha256": "8fc2eaad428e154c0552d9baab315b809784c3bcbe7d54c8c8fd0b7955adf1f3",
+      "bytes": 9619
+    },
+    {
+      "path": "iter-1/episode-0/interaction-journal.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/feedback/iter-1/episode-0/interaction-journal.json",
+      "sha256": "857967cdb3f2d05ab58c6c03c4112fd3c596e83b9205cf089063a69af39188af",
+      "bytes": 6835
+    },
+    {
+      "path": "iter-1/episode-0/observation-5.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/feedback/iter-1/episode-0/observation-5.json",
+      "sha256": "32f496f69ee611bdab14a4cb8c4683285c5b7a0dec77530fc71a72a87a2e669e",
+      "bytes": 1161
+    },
+    {
+      "path": "iter-1/episode-0/observation-1.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/feedback/iter-1/episode-0/observation-1.json",
+      "sha256": "96b80af2b9889fa213ba3e1e51f14a22d7c042a6049c0f256f089402fba037ec",
+      "bytes": 2290
+    },
+    {
+      "path": "iter-1/episode-0/observation-4.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/feedback/iter-1/episode-0/observation-4.json",
+      "sha256": "8c1cf31799fe01ee4c3dec0f96bc47855b202fdb1b6139bebcc7f6275127f056",
+      "bytes": 1590
+    },
+    {
+      "path": "iter-1/episode-0/observation-2.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/feedback/iter-1/episode-0/observation-2.json",
+      "sha256": "06b9427e4ec3d31be153fe91dc7068f3d4151ebab3659e5e40be1c0c7b1e29e3",
+      "bytes": 2903
+    },
+    {
+      "path": "iter-1/episode-0/observation-3.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/feedback/iter-1/episode-0/observation-3.json",
+      "sha256": "97e1cc1512df62ff964ded6c1defb3d36611776765a0a7168c3eef924b580854",
+      "bytes": 2891
+    },
+    {
+      "path": "iter-1/episode-0/observation-0.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/feedback/iter-1/episode-0/observation-0.json",
+      "sha256": "345eab614374aacf65853922e73ac9a36bf154a9bf6beb8510666a32640933e5",
+      "bytes": 1520
+    },
+    {
+      "path": "iter-1/episode-0/action-1.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/feedback/iter-1/episode-0/action-1.json",
+      "sha256": "ae5ddddf80491913d827aef04e5bd4541d2573e19b7c115b338a46a73829d1fc",
+      "bytes": 36
+    },
+    {
+      "path": "iter-1/episode-0/action-0.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/feedback/iter-1/episode-0/action-0.json",
+      "sha256": "3a76afd2d6890dd7f695eac05b50b6c6e217301a2a444e206fdb355ce894a035",
+      "bytes": 35
+    },
+    {
+      "path": "iter-1/episode-0/action-3.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/feedback/iter-1/episode-0/action-3.json",
+      "sha256": "e94bfc99d0bf77bbb21836c4104a0713f79aedf18aabd4aabd7eb90023de0593",
+      "bytes": 37
+    },
+    {
+      "path": "iter-1/episode-0/action-4.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/feedback/iter-1/episode-0/action-4.json",
+      "sha256": "06f5b5cedad1ecd952f58f1c83db19f373bd06fff26fd88bf31016140e817c20",
+      "bytes": 37
+    },
+    {
+      "path": "iter-1/episode-0/action-2.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/feedback/iter-1/episode-0/action-2.json",
+      "sha256": "9f44fbf74631f9c1a7b1843c68a0f060c1924bd4f623ada750f7cc1ecfa198fc",
+      "bytes": 37
+    },
+    {
+      "path": "iter-1/episode-0/exposure-0.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/feedback/iter-1/episode-0/exposure-0.json",
+      "sha256": "430414e8119d944f1e926b2b030af20d6f574f2d7e28d94f5bb08ad7c86082dd",
+      "bytes": 493
+    },
+    {
+      "path": "iter-1/episode-0/exposure-1.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/feedback/iter-1/episode-0/exposure-1.json",
+      "sha256": "a4224d43da160a2f851d3202395247208926ba2df8238770edd96e829b56ce41",
+      "bytes": 490
+    },
+    {
+      "path": "iter-1/episode-0/exposure-5.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/feedback/iter-1/episode-0/exposure-5.json",
+      "sha256": "e297ec707c6f153208e7519a206712fe2d03d993f5ab8874947e484ac150723f",
+      "bytes": 499
+    },
+    {
+      "path": "iter-1/episode-0/exposure-4.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/feedback/iter-1/episode-0/exposure-4.json",
+      "sha256": "aec297dbdb17d5450a396e49116d04a58c35f484fe83bdd5088f62d6b61f2c9a",
+      "bytes": 492
+    },
+    {
+      "path": "iter-1/episode-0/exposure-2.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/feedback/iter-1/episode-0/exposure-2.json",
+      "sha256": "6936944f3d4748a8fdf9b194b65fb252233d467a393f828ba04564a29d525522",
+      "bytes": 500
+    },
+    {
+      "path": "iter-1/episode-0/exposure-3.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/feedback/iter-1/episode-0/exposure-3.json",
+      "sha256": "1fdb653ffe87eb371c74d39f514d1625baaee3be0a6be0dad98cf6a9e8eb62be",
+      "bytes": 500
+    },
+    {
+      "path": "iter-1/episode-0/screenshot-1.png",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/feedback/iter-1/episode-0/screenshot-1.png",
+      "sha256": "854d52f2e3d442da52715876d8a0d49b9ea74f3c386b6b61e26e0e767a39301f",
+      "bytes": 38467
+    },
+    {
+      "path": "iter-1/episode-0/screenshot-3.png",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/feedback/iter-1/episode-0/screenshot-3.png",
+      "sha256": "d8880e1b139338efb6ce014b27c7659ec135ce8f859e9602c3a233143d0b43aa",
+      "bytes": 70493
+    },
+    {
+      "path": "iter-1/episode-0/screenshot-5.png",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/feedback/iter-1/episode-0/screenshot-5.png",
+      "sha256": "1727a59df197017d918cb943ba63610f48e769d5735c72bc5197e0b6e47fe0aa",
+      "bytes": 29214
+    },
+    {
+      "path": "iter-1/episode-0/screenshot-4.png",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/feedback/iter-1/episode-0/screenshot-4.png",
+      "sha256": "b851a93740c5f1188abadc5276bb9fa3881cd618bf10209413be7ad385e25d41",
+      "bytes": 42822
+    },
+    {
+      "path": "iter-1/episode-0/screenshot-0.png",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/feedback/iter-1/episode-0/screenshot-0.png",
+      "sha256": "cab222b9c597c4075750718961115a19abce551df9d4127f3ca2da94e9a8c041",
+      "bytes": 44978
+    },
+    {
+      "path": "iter-1/episode-0/screenshot-2.png",
+      "raw_source": "/workspace/webhelix-runs/discovery-offline-20261102/feedback/iter-1/episode-0/screenshot-2.png",
+      "sha256": "0f4b2b3144a3ff2dfc3ede038a2776ab8abe923eff6725742ec8bcfdd8723184",
+      "bytes": 70729
+    },
+    {
+      "path": "cost-forecast.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-cost-forecast-20261102.json",
+      "sha256": "b8123a546ce9be7bec7e23ed37ed9a7f8b6e2c27f875933ee543faba819cd2aa",
+      "bytes": 13985
+    },
+    {
+      "path": "forecast-cost.py",
+      "raw_source": "/workspace/webhelix-runs/forecast-discovery-cost-20261102.py",
+      "sha256": "3b254b6af0a36a9112f222600f84959d468edad7a9d8bb2245ef1adb490b4198",
+      "bytes": 6620
+    }
+  ],
+  "selection": "Small receipts, every optimizer note/candidate/diff, first candidate and clean native browser journeys. Full provider payloads and tested source remain in raw archive; no credentials or browser profiles exported.",
+  "derived_files": "README.md, summary.json and iter-*/measurement.json are explicitly generated explanations or projections of raw receipts."
+}

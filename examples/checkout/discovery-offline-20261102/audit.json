@@ -1,0 +1,1134 @@
+{
+  "passed": true,
+  "check_count": 225,
+  "scheduled_scripted_episodes": 19,
+  "optimizer_sessions": 6,
+  "fixture_requests": 36,
+  "real_model_calls": 0,
+  "checks": [
+    {
+      "check": "single completed offline discovery",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/__init__.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/bridge.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/cli.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/comparison.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/episode.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/evaluate.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/experiment.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/provider.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/site.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/spec.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/benchmark/__init__.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/benchmark/budget.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/benchmark/cli.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/benchmark/contract.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/benchmark/environment.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/benchmark/episode.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/benchmark/evaluate.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/benchmark/experiment.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/benchmark/optimizer.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/benchmark/render.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/browser/__init__.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/browser/manifest.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/browser/model.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/browser/observations.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/browser/runtime.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/checkout/__init__.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/checkout/cli.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/checkout/contract.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/checkout/controls.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/checkout/episode.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/checkout/evaluate.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/checkout/experiment.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/checkout/optimizer.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/checkout/report.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/checkout/scoring.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/checkout/site.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/checkout/interaction_controls.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/checkout/discovery.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/checkout/interaction.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/opencode/__init__.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/opencode/backend.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/opencode/config.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/opencode/fixture.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/opencode/gateway.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/opencode/launcher.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/opencode/preview.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/opencode/runtime.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/optimizer/__init__.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/optimizer/backend.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/optimizer/budget.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/optimizer/cli.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/optimizer/client.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/optimizer/continuation.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/search/__init__.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/search/budget.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/search/instructions.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/v2/__init__.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/v2/bridge.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/v2/cli.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/v2/contract.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/v2/episode.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/v2/evaluate.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/v2/experiment.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/v2/isolation.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/v2/report.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/v2/site.py",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/candidate/cart.html",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/candidate/options.html",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/candidate/product.html",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/candidate/review.html",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/candidate/style.css",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/opencode-runtime/Dockerfile",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/opencode-runtime/README.md",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/opencode-runtime/lock.json",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/opencode-runtime/wh-preview.py",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/catalogue.json",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/task.json",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/evaluation.json",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/CONTRACT.md",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/INTERACTION_CONTRACT.md",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/pilot.json",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/optimizer.example.json",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/victim.example.json",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/opencode.example.json",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/opencode-pilot.json",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/opencode-longer-pilot.json",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/opencode-longer.example.json",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/discovery-pilot.json",
+      "passed": true
+    },
+    {
+      "check": "protected source pyproject.toml",
+      "passed": true
+    },
+    {
+      "check": "protected source uv.lock",
+      "passed": true
+    },
+    {
+      "check": "protected source scripts/setup-opencode.py",
+      "passed": true
+    },
+    {
+      "check": "one baseline and six candidate batches",
+      "passed": true
+    },
+    {
+      "check": "no identity or arms",
+      "passed": true
+    },
+    {
+      "check": "one clean smoke claim",
+      "passed": true
+    },
+    {
+      "check": "clean-b14e7e3f required episode count",
+      "passed": true
+    },
+    {
+      "check": "clean-b14e7e3f served exact candidate",
+      "passed": true
+    },
+    {
+      "check": "clean-b14e7e3f measured complete scripted success",
+      "passed": true
+    },
+    {
+      "check": "clean-b14e7e3f/episode-0 fresh initial state",
+      "passed": true
+    },
+    {
+      "check": "clean-b14e7e3f/episode-0 confirmed independently",
+      "passed": true
+    },
+    {
+      "check": "clean-b14e7e3f/episode-0 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "iter-1-d825a336 required episode count",
+      "passed": true
+    },
+    {
+      "check": "iter-1-d825a336 served exact candidate",
+      "passed": true
+    },
+    {
+      "check": "iter-1-d825a336 measured complete scripted success",
+      "passed": true
+    },
+    {
+      "check": "iter-1-d825a336/episode-0 fresh initial state",
+      "passed": true
+    },
+    {
+      "check": "iter-1-d825a336/episode-0 confirmed independently",
+      "passed": true
+    },
+    {
+      "check": "iter-1-d825a336/episode-0 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "iter-1-d825a336/episode-0 actual interaction encountered",
+      "passed": true
+    },
+    {
+      "check": "iter-1-d825a336/episode-1 fresh initial state",
+      "passed": true
+    },
+    {
+      "check": "iter-1-d825a336/episode-1 confirmed independently",
+      "passed": true
+    },
+    {
+      "check": "iter-1-d825a336/episode-1 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "iter-1-d825a336/episode-1 actual interaction encountered",
+      "passed": true
+    },
+    {
+      "check": "iter-1-d825a336/episode-2 fresh initial state",
+      "passed": true
+    },
+    {
+      "check": "iter-1-d825a336/episode-2 confirmed independently",
+      "passed": true
+    },
+    {
+      "check": "iter-1-d825a336/episode-2 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "iter-1-d825a336/episode-2 actual interaction encountered",
+      "passed": true
+    },
+    {
+      "check": "iter-2-785fcc39 required episode count",
+      "passed": true
+    },
+    {
+      "check": "iter-2-785fcc39 served exact candidate",
+      "passed": true
+    },
+    {
+      "check": "iter-2-785fcc39 measured complete scripted success",
+      "passed": true
+    },
+    {
+      "check": "iter-2-785fcc39/episode-0 fresh initial state",
+      "passed": true
+    },
+    {
+      "check": "iter-2-785fcc39/episode-0 confirmed independently",
+      "passed": true
+    },
+    {
+      "check": "iter-2-785fcc39/episode-0 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "iter-2-785fcc39/episode-0 actual interaction encountered",
+      "passed": true
+    },
+    {
+      "check": "iter-2-785fcc39/episode-1 fresh initial state",
+      "passed": true
+    },
+    {
+      "check": "iter-2-785fcc39/episode-1 confirmed independently",
+      "passed": true
+    },
+    {
+      "check": "iter-2-785fcc39/episode-1 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "iter-2-785fcc39/episode-1 actual interaction encountered",
+      "passed": true
+    },
+    {
+      "check": "iter-2-785fcc39/episode-2 fresh initial state",
+      "passed": true
+    },
+    {
+      "check": "iter-2-785fcc39/episode-2 confirmed independently",
+      "passed": true
+    },
+    {
+      "check": "iter-2-785fcc39/episode-2 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "iter-2-785fcc39/episode-2 actual interaction encountered",
+      "passed": true
+    },
+    {
+      "check": "iter-3-30afcc70 required episode count",
+      "passed": true
+    },
+    {
+      "check": "iter-3-30afcc70 served exact candidate",
+      "passed": true
+    },
+    {
+      "check": "iter-3-30afcc70 measured complete scripted success",
+      "passed": true
+    },
+    {
+      "check": "iter-3-30afcc70/episode-0 fresh initial state",
+      "passed": true
+    },
+    {
+      "check": "iter-3-30afcc70/episode-0 confirmed independently",
+      "passed": true
+    },
+    {
+      "check": "iter-3-30afcc70/episode-0 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "iter-3-30afcc70/episode-0 actual interaction encountered",
+      "passed": true
+    },
+    {
+      "check": "iter-3-30afcc70/episode-1 fresh initial state",
+      "passed": true
+    },
+    {
+      "check": "iter-3-30afcc70/episode-1 confirmed independently",
+      "passed": true
+    },
+    {
+      "check": "iter-3-30afcc70/episode-1 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "iter-3-30afcc70/episode-1 actual interaction encountered",
+      "passed": true
+    },
+    {
+      "check": "iter-3-30afcc70/episode-2 fresh initial state",
+      "passed": true
+    },
+    {
+      "check": "iter-3-30afcc70/episode-2 confirmed independently",
+      "passed": true
+    },
+    {
+      "check": "iter-3-30afcc70/episode-2 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "iter-3-30afcc70/episode-2 actual interaction encountered",
+      "passed": true
+    },
+    {
+      "check": "iter-4-54685c4f required episode count",
+      "passed": true
+    },
+    {
+      "check": "iter-4-54685c4f served exact candidate",
+      "passed": true
+    },
+    {
+      "check": "iter-4-54685c4f measured complete scripted success",
+      "passed": true
+    },
+    {
+      "check": "iter-4-54685c4f/episode-0 fresh initial state",
+      "passed": true
+    },
+    {
+      "check": "iter-4-54685c4f/episode-0 confirmed independently",
+      "passed": true
+    },
+    {
+      "check": "iter-4-54685c4f/episode-0 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "iter-4-54685c4f/episode-0 actual interaction encountered",
+      "passed": true
+    },
+    {
+      "check": "iter-4-54685c4f/episode-1 fresh initial state",
+      "passed": true
+    },
+    {
+      "check": "iter-4-54685c4f/episode-1 confirmed independently",
+      "passed": true
+    },
+    {
+      "check": "iter-4-54685c4f/episode-1 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "iter-4-54685c4f/episode-1 actual interaction encountered",
+      "passed": true
+    },
+    {
+      "check": "iter-4-54685c4f/episode-2 fresh initial state",
+      "passed": true
+    },
+    {
+      "check": "iter-4-54685c4f/episode-2 confirmed independently",
+      "passed": true
+    },
+    {
+      "check": "iter-4-54685c4f/episode-2 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "iter-4-54685c4f/episode-2 actual interaction encountered",
+      "passed": true
+    },
+    {
+      "check": "iter-5-d7747eba required episode count",
+      "passed": true
+    },
+    {
+      "check": "iter-5-d7747eba served exact candidate",
+      "passed": true
+    },
+    {
+      "check": "iter-5-d7747eba measured complete scripted success",
+      "passed": true
+    },
+    {
+      "check": "iter-5-d7747eba/episode-0 fresh initial state",
+      "passed": true
+    },
+    {
+      "check": "iter-5-d7747eba/episode-0 confirmed independently",
+      "passed": true
+    },
+    {
+      "check": "iter-5-d7747eba/episode-0 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "iter-5-d7747eba/episode-0 actual interaction encountered",
+      "passed": true
+    },
+    {
+      "check": "iter-5-d7747eba/episode-1 fresh initial state",
+      "passed": true
+    },
+    {
+      "check": "iter-5-d7747eba/episode-1 confirmed independently",
+      "passed": true
+    },
+    {
+      "check": "iter-5-d7747eba/episode-1 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "iter-5-d7747eba/episode-1 actual interaction encountered",
+      "passed": true
+    },
+    {
+      "check": "iter-5-d7747eba/episode-2 fresh initial state",
+      "passed": true
+    },
+    {
+      "check": "iter-5-d7747eba/episode-2 confirmed independently",
+      "passed": true
+    },
+    {
+      "check": "iter-5-d7747eba/episode-2 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "iter-5-d7747eba/episode-2 actual interaction encountered",
+      "passed": true
+    },
+    {
+      "check": "iter-6-1687a752 required episode count",
+      "passed": true
+    },
+    {
+      "check": "iter-6-1687a752 served exact candidate",
+      "passed": true
+    },
+    {
+      "check": "iter-6-1687a752 measured complete scripted success",
+      "passed": true
+    },
+    {
+      "check": "iter-6-1687a752/episode-0 fresh initial state",
+      "passed": true
+    },
+    {
+      "check": "iter-6-1687a752/episode-0 confirmed independently",
+      "passed": true
+    },
+    {
+      "check": "iter-6-1687a752/episode-0 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "iter-6-1687a752/episode-0 actual interaction encountered",
+      "passed": true
+    },
+    {
+      "check": "iter-6-1687a752/episode-1 fresh initial state",
+      "passed": true
+    },
+    {
+      "check": "iter-6-1687a752/episode-1 confirmed independently",
+      "passed": true
+    },
+    {
+      "check": "iter-6-1687a752/episode-1 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "iter-6-1687a752/episode-1 actual interaction encountered",
+      "passed": true
+    },
+    {
+      "check": "iter-6-1687a752/episode-2 fresh initial state",
+      "passed": true
+    },
+    {
+      "check": "iter-6-1687a752/episode-2 confirmed independently",
+      "passed": true
+    },
+    {
+      "check": "iter-6-1687a752/episode-2 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "iter-6-1687a752/episode-2 actual interaction encountered",
+      "passed": true
+    },
+    {
+      "check": "nineteen scheduled episodes",
+      "passed": true
+    },
+    {
+      "check": "retained identity after six zero ties",
+      "passed": true
+    },
+    {
+      "check": "history baseline plus six rejected candidates",
+      "passed": true
+    },
+    {
+      "check": "iter1 native proposal",
+      "passed": true
+    },
+    {
+      "check": "iter1 evaluation criteria actually mounted",
+      "passed": true
+    },
+    {
+      "check": "iter1 all predecessor IDs",
+      "passed": true
+    },
+    {
+      "check": "iter1 request byte bound",
+      "passed": true
+    },
+    {
+      "check": "iter2 native proposal",
+      "passed": true
+    },
+    {
+      "check": "iter2 evaluation criteria actually mounted",
+      "passed": true
+    },
+    {
+      "check": "iter2 all predecessor IDs",
+      "passed": true
+    },
+    {
+      "check": "iter2 evidence in actual forwarded request",
+      "passed": true
+    },
+    {
+      "check": "iter2 request byte bound",
+      "passed": true
+    },
+    {
+      "check": "iter3 native proposal",
+      "passed": true
+    },
+    {
+      "check": "iter3 evaluation criteria actually mounted",
+      "passed": true
+    },
+    {
+      "check": "iter3 all predecessor IDs",
+      "passed": true
+    },
+    {
+      "check": "iter3 evidence in actual forwarded request",
+      "passed": true
+    },
+    {
+      "check": "iter3 request byte bound",
+      "passed": true
+    },
+    {
+      "check": "iter4 native proposal",
+      "passed": true
+    },
+    {
+      "check": "iter4 evaluation criteria actually mounted",
+      "passed": true
+    },
+    {
+      "check": "iter4 all predecessor IDs",
+      "passed": true
+    },
+    {
+      "check": "iter4 evidence in actual forwarded request",
+      "passed": true
+    },
+    {
+      "check": "iter4 request byte bound",
+      "passed": true
+    },
+    {
+      "check": "iter5 native proposal",
+      "passed": true
+    },
+    {
+      "check": "iter5 evaluation criteria actually mounted",
+      "passed": true
+    },
+    {
+      "check": "iter5 all predecessor IDs",
+      "passed": true
+    },
+    {
+      "check": "iter5 evidence in actual forwarded request",
+      "passed": true
+    },
+    {
+      "check": "iter5 request byte bound",
+      "passed": true
+    },
+    {
+      "check": "iter6 native proposal",
+      "passed": true
+    },
+    {
+      "check": "iter6 evaluation criteria actually mounted",
+      "passed": true
+    },
+    {
+      "check": "iter6 all predecessor IDs",
+      "passed": true
+    },
+    {
+      "check": "iter6 evidence in actual forwarded request",
+      "passed": true
+    },
+    {
+      "check": "iter6 request byte bound",
+      "passed": true
+    },
+    {
+      "check": "zero real episode starts",
+      "passed": true
+    },
+    {
+      "check": "zero synthetic cost",
+      "passed": true
+    }
+  ],
+  "payloads": [
+    {
+      "iteration": 1,
+      "context_compact_bytes": 36523,
+      "requests": [
+        {
+          "path": "proposals/iter-1/gateway/calls/request-1/request.json",
+          "compact_bytes": 54802,
+          "recorded_bytes": 56174
+        },
+        {
+          "path": "proposals/iter-1/gateway/calls/request-2/request.json",
+          "compact_bytes": 104597,
+          "recorded_bytes": 106174
+        },
+        {
+          "path": "proposals/iter-1/gateway/calls/request-3/request.json",
+          "compact_bytes": 105456,
+          "recorded_bytes": 107095
+        },
+        {
+          "path": "proposals/iter-1/gateway/calls/request-4/request.json",
+          "compact_bytes": 108136,
+          "recorded_bytes": 109837
+        },
+        {
+          "path": "proposals/iter-1/gateway/calls/request-5/request.json",
+          "compact_bytes": 109131,
+          "recorded_bytes": 110894
+        },
+        {
+          "path": "proposals/iter-1/gateway/calls/request-6/request.json",
+          "compact_bytes": 203783,
+          "recorded_bytes": 205692
+        }
+      ],
+      "maximum_compact_request_bytes": 203783
+    },
+    {
+      "iteration": 2,
+      "context_compact_bytes": 155134,
+      "requests": [
+        {
+          "path": "proposals/iter-2/gateway/calls/request-1/request.json",
+          "compact_bytes": 190356,
+          "recorded_bytes": 192280
+        },
+        {
+          "path": "proposals/iter-2/gateway/calls/request-2/request.json",
+          "compact_bytes": 251521,
+          "recorded_bytes": 253641
+        },
+        {
+          "path": "proposals/iter-2/gateway/calls/request-3/request.json",
+          "compact_bytes": 252380,
+          "recorded_bytes": 254562
+        },
+        {
+          "path": "proposals/iter-2/gateway/calls/request-4/request.json",
+          "compact_bytes": 255066,
+          "recorded_bytes": 257310
+        },
+        {
+          "path": "proposals/iter-2/gateway/calls/request-5/request.json",
+          "compact_bytes": 256061,
+          "recorded_bytes": 258367
+        },
+        {
+          "path": "proposals/iter-2/gateway/calls/request-6/request.json",
+          "compact_bytes": 351113,
+          "recorded_bytes": 353565
+        }
+      ],
+      "maximum_compact_request_bytes": 351113
+    },
+    {
+      "iteration": 3,
+      "context_compact_bytes": 275036,
+      "requests": [
+        {
+          "path": "proposals/iter-3/gateway/calls/request-1/request.json",
+          "compact_bytes": 327322,
+          "recorded_bytes": 329798
+        },
+        {
+          "path": "proposals/iter-3/gateway/calls/request-2/request.json",
+          "compact_bytes": 388487,
+          "recorded_bytes": 391159
+        },
+        {
+          "path": "proposals/iter-3/gateway/calls/request-3/request.json",
+          "compact_bytes": 389346,
+          "recorded_bytes": 392080
+        },
+        {
+          "path": "proposals/iter-3/gateway/calls/request-4/request.json",
+          "compact_bytes": 392032,
+          "recorded_bytes": 394828
+        },
+        {
+          "path": "proposals/iter-3/gateway/calls/request-5/request.json",
+          "compact_bytes": 393027,
+          "recorded_bytes": 395885
+        },
+        {
+          "path": "proposals/iter-3/gateway/calls/request-6/request.json",
+          "compact_bytes": 487563,
+          "recorded_bytes": 490567
+        }
+      ],
+      "maximum_compact_request_bytes": 487563
+    },
+    {
+      "iteration": 4,
+      "context_compact_bytes": 394939,
+      "requests": [
+        {
+          "path": "proposals/iter-4/gateway/calls/request-1/request.json",
+          "compact_bytes": 464289,
+          "recorded_bytes": 467317
+        },
+        {
+          "path": "proposals/iter-4/gateway/calls/request-2/request.json",
+          "compact_bytes": 525454,
+          "recorded_bytes": 528678
+        },
+        {
+          "path": "proposals/iter-4/gateway/calls/request-3/request.json",
+          "compact_bytes": 526313,
+          "recorded_bytes": 529599
+        },
+        {
+          "path": "proposals/iter-4/gateway/calls/request-4/request.json",
+          "compact_bytes": 528999,
+          "recorded_bytes": 532347
+        },
+        {
+          "path": "proposals/iter-4/gateway/calls/request-5/request.json",
+          "compact_bytes": 529994,
+          "recorded_bytes": 533404
+        },
+        {
+          "path": "proposals/iter-4/gateway/calls/request-6/request.json",
+          "compact_bytes": 625070,
+          "recorded_bytes": 628626
+        }
+      ],
+      "maximum_compact_request_bytes": 625070
+    },
+    {
+      "iteration": 5,
+      "context_compact_bytes": 514844,
+      "requests": [
+        {
+          "path": "proposals/iter-5/gateway/calls/request-1/request.json",
+          "compact_bytes": 601258,
+          "recorded_bytes": 604838
+        },
+        {
+          "path": "proposals/iter-5/gateway/calls/request-2/request.json",
+          "compact_bytes": 662423,
+          "recorded_bytes": 666199
+        },
+        {
+          "path": "proposals/iter-5/gateway/calls/request-3/request.json",
+          "compact_bytes": 663282,
+          "recorded_bytes": 667120
+        },
+        {
+          "path": "proposals/iter-5/gateway/calls/request-4/request.json",
+          "compact_bytes": 665968,
+          "recorded_bytes": 669868
+        },
+        {
+          "path": "proposals/iter-5/gateway/calls/request-5/request.json",
+          "compact_bytes": 666963,
+          "recorded_bytes": 670925
+        },
+        {
+          "path": "proposals/iter-5/gateway/calls/request-6/request.json",
+          "compact_bytes": 762027,
+          "recorded_bytes": 766135
+        }
+      ],
+      "maximum_compact_request_bytes": 762027
+    },
+    {
+      "iteration": 6,
+      "context_compact_bytes": 634649,
+      "requests": [
+        {
+          "path": "proposals/iter-6/gateway/calls/request-1/request.json",
+          "compact_bytes": 738126,
+          "recorded_bytes": 742258
+        },
+        {
+          "path": "proposals/iter-6/gateway/calls/request-2/request.json",
+          "compact_bytes": 799295,
+          "recorded_bytes": 803623
+        },
+        {
+          "path": "proposals/iter-6/gateway/calls/request-3/request.json",
+          "compact_bytes": 800154,
+          "recorded_bytes": 804544
+        },
+        {
+          "path": "proposals/iter-6/gateway/calls/request-4/request.json",
+          "compact_bytes": 802840,
+          "recorded_bytes": 807292
+        },
+        {
+          "path": "proposals/iter-6/gateway/calls/request-5/request.json",
+          "compact_bytes": 803835,
+          "recorded_bytes": 808349
+        },
+        {
+          "path": "proposals/iter-6/gateway/calls/request-6/request.json",
+          "compact_bytes": 898379,
+          "recorded_bytes": 903039
+        }
+      ],
+      "maximum_compact_request_bytes": 898379
+    }
+  ]
+}
