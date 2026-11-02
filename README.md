@@ -157,7 +157,7 @@ Checkout model settings are explicit JSON configuration:
   contains placeholders for an explicitly authorized combined spending ceiling
   and verified pricing/context bounds. Its null amount blocks paid execution.
 
-The optimizer requests `gpt-5.4-mini`; the Browser-Use victim retains
+The optimizer requests the pinned `gpt-5.4-mini-2026-03-17` snapshot; the Browser-Use victim retains
 `gpt-6.1-sol`. Both use medium reasoning and separate conversations. The
 [30 October live Browser-Use baseline](examples/checkout/browser-use-real-baseline-20261030/README.md)
 passed all three clean and three identity checkout episodes with that victim

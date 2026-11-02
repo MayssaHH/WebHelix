@@ -1,0 +1,9 @@
+{
+  "iteration": 1,
+  "accepted": false,
+  "metrics": {},
+  "commit": null,
+  "reason": "model_mismatch",
+  "failure_output": "Provider gateway halted this session; inspect gateway request receipts",
+  "usage": {}
+}

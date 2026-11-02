@@ -1,0 +1,9 @@
+{
+  "success": false,
+  "exit_code": 1,
+  "error": "model_mismatch",
+  "usage": {
+    "input_tokens": 14125,
+    "output_tokens": 382
+  }
+}

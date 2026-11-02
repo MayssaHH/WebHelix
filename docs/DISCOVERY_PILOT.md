@@ -107,7 +107,9 @@ snapshots the source and configuration; changing them requires a fresh preparati
 
 Keep the credential in the private ignored `.env`. The prepared live workflow uses
 the explicit [OpenCode](../experiments/checkout/opencode-discovery.example.json) configuration:
-`gpt-5.4-mini`, medium reasoning, 400,000-token context metadata. The independent
+`gpt-5.4-mini-2026-03-17`, medium reasoning, 400,000-token context metadata.
+The dated ID is pinned because the alias returns this snapshot in the response;
+the strict provider identity check remains enabled. The independent
 Browser-Use victim remains `gpt-6.1-sol`, medium reasoning, as specified in
 [discovery-pilot.json](../experiments/checkout/discovery-pilot.json). No model is
 substituted automatically. The optimizer model context must match its accounting

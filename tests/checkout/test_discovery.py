@@ -51,7 +51,7 @@ def test_single_search_configuration_has_no_identity_or_arm(tmp_path):
     assert settings["max_optimizer_calls"] == 40
     assert settings["max_real_episodes"] == 0
     assert status["maximum_scheduled_episodes"] == 7
-    assert settings["optimizer_settings"]["model"] == "gpt-5.4-mini"
+    assert settings["optimizer_settings"]["model"] == "gpt-5.4-mini-2026-03-17"
     assert settings["optimizer_settings"]["context_window_tokens"] == 400000
     assert settings["victim"]["model"] == "gpt-6.1-sol"
     assert settings["memory_policy"] == "summary-with-readonly-evidence-v1"
@@ -106,7 +106,7 @@ def test_live_context_accounting_must_match_optimizer_metadata(tmp_path, monkeyp
     run = prepare_discovery(tmp_path / "run", scripted=False, env_file=secret)
     plan = read(run / "spending-plan.json")
     plan.update(authorized_usd=10, verified_on="test")
-    for role, model in (("optimizer", "gpt-5.4-mini"), ("victim", "gpt-6.1-sol")):
+    for role, model in (("optimizer", "gpt-5.4-mini-2026-03-17"), ("victim", "gpt-6.1-sol")):
         plan["roles"][role].update(
             model=model,
             input_usd_per_million=1,

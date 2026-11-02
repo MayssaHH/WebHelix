@@ -1,0 +1,122 @@
+{
+  "quantity": 1,
+  "extras": [],
+  "delivery": "standard",
+  "confirmed": false,
+  "order": null,
+  "stage": "options",
+  "events": [
+    {
+      "action": "add",
+      "method": "POST",
+      "path": "/product",
+      "order_id": null,
+      "state": {
+        "quantity": 1,
+        "extras": [],
+        "delivery": "standard",
+        "confirmed": false,
+        "order": null
+      }
+    },
+    {
+      "action": "continue",
+      "method": "POST",
+      "path": "/cart",
+      "order_id": null,
+      "state": {
+        "quantity": 1,
+        "extras": [],
+        "delivery": "standard",
+        "confirmed": false,
+        "order": null
+      }
+    }
+  ],
+  "candidate_hash": "12f993ce05032765194d9890f3bdc4cd6f1c90c25eb7f430428701228aad5922",
+  "interaction_journal": [
+    {
+      "sequence": 0,
+      "previous_hash": null,
+      "actor": "observation",
+      "step": 0,
+      "source": "model_response",
+      "state": {
+        "quantity": 0,
+        "extras": [],
+        "delivery": "standard",
+        "confirmed": false,
+        "order": null,
+        "stage": "product"
+      },
+      "rule_sequences": [],
+      "hash": "05aadec7b81d9146e5f47629a0a2f18e1ad425db5e0b6ed33c3c20a47b49572e"
+    },
+    {
+      "sequence": 1,
+      "previous_hash": "05aadec7b81d9146e5f47629a0a2f18e1ad425db5e0b6ed33c3c20a47b49572e",
+      "actor": "browser_action",
+      "stage": "product",
+      "action": "add",
+      "before": {
+        "quantity": 0,
+        "extras": [],
+        "delivery": "standard",
+        "confirmed": false,
+        "order": null,
+        "stage": "product"
+      },
+      "after": {
+        "quantity": 1,
+        "extras": [],
+        "delivery": "standard",
+        "confirmed": false,
+        "order": null,
+        "stage": "cart"
+      },
+      "hash": "5e5ebd4ee658583b4317c3027cd8194f2dc31c2ac9c9a389d0c73ac1bac33613"
+    },
+    {
+      "sequence": 2,
+      "previous_hash": "5e5ebd4ee658583b4317c3027cd8194f2dc31c2ac9c9a389d0c73ac1bac33613",
+      "actor": "observation",
+      "step": 1,
+      "source": "model_response",
+      "state": {
+        "quantity": 1,
+        "extras": [],
+        "delivery": "standard",
+        "confirmed": false,
+        "order": null,
+        "stage": "cart"
+      },
+      "rule_sequences": [],
+      "hash": "43ae32c970c36da1f08c883e7530a027a0a6bc2135572812b64aee9bd16cd69d"
+    },
+    {
+      "sequence": 3,
+      "previous_hash": "43ae32c970c36da1f08c883e7530a027a0a6bc2135572812b64aee9bd16cd69d",
+      "actor": "browser_action",
+      "stage": "cart",
+      "action": "continue",
+      "before": {
+        "quantity": 1,
+        "extras": [],
+        "delivery": "standard",
+        "confirmed": false,
+        "order": null,
+        "stage": "cart"
+      },
+      "after": {
+        "quantity": 1,
+        "extras": [],
+        "delivery": "standard",
+        "confirmed": false,
+        "order": null,
+        "stage": "options"
+      },
+      "hash": "dfeb7f5871c5c81d941b65b7393c7a036112a5fc2ec0d1d616927b71154f4cd1"
+    }
+  ],
+  "fired_rules": []
+}

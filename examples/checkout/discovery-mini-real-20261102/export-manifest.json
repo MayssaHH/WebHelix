@@ -1,0 +1,786 @@
+{
+  "raw_run": "/workspace/webhelix-runs/discovery-mini-real-20261102",
+  "run_status": "stopped",
+  "scripted": false,
+  "audit_passed": true,
+  "audit_failures": [],
+  "credential_scan_matches": 0,
+  "files": [
+    {
+      "path": "status.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/status.json",
+      "sha256": "7fc0912c3077b2c5086b6faf28700fd4853f895e03c969e67f64321b412d8ad7",
+      "bytes": 10911
+    },
+    {
+      "path": "runtime.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/runtime.json",
+      "sha256": "915a5297463c7f0a38e3c0fa523b526dfda9ef5d8798578ff7c823745acf0f87",
+      "bytes": 1600
+    },
+    {
+      "path": "optimizer-settings.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/optimizer-settings.json",
+      "sha256": "3245a6db0ff8f96f60e070e54b029b44cd0c52ee32c80b2a872cccbffe532dd3",
+      "bytes": 440
+    },
+    {
+      "path": "opencode-runtime.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/opencode-runtime.json",
+      "sha256": "eb5da254b0d254a9586c894c052bc17c59c32a808ef9b087d55ee54f961523f4",
+      "bytes": 696
+    },
+    {
+      "path": "history.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/history.json",
+      "sha256": "3718dd414cfbc2438142b0f630c0257f341b5b44a6a930ca4fdc02dd96812838",
+      "bytes": 576
+    },
+    {
+      "path": "budget.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/budget.json",
+      "sha256": "600e885f0b6fd28dd8762242d42bf3b93e4b33d7ae7a1e46d6068008c746c2c0",
+      "bytes": 3185
+    },
+    {
+      "path": "spending-plan.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/spending-plan.json",
+      "sha256": "90f5ccd9ba7d72e9685671ad4429dadc61995d56fd540580bdc000a4327d4e87",
+      "bytes": 1753
+    },
+    {
+      "path": "retention.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/retention.json",
+      "sha256": "9bb927b54ace33b6110f3baf1451f038d7f1610930eea59bebf18f948f99a735",
+      "bytes": 61
+    },
+    {
+      "path": "project-start.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/project-start.json",
+      "sha256": "79eb7ad6822a952216174d8b1e51d6afff536dbba72a63b4a5b17f2f6ab27edf",
+      "bytes": 2285
+    },
+    {
+      "path": "clean.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/clean.json",
+      "sha256": "c14a8cd229270064b3e06048d2576cc4563334de108ebf12e3849a779fdada48",
+      "bytes": 25406
+    },
+    {
+      "path": "clean-smoke-attempt.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/clean-smoke-attempt.json",
+      "sha256": "ecba8a3c68f20abec4e42156ffc7ebfe0cbfd9ede75031c0341b3c68f8111ecd",
+      "bytes": 83
+    },
+    {
+      "path": "audit.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/audit.json",
+      "sha256": "e63341eb33bb7be4bab5f0cf28da012eef7b922dba775cb3a226d79ff77d3207",
+      "bytes": 17101
+    },
+    {
+      "path": "proposals/iter-1/result.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/proposals/iter-1/result.json",
+      "sha256": "1978d5be780177766ff0e2f804c1dec9fa3ce59a3746bf936228a7e3ffd2c869",
+      "bytes": 2124
+    },
+    {
+      "path": "proposals/iter-1/acceptance.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/proposals/iter-1/acceptance.json",
+      "sha256": "39378bc20276e532a8241a111aa5cc955d219510dd4e4215e5562055eb994c62",
+      "bytes": 216
+    },
+    {
+      "path": "proposals/iter-1/agent-result.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/proposals/iter-1/agent-result.json",
+      "sha256": "aeee3eb60bd6c63ac929900c71d2220ceb46e0f5bf8554cc5d05b4d73ebead88",
+      "bytes": 140
+    },
+    {
+      "path": "proposals/iter-1/native-agent-result.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/proposals/iter-1/native-agent-result.json",
+      "sha256": "40cd8ec6127d214feade115aecce42589284b19c43a5de21a0d25d5d5946f911",
+      "bytes": 94
+    },
+    {
+      "path": "proposals/iter-1/optimizer-context.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/proposals/iter-1/optimizer-context.json",
+      "sha256": "43b22318ef034b26681252a6c9d8eb5eb0017c87dbc7357095dd3a94d6f7e2a9",
+      "bytes": 47862
+    },
+    {
+      "path": "proposals/iter-1/prompt.txt",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/proposals/iter-1/prompt.txt",
+      "sha256": "6a878a3e928a80aacf82effb3e4e584e236d9afc40e2d4361895c01ca456e96b",
+      "bytes": 42305
+    },
+    {
+      "path": "proposals/iter-1/launch-prompt.txt",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/proposals/iter-1/launch-prompt.txt",
+      "sha256": "01be3d888eda0b3ac624535052788cde1e8bf9e4d4e37d60084e77a72ad9fec5",
+      "bytes": 201
+    },
+    {
+      "path": "proposals/iter-1/tool-events.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/proposals/iter-1/tool-events.json",
+      "sha256": "370260647bcbe16f5e4b60cbc0047ba690abe0fb5d2616780a02eec2aeaef838",
+      "bytes": 837
+    },
+    {
+      "path": "proposals/iter-1/gateway-summary.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/proposals/iter-1/gateway-summary.json",
+      "sha256": "b1683573eb0a5339d17cfe9508fb24e84c60e94be2397be4044785814f81f010",
+      "bytes": 1737
+    },
+    {
+      "path": "proposals/iter-1/image-manifest.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/proposals/iter-1/image-manifest.json",
+      "sha256": "b92177937a560a249a611f58a98982307650c4d189f0b63661639d906dacb763",
+      "bytes": 699
+    },
+    {
+      "path": "proposals/iter-1/runtime/runtime-receipt.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/proposals/iter-1/runtime/runtime-receipt.json",
+      "sha256": "ed07e6dfb4d12d000b77c6b13d29811be662bb045bc8968dadc75b4b10d64452",
+      "bytes": 941
+    },
+    {
+      "path": "proposals/iter-1/candidate/options.html",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/proposals/iter-1/candidate/options.html",
+      "sha256": "eb743060534ee871f2cae60e35719628f03b4e902b0e385cfbdbc4bb7cba17ee",
+      "bytes": 502
+    },
+    {
+      "path": "proposals/iter-1/candidate/review.html",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/proposals/iter-1/candidate/review.html",
+      "sha256": "f34294204096b8ea9bc4ef4cc2c0b1b17fa64a102029c3c8bac6d83ffbdb0410",
+      "bytes": 429
+    },
+    {
+      "path": "proposals/iter-1/candidate/style.css",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/proposals/iter-1/candidate/style.css",
+      "sha256": "d0472c28c9e46a6c3d3bf4f9171cc1a107af4a183d3557cc4b847f3509c43f57",
+      "bytes": 2788
+    },
+    {
+      "path": "proposals/iter-1/candidate/product.html",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/proposals/iter-1/candidate/product.html",
+      "sha256": "581740ceccb22ed936eb236603ba5b10871518230906c369b4ef2a3966db6f2f",
+      "bytes": 609
+    },
+    {
+      "path": "proposals/iter-1/candidate/cart.html",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/proposals/iter-1/candidate/cart.html",
+      "sha256": "a56e87f0003237fccf5e071ee0afa88202b2cf4d5bd22c5c25dcefd4c8a7fd85",
+      "bytes": 387
+    },
+    {
+      "path": "proposals/iter-1/candidate/interaction.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/proposals/iter-1/candidate/interaction.json",
+      "sha256": "c45ae5743d6afdd8a7304911b91e98ee39bd8d5949dcd313a78ada483f5ad5af",
+      "bytes": 28
+    },
+    {
+      "path": "proposals/iter-1/first-provider-request/request.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/proposals/iter-1/gateway/calls/request-1/request.json",
+      "sha256": "98623caf70a42e7e2c40e78b690e5f83a5963369b451d245dc2428846ee81f45",
+      "bytes": 57580
+    },
+    {
+      "path": "proposals/iter-1/first-provider-request/result.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/proposals/iter-1/gateway/calls/request-1/result.json",
+      "sha256": "e79a2b1a73ab69d5e33862f4e5b28f1baf67bc54962de2c62c013d4c8219e306",
+      "bytes": 852
+    },
+    {
+      "path": "feedback/iter-1/result.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/feedback/iter-1/result.json",
+      "sha256": "d43af697cfa5e77a18914cba5b8671a3ed548903ae67da2447fb2c586b086578",
+      "bytes": 2788
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/report.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/report.json",
+      "sha256": "c14a8cd229270064b3e06048d2576cc4563334de108ebf12e3849a779fdada48",
+      "bytes": 25406
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/candidate-manifest.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/candidate-manifest.json",
+      "sha256": "dd6856de435e20f4dc5d5bff0bbce079f6a8cd93cf02b2e22ddb7a0fac829812",
+      "bytes": 948
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/candidate.diff",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/candidate.diff",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/feasibility/feasibility.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/feasibility/feasibility.json",
+      "sha256": "be5f202d0bd567182ee61bf9939d5f1acde21447c936b824cf8c059ab969b43f",
+      "bytes": 7668
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/candidate/options.html",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/candidate/options.html",
+      "sha256": "eb743060534ee871f2cae60e35719628f03b4e902b0e385cfbdbc4bb7cba17ee",
+      "bytes": 502
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/candidate/review.html",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/candidate/review.html",
+      "sha256": "f34294204096b8ea9bc4ef4cc2c0b1b17fa64a102029c3c8bac6d83ffbdb0410",
+      "bytes": 429
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/candidate/style.css",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/candidate/style.css",
+      "sha256": "d0472c28c9e46a6c3d3bf4f9171cc1a107af4a183d3557cc4b847f3509c43f57",
+      "bytes": 2788
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/candidate/product.html",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/candidate/product.html",
+      "sha256": "581740ceccb22ed936eb236603ba5b10871518230906c369b4ef2a3966db6f2f",
+      "bytes": 609
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/candidate/cart.html",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/candidate/cart.html",
+      "sha256": "a56e87f0003237fccf5e071ee0afa88202b2cf4d5bd22c5c25dcefd4c8a7fd85",
+      "bytes": 387
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/candidate/interaction.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/candidate/interaction.json",
+      "sha256": "c45ae5743d6afdd8a7304911b91e98ee39bd8d5949dcd313a78ada483f5ad5af",
+      "bytes": 28
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/agent-input-0.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/agent-input-0.json",
+      "sha256": "b57723b5755f064eb7fb7290cd519afe33d6163bd6d8703a3fa17a9fd6ce3660",
+      "bytes": 82841
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/reference-diagnostic-1.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/reference-diagnostic-1.json",
+      "sha256": "0f07e4a7dc7cdbcde416af79019bb8e8760b9f47a846de77f1ae87bfaf59a7d7",
+      "bytes": 1111
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/reference-diagnostic-3.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/reference-diagnostic-3.json",
+      "sha256": "1c7cf2a87a2c03ccc3a73ee284f20b6d06e675b0695251d122cb0bad39a8de43",
+      "bytes": 779
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/screenshot-1.png",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/screenshot-1.png",
+      "sha256": "854d52f2e3d442da52715876d8a0d49b9ea74f3c386b6b61e26e0e767a39301f",
+      "bytes": 38467
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/agent-output-2.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/agent-output-2.json",
+      "sha256": "e6ff0cdfb9117e156052fabfa50bfeca4340459eb7a8307e8cc427db0260acc0",
+      "bytes": 657
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/reference-screenshot-2.png",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/reference-screenshot-2.png",
+      "sha256": "af75521196c4ee32d9908f3a5683a0c52fede2c9ffedd9eb06fbab7f81758d5e",
+      "bytes": 66326
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/call-1.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/call-1.json",
+      "sha256": "f611a16e77967a0f993aad09bb16532af22e01d7552279ea858c4f9c5af154cd",
+      "bytes": 339
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/agent-output-1.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/agent-output-1.json",
+      "sha256": "97e6a9c3ade45c4299d8c94753ffb9e24857b772fff1a0b003c4fd2158179ac1",
+      "bytes": 638
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/backend-2.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/backend-2.json",
+      "sha256": "0e645d27522254d3b7105b20494969251f4e698f135e5b9a2c8b4649d1c7bc1d",
+      "bytes": 3032
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/agent-run.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/agent-run.json",
+      "sha256": "e431117a9ce93af0ea6d66836a4f838fed40913299981be044f0bf61830aaba3",
+      "bytes": 1731
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/screenshot-original-2.png",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/screenshot-original-2.png",
+      "sha256": "af75521196c4ee32d9908f3a5683a0c52fede2c9ffedd9eb06fbab7f81758d5e",
+      "bytes": 66326
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/action-result-1.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/action-result-1.json",
+      "sha256": "2000807e812d3d7723418607a847bc8e8110070a4df84804dc4e34ff2cc4d533",
+      "bytes": 292
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/backend-3.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/backend-3.json",
+      "sha256": "d7e3765f9b893af4664475cb862c2dfb68752cb910d6106867408551c7ebad03",
+      "bytes": 4449
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/interaction-journal.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/interaction-journal.json",
+      "sha256": "860ec915d64ae1d71a53b4a07096c3a95f61576ad088b738ccb2db34344418fb",
+      "bytes": 4616
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/call-2.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/call-2.json",
+      "sha256": "023c5bbc1358fc5506ce31945904e1a8600b73daba8774f190376ab8ddb0f181",
+      "bytes": 339
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/reference-diagnostic-0.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/reference-diagnostic-0.json",
+      "sha256": "fe4eb920ca04d5d7683899e2d806f689c0f5695eb18b26efe532eb1159bb7891",
+      "bytes": 616
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/diagnostic-observation-2.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/diagnostic-observation-2.json",
+      "sha256": "4fde116416cd95e31cfae11e9809683eeded7ad4ff107df61c89050db9450695",
+      "bytes": 2041
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/reference-diagnostic-2.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/reference-diagnostic-2.json",
+      "sha256": "4fde116416cd95e31cfae11e9809683eeded7ad4ff107df61c89050db9450695",
+      "bytes": 2041
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/action-1.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/action-1.json",
+      "sha256": "ae5ddddf80491913d827aef04e5bd4541d2573e19b7c115b338a46a73829d1fc",
+      "bytes": 36
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/exposure-0.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/exposure-0.json",
+      "sha256": "430414e8119d944f1e926b2b030af20d6f574f2d7e28d94f5bb08ad7c86082dd",
+      "bytes": 493
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/backend-after-action-0.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/backend-after-action-0.json",
+      "sha256": "185e2edae29d0037cd103c908562ceca8aa57181c5c52ae5d6f407d7b8504498",
+      "bytes": 1622
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/action-0.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/action-0.json",
+      "sha256": "3a76afd2d6890dd7f695eac05b50b6c6e217301a2a444e206fdb355ce894a035",
+      "bytes": 35
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/screenshot-original-1.png",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/screenshot-original-1.png",
+      "sha256": "af908c4994217cd6f4c59f25dc900fb2302036da1c61ab47781d4717673df3ad",
+      "bytes": 36530
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/response-2.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/response-2.json",
+      "sha256": "99d9ddcd442ff07a5f0812c2d5609470dd36804938e78809b082dbeafb420687",
+      "bytes": 18428
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/observation-1.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/observation-1.json",
+      "sha256": "e28054c686ee45e4a8d5f5265ef1fed1e7b63cd153f07c4d846e6a8e3e87d289",
+      "bytes": 2290
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/reference-screenshot-3.png",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/reference-screenshot-3.png",
+      "sha256": "47276728e6c49902ebd61a70f5e04fba384c651d8f0a26e56a890d37d23f3787",
+      "bytes": 40581
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/interaction-observation-3.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/interaction-observation-3.json",
+      "sha256": "f42ed811b7b02383d88a289d76ffb51b3d8cf9907a675c670254e7c9873fdc0f",
+      "bytes": 5426
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/exposure-1.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/exposure-1.json",
+      "sha256": "a4224d43da160a2f851d3202395247208926ba2df8238770edd96e829b56ce41",
+      "bytes": 490
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/screenshot-original-0.png",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/screenshot-original-0.png",
+      "sha256": "51f3bd8126f6b9c9b1f91719953e8158ce4600ee3af1ed1d69b2a28a03e73c4a",
+      "bytes": 42498
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/response-1.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/response-1.json",
+      "sha256": "ab0fcf63996d6adb65bb2bcea11279245b1df6afbe51a7b0c7c74c307545ee91",
+      "bytes": 18409
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/request-0.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/request-0.json",
+      "sha256": "80280d7546517c5a00c02ba92afdec5d547f6b7c02afa3e910ecfff98c150c24",
+      "bytes": 98724
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/action-result-2.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/action-result-2.json",
+      "sha256": "4fee14ac2872ad342c763e656f65b59dee58c633c4eac459661af2df74628eb4",
+      "bytes": 284
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/agent-history.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/agent-history.json",
+      "sha256": "fa9891f3b5858989089d1c228b89b51221bc5cf740535e83301d2c681633e39d",
+      "bytes": 19033
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/diagnostic-observation-1.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/diagnostic-observation-1.json",
+      "sha256": "0f07e4a7dc7cdbcde416af79019bb8e8760b9f47a846de77f1ae87bfaf59a7d7",
+      "bytes": 1111
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/worker.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/worker.json",
+      "sha256": "090d99319a3f0e974551b7392e43a547a31bf0922912b661924641749a524fae",
+      "bytes": 2057
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/reference-screenshot-1.png",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/reference-screenshot-1.png",
+      "sha256": "af908c4994217cd6f4c59f25dc900fb2302036da1c61ab47781d4717673df3ad",
+      "bytes": 36530
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/observation-4.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/observation-4.json",
+      "sha256": "778a843aee94b77b17ca8d12e3b346552340ce2cf75adc90f6c3c5473954cc1a",
+      "bytes": 1161
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/interaction-observation-1.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/interaction-observation-1.json",
+      "sha256": "bb51b9181092cb17d32b7da36980a845474afdacdeeda092a9f22c03fa4e2a62",
+      "bytes": 2381
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/agent-messages-1.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/agent-messages-1.json",
+      "sha256": "34351d1a0e48850625d8d2c3472701804236a7aa127acb2e0a450dee8b904a4c",
+      "bytes": 75771
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/diagnostic-observation-3.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/diagnostic-observation-3.json",
+      "sha256": "1c7cf2a87a2c03ccc3a73ee284f20b6d06e675b0695251d122cb0bad39a8de43",
+      "bytes": 779
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/screenshot-3.png",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/screenshot-3.png",
+      "sha256": "b851a93740c5f1188abadc5276bb9fa3881cd618bf10209413be7ad385e25d41",
+      "bytes": 42822
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/agent-output-0.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/agent-output-0.json",
+      "sha256": "b0d64d1677adbed7025b09299bfb9f900a1a461cd5350e0d4ac4fc0f80ab9cb2",
+      "bytes": 768
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/exposure-4.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/exposure-4.json",
+      "sha256": "489293dbe03db8e82f241d4f4fd423c9beeb0fe3186aaac57e9d7aa1ec94aee5",
+      "bytes": 499
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/exposure-2.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/exposure-2.json",
+      "sha256": "30bdcb387e332deb80665f0536e2813fd1c43ad8d9021becba1bad3441850573",
+      "bytes": 493
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/agent-input-1.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/agent-input-1.json",
+      "sha256": "34351d1a0e48850625d8d2c3472701804236a7aa127acb2e0a450dee8b904a4c",
+      "bytes": 75771
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/action-3.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/action-3.json",
+      "sha256": "7c8ba2210b5a86be6159b1829f41eba98d422258d086a8bef54706441fd764b0",
+      "bytes": 37
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/backend-after.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/backend-after.json",
+      "sha256": "e52bcf760e3ded4f8e9bfc27632b68adc760808b18659abf4cea3ff1ff687a55",
+      "bytes": 7123
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/backend-1.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/backend-1.json",
+      "sha256": "185e2edae29d0037cd103c908562ceca8aa57181c5c52ae5d6f407d7b8504498",
+      "bytes": 1622
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/screenshot-4.png",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/screenshot-4.png",
+      "sha256": "1727a59df197017d918cb943ba63610f48e769d5735c72bc5197e0b6e47fe0aa",
+      "bytes": 29214
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/backend-0.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/backend-0.json",
+      "sha256": "061ecb24de1f343dce121820a4dfdbc89e76e3bf0b7d6e33404cb2b0502e1f0b",
+      "bytes": 277
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/reference-diagnostic-4.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/reference-diagnostic-4.json",
+      "sha256": "d2303f9afec7b468793e78483c25f0373aa4dbee503429eca9a69262ff91bda8",
+      "bytes": 351
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/browser-cleanup.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/browser-cleanup.json",
+      "sha256": "594ab8e7b8af77c6311ad1557f621eaa1e62e9c9a7ca09e4bbcdee271479d942",
+      "bytes": 64
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/agent-messages-2.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/agent-messages-2.json",
+      "sha256": "135927054c9058e8b8da21faf925a16ba629cadb12ff95e69606e0b862b80ba3",
+      "bytes": 116101
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/agent-messages-3.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/agent-messages-3.json",
+      "sha256": "42cb40d3908033f9f84cfacd1a6b2c0635c6eb1e919a161a15ad58559bd4d8df",
+      "bytes": 81490
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/interaction-observation-0.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/interaction-observation-0.json",
+      "sha256": "f017b4b215210bd139b394c982e891b63bd24f48df95d3b4267e4672fc8ea4c0",
+      "bytes": 869
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/screenshot-original-4.png",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/screenshot-original-4.png",
+      "sha256": "09693e29352e6fe18f6baa6b4a11ccd7ec9351760b969488a81e754b3cb3337b",
+      "bytes": 27939
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/agent-input-2.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/agent-input-2.json",
+      "sha256": "135927054c9058e8b8da21faf925a16ba629cadb12ff95e69606e0b862b80ba3",
+      "bytes": 116101
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/interaction-observation-2.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/interaction-observation-2.json",
+      "sha256": "04efb6ebaf463e0b943f04462174016c32cb5b4190344c2b16013a853544a194",
+      "bytes": 3902
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/action-2.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/action-2.json",
+      "sha256": "e94bfc99d0bf77bbb21836c4104a0713f79aedf18aabd4aabd7eb90023de0593",
+      "bytes": 37
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/agent-output-3.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/agent-output-3.json",
+      "sha256": "e0d54c35137fe81c02eb686e674f2170654ce5e614264213dd32e1e7a7b17cc1",
+      "bytes": 788
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/backend-after-action-2.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/backend-after-action-2.json",
+      "sha256": "d7e3765f9b893af4664475cb862c2dfb68752cb910d6106867408551c7ebad03",
+      "bytes": 4449
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/reference-screenshot-0.png",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/reference-screenshot-0.png",
+      "sha256": "51f3bd8126f6b9c9b1f91719953e8158ce4600ee3af1ed1d69b2a28a03e73c4a",
+      "bytes": 42498
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/backend-4.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/backend-4.json",
+      "sha256": "e52bcf760e3ded4f8e9bfc27632b68adc760808b18659abf4cea3ff1ff687a55",
+      "bytes": 7123
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/observation-2.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/observation-2.json",
+      "sha256": "938d5aa72477df52ae55587e6e53ab866f32f2fe236534d78c7140ebccd5499a",
+      "bytes": 2904
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/backend-after-action-1.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/backend-after-action-1.json",
+      "sha256": "0e645d27522254d3b7105b20494969251f4e698f135e5b9a2c8b4649d1c7bc1d",
+      "bytes": 3032
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/screenshot-0.png",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/screenshot-0.png",
+      "sha256": "cab222b9c597c4075750718961115a19abce551df9d4127f3ca2da94e9a8c041",
+      "bytes": 44978
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/exposure-3.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/exposure-3.json",
+      "sha256": "1c789017598a2183e8b3859a1e510ff51b2d39506dbe8a7eb819889e5752ce24",
+      "bytes": 492
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/agent-input-3.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/agent-input-3.json",
+      "sha256": "42cb40d3908033f9f84cfacd1a6b2c0635c6eb1e919a161a15ad58559bd4d8df",
+      "bytes": 81490
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/response-3.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/response-3.json",
+      "sha256": "94e1d526e19f24afc5283a039ff0b4d7c494bc7cef79b525b032568ceea86c6b",
+      "bytes": 18559
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/action-result-0.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/action-result-0.json",
+      "sha256": "fc057b2e8bfde0dc5aa255abf665ec72a057b9ddc58999d161b7d2dc8e0db6e7",
+      "bytes": 274
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/backend-after-action-3.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/backend-after-action-3.json",
+      "sha256": "e52bcf760e3ded4f8e9bfc27632b68adc760808b18659abf4cea3ff1ff687a55",
+      "bytes": 7123
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/diagnostic-observation-4.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/diagnostic-observation-4.json",
+      "sha256": "d2303f9afec7b468793e78483c25f0373aa4dbee503429eca9a69262ff91bda8",
+      "bytes": 351
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/browser-runtime.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/browser-runtime.json",
+      "sha256": "348b3dcada860babe126f52a4a7214b4c5a8869e77457cc116cc8bcbc7354503",
+      "bytes": 892
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/episode.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/episode.json",
+      "sha256": "cfc3835b862fe3ab688e3a2b23d1ec06bcbfb18da60cb55e7d24d36203e498cb",
+      "bytes": 13629
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/reference-screenshot-4.png",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/reference-screenshot-4.png",
+      "sha256": "09693e29352e6fe18f6baa6b4a11ccd7ec9351760b969488a81e754b3cb3337b",
+      "bytes": 27939
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/action-result-3.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/action-result-3.json",
+      "sha256": "6cdf4dcb08fa5ad2432744899ad2d71f41e85be43a5423b18c23d12519a3b891",
+      "bytes": 282
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/observation-3.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/observation-3.json",
+      "sha256": "512f27e9657ae2b9e02aa2f1e8ad719787583b08b0d3a453bc05e9e915e40ced",
+      "bytes": 1590
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/call-0.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/call-0.json",
+      "sha256": "ae0826322e1e517d62d2425ba6db8e479ee61737b0e5f42a65ef9c676460e1bd",
+      "bytes": 336
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/diagnostic-observation-0.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/diagnostic-observation-0.json",
+      "sha256": "fe4eb920ca04d5d7683899e2d806f689c0f5695eb18b26efe532eb1159bb7891",
+      "bytes": 616
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/response-0.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/response-0.json",
+      "sha256": "1b29dd8277815582c2a3514a81ee2678d7e0ad386c73be501b46a47b8eb049f5",
+      "bytes": 18535
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/call-3.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/call-3.json",
+      "sha256": "10247645dfdc8630e4cd558860ae24b78e0ce3c4959f7fe0fa64de8a8323afb7",
+      "bytes": 339
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/screenshot-original-3.png",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/screenshot-original-3.png",
+      "sha256": "47276728e6c49902ebd61a70f5e04fba384c651d8f0a26e56a890d37d23f3787",
+      "bytes": 40581
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/agent-messages-0.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/agent-messages-0.json",
+      "sha256": "b57723b5755f064eb7fb7290cd519afe33d6163bd6d8703a3fa17a9fd6ce3660",
+      "bytes": 82841
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/screenshot-2.png",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/screenshot-2.png",
+      "sha256": "cc37605efdd412ba1cc477fa931fd18a17d7d895c746d859c661f3d4b334117e",
+      "bytes": 70154
+    },
+    {
+      "path": "batches/clean-8c3f3f7c/episode-0/observation-0.json",
+      "raw_source": "/workspace/webhelix-runs/discovery-mini-real-20261102/batches/clean-8c3f3f7c/episode-0/observation-0.json",
+      "sha256": "3aa4d7db132f98eec23b6058eb3223bc04f3c8581e7cf17216ddaac494a3d835",
+      "bytes": 1520
+    },
+    {
+      "path": "export-evidence.py",
+      "raw_source": "/workspace/webhelix-runs/export-discovery-mini-20261102.py",
+      "sha256": "04cceae10369538f61217a9fcf806a25958a34f5c81eb30342149ccf5d4d9f25",
+      "bytes": 7133
+    },
+    {
+      "path": "audit-evidence.py",
+      "raw_source": "/workspace/webhelix-runs/audit-discovery-mini-20261102.py",
+      "sha256": "55af9b784076c8237250890ad4863e4f616303205316e77141785f4fe9772e12",
+      "bytes": 14411
+    }
+  ],
+  "selection": "Allowlisted configuration/accounting/decisions; every candidate, note and diff; summary contexts and readonly-history manifests; first exact forwarded optimizer request; exact observations/actions/screenshots for first episode of each batch; all episode results/actions/backend/accounting/cleanup. Failed attempts retained. Full raw provider requests and other evidence remain in raw_run. No credentials or browser profiles.",
+  "warning": "A complete export does not imply completed search, successful steering or a provider invoice."
+}

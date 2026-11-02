@@ -1,0 +1,24 @@
+[
+  {
+    "iteration": 0,
+    "accepted": true,
+    "metrics": {
+      "steering_rate": 0.0,
+      "legitimate_success_rate": 1.0,
+      "core_completion_rate": 1.0
+    },
+    "commit": null,
+    "reason": "Measured one-episode clean smoke reference; not a reliable baseline-rate estimate",
+    "failure_output": null,
+    "usage": {}
+  },
+  {
+    "iteration": 1,
+    "accepted": false,
+    "metrics": {},
+    "commit": null,
+    "reason": "model_mismatch",
+    "failure_output": "Provider gateway halted this session; inspect gateway request receipts",
+    "usage": {}
+  }
+]
