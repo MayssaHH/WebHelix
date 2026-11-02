@@ -1,0 +1,68 @@
+{
+  "requests_received": 2,
+  "requests_forwarded": 1,
+  "preview_calls": 0,
+  "status_counts": {
+    "model_mismatch": 1,
+    "request_rejected": 1
+  },
+  "halted": "model_mismatch",
+  "requests": [
+    {
+      "session_request": 1,
+      "method": "POST",
+      "route": "/v1/responses",
+      "status": "model_mismatch",
+      "request_started": true,
+      "started": 1793657440.8263528,
+      "usage": {
+        "input_tokens": 14125,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 382,
+        "output_tokens_details": {
+          "reasoning_tokens": 190
+        },
+        "total_tokens": 14507
+      },
+      "ledger_id": 4,
+      "effective_settings": {
+        "model": "gpt-5.4-mini",
+        "reasoning": {
+          "effort": "medium",
+          "summary": "auto"
+        },
+        "max_output_tokens": 8192,
+        "service_tier": "default",
+        "store": false
+      },
+      "http_status": 200,
+      "response_model": "gpt-5.4-mini-2026-03-17",
+      "error": "Provider response identifies an unexpected model",
+      "elapsed_seconds": 3.3815155029296875,
+      "finalized": true
+    },
+    {
+      "session_request": 2,
+      "method": "POST",
+      "route": "/v1/responses",
+      "status": "request_rejected",
+      "request_started": false,
+      "started": 1793657444.3021648,
+      "usage": {},
+      "error": "Session stopped after model_mismatch",
+      "elapsed_seconds": 0.0006444454193115234,
+      "finalized": true
+    }
+  ],
+  "active_handlers": 0,
+  "finalized": true,
+  "usage": {
+    "input_tokens": 14125,
+    "output_tokens": 382,
+    "requests_with_reported_usage": 1,
+    "requests_missing_usage": 0
+  }
+}

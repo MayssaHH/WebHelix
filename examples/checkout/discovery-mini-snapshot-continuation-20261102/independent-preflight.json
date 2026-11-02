@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "reviewed_at_epoch": 1793657855.8131695,
+  "run": "/workspace/webhelix-runs/discovery-mini-snapshot-continuation-20261102",
+  "status_at_review": "running",
+  "review": "Independent source and prepared-state inspection before root launches the remaining session; no model call or browser episode.",
+  "original_ledger_sha256": "600e885f0b6fd28dd8762242d42bf3b93e4b33d7ae7a1e46d6068008c746c2c0",
+  "copied_ledger_sha256": "14e8c0ac7a4d9bc316d3275e327f76165f1d2358de8c87ce56ebde9f4eb42326",
+  "imported_calls": 5,
+  "imported_episode_starts": 1,
+  "frozen_original_files": 343,
+  "runtime_changes_only": [
+    "optimizer_settings.model=gpt-5.4-mini-2026-03-17",
+    "max_optimizer_calls=21"
+  ],
+  "ceiling_usd": 10,
+  "deadline_epoch_unchanged": 1793664596.1827152,
+  "remaining_iterations": [
+    2
+  ],
+  "maximum_new_optimizer_requests": 20,
+  "maximum_new_victim_episodes": 3,
+  "checks": [
+    "Original status stopped; pristine retained state; full343-file source hashes unchanged",
+    "Clean, history0/1, failed proposal/feedback and all5 ledger calls imported exactly",
+    "Same$10 original authorization and deadline; no budget reset",
+    "Only requested optimizer model snapshot and reduced total optimizer request cap differ",
+    "Single-use prepared state and both original/new execution locks",
+    "Prepared source, runtime, spending plan, driver and provenance hashes checked before paid execution",
+    "AutoHelix max_iterations2 resumes after imported history iteration1; no new baseline",
+    "Finally verifies unchanged original evidence, imported ledger prefix and additional usage bounds"
+  ]
+}

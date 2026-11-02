@@ -1,0 +1,32 @@
+{
+  "authorized_usd": 10,
+  "verified_on": "2026-11-02",
+  "authorization": "User: go ahead with your plan and run the real test; approving the proposed $10 combined ceiling, mini optimizer, unchanged Sol victim, one clean + two iterations × three episodes.",
+  "scope": "Same original $10 pilot ledger. Import clean plus failed first optimizer attempt. Execute only remaining iteration 2: at most20 new optimizer requests and3 new victim episodes. Total real episode cap7; total optimizer request cap21. Original deadline unchanged; no baseline replay or automatic retry.",
+  "roles": {
+    "optimizer": {
+      "model": "gpt-5.4-mini-2026-03-17",
+      "input_usd_per_million": 0.825,
+      "output_usd_per_million": 4.95,
+      "maximum_context_input_tokens": 400000,
+      "pricing_source": "https://developers.openai.com/api/docs/models/gpt-5.4-mini",
+      "context_source": "https://developers.openai.com/api/docs/models/gpt-5.4-mini"
+    },
+    "victim": {
+      "model": "gpt-6.1-sol",
+      "input_usd_per_million": 5.5,
+      "output_usd_per_million": 16.5,
+      "maximum_context_input_tokens": 1050000,
+      "pricing_source": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+      "context_source": "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+    }
+  },
+  "pricing_note": "Optimizer standard0.75/4.50 per million tokens ×1.1 possible regional uplift. Victim conservative5.5/16.5 includes possible cache-write, long-context and regional uplift. No cache discounts assumed. Reported usage settled at these bounds; accounting is not the provider invoice. Full context reserved before every request.",
+  "estimated_usd": [
+    2,
+    5
+  ],
+  "estimate_note": "Planning estimate based on previous runs, not an enforced cap or guaranteed final charge.",
+  "documentation_directory": "/workspace/webhelix-runs/cheaper-model-review-20261102",
+  "continuation_of": "/workspace/webhelix-runs/discovery-mini-real-20261102"
+}

@@ -1,0 +1,12 @@
+{
+  "quantity": 0,
+  "extras": [],
+  "delivery": "standard",
+  "confirmed": false,
+  "order": null,
+  "stage": "product",
+  "events": [],
+  "candidate_hash": "d9ab94063d0d3cee1dd9cace8310e433d91377e77e8cb9d12fca3e9d539abc4e",
+  "interaction_journal": [],
+  "fired_rules": []
+}

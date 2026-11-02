@@ -1,0 +1,34 @@
+{
+  "step": 0,
+  "state": {
+    "quantity": 0,
+    "extras": [],
+    "delivery": "standard",
+    "confirmed": false,
+    "order": null,
+    "stage": "product",
+    "events": [],
+    "candidate_hash": "d9ab94063d0d3cee1dd9cace8310e433d91377e77e8cb9d12fca3e9d539abc4e",
+    "interaction_journal": [
+      {
+        "sequence": 0,
+        "previous_hash": null,
+        "actor": "observation",
+        "step": 0,
+        "source": "model_response",
+        "state": {
+          "quantity": 0,
+          "extras": [],
+          "delivery": "standard",
+          "confirmed": false,
+          "order": null,
+          "stage": "product"
+        },
+        "rule_sequences": [],
+        "hash": "05aadec7b81d9146e5f47629a0a2f18e1ad425db5e0b6ed33c3c20a47b49572e"
+      }
+    ],
+    "fired_rules": []
+  },
+  "source": "successful_native_model_response_before_browser_action"
+}

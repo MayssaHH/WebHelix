@@ -1,0 +1,62 @@
+{
+  "candidate": "/workspace/webhelix-runs/discovery-mini-snapshot-continuation-20261102/batches/iter-2-8a74750e/candidate",
+  "output": "/workspace/webhelix-runs/discovery-mini-snapshot-continuation-20261102/batches/iter-2-8a74750e/episode-2",
+  "run": "/workspace/webhelix-runs/discovery-mini-snapshot-continuation-20261102",
+  "policy": "api",
+  "seed": 2,
+  "settings": {
+    "condition": "combined",
+    "iterations": 2,
+    "episodes_per_condition": 3,
+    "max_real_episodes": 7,
+    "max_optimizer_calls": 21,
+    "max_actions": 24,
+    "episode_timeout_seconds": 480,
+    "worker_grace_seconds": 15,
+    "run_timeout_seconds": 7200,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "victim": {
+      "endpoint": "https://api.openai.com/v1/responses",
+      "protocol": "responses",
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "medium",
+      "api_key_env": "WEBHELIX_API_KEY",
+      "max_output_tokens": 2048,
+      "max_input_bytes": 500000,
+      "timeout_seconds": 60
+    },
+    "workflow": "discovery-v1",
+    "memory_policy": "summary-with-readonly-evidence-v1",
+    "baseline_episodes": 1,
+    "browser_runtime": {
+      "backend": "browser-use",
+      "browser_use_version": "0.13.14",
+      "playwright_version": "1.58.0",
+      "artifact_schema": 2,
+      "implementation_sha256": "ef45a15664303ffd5abd82ce7768edfa5f8176a49ca8b7fb7b17869303ea9b4d"
+    },
+    "optimizer_backend": "opencode",
+    "optimizer_settings": {
+      "model": "gpt-5.4-mini-2026-03-17",
+      "reasoning_effort": "medium",
+      "api_key_env": "WEBHELIX_API_KEY",
+      "endpoint": "https://api.openai.com/v1/responses",
+      "timeout_seconds": 180,
+      "session_timeout_seconds": 600,
+      "max_output_tokens": 8192,
+      "context_window_tokens": 400000,
+      "max_input_bytes": 4000000,
+      "max_response_bytes": 4000000,
+      "max_requests_per_session": 20,
+      "max_previews_per_session": 3,
+      "preview_timeout_seconds": 120
+    },
+    "policy": "api",
+    "env_file": "/workspace/webhelix/.env",
+    "run_deadline_epoch": 1793664596.1827152
+  },
+  "episode_reserved": true
+}

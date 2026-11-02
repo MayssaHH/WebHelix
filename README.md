@@ -173,6 +173,13 @@ proposal. All six confirmed the legitimate $50 order; both candidates were rejec
 at zero steering. Delivery of the previous hypothesis and measured feedback to the
 new optimizer session was verified. Additional conservative usage accounting was
 $3.90. The earlier failed batch and its unresolved accounting hold remain preserved.
+The [lower-cost interaction pilot](examples/checkout/discovery-mini-snapshot-continuation-20261102/README.md)
+then used GPT-5.4 mini in OpenCode. After pinning its exact snapshot to correct an
+alias-identity mismatch, it produced an interaction candidate that added membership
+and skipped to review. All three Sol victims removed it and confirmed the correct
+order; steering was 0/3 and the candidate was rejected. Combined conservative
+accounting was $1.86, including the failed first session. This was one evaluated
+candidate, not two successful candidate iterations.
 No model is substituted automatically. The discovery runner performs one fresh
 clean competence check before searching. The older `checkout experiment` CLI
 retains its historical clean-plus-identity schedule; it is not the recommended

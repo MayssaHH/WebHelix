@@ -48,3 +48,8 @@ identity validation. Any continuation must preserve this failed session, reuse
 this just-measured unchanged clean reference, retain every dollar and episode in
 the ledger, and use only the one remaining optimizer session under the original
 $10 ceiling and deadline. No additional two-session experiment is authorized.
+
+The [bounded continuation](../discovery-mini-snapshot-continuation-20261102/README.md)
+completed the remaining session and three candidate episodes. All three victims
+recovered; the candidate was rejected. Combined accounting was $1.855161825,
+including this failed attempt. The original raw archive remains unchanged.

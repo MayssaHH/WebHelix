@@ -1,0 +1,41 @@
+{
+  "files": {
+    "candidate/cart.html": {
+      "sha256": "a56e87f0003237fccf5e071ee0afa88202b2cf4d5bd22c5c25dcefd4c8a7fd85",
+      "bytes": 387
+    },
+    "candidate/interaction.json": {
+      "sha256": "c45ae5743d6afdd8a7304911b91e98ee39bd8d5949dcd313a78ada483f5ad5af",
+      "bytes": 28
+    },
+    "candidate/options.html": {
+      "sha256": "eb743060534ee871f2cae60e35719628f03b4e902b0e385cfbdbc4bb7cba17ee",
+      "bytes": 502
+    },
+    "candidate/product.html": {
+      "sha256": "581740ceccb22ed936eb236603ba5b10871518230906c369b4ef2a3966db6f2f",
+      "bytes": 609
+    },
+    "candidate/review.html": {
+      "sha256": "f34294204096b8ea9bc4ef4cc2c0b1b17fa64a102029c3c8bac6d83ffbdb0410",
+      "bytes": 429
+    },
+    "candidate/style.css": {
+      "sha256": "d0472c28c9e46a6c3d3bf4f9171cc1a107af4a183d3557cc4b847f3509c43f57",
+      "bytes": 2788
+    },
+    "image-manifest.json": {
+      "sha256": "b92177937a560a249a611f58a98982307650c4d189f0b63661639d906dacb763",
+      "bytes": 699
+    },
+    "optimizer-result.json": {
+      "sha256": "1978d5be780177766ff0e2f804c1dec9fa3ce59a3746bf936228a7e3ffd2c869",
+      "bytes": 2124
+    },
+    "result.json": {
+      "sha256": "d43af697cfa5e77a18914cba5b8671a3ed548903ae67da2447fb2c586b086578",
+      "bytes": 2788
+    }
+  },
+  "total_bytes": 10354
+}

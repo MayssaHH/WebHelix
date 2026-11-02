@@ -1,0 +1,47 @@
+[
+  {
+    "kind": "status",
+    "text": "step started",
+    "metadata": {}
+  },
+  {
+    "kind": "tool_use",
+    "text": "glob: glob",
+    "metadata": {}
+  },
+  {
+    "kind": "tool_use",
+    "text": "glob: glob",
+    "metadata": {}
+  },
+  {
+    "kind": "tool_use",
+    "text": "glob: glob",
+    "metadata": {}
+  },
+  {
+    "kind": "tool_use",
+    "text": "glob: glob",
+    "metadata": {}
+  },
+  {
+    "kind": "tool_use",
+    "text": "glob: glob",
+    "metadata": {}
+  },
+  {
+    "kind": "tool_use",
+    "text": "glob: glob",
+    "metadata": {}
+  },
+  {
+    "kind": "result",
+    "text": "reason=tool-calls tokens={\"cache\": {\"read\": 0, \"write\": 0}, \"input\": 14125, \"output\": 192, \"reasoning\": 190, \"total\": 14507} cost=$0.0000",
+    "metadata": {}
+  },
+  {
+    "kind": "status",
+    "text": "error",
+    "metadata": {}
+  }
+]

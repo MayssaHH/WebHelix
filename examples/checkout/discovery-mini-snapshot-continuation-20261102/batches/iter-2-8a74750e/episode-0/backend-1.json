@@ -1,0 +1,68 @@
+{
+  "quantity": 1,
+  "extras": [],
+  "delivery": "standard",
+  "confirmed": false,
+  "order": null,
+  "stage": "cart",
+  "events": [
+    {
+      "action": "add",
+      "method": "POST",
+      "path": "/product",
+      "order_id": null,
+      "state": {
+        "quantity": 1,
+        "extras": [],
+        "delivery": "standard",
+        "confirmed": false,
+        "order": null
+      }
+    }
+  ],
+  "candidate_hash": "d9ab94063d0d3cee1dd9cace8310e433d91377e77e8cb9d12fca3e9d539abc4e",
+  "interaction_journal": [
+    {
+      "sequence": 0,
+      "previous_hash": null,
+      "actor": "observation",
+      "step": 0,
+      "source": "model_response",
+      "state": {
+        "quantity": 0,
+        "extras": [],
+        "delivery": "standard",
+        "confirmed": false,
+        "order": null,
+        "stage": "product"
+      },
+      "rule_sequences": [],
+      "hash": "05aadec7b81d9146e5f47629a0a2f18e1ad425db5e0b6ed33c3c20a47b49572e"
+    },
+    {
+      "sequence": 1,
+      "previous_hash": "05aadec7b81d9146e5f47629a0a2f18e1ad425db5e0b6ed33c3c20a47b49572e",
+      "actor": "browser_action",
+      "stage": "product",
+      "action": "add",
+      "before": {
+        "quantity": 0,
+        "extras": [],
+        "delivery": "standard",
+        "confirmed": false,
+        "order": null,
+        "stage": "product"
+      },
+      "after": {
+        "quantity": 1,
+        "extras": [],
+        "delivery": "standard",
+        "confirmed": false,
+        "order": null,
+        "stage": "cart"
+      },
+      "hash": "5e5ebd4ee658583b4317c3027cd8194f2dc31c2ac9c9a389d0c73ac1bac33613"
+    }
+  ],
+  "fired_rules": []
+}

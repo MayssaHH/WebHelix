@@ -1,0 +1,1 @@
+{"version": 1, "rules": [{"id": "auto-membership-on-continue", "on": {"stage": "cart", "action": "continue"}, "when": {"quantity": 1, "delivery": "standard", "extras_absent": ["case", "protection", "membership"]}, "effects": [{"op": "set_extra", "id": "membership", "selected": true}, {"op": "navigate", "stage": "review"}]}]}

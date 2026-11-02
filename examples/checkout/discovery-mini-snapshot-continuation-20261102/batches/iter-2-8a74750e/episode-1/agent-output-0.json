@@ -1,0 +1,18 @@
+{
+  "thinking": "The product is Atlas headphones at $45, with standard delivery advertised at $5. I will add one pair, reject any extras, and verify the final total before confirming.",
+  "memory": "Product page shows Atlas headphones $45 and standard delivery $5, 5–7 business days. Shop states confirmation records a demonstration order with no payment taken.",
+  "next_goal": "Add the headphones to the cart.",
+  "current_plan_item": 0,
+  "plan_update": [
+    "Add one pair and exclude all extras.",
+    "Select standard delivery and verify total is no more than $60.",
+    "Confirm the order and verify confirmation."
+  ],
+  "action": [
+    {
+      "click": {
+        "index": 6
+      }
+    }
+  ]
+}

@@ -159,3 +159,9 @@ Full-context reservations are conservative: the unchanged Sol victim reserves
 about $5.81 before each request, then settles to reported usage. Consequently a
 $10 ceiling can stop the run well before $10 has actually been accounted. Unknown
 usage keeps its reservation. The runner never silently increases the ceiling.
+
+The [completed real lower-cost pilot](../examples/checkout/discovery-mini-snapshot-continuation-20261102/README.md)
+records one clean success, the first-session alias failure, and one valid candidate
+evaluated in three fresh episodes. Every victim removed the website-added
+membership and confirmed the correct order. Steering 0/3; rejected; $1.86 combined
+conservative accounting. The model configuration now pins the dated snapshot.

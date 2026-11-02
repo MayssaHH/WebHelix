@@ -1,0 +1,16 @@
+# Run from /workspace/webhelix. Private credentials were never printed.
+export UV_CACHE_DIR=/workspace/.cache/uv
+export PLAYWRIGHT_BROWSERS_PATH=/workspace/.cache/ms-playwright
+uv run --locked pytest -q > /workspace/webhelix-runs/discovery-mini-full-tests-20261102.log 2>&1
+uv run --locked webhelix checkout discovery --prepare --scripted --run-dir /workspace/webhelix-runs/discovery-mini-offline-20261102
+uv run --locked webhelix checkout discovery --execute --run-dir /workspace/webhelix-runs/discovery-mini-offline-20261102 > /workspace/webhelix-runs/discovery-mini-offline-20261102/command.log 2>&1
+# Live commands will be appended only when executed.
+uv run --locked webhelix checkout discovery --prepare --run-dir /workspace/webhelix-runs/discovery-mini-real-20261102 --env-file /workspace/webhelix/.env --spending-plan /workspace/webhelix-runs/discovery-mini-plan-20261102.json
+uv run --locked webhelix checkout discovery --execute --run-dir /workspace/webhelix-runs/discovery-mini-real-20261102 > /workspace/webhelix-runs/discovery-mini-real-20261102/command.log 2>&1
+uv run --locked python /workspace/webhelix-runs/continue-discovery-mini-20261102.py --prepare
+uv run --locked python /workspace/webhelix-runs/continue-discovery-mini-20261102.py --execute > /workspace/webhelix-runs/discovery-mini-snapshot-continuation-20261102/command.log 2>&1
+
+# Targeted checks after the model-name configuration fix:
+uv run --locked pytest -q tests/checkout/test_discovery.py tests/opencode/test_config.py tests/opencode/test_gateway.py
+# Independent continuation guard tests:
+uv run --locked pytest -q /workspace/webhelix-runs/test-discovery-mini-continuation.py
