@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "serialized_request_context_matches": true,
+  "next_iteration": 2,
+  "prior_iterations": [
+    {
+      "iteration": 1,
+      "measurements_match": true,
+      "optimizer_note_matches": true,
+      "candidate_files_match": true,
+      "all_episodes_match": true
+    }
+  ],
+  "context_sha256": "cf020806da1597fc9d14507f535422cd852609b0ead02a5960b76149e85a5307"
+}

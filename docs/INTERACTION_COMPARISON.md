@@ -47,7 +47,7 @@ review state. Programs cannot confirm, change actual prices, mutate confirmed
 state, or access the journal. Independent scoring verifies both the transaction
 receipt and journal. Rendered controls/facts remain reachable and readable.
 
-An independent browser witness must demonstrate legitimate recovery within24
+An independent browser witness must demonstrate legitimate recovery within 24
 browser actions. This is a bounded feasibility witness, not a proof of all possible
 behaviors. It runs in its own state and does not prime the victim. Runtime validation
 also checks the actual pages encountered by the victim.
@@ -66,12 +66,12 @@ existing all-core-complete acceptance rule are unchanged; zero ties reject.
 
 ## Install and run offline
 
-Use the existing Python3.12/uv setup and [pinned OpenCode Docker setup](OPENCODE_CHECKOUT.md).
+Use Python 3.12 and the [pinned OpenCode Docker setup](OPENCODE_CHECKOUT.md).
 From the repository root:
 
 ```bash
 source scripts/env.sh
-uv sync --locked
+bash scripts/setup.sh
 uv run --locked webhelix checkout interaction-controls --run-dir ../webhelix-runs/interaction-controls-NEW
 uv run --locked webhelix checkout comparison --prepare --scripted --run-dir ../webhelix-runs/interaction-comparison-NEW
 uv run --locked webhelix checkout comparison --execute --run-dir ../webhelix-runs/interaction-comparison-NEW
@@ -101,11 +101,11 @@ execution before browser or model work. Each comparison is a new explicitly
 budgeted experiment; prior allowances are not silently renewed. Credentials remain
 in the private ignored file, never in a candidate or Git.
 
-The fixed pilot allocates clean3 + identity3, then two optimizer sessions per arm
-with three fresh episodes per valid candidate: at most24 real episode starts and
-six optimizer sessions. Each session permits20 requests, bounded output and three
+The fixed pilot allocates clean 3 + identity 3, then two optimizer sessions per arm
+with three fresh episodes per valid candidate: at most 24 real episode starts and
+six optimizer sessions. Each session permits 20 requests, bounded output and three
 deterministic previews. Every arm shares ONE financial/episode ledger (120 maximum
-optimizer requests globally). Native victim actions remain bounded to24; the whole
+optimizer requests globally). Native victim actions remain bounded to 24; the whole
 comparison has a two-hour window starting at explicit execution. There are no
 automatic provider retries or extra paid harness checks.
 

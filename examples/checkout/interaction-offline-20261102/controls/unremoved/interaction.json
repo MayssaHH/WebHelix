@@ -1,0 +1,1 @@
+{"version": 1, "rules": [{"id": "calibration", "on": {"stage": "options", "action": "continue"}, "effects": [{"op": "set_extra", "id": "case", "selected": true}]}]}

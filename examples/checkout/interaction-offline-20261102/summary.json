@@ -1,0 +1,25 @@
+{
+  "status": "completed",
+  "scripted": true,
+  "arm_order": [
+    "interaction",
+    "presentation",
+    "combined"
+  ],
+  "seed": 20261102,
+  "source_revision": "b6d717a1ab0247608466196460b8117166029dd7",
+  "source_dirty": false,
+  "real_episode_starts": 0,
+  "accounted_usd": "0.000",
+  "elapsed_seconds": 597.8698885440826,
+  "real_model_calls": 0,
+  "scheduled_scripted_episodes": 24,
+  "optimizer_fixture_sessions": 6,
+  "calibration_episodes": 4,
+  "automated_tests_log": "/workspace/webhelix-runs/interaction-full-tests-20261102.log",
+  "source_runs": [
+    "/workspace/webhelix-runs/interaction-comparison-offline-20261102",
+    "/workspace/webhelix-runs/interaction-controls-final-20261102"
+  ],
+  "interpretation": "Deterministic native harness controls, not discovered patterns or evidence of real-model steering."
+}

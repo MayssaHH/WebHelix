@@ -1,0 +1,7 @@
+{
+  "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102",
+  "reason": "All arms have identical identity candidate bytes and native victim settings; conditions change allowed edits, not identity behavior.",
+  "candidate_hash": "12f993ce05032765194d9890f3bdc4cd6f1c90c25eb7f430428701228aad5922",
+  "cache_imported": false,
+  "signatures_rewritten": false
+}

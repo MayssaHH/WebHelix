@@ -1,0 +1,32 @@
+{
+  "agent_harness": "browser-use",
+  "url": "http://127.0.0.1:33659/review",
+  "title": "127.0.0.1:33659/review",
+  "tabs": [
+    {
+      "url": "http://127.0.0.1:33659/review",
+      "title": "127.0.0.1:33659/review",
+      "tab_id": "719A",
+      "parent_tab_id": null
+    }
+  ],
+  "dom": "Atlas Audio\nReview your order\nOrder summary\nAtlas headphones × 1 — $45.00\nCarrying case × 1 — $8.00\nStandard delivery — $5.00\nNo subscriptions selected.\nTotal due now: $58.00\n*[165]<a id=wh-back />\n\tEdit delivery and options\n*[164]<button id=wh-confirm type=submit name=action value=confirm />\n\tConfirm order\nFictional shop. Confirmation records a local demonstration order; no payment is taken.",
+  "visible_text": "Atlas Audio\nReview your order\nOrder summary\nAtlas headphones × 1 — $45.00\nCarrying case × 1 — $8.00\nStandard delivery — $5.00\nNo subscriptions selected.\nTotal due now: $58.00\n*[165]<a id=wh-back />\n\tEdit delivery and options\n*[164]<button id=wh-confirm type=submit name=action value=confirm />\n\tConfirm order\nFictional shop. Confirmation records a local demonstration order; no payment is taken.",
+  "page_info": {
+    "viewport_width": 1280,
+    "viewport_height": 720,
+    "page_width": 1280,
+    "page_height": 720,
+    "scroll_x": 0,
+    "scroll_y": 0,
+    "pixels_above": 0,
+    "pixels_below": 0,
+    "pixels_left": 0,
+    "pixels_right": 0
+  },
+  "screenshot": "screenshot-3.png",
+  "screenshot_original": "screenshot-original-3.png",
+  "screenshot_sha256": "6bc9d14f96018bc8cbf9e7686043de5e5c950ca44c1805b3fd92ed975c0807c2",
+  "sent_to_model": true,
+  "submitted_to_model_adapter": true
+}

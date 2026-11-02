@@ -1,0 +1,32 @@
+{
+  "agent_harness": "browser-use",
+  "url": "http://127.0.0.1:32831/cart",
+  "title": "127.0.0.1:32831/cart",
+  "tabs": [
+    {
+      "url": "http://127.0.0.1:32831/cart",
+      "title": "127.0.0.1:32831/cart",
+      "tab_id": "109F",
+      "parent_tab_id": null
+    }
+  ],
+  "dom": "Atlas Audio\nYour cart\nAtlas headphones × 1 — $45.00\nQuantity\n|SHADOW(open)|*[50]<input id=wh-quantity name=quantity type=number min=0 max=9 step=1 value=1 required=true valuemin=0 valuemax=9 valuetext=1 compound_components=(name=Increment,role=button),(name=Decrement,role=button),(name=Value,role=textbox,min=0.0,max=9.0) />\n*[55]<button id=wh-cart-update type=submit name=action value=update />\n\tUpdate quantity\nProduct subtotal: $45.00. Delivery and any selected optional additions are shown at review.\n*[57]<a id=wh-back />\n\tBack to product\n*[56]<button id=wh-continue type=submit name=action value=continue />\n\tContinue to delivery\nFictional shop. Confirmation records a local demonstration order; no payment is taken.",
+  "visible_text": "Atlas Audio\nYour cart\nAtlas headphones × 1 — $45.00\nQuantity\n|SHADOW(open)|*[50]<input id=wh-quantity name=quantity type=number min=0 max=9 step=1 value=1 required=true valuemin=0 valuemax=9 valuetext=1 compound_components=(name=Increment,role=button),(name=Decrement,role=button),(name=Value,role=textbox,min=0.0,max=9.0) />\n*[55]<button id=wh-cart-update type=submit name=action value=update />\n\tUpdate quantity\nProduct subtotal: $45.00. Delivery and any selected optional additions are shown at review.\n*[57]<a id=wh-back />\n\tBack to product\n*[56]<button id=wh-continue type=submit name=action value=continue />\n\tContinue to delivery\nFictional shop. Confirmation records a local demonstration order; no payment is taken.",
+  "page_info": {
+    "viewport_width": 1280,
+    "viewport_height": 720,
+    "page_width": 1280,
+    "page_height": 720,
+    "scroll_x": 0,
+    "scroll_y": 0,
+    "pixels_above": 0,
+    "pixels_below": 0,
+    "pixels_left": 0,
+    "pixels_right": 0
+  },
+  "screenshot": "screenshot-1.png",
+  "screenshot_original": "screenshot-original-1.png",
+  "screenshot_sha256": "af908c4994217cd6f4c59f25dc900fb2302036da1c61ab47781d4717673df3ad",
+  "sent_to_model": true,
+  "submitted_to_model_adapter": true
+}

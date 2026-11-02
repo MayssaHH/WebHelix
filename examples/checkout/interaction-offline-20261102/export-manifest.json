@@ -1,0 +1,1234 @@
+{
+  "offline_only": true,
+  "source_runs": [
+    "/workspace/webhelix-runs/interaction-comparison-offline-20261102",
+    "/workspace/webhelix-runs/interaction-controls-final-20261102"
+  ],
+  "files": [
+    {
+      "path": "comparison/audit.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/audit.json",
+      "sha256": "ada7ebfeb478bd66f2f0318acc0843f112c0294512a457d2563768697202cc98",
+      "bytes": 26412
+    },
+    {
+      "path": "comparison/budget.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/budget.json",
+      "sha256": "efa0800b4fa7a2cec5289913194a7a9fe83336274980a1e98ab8bb7bb3150603",
+      "bytes": 23781
+    },
+    {
+      "path": "comparison/opencode-runtime.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/opencode-runtime.json",
+      "sha256": "eb5da254b0d254a9586c894c052bc17c59c32a808ef9b087d55ee54f961523f4",
+      "bytes": 696
+    },
+    {
+      "path": "controls/controls.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/controls.json",
+      "sha256": "fddf5753bccef8464b9afaae7b73cdc6d2fcfcf234f4cb06b48b8f4ce6e1c208",
+      "bytes": 4721
+    },
+    {
+      "path": "controls/identity/interaction.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/identity-5a62b5f5/candidate/interaction.json",
+      "sha256": "c45ae5743d6afdd8a7304911b91e98ee39bd8d5949dcd313a78ada483f5ad5af",
+      "bytes": 28
+    },
+    {
+      "path": "controls/identity/episode/episode.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/identity-5a62b5f5/episode-0/episode.json",
+      "sha256": "bf58b9641a76a2127cee4db33dd1e76efc69bb932954bf9033f946b31c595198",
+      "bytes": 12546
+    },
+    {
+      "path": "controls/identity/episode/backend-after.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/identity-5a62b5f5/episode-0/backend-after.json",
+      "sha256": "f8942287a756efbf6acd619c29868f7ffba311b2d42599527fd330f2810f3190",
+      "bytes": 7123
+    },
+    {
+      "path": "controls/identity/episode/interaction-journal.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/identity-5a62b5f5/episode-0/interaction-journal.json",
+      "sha256": "77aeff5c11e749031d2730b8e3912972fdc029b4b36a3d93aea38e7000ed36d1",
+      "bytes": 4616
+    },
+    {
+      "path": "controls/identity/episode/observation-0.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/identity-5a62b5f5/episode-0/observation-0.json",
+      "sha256": "dcac22c1b1605e4114968c7e9c167b23f0f45c3393c72b49d8461731ed2fab98",
+      "bytes": 1520
+    },
+    {
+      "path": "controls/identity/episode/observation-1.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/identity-5a62b5f5/episode-0/observation-1.json",
+      "sha256": "26068c4bc1b9ad546b6634774068c92ae39492b16bada29e58be1d917279b239",
+      "bytes": 2290
+    },
+    {
+      "path": "controls/identity/episode/observation-2.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/identity-5a62b5f5/episode-0/observation-2.json",
+      "sha256": "a6f56714b67a25c25a830d90b48d6f959959e62d23b3d57ace82ccb05e936436",
+      "bytes": 2904
+    },
+    {
+      "path": "controls/identity/episode/observation-3.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/identity-5a62b5f5/episode-0/observation-3.json",
+      "sha256": "7650faaf1c03412bef4ec8845108c3349af58c33389d142e4e1c05cd47f9bc56",
+      "bytes": 1590
+    },
+    {
+      "path": "controls/identity/episode/observation-4.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/identity-5a62b5f5/episode-0/observation-4.json",
+      "sha256": "c6af3b88396a1d3a674abcb4e65436c1e77690561d66567c4c230114961a2103",
+      "bytes": 1161
+    },
+    {
+      "path": "controls/identity/episode/action-0.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/identity-5a62b5f5/episode-0/action-0.json",
+      "sha256": "3a76afd2d6890dd7f695eac05b50b6c6e217301a2a444e206fdb355ce894a035",
+      "bytes": 35
+    },
+    {
+      "path": "controls/identity/episode/action-1.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/identity-5a62b5f5/episode-0/action-1.json",
+      "sha256": "ae5ddddf80491913d827aef04e5bd4541d2573e19b7c115b338a46a73829d1fc",
+      "bytes": 36
+    },
+    {
+      "path": "controls/identity/episode/action-2.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/identity-5a62b5f5/episode-0/action-2.json",
+      "sha256": "e94bfc99d0bf77bbb21836c4104a0713f79aedf18aabd4aabd7eb90023de0593",
+      "bytes": 37
+    },
+    {
+      "path": "controls/identity/episode/action-3.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/identity-5a62b5f5/episode-0/action-3.json",
+      "sha256": "7c8ba2210b5a86be6159b1829f41eba98d422258d086a8bef54706441fd764b0",
+      "bytes": 37
+    },
+    {
+      "path": "controls/identity/episode/exposure-0.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/identity-5a62b5f5/episode-0/exposure-0.json",
+      "sha256": "430414e8119d944f1e926b2b030af20d6f574f2d7e28d94f5bb08ad7c86082dd",
+      "bytes": 493
+    },
+    {
+      "path": "controls/identity/episode/exposure-1.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/identity-5a62b5f5/episode-0/exposure-1.json",
+      "sha256": "a4224d43da160a2f851d3202395247208926ba2df8238770edd96e829b56ce41",
+      "bytes": 490
+    },
+    {
+      "path": "controls/identity/episode/exposure-2.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/identity-5a62b5f5/episode-0/exposure-2.json",
+      "sha256": "30bdcb387e332deb80665f0536e2813fd1c43ad8d9021becba1bad3441850573",
+      "bytes": 493
+    },
+    {
+      "path": "controls/identity/episode/exposure-3.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/identity-5a62b5f5/episode-0/exposure-3.json",
+      "sha256": "1c789017598a2183e8b3859a1e510ff51b2d39506dbe8a7eb819889e5752ce24",
+      "bytes": 492
+    },
+    {
+      "path": "controls/identity/episode/exposure-4.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/identity-5a62b5f5/episode-0/exposure-4.json",
+      "sha256": "489293dbe03db8e82f241d4f4fd423c9beeb0fe3186aaac57e9d7aa1ec94aee5",
+      "bytes": 499
+    },
+    {
+      "path": "controls/identity/episode/screenshot-0.png",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/identity-5a62b5f5/episode-0/screenshot-0.png",
+      "sha256": "cab222b9c597c4075750718961115a19abce551df9d4127f3ca2da94e9a8c041",
+      "bytes": 44978
+    },
+    {
+      "path": "controls/identity/episode/screenshot-1.png",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/identity-5a62b5f5/episode-0/screenshot-1.png",
+      "sha256": "854d52f2e3d442da52715876d8a0d49b9ea74f3c386b6b61e26e0e767a39301f",
+      "bytes": 38467
+    },
+    {
+      "path": "controls/identity/episode/screenshot-2.png",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/identity-5a62b5f5/episode-0/screenshot-2.png",
+      "sha256": "cc37605efdd412ba1cc477fa931fd18a17d7d895c746d859c661f3d4b334117e",
+      "bytes": 70154
+    },
+    {
+      "path": "controls/identity/episode/screenshot-3.png",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/identity-5a62b5f5/episode-0/screenshot-3.png",
+      "sha256": "b851a93740c5f1188abadc5276bb9fa3881cd618bf10209413be7ad385e25d41",
+      "bytes": 42822
+    },
+    {
+      "path": "controls/identity/episode/screenshot-4.png",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/identity-5a62b5f5/episode-0/screenshot-4.png",
+      "sha256": "1727a59df197017d918cb943ba63610f48e769d5735c72bc5197e0b6e47fe0aa",
+      "bytes": 29214
+    },
+    {
+      "path": "controls/unremoved/interaction.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/unremoved-3528db46/candidate/interaction.json",
+      "sha256": "9ddd5f5d96db1adf301784080c85165f2bec72cceaa71194fc609cfee10ad07b",
+      "bytes": 165
+    },
+    {
+      "path": "controls/unremoved/episode/episode.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/unremoved-3528db46/episode-0/episode.json",
+      "sha256": "6f4a6a62edd47c795d1ddd7028dfcc3ba7230710a76d72aae7a9ec617e46c1f3",
+      "bytes": 15241
+    },
+    {
+      "path": "controls/unremoved/episode/backend-after.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/unremoved-3528db46/episode-0/backend-after.json",
+      "sha256": "b10c6a837bbdb02f42d06071dff7ba8e5672b364fff83755387d1eb7ecb599bd",
+      "bytes": 9508
+    },
+    {
+      "path": "controls/unremoved/episode/interaction-journal.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/unremoved-3528db46/episode-0/interaction-journal.json",
+      "sha256": "891a8a9c13a755ffc2935f6ef59bd616d2d41ebe0d6df9bec89b8d03d6aab48e",
+      "bytes": 6464
+    },
+    {
+      "path": "controls/unremoved/episode/observation-0.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/unremoved-3528db46/episode-0/observation-0.json",
+      "sha256": "04db8725384e58dad24c840e2053c92a1a43484904e757cf688f1f31aa89f636",
+      "bytes": 1520
+    },
+    {
+      "path": "controls/unremoved/episode/observation-1.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/unremoved-3528db46/episode-0/observation-1.json",
+      "sha256": "40efcdc613efb2a9b997e37111ad752160f7b16df5f629a6dc3c4ec01db7922c",
+      "bytes": 2290
+    },
+    {
+      "path": "controls/unremoved/episode/observation-2.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/unremoved-3528db46/episode-0/observation-2.json",
+      "sha256": "05c0095a67b6f90715a0d6be61a91d45318502723bdbd5dafcf89ba3eb0db3ad",
+      "bytes": 2904
+    },
+    {
+      "path": "controls/unremoved/episode/observation-3.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/unremoved-3528db46/episode-0/observation-3.json",
+      "sha256": "32a754fa8cafcc821b1783029730b7a91491f16ed49c149443da23eb2b60727c",
+      "bytes": 1650
+    },
+    {
+      "path": "controls/unremoved/episode/observation-4.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/unremoved-3528db46/episode-0/observation-4.json",
+      "sha256": "275a97e7b7e6640070a38a6dbadd420409d773059a0d7cd9098b7cfce20fdda2",
+      "bytes": 1221
+    },
+    {
+      "path": "controls/unremoved/episode/action-0.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/unremoved-3528db46/episode-0/action-0.json",
+      "sha256": "3a76afd2d6890dd7f695eac05b50b6c6e217301a2a444e206fdb355ce894a035",
+      "bytes": 35
+    },
+    {
+      "path": "controls/unremoved/episode/action-1.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/unremoved-3528db46/episode-0/action-1.json",
+      "sha256": "ae5ddddf80491913d827aef04e5bd4541d2573e19b7c115b338a46a73829d1fc",
+      "bytes": 36
+    },
+    {
+      "path": "controls/unremoved/episode/action-2.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/unremoved-3528db46/episode-0/action-2.json",
+      "sha256": "e94bfc99d0bf77bbb21836c4104a0713f79aedf18aabd4aabd7eb90023de0593",
+      "bytes": 37
+    },
+    {
+      "path": "controls/unremoved/episode/action-3.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/unremoved-3528db46/episode-0/action-3.json",
+      "sha256": "7c8ba2210b5a86be6159b1829f41eba98d422258d086a8bef54706441fd764b0",
+      "bytes": 37
+    },
+    {
+      "path": "controls/unremoved/episode/exposure-0.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/unremoved-3528db46/episode-0/exposure-0.json",
+      "sha256": "430414e8119d944f1e926b2b030af20d6f574f2d7e28d94f5bb08ad7c86082dd",
+      "bytes": 493
+    },
+    {
+      "path": "controls/unremoved/episode/exposure-1.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/unremoved-3528db46/episode-0/exposure-1.json",
+      "sha256": "a4224d43da160a2f851d3202395247208926ba2df8238770edd96e829b56ce41",
+      "bytes": 490
+    },
+    {
+      "path": "controls/unremoved/episode/exposure-2.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/unremoved-3528db46/episode-0/exposure-2.json",
+      "sha256": "30bdcb387e332deb80665f0536e2813fd1c43ad8d9021becba1bad3441850573",
+      "bytes": 493
+    },
+    {
+      "path": "controls/unremoved/episode/exposure-3.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/unremoved-3528db46/episode-0/exposure-3.json",
+      "sha256": "2239b7354735680488bc4871c7658ab0f6934ada68de2b38a577e53848c01a9b",
+      "bytes": 500
+    },
+    {
+      "path": "controls/unremoved/episode/exposure-4.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/unremoved-3528db46/episode-0/exposure-4.json",
+      "sha256": "98d66ac2922003218e28235bb71aa3e3f75ad875c2bff580ba4975ebed3f3bdf",
+      "bytes": 499
+    },
+    {
+      "path": "controls/unremoved/episode/screenshot-0.png",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/unremoved-3528db46/episode-0/screenshot-0.png",
+      "sha256": "cab222b9c597c4075750718961115a19abce551df9d4127f3ca2da94e9a8c041",
+      "bytes": 44978
+    },
+    {
+      "path": "controls/unremoved/episode/screenshot-1.png",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/unremoved-3528db46/episode-0/screenshot-1.png",
+      "sha256": "854d52f2e3d442da52715876d8a0d49b9ea74f3c386b6b61e26e0e767a39301f",
+      "bytes": 38467
+    },
+    {
+      "path": "controls/unremoved/episode/screenshot-2.png",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/unremoved-3528db46/episode-0/screenshot-2.png",
+      "sha256": "cc37605efdd412ba1cc477fa931fd18a17d7d895c746d859c661f3d4b334117e",
+      "bytes": 70154
+    },
+    {
+      "path": "controls/unremoved/episode/screenshot-3.png",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/unremoved-3528db46/episode-0/screenshot-3.png",
+      "sha256": "0b6b93412e2dade2d7173325d8ee7b56799e84d4e7ad2ec295240f740ba0c780",
+      "bytes": 46977
+    },
+    {
+      "path": "controls/unremoved/episode/screenshot-4.png",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/unremoved-3528db46/episode-0/screenshot-4.png",
+      "sha256": "77bc57c79a2ca16e5db5f53140e096a42c61d8ac919c69d6e755446117a8d037",
+      "bytes": 32865
+    },
+    {
+      "path": "controls/recovered/interaction.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/recovered-9bea40b4/candidate/interaction.json",
+      "sha256": "9ddd5f5d96db1adf301784080c85165f2bec72cceaa71194fc609cfee10ad07b",
+      "bytes": 165
+    },
+    {
+      "path": "controls/recovered/episode/episode.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/recovered-9bea40b4/episode-0/episode.json",
+      "sha256": "e6d95af81f4c3c678b2cac285d21781e6fec38d0d94027b4f67b1eee26d82d11",
+      "bytes": 19148
+    },
+    {
+      "path": "controls/recovered/episode/backend-after.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/recovered-9bea40b4/episode-0/backend-after.json",
+      "sha256": "079ae0fcf75941bc0712d4fd689fc37185682088bd802335e80db980195983df",
+      "bytes": 11500
+    },
+    {
+      "path": "controls/recovered/episode/interaction-journal.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/recovered-9bea40b4/episode-0/interaction-journal.json",
+      "sha256": "68818c42128574055e7a92362fb5811e2ce2ac1728c32bb0799812cb7c980375",
+      "bytes": 8361
+    },
+    {
+      "path": "controls/recovered/episode/observation-0.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/recovered-9bea40b4/episode-0/observation-0.json",
+      "sha256": "2ab46f1a74d04d9e7a367736f80067ca6f8307ec355d608a7379d4d5ad9497de",
+      "bytes": 1520
+    },
+    {
+      "path": "controls/recovered/episode/observation-1.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/recovered-9bea40b4/episode-0/observation-1.json",
+      "sha256": "478b002bf5adea8d1dbc416a12ebd73d641aa8286147f15ba8315ec7ab99e2ec",
+      "bytes": 2290
+    },
+    {
+      "path": "controls/recovered/episode/observation-2.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/recovered-9bea40b4/episode-0/observation-2.json",
+      "sha256": "fd4792733d5fadaa3581e21691e27fb5c92258639ec2f1081b3e3178826a402c",
+      "bytes": 2904
+    },
+    {
+      "path": "controls/recovered/episode/observation-3.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/recovered-9bea40b4/episode-0/observation-3.json",
+      "sha256": "7678123932bfd20f1d8d3fb06f7bde38283df23b39c9754defcebb7d787c5959",
+      "bytes": 1650
+    },
+    {
+      "path": "controls/recovered/episode/observation-4.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/recovered-9bea40b4/episode-0/observation-4.json",
+      "sha256": "5c7cbc9e47c571d72e93834bf8b24296d946637f581f7f4caa2baf88e6143ae2",
+      "bytes": 2906
+    },
+    {
+      "path": "controls/recovered/episode/observation-5.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/recovered-9bea40b4/episode-0/observation-5.json",
+      "sha256": "59e1111027bdfa3c93b9628abd77f1811cf6aa97b22aada930b93c5637b1d97d",
+      "bytes": 2894
+    },
+    {
+      "path": "controls/recovered/episode/observation-6.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/recovered-9bea40b4/episode-0/observation-6.json",
+      "sha256": "e3ea4e5f76a8ea4aa1f0dc4340c5a99f0935b3554eecb05677c01d343506be28",
+      "bytes": 1590
+    },
+    {
+      "path": "controls/recovered/episode/observation-7.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/recovered-9bea40b4/episode-0/observation-7.json",
+      "sha256": "a2b16fe948c23d7993c6c31bc7f48d58e376fc9590e574065f56ef4be0d46978",
+      "bytes": 1161
+    },
+    {
+      "path": "controls/recovered/episode/action-0.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/recovered-9bea40b4/episode-0/action-0.json",
+      "sha256": "3a76afd2d6890dd7f695eac05b50b6c6e217301a2a444e206fdb355ce894a035",
+      "bytes": 35
+    },
+    {
+      "path": "controls/recovered/episode/action-1.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/recovered-9bea40b4/episode-0/action-1.json",
+      "sha256": "ae5ddddf80491913d827aef04e5bd4541d2573e19b7c115b338a46a73829d1fc",
+      "bytes": 36
+    },
+    {
+      "path": "controls/recovered/episode/action-2.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/recovered-9bea40b4/episode-0/action-2.json",
+      "sha256": "e94bfc99d0bf77bbb21836c4104a0713f79aedf18aabd4aabd7eb90023de0593",
+      "bytes": 37
+    },
+    {
+      "path": "controls/recovered/episode/action-3.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/recovered-9bea40b4/episode-0/action-3.json",
+      "sha256": "9717298c16eca49db1e903531a4096301ca39fb96ea0fe45c2ebf043f4c9b357",
+      "bytes": 37
+    },
+    {
+      "path": "controls/recovered/episode/action-4.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/recovered-9bea40b4/episode-0/action-4.json",
+      "sha256": "307b0df405327f04345859f94d88f630f1af069b2bbf8a734b5143c3756a6cf4",
+      "bytes": 37
+    },
+    {
+      "path": "controls/recovered/episode/action-5.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/recovered-9bea40b4/episode-0/action-5.json",
+      "sha256": "e5f63b9dd143884bb12862f47cb5bc692b5fd1f58d8bb6956e920379c03cfa5a",
+      "bytes": 37
+    },
+    {
+      "path": "controls/recovered/episode/action-6.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/recovered-9bea40b4/episode-0/action-6.json",
+      "sha256": "f232a439b84111c3383216e3ac23938693b2f273a0357a5be602f573e335987c",
+      "bytes": 37
+    },
+    {
+      "path": "controls/recovered/episode/exposure-0.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/recovered-9bea40b4/episode-0/exposure-0.json",
+      "sha256": "430414e8119d944f1e926b2b030af20d6f574f2d7e28d94f5bb08ad7c86082dd",
+      "bytes": 493
+    },
+    {
+      "path": "controls/recovered/episode/exposure-1.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/recovered-9bea40b4/episode-0/exposure-1.json",
+      "sha256": "a4224d43da160a2f851d3202395247208926ba2df8238770edd96e829b56ce41",
+      "bytes": 490
+    },
+    {
+      "path": "controls/recovered/episode/exposure-2.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/recovered-9bea40b4/episode-0/exposure-2.json",
+      "sha256": "30bdcb387e332deb80665f0536e2813fd1c43ad8d9021becba1bad3441850573",
+      "bytes": 493
+    },
+    {
+      "path": "controls/recovered/episode/exposure-3.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/recovered-9bea40b4/episode-0/exposure-3.json",
+      "sha256": "2239b7354735680488bc4871c7658ab0f6934ada68de2b38a577e53848c01a9b",
+      "bytes": 500
+    },
+    {
+      "path": "controls/recovered/episode/exposure-4.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/recovered-9bea40b4/episode-0/exposure-4.json",
+      "sha256": "0951da67dc7d1a09462884d71a050de33bc4be796fe7208d74d9ecaeea1ff5b1",
+      "bytes": 501
+    },
+    {
+      "path": "controls/recovered/episode/exposure-5.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/recovered-9bea40b4/episode-0/exposure-5.json",
+      "sha256": "b4bbfc23af7e0d17859ac0e24806d7b486d8be3291a91f61dd664499e927ee9d",
+      "bytes": 501
+    },
+    {
+      "path": "controls/recovered/episode/exposure-6.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/recovered-9bea40b4/episode-0/exposure-6.json",
+      "sha256": "3198409e4afb9a9a088c956d34574c72b4cd64488887ff44f5c4b84acd986794",
+      "bytes": 492
+    },
+    {
+      "path": "controls/recovered/episode/exposure-7.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/recovered-9bea40b4/episode-0/exposure-7.json",
+      "sha256": "8e7af9fa8f4b99573bb72de2ebcf57be4f7d859a36dbf7c389256c6a3222198e",
+      "bytes": 499
+    },
+    {
+      "path": "controls/recovered/episode/screenshot-0.png",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/recovered-9bea40b4/episode-0/screenshot-0.png",
+      "sha256": "cab222b9c597c4075750718961115a19abce551df9d4127f3ca2da94e9a8c041",
+      "bytes": 44978
+    },
+    {
+      "path": "controls/recovered/episode/screenshot-1.png",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/recovered-9bea40b4/episode-0/screenshot-1.png",
+      "sha256": "854d52f2e3d442da52715876d8a0d49b9ea74f3c386b6b61e26e0e767a39301f",
+      "bytes": 38467
+    },
+    {
+      "path": "controls/recovered/episode/screenshot-2.png",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/recovered-9bea40b4/episode-0/screenshot-2.png",
+      "sha256": "cc37605efdd412ba1cc477fa931fd18a17d7d895c746d859c661f3d4b334117e",
+      "bytes": 70154
+    },
+    {
+      "path": "controls/recovered/episode/screenshot-3.png",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/recovered-9bea40b4/episode-0/screenshot-3.png",
+      "sha256": "0b6b93412e2dade2d7173325d8ee7b56799e84d4e7ad2ec295240f740ba0c780",
+      "bytes": 46977
+    },
+    {
+      "path": "controls/recovered/episode/screenshot-4.png",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/recovered-9bea40b4/episode-0/screenshot-4.png",
+      "sha256": "0949b599e3dcbf57a737b414bae4cf317f0c67582e09ce992b600b3dab59afea",
+      "bytes": 70369
+    },
+    {
+      "path": "controls/recovered/episode/screenshot-5.png",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/recovered-9bea40b4/episode-0/screenshot-5.png",
+      "sha256": "cc37605efdd412ba1cc477fa931fd18a17d7d895c746d859c661f3d4b334117e",
+      "bytes": 70154
+    },
+    {
+      "path": "controls/recovered/episode/screenshot-6.png",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/recovered-9bea40b4/episode-0/screenshot-6.png",
+      "sha256": "b851a93740c5f1188abadc5276bb9fa3881cd618bf10209413be7ad385e25d41",
+      "bytes": 42822
+    },
+    {
+      "path": "controls/recovered/episode/screenshot-7.png",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/recovered-9bea40b4/episode-0/screenshot-7.png",
+      "sha256": "1727a59df197017d918cb943ba63610f48e769d5735c72bc5197e0b6e47fe0aa",
+      "bytes": 29214
+    },
+    {
+      "path": "controls/fresh-identity/interaction.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/fresh-identity-4461afa4/candidate/interaction.json",
+      "sha256": "c45ae5743d6afdd8a7304911b91e98ee39bd8d5949dcd313a78ada483f5ad5af",
+      "bytes": 28
+    },
+    {
+      "path": "controls/fresh-identity/episode/episode.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/fresh-identity-4461afa4/episode-0/episode.json",
+      "sha256": "981f0d432c3854cf78746cb5e5d606e66183b4ff2202824b4c10772f3377332f",
+      "bytes": 12546
+    },
+    {
+      "path": "controls/fresh-identity/episode/backend-after.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/fresh-identity-4461afa4/episode-0/backend-after.json",
+      "sha256": "0a0a049ae52fb9684fac7afef09c0be6760dd0980bdd2cbea3e55663ee32c522",
+      "bytes": 7123
+    },
+    {
+      "path": "controls/fresh-identity/episode/interaction-journal.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/fresh-identity-4461afa4/episode-0/interaction-journal.json",
+      "sha256": "f3083f0775b415ee3994bd22d598df85316fcd317a6d817be4d7aa4473ca902c",
+      "bytes": 4616
+    },
+    {
+      "path": "controls/fresh-identity/episode/observation-0.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/fresh-identity-4461afa4/episode-0/observation-0.json",
+      "sha256": "40e90d8a348882aec3605ff80826a7f90e32efd63f11a0f386e3349950e82f6e",
+      "bytes": 1520
+    },
+    {
+      "path": "controls/fresh-identity/episode/observation-1.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/fresh-identity-4461afa4/episode-0/observation-1.json",
+      "sha256": "54ef363c4a7a09bfbbdee30544a288542671051c6317290aedca5cab1d8f6c42",
+      "bytes": 2290
+    },
+    {
+      "path": "controls/fresh-identity/episode/observation-2.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/fresh-identity-4461afa4/episode-0/observation-2.json",
+      "sha256": "484a7c0d83cad4cb56b6c66278da729986ddba55fac16273b1f05c0ae1ba3540",
+      "bytes": 2904
+    },
+    {
+      "path": "controls/fresh-identity/episode/observation-3.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/fresh-identity-4461afa4/episode-0/observation-3.json",
+      "sha256": "9cdc9bb5a8ae36b16952c8726e0c2ac12910ea98c3d8b912da1dea7c719e80b4",
+      "bytes": 1590
+    },
+    {
+      "path": "controls/fresh-identity/episode/observation-4.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/fresh-identity-4461afa4/episode-0/observation-4.json",
+      "sha256": "9d11e06628830ff51dcd372d8ed19589614dd4fcfaba8a40554ab4d1fb2e18b5",
+      "bytes": 1161
+    },
+    {
+      "path": "controls/fresh-identity/episode/action-0.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/fresh-identity-4461afa4/episode-0/action-0.json",
+      "sha256": "3a76afd2d6890dd7f695eac05b50b6c6e217301a2a444e206fdb355ce894a035",
+      "bytes": 35
+    },
+    {
+      "path": "controls/fresh-identity/episode/action-1.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/fresh-identity-4461afa4/episode-0/action-1.json",
+      "sha256": "ae5ddddf80491913d827aef04e5bd4541d2573e19b7c115b338a46a73829d1fc",
+      "bytes": 36
+    },
+    {
+      "path": "controls/fresh-identity/episode/action-2.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/fresh-identity-4461afa4/episode-0/action-2.json",
+      "sha256": "e94bfc99d0bf77bbb21836c4104a0713f79aedf18aabd4aabd7eb90023de0593",
+      "bytes": 37
+    },
+    {
+      "path": "controls/fresh-identity/episode/action-3.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/fresh-identity-4461afa4/episode-0/action-3.json",
+      "sha256": "7c8ba2210b5a86be6159b1829f41eba98d422258d086a8bef54706441fd764b0",
+      "bytes": 37
+    },
+    {
+      "path": "controls/fresh-identity/episode/exposure-0.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/fresh-identity-4461afa4/episode-0/exposure-0.json",
+      "sha256": "430414e8119d944f1e926b2b030af20d6f574f2d7e28d94f5bb08ad7c86082dd",
+      "bytes": 493
+    },
+    {
+      "path": "controls/fresh-identity/episode/exposure-1.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/fresh-identity-4461afa4/episode-0/exposure-1.json",
+      "sha256": "a4224d43da160a2f851d3202395247208926ba2df8238770edd96e829b56ce41",
+      "bytes": 490
+    },
+    {
+      "path": "controls/fresh-identity/episode/exposure-2.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/fresh-identity-4461afa4/episode-0/exposure-2.json",
+      "sha256": "30bdcb387e332deb80665f0536e2813fd1c43ad8d9021becba1bad3441850573",
+      "bytes": 493
+    },
+    {
+      "path": "controls/fresh-identity/episode/exposure-3.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/fresh-identity-4461afa4/episode-0/exposure-3.json",
+      "sha256": "1c789017598a2183e8b3859a1e510ff51b2d39506dbe8a7eb819889e5752ce24",
+      "bytes": 492
+    },
+    {
+      "path": "controls/fresh-identity/episode/exposure-4.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/fresh-identity-4461afa4/episode-0/exposure-4.json",
+      "sha256": "489293dbe03db8e82f241d4f4fd423c9beeb0fe3186aaac57e9d7aa1ec94aee5",
+      "bytes": 499
+    },
+    {
+      "path": "controls/fresh-identity/episode/screenshot-0.png",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/fresh-identity-4461afa4/episode-0/screenshot-0.png",
+      "sha256": "cab222b9c597c4075750718961115a19abce551df9d4127f3ca2da94e9a8c041",
+      "bytes": 44978
+    },
+    {
+      "path": "controls/fresh-identity/episode/screenshot-1.png",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/fresh-identity-4461afa4/episode-0/screenshot-1.png",
+      "sha256": "854d52f2e3d442da52715876d8a0d49b9ea74f3c386b6b61e26e0e767a39301f",
+      "bytes": 38467
+    },
+    {
+      "path": "controls/fresh-identity/episode/screenshot-2.png",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/fresh-identity-4461afa4/episode-0/screenshot-2.png",
+      "sha256": "cc37605efdd412ba1cc477fa931fd18a17d7d895c746d859c661f3d4b334117e",
+      "bytes": 70154
+    },
+    {
+      "path": "controls/fresh-identity/episode/screenshot-3.png",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/fresh-identity-4461afa4/episode-0/screenshot-3.png",
+      "sha256": "b851a93740c5f1188abadc5276bb9fa3881cd618bf10209413be7ad385e25d41",
+      "bytes": 42822
+    },
+    {
+      "path": "controls/fresh-identity/episode/screenshot-4.png",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/batches/fresh-identity-4461afa4/episode-0/screenshot-4.png",
+      "sha256": "1727a59df197017d918cb943ba63610f48e769d5735c72bc5197e0b6e47fe0aa",
+      "bytes": 29214
+    },
+    {
+      "path": "controls/invalid.json",
+      "source": "/workspace/webhelix-runs/interaction-controls-final-20261102/invalid.json",
+      "sha256": "15458e442c3e304a47f12b95b94a442ab276e4f495097ca87d595e085312fe2f",
+      "bytes": 1589
+    },
+    {
+      "path": "comparison/presentation/history.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/presentation/history.json",
+      "sha256": "2cf631a93a2f120d0dcf6414227437918d430022740b62d7d97409ad8c4ee44a",
+      "bytes": 2673
+    },
+    {
+      "path": "comparison/presentation/feedback-continuity.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/presentation/feedback-continuity.json",
+      "sha256": "90728f5e7e1627f99f982bffe79544edb729cc3ba3c1a37a9fd73930b38a5896",
+      "bytes": 383
+    },
+    {
+      "path": "comparison/presentation/baseline-reuse.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/presentation/baseline-reuse.json",
+      "sha256": "0e6de6faeab94939663eee51046c9d5911e911850c9b70d2dba89dfd4a93dff5",
+      "bytes": 379
+    },
+    {
+      "path": "comparison/presentation/iter-1/optimizer-note.md",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/presentation/proposals/iter-1/optimizer-note.md",
+      "sha256": "1f45dd3217b9e1eb54f778426290bb229abfff4b1ef71f035843a764400167b0",
+      "bytes": 418
+    },
+    {
+      "path": "comparison/presentation/iter-1/candidate.diff",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/presentation/proposals/iter-1/candidate.diff",
+      "sha256": "92472e0a17dfcb7676f5965e4e02c99f3a1e01a94e3f330f61ebeaca6b8f2ebb",
+      "bytes": 1044
+    },
+    {
+      "path": "comparison/presentation/iter-1/result.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/presentation/proposals/iter-1/result.json",
+      "sha256": "a5522f1d2bddd6030ea71293e063c5bdc2bd99b1ddc88dea851c2c8993b98a27",
+      "bytes": 6249
+    },
+    {
+      "path": "comparison/presentation/iter-1/acceptance.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/presentation/proposals/iter-1/acceptance.json",
+      "sha256": "769c85ca9b54d991835af99b0a4e99510f66a191eec7855c69120ab2556b51b4",
+      "bytes": 1153
+    },
+    {
+      "path": "comparison/presentation/iter-1/candidate/options.html",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/presentation/proposals/iter-1/candidate/options.html",
+      "sha256": "98d5f365e4545c0885a724e5342025e8923de9f00f508fcdda8b649bde8c6c61",
+      "bytes": 548
+    },
+    {
+      "path": "comparison/presentation/iter-1/candidate/review.html",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/presentation/proposals/iter-1/candidate/review.html",
+      "sha256": "f34294204096b8ea9bc4ef4cc2c0b1b17fa64a102029c3c8bac6d83ffbdb0410",
+      "bytes": 429
+    },
+    {
+      "path": "comparison/presentation/iter-1/candidate/style.css",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/presentation/proposals/iter-1/candidate/style.css",
+      "sha256": "84fed97efd6943d9aef703cf470d09917e7648bb50c17fa59f1d529484522cbf",
+      "bytes": 2873
+    },
+    {
+      "path": "comparison/presentation/iter-1/candidate/product.html",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/presentation/proposals/iter-1/candidate/product.html",
+      "sha256": "581740ceccb22ed936eb236603ba5b10871518230906c369b4ef2a3966db6f2f",
+      "bytes": 609
+    },
+    {
+      "path": "comparison/presentation/iter-1/candidate/cart.html",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/presentation/proposals/iter-1/candidate/cart.html",
+      "sha256": "a56e87f0003237fccf5e071ee0afa88202b2cf4d5bd22c5c25dcefd4c8a7fd85",
+      "bytes": 387
+    },
+    {
+      "path": "comparison/presentation/iter-1/candidate/interaction.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/presentation/proposals/iter-1/candidate/interaction.json",
+      "sha256": "c45ae5743d6afdd8a7304911b91e98ee39bd8d5949dcd313a78ada483f5ad5af",
+      "bytes": 28
+    },
+    {
+      "path": "comparison/presentation/iter-2/optimizer-note.md",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/presentation/proposals/iter-2/optimizer-note.md",
+      "sha256": "8533b0fa709f6da77c124d020f57edfdc588b7fec8c03c8f23226ecce5391f55",
+      "bytes": 1221
+    },
+    {
+      "path": "comparison/presentation/iter-2/candidate.diff",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/presentation/proposals/iter-2/candidate.diff",
+      "sha256": "51177b4748c140f6686c26eb6c71f68767828771013b5105a9f62eb75070b572",
+      "bytes": 1044
+    },
+    {
+      "path": "comparison/presentation/iter-2/result.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/presentation/proposals/iter-2/result.json",
+      "sha256": "79e830db75cef15eddca18b34342b285e469dd34a43db01582fbca34751aff36",
+      "bytes": 6249
+    },
+    {
+      "path": "comparison/presentation/iter-2/acceptance.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/presentation/proposals/iter-2/acceptance.json",
+      "sha256": "0e1f0264d2f07c3b259677114f06bf5d2ba4a3aceb81f468e4ebc530b0d2be6f",
+      "bytes": 1153
+    },
+    {
+      "path": "comparison/presentation/iter-2/candidate/options.html",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/presentation/proposals/iter-2/candidate/options.html",
+      "sha256": "21a8ee08db34c10400a1649f7295b59304fd091d42e90d438f1af51ccc5f7480",
+      "bytes": 548
+    },
+    {
+      "path": "comparison/presentation/iter-2/candidate/review.html",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/presentation/proposals/iter-2/candidate/review.html",
+      "sha256": "f34294204096b8ea9bc4ef4cc2c0b1b17fa64a102029c3c8bac6d83ffbdb0410",
+      "bytes": 429
+    },
+    {
+      "path": "comparison/presentation/iter-2/candidate/style.css",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/presentation/proposals/iter-2/candidate/style.css",
+      "sha256": "1269d06c83bcdab9b6902a07247a725a859d43f4bfcf464391d86169e24b5fc3",
+      "bytes": 2873
+    },
+    {
+      "path": "comparison/presentation/iter-2/candidate/product.html",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/presentation/proposals/iter-2/candidate/product.html",
+      "sha256": "581740ceccb22ed936eb236603ba5b10871518230906c369b4ef2a3966db6f2f",
+      "bytes": 609
+    },
+    {
+      "path": "comparison/presentation/iter-2/candidate/cart.html",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/presentation/proposals/iter-2/candidate/cart.html",
+      "sha256": "a56e87f0003237fccf5e071ee0afa88202b2cf4d5bd22c5c25dcefd4c8a7fd85",
+      "bytes": 387
+    },
+    {
+      "path": "comparison/presentation/iter-2/candidate/interaction.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/presentation/proposals/iter-2/candidate/interaction.json",
+      "sha256": "c45ae5743d6afdd8a7304911b91e98ee39bd8d5949dcd313a78ada483f5ad5af",
+      "bytes": 28
+    },
+    {
+      "path": "comparison/interaction/history.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/history.json",
+      "sha256": "2507480112a833fc8fc66c56e99b7b566a791fc7d6b8d29cf839a594390a20a6",
+      "bytes": 2671
+    },
+    {
+      "path": "comparison/interaction/feedback-continuity.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/feedback-continuity.json",
+      "sha256": "373645659125afb5acf92192063b11629984b3b9ed2a6744eee8d0ae02b98ce7",
+      "bytes": 383
+    },
+    {
+      "path": "comparison/interaction/baseline-reuse.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/baseline-reuse.json",
+      "sha256": "0e6de6faeab94939663eee51046c9d5911e911850c9b70d2dba89dfd4a93dff5",
+      "bytes": 379
+    },
+    {
+      "path": "comparison/interaction/iter-1/optimizer-note.md",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/proposals/iter-1/optimizer-note.md",
+      "sha256": "f8a05209d94ab98772712b28f46bde8b81a5862fb60466d8d5a11e9ed352c4f7",
+      "bytes": 495
+    },
+    {
+      "path": "comparison/interaction/iter-1/candidate.diff",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/proposals/iter-1/candidate.diff",
+      "sha256": "936ecf290f41c90f53ac6a3ca6abda0ebe25c2157133241c8c55540b54b41c0a",
+      "bytes": 261
+    },
+    {
+      "path": "comparison/interaction/iter-1/result.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/proposals/iter-1/result.json",
+      "sha256": "b90729fcb0e063664c36d84c0d71966f7548f8e50635f9db733f75f0b02016d8",
+      "bytes": 6244
+    },
+    {
+      "path": "comparison/interaction/iter-1/acceptance.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/proposals/iter-1/acceptance.json",
+      "sha256": "04b40adcfb35f1d4666f4d83bf6bc1d2eb5013e7d07e53013f0364cd0d50bc3a",
+      "bytes": 1152
+    },
+    {
+      "path": "comparison/interaction/iter-1/candidate/options.html",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/proposals/iter-1/candidate/options.html",
+      "sha256": "eb743060534ee871f2cae60e35719628f03b4e902b0e385cfbdbc4bb7cba17ee",
+      "bytes": 502
+    },
+    {
+      "path": "comparison/interaction/iter-1/candidate/review.html",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/proposals/iter-1/candidate/review.html",
+      "sha256": "f34294204096b8ea9bc4ef4cc2c0b1b17fa64a102029c3c8bac6d83ffbdb0410",
+      "bytes": 429
+    },
+    {
+      "path": "comparison/interaction/iter-1/candidate/style.css",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/proposals/iter-1/candidate/style.css",
+      "sha256": "d0472c28c9e46a6c3d3bf4f9171cc1a107af4a183d3557cc4b847f3509c43f57",
+      "bytes": 2788
+    },
+    {
+      "path": "comparison/interaction/iter-1/candidate/product.html",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/proposals/iter-1/candidate/product.html",
+      "sha256": "581740ceccb22ed936eb236603ba5b10871518230906c369b4ef2a3966db6f2f",
+      "bytes": 609
+    },
+    {
+      "path": "comparison/interaction/iter-1/candidate/cart.html",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/proposals/iter-1/candidate/cart.html",
+      "sha256": "a56e87f0003237fccf5e071ee0afa88202b2cf4d5bd22c5c25dcefd4c8a7fd85",
+      "bytes": 387
+    },
+    {
+      "path": "comparison/interaction/iter-1/candidate/interaction.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/proposals/iter-1/candidate/interaction.json",
+      "sha256": "44b5a45598aa55eb2d52d8d69ba8ce7815d8d33fce0d123db8881294e8d4c5a3",
+      "bytes": 158
+    },
+    {
+      "path": "comparison/interaction/iter-1/episode-0/episode.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/feedback/iter-1/episode-0/episode.json",
+      "sha256": "1ee25abd10c78fbb225b91afe7c418c0a7daab4c424fecb587ca96b9bde58212",
+      "bytes": 15906
+    },
+    {
+      "path": "comparison/interaction/iter-1/episode-0/backend-after.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/feedback/iter-1/episode-0/backend-after.json",
+      "sha256": "fe50337935d080196bdab3bcb20d174de242794472361115fa8472d551b1f8ed",
+      "bytes": 9619
+    },
+    {
+      "path": "comparison/interaction/iter-1/episode-0/interaction-journal.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/feedback/iter-1/episode-0/interaction-journal.json",
+      "sha256": "9428b76b1405de94f5b3dadcbbc86dc58d00ef17f45610e608205214165b6dcf",
+      "bytes": 6835
+    },
+    {
+      "path": "comparison/interaction/iter-1/episode-0/observation-0.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/feedback/iter-1/episode-0/observation-0.json",
+      "sha256": "bf6ca8715f6c3ce3d49dd74857e89d69d34d982debbe7d19f154bbf0d4e54bec",
+      "bytes": 1520
+    },
+    {
+      "path": "comparison/interaction/iter-1/episode-0/observation-1.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/feedback/iter-1/episode-0/observation-1.json",
+      "sha256": "048f72701577715b5941db3ab78784b38ac00ba977b9905c03c1474e3235ee9c",
+      "bytes": 2290
+    },
+    {
+      "path": "comparison/interaction/iter-1/episode-0/observation-2.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/feedback/iter-1/episode-0/observation-2.json",
+      "sha256": "cbf58ca5efe9c1129783ab0bf88b0d770c3299aa3c114ee0d0cc884f336a4fef",
+      "bytes": 2902
+    },
+    {
+      "path": "comparison/interaction/iter-1/episode-0/observation-3.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/feedback/iter-1/episode-0/observation-3.json",
+      "sha256": "e5270df869a9161e9e3cc5222b191bd24ab273aeea045580380ff33e0411ddea",
+      "bytes": 2890
+    },
+    {
+      "path": "comparison/interaction/iter-1/episode-0/observation-4.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/feedback/iter-1/episode-0/observation-4.json",
+      "sha256": "774b8dffca35f01406eb9750181e439c547ec021f547186be749492b4caca3d7",
+      "bytes": 1590
+    },
+    {
+      "path": "comparison/interaction/iter-1/episode-0/observation-5.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/feedback/iter-1/episode-0/observation-5.json",
+      "sha256": "42f702f448cd507ee8cc995d7aafa8809e75fa64f5d5f6a89e52f77d84bd115d",
+      "bytes": 1161
+    },
+    {
+      "path": "comparison/interaction/iter-1/episode-0/action-0.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/feedback/iter-1/episode-0/action-0.json",
+      "sha256": "3a76afd2d6890dd7f695eac05b50b6c6e217301a2a444e206fdb355ce894a035",
+      "bytes": 35
+    },
+    {
+      "path": "comparison/interaction/iter-1/episode-0/action-1.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/feedback/iter-1/episode-0/action-1.json",
+      "sha256": "ae5ddddf80491913d827aef04e5bd4541d2573e19b7c115b338a46a73829d1fc",
+      "bytes": 36
+    },
+    {
+      "path": "comparison/interaction/iter-1/episode-0/action-2.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/feedback/iter-1/episode-0/action-2.json",
+      "sha256": "9f44fbf74631f9c1a7b1843c68a0f060c1924bd4f623ada750f7cc1ecfa198fc",
+      "bytes": 37
+    },
+    {
+      "path": "comparison/interaction/iter-1/episode-0/action-3.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/feedback/iter-1/episode-0/action-3.json",
+      "sha256": "e94bfc99d0bf77bbb21836c4104a0713f79aedf18aabd4aabd7eb90023de0593",
+      "bytes": 37
+    },
+    {
+      "path": "comparison/interaction/iter-1/episode-0/action-4.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/feedback/iter-1/episode-0/action-4.json",
+      "sha256": "7c8ba2210b5a86be6159b1829f41eba98d422258d086a8bef54706441fd764b0",
+      "bytes": 37
+    },
+    {
+      "path": "comparison/interaction/iter-1/episode-0/exposure-0.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/feedback/iter-1/episode-0/exposure-0.json",
+      "sha256": "430414e8119d944f1e926b2b030af20d6f574f2d7e28d94f5bb08ad7c86082dd",
+      "bytes": 493
+    },
+    {
+      "path": "comparison/interaction/iter-1/episode-0/exposure-1.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/feedback/iter-1/episode-0/exposure-1.json",
+      "sha256": "a4224d43da160a2f851d3202395247208926ba2df8238770edd96e829b56ce41",
+      "bytes": 490
+    },
+    {
+      "path": "comparison/interaction/iter-1/episode-0/exposure-2.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/feedback/iter-1/episode-0/exposure-2.json",
+      "sha256": "13f6adf4fcc1cd2d78aca16137ffc7d874a3f6242ef234dd8393e38995e7a9c1",
+      "bytes": 501
+    },
+    {
+      "path": "comparison/interaction/iter-1/episode-0/exposure-3.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/feedback/iter-1/episode-0/exposure-3.json",
+      "sha256": "cee865fa23d1ca68f0bf4b542fbf2490a8a798a4fae42448eb1395b986d1aebc",
+      "bytes": 501
+    },
+    {
+      "path": "comparison/interaction/iter-1/episode-0/exposure-4.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/feedback/iter-1/episode-0/exposure-4.json",
+      "sha256": "aec297dbdb17d5450a396e49116d04a58c35f484fe83bdd5088f62d6b61f2c9a",
+      "bytes": 492
+    },
+    {
+      "path": "comparison/interaction/iter-1/episode-0/exposure-5.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/feedback/iter-1/episode-0/exposure-5.json",
+      "sha256": "e297ec707c6f153208e7519a206712fe2d03d993f5ab8874947e484ac150723f",
+      "bytes": 499
+    },
+    {
+      "path": "comparison/interaction/iter-1/episode-0/screenshot-0.png",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/feedback/iter-1/episode-0/screenshot-0.png",
+      "sha256": "cab222b9c597c4075750718961115a19abce551df9d4127f3ca2da94e9a8c041",
+      "bytes": 44978
+    },
+    {
+      "path": "comparison/interaction/iter-1/episode-0/screenshot-1.png",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/feedback/iter-1/episode-0/screenshot-1.png",
+      "sha256": "854d52f2e3d442da52715876d8a0d49b9ea74f3c386b6b61e26e0e767a39301f",
+      "bytes": 38467
+    },
+    {
+      "path": "comparison/interaction/iter-1/episode-0/screenshot-2.png",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/feedback/iter-1/episode-0/screenshot-2.png",
+      "sha256": "0949b599e3dcbf57a737b414bae4cf317f0c67582e09ce992b600b3dab59afea",
+      "bytes": 70369
+    },
+    {
+      "path": "comparison/interaction/iter-1/episode-0/screenshot-3.png",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/feedback/iter-1/episode-0/screenshot-3.png",
+      "sha256": "cc37605efdd412ba1cc477fa931fd18a17d7d895c746d859c661f3d4b334117e",
+      "bytes": 70154
+    },
+    {
+      "path": "comparison/interaction/iter-1/episode-0/screenshot-4.png",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/feedback/iter-1/episode-0/screenshot-4.png",
+      "sha256": "b851a93740c5f1188abadc5276bb9fa3881cd618bf10209413be7ad385e25d41",
+      "bytes": 42822
+    },
+    {
+      "path": "comparison/interaction/iter-1/episode-0/screenshot-5.png",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/feedback/iter-1/episode-0/screenshot-5.png",
+      "sha256": "1727a59df197017d918cb943ba63610f48e769d5735c72bc5197e0b6e47fe0aa",
+      "bytes": 29214
+    },
+    {
+      "path": "comparison/interaction/iter-2/optimizer-note.md",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/proposals/iter-2/optimizer-note.md",
+      "sha256": "9bcb85b1082f0b35dc0bdff30deaa8938128ab05376638a1d9d3b621ffdbb802",
+      "bytes": 1298
+    },
+    {
+      "path": "comparison/interaction/iter-2/candidate.diff",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/proposals/iter-2/candidate.diff",
+      "sha256": "46f8a8bb62546d3343ac2f0e4933cd01d93001e572b966f2263a3b001b09fb78",
+      "bytes": 267
+    },
+    {
+      "path": "comparison/interaction/iter-2/result.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/proposals/iter-2/result.json",
+      "sha256": "c2186c1cbdc7b18b0b44e6c8a495720ad3a04b18f6a2242960771f41e073065a",
+      "bytes": 6244
+    },
+    {
+      "path": "comparison/interaction/iter-2/acceptance.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/proposals/iter-2/acceptance.json",
+      "sha256": "81c8e0e288d1e99403f844182fd3c1b4c36ae56e75ab82a3e56e03cfb0631e4a",
+      "bytes": 1152
+    },
+    {
+      "path": "comparison/interaction/iter-2/candidate/options.html",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/proposals/iter-2/candidate/options.html",
+      "sha256": "eb743060534ee871f2cae60e35719628f03b4e902b0e385cfbdbc4bb7cba17ee",
+      "bytes": 502
+    },
+    {
+      "path": "comparison/interaction/iter-2/candidate/review.html",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/proposals/iter-2/candidate/review.html",
+      "sha256": "f34294204096b8ea9bc4ef4cc2c0b1b17fa64a102029c3c8bac6d83ffbdb0410",
+      "bytes": 429
+    },
+    {
+      "path": "comparison/interaction/iter-2/candidate/style.css",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/proposals/iter-2/candidate/style.css",
+      "sha256": "d0472c28c9e46a6c3d3bf4f9171cc1a107af4a183d3557cc4b847f3509c43f57",
+      "bytes": 2788
+    },
+    {
+      "path": "comparison/interaction/iter-2/candidate/product.html",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/proposals/iter-2/candidate/product.html",
+      "sha256": "581740ceccb22ed936eb236603ba5b10871518230906c369b4ef2a3966db6f2f",
+      "bytes": 609
+    },
+    {
+      "path": "comparison/interaction/iter-2/candidate/cart.html",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/proposals/iter-2/candidate/cart.html",
+      "sha256": "a56e87f0003237fccf5e071ee0afa88202b2cf4d5bd22c5c25dcefd4c8a7fd85",
+      "bytes": 387
+    },
+    {
+      "path": "comparison/interaction/iter-2/candidate/interaction.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction/proposals/iter-2/candidate/interaction.json",
+      "sha256": "2058dd78a4d3305a8552bc49e0c9a0de9dfe79731db29b60bdedde669c0e3d96",
+      "bytes": 164
+    },
+    {
+      "path": "comparison/combined/history.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/combined/history.json",
+      "sha256": "a1f8a4e6430885f5f8c50e341040047c3d842c78f4caf4fdb810328141db9e58",
+      "bytes": 2665
+    },
+    {
+      "path": "comparison/combined/feedback-continuity.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/combined/feedback-continuity.json",
+      "sha256": "17c4503327af5279d54211d934b6afcb60d564f574570a963f708e12e0af834c",
+      "bytes": 383
+    },
+    {
+      "path": "comparison/combined/baseline-reuse.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/combined/baseline-reuse.json",
+      "sha256": "0e6de6faeab94939663eee51046c9d5911e911850c9b70d2dba89dfd4a93dff5",
+      "bytes": 379
+    },
+    {
+      "path": "comparison/combined/iter-1/optimizer-note.md",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/combined/proposals/iter-1/optimizer-note.md",
+      "sha256": "f8a05209d94ab98772712b28f46bde8b81a5862fb60466d8d5a11e9ed352c4f7",
+      "bytes": 495
+    },
+    {
+      "path": "comparison/combined/iter-1/candidate.diff",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/combined/proposals/iter-1/candidate.diff",
+      "sha256": "24411641ea86120f0993b096bf3733d6e07817c5fa6a524510447f5dceba1004",
+      "bytes": 1305
+    },
+    {
+      "path": "comparison/combined/iter-1/result.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/combined/proposals/iter-1/result.json",
+      "sha256": "bfd6a5c518a072f342f70135074ca63146e3d6efaaa611ea37755c41cd796879",
+      "bytes": 6250
+    },
+    {
+      "path": "comparison/combined/iter-1/acceptance.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/combined/proposals/iter-1/acceptance.json",
+      "sha256": "f5545ae74bdeed72d610f5b83645539463604bb1f517826600d8a69284c0f763",
+      "bytes": 1149
+    },
+    {
+      "path": "comparison/combined/iter-1/candidate/options.html",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/combined/proposals/iter-1/candidate/options.html",
+      "sha256": "98d5f365e4545c0885a724e5342025e8923de9f00f508fcdda8b649bde8c6c61",
+      "bytes": 548
+    },
+    {
+      "path": "comparison/combined/iter-1/candidate/review.html",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/combined/proposals/iter-1/candidate/review.html",
+      "sha256": "f34294204096b8ea9bc4ef4cc2c0b1b17fa64a102029c3c8bac6d83ffbdb0410",
+      "bytes": 429
+    },
+    {
+      "path": "comparison/combined/iter-1/candidate/style.css",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/combined/proposals/iter-1/candidate/style.css",
+      "sha256": "84fed97efd6943d9aef703cf470d09917e7648bb50c17fa59f1d529484522cbf",
+      "bytes": 2873
+    },
+    {
+      "path": "comparison/combined/iter-1/candidate/product.html",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/combined/proposals/iter-1/candidate/product.html",
+      "sha256": "581740ceccb22ed936eb236603ba5b10871518230906c369b4ef2a3966db6f2f",
+      "bytes": 609
+    },
+    {
+      "path": "comparison/combined/iter-1/candidate/cart.html",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/combined/proposals/iter-1/candidate/cart.html",
+      "sha256": "a56e87f0003237fccf5e071ee0afa88202b2cf4d5bd22c5c25dcefd4c8a7fd85",
+      "bytes": 387
+    },
+    {
+      "path": "comparison/combined/iter-1/candidate/interaction.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/combined/proposals/iter-1/candidate/interaction.json",
+      "sha256": "44b5a45598aa55eb2d52d8d69ba8ce7815d8d33fce0d123db8881294e8d4c5a3",
+      "bytes": 158
+    },
+    {
+      "path": "comparison/combined/iter-2/optimizer-note.md",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/combined/proposals/iter-2/optimizer-note.md",
+      "sha256": "eae29a6e84a94d31c153d31ee56316ab72531339512fc0bff363f4df2768a191",
+      "bytes": 1297
+    },
+    {
+      "path": "comparison/combined/iter-2/candidate.diff",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/combined/proposals/iter-2/candidate.diff",
+      "sha256": "3cd9b82aa1dfd662ade8ebcf0f6b541d93bfc220da981fdcc1f9b42f15e904c6",
+      "bytes": 1311
+    },
+    {
+      "path": "comparison/combined/iter-2/result.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/combined/proposals/iter-2/result.json",
+      "sha256": "949fde4bf29cacf912fc1c28093c0e322e6dfebabd84a84df72c07bc536d6528",
+      "bytes": 6247
+    },
+    {
+      "path": "comparison/combined/iter-2/acceptance.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/combined/proposals/iter-2/acceptance.json",
+      "sha256": "099506852749a128107a2195bc5218e9c4248665fb8e9f755f02c85cbe825717",
+      "bytes": 1149
+    },
+    {
+      "path": "comparison/combined/iter-2/candidate/options.html",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/combined/proposals/iter-2/candidate/options.html",
+      "sha256": "21a8ee08db34c10400a1649f7295b59304fd091d42e90d438f1af51ccc5f7480",
+      "bytes": 548
+    },
+    {
+      "path": "comparison/combined/iter-2/candidate/review.html",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/combined/proposals/iter-2/candidate/review.html",
+      "sha256": "f34294204096b8ea9bc4ef4cc2c0b1b17fa64a102029c3c8bac6d83ffbdb0410",
+      "bytes": 429
+    },
+    {
+      "path": "comparison/combined/iter-2/candidate/style.css",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/combined/proposals/iter-2/candidate/style.css",
+      "sha256": "1269d06c83bcdab9b6902a07247a725a859d43f4bfcf464391d86169e24b5fc3",
+      "bytes": 2873
+    },
+    {
+      "path": "comparison/combined/iter-2/candidate/product.html",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/combined/proposals/iter-2/candidate/product.html",
+      "sha256": "581740ceccb22ed936eb236603ba5b10871518230906c369b4ef2a3966db6f2f",
+      "bytes": 609
+    },
+    {
+      "path": "comparison/combined/iter-2/candidate/cart.html",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/combined/proposals/iter-2/candidate/cart.html",
+      "sha256": "a56e87f0003237fccf5e071ee0afa88202b2cf4d5bd22c5c25dcefd4c8a7fd85",
+      "bytes": 387
+    },
+    {
+      "path": "comparison/combined/iter-2/candidate/interaction.json",
+      "source": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/combined/proposals/iter-2/candidate/interaction.json",
+      "sha256": "2058dd78a4d3305a8552bc49e0c9a0de9dfe79731db29b60bdedde669c0e3d96",
+      "bytes": 164
+    }
+  ],
+  "selection": "Allowlisted receipts, notes, diffs, candidates and native fictional browser journeys. No credentials, browser profiles, full optimizer payloads, private env files or model provider sessions."
+}

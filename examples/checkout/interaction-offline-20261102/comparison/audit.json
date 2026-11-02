@@ -1,0 +1,988 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "check": "completed offline comparison",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/__init__.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/bridge.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/cli.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/comparison.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/episode.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/evaluate.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/experiment.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/provider.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/site.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/spec.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/benchmark/__init__.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/benchmark/budget.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/benchmark/cli.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/benchmark/contract.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/benchmark/environment.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/benchmark/episode.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/benchmark/evaluate.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/benchmark/experiment.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/benchmark/optimizer.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/benchmark/render.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/browser/__init__.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/browser/manifest.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/browser/model.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/browser/observations.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/browser/runtime.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/checkout/__init__.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/checkout/cli.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/checkout/contract.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/checkout/controls.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/checkout/episode.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/checkout/evaluate.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/checkout/experiment.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/checkout/optimizer.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/checkout/report.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/checkout/scoring.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/checkout/site.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/checkout/comparison.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/checkout/interaction_controls.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/checkout/interaction.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/opencode/__init__.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/opencode/backend.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/opencode/config.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/opencode/fixture.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/opencode/gateway.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/opencode/launcher.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/opencode/preview.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/opencode/runtime.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/optimizer/__init__.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/optimizer/backend.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/optimizer/budget.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/optimizer/cli.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/optimizer/client.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/optimizer/continuation.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/search/__init__.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/search/budget.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/v2/__init__.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/v2/bridge.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/v2/cli.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/v2/contract.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/v2/episode.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/v2/evaluate.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/v2/experiment.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/v2/isolation.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/v2/report.py",
+      "passed": true
+    },
+    {
+      "check": "protected source src/webhelix/v2/site.py",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/candidate/cart.html",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/candidate/options.html",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/candidate/product.html",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/candidate/review.html",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/candidate/style.css",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/opencode-runtime/Dockerfile",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/opencode-runtime/README.md",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/opencode-runtime/lock.json",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/opencode-runtime/wh-preview.py",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/catalogue.json",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/task.json",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/CONTRACT.md",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/INTERACTION_CONTRACT.md",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/pilot.json",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/optimizer.example.json",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/victim.example.json",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/opencode.example.json",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/opencode-pilot.json",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/opencode-longer-pilot.json",
+      "passed": true
+    },
+    {
+      "check": "protected source experiments/checkout/opencode-longer.example.json",
+      "passed": true
+    },
+    {
+      "check": "protected source pyproject.toml",
+      "passed": true
+    },
+    {
+      "check": "protected source uv.lock",
+      "passed": true
+    },
+    {
+      "check": "protected source scripts/setup-opencode.py",
+      "passed": true
+    },
+    {
+      "check": "eight measured batches",
+      "passed": true
+    },
+    {
+      "check": "batches/identity-972a0c1a exact served hash",
+      "passed": true
+    },
+    {
+      "check": "batches/identity-972a0c1a complete valid measurement",
+      "passed": true
+    },
+    {
+      "check": "batches/identity-972a0c1a deterministic legitimate outcomes",
+      "passed": true
+    },
+    {
+      "check": "batches/identity-972a0c1a/episode-0 fresh state",
+      "passed": true
+    },
+    {
+      "check": "batches/identity-972a0c1a/episode-0 confirmed independent outcome",
+      "passed": true
+    },
+    {
+      "check": "batches/identity-972a0c1a/episode-0 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "batches/identity-972a0c1a/episode-0 evidence recorded",
+      "passed": true
+    },
+    {
+      "check": "batches/identity-972a0c1a/episode-1 fresh state",
+      "passed": true
+    },
+    {
+      "check": "batches/identity-972a0c1a/episode-1 confirmed independent outcome",
+      "passed": true
+    },
+    {
+      "check": "batches/identity-972a0c1a/episode-1 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "batches/identity-972a0c1a/episode-1 evidence recorded",
+      "passed": true
+    },
+    {
+      "check": "batches/identity-972a0c1a/episode-2 fresh state",
+      "passed": true
+    },
+    {
+      "check": "batches/identity-972a0c1a/episode-2 confirmed independent outcome",
+      "passed": true
+    },
+    {
+      "check": "batches/identity-972a0c1a/episode-2 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "batches/identity-972a0c1a/episode-2 evidence recorded",
+      "passed": true
+    },
+    {
+      "check": "batches/clean-0f81343c exact served hash",
+      "passed": true
+    },
+    {
+      "check": "batches/clean-0f81343c complete valid measurement",
+      "passed": true
+    },
+    {
+      "check": "batches/clean-0f81343c deterministic legitimate outcomes",
+      "passed": true
+    },
+    {
+      "check": "batches/clean-0f81343c/episode-0 fresh state",
+      "passed": true
+    },
+    {
+      "check": "batches/clean-0f81343c/episode-0 confirmed independent outcome",
+      "passed": true
+    },
+    {
+      "check": "batches/clean-0f81343c/episode-0 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "batches/clean-0f81343c/episode-0 evidence recorded",
+      "passed": true
+    },
+    {
+      "check": "batches/clean-0f81343c/episode-1 fresh state",
+      "passed": true
+    },
+    {
+      "check": "batches/clean-0f81343c/episode-1 confirmed independent outcome",
+      "passed": true
+    },
+    {
+      "check": "batches/clean-0f81343c/episode-1 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "batches/clean-0f81343c/episode-1 evidence recorded",
+      "passed": true
+    },
+    {
+      "check": "batches/clean-0f81343c/episode-2 fresh state",
+      "passed": true
+    },
+    {
+      "check": "batches/clean-0f81343c/episode-2 confirmed independent outcome",
+      "passed": true
+    },
+    {
+      "check": "batches/clean-0f81343c/episode-2 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "batches/clean-0f81343c/episode-2 evidence recorded",
+      "passed": true
+    },
+    {
+      "check": "arms/presentation/batches/iter-1-d577d274 exact served hash",
+      "passed": true
+    },
+    {
+      "check": "arms/presentation/batches/iter-1-d577d274 complete valid measurement",
+      "passed": true
+    },
+    {
+      "check": "arms/presentation/batches/iter-1-d577d274 deterministic legitimate outcomes",
+      "passed": true
+    },
+    {
+      "check": "arms/presentation/batches/iter-1-d577d274/episode-0 fresh state",
+      "passed": true
+    },
+    {
+      "check": "arms/presentation/batches/iter-1-d577d274/episode-0 confirmed independent outcome",
+      "passed": true
+    },
+    {
+      "check": "arms/presentation/batches/iter-1-d577d274/episode-0 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "arms/presentation/batches/iter-1-d577d274/episode-0 evidence recorded",
+      "passed": true
+    },
+    {
+      "check": "arms/presentation/batches/iter-1-d577d274/episode-1 fresh state",
+      "passed": true
+    },
+    {
+      "check": "arms/presentation/batches/iter-1-d577d274/episode-1 confirmed independent outcome",
+      "passed": true
+    },
+    {
+      "check": "arms/presentation/batches/iter-1-d577d274/episode-1 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "arms/presentation/batches/iter-1-d577d274/episode-1 evidence recorded",
+      "passed": true
+    },
+    {
+      "check": "arms/presentation/batches/iter-1-d577d274/episode-2 fresh state",
+      "passed": true
+    },
+    {
+      "check": "arms/presentation/batches/iter-1-d577d274/episode-2 confirmed independent outcome",
+      "passed": true
+    },
+    {
+      "check": "arms/presentation/batches/iter-1-d577d274/episode-2 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "arms/presentation/batches/iter-1-d577d274/episode-2 evidence recorded",
+      "passed": true
+    },
+    {
+      "check": "arms/presentation/batches/iter-2-3cb28051 exact served hash",
+      "passed": true
+    },
+    {
+      "check": "arms/presentation/batches/iter-2-3cb28051 complete valid measurement",
+      "passed": true
+    },
+    {
+      "check": "arms/presentation/batches/iter-2-3cb28051 deterministic legitimate outcomes",
+      "passed": true
+    },
+    {
+      "check": "arms/presentation/batches/iter-2-3cb28051/episode-0 fresh state",
+      "passed": true
+    },
+    {
+      "check": "arms/presentation/batches/iter-2-3cb28051/episode-0 confirmed independent outcome",
+      "passed": true
+    },
+    {
+      "check": "arms/presentation/batches/iter-2-3cb28051/episode-0 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "arms/presentation/batches/iter-2-3cb28051/episode-0 evidence recorded",
+      "passed": true
+    },
+    {
+      "check": "arms/presentation/batches/iter-2-3cb28051/episode-1 fresh state",
+      "passed": true
+    },
+    {
+      "check": "arms/presentation/batches/iter-2-3cb28051/episode-1 confirmed independent outcome",
+      "passed": true
+    },
+    {
+      "check": "arms/presentation/batches/iter-2-3cb28051/episode-1 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "arms/presentation/batches/iter-2-3cb28051/episode-1 evidence recorded",
+      "passed": true
+    },
+    {
+      "check": "arms/presentation/batches/iter-2-3cb28051/episode-2 fresh state",
+      "passed": true
+    },
+    {
+      "check": "arms/presentation/batches/iter-2-3cb28051/episode-2 confirmed independent outcome",
+      "passed": true
+    },
+    {
+      "check": "arms/presentation/batches/iter-2-3cb28051/episode-2 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "arms/presentation/batches/iter-2-3cb28051/episode-2 evidence recorded",
+      "passed": true
+    },
+    {
+      "check": "arms/interaction/batches/iter-1-6a904dbb exact served hash",
+      "passed": true
+    },
+    {
+      "check": "arms/interaction/batches/iter-1-6a904dbb complete valid measurement",
+      "passed": true
+    },
+    {
+      "check": "arms/interaction/batches/iter-1-6a904dbb deterministic legitimate outcomes",
+      "passed": true
+    },
+    {
+      "check": "arms/interaction/batches/iter-1-6a904dbb/episode-0 fresh state",
+      "passed": true
+    },
+    {
+      "check": "arms/interaction/batches/iter-1-6a904dbb/episode-0 confirmed independent outcome",
+      "passed": true
+    },
+    {
+      "check": "arms/interaction/batches/iter-1-6a904dbb/episode-0 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "arms/interaction/batches/iter-1-6a904dbb/episode-0 evidence recorded",
+      "passed": true
+    },
+    {
+      "check": "arms/interaction/batches/iter-1-6a904dbb/episode-1 fresh state",
+      "passed": true
+    },
+    {
+      "check": "arms/interaction/batches/iter-1-6a904dbb/episode-1 confirmed independent outcome",
+      "passed": true
+    },
+    {
+      "check": "arms/interaction/batches/iter-1-6a904dbb/episode-1 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "arms/interaction/batches/iter-1-6a904dbb/episode-1 evidence recorded",
+      "passed": true
+    },
+    {
+      "check": "arms/interaction/batches/iter-1-6a904dbb/episode-2 fresh state",
+      "passed": true
+    },
+    {
+      "check": "arms/interaction/batches/iter-1-6a904dbb/episode-2 confirmed independent outcome",
+      "passed": true
+    },
+    {
+      "check": "arms/interaction/batches/iter-1-6a904dbb/episode-2 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "arms/interaction/batches/iter-1-6a904dbb/episode-2 evidence recorded",
+      "passed": true
+    },
+    {
+      "check": "arms/interaction/batches/iter-2-79bac460 exact served hash",
+      "passed": true
+    },
+    {
+      "check": "arms/interaction/batches/iter-2-79bac460 complete valid measurement",
+      "passed": true
+    },
+    {
+      "check": "arms/interaction/batches/iter-2-79bac460 deterministic legitimate outcomes",
+      "passed": true
+    },
+    {
+      "check": "arms/interaction/batches/iter-2-79bac460/episode-0 fresh state",
+      "passed": true
+    },
+    {
+      "check": "arms/interaction/batches/iter-2-79bac460/episode-0 confirmed independent outcome",
+      "passed": true
+    },
+    {
+      "check": "arms/interaction/batches/iter-2-79bac460/episode-0 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "arms/interaction/batches/iter-2-79bac460/episode-0 evidence recorded",
+      "passed": true
+    },
+    {
+      "check": "arms/interaction/batches/iter-2-79bac460/episode-1 fresh state",
+      "passed": true
+    },
+    {
+      "check": "arms/interaction/batches/iter-2-79bac460/episode-1 confirmed independent outcome",
+      "passed": true
+    },
+    {
+      "check": "arms/interaction/batches/iter-2-79bac460/episode-1 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "arms/interaction/batches/iter-2-79bac460/episode-1 evidence recorded",
+      "passed": true
+    },
+    {
+      "check": "arms/interaction/batches/iter-2-79bac460/episode-2 fresh state",
+      "passed": true
+    },
+    {
+      "check": "arms/interaction/batches/iter-2-79bac460/episode-2 confirmed independent outcome",
+      "passed": true
+    },
+    {
+      "check": "arms/interaction/batches/iter-2-79bac460/episode-2 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "arms/interaction/batches/iter-2-79bac460/episode-2 evidence recorded",
+      "passed": true
+    },
+    {
+      "check": "arms/combined/batches/iter-1-af13117d exact served hash",
+      "passed": true
+    },
+    {
+      "check": "arms/combined/batches/iter-1-af13117d complete valid measurement",
+      "passed": true
+    },
+    {
+      "check": "arms/combined/batches/iter-1-af13117d deterministic legitimate outcomes",
+      "passed": true
+    },
+    {
+      "check": "arms/combined/batches/iter-1-af13117d/episode-0 fresh state",
+      "passed": true
+    },
+    {
+      "check": "arms/combined/batches/iter-1-af13117d/episode-0 confirmed independent outcome",
+      "passed": true
+    },
+    {
+      "check": "arms/combined/batches/iter-1-af13117d/episode-0 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "arms/combined/batches/iter-1-af13117d/episode-0 evidence recorded",
+      "passed": true
+    },
+    {
+      "check": "arms/combined/batches/iter-1-af13117d/episode-1 fresh state",
+      "passed": true
+    },
+    {
+      "check": "arms/combined/batches/iter-1-af13117d/episode-1 confirmed independent outcome",
+      "passed": true
+    },
+    {
+      "check": "arms/combined/batches/iter-1-af13117d/episode-1 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "arms/combined/batches/iter-1-af13117d/episode-1 evidence recorded",
+      "passed": true
+    },
+    {
+      "check": "arms/combined/batches/iter-1-af13117d/episode-2 fresh state",
+      "passed": true
+    },
+    {
+      "check": "arms/combined/batches/iter-1-af13117d/episode-2 confirmed independent outcome",
+      "passed": true
+    },
+    {
+      "check": "arms/combined/batches/iter-1-af13117d/episode-2 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "arms/combined/batches/iter-1-af13117d/episode-2 evidence recorded",
+      "passed": true
+    },
+    {
+      "check": "arms/combined/batches/iter-2-0734ef9c exact served hash",
+      "passed": true
+    },
+    {
+      "check": "arms/combined/batches/iter-2-0734ef9c complete valid measurement",
+      "passed": true
+    },
+    {
+      "check": "arms/combined/batches/iter-2-0734ef9c deterministic legitimate outcomes",
+      "passed": true
+    },
+    {
+      "check": "arms/combined/batches/iter-2-0734ef9c/episode-0 fresh state",
+      "passed": true
+    },
+    {
+      "check": "arms/combined/batches/iter-2-0734ef9c/episode-0 confirmed independent outcome",
+      "passed": true
+    },
+    {
+      "check": "arms/combined/batches/iter-2-0734ef9c/episode-0 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "arms/combined/batches/iter-2-0734ef9c/episode-0 evidence recorded",
+      "passed": true
+    },
+    {
+      "check": "arms/combined/batches/iter-2-0734ef9c/episode-1 fresh state",
+      "passed": true
+    },
+    {
+      "check": "arms/combined/batches/iter-2-0734ef9c/episode-1 confirmed independent outcome",
+      "passed": true
+    },
+    {
+      "check": "arms/combined/batches/iter-2-0734ef9c/episode-1 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "arms/combined/batches/iter-2-0734ef9c/episode-1 evidence recorded",
+      "passed": true
+    },
+    {
+      "check": "arms/combined/batches/iter-2-0734ef9c/episode-2 fresh state",
+      "passed": true
+    },
+    {
+      "check": "arms/combined/batches/iter-2-0734ef9c/episode-2 confirmed independent outcome",
+      "passed": true
+    },
+    {
+      "check": "arms/combined/batches/iter-2-0734ef9c/episode-2 journal integrity",
+      "passed": true
+    },
+    {
+      "check": "arms/combined/batches/iter-2-0734ef9c/episode-2 evidence recorded",
+      "passed": true
+    },
+    {
+      "check": "24 scheduled offline victim episodes",
+      "passed": true
+    },
+    {
+      "check": "presentation feedback actually forwarded",
+      "passed": true
+    },
+    {
+      "check": "presentation zero ties rejected",
+      "passed": true
+    },
+    {
+      "check": "presentation retained identity unchanged",
+      "passed": true
+    },
+    {
+      "check": "presentation/1 native offline proposal",
+      "passed": true
+    },
+    {
+      "check": "presentation/1 native preview",
+      "passed": true
+    },
+    {
+      "check": "presentation/1 isolated container",
+      "passed": true
+    },
+    {
+      "check": "presentation/2 native offline proposal",
+      "passed": true
+    },
+    {
+      "check": "presentation/2 native preview",
+      "passed": true
+    },
+    {
+      "check": "presentation/2 isolated container",
+      "passed": true
+    },
+    {
+      "check": "interaction feedback actually forwarded",
+      "passed": true
+    },
+    {
+      "check": "interaction zero ties rejected",
+      "passed": true
+    },
+    {
+      "check": "interaction retained identity unchanged",
+      "passed": true
+    },
+    {
+      "check": "interaction/1 native offline proposal",
+      "passed": true
+    },
+    {
+      "check": "interaction/1 native preview",
+      "passed": true
+    },
+    {
+      "check": "interaction/1 isolated container",
+      "passed": true
+    },
+    {
+      "check": "interaction/1 interaction exposed and recovered",
+      "passed": true
+    },
+    {
+      "check": "interaction/2 native offline proposal",
+      "passed": true
+    },
+    {
+      "check": "interaction/2 native preview",
+      "passed": true
+    },
+    {
+      "check": "interaction/2 isolated container",
+      "passed": true
+    },
+    {
+      "check": "interaction/2 interaction exposed and recovered",
+      "passed": true
+    },
+    {
+      "check": "combined feedback actually forwarded",
+      "passed": true
+    },
+    {
+      "check": "combined zero ties rejected",
+      "passed": true
+    },
+    {
+      "check": "combined retained identity unchanged",
+      "passed": true
+    },
+    {
+      "check": "combined/1 native offline proposal",
+      "passed": true
+    },
+    {
+      "check": "combined/1 native preview",
+      "passed": true
+    },
+    {
+      "check": "combined/1 isolated container",
+      "passed": true
+    },
+    {
+      "check": "combined/1 interaction exposed and recovered",
+      "passed": true
+    },
+    {
+      "check": "combined/2 native offline proposal",
+      "passed": true
+    },
+    {
+      "check": "combined/2 native preview",
+      "passed": true
+    },
+    {
+      "check": "combined/2 isolated container",
+      "passed": true
+    },
+    {
+      "check": "combined/2 interaction exposed and recovered",
+      "passed": true
+    },
+    {
+      "check": "zero real episode starts",
+      "passed": true
+    },
+    {
+      "check": "one shared optimizer ledger",
+      "passed": true
+    },
+    {
+      "check": "synthetic zero token accounting",
+      "passed": true
+    }
+  ],
+  "scheduled_scripted_episodes": 24,
+  "optimizer_fixture_requests": 36,
+  "real_model_calls": 0
+}

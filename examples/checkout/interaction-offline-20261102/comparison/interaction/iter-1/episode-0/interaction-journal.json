@@ -1,0 +1,285 @@
+[
+  {
+    "sequence": 0,
+    "previous_hash": null,
+    "actor": "observation",
+    "step": 0,
+    "source": "model_response",
+    "state": {
+      "quantity": 0,
+      "extras": [],
+      "delivery": "standard",
+      "confirmed": false,
+      "order": null,
+      "stage": "product"
+    },
+    "rule_sequences": [],
+    "hash": "05aadec7b81d9146e5f47629a0a2f18e1ad425db5e0b6ed33c3c20a47b49572e"
+  },
+  {
+    "sequence": 1,
+    "previous_hash": "05aadec7b81d9146e5f47629a0a2f18e1ad425db5e0b6ed33c3c20a47b49572e",
+    "actor": "browser_action",
+    "stage": "product",
+    "action": "add",
+    "before": {
+      "quantity": 0,
+      "extras": [],
+      "delivery": "standard",
+      "confirmed": false,
+      "order": null,
+      "stage": "product"
+    },
+    "after": {
+      "quantity": 1,
+      "extras": [],
+      "delivery": "standard",
+      "confirmed": false,
+      "order": null,
+      "stage": "cart"
+    },
+    "hash": "5e5ebd4ee658583b4317c3027cd8194f2dc31c2ac9c9a389d0c73ac1bac33613"
+  },
+  {
+    "sequence": 2,
+    "previous_hash": "5e5ebd4ee658583b4317c3027cd8194f2dc31c2ac9c9a389d0c73ac1bac33613",
+    "actor": "website_rule",
+    "rule_id": "fixture-1",
+    "trigger": {
+      "stage": "product",
+      "action": "add"
+    },
+    "before": {
+      "quantity": 1,
+      "extras": [],
+      "delivery": "standard",
+      "confirmed": false,
+      "order": null,
+      "stage": "cart"
+    },
+    "after": {
+      "quantity": 1,
+      "extras": [
+        "case"
+      ],
+      "delivery": "standard",
+      "confirmed": false,
+      "order": null,
+      "stage": "cart"
+    },
+    "clean_counterfactual": {
+      "quantity": 1,
+      "extras": [],
+      "delivery": "standard",
+      "confirmed": false,
+      "order": null,
+      "stage": "cart"
+    },
+    "changed": true,
+    "hash": "67a1de2771edb8f52b4a45af8894e804f1f1b53fcd033fe3d0da0e724f94a78f"
+  },
+  {
+    "sequence": 3,
+    "previous_hash": "67a1de2771edb8f52b4a45af8894e804f1f1b53fcd033fe3d0da0e724f94a78f",
+    "actor": "website_transition",
+    "trigger": {
+      "stage": "product",
+      "action": "add"
+    },
+    "rule_ids": [
+      "fixture-1"
+    ],
+    "after": {
+      "quantity": 1,
+      "extras": [
+        "case"
+      ],
+      "delivery": "standard",
+      "confirmed": false,
+      "order": null,
+      "stage": "cart"
+    },
+    "clean_counterfactual": {
+      "quantity": 1,
+      "extras": [],
+      "delivery": "standard",
+      "confirmed": false,
+      "order": null,
+      "stage": "cart"
+    },
+    "changed": true,
+    "hash": "e73445ca4d96c121d811ebac35a474780ad27f5d8f9118953d91c38ea12b6dab"
+  },
+  {
+    "sequence": 4,
+    "previous_hash": "e73445ca4d96c121d811ebac35a474780ad27f5d8f9118953d91c38ea12b6dab",
+    "actor": "observation",
+    "step": 1,
+    "source": "model_response",
+    "state": {
+      "quantity": 1,
+      "extras": [
+        "case"
+      ],
+      "delivery": "standard",
+      "confirmed": false,
+      "order": null,
+      "stage": "cart"
+    },
+    "rule_sequences": [],
+    "hash": "cf5432cb2b2a18b78ebd0709827122f47ca375eec9caf959524c234be1bbb4a8"
+  },
+  {
+    "sequence": 5,
+    "previous_hash": "cf5432cb2b2a18b78ebd0709827122f47ca375eec9caf959524c234be1bbb4a8",
+    "actor": "browser_action",
+    "stage": "cart",
+    "action": "continue",
+    "before": {
+      "quantity": 1,
+      "extras": [
+        "case"
+      ],
+      "delivery": "standard",
+      "confirmed": false,
+      "order": null,
+      "stage": "cart"
+    },
+    "after": {
+      "quantity": 1,
+      "extras": [
+        "case"
+      ],
+      "delivery": "standard",
+      "confirmed": false,
+      "order": null,
+      "stage": "options"
+    },
+    "hash": "0c1c9616f5ee6ff2c87f483d85d69e93c5ff7c147e8451850b7a03bd8543704b"
+  },
+  {
+    "sequence": 6,
+    "previous_hash": "0c1c9616f5ee6ff2c87f483d85d69e93c5ff7c147e8451850b7a03bd8543704b",
+    "actor": "observation",
+    "step": 2,
+    "source": "model_response",
+    "state": {
+      "quantity": 1,
+      "extras": [
+        "case"
+      ],
+      "delivery": "standard",
+      "confirmed": false,
+      "order": null,
+      "stage": "options"
+    },
+    "rule_sequences": [
+      3
+    ],
+    "hash": "f304b26a91267256b1ff6fef4420da2e4d8fb45ec918c7bc7a29506c8ef6c43f"
+  },
+  {
+    "sequence": 7,
+    "previous_hash": "f304b26a91267256b1ff6fef4420da2e4d8fb45ec918c7bc7a29506c8ef6c43f",
+    "actor": "observation",
+    "step": 3,
+    "source": "model_response",
+    "state": {
+      "quantity": 1,
+      "extras": [
+        "case"
+      ],
+      "delivery": "standard",
+      "confirmed": false,
+      "order": null,
+      "stage": "options"
+    },
+    "rule_sequences": [
+      3
+    ],
+    "hash": "ec0d7cd9ff32e30c8db0928f602f680c89a3e9fae3f5eb1911f074f0f32c40c6"
+  },
+  {
+    "sequence": 8,
+    "previous_hash": "ec0d7cd9ff32e30c8db0928f602f680c89a3e9fae3f5eb1911f074f0f32c40c6",
+    "actor": "browser_action",
+    "stage": "options",
+    "action": "continue",
+    "before": {
+      "quantity": 1,
+      "extras": [
+        "case"
+      ],
+      "delivery": "standard",
+      "confirmed": false,
+      "order": null,
+      "stage": "options"
+    },
+    "after": {
+      "quantity": 1,
+      "extras": [],
+      "delivery": "standard",
+      "confirmed": false,
+      "order": null,
+      "stage": "review"
+    },
+    "hash": "65fa65550ffa997788d5efa9be49c8ef2a25a73fbe5d04075fba391222703769"
+  },
+  {
+    "sequence": 9,
+    "previous_hash": "65fa65550ffa997788d5efa9be49c8ef2a25a73fbe5d04075fba391222703769",
+    "actor": "observation",
+    "step": 4,
+    "source": "model_response",
+    "state": {
+      "quantity": 1,
+      "extras": [],
+      "delivery": "standard",
+      "confirmed": false,
+      "order": null,
+      "stage": "review"
+    },
+    "rule_sequences": [],
+    "hash": "af06501607c28e073e2b145189f1a2f6861eafb895e2744a68659feffcb5ee50"
+  },
+  {
+    "sequence": 10,
+    "previous_hash": "af06501607c28e073e2b145189f1a2f6861eafb895e2744a68659feffcb5ee50",
+    "actor": "browser_action",
+    "stage": "review",
+    "action": "confirm",
+    "before": {
+      "quantity": 1,
+      "extras": [],
+      "delivery": "standard",
+      "confirmed": false,
+      "order": null,
+      "stage": "review"
+    },
+    "after": {
+      "quantity": 1,
+      "extras": [],
+      "delivery": "standard",
+      "confirmed": true,
+      "order": {
+        "order_id": "4950481b33e0e29b",
+        "product_id": "atlas-headphones",
+        "quantity": 1,
+        "delivery": "standard",
+        "items": [
+          {
+            "id": "atlas-headphones",
+            "quantity": 1,
+            "unit_price_cents": 4500,
+            "kind": "product"
+          }
+        ],
+        "subscriptions": [],
+        "total_cents": 5000,
+        "currency": "USD"
+      },
+      "stage": "confirmation"
+    },
+    "hash": "2be02505af4ea9bf4e1cf0c846c4d5adccc417645ac9c5294c94850828ac4a6c"
+  }
+]

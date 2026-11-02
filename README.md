@@ -20,6 +20,8 @@ The [interaction comparison](docs/INTERACTION_COMPARISON.md) adds bounded websit
 state/navigation programs, independent transition evidence and a shared-budget
 presentation/interaction/combined pilot. Historical results below retain their
 original presentation-only contract; new capabilities require new measurements.
+The [verified offline comparison](examples/checkout/interaction-offline-20261102/README.md)
+includes calibration screenshots, all six proposal notes and feedback checks.
 
 ## Start with the checkout
 

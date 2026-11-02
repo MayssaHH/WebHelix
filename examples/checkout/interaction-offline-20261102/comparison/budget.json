@@ -1,0 +1,834 @@
+{
+  "episodes": [],
+  "calls": [
+    {
+      "id": 0,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793650838.9419563,
+      "group": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 1,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793650839.2152884,
+      "group": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 2,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793650839.2705455,
+      "group": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 3,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793650839.5059116,
+      "group": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 4,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793650861.3699565,
+      "group": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 5,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793650861.5840862,
+      "group": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 6,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793650922.3720481,
+      "group": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 7,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793650922.813772,
+      "group": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 8,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793650922.8552425,
+      "group": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 9,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793650923.0542505,
+      "group": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 10,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793650944.412955,
+      "group": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 11,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793650944.530169,
+      "group": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/interaction",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 12,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793651008.8349917,
+      "group": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/presentation",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 13,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793651009.3241692,
+      "group": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/presentation",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 14,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793651009.3856812,
+      "group": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/presentation",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 15,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793651009.5830066,
+      "group": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/presentation",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 16,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793651028.789439,
+      "group": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/presentation",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 17,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793651028.9394796,
+      "group": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/presentation",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 18,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793651090.6159394,
+      "group": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/presentation",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 19,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793651091.0473738,
+      "group": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/presentation",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 20,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793651091.097742,
+      "group": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/presentation",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 21,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793651091.3225806,
+      "group": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/presentation",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 22,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793651112.5248947,
+      "group": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/presentation",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 23,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793651112.6317308,
+      "group": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/presentation",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 24,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793651168.0741975,
+      "group": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/combined",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 25,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793651168.4822164,
+      "group": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/combined",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 26,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793651168.55976,
+      "group": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/combined",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 27,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793651168.7638407,
+      "group": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/combined",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 28,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793651191.1555274,
+      "group": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/combined",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 29,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793651191.2636266,
+      "group": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/combined",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 30,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793651253.9203103,
+      "group": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/combined",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 31,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793651254.365978,
+      "group": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/combined",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 32,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793651254.4091644,
+      "group": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/combined",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 33,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793651254.6098714,
+      "group": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/combined",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 34,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793651277.801579,
+      "group": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/combined",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "id": 35,
+      "role": "optimizer",
+      "model": "gpt-6.1-sol",
+      "reserved_usd": "0.001058192",
+      "accounted_usd": "0.000",
+      "maximum_input_tokens": 1050000,
+      "maximum_output_tokens": 8192,
+      "status": "usage_reported",
+      "started": 1793651277.923509,
+      "group": "/workspace/webhelix-runs/interaction-comparison-offline-20261102/arms/combined",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      }
+    }
+  ],
+  "max_real_episodes": 24
+}
