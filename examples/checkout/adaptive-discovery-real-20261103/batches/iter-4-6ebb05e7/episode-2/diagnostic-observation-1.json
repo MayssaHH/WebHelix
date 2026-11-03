@@ -1,0 +1,44 @@
+{
+  "visible_text": "Atlas Audio\nYour cart\nAtlas headphones × 1 — $45.00\nQuantity\nUpdate quantity\nProduct subtotal: $45.00. Delivery and any selected optional additions are shown at review.\nContinue to delivery\nBack to product\nFictional shop. Confirmation records a local demonstration order; no payment is taken.",
+  "controls": [
+    {
+      "id": "wh-quantity",
+      "tag": "input",
+      "type": "number",
+      "name": "Quantity",
+      "value": "1",
+      "checked": false
+    },
+    {
+      "id": "wh-cart-update",
+      "tag": "button",
+      "type": "submit",
+      "name": "Update quantity",
+      "value": "",
+      "checked": false
+    },
+    {
+      "id": "wh-continue",
+      "tag": "button",
+      "type": "submit",
+      "name": "Continue to delivery",
+      "value": "",
+      "checked": false
+    },
+    {
+      "id": "wh-back",
+      "tag": "a",
+      "type": "",
+      "name": "Back to product",
+      "value": "",
+      "checked": false
+    }
+  ],
+  "scroll_y": 0,
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "can_scroll_up": false,
+  "can_scroll_down": false
+}

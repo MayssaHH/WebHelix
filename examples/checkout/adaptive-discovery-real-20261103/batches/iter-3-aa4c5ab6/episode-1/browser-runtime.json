@@ -1,0 +1,42 @@
+{
+  "backend": "browser-use",
+  "browser_use_version": "0.13.14",
+  "playwright_version": "1.58.0",
+  "artifact_schema": 2,
+  "implementation_sha256": "ef45a15664303ffd5abd82ce7768edfa5f8176a49ca8b7fb7b17869303ea9b4d",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "use_vision": true,
+  "highlight_elements": false,
+  "llm_screenshot_size": null,
+  "allowed_origin": "http://127.0.0.1:36361",
+  "tools": [
+    "click",
+    "close",
+    "done",
+    "dropdown_options",
+    "find_text",
+    "go_back",
+    "input",
+    "navigate",
+    "scroll",
+    "select_dropdown",
+    "send_keys",
+    "switch",
+    "wait"
+  ],
+  "max_actions_per_step": 1,
+  "max_failures": 1,
+  "final_response_after_failure": false,
+  "judge": false,
+  "message_compaction": false,
+  "cloud_sync": false,
+  "telemetry": false,
+  "initial_storage": {
+    "cookies": [],
+    "local": 0,
+    "session": 0
+  }
+}

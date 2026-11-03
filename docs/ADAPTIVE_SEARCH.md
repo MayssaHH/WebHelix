@@ -97,3 +97,10 @@ Use the [discovery guide](DISCOVERY_PILOT.md) for a fresh search. The bounded
 continuation driver and exact commands are archived with its experiment evidence;
 it is tied to the preserved source run and refuses duplicate execution. A fresh
 run needs its own unused directory and explicit spending authorization.
+
+The [completed real test](../examples/checkout/adaptive-discovery-real-20261103/README.md)
+contains both actual notes, parent selections, candidate diffs and victim journeys.
+Both candidates were valid and exposed, all six victims recovered, and neither
+was retained. New accounting was $3.72; 527 evidence checks passed. These results
+verify the implementation and show feedback use, without demonstrating successful
+steering or increased mechanism diversity.

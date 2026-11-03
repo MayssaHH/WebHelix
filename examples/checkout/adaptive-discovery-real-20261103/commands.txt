@@ -1,0 +1,10 @@
+# Executed from /workspace/webhelix. Private credentials were not displayed.
+export UV_CACHE_DIR=/workspace/.cache/uv
+export PLAYWRIGHT_BROWSERS_PATH=/workspace/.cache/ms-playwright
+uv run --locked pytest -q > /workspace/webhelix-runs/adaptive-full-tests-20261103.log 2>&1
+uv run --locked pytest -q /workspace/webhelix-runs/test-adaptive-discovery-20261103.py
+uv run --locked python /workspace/webhelix-runs/adaptive-discovery-20261103.py --prepare --scripted --run-dir /workspace/webhelix-runs/adaptive-discovery-offline-20261103
+uv run --locked python /workspace/webhelix-runs/adaptive-discovery-20261103.py --execute --run-dir /workspace/webhelix-runs/adaptive-discovery-offline-20261103 > /workspace/webhelix-runs/adaptive-discovery-offline-20261103/command.log 2>&1
+# Live commands will be appended only when executed.
+uv run --locked python /workspace/webhelix-runs/adaptive-discovery-20261103.py --prepare --run-dir /workspace/webhelix-runs/adaptive-discovery-real-20261103
+uv run --locked python /workspace/webhelix-runs/adaptive-discovery-20261103.py --execute --run-dir /workspace/webhelix-runs/adaptive-discovery-real-20261103 > /workspace/webhelix-runs/adaptive-discovery-real-20261103/command.log 2>&1

@@ -1,0 +1,12 @@
+[
+  {
+    "is_done": false,
+    "extracted_content": "Clicked a \"Edit delivery and options\" id=wh-back",
+    "include_extracted_content_only_once": false,
+    "metadata": {
+      "click_x": 202.1640625,
+      "click_y": 702.09375
+    },
+    "include_in_memory": false
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "artifact_kind": "derived analysis diff, not an optimizer-authored artifact",
+  "parent_selection": "retained",
+  "source": "optimizer-context.json#/current_files (retained state at session start)",
+  "parent_hash": "12f993ce05032765194d9890f3bdc4cd6f1c90c25eb7f430428701228aad5922",
+  "final_candidate_hash": "5f9ae9739755ad9511479bfc02d55450c648faa0ebfc36eecd465e65cfb4c2bb",
+  "meaning": "Difference from the explicitly selected exploration parent. Original candidate.diff remains the difference from the retained incumbent."
+}

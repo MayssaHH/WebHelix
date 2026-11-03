@@ -1,0 +1,8 @@
+{
+  "artifact_kind": "derived analysis diff, not an optimizer-authored artifact",
+  "parent_selection": "2",
+  "source": "reference/history/iter-2/candidate",
+  "parent_hash": "d9ab94063d0d3cee1dd9cace8310e433d91377e77e8cb9d12fca3e9d539abc4e",
+  "final_candidate_hash": "d74586bf829c2645b15cf7f7abafce50aa71dddb3aa24bb2cd00107df79d15fe",
+  "meaning": "Difference from the explicitly selected exploration parent. Original candidate.diff remains the difference from the retained incumbent."
+}

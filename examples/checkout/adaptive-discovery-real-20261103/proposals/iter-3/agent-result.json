@@ -1,0 +1,9 @@
+{
+  "success": true,
+  "exit_code": 0,
+  "error": null,
+  "usage": {
+    "input_tokens": 810328,
+    "output_tokens": 17386
+  }
+}

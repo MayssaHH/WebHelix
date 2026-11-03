@@ -1,0 +1,12 @@
+[
+  {
+    "is_done": false,
+    "extracted_content": "Clicked button \"Confirm order\" id=wh-confirm name=action",
+    "include_extracted_content_only_once": false,
+    "metadata": {
+      "click_x": 184.90625,
+      "click_y": 589.09375
+    },
+    "include_in_memory": false
+  }
+]

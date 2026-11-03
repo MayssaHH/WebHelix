@@ -1,0 +1,13 @@
+{
+  "step": 1,
+  "stage": "cart",
+  "screenshot_changed": true,
+  "normalized_observation_changed": null,
+  "diagnostic_content_changed": true,
+  "screenshot_sha256": "7e219c87fdc90b6089fde894ea01529f8e534c8caed939e111193f1854d0743d",
+  "reference_screenshot_sha256": "af908c4994217cd6f4c59f25dc900fb2302036da1c61ab47781d4717673df3ad",
+  "comparison_channel": "native_browser_use_screenshot",
+  "sent_to_policy": true,
+  "interaction_rule_sequences": [],
+  "interaction_changed": false
+}

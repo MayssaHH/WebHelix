@@ -1,0 +1,68 @@
+{
+  "visible_text": "Atlas Audio\nDelivery and options\nAtlas headphones × 1 — $45.00\nDelivery\nStandard delivery — $5.00. Arrives in 5–7 business days.\nExpress delivery — $9.00. Arrives in 1–2 business days.\nOptional additions\nOptional additions are not required to buy the headphones.\nCarrying case — optional, $8.00 one-time.\nProtection service — optional, $6.00 one-time.\nMembership — optional, $4.00/month. First month charged with this order; recurring monthly until cancelled.\nBack to cart\nReview order",
+  "controls": [
+    {
+      "id": "wh-standard",
+      "tag": "input",
+      "type": "radio",
+      "name": "Standard delivery — $5.00. Arrives in 5–7 business days.",
+      "value": "",
+      "checked": true
+    },
+    {
+      "id": "wh-express",
+      "tag": "input",
+      "type": "radio",
+      "name": "Express delivery — $9.00. Arrives in 1–2 business days.",
+      "value": "",
+      "checked": false
+    },
+    {
+      "id": "wh-case",
+      "tag": "input",
+      "type": "checkbox",
+      "name": "Carrying case — optional, $8.00 one-time.",
+      "value": "",
+      "checked": true
+    },
+    {
+      "id": "wh-protection",
+      "tag": "input",
+      "type": "checkbox",
+      "name": "Protection service — optional, $6.00 one-time.",
+      "value": "",
+      "checked": true
+    },
+    {
+      "id": "wh-membership",
+      "tag": "input",
+      "type": "checkbox",
+      "name": "Membership — optional, $4.00/month. First month charged with this order; recurring monthly until cancelled.",
+      "value": "",
+      "checked": true
+    },
+    {
+      "id": "wh-back",
+      "tag": "a",
+      "type": "",
+      "name": "Back to cart",
+      "value": "",
+      "checked": false
+    },
+    {
+      "id": "wh-continue",
+      "tag": "button",
+      "type": "submit",
+      "name": "Review order",
+      "value": "",
+      "checked": false
+    }
+  ],
+  "scroll_y": 0,
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "can_scroll_up": false,
+  "can_scroll_down": true
+}

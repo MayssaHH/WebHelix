@@ -1,0 +1,71 @@
+{
+  "required": true,
+  "choices": [
+    {
+      "selection": "retained",
+      "candidate_hash": "12f993ce05032765194d9890f3bdc4cd6f1c90c25eb7f430428701228aad5922",
+      "source_iteration": null,
+      "source_status": "retained_best",
+      "files": {
+        "cart.html": {
+          "sha256": "a56e87f0003237fccf5e071ee0afa88202b2cf4d5bd22c5c25dcefd4c8a7fd85",
+          "bytes": 387
+        },
+        "interaction.json": {
+          "sha256": "c45ae5743d6afdd8a7304911b91e98ee39bd8d5949dcd313a78ada483f5ad5af",
+          "bytes": 28
+        },
+        "options.html": {
+          "sha256": "eb743060534ee871f2cae60e35719628f03b4e902b0e385cfbdbc4bb7cba17ee",
+          "bytes": 502
+        },
+        "product.html": {
+          "sha256": "581740ceccb22ed936eb236603ba5b10871518230906c369b4ef2a3966db6f2f",
+          "bytes": 609
+        },
+        "review.html": {
+          "sha256": "f34294204096b8ea9bc4ef4cc2c0b1b17fa64a102029c3c8bac6d83ffbdb0410",
+          "bytes": 429
+        },
+        "style.css": {
+          "sha256": "d0472c28c9e46a6c3d3bf4f9171cc1a107af4a183d3557cc4b847f3509c43f57",
+          "bytes": 2788
+        }
+      }
+    },
+    {
+      "selection": "2",
+      "candidate_hash": "d9ab94063d0d3cee1dd9cace8310e433d91377e77e8cb9d12fca3e9d539abc4e",
+      "source_iteration": 2,
+      "source_status": "rejected",
+      "files": {
+        "cart.html": {
+          "sha256": "a56e87f0003237fccf5e071ee0afa88202b2cf4d5bd22c5c25dcefd4c8a7fd85",
+          "bytes": 387
+        },
+        "interaction.json": {
+          "sha256": "8feeba723252c6f9c557cfe17a748072dffbcf899642505b58e622bab63725c0",
+          "bytes": 327
+        },
+        "options.html": {
+          "sha256": "eb743060534ee871f2cae60e35719628f03b4e902b0e385cfbdbc4bb7cba17ee",
+          "bytes": 502
+        },
+        "product.html": {
+          "sha256": "581740ceccb22ed936eb236603ba5b10871518230906c369b4ef2a3966db6f2f",
+          "bytes": 609
+        },
+        "review.html": {
+          "sha256": "f34294204096b8ea9bc4ef4cc2c0b1b17fa64a102029c3c8bac6d83ffbdb0410",
+          "bytes": 429
+        },
+        "style.css": {
+          "sha256": "533bb591b809ff562d9897172a08817aaadc23da1d84dc2bc6ce707ca6685554",
+          "bytes": 2974
+        }
+      }
+    }
+  ],
+  "command": "python /work/reference/select-parent.py retained|ITERATION",
+  "meaning": "Choose exactly once BEFORE editing. Selecting an archived rejected candidate only chooses the starting files; it does not accept that candidate or change the retained best. Select retained for a fresh mechanism from the current best, or a measured candidate number to revise its files. The trusted host records the selection and exact copied hashes. Invalid or unevaluated attempts are not selectable parents."
+}

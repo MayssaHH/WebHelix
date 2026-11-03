@@ -1,0 +1,15 @@
+{
+  "step": 2,
+  "stage": "review",
+  "screenshot_changed": true,
+  "normalized_observation_changed": null,
+  "diagnostic_content_changed": true,
+  "screenshot_sha256": "0d390ec8da963ab50149b322705ee7d46ae71f64c50b3b2697a1a42ad19a35fb",
+  "reference_screenshot_sha256": "2c6da343966089609ec756f3d781bbd3b0e841d4857a7570abdb92bbd00f1acb",
+  "comparison_channel": "native_browser_use_screenshot",
+  "sent_to_policy": true,
+  "interaction_rule_sequences": [
+    5
+  ],
+  "interaction_changed": true
+}

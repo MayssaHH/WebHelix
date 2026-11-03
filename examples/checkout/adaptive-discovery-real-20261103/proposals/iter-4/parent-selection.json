@@ -1,0 +1,37 @@
+{
+  "status": "selected",
+  "iteration": 4,
+  "selection": "retained",
+  "source_iteration": null,
+  "source_status": "retained_best",
+  "retained_hash_before": "12f993ce05032765194d9890f3bdc4cd6f1c90c25eb7f430428701228aad5922",
+  "selected_candidate_hash": "12f993ce05032765194d9890f3bdc4cd6f1c90c25eb7f430428701228aad5922",
+  "files": {
+    "cart.html": {
+      "sha256": "a56e87f0003237fccf5e071ee0afa88202b2cf4d5bd22c5c25dcefd4c8a7fd85",
+      "bytes": 387
+    },
+    "interaction.json": {
+      "sha256": "c45ae5743d6afdd8a7304911b91e98ee39bd8d5949dcd313a78ada483f5ad5af",
+      "bytes": 28
+    },
+    "options.html": {
+      "sha256": "eb743060534ee871f2cae60e35719628f03b4e902b0e385cfbdbc4bb7cba17ee",
+      "bytes": 502
+    },
+    "product.html": {
+      "sha256": "581740ceccb22ed936eb236603ba5b10871518230906c369b4ef2a3966db6f2f",
+      "bytes": 609
+    },
+    "review.html": {
+      "sha256": "f34294204096b8ea9bc4ef4cc2c0b1b17fa64a102029c3c8bac6d83ffbdb0410",
+      "bytes": 429
+    },
+    "style.css": {
+      "sha256": "d0472c28c9e46a6c3d3bf4f9171cc1a107af4a183d3557cc4b847f3509c43f57",
+      "bytes": 2788
+    }
+  },
+  "acceptance_changed": false,
+  "meaning": "Host-verified initial candidate copy; final edited files require independent validation and evaluation. This is not an acceptance or steering result."
+}

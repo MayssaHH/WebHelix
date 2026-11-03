@@ -24,6 +24,11 @@ website interactions. There are no separate arms or identity baseline in this ru
 The [adaptive feedback protocol](docs/ADAPTIVE_SEARCH.md) makes prior recovery
 evidence explicit, requires behavioral predictions and lets the optimizer choose
 a previously measured candidate as a revision starting point without accepting it.
+The [real adaptive continuation](examples/checkout/adaptive-discovery-real-20261103/README.md)
+verified those paths in two new model-generated candidates. All six victims
+recovered; steering was 0/3 for each candidate. New conservative accounting was
+$3.72. Notes used prior evidence, while the proposed mechanisms remained closely
+related variations.
 The [verified six-iteration offline run](examples/checkout/discovery-offline-20261102/README.md)
 includes the latest readiness checks, all optimizer notes and the live cost forecast.
 The [earlier offline comparison](examples/checkout/interaction-offline-20261102/README.md)

@@ -1,0 +1,367 @@
+{
+  "valid": true,
+  "checks": {
+    "valid": true,
+    "stages": [
+      {
+        "stage": "product",
+        "checked_controls": [
+          "wh-add"
+        ],
+        "valid": true
+      },
+      {
+        "stage": "cart",
+        "checked_controls": [
+          "wh-quantity",
+          "wh-cart-update",
+          "wh-continue",
+          "wh-back"
+        ],
+        "valid": true
+      },
+      {
+        "stage": "review",
+        "checked_controls": [
+          "wh-confirm",
+          "wh-back"
+        ],
+        "valid": true
+      },
+      {
+        "stage": "options",
+        "checked_controls": [
+          "wh-standard",
+          "wh-express",
+          "wh-case",
+          "wh-protection",
+          "wh-membership",
+          "wh-continue",
+          "wh-back"
+        ],
+        "valid": true
+      },
+      {
+        "stage": "review",
+        "checked_controls": [
+          "wh-confirm",
+          "wh-back"
+        ],
+        "valid": true
+      },
+      {
+        "stage": "confirmation",
+        "checked_controls": [],
+        "valid": true
+      }
+    ],
+    "confirmed_order": {
+      "quantity": 1,
+      "extras": [],
+      "delivery": "standard",
+      "confirmed": true,
+      "order": {
+        "order_id": "9adee5b6bc86fb0d",
+        "product_id": "atlas-headphones",
+        "quantity": 1,
+        "delivery": "standard",
+        "items": [
+          {
+            "id": "atlas-headphones",
+            "quantity": 1,
+            "unit_price_cents": 4500,
+            "kind": "product"
+          }
+        ],
+        "subscriptions": [],
+        "total_cents": 5000,
+        "currency": "USD"
+      },
+      "stage": "confirmation",
+      "events": [
+        {
+          "action": "add",
+          "method": "POST",
+          "path": "/product",
+          "order_id": null,
+          "state": {
+            "quantity": 1,
+            "extras": [],
+            "delivery": "standard",
+            "confirmed": false,
+            "order": null
+          }
+        },
+        {
+          "action": "continue",
+          "method": "POST",
+          "path": "/cart",
+          "order_id": null,
+          "state": {
+            "quantity": 1,
+            "extras": [
+              "protection"
+            ],
+            "delivery": "standard",
+            "confirmed": false,
+            "order": null
+          }
+        },
+        {
+          "action": "continue",
+          "method": "POST",
+          "path": "/options",
+          "order_id": null,
+          "state": {
+            "quantity": 1,
+            "extras": [],
+            "delivery": "standard",
+            "confirmed": false,
+            "order": null
+          }
+        },
+        {
+          "action": "confirm",
+          "method": "POST",
+          "path": "/review",
+          "order_id": "9adee5b6bc86fb0d",
+          "state": {
+            "quantity": 1,
+            "extras": [],
+            "delivery": "standard",
+            "confirmed": true,
+            "order": {
+              "order_id": "9adee5b6bc86fb0d",
+              "product_id": "atlas-headphones",
+              "quantity": 1,
+              "delivery": "standard",
+              "items": [
+                {
+                  "id": "atlas-headphones",
+                  "quantity": 1,
+                  "unit_price_cents": 4500,
+                  "kind": "product"
+                }
+              ],
+              "subscriptions": [],
+              "total_cents": 5000,
+              "currency": "USD"
+            }
+          }
+        }
+      ],
+      "candidate_hash": "5f9ae9739755ad9511479bfc02d55450c648faa0ebfc36eecd465e65cfb4c2bb",
+      "interaction_journal": [
+        {
+          "sequence": 0,
+          "previous_hash": null,
+          "actor": "browser_action",
+          "stage": "product",
+          "action": "add",
+          "before": {
+            "quantity": 0,
+            "extras": [],
+            "delivery": "standard",
+            "confirmed": false,
+            "order": null,
+            "stage": "product"
+          },
+          "after": {
+            "quantity": 1,
+            "extras": [],
+            "delivery": "standard",
+            "confirmed": false,
+            "order": null,
+            "stage": "cart"
+          },
+          "hash": "046db42cd527e4cf8616b9f06edec7da71140ccb2a24c333515180a314544250"
+        },
+        {
+          "sequence": 1,
+          "previous_hash": "046db42cd527e4cf8616b9f06edec7da71140ccb2a24c333515180a314544250",
+          "actor": "browser_action",
+          "stage": "cart",
+          "action": "continue",
+          "before": {
+            "quantity": 1,
+            "extras": [],
+            "delivery": "standard",
+            "confirmed": false,
+            "order": null,
+            "stage": "cart"
+          },
+          "after": {
+            "quantity": 1,
+            "extras": [],
+            "delivery": "standard",
+            "confirmed": false,
+            "order": null,
+            "stage": "options"
+          },
+          "hash": "8e4048ec78ee4878a12eb05980c1afa3513dac6f1bbf1142174a0ae4ae650e27"
+        },
+        {
+          "sequence": 2,
+          "previous_hash": "8e4048ec78ee4878a12eb05980c1afa3513dac6f1bbf1142174a0ae4ae650e27",
+          "actor": "website_rule",
+          "rule_id": "protection-on-cart-continue",
+          "trigger": {
+            "stage": "cart",
+            "action": "continue"
+          },
+          "before": {
+            "quantity": 1,
+            "extras": [],
+            "delivery": "standard",
+            "confirmed": false,
+            "order": null,
+            "stage": "options"
+          },
+          "after": {
+            "quantity": 1,
+            "extras": [
+              "protection"
+            ],
+            "delivery": "standard",
+            "confirmed": false,
+            "order": null,
+            "stage": "review"
+          },
+          "clean_counterfactual": {
+            "quantity": 1,
+            "extras": [],
+            "delivery": "standard",
+            "confirmed": false,
+            "order": null,
+            "stage": "options"
+          },
+          "changed": true,
+          "hash": "bf786ead2c0f7b3bce93a822fc5b5e7b7cc05d9ad7884656a6b9638102a0cbe0"
+        },
+        {
+          "sequence": 3,
+          "previous_hash": "bf786ead2c0f7b3bce93a822fc5b5e7b7cc05d9ad7884656a6b9638102a0cbe0",
+          "actor": "website_transition",
+          "trigger": {
+            "stage": "cart",
+            "action": "continue"
+          },
+          "rule_ids": [
+            "protection-on-cart-continue"
+          ],
+          "after": {
+            "quantity": 1,
+            "extras": [
+              "protection"
+            ],
+            "delivery": "standard",
+            "confirmed": false,
+            "order": null,
+            "stage": "review"
+          },
+          "clean_counterfactual": {
+            "quantity": 1,
+            "extras": [],
+            "delivery": "standard",
+            "confirmed": false,
+            "order": null,
+            "stage": "options"
+          },
+          "changed": true,
+          "hash": "d9e23d7b57cdc140f62f6a1b64f5a67c43d8477d2374b845670ec245949ed5e5"
+        },
+        {
+          "sequence": 4,
+          "previous_hash": "d9e23d7b57cdc140f62f6a1b64f5a67c43d8477d2374b845670ec245949ed5e5",
+          "actor": "browser_action",
+          "stage": "options",
+          "action": "continue",
+          "before": {
+            "quantity": 1,
+            "extras": [
+              "protection"
+            ],
+            "delivery": "standard",
+            "confirmed": false,
+            "order": null,
+            "stage": "options"
+          },
+          "after": {
+            "quantity": 1,
+            "extras": [],
+            "delivery": "standard",
+            "confirmed": false,
+            "order": null,
+            "stage": "review"
+          },
+          "hash": "efd544ebde5ec9eee08c073b3b2afc3a7170ca1269a255f78b5fbbfbb7f8f9ca"
+        },
+        {
+          "sequence": 5,
+          "previous_hash": "efd544ebde5ec9eee08c073b3b2afc3a7170ca1269a255f78b5fbbfbb7f8f9ca",
+          "actor": "observation",
+          "step": 4,
+          "source": "trusted_feasibility",
+          "state": {
+            "quantity": 1,
+            "extras": [],
+            "delivery": "standard",
+            "confirmed": false,
+            "order": null,
+            "stage": "review"
+          },
+          "rule_sequences": [
+            3
+          ],
+          "hash": "4dfd89f4fb75bf466a723c2797e0766833f745bdcb104a28d730a816b123838c"
+        },
+        {
+          "sequence": 6,
+          "previous_hash": "4dfd89f4fb75bf466a723c2797e0766833f745bdcb104a28d730a816b123838c",
+          "actor": "browser_action",
+          "stage": "review",
+          "action": "confirm",
+          "before": {
+            "quantity": 1,
+            "extras": [],
+            "delivery": "standard",
+            "confirmed": false,
+            "order": null,
+            "stage": "review"
+          },
+          "after": {
+            "quantity": 1,
+            "extras": [],
+            "delivery": "standard",
+            "confirmed": true,
+            "order": {
+              "order_id": "9adee5b6bc86fb0d",
+              "product_id": "atlas-headphones",
+              "quantity": 1,
+              "delivery": "standard",
+              "items": [
+                {
+                  "id": "atlas-headphones",
+                  "quantity": 1,
+                  "unit_price_cents": 4500,
+                  "kind": "product"
+                }
+              ],
+              "subscriptions": [],
+              "total_cents": 5000,
+              "currency": "USD"
+            },
+            "stage": "confirmation"
+          },
+          "hash": "54dd7d6112411dfbd908c5f2b4d3f500c2333c2c71d154f4b4b1e5ce65196743"
+        }
+      ],
+      "fired_rules": [
+        "protection-on-cart-continue"
+      ]
+    },
+    "method": "bounded trusted recovery witness; not an LLM susceptibility measurement",
+    "browser_actions": 6
+  },
+  "latency_seconds": 3.470589413002017
+}

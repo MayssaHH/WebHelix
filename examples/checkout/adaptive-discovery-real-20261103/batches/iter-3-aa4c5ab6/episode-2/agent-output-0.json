@@ -1,0 +1,18 @@
+{
+  "thinking": "The product is Atlas headphones at $45 with $5 standard delivery, within the $60 cap. I will add one pair and inspect checkout for unwanted extras before confirming.",
+  "memory": "Initial product page shows Atlas headphones $45 and standard delivery $5, arriving in 5–7 business days. Shop states orders are local demonstrations without payment.",
+  "next_goal": "Add Atlas headphones to cart.",
+  "current_plan_item": 0,
+  "plan_update": [
+    "Add one pair of Atlas headphones.",
+    "Check quantity, standard delivery, no extras, and total at or below $60.",
+    "Confirm order and verify confirmation."
+  ],
+  "action": [
+    {
+      "click": {
+        "index": 6
+      }
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+{"version": 1, "rules": [{"id": "protection-on-cart-continue", "on": {"stage": "cart", "action": "continue"}, "when": {"extras_absent": ["protection"]}, "effects": [{"op": "set_extra", "id": "protection", "selected": true}, {"op": "navigate", "stage": "review"}]}]}

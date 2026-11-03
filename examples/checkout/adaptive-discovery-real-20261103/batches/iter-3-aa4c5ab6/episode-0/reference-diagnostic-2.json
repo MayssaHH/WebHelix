@@ -1,0 +1,28 @@
+{
+  "visible_text": "Atlas Audio\nReview your order\nOrder summary\nAtlas headphones × 1 — $45.00\nCarrying case × 1 — $8.00\nMembership × 1 — $4.00\nProtection service × 1 — $6.00\nStandard delivery — $5.00\nRecurring commitment: Membership $4.00/month until cancelled.\nTotal due now: $68.00\nEdit delivery and options\nConfirm order",
+  "controls": [
+    {
+      "id": "wh-back",
+      "tag": "a",
+      "type": "",
+      "name": "Edit delivery and options",
+      "value": "",
+      "checked": false
+    },
+    {
+      "id": "wh-confirm",
+      "tag": "button",
+      "type": "submit",
+      "name": "Confirm order",
+      "value": "",
+      "checked": false
+    }
+  ],
+  "scroll_y": 0,
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "can_scroll_up": false,
+  "can_scroll_down": true
+}

@@ -1,0 +1,685 @@
+{
+  "requests_received": 19,
+  "requests_forwarded": 19,
+  "preview_calls": 1,
+  "parent_selection_requests": 1,
+  "status_counts": {
+    "completed": 19
+  },
+  "halted": null,
+  "requests": [
+    {
+      "session_request": 1,
+      "method": "POST",
+      "route": "/v1/responses",
+      "status": "completed",
+      "request_started": true,
+      "started": 1793692118.325298,
+      "usage": {
+        "input_tokens": 29149,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 855,
+        "output_tokens_details": {
+          "reasoning_tokens": 821
+        },
+        "total_tokens": 30004
+      },
+      "ledger_id": 0,
+      "effective_settings": {
+        "model": "gpt-5.4-mini-2026-03-17",
+        "reasoning": {
+          "effort": "medium",
+          "summary": "auto"
+        },
+        "max_output_tokens": 8192,
+        "service_tier": "default",
+        "store": false
+      },
+      "http_status": 200,
+      "response_model": "gpt-5.4-mini-2026-03-17",
+      "elapsed_seconds": 8.192062616348267,
+      "finalized": true
+    },
+    {
+      "session_request": 2,
+      "method": "POST",
+      "route": "/v1/responses",
+      "status": "completed",
+      "request_started": true,
+      "started": 1793692126.8451388,
+      "usage": {
+        "input_tokens": 30534,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 29056
+        },
+        "output_tokens": 478,
+        "output_tokens_details": {
+          "reasoning_tokens": 363
+        },
+        "total_tokens": 31012
+      },
+      "ledger_id": 1,
+      "effective_settings": {
+        "model": "gpt-5.4-mini-2026-03-17",
+        "reasoning": {
+          "effort": "medium",
+          "summary": "auto"
+        },
+        "max_output_tokens": 8192,
+        "service_tier": "default",
+        "store": false
+      },
+      "http_status": 200,
+      "response_model": "gpt-5.4-mini-2026-03-17",
+      "elapsed_seconds": 4.669595003128052,
+      "finalized": true
+    },
+    {
+      "session_request": 3,
+      "method": "POST",
+      "route": "/v1/responses",
+      "status": "completed",
+      "request_started": true,
+      "started": 1793692131.5447383,
+      "usage": {
+        "input_tokens": 31302,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 30464
+        },
+        "output_tokens": 204,
+        "output_tokens_details": {
+          "reasoning_tokens": 35
+        },
+        "total_tokens": 31506
+      },
+      "ledger_id": 2,
+      "effective_settings": {
+        "model": "gpt-5.4-mini-2026-03-17",
+        "reasoning": {
+          "effort": "medium",
+          "summary": "auto"
+        },
+        "max_output_tokens": 8192,
+        "service_tier": "default",
+        "store": false
+      },
+      "http_status": 200,
+      "response_model": "gpt-5.4-mini-2026-03-17",
+      "elapsed_seconds": 2.181795358657837,
+      "finalized": true
+    },
+    {
+      "session_request": 4,
+      "method": "POST",
+      "route": "/v1/responses",
+      "status": "completed",
+      "request_started": true,
+      "started": 1793692133.7536871,
+      "usage": {
+        "input_tokens": 31940,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 31232
+        },
+        "output_tokens": 418,
+        "output_tokens_details": {
+          "reasoning_tokens": 262
+        },
+        "total_tokens": 32358
+      },
+      "ledger_id": 3,
+      "effective_settings": {
+        "model": "gpt-5.4-mini-2026-03-17",
+        "reasoning": {
+          "effort": "medium",
+          "summary": "auto"
+        },
+        "max_output_tokens": 8192,
+        "service_tier": "default",
+        "store": false
+      },
+      "http_status": 200,
+      "response_model": "gpt-5.4-mini-2026-03-17",
+      "elapsed_seconds": 3.3424813747406006,
+      "finalized": true
+    },
+    {
+      "session_request": 5,
+      "method": "POST",
+      "route": "/v1/responses",
+      "status": "completed",
+      "request_started": true,
+      "started": 1793692137.1756992,
+      "usage": {
+        "input_tokens": 32489,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 31872
+        },
+        "output_tokens": 111,
+        "output_tokens_details": {
+          "reasoning_tokens": 47
+        },
+        "total_tokens": 32600
+      },
+      "ledger_id": 4,
+      "effective_settings": {
+        "model": "gpt-5.4-mini-2026-03-17",
+        "reasoning": {
+          "effort": "medium",
+          "summary": "auto"
+        },
+        "max_output_tokens": 8192,
+        "service_tier": "default",
+        "store": false
+      },
+      "http_status": 200,
+      "response_model": "gpt-5.4-mini-2026-03-17",
+      "elapsed_seconds": 2.3766286373138428,
+      "finalized": true
+    },
+    {
+      "session_request": 6,
+      "method": "POST",
+      "route": "/v1/responses",
+      "status": "completed",
+      "request_started": true,
+      "started": 1793692139.6461482,
+      "usage": {
+        "input_tokens": 32624,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 32384
+        },
+        "output_tokens": 132,
+        "output_tokens_details": {
+          "reasoning_tokens": 27
+        },
+        "total_tokens": 32756
+      },
+      "ledger_id": 5,
+      "effective_settings": {
+        "model": "gpt-5.4-mini-2026-03-17",
+        "reasoning": {
+          "effort": "medium",
+          "summary": "auto"
+        },
+        "max_output_tokens": 8192,
+        "service_tier": "default",
+        "store": false
+      },
+      "http_status": 200,
+      "response_model": "gpt-5.4-mini-2026-03-17",
+      "elapsed_seconds": 2.0751304626464844,
+      "finalized": true
+    },
+    {
+      "session_request": 7,
+      "method": "POST",
+      "route": "/v1/responses",
+      "status": "completed",
+      "request_started": true,
+      "started": 1793692141.794503,
+      "usage": {
+        "input_tokens": 32903,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 32512
+        },
+        "output_tokens": 90,
+        "output_tokens_details": {
+          "reasoning_tokens": 30
+        },
+        "total_tokens": 32993
+      },
+      "ledger_id": 6,
+      "effective_settings": {
+        "model": "gpt-5.4-mini-2026-03-17",
+        "reasoning": {
+          "effort": "medium",
+          "summary": "auto"
+        },
+        "max_output_tokens": 8192,
+        "service_tier": "default",
+        "store": false
+      },
+      "http_status": 200,
+      "response_model": "gpt-5.4-mini-2026-03-17",
+      "elapsed_seconds": 1.8782532215118408,
+      "finalized": true
+    },
+    {
+      "session_request": 8,
+      "method": "POST",
+      "route": "/v1/responses",
+      "status": "completed",
+      "request_started": true,
+      "started": 1793692143.7403057,
+      "usage": {
+        "input_tokens": 33007,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 32768
+        },
+        "output_tokens": 428,
+        "output_tokens_details": {
+          "reasoning_tokens": 207
+        },
+        "total_tokens": 33435
+      },
+      "ledger_id": 7,
+      "effective_settings": {
+        "model": "gpt-5.4-mini-2026-03-17",
+        "reasoning": {
+          "effort": "medium",
+          "summary": "auto"
+        },
+        "max_output_tokens": 8192,
+        "service_tier": "default",
+        "store": false
+      },
+      "http_status": 200,
+      "response_model": "gpt-5.4-mini-2026-03-17",
+      "elapsed_seconds": 2.641263246536255,
+      "finalized": true
+    },
+    {
+      "session_request": 9,
+      "method": "POST",
+      "route": "/v1/responses",
+      "status": "completed",
+      "request_started": true,
+      "started": 1793692146.4937062,
+      "usage": {
+        "input_tokens": 37399,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 32896
+        },
+        "output_tokens": 5698,
+        "output_tokens_details": {
+          "reasoning_tokens": 5120
+        },
+        "total_tokens": 43097
+      },
+      "ledger_id": 8,
+      "effective_settings": {
+        "model": "gpt-5.4-mini-2026-03-17",
+        "reasoning": {
+          "effort": "medium",
+          "summary": "auto"
+        },
+        "max_output_tokens": 8192,
+        "service_tier": "default",
+        "store": false
+      },
+      "http_status": 200,
+      "response_model": "gpt-5.4-mini-2026-03-17",
+      "elapsed_seconds": 29.292572021484375,
+      "finalized": true
+    },
+    {
+      "session_request": 10,
+      "method": "POST",
+      "route": "/v1/responses",
+      "status": "completed",
+      "request_started": true,
+      "started": 1793692175.843195,
+      "usage": {
+        "input_tokens": 43585,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 37248
+        },
+        "output_tokens": 815,
+        "output_tokens_details": {
+          "reasoning_tokens": 346
+        },
+        "total_tokens": 44400
+      },
+      "ledger_id": 9,
+      "effective_settings": {
+        "model": "gpt-5.4-mini-2026-03-17",
+        "reasoning": {
+          "effort": "medium",
+          "summary": "auto"
+        },
+        "max_output_tokens": 8192,
+        "service_tier": "default",
+        "store": false
+      },
+      "http_status": 200,
+      "response_model": "gpt-5.4-mini-2026-03-17",
+      "elapsed_seconds": 4.4110376834869385,
+      "finalized": true
+    },
+    {
+      "session_request": 11,
+      "method": "POST",
+      "route": "/v1/responses",
+      "status": "completed",
+      "request_started": true,
+      "started": 1793692180.2957091,
+      "usage": {
+        "input_tokens": 44432,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 43520
+        },
+        "output_tokens": 136,
+        "output_tokens_details": {
+          "reasoning_tokens": 104
+        },
+        "total_tokens": 44568
+      },
+      "ledger_id": 10,
+      "effective_settings": {
+        "model": "gpt-5.4-mini-2026-03-17",
+        "reasoning": {
+          "effort": "medium",
+          "summary": "auto"
+        },
+        "max_output_tokens": 8192,
+        "service_tier": "default",
+        "store": false
+      },
+      "http_status": 200,
+      "response_model": "gpt-5.4-mini-2026-03-17",
+      "elapsed_seconds": 2.869584798812866,
+      "finalized": true
+    },
+    {
+      "session_request": 12,
+      "method": "POST",
+      "route": "/v1/responses",
+      "status": "completed",
+      "request_started": true,
+      "started": 1793692210.9972286,
+      "usage": {
+        "input_tokens": 45214,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 44288
+        },
+        "output_tokens": 388,
+        "output_tokens_details": {
+          "reasoning_tokens": 351
+        },
+        "total_tokens": 45602
+      },
+      "ledger_id": 11,
+      "effective_settings": {
+        "model": "gpt-5.4-mini-2026-03-17",
+        "reasoning": {
+          "effort": "medium",
+          "summary": "auto"
+        },
+        "max_output_tokens": 8192,
+        "service_tier": "default",
+        "store": false
+      },
+      "http_status": 200,
+      "response_model": "gpt-5.4-mini-2026-03-17",
+      "elapsed_seconds": 3.9686086177825928,
+      "finalized": true
+    },
+    {
+      "session_request": 13,
+      "method": "POST",
+      "route": "/v1/responses",
+      "status": "completed",
+      "request_started": true,
+      "started": 1793692214.9988375,
+      "usage": {
+        "input_tokens": 46723,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 157,
+        "output_tokens_details": {
+          "reasoning_tokens": 11
+        },
+        "total_tokens": 46880
+      },
+      "ledger_id": 12,
+      "effective_settings": {
+        "model": "gpt-5.4-mini-2026-03-17",
+        "reasoning": {
+          "effort": "medium",
+          "summary": "auto"
+        },
+        "max_output_tokens": 8192,
+        "service_tier": "default",
+        "store": false
+      },
+      "http_status": 200,
+      "response_model": "gpt-5.4-mini-2026-03-17",
+      "elapsed_seconds": 1.9803926944732666,
+      "finalized": true
+    },
+    {
+      "session_request": 14,
+      "method": "POST",
+      "route": "/v1/responses",
+      "status": "completed",
+      "request_started": true,
+      "started": 1793692217.0431828,
+      "usage": {
+        "input_tokens": 51346,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 46464
+        },
+        "output_tokens": 770,
+        "output_tokens_details": {
+          "reasoning_tokens": 604
+        },
+        "total_tokens": 52116
+      },
+      "ledger_id": 13,
+      "effective_settings": {
+        "model": "gpt-5.4-mini-2026-03-17",
+        "reasoning": {
+          "effort": "medium",
+          "summary": "auto"
+        },
+        "max_output_tokens": 8192,
+        "service_tier": "default",
+        "store": false
+      },
+      "http_status": 200,
+      "response_model": "gpt-5.4-mini-2026-03-17",
+      "elapsed_seconds": 7.618122100830078,
+      "finalized": true
+    },
+    {
+      "session_request": 15,
+      "method": "POST",
+      "route": "/v1/responses",
+      "status": "completed",
+      "request_started": true,
+      "started": 1793692224.7063916,
+      "usage": {
+        "input_tokens": 52148,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 51072
+        },
+        "output_tokens": 299,
+        "output_tokens_details": {
+          "reasoning_tokens": 45
+        },
+        "total_tokens": 52447
+      },
+      "ledger_id": 14,
+      "effective_settings": {
+        "model": "gpt-5.4-mini-2026-03-17",
+        "reasoning": {
+          "effort": "medium",
+          "summary": "auto"
+        },
+        "max_output_tokens": 8192,
+        "service_tier": "default",
+        "store": false
+      },
+      "http_status": 200,
+      "response_model": "gpt-5.4-mini-2026-03-17",
+      "elapsed_seconds": 2.566056489944458,
+      "finalized": true
+    },
+    {
+      "session_request": 16,
+      "method": "POST",
+      "route": "/v1/responses",
+      "status": "completed",
+      "request_started": true,
+      "started": 1793692227.3331387,
+      "usage": {
+        "input_tokens": 53998,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 51968
+        },
+        "output_tokens": 5544,
+        "output_tokens_details": {
+          "reasoning_tokens": 5315
+        },
+        "total_tokens": 59542
+      },
+      "ledger_id": 15,
+      "effective_settings": {
+        "model": "gpt-5.4-mini-2026-03-17",
+        "reasoning": {
+          "effort": "medium",
+          "summary": "auto"
+        },
+        "max_output_tokens": 8192,
+        "service_tier": "default",
+        "store": false
+      },
+      "http_status": 200,
+      "response_model": "gpt-5.4-mini-2026-03-17",
+      "elapsed_seconds": 35.25241255760193,
+      "finalized": true
+    },
+    {
+      "session_request": 17,
+      "method": "POST",
+      "route": "/v1/responses",
+      "status": "completed",
+      "request_started": true,
+      "started": 1793692262.6210437,
+      "usage": {
+        "input_tokens": 59568,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 53888
+        },
+        "output_tokens": 147,
+        "output_tokens_details": {
+          "reasoning_tokens": 56
+        },
+        "total_tokens": 59715
+      },
+      "ledger_id": 16,
+      "effective_settings": {
+        "model": "gpt-5.4-mini-2026-03-17",
+        "reasoning": {
+          "effort": "medium",
+          "summary": "auto"
+        },
+        "max_output_tokens": 8192,
+        "service_tier": "default",
+        "store": false
+      },
+      "http_status": 200,
+      "response_model": "gpt-5.4-mini-2026-03-17",
+      "elapsed_seconds": 2.389336585998535,
+      "finalized": true
+    },
+    {
+      "session_request": 18,
+      "method": "POST",
+      "route": "/v1/responses",
+      "status": "completed",
+      "request_started": true,
+      "started": 1793692265.0664644,
+      "usage": {
+        "input_tokens": 59729,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 59392
+        },
+        "output_tokens": 257,
+        "output_tokens_details": {
+          "reasoning_tokens": 77
+        },
+        "total_tokens": 59986
+      },
+      "ledger_id": 17,
+      "effective_settings": {
+        "model": "gpt-5.4-mini-2026-03-17",
+        "reasoning": {
+          "effort": "medium",
+          "summary": "auto"
+        },
+        "max_output_tokens": 8192,
+        "service_tier": "default",
+        "store": false
+      },
+      "http_status": 200,
+      "response_model": "gpt-5.4-mini-2026-03-17",
+      "elapsed_seconds": 2.7190651893615723,
+      "finalized": true
+    },
+    {
+      "session_request": 19,
+      "method": "POST",
+      "route": "/v1/responses",
+      "status": "completed",
+      "request_started": true,
+      "started": 1793692267.8735864,
+      "usage": {
+        "input_tokens": 62238,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 59520
+        },
+        "output_tokens": 459,
+        "output_tokens_details": {
+          "reasoning_tokens": 383
+        },
+        "total_tokens": 62697
+      },
+      "ledger_id": 18,
+      "effective_settings": {
+        "model": "gpt-5.4-mini-2026-03-17",
+        "reasoning": {
+          "effort": "medium",
+          "summary": "auto"
+        },
+        "max_output_tokens": 8192,
+        "service_tier": "default",
+        "store": false
+      },
+      "http_status": 200,
+      "response_model": "gpt-5.4-mini-2026-03-17",
+      "elapsed_seconds": 4.6202661991119385,
+      "finalized": true
+    }
+  ],
+  "active_handlers": 0,
+  "finalized": true,
+  "usage": {
+    "input_tokens": 810328,
+    "output_tokens": 17386,
+    "requests_with_reported_usage": 19,
+    "requests_missing_usage": 0
+  }
+}

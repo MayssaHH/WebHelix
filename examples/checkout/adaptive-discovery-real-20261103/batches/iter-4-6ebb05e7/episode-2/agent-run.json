@@ -1,0 +1,119 @@
+{
+  "browser_runtime": {
+    "backend": "browser-use",
+    "browser_use_version": "0.13.14",
+    "playwright_version": "1.58.0",
+    "artifact_schema": 2,
+    "implementation_sha256": "ef45a15664303ffd5abd82ce7768edfa5f8176a49ca8b7fb7b17869303ea9b4d"
+  },
+  "actions": [
+    {
+      "click": {
+        "index": 6
+      }
+    },
+    {
+      "click": {
+        "index": 56
+      }
+    },
+    {
+      "click": {
+        "index": 102
+      }
+    },
+    {
+      "click": {
+        "index": 152
+      }
+    },
+    {
+      "click": {
+        "index": 157
+      }
+    },
+    {
+      "click": {
+        "index": 215
+      }
+    }
+  ],
+  "usage": [
+    {
+      "input_tokens": 7678,
+      "input_tokens_details": {
+        "cache_write_tokens": 1409,
+        "cached_tokens": 6266
+      },
+      "output_tokens": 165,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 7843
+    },
+    {
+      "input_tokens": 7932,
+      "input_tokens_details": {
+        "cache_write_tokens": 1663,
+        "cached_tokens": 6266
+      },
+      "output_tokens": 129,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 8061
+    },
+    {
+      "input_tokens": 7896,
+      "input_tokens_details": {
+        "cache_write_tokens": 1627,
+        "cached_tokens": 6266
+      },
+      "output_tokens": 125,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 8021
+    },
+    {
+      "input_tokens": 8118,
+      "input_tokens_details": {
+        "cache_write_tokens": 1849,
+        "cached_tokens": 6266
+      },
+      "output_tokens": 134,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 8252
+    },
+    {
+      "input_tokens": 8191,
+      "input_tokens_details": {
+        "cache_write_tokens": 1922,
+        "cached_tokens": 6266
+      },
+      "output_tokens": 138,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 8329
+    },
+    {
+      "input_tokens": 8109,
+      "input_tokens_details": {
+        "cache_write_tokens": 1840,
+        "cached_tokens": 6266
+      },
+      "output_tokens": 158,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 8267
+    }
+  ],
+  "model_requests": 6,
+  "stop_reason": "confirmed",
+  "errors": [],
+  "latency_seconds": 43.34205944599671
+}

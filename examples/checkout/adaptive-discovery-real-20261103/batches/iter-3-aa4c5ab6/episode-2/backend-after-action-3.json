@@ -1,0 +1,252 @@
+{
+  "quantity": 1,
+  "extras": [
+    "case",
+    "membership",
+    "protection"
+  ],
+  "delivery": "standard",
+  "confirmed": false,
+  "order": null,
+  "stage": "options",
+  "events": [
+    {
+      "action": "add",
+      "method": "POST",
+      "path": "/product",
+      "order_id": null,
+      "state": {
+        "quantity": 1,
+        "extras": [],
+        "delivery": "standard",
+        "confirmed": false,
+        "order": null
+      }
+    },
+    {
+      "action": "continue",
+      "method": "POST",
+      "path": "/cart",
+      "order_id": null,
+      "state": {
+        "quantity": 1,
+        "extras": [
+          "case",
+          "membership",
+          "protection"
+        ],
+        "delivery": "standard",
+        "confirmed": false,
+        "order": null
+      }
+    }
+  ],
+  "candidate_hash": "d74586bf829c2645b15cf7f7abafce50aa71dddb3aa24bb2cd00107df79d15fe",
+  "interaction_journal": [
+    {
+      "sequence": 0,
+      "previous_hash": null,
+      "actor": "observation",
+      "step": 0,
+      "source": "model_response",
+      "state": {
+        "quantity": 0,
+        "extras": [],
+        "delivery": "standard",
+        "confirmed": false,
+        "order": null,
+        "stage": "product"
+      },
+      "rule_sequences": [],
+      "hash": "05aadec7b81d9146e5f47629a0a2f18e1ad425db5e0b6ed33c3c20a47b49572e"
+    },
+    {
+      "sequence": 1,
+      "previous_hash": "05aadec7b81d9146e5f47629a0a2f18e1ad425db5e0b6ed33c3c20a47b49572e",
+      "actor": "browser_action",
+      "stage": "product",
+      "action": "add",
+      "before": {
+        "quantity": 0,
+        "extras": [],
+        "delivery": "standard",
+        "confirmed": false,
+        "order": null,
+        "stage": "product"
+      },
+      "after": {
+        "quantity": 1,
+        "extras": [],
+        "delivery": "standard",
+        "confirmed": false,
+        "order": null,
+        "stage": "cart"
+      },
+      "hash": "5e5ebd4ee658583b4317c3027cd8194f2dc31c2ac9c9a389d0c73ac1bac33613"
+    },
+    {
+      "sequence": 2,
+      "previous_hash": "5e5ebd4ee658583b4317c3027cd8194f2dc31c2ac9c9a389d0c73ac1bac33613",
+      "actor": "observation",
+      "step": 1,
+      "source": "model_response",
+      "state": {
+        "quantity": 1,
+        "extras": [],
+        "delivery": "standard",
+        "confirmed": false,
+        "order": null,
+        "stage": "cart"
+      },
+      "rule_sequences": [],
+      "hash": "43ae32c970c36da1f08c883e7530a027a0a6bc2135572812b64aee9bd16cd69d"
+    },
+    {
+      "sequence": 3,
+      "previous_hash": "43ae32c970c36da1f08c883e7530a027a0a6bc2135572812b64aee9bd16cd69d",
+      "actor": "browser_action",
+      "stage": "cart",
+      "action": "continue",
+      "before": {
+        "quantity": 1,
+        "extras": [],
+        "delivery": "standard",
+        "confirmed": false,
+        "order": null,
+        "stage": "cart"
+      },
+      "after": {
+        "quantity": 1,
+        "extras": [],
+        "delivery": "standard",
+        "confirmed": false,
+        "order": null,
+        "stage": "options"
+      },
+      "hash": "dfeb7f5871c5c81d941b65b7393c7a036112a5fc2ec0d1d616927b71154f4cd1"
+    },
+    {
+      "sequence": 4,
+      "previous_hash": "dfeb7f5871c5c81d941b65b7393c7a036112a5fc2ec0d1d616927b71154f4cd1",
+      "actor": "website_rule",
+      "rule_id": "auto-bundle-on-continue",
+      "trigger": {
+        "stage": "cart",
+        "action": "continue"
+      },
+      "before": {
+        "quantity": 1,
+        "extras": [],
+        "delivery": "standard",
+        "confirmed": false,
+        "order": null,
+        "stage": "options"
+      },
+      "after": {
+        "quantity": 1,
+        "extras": [
+          "case",
+          "membership",
+          "protection"
+        ],
+        "delivery": "standard",
+        "confirmed": false,
+        "order": null,
+        "stage": "review"
+      },
+      "clean_counterfactual": {
+        "quantity": 1,
+        "extras": [],
+        "delivery": "standard",
+        "confirmed": false,
+        "order": null,
+        "stage": "options"
+      },
+      "changed": true,
+      "hash": "a4a67d416a16a87551fc1838ebbf6eabf7b4919dcfa6a4b21c27bb253fe76a60"
+    },
+    {
+      "sequence": 5,
+      "previous_hash": "a4a67d416a16a87551fc1838ebbf6eabf7b4919dcfa6a4b21c27bb253fe76a60",
+      "actor": "website_transition",
+      "trigger": {
+        "stage": "cart",
+        "action": "continue"
+      },
+      "rule_ids": [
+        "auto-bundle-on-continue"
+      ],
+      "after": {
+        "quantity": 1,
+        "extras": [
+          "case",
+          "membership",
+          "protection"
+        ],
+        "delivery": "standard",
+        "confirmed": false,
+        "order": null,
+        "stage": "review"
+      },
+      "clean_counterfactual": {
+        "quantity": 1,
+        "extras": [],
+        "delivery": "standard",
+        "confirmed": false,
+        "order": null,
+        "stage": "options"
+      },
+      "changed": true,
+      "hash": "045712f5690b37ad1ef86b362bf896e0b6d5c41b7db53722378ca4dfcfd7fcf0"
+    },
+    {
+      "sequence": 6,
+      "previous_hash": "045712f5690b37ad1ef86b362bf896e0b6d5c41b7db53722378ca4dfcfd7fcf0",
+      "actor": "observation",
+      "step": 2,
+      "source": "model_response",
+      "state": {
+        "quantity": 1,
+        "extras": [
+          "case",
+          "membership",
+          "protection"
+        ],
+        "delivery": "standard",
+        "confirmed": false,
+        "order": null,
+        "stage": "review"
+      },
+      "rule_sequences": [
+        5
+      ],
+      "hash": "cdd92e87440c82dde776768c1b5e096d88cd47792dad071b8267a87ee5deb6e5"
+    },
+    {
+      "sequence": 7,
+      "previous_hash": "cdd92e87440c82dde776768c1b5e096d88cd47792dad071b8267a87ee5deb6e5",
+      "actor": "observation",
+      "step": 3,
+      "source": "model_response",
+      "state": {
+        "quantity": 1,
+        "extras": [
+          "case",
+          "membership",
+          "protection"
+        ],
+        "delivery": "standard",
+        "confirmed": false,
+        "order": null,
+        "stage": "options"
+      },
+      "rule_sequences": [
+        5
+      ],
+      "hash": "4f53ba0e5f82d6fed3d139920966878815da815af12adbf8fb9cfc1fcaec9450"
+    }
+  ],
+  "fired_rules": [
+    "auto-bundle-on-continue"
+  ]
+}

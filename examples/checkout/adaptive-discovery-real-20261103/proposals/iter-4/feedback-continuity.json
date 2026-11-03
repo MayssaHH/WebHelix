@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "serialized_request_context_matches": true,
+  "next_iteration": 4,
+  "prior_iterations": [
+    {
+      "iteration": 1,
+      "summary_matches": true,
+      "evidence_manifest_matches": true,
+      "complete_readonly_evidence_matches": true
+    },
+    {
+      "iteration": 2,
+      "summary_matches": true,
+      "evidence_manifest_matches": true,
+      "complete_readonly_evidence_matches": true
+    },
+    {
+      "iteration": 3,
+      "summary_matches": true,
+      "evidence_manifest_matches": true,
+      "complete_readonly_evidence_matches": true
+    }
+  ],
+  "context_sha256": "e2f1edb37a75cb809161e792eb4a94bca8af425647767549e2978b8ab005d0c3"
+}

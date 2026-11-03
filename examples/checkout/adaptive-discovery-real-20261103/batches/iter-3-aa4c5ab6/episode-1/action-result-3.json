@@ -1,0 +1,13 @@
+[
+  {
+    "is_done": false,
+    "extracted_content": "Clicked input type=checkbox checkbox-state=checked id=wh-case name=extras",
+    "include_extracted_content_only_once": false,
+    "metadata": {
+      "click_x": 704.0,
+      "click_y": 361.59375,
+      "checked": false
+    },
+    "include_in_memory": false
+  }
+]

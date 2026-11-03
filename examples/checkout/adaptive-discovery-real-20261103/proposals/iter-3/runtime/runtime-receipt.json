@@ -1,0 +1,22 @@
+{
+  "image": "webhelix-opencode:1.19.4",
+  "image_id": "sha256:2fd904e84bff68c0f16d064e8c57e09827612fd348d77447e1fd0a34d0fbc2ae",
+  "opencode_version": "1.19.4",
+  "archive_sha256": "1697ef40558d378bd2f72efa8fafe1bed1f0e664f09247b9357556b95dbc7cbc",
+  "network_internal": true,
+  "network": "webhelix-opencode-73e09256639c-net",
+  "container": "webhelix-opencode-73e09256639c",
+  "candidate_mount": "/workspace/webhelix-runs/adaptive-discovery-real-20261103/project/.autohelix/worktrees/iter-3/candidate",
+  "context_mount": "/workspace/webhelix-runs/adaptive-discovery-real-20261103/proposals/iter-3/reference",
+  "model": "webhelix/gpt-5.4-mini-2026-03-17",
+  "reasoning_variant": "medium",
+  "maximum_agent_steps": 20,
+  "context_window_tokens": 400000,
+  "maximum_output_tokens": 8192,
+  "read_only_rootfs": true,
+  "capabilities_dropped": "ALL",
+  "real_credentials_in_container": false,
+  "uid": 1000,
+  "gid": 1000,
+  "verified_cli_version": "1.19.4"
+}
