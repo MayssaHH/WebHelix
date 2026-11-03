@@ -55,6 +55,7 @@ def test_single_search_configuration_has_no_identity_or_arm(tmp_path):
     assert settings["optimizer_settings"]["context_window_tokens"] == 400000
     assert settings["victim"]["model"] == "gpt-6.1-sol"
     assert settings["memory_policy"] == "summary-with-readonly-evidence-v1"
+    assert settings["optimizer_feedback_protocol"] == "behavioral-v1"
     assert status["baseline_episodes"] == 1
     assert not (run / "identity.json").exists() and not (run / "arms").exists()
     assert fingerprint(initial_files("combined")) == fingerprint(

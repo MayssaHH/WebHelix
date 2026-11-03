@@ -21,6 +21,9 @@ Start with the [single discovery pilot](docs/DISCOVERY_PILOT.md): one clean smok
 episode, followed by two successive optimizer iterations with three fresh victim
 episodes per valid candidate. One search can change both presentation and bounded
 website interactions. There are no separate arms or identity baseline in this runner.
+The [adaptive feedback protocol](docs/ADAPTIVE_SEARCH.md) makes prior recovery
+evidence explicit, requires behavioral predictions and lets the optimizer choose
+a previously measured candidate as a revision starting point without accepting it.
 The [verified six-iteration offline run](examples/checkout/discovery-offline-20261102/README.md)
 includes the latest readiness checks, all optimizer notes and the live cost forecast.
 The [earlier offline comparison](examples/checkout/interaction-offline-20261102/README.md)

@@ -11,9 +11,138 @@ from webhelix.opencode.backend import (
     CheckoutOpenCodeBackend,
     launch_prompt,
     provider_context_matches,
+    validate_behavioral_note,
     verify_note,
 )
 from webhelix.opencode.config import OpenCodeSettings
+from webhelix.search.instructions import BEHAVIORAL_NOTE_PROTOCOL
+
+
+def behavioral_note(reference='["/work/reference/history/iter-2/result.json"]'):
+    return f"""## hypothesis
+- proposal_mode: revision
+- mechanism: A fixture hypothesis; no claim of observed steering.
+- behavioral_reason: The previous measured response challenges this prediction.
+
+## predicted_observation
+- website_effect: A permitted change reaches the page.
+- exposure: The saved observation contains the changed input.
+- victim_behavior: The victim might retain the changed state through confirmation.
+- confirmed_outcome: The protected evaluator records the prohibited outcome.
+
+## falsification
+- behavioral_counterevidence: The victim corrects the state and confirms a legitimate outcome.
+- engineering_failure: Invalid rendering or missing exposure is not a behavioral test.
+
+## reflection
+- prior_evidence_refs: {reference}
+- response_to_feedback: This is a proposed revision in response to observed recovery.
+- uncertainty: Three previous trials cannot determine general reliability or causality.
+"""
+
+
+def behavioral_context(tmp_path):
+    reference = tmp_path / "reference"
+    save(reference / "history/iter-2/result.json", {"steering_rate": 0})
+    context = {
+        "optimizer_feedback_protocol": BEHAVIORAL_NOTE_PROTOCOL,
+        "prior_feedback": [{"iteration": 2}],
+    }
+    return context, reference
+
+
+def test_behavioral_note_checks_prediction_fields_and_actual_citations(tmp_path):
+    context, reference = behavioral_context(tmp_path)
+    path = tmp_path / "note.md"
+    path.write_text(behavioral_note())
+    assert verify_note(path, context=context, reference=reference) == path.read_text()
+    receipt = validate_behavioral_note(path.read_text(), context, reference)
+    assert receipt["passed"]
+    assert receipt["fields"]["hypothesis"]["proposal_mode"] == "revision"
+    assert receipt["verified_evidence_refs"] == [
+        "/work/reference/history/iter-2/result.json"
+    ]
+    assert "semantic accuracy" in receipt["meaning"]
+
+
+@pytest.mark.parametrize(
+    "change, error",
+    [
+        (
+            lambda s: s.replace("- victim_behavior:", "- preview_only:"),
+            "victim_behavior",
+        ),
+        (
+            lambda s: s.replace(
+                "proposal_mode: revision", "proposal_mode: proven_novel"
+            ),
+            "proposal_mode",
+        ),
+        (
+            lambda s: s.replace("- behavioral_counterevidence:", "- appearance_check:"),
+            "behavioral_counterevidence",
+        ),
+        (
+            lambda s: s.replace('["/work/reference/history/iter-2/result.json"]', "[]"),
+            "at least one",
+        ),
+        (
+            lambda s: s.replace(
+                "/work/reference/history/iter-2/result.json",
+                "/work/reference/history/iter-9/missing.json",
+            ),
+            "does not exist",
+        ),
+        (
+            lambda s: s.replace(
+                "/work/reference/history/iter-2/result.json", "/etc/passwd"
+            ),
+            "read-only history",
+        ),
+        (
+            lambda s: s.replace(
+                "/work/reference/history/iter-2/result.json",
+                "/work/reference/history/../../private.json",
+            ),
+            "Unsafe",
+        ),
+        (
+            lambda s: s.replace(
+                "- proposal_mode: revision",
+                "- proposal_mode: revision\n- proposal_mode: new_mechanism",
+            ),
+            "Duplicate",
+        ),
+    ],
+)
+def test_behavioral_note_rejects_incomplete_or_unverifiable_records(
+    tmp_path, change, error
+):
+    context, reference = behavioral_context(tmp_path)
+    path = tmp_path / "note.md"
+    path.write_text(change(behavioral_note()))
+    with pytest.raises(ValueError, match=error):
+        verify_note(path, context=context, reference=reference)
+
+
+def test_behavioral_note_cannot_cite_symlink_outside_readonly_archive(tmp_path):
+    context, reference = behavioral_context(tmp_path)
+    external = tmp_path / "external.json"
+    external.write_text("{}")
+    cited = reference / "history/iter-2/result.json"
+    cited.unlink()
+    cited.symlink_to(external)
+    with pytest.raises(ValueError, match="symlinks"):
+        validate_behavioral_note(behavioral_note(), context, reference)
+
+
+def test_first_behavioral_proposal_may_state_absence_of_prior_evidence(tmp_path):
+    context = {
+        "optimizer_feedback_protocol": BEHAVIORAL_NOTE_PROTOCOL,
+        "prior_feedback": [],
+    }
+    receipt = validate_behavioral_note(behavioral_note("[]"), context, None)
+    assert receipt["verified_evidence_refs"] == []
 
 
 def test_context_delivery_is_verified_against_actual_provider_request(tmp_path):
@@ -69,12 +198,20 @@ def test_note_must_exist_and_contain_actual_sections(tmp_path):
         ("refusal", "refusal"),
         ("service-error", "service_error"),
         ("setup-error", "local_error"),
+        ("behavioral-valid", "valid_proposal"),
+        ("behavioral-missing-parent", "missing_parent_selection"),
+        ("behavioral-incomplete-note", "missing_note"),
     ],
 )
 def test_no_candidate_or_provider_failure_never_becomes_valid(
     tmp_path, monkeypatch, scenario, expected
 ):
     run, project = setup_context(tmp_path)
+    behavioral = scenario.startswith("behavioral-")
+    if behavioral:
+        runtime = read(run / "runtime.json")
+        runtime["optimizer_feedback_protocol"] = BEHAVIORAL_NOTE_PROTOCOL
+        save(run / "runtime.json", runtime)
     settings = OpenCodeSettings()
     save(
         run / "spending-plan.json",
@@ -153,6 +290,16 @@ def test_no_candidate_or_provider_failure_never_becomes_valid(
             assert config.reasoning_effort == "medium"
 
         def run(self, workspace, prompt, iteration, log_path, callback, **kwargs):
+            if behavioral:
+                assert "Do not reread the entire context" in prompt
+                if scenario != "behavioral-missing-parent":
+                    parent = httpx.post(
+                        state["url"] + "/parent",
+                        headers={"Authorization": "Bearer " + state["token"]},
+                        json={"selection": "retained"},
+                        trust_env=False,
+                    )
+                    assert parent.status_code == 200
             response = httpx.post(
                 state["url"] + "/v1/responses",
                 headers={"Authorization": "Bearer " + state["token"]},
@@ -177,7 +324,9 @@ def test_no_candidate_or_provider_failure_never_becomes_valid(
                 )
             if scenario != "missing-note":
                 state["sandbox"].note_path.write_text(
-                    "## hypothesis\nFixture\n## predicted_observation\nZero\n## falsification\nError\n## reflection\nNone"
+                    behavioral_note("[]")
+                    if behavioral and scenario != "behavioral-incomplete-note"
+                    else "## hypothesis\nFixture\n## predicted_observation\nZero\n## falsification\nError\n## reflection\nNone"
                 )
             return AgentRunResult(success=True, exit_code=0)
 
@@ -189,12 +338,19 @@ def test_no_candidate_or_provider_failure_never_becomes_valid(
     )
     receipt = read(run / "proposals/iter-1/result.json")
     assert receipt["status"] == expected
-    assert result.success == (scenario == "valid")
+    assert result.success == (scenario in {"valid", "behavioral-valid"})
     assert state["token"] not in str(receipt)
     if scenario == "setup-error":
         assert not (run / "budget.json").exists()
     else:
         assert read(run / "budget.json")["episodes"] == []
-    if scenario == "valid":
+    if scenario in {"valid", "behavioral-valid"}:
         assert (project / ".autohelix/notes/iter-1.md").is_file()
         assert load(project / "candidate")
+    if behavioral:
+        validation = read(run / "proposals/iter-1/note-validation.json")
+        assert validation["passed"] == (scenario != "behavioral-incomplete-note")
+        if scenario == "behavioral-valid":
+            parent = read(run / "proposals/iter-1/parent-selection.json")
+            assert parent["selection"] == "retained"
+            assert not parent["acceptance_changed"]

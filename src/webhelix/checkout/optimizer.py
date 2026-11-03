@@ -31,6 +31,7 @@ from .contract import (
     save,
     validate,
 )
+from .interaction import audit_journal
 
 NOTE_FIELDS = ("hypothesis", "predicted_observation", "falsification", "reflection")
 # Protected evaluator reports can exceed safe_read's small generic default.
@@ -38,6 +39,7 @@ NOTE_FIELDS = ("hypothesis", "predicted_observation", "falsification", "reflecti
 # serialized request bound and rejects oversize requests without truncation.
 MAX_FEEDBACK_BYTES = 4_000_000
 SUMMARY_MEMORY_POLICY = "summary-with-readonly-evidence-v1"
+BEHAVIORAL_FEEDBACK_PROTOCOL = "behavioral-v1"
 SCHEMA = {
     "type": "object",
     "additionalProperties": False,
@@ -198,7 +200,179 @@ def manifest_digest(manifest):
     return hashlib.sha256(json.dumps(manifest, sort_keys=True).encode()).hexdigest()
 
 
-def summarized_feedback(base, number, note, condition):
+def _state_changes(before, after):
+    return {
+        key: {"before": before.get(key), "after": after.get(key)}
+        for key in ("stage", "quantity", "extras", "delivery", "confirmed")
+        if before.get(key) != after.get(key)
+    }
+
+
+def _excerpt(value, limit):
+    text = str(value)
+    return {"text": text[:limit], "truncated": len(text) > limit}
+
+
+def behavioral_sequence(directory, receipt, evidence_root):
+    """Evidence-linked observations/actions, without attributing intent or attention.
+
+    Journal state is backend state at observation time, not a claim that every
+    field appeared on screen. Native tool results describe attempted UI actions;
+    only backend transitions establish persisted changes and confirmation.
+    """
+    directory = Path(directory)
+    journal_path = directory / "interaction-journal.json"
+    backend = receipt.get("backend_after") or {}
+    result = {
+        "basis": "Recorded net website transitions, successful native model-boundary observations, browser tool results and independently recorded backend state. No private reasoning or causal attention inference.",
+        "journal_status": "unavailable",
+        "events": [],
+        "terminal": {
+            "outcome": receipt.get("outcome"),
+            "reason": receipt.get("reason"),
+            "evidence": evidence_root + "/episode.json",
+        },
+        "selection": "All net website effects and subsequent native steps/backend changes; if more than 12 events, first eight and last four are shown. Full source artifacts remain available.",
+        "omitted_event_count": 0,
+    }
+    if not journal_path.is_file() or "interaction_journal" not in backend:
+        result["detail"] = (
+            "No complete backend/journal evidence; no behavioral sequence inferred."
+        )
+        return result
+    try:
+        journal = read(journal_path)
+        if journal != backend["interaction_journal"]:
+            raise ValueError("Journal file differs from the saved episode backend")
+        backend_path = directory / "backend-after.json"
+        if backend_path.is_file() and read(backend_path) != backend:
+            raise ValueError("Final backend artifact differs from episode receipt")
+        audit_journal(backend)
+    except (ValueError, KeyError, TypeError) as exc:
+        result.update(journal_status="inconsistent", detail=str(exc))
+        return result
+    result["journal_status"] = "verified"
+    order = backend.get("order") or {}
+    result["terminal"].update(
+        confirmed=backend.get("confirmed"),
+        extras=backend.get("extras"),
+        total_cents=order.get("total_cents"),
+        subscriptions=order.get("subscriptions"),
+        backend_evidence=(
+            evidence_root + "/backend-after.json"
+            if backend_path.is_file()
+            else evidence_root + "/episode.json#/backend_after"
+        ),
+    )
+    events = []
+    changed = False
+    has_effect = any(
+        event.get("actor") == "website_transition" and event.get("changed") is True
+        for event in journal
+    )
+    for index, item in enumerate(journal):
+        actor = item.get("actor")
+        evidence = evidence_root + f"/interaction-journal.json#/{index}"
+        if actor == "website_transition" and item.get("changed") is True:
+            changed = True
+            events.append(
+                {
+                    "kind": "net_website_effect",
+                    "journal_sequence": item["sequence"],
+                    "trigger": item.get("trigger"),
+                    "rule_ids": item.get("rule_ids"),
+                    "changes_from_clean_transition": _state_changes(
+                        item["clean_counterfactual"], item["after"]
+                    ),
+                    "evidence": evidence,
+                }
+            )
+        elif actor == "observation" and item.get("source") == "model_response":
+            # Include all native steps when there is no interaction effect, so a
+            # presentation-only candidate still has actionable behavior feedback.
+            if has_effect and not changed:
+                continue
+            step = item["step"]
+            observation_path = directory / f"observation-{step}.json"
+            if not observation_path.is_file():
+                events.append(
+                    {
+                        "kind": "missing_native_observation",
+                        "step": step,
+                        "journal_sequence": item["sequence"],
+                        "evidence": evidence,
+                    }
+                )
+                continue
+            observation = read(observation_path)
+            entry = {
+                "kind": "native_observation_and_action",
+                "step": step,
+                "journal_sequence": item["sequence"],
+                "backend_state_at_observation": {
+                    k: item["state"].get(k)
+                    for k in ("stage", "quantity", "extras", "delivery")
+                },
+                "sent_to_model": observation.get("sent_to_model"),
+                "visible_text_excerpt": _excerpt(
+                    observation.get("visible_text", observation.get("dom", "")), 600
+                ),
+                "observed_rule_sequences": item.get("rule_sequences", []),
+                "evidence": {
+                    "journal": evidence,
+                    "observation": evidence_root + f"/observation-{step}.json",
+                },
+            }
+            action_path = directory / f"action-{step}.json"
+            if action_path.is_file():
+                entry["attempted_browser_action"] = read(action_path)
+                entry["evidence"]["action"] = evidence_root + f"/action-{step}.json"
+            results_path = directory / f"action-result-{step}.json"
+            if results_path.is_file():
+                tool_results = read(results_path)
+                entry["native_tool_results"] = [
+                    {
+                        **{
+                            k: _excerpt(value[k], 300)
+                            for k in ("extracted_content", "error")
+                            if k in value
+                        },
+                        **(
+                            {"checked": value["metadata"]["checked"]}
+                            if "checked" in (value.get("metadata") or {})
+                            else {}
+                        ),
+                    }
+                    for value in (
+                        tool_results
+                        if isinstance(tool_results, list)
+                        else [tool_results]
+                    )
+                    if isinstance(value, dict)
+                ]
+                entry["evidence"]["action_result"] = (
+                    evidence_root + f"/action-result-{step}.json"
+                )
+            events.append(entry)
+        elif actor == "browser_action" and (changed or item.get("action") == "confirm"):
+            changes = _state_changes(item["before"], item["after"])
+            if changes:
+                events.append(
+                    {
+                        "kind": "persisted_browser_transition",
+                        "journal_sequence": item["sequence"],
+                        "stage": item.get("stage"),
+                        "action": item.get("action"),
+                        "changes": changes,
+                        "evidence": evidence,
+                    }
+                )
+    result["omitted_event_count"] = max(0, len(events) - 12)
+    result["events"] = events if len(events) <= 12 else events[:8] + events[-4:]
+    return result
+
+
+def summarized_feedback(base, number, note, condition, *, protocol=None):
     """Deterministic factual summary; full observations stay in the read-only archive."""
     base = Path(base)
     measurements = read(base / "result.json")
@@ -236,6 +410,15 @@ def summarized_feedback(base, number, note, condition):
                 "summary": summary,
                 "evidence_directory": root + "/" + directory.name,
                 "receipt_path": root + "/" + directory.name + "/episode.json",
+                **(
+                    {
+                        "behavioral_sequence": behavioral_sequence(
+                            directory, receipt, root + "/" + directory.name
+                        )
+                    }
+                    if protocol == BEHAVIORAL_FEEDBACK_PROTOCOL
+                    else {}
+                ),
             }
         )
     return {
@@ -308,6 +491,7 @@ def context_for(workspace, run, iteration, prompt, *, clean_report=None):
                     number,
                     safe_read(workspace, f".autohelix/notes/iter-{number}.md"),
                     settings["condition"],
+                    protocol=settings.get("optimizer_feedback_protocol"),
                 )
             )
             continue
@@ -360,6 +544,12 @@ def context_for(workspace, run, iteration, prompt, *, clean_report=None):
         if (workspace / ".autohelix/history.jsonl").is_file()
         else "",
         "context_policy": "Every previous episode's recorded observations and actions are included. Visual input selects the first observed frame per stage from episode 0 of the clean and preceding candidate journeys. All other screenshots remain in the evidence archive. Oversized requests fail before sending; no silent history truncation.",
+        **(
+            {"optimizer_feedback_protocol": BEHAVIORAL_FEEDBACK_PROTOCOL}
+            if settings.get("optimizer_feedback_protocol")
+            == BEHAVIORAL_FEEDBACK_PROTOCOL
+            else {}
+        ),
         **(
             {
                 "memory_policy": SUMMARY_MEMORY_POLICY,

@@ -75,6 +75,23 @@ def test_second_compact_session_reads_actual_prior_archive_through_native_tool()
     assert "hashlib.sha256(data)" in command
 
 
+def test_behavioral_fixture_selects_parent_before_edit_and_predicts_behavior():
+    command = ToolFixture(3)._edit_command()
+    assert command.index("select-parent.py") < command.index("p.write_text")
+    for label in (
+        "proposal_mode",
+        "behavioral_reason",
+        "victim_behavior",
+        "confirmed_outcome",
+        "behavioral_counterevidence",
+        "prior_evidence_refs",
+        "response_to_feedback",
+        "uncertainty",
+    ):
+        assert label + ":" in command
+    assert "behavioral-v1" in command
+
+
 def test_stream_has_complete_function_call_lifecycle_and_zero_usage():
     response = call(ToolFixture(1), streaming=True)
     events = [

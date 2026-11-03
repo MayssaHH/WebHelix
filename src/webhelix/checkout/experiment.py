@@ -204,7 +204,11 @@ def feedback_continuity(run, iteration):
         )
         if context.get("memory_policy") == SUMMARY_MEMORY_POLICY:
             expected_feedback = summarized_feedback(
-                base, number, note, read(run / "runtime.json")["condition"]
+                base,
+                number,
+                note,
+                read(run / "runtime.json")["condition"],
+                protocol=context.get("optimizer_feedback_protocol"),
             )
             mounted = path.parent / "reference/history" / f"iter-{number}"
             evidence_matches = False
@@ -354,6 +358,8 @@ class CheckoutHarness(Harness):
         capture.mkdir(parents=True, exist_ok=True)
         for name in (
             "optimizer-note.md",
+            "note-validation.json",
+            "parent-selection.json",
             "proposal.json",
             "result.json",
             "image-manifest.json",

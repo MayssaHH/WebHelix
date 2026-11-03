@@ -53,6 +53,7 @@ def prepare_discovery(root, *, scripted, env_file=None, spending_plan=None):
     settings.update(
         workflow="discovery-v1",
         memory_policy="summary-with-readonly-evidence-v1",
+        optimizer_feedback_protocol="behavioral-v1",
         baseline_episodes=1,
         browser_runtime=runtime_identity(),
         optimizer_backend="opencode",

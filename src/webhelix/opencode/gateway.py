@@ -130,6 +130,7 @@ class Gateway:
         host="127.0.0.1",
         transport=None,
         preview_callback=None,
+        parent_callback=None,
     ):
         self.run_dir, self.output_dir = Path(run_dir), Path(output_dir)
         self.settings = dict(settings)
@@ -144,10 +145,13 @@ class Gateway:
             preview_callback,
         )
         self.url = None
+        self.parent_callback = parent_callback
         self._server = self._thread = None
         self._lock, self._call_lock = threading.Lock(), threading.Lock()
         self._idle = threading.Condition(self._lock)
         self._preview_lock = threading.Lock()
+        self._parent_lock = threading.Lock()
+        self._parent_requests = 0
         self._active_handlers = 0
         self._clients = set()
         self._records, self._preview_count = [], 0
@@ -185,6 +189,7 @@ class Gateway:
                 "requests_received": len(records),
                 "requests_forwarded": forwarded,
                 "preview_calls": self._preview_count,
+                "parent_selection_requests": self._parent_requests,
                 "status_counts": dict(
                     Counter(r.get("status", "running") for r in records)
                 ),
@@ -272,6 +277,8 @@ class Gateway:
                 try:
                     if self.command == "POST" and self.path == "/preview":
                         gateway._preview(self)
+                    elif self.command == "POST" and self.path == "/parent":
+                        gateway._parent(self)
                     else:
                         gateway._request(self)
                 finally:
@@ -370,6 +377,64 @@ class Gateway:
         finally:
             if obtained:
                 self._preview_lock.release()
+
+    def _parent(self, handler):
+        """Select an allowlisted parent locally, with no provider request."""
+        obtained = self._parent_lock.acquire(blocking=False)
+        try:
+            if not obtained:
+                raise RequestRejected("Concurrent parent selections are not allowed")
+            body = self._body(handler, 256)
+            if (
+                not isinstance(body, dict)
+                or set(body) != {"selection"}
+                or type(body["selection"]) is not str
+            ):
+                raise RequestRejected(
+                    "Parent selection requires exactly one string identifier"
+                )
+            runtime = read(self.run_dir / "runtime.json")
+            if time.time() >= runtime["run_deadline_epoch"]:
+                raise BudgetBlocked(
+                    "Whole-run deadline reached before parent selection"
+                )
+            with self._lock:
+                if self._closed or self._halted:
+                    raise RequestRejected("Optimizer session is closed or halted")
+                if self.parent_callback is None:
+                    raise RequestRejected(
+                        "Parent selection is unavailable in this session"
+                    )
+                self._parent_requests += 1
+                number = self._parent_requests
+            try:
+                result = self.parent_callback(body["selection"])
+            except ValueError as exc:
+                raise RequestRejected(str(exc)) from exc
+            save(
+                self.output_dir / "parents" / f"request-{number}.json",
+                self._redact(result),
+            )
+            self._json(handler, 200, result)
+        except BudgetBlocked as exc:
+            with self._lock:
+                self._halted = "budget_blocked"
+            self._json(handler, 429, {"error": {"message": str(exc)}})
+        except RequestRejected as exc:
+            self._json(handler, 400, {"error": {"message": str(exc)}})
+        except Exception as exc:
+            self._json(
+                handler,
+                500,
+                {
+                    "error": {
+                        "message": f"Parent selection failed: {type(exc).__name__}: {exc}"
+                    }
+                },
+            )
+        finally:
+            if obtained:
+                self._parent_lock.release()
 
     def _request(self, handler):
         with self._lock:

@@ -15,7 +15,7 @@ from webhelix.opencode.backend import (
     launch_prompt,
 )
 from webhelix.opencode.config import OpenCodeSettings
-from webhelix.search.instructions import SEARCH_GOAL
+from webhelix.search.instructions import SEARCH_GOAL, BEHAVIORAL_NOTE_PROTOCOL
 
 
 @pytest.mark.parametrize(
@@ -62,6 +62,32 @@ def test_context_reads_fixed_evaluation_separately_from_task_and_candidate(tmp_p
     assert "EVALUATION.json" not in context["current_files"]
     config = yaml.safe_load((project / "autohelix.yaml").read_text())
     assert all(name.startswith("candidate/") for name in config["scope"]["editable"])
+
+
+def test_behavioral_protocol_requires_real_predictions_without_prescribing_mechanism():
+    context = {
+        "optimizer_feedback_protocol": BEHAVIORAL_NOTE_PROTOCOL,
+        "legitimate_task": {"request": "Reserve the requested appointment."},
+        "evaluation_contract": {
+            "optimizer_objective": "Measure violations of the requested time."
+        },
+        "prior_feedback": [{"iteration": 2}],
+    }
+    prompt = launch_prompt(context).split(CONTEXT_START)[0]
+    for phrase in (
+        "victim's observable response",
+        "behavioral counterevidence",
+        "deterministic preview",
+        "at least four",
+        "Do not reread the whole",
+        "Select your starting candidate once",
+        "not semantic truth",
+    ):
+        assert phrase in " ".join(prompt.split())
+    for phrase in ("membership", "shopper", "checkout", "purchase"):
+        assert phrase not in prompt.lower()
+    legacy = launch_prompt({}).split(CONTEXT_START)[0]
+    assert "behavioral-v1" not in legacy
 
 
 def test_large_prior_measurement_is_preserved_without_silent_truncation(tmp_path):
