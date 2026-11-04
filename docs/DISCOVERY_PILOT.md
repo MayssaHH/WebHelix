@@ -174,6 +174,40 @@ An example configuration is not permission to run paid work.
 Started episodes and failed calls remain counted. Reserved costs without reported
 usage are not erased. A ceiling can stop the run before both iterations finish.
 
+### Run-specific models and iteration count
+
+Discovery preparation accepts `--pilot-config` and `--optimizer-config` for both
+the `checkout discovery` and `archive discovery` commands. Use these to select
+models and bounded experiment settings without changing shared defaults or an
+existing run. The selected values are saved into the run's frozen settings;
+execution rejects configuration overrides.
+
+For three iterations, the pilot configuration must specify `iterations: 3`,
+`episodes_per_condition: 3`, `max_real_episodes: 10`, and
+`max_optimizer_calls: 60` when the optimizer configuration allows 20 requests per
+session. This schedules one fresh clean episode and up to nine candidate
+episodes. Invalid proposals or infrastructure failures can reduce the executed
+count; they are preserved in the evidence. `--iterations` can still reduce the
+count in the selected pilot configuration.
+
+The default action limit remains 24. A run-specific pilot may select up to 40
+actions, applied equally to its clean baseline and candidate episodes. This can
+allow more time for recovery after an interaction change. It changes the
+experiment's action budget, so compare against that run's fresh baseline rather
+than treating earlier 24-action results as interchangeable.
+
+The pilot's `victim` fields select the Browser-Use model. The optimizer file
+selects the independent OpenCode model, reasoning and context/request limits.
+The spending plan must match both exact model IDs and verified rates/context
+bounds. Model metadata access alone does not prove successful multimodal,
+structured-output generation; inspect the fresh clean episode before search.
+
+For a new independent experiment, preserve and reference previous terminal
+ledgers for cumulative reporting while recording the new experiment's own
+authorized episode/request allowance. Do not copy an old ledger into a new
+schedule unchanged: historical starts and requests would consume that schedule's
+caps. Existing reservations or unknown usage must never be erased.
+
 ## Inspect the result
 
 Start with `status.json`, `clean.json`, `history.json`, `budget.json` and `index.html`.

@@ -195,6 +195,16 @@ def main(argv=None):
             p.add_argument("--env-file", type=Path)
             p.add_argument("--spending-plan", type=Path)
             p.add_argument(
+                "--pilot-config",
+                type=Path,
+                help="Trusted run settings to freeze during preparation",
+            )
+            p.add_argument(
+                "--optimizer-config",
+                type=Path,
+                help="OpenCode model/session settings to freeze during preparation",
+            )
+            p.add_argument(
                 "--iterations",
                 type=int,
                 help="Prepare fewer optimizer iterations, preserving the total episode cap",
@@ -238,6 +248,8 @@ def main(argv=None):
                     spending_plan=args.spending_plan,
                     archive_root=args.archive_root,
                     iteration_limit=args.iterations,
+                    pilot_config=args.pilot_config,
+                    optimizer_config=args.optimizer_config,
                 )
             )
         else:
@@ -248,6 +260,8 @@ def main(argv=None):
                 or args.env_file
                 or args.spending_plan
                 or args.iterations is not None
+                or args.pilot_config
+                or args.optimizer_config
             ):
                 parser.error("Execution uses only the previously frozen run settings")
             settings = read(args.run_dir / "runtime.json")

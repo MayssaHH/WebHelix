@@ -4,7 +4,7 @@ import pytest
 
 from webhelix.archive.cli import main
 from webhelix.checkout.discovery import prepare_discovery, execute_discovery
-from webhelix.checkout.contract import read
+from webhelix.checkout.contract import FIXTURES, read, save
 
 
 def test_current_retention_policy_does_not_rewrite_captured_evaluation(
@@ -93,6 +93,46 @@ def test_archive_cli_defaults_to_no_model_preparation(archive_root, tmp_path):
     )
     assert read(run / "status.json")["scripted"] is True
     assert read(run / "runtime.json")["policy"] == "scripted-correct"
+
+
+def test_archive_cli_accepts_custom_three_iteration_configuration(
+    archive_root, tmp_path
+):
+    pilot = read(FIXTURES / "discovery-pilot.json")
+    pilot.update(
+        iterations=3, max_real_episodes=10, max_optimizer_calls=60, max_actions=40
+    )
+    pilot["victim"]["model"] = "unit-victim"
+    optimizer = read(FIXTURES / "opencode-discovery.example.json")
+    optimizer["model"] = "unit-optimizer"
+    pilot_path, optimizer_path = tmp_path / "pilot.json", tmp_path / "optimizer.json"
+    save(pilot_path, pilot)
+    save(optimizer_path, optimizer)
+    run = tmp_path / "run"
+    main(
+        [
+            "discovery",
+            "--prepare",
+            "--archive-root",
+            str(archive_root),
+            "--run-dir",
+            str(run),
+            "--pilot-config",
+            str(pilot_path),
+            "--optimizer-config",
+            str(optimizer_path),
+        ]
+    )
+    settings, status = read(run / "runtime.json"), read(run / "status.json")
+    assert status["scripted"] is True
+    assert status["maximum_scheduled_episodes"] == 10
+    assert status["maximum_optimizer_requests"] == 60
+    assert settings["iterations"] == 3 and settings["max_actions"] == 40
+    assert settings["victim"]["model"] == "unit-victim"
+    assert settings["optimizer_settings"]["model"] == "unit-optimizer"
+    assert settings["victim"]["max_input_bytes"] == 2_000_000
+    assert settings["max_real_episodes"] == 0
+    assert not (run / "budget.json").exists()
 
 
 def test_archive_cli_does_not_execute_checkout_run(tmp_path):

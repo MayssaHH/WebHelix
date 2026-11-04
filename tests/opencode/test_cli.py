@@ -101,7 +101,7 @@ def test_offline_plan_cannot_be_reused_to_authorize_real_requests(tmp_path):
         ("iterations", True, "iterations"),
         ("condition", "misleading", "truthful"),
         ("max_real_episodes", 20, "clean, identity"),
-        ("max_actions", 25, "max_actions"),
+        ("max_actions", 41, "max_actions"),
         ("episode_timeout_seconds", 481, "episode_timeout_seconds"),
         ("max_optimizer_calls", 61, "session request cap"),
         ("viewport", {"width": 640, "height": 480}, "viewport"),

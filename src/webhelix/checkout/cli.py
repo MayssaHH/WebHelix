@@ -27,7 +27,7 @@ def _pilot_settings(path, *, scripted, clean_smoke=False):
         "iterations": 10,
         "max_optimizer_calls": 200,
         "max_real_episodes": 36,
-        "max_actions": 24,
+        "max_actions": 40,
         "episode_timeout_seconds": 480,
         "worker_grace_seconds": 30,
         "run_timeout_seconds": 7200,

@@ -70,6 +70,8 @@ def prepare_discovery(
     spending_plan=None,
     archive_root=None,
     iteration_limit=None,
+    pilot_config=None,
+    optimizer_config=None,
 ):
     """Prepare a reviewable experiment without a browser or provider request."""
     root = Path(root).resolve()
@@ -77,9 +79,13 @@ def prepare_discovery(
         raise ValueError(
             "Choose a fresh discovery directory; existing evidence is preserved"
         )
-    optimizer = OpenCodeSettings.load(FIXTURES / "opencode-discovery.example.json")
+    optimizer = OpenCodeSettings.load(
+        optimizer_config or FIXTURES / "opencode-discovery.example.json"
+    )
     settings = _pilot_settings(
-        FIXTURES / "discovery-pilot.json", scripted=scripted, clean_smoke=True
+        pilot_config or FIXTURES / "discovery-pilot.json",
+        scripted=scripted,
+        clean_smoke=True,
     )
     scheduled = 1 + settings["iterations"] * settings["episodes_per_condition"]
     optimizer_requests = settings["iterations"] * optimizer.max_requests_per_session
@@ -428,6 +434,16 @@ def main(argv=None):
     )
     parser.add_argument("--env-file", type=Path)
     parser.add_argument("--spending-plan", type=Path)
+    parser.add_argument(
+        "--pilot-config",
+        type=Path,
+        help="Trusted run settings to freeze during preparation",
+    )
+    parser.add_argument(
+        "--optimizer-config",
+        type=Path,
+        help="OpenCode model/session settings to freeze during preparation",
+    )
     args = parser.parse_args(argv)
     if args.baseline_only and not args.execute:
         parser.error("--baseline-only requires --execute")
@@ -438,9 +454,19 @@ def main(argv=None):
                 scripted=args.scripted,
                 env_file=args.env_file,
                 spending_plan=args.spending_plan,
+                pilot_config=args.pilot_config,
+                optimizer_config=args.optimizer_config,
             )
         )
     else:
+        if (
+            args.scripted
+            or args.env_file
+            or args.spending_plan
+            or args.pilot_config
+            or args.optimizer_config
+        ):
+            parser.error("Execution uses only the previously frozen run settings")
         status = execute_discovery(args.run_dir, baseline_only=args.baseline_only)
         print({k: v for k, v in status.items() if k != "source_hashes"})
 

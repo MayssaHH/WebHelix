@@ -3,7 +3,7 @@ import time
 import pytest
 
 from webhelix.checkout.discovery import prepare_discovery, execute_discovery
-from webhelix.checkout.contract import initial_files, fingerprint, read, save
+from webhelix.checkout.contract import FIXTURES, initial_files, fingerprint, read, save
 from webhelix.checkout.evaluate import evaluate
 from webhelix.search.budget import Budget, BudgetBlocked
 from webhelix.intervention import describe_changes
@@ -55,6 +55,7 @@ def test_single_search_configuration_has_no_identity_or_arm(tmp_path):
     assert settings["optimizer_settings"]["model"] == "gpt-5.4-mini-2026-03-17"
     assert settings["optimizer_settings"]["context_window_tokens"] == 400000
     assert settings["victim"]["model"] == "gpt-6.1-sol"
+    assert settings["max_actions"] == 24
     assert settings["memory_policy"] == "summary-with-readonly-evidence-v1"
     assert settings["optimizer_feedback_protocol"] == "behavioral-v1"
     assert settings["measurement_protocol"] == "artifact-outcome-v1"
@@ -63,6 +64,159 @@ def test_single_search_configuration_has_no_identity_or_arm(tmp_path):
     assert fingerprint(initial_files("combined")) == fingerprint(
         {p.name: p.read_text() for p in (run / "reference/candidate").iterdir()}
     )
+
+
+def custom_discovery_configs(tmp_path):
+    pilot = read(FIXTURES / "discovery-pilot.json")
+    pilot.update(
+        iterations=3, max_real_episodes=10, max_optimizer_calls=24, max_actions=40
+    )
+    pilot["victim"].update(model="unit-victim", reasoning_effort="low")
+    optimizer = read(FIXTURES / "opencode-discovery.example.json")
+    optimizer.update(
+        model="unit-optimizer",
+        reasoning_effort="high",
+        max_requests_per_session=8,
+        context_window_tokens=200_000,
+    )
+    pilot_path, optimizer_path = tmp_path / "pilot.json", tmp_path / "optimizer.json"
+    save(pilot_path, pilot)
+    save(optimizer_path, optimizer)
+    return pilot_path, optimizer_path
+
+
+def test_custom_three_iteration_live_preparation_freezes_model_and_session_settings(
+    tmp_path,
+):
+    pilot, optimizer = custom_discovery_configs(tmp_path)
+    private = tmp_path / "private.env"
+    private.write_text("WEBHELIX_API_KEY=unit-test-not-a-real-key\n")
+    run = prepare_discovery(
+        tmp_path / "run",
+        scripted=False,
+        env_file=private,
+        pilot_config=pilot,
+        optimizer_config=optimizer,
+    )
+    settings, status = read(run / "runtime.json"), read(run / "status.json")
+    assert settings["iterations"] == status["maximum_optimizer_sessions"] == 3
+    assert settings["max_real_episodes"] == status["maximum_scheduled_episodes"] == 10
+    assert settings["max_optimizer_calls"] == status["maximum_optimizer_requests"] == 24
+    assert settings["max_actions"] == 40
+    assert settings["victim"]["model"] == "unit-victim"
+    assert settings["victim"]["reasoning_effort"] == "low"
+    assert settings["optimizer_settings"] == read(optimizer)
+    assert read(run / "optimizer-settings.json") == read(optimizer)
+    assert not (run / "budget.json").exists() and not (run / "batches").exists()
+
+
+def test_custom_config_files_are_not_reread_during_execution(tmp_path, monkeypatch):
+    from webhelix.checkout.discovery import main
+
+    pilot, optimizer = custom_discovery_configs(tmp_path)
+    run = tmp_path / "run"
+    main(
+        [
+            "--prepare",
+            "--scripted",
+            "--run-dir",
+            str(run),
+            "--pilot-config",
+            str(pilot),
+            "--optimizer-config",
+            str(optimizer),
+        ]
+    )
+    frozen = read(run / "runtime.json")
+    pilot.unlink()
+    optimizer.unlink()
+    seen = []
+
+    def clean(candidate, root, policy, episodes, label, *, purpose):
+        seen.append(read(root / "runtime.json"))
+        return successful_clean(root)
+
+    monkeypatch.setattr("webhelix.checkout.discovery.evaluate", clean)
+    monkeypatch.setattr(
+        "webhelix.checkout.discovery.DockerRuntime.preflight",
+        lambda: pytest.fail("Baseline must not launch Docker"),
+    )
+    result = execute_discovery(run, baseline_only=True)
+    assert result["status"] == "baseline_completed"
+    assert seen[0]["victim"] == frozen["victim"]
+    assert seen[0]["optimizer_settings"] == frozen["optimizer_settings"]
+    assert seen[0]["iterations"] == 3 and seen[0]["max_actions"] == 40
+
+
+@pytest.mark.parametrize(
+    "field,value",
+    [
+        ("max_real_episodes", 11),
+        ("max_optimizer_calls", 25),
+        ("episodes_per_condition", 1),
+        ("max_actions", 41),
+        ("max_actions", 0),
+        ("max_actions", True),
+    ],
+)
+def test_custom_pilot_does_not_bypass_schedule_or_action_bounds(tmp_path, field, value):
+    pilot, optimizer = custom_discovery_configs(tmp_path)
+    settings = read(pilot)
+    settings[field] = value
+    save(pilot, settings)
+    run = tmp_path / "run"
+    with pytest.raises(ValueError):
+        prepare_discovery(
+            run, scripted=True, pilot_config=pilot, optimizer_config=optimizer
+        )
+    assert not run.exists()
+
+
+def test_invalid_custom_optimizer_is_rejected_before_preparation(tmp_path):
+    pilot, optimizer = custom_discovery_configs(tmp_path)
+    settings = read(optimizer)
+    settings["max_requests_per_session"] = 21
+    save(optimizer, settings)
+    with pytest.raises(ValueError, match="max_requests_per_session"):
+        prepare_discovery(
+            tmp_path / "run",
+            scripted=True,
+            pilot_config=pilot,
+            optimizer_config=optimizer,
+        )
+    assert not (tmp_path / "run").exists()
+
+
+@pytest.mark.parametrize("entrypoint", ["checkout", "archive"])
+@pytest.mark.parametrize(
+    "flag",
+    [
+        "--pilot-config",
+        "--optimizer-config",
+        "--env-file",
+        "--spending-plan",
+        "--scripted",
+    ],
+)
+def test_discovery_execution_rejects_prepare_overrides(
+    tmp_path, monkeypatch, capsys, entrypoint, flag
+):
+    from webhelix.archive.cli import main as archive_main
+    from webhelix.checkout.discovery import main as checkout_main
+
+    monkeypatch.setattr(
+        "webhelix.checkout.discovery.execute_discovery",
+        lambda *a, **kw: pytest.fail("Execution override was silently ignored"),
+    )
+    args = ["--execute", "--run-dir", str(tmp_path / "missing"), flag]
+    if flag != "--scripted":
+        args.append(str(tmp_path / "unused.json"))
+    with pytest.raises(SystemExit) as exc:
+        (archive_main if entrypoint == "archive" else checkout_main)(
+            (["discovery"] if entrypoint == "archive" else []) + args
+        )
+    assert exc.value.code == 2
+    assert "previously frozen run settings" in capsys.readouterr().err
 
 
 def test_failed_clean_smoke_stops_before_optimizer(tmp_path, monkeypatch):
