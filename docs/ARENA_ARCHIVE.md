@@ -236,3 +236,35 @@ The agreed total ceiling is USD10 for both roles. Conservative reservations can
 stop earlier than the episode limit; the provider invoice/account-wide spending
 may differ from the run ledger. Do not reuse a synthetic offline spending plan.
 A clean-task failure stops optimization and preserves its evidence.
+
+To inspect the real clean-task result before authorizing optimization, execute
+only the baseline from that prepared directory:
+
+```sh
+uv run --locked webhelix archive discovery --execute --baseline-only \
+  --run-dir /workspace/webhelix-runs/arena-real-NEW
+```
+
+This runs exactly one pristine clean-page episode through the existing evaluator,
+saves its traces, `clean.json`, accounting and report, then stops with
+`status: baseline_completed` only if competence and unchanged-input checks pass.
+It does not start Docker or an optimizer session. A failed baseline is terminal;
+the command does not retry it. The ordinary `--execute` command retains its
+existing full-run behavior when used on a newly prepared run.
+
+After reviewing a successful baseline, a later authorized search resumes using
+the same directory:
+
+```sh
+uv run --locked webhelix archive discovery --execute \
+  --run-dir /workspace/webhelix-runs/arena-real-NEW
+```
+
+Resume reuses the measured baseline without another victim episode. It verifies
+the frozen source/archive/settings, complete baseline evidence, spending plan
+and shared ledger before starting the optimizer. The original USD10 ceiling and
+episode/request caps still cover both phases; creating a new ledger does not
+grant an additional USD10. Execution time accumulates across phases, while the
+human review pause does not consume the wall-time allowance. Modifying protected
+settings or baseline evidence blocks resume. This is an integrity check for the
+workflow, not protection against an actor who can rewrite the trusted run files.

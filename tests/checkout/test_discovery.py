@@ -107,7 +107,10 @@ def test_live_context_accounting_must_match_optimizer_metadata(tmp_path, monkeyp
     run = prepare_discovery(tmp_path / "run", scripted=False, env_file=secret)
     plan = read(run / "spending-plan.json")
     plan.update(authorized_usd=10, verified_on="test")
-    for role, model in (("optimizer", "gpt-5.4-mini-2026-03-17"), ("victim", "gpt-6.1-sol")):
+    for role, model in (
+        ("optimizer", "gpt-5.4-mini-2026-03-17"),
+        ("victim", "gpt-6.1-sol"),
+    ):
         plan["roles"][role].update(
             model=model,
             input_usd_per_million=1,
@@ -200,3 +203,193 @@ def test_all_arms_share_one_financial_reservation_and_episode_cap(tmp_path):
     ledger = read(root / "budget.json")
     assert len(ledger["calls"]) == 1 and len(ledger["episodes"]) == 2
     assert ledger["episodes"][0]["group"] != ledger["episodes"][1]["group"]
+
+
+def successful_clean(root, *, clock=None):
+    """Saved evaluator output, with no browser or provider involved."""
+    batch = root / "batches/clean-fixture"
+    result = {
+        "batch": str(batch),
+        "metrics": {
+            "evaluation_ok": True,
+            "legitimate_success_rate": 1,
+            "changed_input_episodes": 0,
+            "steering_rate": 0,
+            "core_completion_rate": 1,
+        },
+    }
+    save(root / "clean-smoke-attempt.json", {"purpose": "clean_smoke"})
+    save(batch / "report.json", result)
+    save(batch / "episode-0/episode.json", {"outcome": "legitimate_success"})
+    save(root / "budget.json", {"episodes": [{"label": "clean"}], "calls": []})
+    if clock is not None:
+        clock[0] += 5
+    return result
+
+
+def test_baseline_only_stops_without_docker_or_optimizer(tmp_path, monkeypatch):
+    run = prepare_discovery(tmp_path / "run", scripted=True)
+    calls = []
+
+    def clean(candidate, root, policy, episodes, label, *, purpose):
+        calls.append((candidate, root, policy, episodes, label, purpose))
+        return successful_clean(root)
+
+    monkeypatch.setattr("webhelix.checkout.discovery.evaluate", clean)
+    for target in ("DockerRuntime.preflight", "prepare", "CheckoutOpenCodeBackend"):
+        monkeypatch.setattr(
+            "webhelix.checkout.discovery." + target,
+            lambda *a, **kw: pytest.fail("Baseline must not start optimizer or Docker"),
+        )
+    status = execute_discovery(run, baseline_only=True)
+    assert status["status"] == "baseline_completed"
+    assert status["attempted_iterations"] == 0
+    assert len(calls) == 1 and calls[0][3:] == (1, "clean", "clean_smoke")
+    assert status["baseline_evidence_hashes"]["budget.json"]
+    assert not (run / "project").exists()
+    with pytest.raises(ValueError, match="already attempted"):
+        execute_discovery(run, baseline_only=True)
+
+
+def test_resume_reuses_baseline_ledger_and_excludes_pause_time(tmp_path, monkeypatch):
+    from autohelix.history import IterationResult
+    from webhelix.checkout import discovery
+
+    clock = [1000.0]
+    monkeypatch.setattr(discovery.time, "time", lambda: clock[0])
+    run = prepare_discovery(tmp_path / "run", scripted=True)
+    calls = []
+    monkeypatch.setattr(
+        discovery,
+        "evaluate",
+        lambda *args, **kw: calls.append(args) or successful_clean(run, clock=clock),
+    )
+    first = execute_discovery(run, baseline_only=True)
+    assert first["elapsed_seconds"] == 5
+    old_ledger = read(run / "budget.json")
+    monkeypatch.setattr(
+        discovery, "evaluate", lambda *a, **kw: pytest.fail("Baseline repeated")
+    )
+    monkeypatch.setattr(discovery.DockerRuntime, "preflight", lambda: {})
+
+    def project(root, model):
+        folder = root / "project/candidate"
+        folder.mkdir(parents=True)
+        for path in (root / "reference/candidate").iterdir():
+            (folder / path.name).write_bytes(path.read_bytes())
+        return folder.parent
+
+    monkeypatch.setattr(discovery, "prepare", project)
+    monkeypatch.setattr(discovery, "CheckoutOpenCodeBackend", lambda *a, **kw: object())
+    monkeypatch.setattr(discovery, "feedback_continuity", lambda *a: {"passed": True})
+
+    class Harness:
+        def __init__(self, project, root):
+            self.rows = []
+            self.history = self
+
+        def append(self, row):
+            self.rows.append(row)
+
+        def load(self):
+            return self.rows
+
+        def run(self, max_iterations):
+            assert read(run / "budget.json") == old_ledger
+            runtime = read(run / "runtime.json")
+            assert runtime["run_deadline_epoch"] == clock[0] + 7195
+            assert runtime["max_optimizer_calls"] == 40
+            budget = Budget(run, runtime)
+            call = budget.reserve(
+                "optimizer", runtime["optimizer_settings"]["model"], 10
+            )
+            budget.settle(call, {"input_tokens": 0, "output_tokens": 0})
+            for i in range(1, max_iterations + 1):
+                self.rows.append(
+                    IterationResult(iteration=i, accepted=False, metrics={})
+                )
+                save(
+                    run / f"feedback/iter-{i}/result.json",
+                    {
+                        "iteration": i,
+                        "accepted": False,
+                        "metrics": {"evaluation_ok": True},
+                    },
+                )
+            clock[0] += 7
+
+    monkeypatch.setattr(discovery, "CheckoutHarness", Harness)
+    clock[0] = 10000.0  # The human review pause does not consume execution time.
+    result = execute_discovery(run)
+    assert result["status"] == "completed"
+    assert result["elapsed_seconds"] == 12
+    assert len(calls) == 1
+    ledger = read(run / "budget.json")
+    assert ledger["episodes"] == old_ledger["episodes"]
+    assert len(ledger["calls"]) == 1 and ledger["calls"][0]["role"] == "optimizer"
+    assert result["real_episode_starts"] == 1
+    with pytest.raises(ValueError, match="already attempted"):
+        execute_discovery(run)
+
+
+@pytest.mark.parametrize(
+    "target",
+    ["receipt", "trace", "ledger", "plan", "candidate", "settings", "deadline"],
+)
+def test_resume_refuses_tampered_baseline_or_settings(tmp_path, monkeypatch, target):
+    from webhelix.checkout import discovery
+
+    run = prepare_discovery(tmp_path / "run", scripted=True)
+    monkeypatch.setattr(discovery, "evaluate", lambda *a, **kw: successful_clean(run))
+    execute_discovery(run, baseline_only=True)
+    if target == "receipt":
+        clean = read(run / "clean.json")
+        clean["metrics"]["steering_rate"] = 1
+        save(run / "clean.json", clean)
+    elif target == "trace":
+        save(
+            run / "batches/clean-fixture/episode-0/episode.json",
+            {"outcome": "invented"},
+        )
+    elif target == "ledger":
+        save(run / "budget.json", {"episodes": [], "calls": []})
+    elif target == "plan":
+        plan = read(run / "spending-plan.json")
+        plan["authorized_usd"] = 100
+        save(run / "spending-plan.json", plan)
+    elif target == "candidate":
+        (run / "reference/candidate/style.css").write_text("body{display:none}")
+    else:
+        settings = read(run / "runtime.json")
+        settings["max_actions" if target == "settings" else "run_deadline_epoch"] += 1
+        save(run / "runtime.json", settings)
+    monkeypatch.setattr(
+        discovery.DockerRuntime,
+        "preflight",
+        lambda: pytest.fail("Tamper reached Docker"),
+    )
+    monkeypatch.setattr(
+        discovery, "evaluate", lambda *a, **kw: pytest.fail("New baseline")
+    )
+    with pytest.raises(ValueError, match="changed"):
+        execute_discovery(run)
+    assert read(run / "status.json")["status"] == "baseline_completed"
+
+
+def test_failed_baseline_only_cannot_resume(tmp_path, monkeypatch):
+    from webhelix.checkout import discovery
+
+    run = prepare_discovery(tmp_path / "run", scripted=True)
+    monkeypatch.setattr(
+        discovery,
+        "evaluate",
+        lambda *a, **kw: {"metrics": {"evaluation_ok": False}},
+    )
+    monkeypatch.setattr(
+        discovery.DockerRuntime, "preflight", lambda: pytest.fail("Unexpected Docker")
+    )
+    with pytest.raises(RuntimeError, match="Clean smoke check failed"):
+        execute_discovery(run, baseline_only=True)
+    assert read(run / "status.json")["status"] == "stopped"
+    with pytest.raises(ValueError, match="already attempted"):
+        execute_discovery(run)

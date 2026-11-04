@@ -81,3 +81,29 @@ def test_real_preparation_never_infers_offline_accounting_as_authorization(
             env_file=key,
             spending_plan=plan,
         )
+
+
+def test_archive_cli_baseline_only_dispatch_and_prepare_rejection(
+    archive_root, tmp_path, monkeypatch
+):
+    run = prepare_discovery(tmp_path / "run", scripted=True, archive_root=archive_root)
+    calls = []
+    monkeypatch.setattr(
+        "webhelix.checkout.discovery.execute_discovery",
+        lambda root, **kw: calls.append((root, kw)) or {"status": "baseline_completed"},
+    )
+    main(["discovery", "--execute", "--baseline-only", "--run-dir", str(run)])
+    assert calls == [(run, {"baseline_only": True})]
+    with pytest.raises(SystemExit):
+        main(
+            [
+                "discovery",
+                "--prepare",
+                "--baseline-only",
+                "--run-dir",
+                str(tmp_path / "other"),
+                "--archive-root",
+                str(archive_root),
+            ]
+        )
+    assert not (tmp_path / "other").exists()

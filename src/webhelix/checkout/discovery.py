@@ -29,6 +29,38 @@ def _hash(value):
     return hashlib.sha256(json.dumps(value, sort_keys=True).encode()).hexdigest()
 
 
+def _runtime_hash(settings):
+    """Only the execution-owned deadline may change between launch phases."""
+    return _hash({**settings, "run_deadline_epoch": None})
+
+
+def _baseline_evidence(root, clean):
+    """Bind a resumable baseline to its complete evidence and shared ledger."""
+    batch = Path(clean["batch"])
+    if batch.is_symlink() or not batch.resolve().is_relative_to(root / "batches"):
+        raise ValueError("Baseline batch must remain inside the prepared run")
+    paths = [
+        root / "clean.json",
+        root / "clean-smoke-attempt.json",
+        root / "spending-plan.json",
+        batch / "report.json",
+        *batch.rglob("*"),
+        *(root / "reference/candidate").rglob("*"),
+    ]
+    if (root / "budget.json").exists():
+        paths.append(root / "budget.json")
+    hashes = {}
+    for path in paths:
+        if path.is_symlink():
+            raise ValueError("Baseline evidence must not contain symlinks")
+        if path.is_dir():
+            continue
+        hashes[str(path.relative_to(root))] = hashlib.sha256(
+            path.read_bytes()
+        ).hexdigest()
+    return hashes
+
+
 def prepare_discovery(
     root, *, scripted, env_file=None, spending_plan=None, archive_root=None
 ):
@@ -141,20 +173,25 @@ def prepare_discovery(
     return root
 
 
-def execute_discovery(root):
+def execute_discovery(root, baseline_only=False):
     """Serialize launch attempts so one prepared directory cannot spend twice."""
     root = Path(root).resolve()
     with lock(root / "execution.lock"):
-        return _execute_discovery(root)
+        return _execute_discovery(root, baseline_only=baseline_only)
 
 
-def _execute_discovery(root):
+def _execute_discovery(root, baseline_only=False):
     status, settings = read(root / "status.json"), read(root / "runtime.json")
-    if status["status"] != "prepared" or status.get("workflow") != "discovery-v1":
+    resuming = status["status"] == "baseline_completed" and not baseline_only
+    if (status["status"] != "prepared" and not resuming) or status.get(
+        "workflow"
+    ) != "discovery-v1":
         raise ValueError(
             "Discovery already attempted or wrong workflow; no automatic relaunch"
         )
-    if _hash(settings) != status["prepared_runtime_hash"]:
+    if _runtime_hash(settings) != status["prepared_runtime_hash"] or settings.get(
+        "run_deadline_epoch"
+    ) != (status.get("execution_deadline_epoch") if resuming else None):
         raise ValueError(
             "Runtime configuration changed since preparation; prepare a new discovery run"
         )
@@ -172,6 +209,13 @@ def _execute_discovery(root):
             != status["protected_environment_hashes"]
         ):
             raise ValueError("Protected archive changed since preparation")
+    clean = None
+    if resuming:
+        clean = read(root / "clean.json")
+        if _baseline_evidence(root, clean) != status.get("baseline_evidence_hashes"):
+            raise ValueError(
+                "Baseline evidence or shared budget changed; cannot resume"
+            )
     scripted = status["scripted"]
     if not scripted:
         plan = read(root / "spending-plan.json")
@@ -203,23 +247,34 @@ def _execute_discovery(root):
                 os.environ.pop("WEBHELIX_DOTENV_FILE", None)
             else:
                 os.environ["WEBHELIX_DOTENV_FILE"] = old_env
-    settings["run_deadline_epoch"] = time.time() + settings["run_timeout_seconds"]
+    elapsed_before = status.get("elapsed_seconds", 0) if resuming else 0
+    remaining = settings["run_timeout_seconds"] - elapsed_before
+    if remaining <= 0:
+        raise ValueError("Discovery active execution time budget exhausted")
+    session_started = time.time()
+    settings["run_deadline_epoch"] = session_started + remaining
     save(root / "runtime.json", settings)
-    status.update(status="running", started=time.time())
+    status.setdefault("started", session_started)
+    status.update(
+        status="running",
+        execution_deadline_epoch=settings["run_deadline_epoch"],
+    )
     save(root / "status.json", status)
     old_run = os.environ.get("WEBHELIX_CHECKOUT_RUN")
     harness = None
     try:
-        save(root / "opencode-runtime.json", DockerRuntime.preflight())
-        clean = evaluate(
-            root / "reference/candidate",
-            root,
-            settings["policy"],
-            1,
-            "clean",
-            purpose="clean_smoke",
-        )
-        save(root / "clean.json", clean)
+        if not baseline_only:
+            save(root / "opencode-runtime.json", DockerRuntime.preflight())
+        if clean is None:
+            clean = evaluate(
+                root / "reference/candidate",
+                root,
+                settings["policy"],
+                1,
+                "clean",
+                purpose="clean_smoke",
+            )
+            save(root / "clean.json", clean)
         metrics = clean["metrics"]
         if (
             not metrics["evaluation_ok"]
@@ -227,6 +282,15 @@ def _execute_discovery(root):
             or metrics["changed_input_episodes"] != 0
         ):
             raise RuntimeError("Clean smoke check failed; no optimizer session starts")
+        if baseline_only:
+            status.update(
+                status="baseline_completed",
+                attempted_iterations=0,
+                evaluated_iterations=[],
+                accepted_iterations=[],
+                baseline_evidence_hashes=_baseline_evidence(root, clean),
+            )
+            return status
         project = prepare(root, settings["optimizer_settings"]["model"])
         clean_rate = metrics["steering_rate"]
         save(
@@ -309,7 +373,7 @@ def _execute_discovery(root):
             else {"calls": [], "episodes": []}
         )
         status.update(
-            elapsed_seconds=time.time() - status["started"],
+            elapsed_seconds=elapsed_before + time.time() - session_started,
             real_episode_starts=len(ledger["episodes"]),
             accounted_usd=str(
                 sum((Decimal(c["accounted_usd"]) for c in ledger["calls"]), Decimal(0))
@@ -327,6 +391,11 @@ def main(argv=None):
     mode.add_argument("--prepare", action="store_true")
     mode.add_argument("--execute", action="store_true")
     parser.add_argument(
+        "--baseline-only",
+        action="store_true",
+        help="Execute only the one clean episode; later --execute resumes the same run",
+    )
+    parser.add_argument(
         "--scripted",
         action="store_true",
         help="Native harnesses with explicit model doubles; no upstream model calls",
@@ -334,6 +403,8 @@ def main(argv=None):
     parser.add_argument("--env-file", type=Path)
     parser.add_argument("--spending-plan", type=Path)
     args = parser.parse_args(argv)
+    if args.baseline_only and not args.execute:
+        parser.error("--baseline-only requires --execute")
     if args.prepare:
         print(
             prepare_discovery(
@@ -344,7 +415,7 @@ def main(argv=None):
             )
         )
     else:
-        status = execute_discovery(args.run_dir)
+        status = execute_discovery(args.run_dir, baseline_only=args.baseline_only)
         print({k: v for k, v in status.items() if k != "source_hashes"})
 
 

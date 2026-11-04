@@ -171,6 +171,11 @@ def main(argv=None):
             mode = p.add_mutually_exclusive_group(required=True)
             mode.add_argument("--prepare", action="store_true")
             mode.add_argument("--execute", action="store_true")
+            p.add_argument(
+                "--baseline-only",
+                action="store_true",
+                help="Execute only the clean episode; later --execute resumes this run",
+            )
             policy = p.add_mutually_exclusive_group()
             policy.add_argument(
                 "--scripted", action="store_true", help="Default: offline model doubles"
@@ -209,6 +214,8 @@ def main(argv=None):
         from webhelix.checkout.discovery import prepare_discovery, execute_discovery
 
         if args.prepare:
+            if args.baseline_only:
+                parser.error("--baseline-only requires --execute")
             if not args.archive_root:
                 parser.error("--prepare requires --archive-root")
             print(
@@ -232,7 +239,7 @@ def main(argv=None):
             settings = read(args.run_dir / "runtime.json")
             if settings.get("environment") != "arena-archive":
                 parser.error("This is not a prepared Arena archive run")
-            result = execute_discovery(args.run_dir)
+            result = execute_discovery(args.run_dir, baseline_only=args.baseline_only)
             print(
                 json.dumps(
                     {k: v for k, v in result.items() if k != "source_hashes"}, indent=2
