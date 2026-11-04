@@ -247,9 +247,12 @@ save byte-count diagnostics; they are never silently truncated.
 
 For a subsequently resumed real test, prepare a fresh run with `--real`,
 `--env-file` and a verified `--spending-plan`. Preparation makes no model calls.
-The agreed total ceiling is USD10 for both roles. Conservative reservations can
-stop earlier than the episode limit; the provider invoice/account-wide spending
-may differ from the run ledger. Do not reuse a synthetic offline spending plan.
+The initial experiment used a USD10 combined ceiling. The user subsequently
+removed that ceiling for the saved-candidate continuation. New runs must record
+their own authorization; see [financial authorization](DISCOVERY_PILOT.md#financial-authorization)
+for capped and explicitly uncapped modes. Conservative reservations can stop a
+capped run earlier than the episode limit; provider billing may differ from the
+run ledger. Do not reuse a synthetic offline spending plan.
 A clean-task failure stops optimization and preserves its evidence.
 
 To inspect the real clean-task result before authorizing optimization, execute
@@ -277,9 +280,9 @@ uv run --locked webhelix archive discovery --execute \
 
 Resume reuses the measured baseline without another victim episode. It verifies
 the frozen source/archive/settings, complete baseline evidence, spending plan
-and shared ledger before starting the optimizer. The original USD10 ceiling and
+and shared ledger before starting the optimizer. The prepared financial mode and
 episode/request caps still cover both phases; creating a new ledger does not
-grant an additional USD10. Execution time accumulates across phases, while the
+renew an allowance or discard previous usage. Execution time accumulates across phases, while the
 human review pause does not consume the wall-time allowance. Modifying protected
 settings or baseline evidence blocks resume. This is an integrity check for the
 workflow, not protection against an actor who can rewrite the trusted run files.

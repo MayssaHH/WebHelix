@@ -46,6 +46,9 @@ then its scripted controls and discovery runner. Scripted discovery is the defau
 it exercises native OpenCode and Browser-Use with explicit local model doubles.
 The [verified Arena replay](examples/arena-archive/README.md) records the faithful
 interface checks, all 11 controls, and two completed offline optimization iterations.
+The [real Arena proposal and continuation](examples/arena-archive/artifact-outcome-real-20261105/README.md)
+records the subsequent model-generated interaction change, the original budget
+stop, and evaluation after the user explicitly removed the dollar ceiling.
 
 ## Start with the checkout
 
@@ -175,7 +178,10 @@ Checkout model settings are explicit JSON configuration:
   defines the current two-iteration, at-most-seven-episode pilot.
 - [spending-plan.example.json](experiments/checkout/spending-plan.example.json)
   contains placeholders for an explicitly authorized combined spending ceiling
-  and verified pricing/context bounds. Its null amount blocks paid execution.
+  and verified pricing/context bounds. Its default null amount blocks paid execution.
+  An explicitly authorized experiment may instead disable the dollar ceiling;
+  [the accounting guide](docs/DISCOVERY_PILOT.md#financial-authorization) explains
+  the required fields and the request/episode/time limits that remain enforced.
 
 The optimizer requests the pinned `gpt-5.4-mini-2026-03-17` snapshot; the Browser-Use victim retains
 `gpt-6.1-sol`. Both use medium reasoning and separate conversations. The

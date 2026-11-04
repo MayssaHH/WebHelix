@@ -132,11 +132,34 @@ uv run --locked webhelix checkout discovery --execute \
   --run-dir ../webhelix-runs/discovery-real-NEW
 ```
 
-Preparation makes no model or browser calls. A null spending ceiling blocks live
-execution before browser/model work. A new explicit authorization and verified
+Preparation makes no model or browser calls. A default null spending ceiling blocks live
+execution before browser/model work. Explicit authorization and verified
 pricing/context bounds are required; historical allowances and unresolved holds
 are not silently renewed or discarded. The ledger covers both roles. Local token
 accounting is conservative accounting, not a provider invoice or account-wide cap.
+
+### Financial authorization
+
+The default mode requires a positive `authorized_usd` amount. An experiment whose
+user explicitly removes the dollar ceiling can instead set these fields in its
+local spending plan, alongside the existing verified model rates and context bounds:
+
+```json
+{
+  "authorized_usd": null,
+  "usd_ceiling_disabled": true,
+  "authorization": "Record the user's explicit authorization and its scope here."
+}
+```
+
+The flag must be the Boolean `true`, the amount must be null, and the authorization
+must be nonempty. A null amount alone remains unauthorized. This mode bypasses
+only the dollar reservation rejection. Episode counts, optimizer/victim request
+counts, action/output limits and deadlines still apply. Requests still reserve
+their verified worst-case cost, then settle to reported usage; unknown usage
+keeps its reservation. This setting does not change provider billing or account
+limits. Preserve earlier calls and reservations when continuing an experiment.
+An example configuration is not permission to run paid work.
 
 | Limit | Pilot setting |
 | --- | ---: |
