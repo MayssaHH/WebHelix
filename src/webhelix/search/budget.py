@@ -15,9 +15,26 @@ class BudgetBlocked(RuntimeError):
 def validate_plan(plan, models):
     """Validate both roles before a browser reset or generation request."""
     try:
-        amount = Decimal(str(plan.get("authorized_usd")))
-        if not amount.is_finite() or amount <= 0 or not plan.get("verified_on"):
+        if not isinstance(plan, dict) or not plan.get("verified_on"):
             raise ValueError
+        uncapped = plan.get("usd_ceiling_disabled", False)
+        if type(uncapped) is not bool:
+            raise ValueError
+        if uncapped:
+            # A missing/default amount is not permission to spend without a cap.
+            # Require a deliberate, unambiguous mode and an authorization record.
+            authorization = plan.get("authorization")
+            if (
+                "authorized_usd" not in plan
+                or plan["authorized_usd"] is not None
+                or not isinstance(authorization, str)
+                or not authorization.strip()
+            ):
+                raise ValueError
+        else:
+            amount = Decimal(str(plan.get("authorized_usd")))
+            if not amount.is_finite() or amount <= 0:
+                raise ValueError
         for role, model in models.items():
             spec = plan["roles"][role]
             if (
@@ -35,7 +52,8 @@ def validate_plan(plan, models):
                 raise ValueError
     except (InvalidOperation, ValueError, KeyError, TypeError) as exc:
         raise BudgetBlocked(
-            "Paid calls require a positive authorized amount and verified pricing/context bounds "
+            "Paid calls require a positive authorized amount or explicit no-ceiling authorization, "
+            "and verified pricing/context bounds "
             "for each exact model; fill spending-plan.example.json first"
         ) from exc
 
@@ -126,7 +144,9 @@ class Budget:
             if len(roles) >= maximum:
                 raise BudgetBlocked(role + " request limit reached")
             charged = sum(Decimal(c["accounted_usd"]) for c in data["calls"])
-            if charged + worst > Decimal(str(plan["authorized_usd"])):
+            if not plan.get(
+                "usd_ceiling_disabled", False
+            ) and charged + worst > Decimal(str(plan["authorized_usd"])):
                 raise BudgetBlocked(
                     "Insufficient remaining budget for conservative request reservation"
                 )
