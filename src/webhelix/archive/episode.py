@@ -211,18 +211,38 @@ async def replay_state(page, site):
             await asyncio.sleep(0.05)
 
 
-async def settle_source_ui(page):
+async def settle_source_ui(page, *, timeout=3.5):
     """Wait for finite original transitions; do not disable merchant animation."""
-    await page.evaluate("""async()=>{
-      const finite=document.getAnimations().filter(a=>{
+    await page.evaluate(
+        """async(timeoutMs)=>{
+      const deadline=performance.now()+timeoutMs;
+      const finite=()=>document.getAnimations().filter(a=>{
         const t=a.effect?.getTiming();
-        return a.playState==='running'&&t&&Number.isFinite(t.iterations)
+        return (a.playState==='running'||a.pending)&&t&&Number.isFinite(t.iterations)
           &&typeof t.duration==='number'&&t.duration<=3000;
       });
-      await Promise.race([Promise.all(finite.map(a=>a.finished.catch(()=>{}))),
-        new Promise(resolve=>setTimeout(resolve,3500))]);
-      await document.fonts.ready;
-    }""")
+      const bounded=async promise=>{
+        const remaining=deadline-performance.now();
+        if(remaining<=0)throw new Error('Original UI transitions did not settle within the bound');
+        let timer;
+        try{
+          await Promise.race([promise,new Promise((_,reject)=>{
+            timer=setTimeout(()=>reject(new Error('Original UI transitions did not settle within the bound')),remaining);
+          })]);
+        }finally{clearTimeout(timer)}
+      };
+      await bounded(document.fonts.ready);
+      while(true){
+        const active=finite();
+        if(active.length)await bounded(Promise.all(active.map(a=>a.finished.catch(()=>{}))));
+        // A transitionend listener can start another transition. Paint and then
+        // rediscover it instead of returning from a one-time animation snapshot.
+        await bounded(new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+        if(!finite().length)return;
+      }
+    }""",
+        timeout * 1000,
+    )
 
 
 async def visible_locator(page, selector):

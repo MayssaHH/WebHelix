@@ -7,7 +7,10 @@ lifecycle, accounting, previews and feedback. Episodes cannot reach the live
 retailer or make a purchase. Real optimization remains paused; the
 [real clean-page baseline](../examples/arena-archive/real-baseline-20261104/README.md)
 records the completed shopping task and a reference-comparison defect found in
-the live-model check. The
+the live-model check. The later [one-iteration attempt](../examples/arena-archive/one-iteration-attempt-20261104/README.md)
+stopped at its clean gate on an original chained-animation frame; no optimizer
+was launched. See the [proposed attribution follow-up](ARENA_EXPOSURE_REVIEW.md)
+before further paid search. The
 [completed offline verification](../examples/arena-archive/README.md) records all
 11 passing controls and two evaluated/rejected candidates.
 
