@@ -1,5 +1,8 @@
 # Faithful Arena interface: offline verification, November 4, 2026
 
+Follow-up: [real clean-page baseline and diagnostics](real-baseline-20261104/README.md).
+The results below describe the earlier offline verification only.
+
 The corrected environment preserves Arena's captured Flowers collection and
 relevant product/gift-builder/cart interface. It supersedes the earlier simplified
 four-product reconstruction. The original merchant backend is replaced by local

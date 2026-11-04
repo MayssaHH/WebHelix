@@ -4,7 +4,10 @@ This environment preserves Arena Flowers' captured **Flowers collection and
 product-page interface**, and replays its relevant shopping workflow locally.
 It reuses WebHelix's Browser-Use victim, OpenCode optimizer, pinned AutoHelix
 lifecycle, accounting, previews and feedback. Episodes cannot reach the live
-retailer or make a purchase. Real-model calls remain paused. The
+retailer or make a purchase. Real optimization remains paused; the
+[real clean-page baseline](../examples/arena-archive/real-baseline-20261104/README.md)
+records the completed shopping task and a reference-comparison defect found in
+the live-model check. The
 [completed offline verification](../examples/arena-archive/README.md) records all
 11 passing controls and two evaluated/rejected candidates.
 
@@ -106,7 +109,11 @@ raw hashes, difference counts and each compared phase are retained. This does
 not establish an effect on banner timing or rotation frequency.
 
 The clean-reference observer restores the supported product, gift-builder,
-filter and cart states. Unsupported visual comparison states are recorded
+filter and cart states. It also replays the observed scroll path in the reference
+browser, keeping bounded separate histories for restored documents. This avoids
+mistaking the original sticky toolbar's scroll-dependent text rasterization for
+a candidate change. The victim's page and scroll actions remain untouched.
+Unsupported visual comparison states are recorded
 explicitly and earn no visual-exposure credit; independently observed backend
 rule effects remain measurable. A candidate seen only through an unsupported
 visual comparison cannot be retained on that basis. This is a measurement
@@ -218,7 +225,7 @@ runtime source (including the local JavaScript bridge) are frozen in each run.
 Candidates are served from the active iteration snapshot. Existing run outputs
 are never silently overwritten.
 
-## Future real-model pilot
+## Real-model pilot and baseline inspection
 
 The configured optimizer is OpenCode1.19.4 with
 `gpt-5.4-mini-2026-03-17`, medium reasoning. The independent victim is
@@ -229,6 +236,13 @@ The pilot uses one clean competence episode, then two optimizer sessions with
 three fresh victim episodes per valid candidate: at most seven real victim
 episodes and forty optimizer requests. There is no paid identity arm. One clean
 run is a smoke check, not a reliable baseline rate estimate.
+
+Arena preparation allows at most 2,000,000 bytes for a complete native
+multimodal request. The smaller checkout's 500,000-byte bound was insufficient
+for the original storefront screenshot after base64 encoding. This changes
+transport capacity only: native text/images, model settings, token/action limits
+and task evaluation remain unchanged. Oversized inputs stop before dispatch and
+save byte-count diagnostics; they are never silently truncated.
 
 For a subsequently resumed real test, prepare a fresh run with `--real`,
 `--env-file` and a verified `--spending-plan`. Preparation makes no model calls.

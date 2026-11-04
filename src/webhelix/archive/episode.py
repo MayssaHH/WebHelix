@@ -389,12 +389,54 @@ async def validate_current_state(page, site, *, scroll=False):
     }
 
 
+async def _record_reference_scroll(page, site):
+    """Keep observed scroll positions across one document, never candidate styles."""
+    current = await page.evaluate(
+        "() => ({document:performance.timeOrigin,path:location.pathname,x:scrollX,y:scrollY})"
+    )
+    key = (id(page), current["document"], current["path"])
+    histories = getattr(site, "_reference_scroll_histories", None)
+    if histories is None:
+        histories = {}
+        site._reference_scroll_histories = histories
+    history = histories.get(key)
+    if history is None:
+        if len(histories) >= 32:
+            raise RuntimeError("Clean reference document-history bound exceeded")
+        history = {"document_key": key, "positions": [[0, 0]]}
+        histories[key] = history
+    # Retain histories for restored/back-forward documents; a new time origin
+    # at the same URL starts a separate history instead of inheriting old state.
+    site._reference_scroll_history = history
+    position = [current["x"], current["y"]]
+    if position != history["positions"][-1]:
+        if len(history["positions"]) >= 64:
+            raise RuntimeError("Clean reference scroll-history bound exceeded")
+        history["positions"].append(position)
+    return history["positions"]
+
+
+async def _replay_reference_scroll(reference, positions):
+    # Sticky elements can retain a pixel-snapped glyph raster after scrolling
+    # away from their sticky position, even when DOM geometry/styles match.
+    # A newly loaded clean page must traverse the observed scroll path and paint
+    # each state. Never mask pixels, move victim content, or copy candidate CSS.
+    for x, y in positions:
+        await reference.evaluate(
+            "([x,y])=>scrollTo({left:x,top:y,behavior:'instant'})", [x, y]
+        )
+        await reference.evaluate(
+            "()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)))"
+        )
+
+
 async def _reference(page, site, clean, reference):
     if await reference.evaluate("location.origin") != site.url:
         raise RuntimeError(
             "Clean reference must share the local origin for captured font/assets fidelity"
         )
     if site.faithful:
+        positions = await _record_reference_scroll(page, site)
         state = await replay_state(page, site)
         if not state.get("comparison_supported", True):
             return False
@@ -420,7 +462,10 @@ async def _reference(page, site, clean, reference):
             values,
         )
     await reference.mouse.move(0, 0)
-    await reference.evaluate("y=>scrollTo(0,y)", await page.evaluate("scrollY"))
+    if site.faithful:
+        await _replay_reference_scroll(reference, positions)
+    else:
+        await reference.evaluate("y=>scrollTo(0,y)", await page.evaluate("scrollY"))
     return True
 
 
@@ -979,6 +1024,13 @@ async def _execute(request):
                                 "comparison_channel": "native_browser_use_screenshot",
                                 "sent_to_policy": False,
                             }
+                            if site.faithful and comparable:
+                                exposure["reference_scroll_history"] = [
+                                    list(position)
+                                    for position in site._reference_scroll_history[
+                                        "positions"
+                                    ]
+                                ]
                             report["exposures"].append(exposure)
                             save(output / f"exposure-{step}.json", exposure)
 

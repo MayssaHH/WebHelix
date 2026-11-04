@@ -260,7 +260,11 @@ def test_unsupported_source_state_does_not_manufacture_visual_comparison(monkeyp
     async def state(page, site):
         return {"comparison_supported": False, "unsupported_reasons": ["gallery"]}
 
+    async def scroll_state(page, site):
+        return [[0, 0]]
+
     monkeypatch.setattr(episode, "replay_state", state)
+    monkeypatch.setattr(episode, "_record_reference_scroll", scroll_state)
     assert (
         asyncio.run(
             _reference(
