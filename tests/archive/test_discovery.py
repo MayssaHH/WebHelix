@@ -115,3 +115,83 @@ def test_archive_cli_baseline_only_dispatch_and_prepare_rejection(
             ]
         )
     assert not (tmp_path / "other").exists()
+
+
+def test_one_iteration_preparation_preserves_total_episode_allowance(
+    archive_root, tmp_path
+):
+    secret = tmp_path / "private.env"
+    secret.write_text("WEBHELIX_API_KEY=fixture-not-real\n")
+    run = prepare_discovery(
+        tmp_path / "run",
+        scripted=False,
+        env_file=secret,
+        archive_root=archive_root,
+        iteration_limit=1,
+    )
+    settings, status = read(run / "runtime.json"), read(run / "status.json")
+    assert settings["iterations"] == status["maximum_optimizer_sessions"] == 1
+    assert settings["episodes_per_condition"] == 3
+    assert status["maximum_scheduled_episodes"] == 4
+    assert settings["max_optimizer_calls"] == status["maximum_optimizer_requests"] == 20
+    assert settings["max_real_episodes"] == status["maximum_real_episode_starts"] == 7
+    assert status["baseline_episodes"] == 1
+    assert settings["victim"]["model"] == "gpt-6.1-sol"
+    assert not (run / "budget.json").exists()
+    assert not (run / "batches").exists()
+
+
+@pytest.mark.parametrize("limit", [True, False, 0, -1, 3, 1.0, "1"])
+def test_iteration_limit_cannot_increase_or_invalidate_frozen_pilot(tmp_path, limit):
+    run = tmp_path / "run"
+    with pytest.raises(ValueError, match="Iteration limit"):
+        prepare_discovery(run, scripted=True, iteration_limit=limit)
+    assert not run.exists()
+
+
+def test_iteration_override_does_not_bypass_original_configuration_check(
+    tmp_path, monkeypatch
+):
+    from webhelix.checkout import discovery
+
+    original = discovery._pilot_settings
+
+    def invalid(*args, **kwargs):
+        settings = original(*args, **kwargs)
+        settings["max_optimizer_calls"] = 999
+        return settings
+
+    monkeypatch.setattr(discovery, "_pilot_settings", invalid)
+    with pytest.raises(ValueError, match="Discovery limits must match"):
+        prepare_discovery(tmp_path / "run", scripted=True, iteration_limit=1)
+    assert not (tmp_path / "run").exists()
+
+
+def test_archive_cli_iteration_limit_is_preparation_only(
+    archive_root, tmp_path, monkeypatch
+):
+    run = tmp_path / "run"
+    main(
+        [
+            "discovery",
+            "--prepare",
+            "--iterations",
+            "1",
+            "--archive-root",
+            str(archive_root),
+            "--run-dir",
+            str(run),
+        ]
+    )
+    assert read(run / "runtime.json")["iterations"] == 1
+    assert read(run / "status.json")["maximum_scheduled_episodes"] == 4
+    assert read(run / "status.json")["maximum_real_episode_starts"] == 0
+    monkeypatch.setattr(
+        "webhelix.checkout.discovery.execute_discovery",
+        lambda *a, **kw: pytest.fail(
+            "Execute cannot override the frozen iteration count"
+        ),
+    )
+    with pytest.raises(SystemExit):
+        main(["discovery", "--execute", "--iterations", "1", "--run-dir", str(run)])
+    assert read(run / "status.json")["status"] == "prepared"

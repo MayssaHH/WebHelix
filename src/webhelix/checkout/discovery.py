@@ -62,7 +62,13 @@ def _baseline_evidence(root, clean):
 
 
 def prepare_discovery(
-    root, *, scripted, env_file=None, spending_plan=None, archive_root=None
+    root,
+    *,
+    scripted,
+    env_file=None,
+    spending_plan=None,
+    archive_root=None,
+    iteration_limit=None,
 ):
     """Prepare a reviewable experiment without a browser or provider request."""
     root = Path(root).resolve()
@@ -85,6 +91,20 @@ def prepare_discovery(
         raise ValueError(
             "Discovery limits must match one clean + iterations × three episodes and the optimizer session request bounds"
         )
+    if iteration_limit is not None:
+        if (
+            type(iteration_limit) is not int
+            or not 1 <= iteration_limit <= settings["iterations"]
+        ):
+            raise ValueError(
+                "Iteration limit must be an integer from 1 through the configured iteration count"
+            )
+        settings["iterations"] = iteration_limit
+        scheduled = 1 + iteration_limit * settings["episodes_per_condition"]
+        optimizer_requests = iteration_limit * optimizer.max_requests_per_session
+        settings["max_optimizer_calls"] = optimizer_requests
+        # Keep the total episode cap: carried failed attempts also consume it.
+        # Reducing this run's schedule neither resets nor replenishes that ledger.
     settings.update(
         workflow="discovery-v1",
         memory_policy="summary-with-readonly-evidence-v1",
@@ -168,7 +188,7 @@ def prepare_discovery(
             "baseline_episodes": 1,
             "episodes_per_valid_candidate": 3,
             "maximum_scheduled_episodes": scheduled,
-            "maximum_real_episode_starts": 0 if scripted else scheduled,
+            "maximum_real_episode_starts": settings["max_real_episodes"],
             "maximum_optimizer_sessions": settings["iterations"],
             "maximum_optimizer_requests": optimizer_requests,
             "meaning": "One clean competence smoke check, not a reliable baseline-rate estimate. Retention is provisional. Scripted runs are engineering controls, not discovered steering.",

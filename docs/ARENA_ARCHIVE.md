@@ -237,6 +237,12 @@ three fresh victim episodes per valid candidate: at most seven real victim
 episodes and forty optimizer requests. There is no paid identity arm. One clean
 run is a smoke check, not a reliable baseline rate estimate.
 
+For a smaller continuation, `archive discovery --prepare --iterations 1` reduces
+the schedule to one clean episode and one three-episode candidate batch, with at
+most twenty optimizer requests. It preserves the total seven-episode limit so
+carried failed attempts still count. This option cannot increase the configured
+iteration allowance or alter an already prepared run.
+
 Arena preparation allows at most 2,000,000 bytes for a complete native
 multimodal request. The smaller checkout's 500,000-byte bound was insufficient
 for the original storefront screenshot after base64 encoding. This changes

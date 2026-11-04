@@ -187,6 +187,11 @@ def main(argv=None):
             )
             p.add_argument("--env-file", type=Path)
             p.add_argument("--spending-plan", type=Path)
+            p.add_argument(
+                "--iterations",
+                type=int,
+                help="Prepare fewer optimizer iterations, preserving the total episode cap",
+            )
     report = sub.add_parser("report")
     report.add_argument("--run-dir", type=Path, required=True)
     args = parser.parse_args(argv)
@@ -225,6 +230,7 @@ def main(argv=None):
                     env_file=args.env_file,
                     spending_plan=args.spending_plan,
                     archive_root=args.archive_root,
+                    iteration_limit=args.iterations,
                 )
             )
         else:
@@ -234,6 +240,7 @@ def main(argv=None):
                 or args.archive_root
                 or args.env_file
                 or args.spending_plan
+                or args.iterations is not None
             ):
                 parser.error("Execution uses only the previously frozen run settings")
             settings = read(args.run_dir / "runtime.json")
