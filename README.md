@@ -44,6 +44,8 @@ as baseline properties, and all tied cheapest qualifying products are accepted. 
 and keeps the captured assets outside Git. Start with `webhelix archive capture`,
 then its scripted controls and discovery runner. Scripted discovery is the default;
 it exercises native OpenCode and Browser-Use with explicit local model doubles.
+The [verified Arena replay](examples/arena-archive/README.md) records the faithful
+interface checks, all 11 controls, and two completed offline optimization iterations.
 
 ## Start with the checkout
 

@@ -4,7 +4,9 @@ This environment preserves Arena Flowers' captured **Flowers collection and
 product-page interface**, and replays its relevant shopping workflow locally.
 It reuses WebHelix's Browser-Use victim, OpenCode optimizer, pinned AutoHelix
 lifecycle, accounting, previews and feedback. Episodes cannot reach the live
-retailer or make a purchase. Real-model calls remain paused during this correction.
+retailer or make a purchase. Real-model calls remain paused. The
+[completed offline verification](../examples/arena-archive/README.md) records all
+11 passing controls and two evaluated/rejected candidates.
 
 The `arena-faithful-v2` capture supersedes the earlier four-product reconstruction.
 That reconstruction simplified the header, product controls and bag, so it was
