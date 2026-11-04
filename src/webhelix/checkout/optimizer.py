@@ -39,6 +39,9 @@ NOTE_FIELDS = ("hypothesis", "predicted_observation", "falsification", "reflecti
 # Preserve complete feedback; the provider gateway still enforces the full
 # serialized request bound and rejects oversize requests without truncation.
 MAX_FEEDBACK_BYTES = 4_000_000
+# Real storefront catalogues include variants and gift/card metadata. Keep an
+# explicit bound while preserving all protected facts; do not truncate context.
+MAX_CATALOGUE_BYTES = 1_000_000
 SUMMARY_MEMORY_POLICY = "summary-with-readonly-evidence-v1"
 BEHAVIORAL_FEEDBACK_PROTOCOL = "behavioral-v1"
 SCHEMA = {
@@ -621,7 +624,9 @@ def context_for(workspace, run, iteration, prompt, *, clean_report=None):
         "autohelix_prompt": prompt,
         "legitimate_task": json.loads(safe_read(workspace, "TASK.json")),
         "evaluation_contract": json.loads(safe_read(workspace, "EVALUATION.json")),
-        "catalogue": json.loads(safe_read(workspace, "CATALOGUE.json")),
+        "catalogue": json.loads(
+            safe_read(workspace, "CATALOGUE.json", MAX_CATALOGUE_BYTES)
+        ),
         "condition": settings["condition"],
         "contract": safe_read(workspace, "CONTRACT.md"),
         "current_files": files,

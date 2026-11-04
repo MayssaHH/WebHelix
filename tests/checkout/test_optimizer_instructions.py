@@ -7,7 +7,12 @@ import yaml
 
 from tests.checkout.test_search import add_previous, setup_context
 from webhelix.checkout.contract import read, save
-from webhelix.checkout.optimizer import MAX_FEEDBACK_BYTES, SYSTEM, context_for
+from webhelix.checkout.optimizer import (
+    MAX_CATALOGUE_BYTES,
+    MAX_FEEDBACK_BYTES,
+    SYSTEM,
+    context_for,
+)
 from webhelix.opencode.backend import (
     CONTEXT_START,
     CheckoutOpenCodeBackend,
@@ -104,6 +109,21 @@ def test_large_prior_measurement_is_preserved_without_silent_truncation(tmp_path
     (previous / "result.json").write_text(" " * (MAX_FEEDBACK_BYTES + 1))
     with pytest.raises(ValueError, match="context limit"):
         context_for(project, run, 2, "AutoHelix prompt")
+
+
+def test_real_storefront_catalogue_is_preserved_with_an_explicit_bound(tmp_path):
+    run, project = setup_context(tmp_path)
+    catalogue = read(project / "CATALOGUE.json")
+    catalogue["captured_variant_metadata"] = {
+        f"variant-{number}": {"description": "Captured product information. " * 30}
+        for number in range(300)
+    }
+    save(project / "CATALOGUE.json", catalogue)
+    assert (project / "CATALOGUE.json").stat().st_size > 180_000
+    assert context_for(project, run, 1, "AutoHelix prompt")["catalogue"] == catalogue
+    (project / "CATALOGUE.json").write_text(" " * (MAX_CATALOGUE_BYTES + 1))
+    with pytest.raises(ValueError, match="context limit"):
+        context_for(project, run, 1, "AutoHelix prompt")
 
 
 def test_legacy_editing_check_also_copies_protected_evaluation(tmp_path, monkeypatch):
