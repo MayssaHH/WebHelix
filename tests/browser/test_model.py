@@ -286,9 +286,47 @@ def test_input_bound_stops_before_reserving_or_sending(tmp_path):
         ledger,
         {**SETTINGS, "max_input_bytes": 1},
     )
-    with pytest.raises(ProviderUnavailable, match="input bound"):
-        invoke(llm)
+    with pytest.raises(ProviderUnavailable, match="payload bytes > 1 configured bytes"):
+        invoke(
+            llm, [UserMessage(content="private-page-text-must-not-be-in-diagnostic")]
+        )
     assert ledger.events == []
+    evidence = tmp_path / "evidence"
+    diagnostic = json.loads((evidence / "input-bound-0.json").read_text())
+    receipt = json.loads((evidence / "call-0.json").read_text())
+    assert diagnostic["payload_bytes"] == receipt["payload_bytes"] > 1
+    assert diagnostic["max_input_bytes"] == receipt["max_input_bytes"] == 1
+    assert diagnostic["sent"] is False and diagnostic["truncated"] is False
+    assert receipt["sent"] is False
+    assert not (evidence / "request-0.json").exists()
+    assert not (evidence / "agent-messages-0.json").exists()
+    assert "private-page-text" not in (evidence / "input-bound-0.json").read_text()
+    assert "unit-test-placeholder" not in (evidence / "input-bound-0.json").read_text()
+
+
+def test_larger_archive_transport_preserves_complete_native_screenshot(tmp_path):
+    screenshot = "data:image/png;base64," + "A" * 564368
+    sent = []
+
+    def handler(request):
+        sent.append(bytes(request.content))
+        return httpx.Response(200, json=response())
+
+    ledger = Budget()
+    llm = model(tmp_path, handler, ledger, {**SETTINGS, "max_input_bytes": 2_000_000})
+    invoke(
+        llm,
+        [
+            UserMessage(
+                content=[ContentPartImageParam(image_url=ImageURL(url=screenshot))]
+            )
+        ],
+    )
+    assert len(sent) == 1 and 500_000 < len(sent[0]) < 2_000_000
+    assert json.loads(sent[0])["input"][0]["content"][0]["image_url"] == screenshot
+    receipt = json.loads((tmp_path / "evidence/call-0.json").read_text())
+    assert receipt["payload_bytes"] == len(sent[0]) and receipt["status"] == "completed"
+    assert len(ledger.events) == 2
 
 
 def test_missing_ledger_and_legacy_run_block_paid_execution(tmp_path, monkeypatch):

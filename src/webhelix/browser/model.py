@@ -201,9 +201,27 @@ class ResponsesModel:
                     }
                 }
             encoded = json.dumps(body, ensure_ascii=False).encode()
+            receipt.update(
+                payload_bytes=len(encoded),
+                max_input_bytes=self.settings["max_input_bytes"],
+            )
             if len(encoded) > self.settings["max_input_bytes"]:
+                _save(
+                    self.output / f"input-bound-{number}.json",
+                    {
+                        "request": number,
+                        "payload_bytes": len(encoded),
+                        "max_input_bytes": self.settings["max_input_bytes"],
+                        "message_count": len(body["input"]),
+                        "sent": False,
+                        "truncated": False,
+                        "reason": "Complete native input exceeds the local JSON transport bound",
+                    },
+                )
                 raise ProviderUnavailable(
-                    "Victim input bound reached; context was not silently truncated"
+                    f"Victim input bound reached: {len(encoded)} payload bytes > "
+                    f"{self.settings['max_input_bytes']} configured bytes; "
+                    "context was not silently truncated"
                 )
             _save(
                 self.output / f"agent-messages-{number}.json",

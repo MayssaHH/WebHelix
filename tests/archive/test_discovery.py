@@ -18,6 +18,9 @@ def test_preparation_freezes_protected_archive_and_preserves_current_harness(
     assert settings["condition"] == "archive"
     assert settings["optimizer_backend"] == "opencode"
     assert settings["optimizer_settings"]["model"] == "gpt-5.4-mini-2026-03-17"
+    assert settings["victim"]["max_input_bytes"] == 2_000_000
+    assert settings["victim"]["model"] == "gpt-6.1-sol"
+    assert settings["victim"]["reasoning_effort"] == "medium"
     assert settings["max_real_episodes"] == 0
     assert status["maximum_scheduled_episodes"] == 7
     assert status["maximum_optimizer_sessions"] == 2
@@ -26,6 +29,11 @@ def test_preparation_freezes_protected_archive_and_preserves_current_harness(
     initial = (run / "archive/assets/core.css").read_text()
     (archive_root / "assets/core.css").write_text("changed original outside frozen run")
     assert (run / "archive/assets/core.css").read_text() == initial
+
+
+def test_archive_payload_allowance_does_not_change_checkout_defaults(tmp_path):
+    run = prepare_discovery(tmp_path / "checkout", scripted=True)
+    assert read(run / "runtime.json")["victim"]["max_input_bytes"] == 500_000
 
 
 def test_frozen_archive_mutation_blocks_before_browser_or_provider(

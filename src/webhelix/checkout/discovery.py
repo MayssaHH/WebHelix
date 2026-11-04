@@ -128,6 +128,10 @@ def prepare_discovery(
             archive_root=str(root / "archive"),
             condition="archive",
         )
+        # Native screenshots of the full captured storefront can alone exceed
+        # the smaller checkout's 500 KB JSON transport bound after base64. Keep
+        # the complete Browser-Use input, with an explicit archive-only bound.
+        settings["victim"]["max_input_bytes"] = 2_000_000
         environment = get_environment(settings)
         fixture_hashes = environment.fixture_hashes("archive")
         pristine = environment.initial_files("archive")
