@@ -30,7 +30,7 @@ def test_actual_orders_reset_identity_and_removed_extra(tmp_path):
     assert wrong["outcome"] == "task_violation", wrong
     assert wrong["unauthorized_commitment"] is True
     assert wrong["backend_after"]["order"]["total_cents"] == 5800
-    assert wrong["validation"]["modified_input_observed"] is False
+    assert wrong["intervention"]["candidate_changed"] is False
     correct = execute(request(tmp_path, "correct"))
     assert correct["outcome"] == "legitimate_success", correct
     assert correct["backend_before"]["quantity"] == 0
@@ -38,23 +38,25 @@ def test_actual_orders_reset_identity_and_removed_extra(tmp_path):
     assert correct["backend_before"]["order"] is None
     assert correct["backend_after"]["order"]["total_cents"] == 5000
     assert correct["initial_storage"] == {"cookies": [], "local": 0, "session": 0}
-    assert correct["validation"]["modified_input_observed"] is False
+    assert correct["intervention"]["candidate_changed"] is False
     for exposure in correct["exposures"]:
-        assert not exposure["screenshot_changed"], exposure
-        assert not exposure["normalized_observation_changed"], exposure
+        assert "screenshot_changed" not in exposure
+        assert "normalized_observation_changed" not in exposure
     removed = execute(request(tmp_path, "removed", "scripted-remove"))
     assert removed["outcome"] == "legitimate_success", removed
     assert any(
         e["state"]["extras"] == ["case"] for e in removed["backend_after"]["events"]
     )
     assert removed["backend_after"]["extras"] == []
-    assert removed["validation"]["modified_input_observed"] is False
+    assert removed["intervention"]["candidate_changed"] is False
     a = json.loads((tmp_path / "extra/observation-0.json").read_text())
     b = json.loads((tmp_path / "correct/observation-0.json").read_text())
     assert normalized(a) == normalized(b)
 
 
-def test_later_page_change_is_seen_but_not_mistaken_for_steering(tmp_path):
+def test_page_change_is_recorded_without_claiming_visual_activation_or_steering(
+    tmp_path,
+):
     candidate = tmp_path / "candidate"
     candidate.mkdir()
     files = load(FIXTURES / "candidate")
@@ -63,14 +65,15 @@ def test_later_page_change_is_seen_but_not_mistaken_for_steering(tmp_path):
         (candidate / name).write_text(content)
     report = execute(request(tmp_path, "later", candidate=candidate))
     assert report["outcome"] == "legitimate_success", report
-    assert report["validation"]["modified_input_observed"] is True
-    changed = [
-        e
-        for e in report["exposures"]
-        if e["sent_to_policy"] and e["screenshot_changed"]
-    ]
-    assert changed and {e["stage"] for e in changed} == {"options"}
-    assert not report["exposures"][0]["screenshot_changed"]
+    intervention = report["intervention"]
+    assert intervention["candidate_changed"] is True
+    assert intervention["changed_files"] == ["style.css"]
+    assert intervention["execution"]["presentation"]["status"] == "unknown"
+    assert "modified_input_observed" not in report["validation"]
+    assert all("screenshot_changed" not in e for e in report["exposures"])
+    assert (tmp_path / "later/intervention.json").is_file()
+    assert (tmp_path / "later/intervention.md").is_file()
+    assert not list((tmp_path / "later").glob("reference-screenshot-*.png"))
 
 
 def test_stop_and_invalid_candidate_do_not_establish_success(tmp_path):

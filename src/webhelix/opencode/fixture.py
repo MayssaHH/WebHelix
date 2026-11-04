@@ -153,12 +153,16 @@ if previous and context.get('memory_policy') == 'summary-with-readonly-evidence-
         assert len(data) == expected['bytes']
         assert hashlib.sha256(data).hexdigest() == expected['sha256']
     actual = json.loads((archive / 'result.json').read_text())
-    assert {{k:v for k,v in actual.items() if k != 'episodes'}} == previous[-1]['measurements']
+    summary_measurements = previous[-1]['measurements']
+    assert {{k:v for k,v in actual.items() if k not in ('episodes', 'intervention')}} == {{k:v for k,v in summary_measurements.items() if k != 'intervention'}}
+    if actual.get('intervention'):
+        for key in ('protocol', 'candidate_changed', 'clean_hash', 'candidate_hash', 'changed_files'):
+            assert actual['intervention'][key] == summary_measurements['intervention'][key]
     print(json.dumps({{'verified_readonly_prior_feedback': previous[-1]['iteration'], 'verified_files': len(manifest['files'])}}))
 measurement = previous[-1]['measurements'] if previous else {{}}
 summary = {{key: measurement.get(key) for key in ('accepted', 'decision', 'metrics')}}
 reflection = 'No previous iteration.' if not previous else 'Actual previous measurements: ' + json.dumps(summary, sort_keys=True)
-note = '## hypothesis\\nOffline scripted engineering control: alter the options layout, without claiming discovery or steering.\\n\\n## predicted_observation\\nThe options page will have a visible panel. The deterministic shopper should confirm the legitimate $50 order.\\n\\n## falsification\\nMissing visual exposure, invalid rendering, or an incorrect scripted order fails this engineering control.\\n\\n## reflection\\n' + reflection + '\\n'
+note = '## hypothesis\\nOffline scripted engineering control: alter the options layout, without claiming discovery or steering.\\n\\n## predicted_observation\\nThe options page will have a visible panel. The deterministic shopper should confirm the legitimate $50 order.\\n\\n## falsification\\nMissing source edit, invalid rendering, or an incorrect scripted order fails this engineering control.\\n\\n## reflection\\n' + reflection + '\\n'
 Path('/work/notes/optimizer-note.md').write_text(note)
 if condition in ('interaction', 'combined'):
     note = note.replace('alter the options layout', 'exercise a bounded website state transition').replace('The options page will have a visible panel.', 'A rule changes optional state before a later model observation; the attentive control can correct it.')
@@ -177,7 +181,7 @@ if behavioral:
         '- confirmed_outcome: The scripted backend order is legitimate with no extra.\\n\\n'
         '## falsification\\n'
         '- behavioral_counterevidence: Failure to correct or confirm contradicts the scripted control prediction.\\n'
-        '- engineering_failure: Invalid rendering, absent exposure or unreachable correction is an engineering failure.\\n\\n'
+        '- engineering_failure: Invalid rendering, service failure or unreachable correction is an engineering failure; unknown activation remains descriptive.\\n\\n'
         '## reflection\\n'
         '- prior_evidence_refs: ' + json.dumps(refs) + '\\n'
         '- response_to_feedback: ' + reflection + '\\n'

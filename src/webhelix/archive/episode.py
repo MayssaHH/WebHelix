@@ -1,16 +1,12 @@
 """Fresh native Browser-Use episodes for the archived, local-only flower shop."""
 
 import asyncio
-import base64
-import hashlib
-import io
 from pathlib import Path
 import time
 from urllib.parse import quote, urlsplit
 import re
 
 from bs4 import BeautifulSoup
-from PIL import Image, ImageChops
 
 from playwright.async_api import async_playwright, Error as PlaywrightError
 
@@ -20,104 +16,19 @@ from webhelix.browser.manifest import runtime_identity
 from webhelix.checkout.contract import InvalidCandidate, read, save
 from webhelix.checkout.episode import OBS_JS, READABLE_JS
 from webhelix.provider import InvalidAction
+from webhelix.intervention import (
+    describe_changes,
+    execution_evidence,
+    summarize_intervention,
+)
 from webhelix.search.budget import Budget, BudgetBlocked
 
 from .contract import ArchiveContract
 from .site import ArchiveSite
-from .scoring import classify
+from .scoring import audit, classify
 
 
 VIEWPORT = {"width": 1280, "height": 720}
-
-
-def compare_screenshots(first, second):
-    """Ignore only one-level RGB raster noise; retain raw difference evidence."""
-    with Image.open(io.BytesIO(first)) as left, Image.open(io.BytesIO(second)) as right:
-        left, right = left.convert("RGB"), right.convert("RGB")
-        if left.size != right.size:
-            return {"changed": True, "size_mismatch": True, "channel_tolerance": 1}
-        difference = ImageChops.difference(left, right)
-        maximum = max(high for _, high in difference.getextrema())
-        red, green, blue = difference.split()
-        histogram = ImageChops.lighter(ImageChops.lighter(red, green), blue).histogram()
-        return {
-            "changed": maximum > 1,
-            "size_mismatch": False,
-            "channel_tolerance": 1,
-            "max_channel_delta": maximum,
-            "raw_changed_pixels": sum(histogram[1:]),
-            "pixels_exceeding_tolerance": sum(histogram[2:]),
-        }
-
-
-async def compare_reference(reference, image, output, step, *, faithful=False):
-    """Match only finite original banner states, comparing every image pixel.
-
-    The merchant's protected rotating banner can advance between Browser-Use's
-    screenshot and our later observer. Enumerating its original states avoids
-    calling that clock drift a candidate intervention; nothing is masked and
-    the victim page/timers are untouched.
-    """
-    states = (
-        await reference.evaluate("window.__webhelixReferenceCallouts()")
-        if faithful
-        else {"count": 0, "current": None}
-    )
-    count, current = states["count"], states["current"]
-    if not isinstance(count, int) or count < 0 or count > 8:
-        raise RuntimeError("Unexpected number of original callout states")
-    indices = (
-        ([current] + [i for i in range(count) if i != current]) if count else [None]
-    )
-    variants, best = [], None
-    for index in indices:
-        if index is not None:
-            await reference.evaluate(
-                "index=>window.__webhelixReferenceSetCallout(index)", index
-            )
-        path = output / f"reference-screenshot-{step}-callout-{index}.png"
-        candidate = await reference.screenshot()
-        path.write_bytes(candidate)
-        if index is not None:
-            observed = await reference.evaluate("window.__webhelixReferenceCallouts()")
-            if observed["current"] != index:
-                raise RuntimeError(
-                    "Read-only source callout moved during screenshot comparison"
-                )
-        difference = compare_screenshots(image, candidate)
-        item = {
-            "source_callout_index": index,
-            "path": path.name,
-            "sha256": hashlib.sha256(candidate).hexdigest(),
-            **difference,
-        }
-        variants.append(item)
-        key = (
-            difference.get("pixels_exceeding_tolerance", float("inf")),
-            difference.get("max_channel_delta", 256),
-        )
-        if best is None or key < best[0]:
-            best = (key, candidate, item)
-        if difference["changed"] is False:
-            break
-    selected = best[2]
-    if selected["source_callout_index"] is not None:
-        await reference.evaluate(
-            "index=>window.__webhelixReferenceSetCallout(index)",
-            selected["source_callout_index"],
-        )
-    (output / f"reference-screenshot-{step}.png").write_bytes(best[1])
-    return best[1], {
-        "changed": selected["changed"],
-        "channel_tolerance": 1,
-        "max_channel_delta": selected.get("max_channel_delta"),
-        "raw_changed_pixels": selected.get("raw_changed_pixels"),
-        "pixels_exceeding_tolerance": selected.get("pixels_exceeding_tolerance"),
-        "source_callout_states_available": count,
-        "selected_source_callout_index": selected["source_callout_index"],
-        "compared_variants": variants,
-        "method": "full-image comparison against finite original callout states; no pixel masks",
-    }
 
 
 TEXT_UNCLIPPED_JS = """el=>{
@@ -198,7 +109,6 @@ async def replay_state(page, site):
                 "async()=>{await window.__webhelixReplayReady;return true}"
             )
             await wait_source_state(page, "!window.__webhelixReplayState().busy")
-            await settle_source_ui(page)
             state = await page.evaluate("window.__webhelixReplayState()")
             site.observe_browser_state(state)
             return state
@@ -209,40 +119,6 @@ async def replay_state(page, site):
             ):
                 raise
             await asyncio.sleep(0.05)
-
-
-async def settle_source_ui(page, *, timeout=3.5):
-    """Wait for finite original transitions; do not disable merchant animation."""
-    await page.evaluate(
-        """async(timeoutMs)=>{
-      const deadline=performance.now()+timeoutMs;
-      const finite=()=>document.getAnimations().filter(a=>{
-        const t=a.effect?.getTiming();
-        return (a.playState==='running'||a.pending)&&t&&Number.isFinite(t.iterations)
-          &&typeof t.duration==='number'&&t.duration<=3000;
-      });
-      const bounded=async promise=>{
-        const remaining=deadline-performance.now();
-        if(remaining<=0)throw new Error('Original UI transitions did not settle within the bound');
-        let timer;
-        try{
-          await Promise.race([promise,new Promise((_,reject)=>{
-            timer=setTimeout(()=>reject(new Error('Original UI transitions did not settle within the bound')),remaining);
-          })]);
-        }finally{clearTimeout(timer)}
-      };
-      await bounded(document.fonts.ready);
-      while(true){
-        const active=finite();
-        if(active.length)await bounded(Promise.all(active.map(a=>a.finished.catch(()=>{}))));
-        // A transitionend listener can start another transition. Paint and then
-        // rediscover it instead of returning from a one-time animation snapshot.
-        await bounded(new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
-        if(!finite().length)return;
-      }
-    }""",
-        timeout * 1000,
-    )
 
 
 async def visible_locator(page, selector):
@@ -305,12 +181,7 @@ async def local_only(context, site):
     await context.route_web_socket("**/*", lambda socket: socket.close())
 
 
-async def validate_current_state(page, site, *, scroll=False):
-    """Check required controls/facts without changing the model's browser state."""
-    # Browser-Use supports tabs: inspect the actual active page, never infer its
-    # stage from the server's most recent GET from a different tab.
-    await replay_state(page, site)
-    await page.evaluate("document.fonts.ready")
+async def _required_controls(page, site, *, scroll=False):
     checked = []
     for identifier in site.expected_controls():
         selector = identifier if site.faithful else "#" + identifier
@@ -333,6 +204,37 @@ async def validate_current_state(page, site, *, scroll=False):
             if not reachable:
                 raise InvalidCandidate("Required control obscured: " + identifier)
         checked.append(identifier)
+    return checked
+
+
+async def wait_required_controls(
+    page, site, *, scroll=False, refresh_state=True, timeout=3.5
+):
+    """Wait only for protected controls to be usable, never global visual stillness.
+
+    The source cart/gift controllers expose their next stage before all of its
+    controls have mounted. Persistent absence, clipping or unreadability still
+    fails validation at the bound. No pixels, styles or animations are altered.
+    """
+    deadline = time.monotonic() + timeout
+    while True:
+        try:
+            return await _required_controls(page, site, scroll=scroll)
+        except InvalidCandidate:
+            if not site.faithful or time.monotonic() >= deadline:
+                raise
+            await asyncio.sleep(0.05)
+            if refresh_state:
+                await replay_state(page, site)
+
+
+async def validate_current_state(page, site, *, scroll=False):
+    """Check required controls/facts without changing the model's browser state."""
+    # Browser-Use supports tabs: inspect the actual active page, never infer its
+    # stage from the server's most recent GET from a different tab.
+    await replay_state(page, site)
+    await page.evaluate("document.fonts.ready")
+    checked = await wait_required_controls(page, site, scroll=scroll)
     if site.faithful:
         return {
             "stage": site.stage,
@@ -409,54 +311,12 @@ async def validate_current_state(page, site, *, scroll=False):
     }
 
 
-async def _record_reference_scroll(page, site):
-    """Keep observed scroll positions across one document, never candidate styles."""
-    current = await page.evaluate(
-        "() => ({document:performance.timeOrigin,path:location.pathname,x:scrollX,y:scrollY})"
-    )
-    key = (id(page), current["document"], current["path"])
-    histories = getattr(site, "_reference_scroll_histories", None)
-    if histories is None:
-        histories = {}
-        site._reference_scroll_histories = histories
-    history = histories.get(key)
-    if history is None:
-        if len(histories) >= 32:
-            raise RuntimeError("Clean reference document-history bound exceeded")
-        history = {"document_key": key, "positions": [[0, 0]]}
-        histories[key] = history
-    # Retain histories for restored/back-forward documents; a new time origin
-    # at the same URL starts a separate history instead of inheriting old state.
-    site._reference_scroll_history = history
-    position = [current["x"], current["y"]]
-    if position != history["positions"][-1]:
-        if len(history["positions"]) >= 64:
-            raise RuntimeError("Clean reference scroll-history bound exceeded")
-        history["positions"].append(position)
-    return history["positions"]
-
-
-async def _replay_reference_scroll(reference, positions):
-    # Sticky elements can retain a pixel-snapped glyph raster after scrolling
-    # away from their sticky position, even when DOM geometry/styles match.
-    # A newly loaded clean page must traverse the observed scroll path and paint
-    # each state. Never mask pixels, move victim content, or copy candidate CSS.
-    for x, y in positions:
-        await reference.evaluate(
-            "([x,y])=>scrollTo({left:x,top:y,behavior:'instant'})", [x, y]
-        )
-        await reference.evaluate(
-            "()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)))"
-        )
-
-
 async def _reference(page, site, clean, reference):
     if await reference.evaluate("location.origin") != site.url:
         raise RuntimeError(
             "Clean reference must share the local origin for captured font/assets fidelity"
         )
     if site.faithful:
-        positions = await _record_reference_scroll(page, site)
         state = await replay_state(page, site)
         if not state.get("comparison_supported", True):
             return False
@@ -469,11 +329,12 @@ async def _reference(page, site, clean, reference):
         )
         await reference.evaluate("state=>window.__webhelixReplayRestore(state)", state)
         await wait_source_state(reference, "!window.__webhelixReplayState().busy")
-        await settle_source_ui(reference)
     else:
         await reference.set_content(site.render(files=clean), wait_until="networkidle")
     await reference.evaluate("document.fonts.ready")
-    if not site.faithful:
+    if site.faithful:
+        await wait_required_controls(reference, site, refresh_state=False)
+    else:
         values = await page.locator("input:not([type=hidden])").evaluate_all(
             "els=>els.map(e=>({id:e.id,value:e.value}))"
         )
@@ -482,10 +343,7 @@ async def _reference(page, site, clean, reference):
             values,
         )
     await reference.mouse.move(0, 0)
-    if site.faithful:
-        await _replay_reference_scroll(reference, positions)
-    else:
-        await reference.evaluate("y=>scrollTo(0,y)", await page.evaluate("scrollY"))
+    await reference.evaluate("y=>scrollTo(0,y)", await page.evaluate("scrollY"))
     return True
 
 
@@ -738,25 +596,6 @@ def exposure_stage(site):
     return site.stage
 
 
-def exposure_summary(sent):
-    """Unknown visual comparisons earn no exposure credit; journal effects do."""
-    visual = any(
-        item.get("visual_comparison_supported", True)
-        and item.get("screenshot_changed") is True
-        for item in sent
-    )
-    return {
-        "modified_input_observed": visual
-        or any(item.get("interaction_changed") is True for item in sent),
-        "screenshot_changed": visual,
-        "uncompared_observations": sum(
-            item.get("visual_comparison_supported") is False for item in sent
-        ),
-        "normalized_observation_changed": None,
-        "exposure_basis": "native screenshot and net website effects available in submitted observation; not proof of attention",
-    }
-
-
 async def engineering_observation(runtime, site):
     value = await runtime.inspect()
     if site.faithful:
@@ -947,11 +786,17 @@ async def _execute(request):
         "victim_started": False,
         "validation": {"valid": False},
     }
-    site = model = None
+    site = model = description = None
     try:
         files = contract.load(request["candidate"], "archive")
         clean = contract.initial_files("archive")
         report["candidate_hash"] = contract.fingerprint(files)
+        description = describe_changes(
+            clean,
+            files,
+            clean_hash=contract.fingerprint(clean),
+            candidate_hash=report["candidate_hash"],
+        )
         with ArchiveSite(files, settings["archive_root"]) as site:
             async with BrowserRuntime(site.url, output, viewport=VIEWPORT) as runtime:
                 report["backend_before"] = site.snapshot()
@@ -959,9 +804,8 @@ async def _execute(request):
                 if runtime.initial_storage != {"cookies": [], "local": 0, "session": 0}:
                     raise RuntimeError("Episode browser storage was not fresh")
                 async with async_playwright() as pw:
-                    # Match BrowserRuntime's full Chromium executable. Playwright
-                    # otherwise chooses headless-shell, whose downloaded-font
-                    # rasterization differs despite identical DOM and CSS.
+                    # Use the same engine for protected DOM and readability checks.
+                    # This reference is not used for screenshot comparison.
                     browser = await pw.chromium.launch(
                         headless=True, executable_path=pw.chromium.executable_path
                     )
@@ -972,8 +816,8 @@ async def _execute(request):
                         await local_only(reference_context, site)
                         reference = await reference_context.new_page()
                         # set_content on about:blank keeps an opaque origin and
-                        # causes captured local webfonts to fail CORS, producing
-                        # false presentation exposure even for an identity page.
+                        # causes captured local webfonts to fail CORS, affecting
+                        # the protected DOM/readability checks.
                         # Establish the same local origin once while both fresh
                         # browsers are at the initial listing; subsequent clean
                         # renders do not navigate or mutate the backend.
@@ -992,65 +836,27 @@ async def _execute(request):
                                 await faithful_facts(rt.page, reference)
                             save(output / f"backend-{step}.json", site.snapshot())
                             diagnostic = await rt.page.evaluate(OBS_JS)
-                            image = base64.b64decode(rt.current_state.screenshot)
-                            clean_image, comparison = (
-                                await compare_reference(
-                                    reference,
-                                    image,
-                                    output,
-                                    step,
-                                    faithful=site.faithful,
-                                )
-                                if comparable
-                                else (None, None)
-                            )
-                            clean_diagnostic = (
-                                await reference.evaluate(OBS_JS) if comparable else None
-                            )
                             save(
                                 output / f"diagnostic-observation-{step}.json",
                                 diagnostic,
                             )
-                            save(
-                                output / f"reference-diagnostic-{step}.json",
-                                clean_diagnostic,
-                            )
+                            # Native Browser-Use observations/screenshots are saved by
+                            # BrowserRuntime. This compatibility artifact provides stage
+                            # labels and journal receipts, never a pixel-equality gate.
                             exposure = {
                                 "step": step,
                                 "stage": exposure_stage(site),
-                                "visual_comparison_supported": comparable,
+                                "factual_reference_supported": comparable,
                                 "unsupported_reasons": site.view.get(
                                     "unsupported_reasons", []
                                 )
                                 if site.faithful
                                 else [],
-                                "screenshot_changed": comparison["changed"]
-                                if comparable
-                                else None,
-                                "raster_comparison": comparison,
-                                "diagnostic_content_changed": diagnostic
-                                != clean_diagnostic
-                                if comparable
-                                else None,
-                                "normalized_observation_changed": None,
-                                "screenshot_sha256": hashlib.sha256(image).hexdigest(),
-                                "reference_screenshot_sha256": hashlib.sha256(
-                                    clean_image
-                                ).hexdigest()
-                                if comparable
-                                else None,
                                 "interaction_rule_sequences": site.exposed_transitions(),
                                 "interaction_changed": bool(site.exposed_transitions()),
-                                "comparison_channel": "native_browser_use_screenshot",
                                 "sent_to_policy": False,
+                                "note": "Journal-linked state available at this observation; no claim of attention or visual activation.",
                             }
-                            if site.faithful and comparable:
-                                exposure["reference_scroll_history"] = [
-                                    list(position)
-                                    for position in site._reference_scroll_history[
-                                        "positions"
-                                    ]
-                                ]
                             report["exposures"].append(exposure)
                             save(output / f"exposure-{step}.json", exposure)
 
@@ -1142,14 +948,23 @@ async def _execute(request):
             outcome="infrastructure_error", error=f"{type(exc).__name__}: {exc}"
         )
     finally:
+        journal = None
         if site:
             report["backend_after"] = site.snapshot()
             save(output / "backend-after.json", report["backend_after"])
             save(output / "interaction-journal.json", site.journal)
+            try:
+                audit(report["backend_after"], contract)
+                journal = site.journal
+            except (KeyError, TypeError, ValueError) as exc:
+                report.update(
+                    outcome="infrastructure_error",
+                    journal_error=f"{type(exc).__name__}: {exc}",
+                )
             report["interaction"] = {
-                "rules_triggered": sum(
-                    e["actor"] == "website_rule" for e in site.journal
-                ),
+                "rules_triggered": sum(e["actor"] == "website_rule" for e in journal)
+                if journal is not None
+                else None,
                 "observed_rule_sequences": sorted(
                     {
                         i
@@ -1157,8 +972,11 @@ async def _execute(request):
                         if o["source"] == "model_response"
                         for i in o["rule_sequences"]
                     }
-                ),
+                )
+                if journal is not None
+                else None,
                 "journal": "interaction-journal.json",
+                "journal_audited": journal is not None,
             }
         if model:
             report["usage"] = getattr(model, "usage", [])
@@ -1184,7 +1002,21 @@ async def _execute(request):
                 save(output / f"exposure-{step}.json", exposure)
         sent = [x for x in report["exposures"] if x["sent_to_policy"]]
         report["victim_started"] = bool(sent)
-        report["validation"].update(exposure_summary(sent))
+        if description is not None:
+            report["intervention"] = execution_evidence(
+                description,
+                journal,
+                episode_finished=(
+                    report.get("stop_reason") == "agent_done"
+                    and report["outcome"]
+                    in {"legitimate_success", "task_violation", "incomplete_episode"}
+                    and report["validation"].get("valid") is True
+                ),
+            )
+            save(output / "intervention.json", report["intervention"])
+            (output / "intervention.md").write_text(
+                summarize_intervention(report["intervention"])
+            )
         action_files = sorted(
             output.glob("action-[0-9]*.json"),
             key=lambda p: int(p.stem.rsplit("-", 1)[1]),

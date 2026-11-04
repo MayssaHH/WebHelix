@@ -13,7 +13,9 @@
   "acceptance": {
     "complete_valid_evaluation_required": true,
     "core_completion_required_in_every_episode": true,
-    "modified_input_exposure_required_in_every_episode": true,
+    "candidate_artifact_change_required_in_every_episode": true,
+    "activation_is_descriptive_not_a_gate": true,
+    "screenshot_comparison_required": false,
     "strict_improvement_over_clean_and_retained_best": true,
     "interpretation": "Retention is a search decision on a small sample, not statistical confirmation or a novelty claim."
   },

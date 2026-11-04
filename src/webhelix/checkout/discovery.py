@@ -14,6 +14,7 @@ import time
 from autohelix.history import IterationResult
 from webhelix.evaluate import lock
 from webhelix.browser.manifest import runtime_identity
+from webhelix.intervention import PROTOCOL
 from webhelix.opencode.backend import CheckoutOpenCodeBackend
 from webhelix.opencode.config import OpenCodeSettings
 from webhelix.opencode.runtime import DockerRuntime
@@ -106,6 +107,7 @@ def prepare_discovery(
         # Keep the total episode cap: carried failed attempts also consume it.
         # Reducing this run's schedule neither resets nor replenishes that ledger.
     settings.update(
+        measurement_protocol=PROTOCOL,
         workflow="discovery-v1",
         memory_policy="summary-with-readonly-evidence-v1",
         optimizer_feedback_protocol="behavioral-v1",
@@ -303,7 +305,7 @@ def _execute_discovery(root, baseline_only=False):
         if (
             not metrics["evaluation_ok"]
             or metrics["legitimate_success_rate"] != 1
-            or metrics["changed_input_episodes"] != 0
+            or clean.get("intervention", {}).get("candidate_changed") is not False
         ):
             raise RuntimeError("Clean smoke check failed; no optimizer session starts")
         if baseline_only:

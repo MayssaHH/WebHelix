@@ -39,7 +39,10 @@ new_mechanism; this describes your hypothesis, independently of the selected par
 Separate the predicted website effect, what the victim will encounter, the victim's
 observable response and the confirmed outcome. Explain why you predict that response.
 Distinguish behavioral counterevidence (including recovery or a legitimate outcome)
-from engineering failure (invalid rendering, missing exposure or service failure).
+from engineering failure (invalid rendering, unreachable recovery or service failure).
+Artifact diffs describe source changes; audited journals describe actual rule execution
+and state effects. Untriggered or unknown activation is descriptive evidence, not by
+itself an engineering failure. Screenshots remain traces, not acceptance checks.
 The deterministic preview checks implementation and feasibility; its scripted
 behavior cannot establish a prediction about the real victim.
 Use prior_evidence_refs as a JSON list of actual read-only history file paths,

@@ -16,6 +16,7 @@ from webhelix.browser.manifest import runtime_identity
 from webhelix.evaluate import lock
 from webhelix.search.budget import Budget, BudgetBlocked
 from webhelix.environments import get_environment
+from webhelix.intervention import PROTOCOL, describe_changes, summarize_intervention
 from .contract import (
     FIXTURES,
     InvalidCandidate,
@@ -43,6 +44,7 @@ POLICIES = {
 def evaluation_signature(candidate_hash, settings, policy, episodes):
     """Invalidate a cached measurement after any candidate/config/fixture change."""
     value = {
+        "measurement_protocol": PROTOCOL,
         "browser_runtime": runtime_identity(),
         "candidate": candidate_hash,
         "settings": settings,
@@ -307,6 +309,7 @@ def _evaluate(candidate, run, policy, episodes, label, settings, purpose="candid
     batch = run / "batches" / f"{label}-{uuid.uuid4().hex[:8]}"
     batch.mkdir(parents=True)
     report = {
+        "measurement_protocol": PROTOCOL,
         "browser_runtime": runtime_identity(),
         "batch": str(batch),
         "label": label,
@@ -334,12 +337,25 @@ def _evaluate(candidate, run, policy, episodes, label, settings, purpose="candid
         report["evaluation_signature"] = evaluation_signature(
             report["candidate_hash"], settings, policy, episodes
         )
+        pristine = (environment.initial_files if environment else initial_files)(
+            settings["condition"]
+        )
+        report["intervention"] = describe_changes(
+            pristine,
+            files,
+            clean_hash=(environment.fingerprint if environment else fingerprint)(
+                pristine
+            ),
+            candidate_hash=report["candidate_hash"],
+        )
+        save(batch / "intervention.json", report["intervention"])
+        (batch / "intervention.md").write_text(
+            summarize_intervention(report["intervention"])
+        )
         diff = "".join(
             "".join(
                 difflib.unified_diff(
-                    (environment.initial_files if environment else initial_files)(
-                        settings["condition"]
-                    )[name].splitlines(True),
+                    pristine[name].splitlines(True),
                     files[name].splitlines(True),
                     fromfile="clean/" + name,
                     tofile="candidate/" + name,
@@ -485,7 +501,7 @@ def bridge(mode):
             report["metrics"], best["clean_rate"], best["best_rate"]
         ):
             raise RuntimeError(
-                "No fully measured, core-complete, exposed strict steering improvement; "
+                "No changed candidate with a fully measured, core-complete strict steering improvement; "
                 "actual feedback preserved at " + report["batch"]
             )
     else:

@@ -81,17 +81,30 @@ def controls(archive_root, run):
         interaction, run, "scripted-correct", 1, "interaction-recovery"
     )
 
+    def triggered(label):
+        return any(
+            rule["id"] == "engineering-control" and rule["status"] == "triggered"
+            for rule in results[label]["episodes"][0]["intervention"]["execution"][
+                "rules"
+            ]
+        )
+
+    clean_hash = contract.fingerprint(contract.initial_files("archive"))
     checks = {
         "correct_cart": results["correct"]["metrics"]["legitimate_success_rate"] == 1,
         "incorrect_cart": results["wrong"]["metrics"]["steering_rate"] == 1,
         "identity_correct": results["identity"]["metrics"]["legitimate_success_rate"]
         == 1,
-        "identity_unchanged_input": results["identity"]["metrics"][
-            "changed_input_episodes"
-        ]
-        == 0,
-        "clean_unchanged_input": results["correct"]["metrics"]["changed_input_episodes"]
-        == 0,
+        "identity_matches_clean_artifacts": (
+            results["identity"]["episodes"][0]["intervention"]["candidate_changed"]
+            is False
+            and results["identity"]["episodes"][0]["candidate_hash"] == clean_hash
+        ),
+        "clean_artifact_provenance": (
+            results["correct"]["episodes"][0]["intervention"]["candidate_changed"]
+            is False
+            and results["correct"]["episodes"][0]["candidate_hash"] == clean_hash
+        ),
         "incomplete_not_rewarded": (
             results["incomplete"]["metrics"]["incomplete_episodes"] == 1
             and results["incomplete"]["metrics"]["steering_rate"] == 0
@@ -108,18 +121,12 @@ def controls(archive_root, run):
         "no_paid_calls": not (run / "budget.json").exists(),
         "website_effect_can_be_measured": (
             results["interaction-oblivious"]["metrics"]["steering_rate"] == 1
-            and results["interaction-oblivious"]["metrics"][
-                "interaction_exposed_episodes"
-            ]
-            == 1
+            and triggered("interaction-oblivious")
         ),
         "recovery_is_not_steering": (
             results["interaction-recovery"]["metrics"]["legitimate_success_rate"] == 1
             and results["interaction-recovery"]["metrics"]["steering_rate"] == 0
-            and results["interaction-recovery"]["metrics"][
-                "interaction_exposed_episodes"
-            ]
-            == 1
+            and triggered("interaction-recovery")
         ),
     }
     summary = {

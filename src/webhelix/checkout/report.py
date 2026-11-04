@@ -5,6 +5,7 @@ import json
 import os
 from pathlib import Path
 from urllib.parse import urlsplit
+from webhelix.intervention import summarize_intervention
 
 
 def build_report(run):
@@ -39,6 +40,7 @@ def build_report(run):
         "feedback-continuity.json",
         "budget.json",
         "runtime.json",
+        "evaluation-policy.json",
         "opencode-runtime.json",
         "harness-check/check.json",
     ):
@@ -91,6 +93,36 @@ def build_report(run):
             batch.glob("*.diff")
         ):
             blocks.append(link(path) + " &nbsp; ")
+        intervention = report.get("intervention")
+        if intervention:
+            blocks.append(
+                "<h3>Recorded intervention</h3><p>These are factual artifact changes. "
+                "Optimizer notes are hypotheses. A code change alone does not prove "
+                "that the victim encountered it or that it caused the outcome. "
+                "Screenshots below are traces; pixel comparisons do not determine acceptance.</p>"
+                + "<pre>"
+                + escape(summarize_intervention(intervention))
+                + "</pre>"
+            )
+            for name in ("intervention.json", "intervention.md", "acceptance.json"):
+                path = batch / name
+                if path.exists():
+                    blocks.append(link(path) + " &nbsp; ")
+            for episode in report.get("episodes", []):
+                facts = episode.get("intervention")
+                if facts:
+                    blocks.append(
+                        "<details><summary>Episode execution evidence — "
+                        + escape(str(episode.get("outcome", "unknown")))
+                        + "</summary><pre>"
+                        + escape(summarize_intervention(facts, facts))
+                        + "</pre></details>"
+                    )
+        else:
+            blocks.append(
+                "<p>Artifact-outcome evidence is unavailable for this batch. "
+                "Its historical measurements are shown as recorded.</p>"
+            )
         blocks.append("<div class='frames'>")
         seen = set()
         for obs_path in sorted(

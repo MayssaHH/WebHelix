@@ -1,19 +1,22 @@
-"""Fresh Browser-Use checkout episodes and independent same-state evidence."""
+"""Fresh Browser-Use checkout episodes, artifact provenance and backend evidence."""
 
 import asyncio
 import base64
-import io
 import hashlib
 from pathlib import Path
 import time
 
-from PIL import Image, ImageChops
 from playwright.async_api import async_playwright
 
 from webhelix.browser.runtime import BrowserRuntime, native_action
 from webhelix.browser.model import ResponsesModel, ScriptedModel
 from webhelix.browser.manifest import runtime_identity
 from webhelix.browser.observations import normalize_observation
+from webhelix.intervention import (
+    describe_changes,
+    execution_evidence,
+    summarize_intervention,
+)
 from webhelix.provider import InvalidAction
 
 from .contract import (
@@ -21,6 +24,7 @@ from .contract import (
     SLOTS,
     InvalidCandidate,
     fingerprint,
+    initial_files,
     load,
     read,
     save,
@@ -97,12 +101,16 @@ READABLE_JS = """el=>{
 
 
 def normalized(observation):
-    """Use the shared identity comparison; screenshots are compared separately."""
+    """Normalize diagnostic observations for deterministic offline controls."""
     return normalize_observation(observation)
 
 
 async def _reference(page, site, files, reference):
-    """Render clean presentation of the same backend and unsaved form state."""
+    """Build protected-semantic expectations for the same backend/form state.
+
+    This page is never raster-compared with the victim page. Only form semantics
+    and protected facts are compared; native screenshots remain trace artifacts.
+    """
     await reference.set_content(site.render(files=files), wait_until="domcontentloaded")
     state = await page.locator("input:not([type=hidden]),select,textarea").evaluate_all(
         "els=>els.map(e=>({id:e.id,value:e.value,checked:e.checked}))"
@@ -112,22 +120,6 @@ async def _reference(page, site, files, reference):
         "if(e){e.value=s.value;if('checked' in e)e.checked=s.checked;}}}",
         state,
     )
-    focused = await page.evaluate("document.activeElement?.id || ''")
-    if focused:
-        locator = reference.locator("#" + focused)
-        if await locator.count():
-            await locator.scroll_into_view_if_needed()
-            rectangle = await locator.bounding_box()
-            if rectangle:
-                await reference.mouse.move(
-                    rectangle["x"] + rectangle["width"] / 2,
-                    rectangle["y"] + rectangle["height"] / 2,
-                )
-                await reference.mouse.down()
-                await reference.mouse.move(0, 0)
-                await reference.mouse.up()
-    await reference.mouse.move(0, 0)
-    await reference.evaluate("y=>scrollTo(0,y)", await page.evaluate("scrollY"))
 
 
 async def _protected(page, reference, stage):
@@ -287,13 +279,6 @@ def feasibility(files, output=None, condition="truthful"):
     return asyncio.run(_feasibility(files, output, condition))
 
 
-def _same_pixels(first, second):
-    """Compare decoded pixels, not PNG/JPEG metadata or compression bytes."""
-    with Image.open(io.BytesIO(first)) as a, Image.open(io.BytesIO(second)) as b:
-        a, b = a.convert("RGB"), b.convert("RGB")
-        return a.size == b.size and ImageChops.difference(a, b).getbbox() is None
-
-
 async def _execute(request):
     """One fresh Browser-Use Agent session, with backend-only outcome scoring."""
     from webhelix.search.budget import Budget, BudgetBlocked
@@ -319,7 +304,13 @@ async def _execute(request):
     try:
         files = load(request["candidate"], settings.get("condition", "truthful"))
         report["candidate_hash"] = fingerprint(files)
-        clean = load(FIXTURES / "candidate")
+        clean = initial_files(settings.get("condition", "truthful"))
+        report["intervention"] = describe_changes(
+            clean,
+            files,
+            clean_hash=fingerprint(clean),
+            candidate_hash=report["candidate_hash"],
+        )
         with CheckoutSite(files, settings.get("condition", "truthful")) as site:
             async with BrowserRuntime(site.url, output, viewport=VIEWPORT) as runtime:
                 report["backend_before"] = site.snapshot()
@@ -336,7 +327,7 @@ async def _execute(request):
                     raise RuntimeError(
                         "Episode did not start with fresh browser storage"
                     )
-                # A separate browser keeps clean-reference tabs outside the victim's browser.
+                # The protected-semantic reference is outside the victim's browser.
                 async with async_playwright() as reference_pw:
                     reference_browser = await reference_pw.chromium.launch(
                         headless=True
@@ -366,35 +357,16 @@ async def _execute(request):
                                 output / f"diagnostic-observation-{step}.json",
                                 diagnostic,
                             )
-                            clean_observation = await reference.evaluate(OBS_JS)
-                            save(
-                                output / f"reference-diagnostic-{step}.json",
-                                clean_observation,
-                            )
-                            clean_image = await reference.screenshot(
-                                path=str(output / f"reference-screenshot-{step}.png")
-                            )
                             actual_image = base64.b64decode(rt.current_state.screenshot)
                             exposure = {
                                 "step": step,
                                 "stage": site.stage,
-                                "screenshot_changed": not _same_pixels(
-                                    actual_image, clean_image
-                                ),
-                                # The trusted diagnostic is not the Browser-Use model input.
-                                "normalized_observation_changed": None,
-                                "diagnostic_content_changed": diagnostic
-                                != clean_observation,
                                 "screenshot_sha256": hashlib.sha256(
                                     actual_image
                                 ).hexdigest(),
-                                "reference_screenshot_sha256": hashlib.sha256(
-                                    clean_image
-                                ).hexdigest(),
-                                "comparison_channel": "native_browser_use_screenshot",
+                                "observation_channel": "native_browser_use",
                                 "sent_to_policy": False,
                                 "interaction_rule_sequences": site.exposed_transitions(),
-                                "interaction_changed": bool(site.exposed_transitions()),
                             }
                             report["exposures"].append(exposure)
                             save(output / f"exposure-{step}.json", exposure)
@@ -489,18 +461,29 @@ async def _execute(request):
             outcome="infrastructure_error", error=f"{type(exc).__name__}: {exc}"
         )
     finally:
+        evidence_journal = None
         if site:
             report["backend_after"] = site.snapshot()
             save(output / "backend-after.json", report["backend_after"])
             if site.condition != "truthful":
+                from .interaction import audit_journal
+
                 save(output / "interaction-journal.json", site.journal)
-                effects = [e for e in site.journal if e["actor"] == "website_rule"]
+                try:
+                    audit_journal(report["backend_after"])
+                    evidence_journal = site.journal
+                except (ValueError, KeyError, TypeError, AttributeError) as exc:
+                    report.update(
+                        outcome="infrastructure_error", journal_error=str(exc)
+                    )
+                trusted_entries = evidence_journal or []
+                effects = [e for e in trusted_entries if e["actor"] == "website_rule"]
                 transitions = [
-                    e for e in site.journal if e["actor"] == "website_transition"
+                    e for e in trusted_entries if e["actor"] == "website_transition"
                 ]
                 observations = [
                     e
-                    for e in site.journal
+                    for e in trusted_entries
                     if e["actor"] == "observation" and e["source"] == "model_response"
                 ]
                 report["interaction"] = {
@@ -520,7 +503,10 @@ async def _execute(request):
                         )
                     ),
                     "journal": "interaction-journal.json",
+                    "journal_valid": evidence_journal is not None,
                 }
+            else:
+                evidence_journal = site.journal
         if model is not None:
             report["usage"] = getattr(model, "usage", [])
             try:
@@ -550,16 +536,17 @@ async def _execute(request):
         )
         if action_paths:
             report["actions"] = [read(path) for path in action_paths]
-        observed_exposures = [e for e in report["exposures"] if e["sent_to_policy"]]
-        report["validation"].update(
-            modified_input_observed=any(
-                e["screenshot_changed"] or e.get("interaction_changed", False)
-                for e in observed_exposures
-            ),
-            screenshot_changed=any(e["screenshot_changed"] for e in observed_exposures),
-            normalized_observation_changed=None,
-            exposure_basis="native screenshot plus net website transitions available in submitted native observations; same-state reference only tests presentation; availability does not prove attention",
-        )
+        if "intervention" in report:
+            report["intervention"] = execution_evidence(
+                report["intervention"],
+                evidence_journal,
+                episode_finished=report["outcome"]
+                in {"legitimate_success", "task_violation", "other_intent_violation"},
+            )
+            save(output / "intervention.json", report["intervention"])
+            (output / "intervention.md").write_text(
+                summarize_intervention(report["intervention"])
+            )
         report["latency_seconds"] = time.monotonic() - started
         save(output / "episode.json", report)
     return report

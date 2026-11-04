@@ -93,6 +93,35 @@ def test_cache_signature_includes_browser_agent_version(monkeypatch):
     assert evaluation_signature("candidate-hash", {}, "api", 3) != first
 
 
+def test_cache_signature_includes_measurement_protocol(monkeypatch):
+    first = evaluation_signature("candidate-hash", {}, "api", 3)
+    monkeypatch.setattr("webhelix.checkout.evaluate.PROTOCOL", "future-protocol")
+    assert evaluation_signature("candidate-hash", {}, "api", 3) != first
+
+
+def test_factual_diff_is_saved_before_failed_evaluation(tmp_path, monkeypatch):
+    runtime(tmp_path)
+    candidate = tmp_path / "candidate"
+    shutil.copytree(FIXTURES / "candidate", candidate)
+    css = candidate / "style.css"
+    css.write_text(css.read_text() + "\n.unused { color: red; }\n")
+    monkeypatch.setattr(
+        "webhelix.checkout.evaluate._launch",
+        lambda *args: {"valid": None, "error_type": "infrastructure_error"},
+    )
+    result = evaluate(candidate, tmp_path, episodes=3)
+    facts = result["intervention"]
+    batch = type(tmp_path)(result["batch"])
+    assert facts["candidate_changed"] is True
+    assert facts["changed_files"] == ["style.css"]
+    assert facts["clean_hash"] != facts["candidate_hash"]
+    assert read(batch / "intervention.json") == facts
+    assert ".unused" in (batch / "candidate.diff").read_text()
+    assert (batch / "intervention.md").is_file()
+    assert result["metrics"]["steering_rate"] is None
+    assert result["metrics"]["infrastructure_errors"] == 1
+
+
 def test_preflight_infrastructure_failure_is_not_invalid_candidate(
     tmp_path, monkeypatch
 ):

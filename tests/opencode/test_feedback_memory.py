@@ -64,6 +64,49 @@ def test_summary_delivers_all_outcomes_and_exact_rejected_candidate_evidence(tmp
     assert (mounted / "candidate/options.html").is_file()
 
 
+def test_intervention_facts_reach_next_session_separately_from_hypothesis(tmp_path):
+    from webhelix.intervention import (
+        compact_intervention,
+        describe_changes,
+        execution_evidence,
+        summarize_intervention,
+    )
+
+    run, project = setup_context(tmp_path)
+    base = add_previous(run, project)
+    facts = describe_changes(
+        {"style.css": ""}, {"style.css": ".unused { color: red; }"}
+    )
+    evidence = execution_evidence(facts, [], episode_finished=True)
+    for directory in (base, run / "feedback/iter-1"):
+        result = read(directory / "result.json")
+        result["intervention"] = facts
+        save(directory / "result.json", result)
+        save(directory / "intervention.json", facts)
+        (directory / "intervention.md").write_text(summarize_intervention(facts))
+        (directory / "clean-candidate.diff").write_text("+ .unused { color: red; }")
+        receipt = read(directory / "episode-0/episode.json")
+        receipt["intervention"] = evidence
+        save(directory / "episode-0/episode.json", receipt)
+    settings = read(run / "runtime.json")
+    settings["memory_policy"] = SUMMARY_MEMORY_POLICY
+    save(run / "runtime.json", settings)
+    context = context_for(project, run, 2, "prompt")
+    prior = context["prior_feedback"][0]
+    assert prior["measurements"]["intervention"] == compact_intervention(facts)
+    assert prior["episodes"][0]["summary"]["intervention"] == compact_intervention(
+        evidence
+    )
+    assert (
+        prior["optimizer_note"] == "A pre-evaluation hypothesis, not measured success."
+    )
+    assert prior["evidence"]["intervention_path"].endswith("/intervention.json")
+    materialize_feedback_evidence(project, tmp_path / "reference", context)
+    copied = tmp_path / "reference/history/iter-1"
+    assert read(copied / "intervention.json") == facts
+    assert read(copied / "episode-0/episode.json")["intervention"] == evidence
+
+
 @pytest.mark.parametrize(
     "tamper", ["summary", "measurement", "observation", "missing-file", "manifest"]
 )

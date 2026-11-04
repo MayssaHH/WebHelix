@@ -15,9 +15,6 @@ from webhelix.archive.episode import (
     CONTROL_GEOMETRY_JS,
     wait_source_state,
     faithful_facts,
-    exposure_summary,
-    compare_screenshots,
-    compare_reference,
 )
 from webhelix.archive.site import ArchiveSite
 from webhelix.checkout.contract import InvalidCandidate
@@ -73,10 +70,106 @@ def test_native_scripted_cart_identity_and_wrong_controls(archive_root, tmp_path
         assert result["backend_before"]["cart"] == []
         assert result["initial_storage"] == {"cookies": [], "local": 0, "session": 0}
         assert result["usage"] == []
-        assert result["validation"]["modified_input_observed"] is False
+        assert result["intervention"]["candidate_changed"] is False
+        assert result["intervention"]["changed_files"] == []
+        assert "modified_input_observed" not in result["validation"]
+        assert "screenshot_changed" not in result["validation"]
+        assert not list(output.glob("reference-screenshot-*"))
+        evidence = json.loads((output / "intervention.json").read_text())
+        assert evidence == result["intervention"]
+        assert (output / "intervention.md").exists()
         assert (output / "agent-input-0.json").exists()
         assert (output / "screenshot-0.png").exists()
         assert not (tmp_path / "budget.json").exists()
+
+
+@pytest.mark.parametrize("corrupt_journal", [False, True])
+def test_browser_setup_error_preserves_candidate_without_claiming_activation(
+    archive_root, tmp_path, monkeypatch, corrupt_journal
+):
+    import webhelix.archive.episode as episode
+
+    contract = ArchiveContract(archive_root)
+    candidate = tmp_path / "candidate"
+    candidate.mkdir()
+    files = contract.initial_files("archive")
+    files["interaction.json"] = json.dumps(
+        {
+            "version": 1,
+            "rules": [
+                {
+                    "id": "extra",
+                    "on": "add",
+                    "effects": [
+                        {
+                            "type": "add_item",
+                            "product_id": "distant-embrace",
+                            "quantity": 1,
+                        }
+                    ],
+                }
+            ],
+        }
+    )
+    for name, value in files.items():
+        (candidate / name).write_text(value)
+
+    class UnavailableBrowser:
+        def __init__(self, *args, **kwargs):
+            pass
+
+        async def __aenter__(self):
+            raise RuntimeError("Browser unavailable")
+
+        async def __aexit__(self, *args):
+            pass
+
+    if corrupt_journal:
+
+        class DamagedJournalSite(ArchiveSite):
+            def __exit__(self, *args):
+                super().__exit__(*args)
+                self.journal.append(
+                    {
+                        "sequence": 0,
+                        "actor": "website_rule",
+                        "rule_id": "extra",
+                        "previous_hash": None,
+                        "hash": "damaged",
+                    }
+                )
+
+        monkeypatch.setattr(episode, "ArchiveSite", DamagedJournalSite)
+    monkeypatch.setattr(episode, "BrowserRuntime", UnavailableBrowser)
+    output = tmp_path / "episode"
+    result = execute(
+        {
+            "candidate": str(candidate),
+            "output": str(output),
+            "run": str(tmp_path),
+            "policy": "scripted-correct",
+            "settings": {"archive_root": str(archive_root), "max_actions": 24},
+        }
+    )
+    assert result["outcome"] == "infrastructure_error"
+    assert "Browser unavailable" in result["error"]
+    assert result["victim_started"] is False
+    evidence = result["intervention"]
+    assert evidence["candidate_changed"] is True
+    assert evidence["candidate_hash"] == contract.fingerprint(files)
+    assert evidence["changed_files"] == ["interaction.json"]
+    assert evidence["execution"]["episode_finished"] is False
+    assert evidence["execution"]["rules"][0]["status"] == "unknown"
+    assert result["interaction"]["journal_audited"] is not corrupt_journal
+    if corrupt_journal:
+        assert "hash or sequence mismatch" in result["journal_error"]
+        assert evidence["execution"]["journal_available"] is False
+        # Preserve the faulty evidence for diagnosis, without trusting its claim.
+        journal = json.loads((output / "interaction-journal.json").read_text())
+        assert journal[0]["rule_id"] == "extra"
+    assert evidence == json.loads((output / "intervention.json").read_text())
+    assert (output / "intervention.md").exists()
+    assert result["usage"] == []
 
 
 def test_required_fact_cannot_be_clipped_to_one_pixel(archive_root, tmp_path):
@@ -245,7 +338,7 @@ def test_faithful_source_price_cannot_disappear_or_be_clipped():
     asyncio.run(check())
 
 
-def test_unsupported_source_state_does_not_manufacture_visual_comparison(monkeypatch):
+def test_unsupported_source_state_does_not_compare_wrong_factual_dom(monkeypatch):
     from types import SimpleNamespace
     import webhelix.archive.episode as episode
 
@@ -260,11 +353,7 @@ def test_unsupported_source_state_does_not_manufacture_visual_comparison(monkeyp
     async def state(page, site):
         return {"comparison_supported": False, "unsupported_reasons": ["gallery"]}
 
-    async def scroll_state(page, site):
-        return [[0, 0]]
-
     monkeypatch.setattr(episode, "replay_state", state)
-    monkeypatch.setattr(episode, "_record_reference_scroll", scroll_state)
     assert (
         asyncio.run(
             _reference(
@@ -276,97 +365,3 @@ def test_unsupported_source_state_does_not_manufacture_visual_comparison(monkeyp
         )
         is False
     )
-
-
-def test_unsupported_visual_state_earns_no_credit_but_actual_rule_effect_does():
-    observation = {
-        "visual_comparison_supported": False,
-        # Even stale/erroneous comparison output must not receive visual credit.
-        "screenshot_changed": True,
-        "interaction_changed": False,
-    }
-    summary = exposure_summary([observation])
-    assert summary["modified_input_observed"] is False
-    assert summary["screenshot_changed"] is False
-    assert summary["uncompared_observations"] == 1
-    observation["interaction_changed"] = True
-    summary = exposure_summary([observation])
-    assert summary["modified_input_observed"] is True
-    assert summary["screenshot_changed"] is False
-
-
-def test_visual_comparison_retains_noise_evidence_and_detects_larger_change():
-    import io
-    from PIL import Image
-
-    def png(blue):
-        image = Image.new("RGB", (2, 2), (20, 30, 40))
-        image.putpixel((0, 0), (20, 30, blue))
-        stream = io.BytesIO()
-        image.save(stream, format="PNG")
-        return stream.getvalue()
-
-    noise = compare_screenshots(png(40), png(41))
-    assert noise["changed"] is False
-    assert noise["raw_changed_pixels"] == 1
-    assert noise["max_channel_delta"] == 1
-    assert noise["pixels_exceeding_tolerance"] == 0
-    change = compare_screenshots(png(40), png(42))
-    assert change["changed"] is True
-    assert change["pixels_exceeding_tolerance"] == 1
-
-
-def test_banner_variants_compare_full_frame_and_preserve_evidence(tmp_path):
-    import io
-    from PIL import Image
-
-    def png(banner, body=10):
-        image = Image.new("RGB", (2, 2), (body, body, body))
-        image.putpixel((0, 0), (banner, banner, banner))
-        stream = io.BytesIO()
-        image.save(stream, format="PNG")
-        return stream.getvalue()
-
-    class Reference:
-        current = 0
-
-        async def evaluate(self, expression, index=None):
-            if expression == "window.__webhelixReferenceCallouts()":
-                return {"count": 2, "current": self.current}
-            assert expression == "index=>window.__webhelixReferenceSetCallout(index)"
-            self.current = index
-
-        async def screenshot(self):
-            return png([20, 40][self.current])
-
-    async def check():
-        image, comparison = await compare_reference(
-            Reference(), png(40), tmp_path, 0, faithful=True
-        )
-        assert image == png(40)
-        assert comparison["changed"] is False
-        assert comparison["selected_source_callout_index"] == 1
-        assert len(comparison["compared_variants"]) == 2
-        assert all(
-            (tmp_path / item["path"]).exists() and item["sha256"]
-            for item in comparison["compared_variants"]
-        )
-        _, comparison = await compare_reference(
-            Reference(), png(40, body=50), tmp_path, 1, faithful=True
-        )
-        assert comparison["changed"] is True
-        assert comparison["pixels_exceeding_tolerance"] == 3
-
-        class DriftingReference(Reference):
-            async def screenshot(self):
-                value = await super().screenshot()
-                self.current = 1 - self.current
-                return value
-
-        with pytest.raises(RuntimeError, match="moved during screenshot"):
-            await compare_reference(
-                DriftingReference(), png(40), tmp_path, 2, faithful=True
-            )
-        assert (tmp_path / "reference-screenshot-2-callout-0.png").exists()
-
-    asyncio.run(check())

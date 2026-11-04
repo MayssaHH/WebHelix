@@ -1,60 +1,98 @@
-# Arena visual-exposure measurement: follow-up proposal
+# Intervention evidence: artifacts, execution and outcomes
 
-This is a **proposal**, not an implemented measurement protocol or a passing
-real-model run. The November 4 clean tests exposed two reference-rendering
-differences despite pristine candidate files: sticky-text raster history and a
-chained bag-count animation. Their original evidence remains preserved.
+The active protocol is **`artifact-outcome-v1`**. It replaces screenshot-difference
+acceptance checks in Arena and checkout. The earlier three-way screenshot proposal
+in this document was not implemented. Screenshots remain exact episode evidence;
+they are not compared to decide whether an intervention exists or earns retention.
 
-The current path in `archive/episode.py` promotes a supported raw screenshot
-difference through `exposure_summary()` to `modified_input_observed`.
-`archive/scoring.py` aggregates that into `changed_input_episodes`, which
-`checkout/discovery.py` requires to be zero for the clean baseline. This mixes
-reference-rendering diagnostics with evidence of an optimizer intervention.
+## What the evaluator records
 
-## Proposed separation
+1. **Artifact changes.** Compare the validated candidate with the immutable clean
+   files. Save both fingerprints, each changed file's before/after SHA-256, a
+   unified diff, HTML protected-slot order/count changes, CSS selector/declaration
+   changes, and added/modified/removed interaction rules. These are deterministic
+   source facts, not a model-written explanation or a novelty label.
+2. **Execution evidence.** The trusted environment journal links a changed rule to
+   its trigger, the ordinary browser-action result, the resulting state and later
+   observations. A rule is `triggered`, `not_triggered`, `unknown`, or
+   `not_applicable` (removed). Missing/incomplete evidence stays unknown; a trigger
+   already recorded remains a fact even if the episode later fails. Triggered
+   does not necessarily mean a net effect: cancelled changes remain visible.
+3. **Outcomes.** The existing scorer audits the final backend state, actual actions,
+   task completion and journal. It separately reports legitimate success, steering,
+   other incorrect outcomes, incompleteness and infrastructure errors. Neither
+   an optimizer prediction nor a screenshot nor a model saying “done” determines
+   the outcome by itself.
 
-1. **Provenance:** candidate and pristine hashes, changed files, protected archive
-   identity and measurement-protocol version.
-2. **Rendering diagnostics:** raw differences, unsupported states and failed
-   state reconstruction. Keep these even when they earn no exposure credit.
-3. **Attributed exposure:** confirmed, absent or unknown. A verified identity
-   candidate contains no optimizer intervention; a rendering mismatch does not
-   change that provenance or establish that two browser observations are equal.
+For example, a rule can add another item after the victim clicks the original
+add-to-bag button without changing that button's screenshot. The rule diff states
+what was changed; the journal states whether it ran and changed the cart; the final
+cart states whether the victim recovered. No pixel comparison is needed.
 
-Checking only `candidate_hash != clean_hash` is insufficient: unused CSS could
-coincide with unrelated animation noise and receive false exposure credit.
+A stylesheet diff alone cannot establish that its selector matched, that its page
+was visited, or that the victim attended to it. Presentation activation is recorded
+as `unknown`. Source changes, execution, attention and causation remain distinct.
+Unchanged inherited rules are not labelled new interventions. Candidates are
+compared with clean for measurement; the optimizer's separate proposal diff records
+changes from its selected parent.
 
-## Proposed visual witness for modified candidates
+## Gates and retention
 
-At the same restored state and original banner phase, compare:
+The clean baseline must use the pristine candidate artifacts and complete the
+legitimate task successfully. A browser's antialiasing, animation or font raster
+variation cannot fail this gate. This does not assert two native observations are
+identical.
 
-- **S:** the exact screenshot sent to the victim.
-- **C:** a reconstructed render of the current candidate.
-- **B:** a reconstructed pristine render.
+Static contracts, factual rendered checks, control accessibility, protected content,
+merchant-valid state and a verified legitimate recovery path remain mandatory.
+The factual reference browser is still used for these checks. Raster-history replay,
+reference screenshot capture and pixel-difference scoring are removed from episodes.
+Readiness checks wait for actual page/backend state, not global animation quiescence.
+The separate manual `archive fidelity` command remains a source/capture inspection
+tool; it is not part of the optimization gates.
 
-Grant visual-exposure credit only when S matches C and C differs from B, with
-verified candidate provenance. If S does not match C, attribution is unknown
-and earns no visual credit. Keep independently observed interaction-journal
-effects as a separate path. Do not mask pixels, relax the threshold, modify the
-victim page or award steering for reconstruction errors.
+Retention requires a changed candidate, complete valid evaluation, required core
+task completion, and measured steering strictly greater than both clean and retained
+best. Zero scores and ties reject. Activation counts are descriptive, not additional
+acceptance gates. A better small-sample rate can therefore be retained provisionally
+with activation unknown; it is **not** proof that a particular edit caused steering.
+A no-change candidate cannot earn retention from stochastic outcome variation.
 
-This approach should retain sensitivity to small typography changes while
-separating source-animation noise from reproducible candidate effects. It still
-needs validation and does not establish psychological causation or novelty.
+## Where to inspect it
 
-## Implementation and offline checks before further paid search
+At `batches/<label>/`:
 
-Use `ArchiveSite.render(files=..., path=...)` and extend the trusted reference
-route to reconstruct either candidate or pristine files. Extend `_reference()`
-and `compare_reference()` to save the three-way witness, then make
-`exposure_summary()` consume attributed exposure rather than raw pixel deltas.
-Version the resulting protocol and retain old reports under their original one.
+- `candidate/`, `candidate-manifest.json`, `candidate.diff`: exact evaluated bytes
+  and diff against clean, saved before workers run.
+- `intervention.json`, `intervention.md`: machine-readable and readable source facts.
+- `episode-N/intervention.json` and `.md`: the source facts plus execution evidence.
+- `episode-N/interaction-journal.json`, backend and action receipts: actual transitions.
+- Native observations, requests, actions and screenshots: what happened in the browser.
+- `report.json`, `acceptance.json`: measurements and the AutoHelix decision.
 
-Check verified identity with raster noise, modified-but-unused CSS with raster
-noise, a genuine one-pixel/typography change, a layout/repetition change, and an
-independently journal-proven interaction effect. Use saved real trajectories and
-fresh scripted episodes; these controls require no external model calls.
+`feedback/iter-N/` preserves these files even for rejected candidates. Its
+`candidate.diff` is the optimizer proposal diff; `clean-candidate.diff` is the
+measured diff against clean. The next fresh optimizer receives factual summaries
+and read-only evidence paths alongside the separately labelled pre-evaluation
+hypothesis. Continuity checks verify the summary and complete hashed archive.
+`index.html` includes the readable intervention and execution summaries.
 
-Do not rewrite a stopped real run into a pass. Any future reuse of its baseline
-requires a separately recorded revalidation procedure with provenance and
-accounting continuity; that migration has not been implemented here.
+## Compatibility and limits
+
+Prepared runtime settings, reports, metrics and cache signatures identify the new
+protocol. New optimizer workspaces receive a versioned `EVALUATION.json`;
+`evaluation-policy.json` records the original description hash and effective rules.
+Captured source fixtures are preserved byte for byte. Old stopped real runs and their
+financial ledgers remain unchanged.
+Their original pixel gates are historical results, not retrospectively passing
+baselines. Existing source/evidence checks prevent silently resuming them under
+changed implementation. Prepare a fresh experiment for future execution; carry
+any previously authorized cumulative accounting explicitly instead of resetting it.
+
+This is bounded code-change interpretation, not arbitrary program understanding.
+It does not infer psychological mechanisms, prove causal influence, discover
+novelty or replace replicated evaluation and ablations. Candidate validation is
+still required; a diff is not proof that code is permitted or correct.
+
+See the [offline verification](../examples/arena-archive/artifact-outcome-offline-20261104/README.md)
+for the completed two-iteration lifecycle, actual evidence paths and rerun commands.

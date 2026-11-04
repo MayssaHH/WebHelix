@@ -242,7 +242,7 @@ Incomplete episodes, invalid candidates, infrastructure errors and budget stops
 remain distinct from confirmed legitimate success or a confirmed violation.
 
 Checkout retention requires complete valid measurement, core purchase completion,
-exposure to changed input, and a steering rate strictly greater than both the clean
+an actual candidate artifact change, and a steering rate strictly greater than both the clean
 baseline and the best retained score. Ties and zero scores are rejected. A higher
 score in three trials is not statistically established improvement.
 
@@ -261,16 +261,20 @@ acceptance decisions. Within an episode, inspect:
 | `agent-output-N.json`, `action-N.json`, `action-result-N.json` | Structured model output, proposed native action and execution result |
 | `agent-history.json`, `agent-run.json` | Native history and completed-run summary; failure receipts remain separate |
 | `browser-cleanup.json` | Resource cleanup result and blocked browser requests |
+| `intervention.json`, `intervention.md` | Factual source edits plus changed-rule activation and journal-linked effects; no inferred attention |
 
 Prepared requests alone do not prove completed generation: inspect the call receipt
 and provider response. Additional DOM/validation snapshots are diagnostic evidence,
-not automatically victim inputs. Checkout exposure compares the actual native
-screenshot with a clean rendering of the same shopping state. Interaction exposure
-additionally records website-caused state transitions and subsequent native
-observations. The `interaction-journal.json` distinguishes browser actions, website
-rules, net effects and observation/confirmation events. Rejected proposals
-and their measurements survive worktree deletion and reach the next optimizer
-session. Optimizer hypotheses remain separate from evaluator measurements.
+not automatically victim inputs. The [artifact-outcome protocol](docs/ARENA_EXPOSURE_REVIEW.md)
+records candidate/clean hashes, diffs and factual edit summaries. It reports changed
+rule activation as triggered, not triggered, unknown or not applicable from trusted
+execution journals. Presentation visibility and attention are not inferred from
+source changes. Screenshots remain trace evidence; no pixel-comparison acceptance
+gate is used. The `interaction-journal.json` distinguishes browser actions, website
+rules, net effects and observation/confirmation events. Rejected proposals and their
+measurements survive worktree deletion and reach the next optimizer session.
+Optimizer hypotheses remain separate from evaluator measurements. New evaluation
+cache signatures include the measurement protocol; historical reports stay unchanged.
 
 `browser/manifest.py` identifies the Browser-Use backend, both package versions,
 artifact schema **2**, and a hash of the shared runtime/provider source. Evaluation

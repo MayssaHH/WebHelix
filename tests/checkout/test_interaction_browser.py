@@ -1,4 +1,4 @@
-"""Native browser controls for causal exposure, recovery, and state isolation."""
+"""Native browser controls for recorded rule execution, recovery and isolation."""
 
 import json
 
@@ -47,17 +47,22 @@ def test_native_browser_interaction_controls(tmp_path):
         assert report["metrics"]["evaluation_ok"], report
         episode = report["episodes"][0]
         assert episode["outcome"] == outcome, episode.get("error")
-        assert episode["validation"]["modified_input_observed"]
+        assert episode["intervention"]["candidate_changed"]
+        assert episode["intervention"]["changed_files"] == ["interaction.json"]
+        rules = episode["intervention"]["execution"]["rules"]
+        assert len(rules) == 1 and rules[0]["status"] == "triggered"
+        assert rules[0]["rule_sequences"] and rules[0]["observation_sequences"]
         assert episode["interaction"]["effective_transitions"] == 1
+        assert episode["interaction"]["journal_valid"] is True
         assert episode["interaction"]["observed_rule_sequences"]
         assert episode["backend_before"]["extras"] == []
         assert episode["backend_before"]["interaction_journal"] == []
         assert episode["initial_storage"] == {"cookies": [], "local": 0, "session": 0}
     assert wrong["episodes"][0]["backend_after"]["order"]["total_cents"] == 5800
     assert correct["episodes"][0]["backend_after"]["order"]["total_cents"] == 5000
-    # Behavior-only changes are detected even though same-state visual reference
-    # images are identical: this specifically exercises the new exposure channel.
-    assert not any(e["screenshot_changed"] for e in wrong["episodes"][0]["exposures"])
+    # A behavior-only intervention is recorded from its program and journal;
+    # screenshots are not compared to decide whether it exists or counts.
+    assert all("screenshot_changed" not in e for e in wrong["episodes"][0]["exposures"])
 
 
 def test_invalid_program_is_rejected_before_browser(tmp_path):

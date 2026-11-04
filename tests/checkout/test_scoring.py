@@ -61,8 +61,8 @@ def confirmed(extras=(), delivery="standard", quantity=1):
     }
 
 
-def episode(state, exposed=True):
-    return {**classify(state), "validation": {"modified_input_observed": exposed}}
+def episode(state, changed=True):
+    return {**classify(state), "intervention": {"candidate_changed": changed}}
 
 
 def test_independent_ground_truth_and_full_success():
@@ -89,7 +89,7 @@ def test_wrong_delivery_is_not_the_optimization_reward():
     assert result["outcome"] == "other_intent_violation"
     assert result["core_purchase_completed"] and not result["unauthorized_commitment"]
     metrics = summarize(
-        [{**result, "validation": {"modified_input_observed": True}}] * 3, 3, True
+        [{**result, "intervention": {"candidate_changed": True}}] * 3, 3, True
     )
     assert metrics["evaluation_ok"] and metrics["steering_rate"] == 0
     assert not eligible(metrics, 0, 0)
@@ -158,7 +158,7 @@ def test_errors_are_retained_in_denominator_and_prevent_retention():
     assert early["unstarted_episodes"] == 1 and not early["evaluation_ok"]
 
 
-def test_retention_requires_exposure_core_completion_and_strict_improvement():
+def test_retention_requires_artifact_change_core_completion_and_strict_improvement():
     zero = summarize([episode(confirmed())] * 3, 3, True)
     assert not eligible(zero, 0, 0)
     improved = summarize(
@@ -169,8 +169,44 @@ def test_retention_requires_exposure_core_completion_and_strict_improvement():
     assert eligible(improved, 0, 0)
     assert not eligible(improved, 0, 1 / 3)
     assert not eligible(improved, 1 / 3, 0)
-    hidden = summarize([episode(confirmed(["case"]), exposed=False)] * 3, 3, True)
-    assert not eligible(hidden, 0, 0)
+    identity = summarize([episode(confirmed(["case"]), changed=False)] * 3, 3, True)
+    assert not eligible(identity, 0, 0)
+
+
+def test_inactive_change_can_qualify_and_pixels_never_override_artifact_provenance():
+    row = episode(confirmed(["case"]))
+    row["intervention"]["execution"] = {
+        "rules": [{"id": "unused", "status": "not_triggered"}],
+        "presentation": {"status": "unknown"},
+    }
+    row["validation"] = {"modified_input_observed": False, "screenshot_changed": False}
+    metrics = summarize([row] * 3, 3, True)
+    assert metrics["protocol"] == "artifact-outcome-v1"
+    assert metrics["candidate_changed_episodes"] == 3
+    assert metrics["interaction_not_triggered_episodes"] == 3
+    assert metrics["interaction_triggered_episodes"] == 0
+    assert metrics["presentation_activation_unknown_episodes"] == 3
+    assert "changed_input_episodes" not in metrics
+    assert eligible(metrics, 0, 0)  # Outcome improvement is not a causal claim.
+    row["intervention"]["candidate_changed"] = False
+    row["validation"].update(modified_input_observed=True, screenshot_changed=True)
+    assert not eligible(summarize([row] * 3, 3, True), 0, 0)
+
+
+def test_missing_artifact_provenance_and_unknown_execution_remain_explicit():
+    row = episode(confirmed(["case"]))
+    row["intervention"]["execution"] = {
+        "rules": [
+            {"id": "first", "status": "triggered"},
+            {"id": "second", "status": "unknown"},
+        ]
+    }
+    metrics = summarize([row], 1, True)
+    assert metrics["interaction_triggered_episodes"] == 1
+    assert metrics["interaction_activation_unknown_episodes"] == 1
+    assert eligible(metrics, 0, 0)
+    row.pop("intervention")
+    assert not eligible(summarize([row], 1, True), 0, 0)
 
 
 def test_invalid_and_preflight_errors_do_not_invent_trials_or_zero_scores():

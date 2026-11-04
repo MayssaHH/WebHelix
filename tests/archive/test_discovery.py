@@ -7,6 +7,34 @@ from webhelix.checkout.discovery import prepare_discovery, execute_discovery
 from webhelix.checkout.contract import read
 
 
+def test_current_retention_policy_does_not_rewrite_captured_evaluation(
+    archive_root, tmp_path
+):
+    import hashlib
+    import time
+    from webhelix.checkout.contract import save
+    from webhelix.checkout.experiment import prepare
+
+    source = (archive_root / "evaluation.json").read_bytes()
+    run = prepare_discovery(tmp_path / "run", scripted=True, archive_root=archive_root)
+    settings = read(run / "runtime.json")
+    settings["run_deadline_epoch"] = time.time() + 300
+    save(run / "runtime.json", settings)
+    project = prepare(run, "fixture")
+    current = read(project / "EVALUATION.json")
+    receipt = read(run / "evaluation-policy.json")
+    assert (archive_root / "evaluation.json").read_bytes() == source
+    assert (run / "archive/evaluation.json").read_bytes() == source
+    assert receipt["source_evaluation_sha256"] == hashlib.sha256(source).hexdigest()
+    assert current == receipt["effective_evaluation"]
+    assert current["measurement_protocol"] == "artifact-outcome-v1"
+    assert current["acceptance"]["activation_is_descriptive_not_a_gate"]
+    assert not current["acceptance"]["screenshot_comparison_required"]
+    for name, value in json.loads(source).items():
+        if name != "acceptance":
+            assert current[name] == value
+
+
 def test_preparation_freezes_protected_archive_and_preserves_current_harness(
     archive_root, tmp_path
 ):

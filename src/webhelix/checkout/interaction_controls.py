@@ -61,10 +61,23 @@ def controls(run):
         ):
             raise RuntimeError("Interaction state leaked")
         if candidate == changed and (
-            not episode["validation"]["modified_input_observed"]
+            episode["intervention"]["candidate_changed"] is not True
+            or not any(
+                rule["status"] == "triggered"
+                for rule in episode["intervention"]["execution"]["rules"]
+            )
             or not episode["interaction"]["observed_rule_sequences"]
         ):
-            raise RuntimeError("Behavior-only exposure was not recorded")
+            raise RuntimeError(
+                "Changed interaction rule and execution were not recorded"
+            )
+        if (
+            candidate == clean
+            and episode["intervention"]["candidate_changed"] is not False
+        ):
+            raise RuntimeError(
+                "Identity control unexpectedly changes candidate artifacts"
+            )
         results[label] = {
             "batch": report["batch"],
             "outcome": expected,

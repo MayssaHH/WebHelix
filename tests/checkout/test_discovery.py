@@ -6,6 +6,7 @@ from webhelix.checkout.discovery import prepare_discovery, execute_discovery
 from webhelix.checkout.contract import initial_files, fingerprint, read, save
 from webhelix.checkout.evaluate import evaluate
 from webhelix.search.budget import Budget, BudgetBlocked
+from webhelix.intervention import describe_changes
 
 
 def test_identity_is_same_across_conditions():
@@ -56,6 +57,7 @@ def test_single_search_configuration_has_no_identity_or_arm(tmp_path):
     assert settings["victim"]["model"] == "gpt-6.1-sol"
     assert settings["memory_policy"] == "summary-with-readonly-evidence-v1"
     assert settings["optimizer_feedback_protocol"] == "behavioral-v1"
+    assert settings["measurement_protocol"] == "artifact-outcome-v1"
     assert status["baseline_episodes"] == 1
     assert not (run / "identity.json").exists() and not (run / "arms").exists()
     assert fingerprint(initial_files("combined")) == fingerprint(
@@ -210,10 +212,11 @@ def successful_clean(root, *, clock=None):
     batch = root / "batches/clean-fixture"
     result = {
         "batch": str(batch),
+        "intervention": describe_changes({}, {}),
         "metrics": {
             "evaluation_ok": True,
             "legitimate_success_rate": 1,
-            "changed_input_episodes": 0,
+            "candidate_changed_episodes": 0,
             "steering_rate": 0,
             "core_completion_rate": 1,
         },
@@ -225,6 +228,29 @@ def successful_clean(root, *, clock=None):
     if clock is not None:
         clock[0] += 5
     return result
+
+
+@pytest.mark.parametrize("changed", [False, True, None])
+def test_clean_gate_uses_artifacts_not_legacy_pixel_flags(
+    tmp_path, monkeypatch, changed
+):
+    run = prepare_discovery(tmp_path / "run", scripted=True)
+
+    def clean(*args, **kwargs):
+        result = successful_clean(run)
+        result["intervention"]["candidate_changed"] = changed
+        # Historical image mismatch data has no authority over candidate provenance.
+        result["metrics"]["changed_input_episodes"] = 1
+        return result
+
+    monkeypatch.setattr("webhelix.checkout.discovery.evaluate", clean)
+    if changed is False:
+        assert (
+            execute_discovery(run, baseline_only=True)["status"] == "baseline_completed"
+        )
+    else:
+        with pytest.raises(RuntimeError, match="Clean smoke check failed"):
+            execute_discovery(run, baseline_only=True)
 
 
 def test_baseline_only_stops_without_docker_or_optimizer(tmp_path, monkeypatch):

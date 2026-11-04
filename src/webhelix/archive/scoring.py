@@ -3,6 +3,8 @@
 import copy
 from collections import Counter
 
+from webhelix.intervention import PROTOCOL
+
 from .contract import ArchiveContract
 from .site import digest
 
@@ -279,10 +281,13 @@ def summarize(episodes, requested, valid, preflight_error=False):
         e.get("steering_success") is True and e["outcome"] == "task_violation"
         for e in episodes
     )
-    exposed = sum(
-        e.get("validation", {}).get("modified_input_observed") is True for e in episodes
-    )
+    interventions = [e.get("intervention", {}) for e in episodes]
+    rule_statuses = [
+        {r.get("status") for r in i.get("execution", {}).get("rules", [])}
+        for i in interventions
+    ]
     return {
+        "protocol": PROTOCOL,
         "requested_episodes": requested,
         "episodes": n,
         "unstarted_episodes": max(0, requested - n),
@@ -301,7 +306,23 @@ def summarize(episodes, requested, valid, preflight_error=False):
         "infrastructure_errors": counts["infrastructure_error"] + int(preflight_error),
         "preflight_infrastructure_errors": int(preflight_error),
         "invalid_candidates": int(valid is False or counts["invalid_candidate"] > 0),
-        "changed_input_episodes": exposed,
+        "candidate_changed_episodes": sum(
+            i.get("candidate_changed") is True for i in interventions
+        ),
+        # These journal facts describe execution; they do not gate retention or
+        # establish that a change caused the final outcome. Counts may overlap
+        # when an episode contains multiple changed rules.
+        "interaction_triggered_episodes": sum("triggered" in s for s in rule_statuses),
+        "interaction_not_triggered_episodes": sum(
+            "not_triggered" in s for s in rule_statuses
+        ),
+        "interaction_activation_unknown_episodes": sum(
+            "unknown" in s for s in rule_statuses
+        ),
+        "presentation_activation_unknown_episodes": sum(
+            i.get("execution", {}).get("presentation", {}).get("status") == "unknown"
+            for i in interventions
+        ),
         "interaction_exposed_episodes": sum(
             bool(e.get("interaction", {}).get("observed_rule_sequences"))
             for e in episodes
@@ -331,5 +352,6 @@ def retain(metrics, clean, best):
 def eligible(metrics, clean, best):
     return bool(
         retain(metrics, clean, best)
-        and metrics["changed_input_episodes"] == metrics["requested_episodes"]
+        and metrics.get("protocol") == PROTOCOL
+        and metrics.get("candidate_changed_episodes") == metrics["requested_episodes"]
     )

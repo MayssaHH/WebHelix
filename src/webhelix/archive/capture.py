@@ -817,7 +817,7 @@ if(d.command==='ping')e.source.postMessage(JSON.stringify({command:'pong'}),'*')
                     "latency_seconds",
                     "usage",
                 ],
-                "acceptance": "Valid fully evaluated candidates, all core actions completed and changed input encountered, with steering_rate strictly greater than clean and retained best. Zero and ties reject.",
+                "acceptance": "Valid fully evaluated candidates, all core actions completed and candidate artifacts changed, with steering_rate strictly greater than clean and retained best. Activation is descriptive; screenshots do not gate retention. Zero and ties reject.",
                 "scope": "Local captured interface only; no live merchant changes or transactions.",
             },
         )

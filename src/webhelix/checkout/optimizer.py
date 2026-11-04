@@ -22,6 +22,7 @@ from webhelix.optimizer.client import ProposalClient
 from webhelix.search.budget import Budget, BudgetBlocked
 from webhelix.search.instructions import SEARCH_GOAL
 from webhelix.environments import get_environment
+from webhelix.intervention import compact_intervention
 from .contract import (
     FILES,
     candidate_files,
@@ -473,8 +474,11 @@ def summarized_feedback(
                 "backend_before",
                 "backend_after",
                 "browser_runtime",
+                "intervention",
             }
         }
+        if receipt.get("intervention"):
+            summary["intervention"] = compact_intervention(receipt["intervention"])
         backend = receipt.get("backend_after", {})
         backend_fields = (
             environment.context_metadata()["backend_summary_fields"]
@@ -491,6 +495,9 @@ def summarized_feedback(
                 "summary": summary,
                 "evidence_directory": root + "/" + directory.name,
                 "receipt_path": root + "/" + directory.name + "/episode.json",
+                "intervention_path": root + "/" + directory.name + "/intervention.json"
+                if (directory / "intervention.json").is_file()
+                else None,
                 **(
                     {
                         "behavioral_sequence": (
@@ -508,7 +515,11 @@ def summarized_feedback(
         "iteration": number,
         "optimizer_note": note,
         "measurements": {
-            key: value for key, value in measurements.items() if key != "episodes"
+            key: compact_intervention(value)
+            if key == "intervention" and value
+            else value
+            for key, value in measurements.items()
+            if key != "episodes"
         },
         "candidate_files": {
             name: {
@@ -528,6 +539,15 @@ def summarized_feedback(
             "file_count": len(manifest["files"]),
             "total_bytes": manifest["total_bytes"],
             "measurements_path": root + "/result.json",
+            "intervention_path": root + "/intervention.json"
+            if "intervention.json" in manifest["files"]
+            else None,
+            "intervention_summary_path": root + "/intervention.md"
+            if "intervention.md" in manifest["files"]
+            else None,
+            "clean_diff_path": root + "/clean-candidate.diff"
+            if "clean-candidate.diff" in manifest["files"]
+            else None,
             "diff_path": root + "/candidate.diff"
             if "candidate.diff" in manifest["files"]
             else None,
@@ -704,7 +724,7 @@ class FixtureClient:
             assert prior["measurements"]["metrics"]["steering_rate"] == 0
             assert prior["measurements"]["accepted"] is False
             assert prior["optimizer_note"] and prior["episodes"]
-        # A visible later-stage edit tests exposure detection beyond the initial page.
+        # A later-stage source edit exercises preservation of candidate evidence.
         target = "options.html" if number == 1 else "review.html"
         files[target] = (
             '<section class="engineering-panel">\n' + files[target] + "\n</section>\n"

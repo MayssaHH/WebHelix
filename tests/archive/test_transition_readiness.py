@@ -1,82 +1,120 @@
-"""Original animation chains must settle without hiding or changing their pixels."""
+"""Observe semantic source readiness without requiring animation quiescence."""
 
 import asyncio
+from types import SimpleNamespace
 
 import pytest
-from playwright.async_api import Error as PlaywrightError, async_playwright
+from playwright.async_api import async_playwright
 
-from webhelix.archive.episode import settle_source_ui
-
-
-HTML = """<!doctype html><style>
-#badge {display:block;width:44px;height:44px;transform:scale(.75);transition:transform .12s linear}
-#badge.big {transform:scale(1)}
-</style><div id=badge>1</div>"""
-
-START = """async()=>{
- const e=document.querySelector('#badge');window.events=[];
- e.addEventListener('transitionend',()=>{
-   events.push('first');e.style.transitionDuration='.6s';e.classList.remove('big');
-   e.addEventListener('transitionend',()=>events.push('second'),{once:true});
- },{once:true});
- e.classList.add('big');
- await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
-}"""
-
-OLD_SNAPSHOT = """async()=>{
- const current=document.getAnimations().filter(a=>a.playState==='running');
- await Promise.all(current.map(a=>a.finished));
- await document.fonts.ready;
-}"""
+from webhelix.archive.episode import replay_state, wait_required_controls
+from webhelix.checkout.contract import InvalidCandidate
 
 
-def test_chained_cart_badge_transition_outlives_one_snapshot(tmp_path):
+HTML = """<!doctype html><div id=badge>1</div><span>Bag total: £35</span>
+<script>
+window.pending = 0;
+window.__webhelixReplayReady = Promise.resolve(true);
+window.__webhelixReplayState = () => ({
+    stage: 'cart', path: '/cart', busy: window.pending > 0,
+    cart_total: 3500,
+});
+</script>"""
+
+
+def source_site():
+    states = []
+    return SimpleNamespace(faithful=True, observe_browser_state=states.append), states
+
+
+def test_nonquiescent_badge_does_not_block_source_state_or_stop_animation():
     async def check():
         async with async_playwright() as pw:
             browser = await pw.chromium.launch(headless=True)
             try:
                 page = await browser.new_page()
                 await page.set_content(HTML)
-                await page.evaluate(START)
-                await page.evaluate(OLD_SNAPSHOT)
-                before = await page.evaluate(
-                    "()=>({events:[...events],running:document.getAnimations().filter(a=>a.playState==='running').length})"
-                )
-                assert before == {"events": ["first"], "running": 1}
-                await settle_source_ui(page)
-                after = await page.evaluate(
-                    "()=>({events:[...events],running:document.getAnimations().filter(a=>a.playState==='running').length,transform:getComputedStyle(document.querySelector('#badge')).transform,text:document.querySelector('#badge').textContent})"
-                )
-                assert after == {
-                    "events": ["first", "second"],
-                    "running": 0,
-                    "transform": "matrix(0.75, 0, 0, 0.75, 0, 0)",
-                    "text": "1",
+                await page.evaluate("""() => {
+                    window.cycles = 0;
+                    const badge = document.getElementById('badge');
+                    function animate() {
+                        window.badgeAnimation = badge.animate(
+                            [{transform:'scale(.75)'}, {transform:'scale(1)'}],
+                            {duration:60, iterations:1}
+                        );
+                        badgeAnimation.onfinish = () => { ++cycles; animate(); };
+                    }
+                    animate();
+                }""")
+                site, observed = source_site()
+                # A chain of finite original animations never becomes globally
+                # idle. It must not delay or change an otherwise ready cart.
+                state = await asyncio.wait_for(replay_state(page, site), timeout=1)
+                assert state == {
+                    "stage": "cart",
+                    "path": "/cart",
+                    "busy": False,
+                    "cart_total": 3500,
                 }
+                assert observed == [state]
+                before = await page.evaluate("cycles")
+                await page.wait_for_timeout(160)
+                assert await page.evaluate("cycles") > before
+                assert await page.evaluate("badgeAnimation.playState") == "running"
+                assert await page.locator("#badge").inner_text() == "1"
             finally:
                 await browser.close()
 
     asyncio.run(check())
 
 
-def test_nonquiescent_finite_transition_chain_fails_closed():
+def test_backend_busy_blocks_observation_until_source_state_is_ready():
     async def check():
         async with async_playwright() as pw:
             browser = await pw.chromium.launch(headless=True)
             try:
                 page = await browser.new_page()
                 await page.set_content(HTML)
-                await page.evaluate("""async()=>{
-                  const e=document.querySelector('#badge');e.style.transitionDuration='.06s';
-                  e.addEventListener('transitionend',()=>e.classList.toggle('big'));
-                  e.classList.add('big');
-                  await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
+                await page.evaluate("pending = 1")
+                site, observed = source_site()
+                reading = asyncio.create_task(replay_state(page, site))
+                await page.wait_for_timeout(150)
+                assert not reading.done()
+                assert observed == []
+                await page.evaluate("pending = 0")
+                state = await asyncio.wait_for(reading, timeout=1)
+                assert state["busy"] is False
+                assert observed == [state]
+            finally:
+                await browser.close()
+
+    asyncio.run(check())
+
+
+def test_late_required_control_is_waited_for_but_permanent_absence_fails():
+    async def check():
+        async with async_playwright() as pw:
+            browser = await pw.chromium.launch(headless=True)
+            try:
+                page = await browser.new_page()
+                await page.set_content(HTML)
+                site, _ = source_site()
+                site.expected_controls = lambda: ["#close"]
+                waiting = asyncio.create_task(
+                    wait_required_controls(page, site, timeout=1)
+                )
+                await page.wait_for_timeout(150)
+                assert not waiting.done()
+                await page.evaluate("""() => {
+                    const button = document.createElement('button');
+                    button.id = 'close'; button.textContent = 'Close cart';
+                    document.body.appendChild(button);
                 }""")
+                assert await waiting == ["#close"]
+                await page.locator("#close").evaluate("el=>el.remove()")
                 with pytest.raises(
-                    PlaywrightError, match="did not settle within the bound"
+                    InvalidCandidate, match="Required control unavailable"
                 ):
-                    await settle_source_ui(page, timeout=0.35)
-                assert await page.locator("#badge").inner_text() == "1"
+                    await wait_required_controls(page, site, timeout=0.1)
             finally:
                 await browser.close()
 

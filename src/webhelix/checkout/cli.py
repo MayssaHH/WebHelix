@@ -90,6 +90,7 @@ def initialize(
     from webhelix.optimizer.client import Settings
     from webhelix.search.budget import validate_plan
     from webhelix.browser.manifest import runtime_identity
+    from webhelix.intervention import PROTOCOL
 
     run = Path(run).resolve()
     if run.exists():
@@ -103,6 +104,7 @@ def initialize(
     if victim_config:
         settings["victim"] = read(victim_config)
     settings.update(
+        measurement_protocol=PROTOCOL,
         browser_runtime=runtime_identity(),
         optimizer_backend=optimizer_backend,
         policy="scripted-correct" if scripted else "api",
