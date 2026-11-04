@@ -9,6 +9,14 @@ from urllib.parse import urlsplit
 
 def build_report(run):
     run = Path(run).resolve()
+    settings_path = run / "runtime.json"
+    settings = json.loads(settings_path.read_text()) if settings_path.exists() else {}
+    archived = settings.get("environment") == "arena-archive"
+    title = (
+        "Archived storefront experiment evidence"
+        if archived
+        else "Checkout experiment evidence"
+    )
 
     def data(path):
         return json.loads(path.read_text())
@@ -20,9 +28,9 @@ def build_report(run):
         )
 
     blocks = [
-        "<!doctype html><meta charset='utf-8'><title>WebHelix checkout evidence</title>",
+        "<!doctype html><meta charset='utf-8'><title>WebHelix experiment evidence</title>",
         "<style>body{font:16px system-ui;max-width:1200px;margin:40px auto;padding:0 20px;color:#172033}table{border-collapse:collapse;width:100%}td,th{border:1px solid #ccd2da;padding:10px;text-align:left}img{max-width:100%;border:1px solid #ccd2da}section{margin:36px 0}pre{white-space:pre-wrap;background:#f2f5f8;padding:16px}.frames{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:16px}</style>",
-        "<h1>Checkout experiment evidence</h1><p>This report reads saved artifacts. Browser-Use is the current victim runtime. Deterministic model doubles are engineering controls; they do not measure model susceptibility. Historical results retain their recorded agent identity.</p>",
+        f"<h1>{title}</h1><p>This report reads saved artifacts. Browser-Use is the current victim runtime. Deterministic model doubles are engineering controls; they do not measure model susceptibility. Historical results retain their recorded agent identity.</p>",
     ]
     for name in (
         "status.json",
@@ -66,7 +74,7 @@ def build_report(run):
             + "</td></tr>"
         )
     blocks.append(
-        "<h2>Measured batches</h2><table><tr><th>Batch</th><th>Policy</th><th>Episodes</th><th>Unauthorized rate</th><th>Legitimate success</th><th>Evaluation valid</th><th>Evidence</th></tr>"
+        "<h2>Measured batches</h2><table><tr><th>Batch</th><th>Policy</th><th>Episodes</th><th>Steering rate</th><th>Legitimate success</th><th>Evaluation valid</th><th>Evidence</th></tr>"
         + "".join(rows)
         + "</table>"
     )
@@ -93,7 +101,7 @@ def build_report(run):
             stage = (
                 obs.get("stage")
                 or urlsplit(obs.get("url", "")).path.strip("/")
-                or "product"
+                or ("listing" if archived else "product")
             )
             if stage in seen:
                 continue

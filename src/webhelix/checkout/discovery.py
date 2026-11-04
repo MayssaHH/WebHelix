@@ -8,6 +8,7 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import shutil
 import time
 
 from autohelix.history import IterationResult
@@ -28,7 +29,9 @@ def _hash(value):
     return hashlib.sha256(json.dumps(value, sort_keys=True).encode()).hexdigest()
 
 
-def prepare_discovery(root, *, scripted, env_file=None, spending_plan=None):
+def prepare_discovery(
+    root, *, scripted, env_file=None, spending_plan=None, archive_root=None
+):
     """Prepare a reviewable experiment without a browser or provider request."""
     root = Path(root).resolve()
     if root.exists():
@@ -74,12 +77,37 @@ def prepare_discovery(root, *, scripted, env_file=None, spending_plan=None):
         if plan.get("offline_fixture"):
             raise ValueError("A fixture budget cannot authorize real calls")
     root.mkdir(parents=True)
+    if archive_root is not None:
+        from webhelix.environments import get_environment
+
+        original = Path(archive_root).resolve()
+        if root.is_relative_to(original):
+            raise ValueError("Run output must be outside the protected capture")
+        original_environment = get_environment(
+            {"environment": "arena-archive", "archive_root": str(original)}
+        )
+        original_environment.task()
+        # Snapshot protected assets as well as facts so future source-site or
+        # capture-directory changes cannot silently change an existing run.
+        original_environment.fixture_hashes("archive")
+        shutil.copytree(original, root / "archive")
+        settings.update(
+            environment="arena-archive",
+            archive_root=str(root / "archive"),
+            condition="archive",
+        )
+        environment = get_environment(settings)
+        fixture_hashes = environment.fixture_hashes("archive")
+        pristine = environment.initial_files("archive")
+    else:
+        fixture_hashes = None
+        pristine = initial_files("combined")
     save(root / "runtime.json", settings)
     save(root / "optimizer-settings.json", optimizer.as_dict())
     save(root / "spending-plan.json", plan)
     candidate = root / "reference" / "candidate"
     candidate.mkdir(parents=True)
-    for name, content in initial_files("combined").items():
+    for name, content in pristine.items():
         (candidate / name).write_text(content)
     source = _source_receipt(root)
     save(
@@ -88,7 +116,9 @@ def prepare_discovery(root, *, scripted, env_file=None, spending_plan=None):
             "status": "prepared",
             "workflow": "discovery-v1",
             "scripted": scripted,
-            "condition": "combined",
+            "condition": settings["condition"],
+            "environment": settings.get("environment", "checkout"),
+            "protected_environment_hashes": fixture_hashes,
             "source_revision": subprocess.check_output(
                 ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True
             ).strip(),
@@ -133,6 +163,15 @@ def _execute_discovery(root):
             raise ValueError(
                 "Source changed since preparation; prepare a new discovery run"
             )
+    if settings.get("environment") == "arena-archive":
+        from webhelix.environments import get_environment
+
+        environment = get_environment(settings)
+        if (
+            environment.fixture_hashes("archive")
+            != status["protected_environment_hashes"]
+        ):
+            raise ValueError("Protected archive changed since preparation")
     scripted = status["scripted"]
     if not scripted:
         plan = read(root / "spending-plan.json")
@@ -245,8 +284,12 @@ def _execute_discovery(root):
             attempted_iterations=settings["iterations"],
             evaluated_iterations=evaluated,
             accepted_iterations=[r["iteration"] for r in results if r["accepted"]],
-            retained_candidate_hash=fingerprint(
-                load(project / "candidate", "combined")
+            retained_candidate_hash=(
+                environment.fingerprint(
+                    environment.load(project / "candidate", "archive")
+                )
+                if settings.get("environment") == "arena-archive"
+                else fingerprint(load(project / "candidate", "combined"))
             ),
             feedback_continuity=True,
         )

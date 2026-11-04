@@ -22,7 +22,7 @@ from webhelix.checkout.evaluate import _launch
 MAX_ARTIFACT_BYTES = 16_000_000
 
 
-def _snapshot(candidate, condition="truthful"):
+def _snapshot(candidate, condition="truthful", *, environment=None):
     """Read only bounded regular files through a no-follow directory descriptor.
 
     The agent can edit the mounted candidate while the trusted server runs. Reading
@@ -30,14 +30,22 @@ def _snapshot(candidate, condition="truthful"):
     No candidate-controlled path is used to read a credential or an arbitrary file.
     """
     candidate = Path(candidate).absolute()
+    names = (
+        environment.candidate_files(condition)
+        if environment is not None
+        else candidate_files(condition)
+    )
+    maximum = environment.max_file_bytes if environment is not None else 24_000
     descriptor = os.open(candidate, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
     try:
-        if set(os.listdir(descriptor)) != set(candidate_files(condition)):
+        if set(os.listdir(descriptor)) != set(names):
             raise InvalidCandidate(
-                "Candidate must contain exactly the five allowed files"
+                "Candidate must contain exactly the environment's allowed files"
             )
         files = {}
-        for name in candidate_files(condition):
+        for name in names:
+            if Path(name).name != name or name in {".", ".."}:
+                raise ValueError("Candidate names must be flat protected identifiers")
             fd = os.open(
                 name,
                 os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK,
@@ -45,14 +53,14 @@ def _snapshot(candidate, condition="truthful"):
             )
             try:
                 metadata = os.fstat(fd)
-                if not stat.S_ISREG(metadata.st_mode) or metadata.st_size > 24_000:
+                if not stat.S_ISREG(metadata.st_mode) or metadata.st_size > maximum:
                     raise InvalidCandidate(
                         "Candidate inputs must be bounded regular files"
                     )
                 with os.fdopen(fd, "rb", closefd=False) as source:
-                    data = source.read(24_001)
-                if len(data) > 24_000:
-                    raise InvalidCandidate("Candidate file exceeds 24000 bytes")
+                    data = source.read(maximum + 1)
+                if len(data) > maximum:
+                    raise InvalidCandidate(f"Candidate file exceeds {maximum} bytes")
                 files[name] = data.decode("utf-8")
             finally:
                 os.close(fd)
@@ -72,7 +80,9 @@ def _artifact(path, name=None):
     }
 
 
-def preview(candidate, output, timeout_seconds=120, condition="truthful"):
+def preview(
+    candidate, output, timeout_seconds=120, condition="truthful", *, settings=None
+):
     """Validate and inspect the active candidate using fresh scripted browser state.
 
     ``output`` must be a fresh trusted directory outside the candidate. The two
@@ -86,6 +96,17 @@ def preview(candidate, output, timeout_seconds=120, condition="truthful"):
     if output.resolve().is_relative_to(candidate.resolve()):
         raise ValueError("Preview output must be outside the candidate")
     output.mkdir(parents=True, exist_ok=False)
+    # The run's trusted environment selector chooses the schema/worker. Never
+    # forward victim credentials, model configuration or accounting to previews.
+    environment = None
+    worker_settings = {"condition": condition, "max_actions": 24}
+    if settings and settings.get("environment", "checkout") != "checkout":
+        from webhelix.environments import get_environment
+
+        environment = get_environment(settings)
+        worker_settings.update(
+            environment=settings["environment"], archive_root=settings["archive_root"]
+        )
     started = time.monotonic()
     deadline = started + timeout_seconds
     response = {
@@ -113,7 +134,7 @@ def preview(candidate, output, timeout_seconds=120, condition="truthful"):
 
     try:
         try:
-            files = _snapshot(candidate, condition)
+            files = _snapshot(candidate, condition, environment=environment)
         except (InvalidCandidate, OSError, UnicodeError) as exc:
             response.update(
                 status="invalid_candidate",
@@ -124,22 +145,28 @@ def preview(candidate, output, timeout_seconds=120, condition="truthful"):
         frozen.mkdir()
         for name, content in files.items():
             (frozen / name).write_text(content)
-        response["candidate_hash"] = fingerprint(files)
+        response["candidate_hash"] = (
+            environment.fingerprint(files)
+            if environment is not None
+            else fingerprint(files)
+        )
         try:
-            validate(files, condition)
+            if environment is not None:
+                environment.validate(files, condition)
+            else:
+                validate(files, condition)
         except InvalidCandidate as exc:
             response.update(
                 status="invalid_candidate",
                 validation={"valid": False, "error": str(exc)},
             )
             return response
-        settings = {"condition": condition, "max_actions": 24}
         feasibility = launch(
             {
                 "kind": "feasibility",
                 "candidate": str(frozen),
                 "output": str(output / "feasibility"),
-                "settings": settings,
+                "settings": worker_settings,
             }
         )
         response["validation"] = {
@@ -162,7 +189,7 @@ def preview(candidate, output, timeout_seconds=120, condition="truthful"):
                 "run": str(output),
                 "policy": "scripted-correct",
                 "seed": 0,
-                "settings": settings,
+                "settings": worker_settings,
             }
         )
         response["status"] = {

@@ -9,6 +9,7 @@ from webhelix.checkout.contract import load, read, save
 from webhelix.checkout.experiment import feedback_continuity
 from webhelix.opencode.backend import (
     CheckoutOpenCodeBackend,
+    copy_reference_images,
     launch_prompt,
     provider_context_matches,
     validate_behavioral_note,
@@ -16,6 +17,31 @@ from webhelix.opencode.backend import (
 )
 from webhelix.opencode.config import OpenCodeSettings
 from webhelix.search.instructions import BEHAVIORAL_NOTE_PROTOCOL
+
+
+def test_reference_images_preserve_route_metadata_without_using_route_as_path(tmp_path):
+    import hashlib
+    from pathlib import Path
+
+    reference = tmp_path / "reference"
+    reference.mkdir()
+    image = tmp_path / "screenshot.png"
+    image.write_bytes(b"actual-observed-frame")
+    stages = ["products/baby-pink", "products-baby-pink", "../../escape", "x" * 400]
+    manifest = copy_reference_images(
+        reference,
+        [("clean", stage, image) for stage in stages]
+        + [("previous", stages[0], image)],
+    )
+    assert [row["stage"] for row in manifest] == stages + [stages[0]]
+    assert len({row["path"] for row in manifest}) == len(manifest)
+    assert len(list(reference.iterdir())) == len(manifest)
+    for row in manifest:
+        relative = Path(row["path"]).relative_to("/work/reference")
+        assert len(relative.parts) == 1 and len(relative.name) < 120
+        assert (reference / relative).read_bytes() == image.read_bytes()
+        assert row["sha256"] == hashlib.sha256(image.read_bytes()).hexdigest()
+    assert not (tmp_path / "escape.png").exists()
 
 
 def behavioral_note(reference='["/work/reference/history/iter-2/result.json"]'):

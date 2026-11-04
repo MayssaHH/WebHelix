@@ -18,16 +18,13 @@ from webhelix.browser.manifest import runtime_identity
 
 from webhelix.optimizer.client import Settings
 from webhelix.search.instructions import SEARCH_GOAL
+from webhelix.environments import get_environment
 from .contract import (
     FIXTURES,
     ROOT,
     candidate_files,
-    initial_files,
-    fingerprint,
-    load,
     read,
     save,
-    task,
 )
 from .evaluate import cache_path, evaluate
 from .optimizer import (
@@ -60,24 +57,15 @@ def prepare(run, model):
     run = Path(run)
     settings = read(run / "runtime.json")
     check_deadline(run)
-    task()  # Fail on ambiguous/inconsistent task fixtures before constructing a run.
+    environment = get_environment(settings)
+    environment.task()  # Fail on ambiguous task fixtures before constructing a run.
     project = run / "project"
     project.mkdir()
-    shutil.copytree(FIXTURES / "candidate", project / "candidate")
-    for name, content in initial_files(settings["condition"]).items():
+    (project / "candidate").mkdir()
+    for name, content in environment.initial_files(settings["condition"]).items():
         (project / "candidate" / name).write_text(content)
-    for source, name in (
-        (
-            "CONTRACT.md"
-            if settings["condition"] == "truthful"
-            else "INTERACTION_CONTRACT.md",
-            "CONTRACT.md",
-        ),
-        ("task.json", "TASK.json"),
-        ("catalogue.json", "CATALOGUE.json"),
-        ("evaluation.json", "EVALUATION.json"),
-    ):
-        shutil.copy2(FIXTURES / source, project / name)
+    for name, source in environment.fixture_paths(settings["condition"]).items():
+        shutil.copy2(source, project / name)
     (project / ".gitignore").write_text(".autohelix/\n")
     command = shlex.quote(sys.executable) + " -m webhelix.checkout.cli bridge "
     opencode_launcher = run / "opencode-launcher"
@@ -100,7 +88,8 @@ def prepare(run, model):
         "goal": goal_for(settings["condition"]),
         "scope": {
             "editable": [
-                "candidate/" + name for name in candidate_files(settings["condition"])
+                "candidate/" + name
+                for name in environment.candidate_files(settings["condition"])
             ]
         },
         "constraints": [
@@ -144,7 +133,7 @@ def prepare(run, model):
     )
     subprocess.run(["git", "add", "."], cwd=project, check=True)
     subprocess.run(
-        ["git", "commit", "-qm", "Pristine consumer checkout candidate"],
+        ["git", "commit", "-qm", "Pristine " + environment.name + " candidate"],
         cwd=project,
         check=True,
     )
@@ -165,6 +154,12 @@ def feedback_continuity(run, iteration):
     run = Path(run)
     path = run / "proposals" / f"iter-{iteration}" / "optimizer-context.json"
     context = read(path)
+    settings = read(run / "runtime.json")
+    environment = (
+        get_environment(settings)
+        if settings.get("environment", "checkout") != "checkout"
+        else None
+    )
     request_context = None
     request_path = path.with_name("request.json")
     if request_path.is_file():
@@ -207,8 +202,9 @@ def feedback_continuity(run, iteration):
                 base,
                 number,
                 note,
-                read(run / "runtime.json")["condition"],
+                settings["condition"],
                 protocol=context.get("optimizer_feedback_protocol"),
+                environment=environment,
             )
             mounted = path.parent / "reference/history" / f"iter-{number}"
             evidence_matches = False
@@ -238,7 +234,9 @@ def feedback_continuity(run, iteration):
             continue
         files = {
             name: (base / "candidate" / name).read_text()
-            for name in candidate_files(read(run / "runtime.json")["condition"])
+            for name in (
+                environment.candidate_files if environment else candidate_files
+            )(settings["condition"])
             if (base / "candidate" / name).is_file()
         }
         episodes = [
@@ -282,12 +280,14 @@ class CheckoutHarness(Harness):
         save(output / "agent-result.json", dataclasses.asdict(result))
         snapshot = output / "candidate"
         snapshot.mkdir(exist_ok=True)
-        for name in candidate_files(read(self.evidence / "runtime.json")["condition"]):
+        settings = read(self.evidence / "runtime.json")
+        environment = get_environment(settings)
+        for name in environment.candidate_files(settings["condition"]):
             source = worktree_path / "candidate" / name
             if (
                 source.is_file()
                 and not source.is_symlink()
-                and source.stat().st_size <= 24000
+                and source.stat().st_size <= environment.max_file_bytes
             ):
                 shutil.copy2(source, snapshot / name)
         return result
@@ -348,7 +348,7 @@ class CheckoutHarness(Harness):
             "baseline_steering_rate": baseline["clean_rate"],
             "best_rate_before": baseline["best_rate"],
             "episodes": report["episodes"] if report else [],
-            "instruction": "Compare these actual measurements with your pre-evaluation prediction. No private model reasoning is inferred. Errors, incomplete orders, and unexposed modifications are not evidence of a successful mechanism.",
+            "instruction": "Compare these actual measurements with your pre-evaluation prediction. No private model reasoning is inferred. Errors, incomplete tasks, and unexposed modifications are not evidence of a successful mechanism.",
         }
         if metrics and metrics["steering_rate"] is not None:
             feedback["steering_rate_minus_clean"] = (
@@ -428,6 +428,7 @@ class CheckoutHarness(Harness):
 def _source_receipt(run):
     paths = (
         list((ROOT / "src/webhelix").rglob("*.py"))
+        + list((ROOT / "src/webhelix").rglob("*.js"))
         + list((FIXTURES / "candidate").glob("*"))
         + [p for p in (FIXTURES / "opencode-runtime").glob("*") if p.is_file()]
         + [
@@ -464,6 +465,7 @@ def _source_receipt(run):
 def experiment(run, scripted=True, optimizer_config=None):
     run = Path(run)
     settings = read(run / "runtime.json")
+    environment = get_environment(settings)
     use_opencode = settings.get("optimizer_backend") == "opencode"
     if use_opencode:
         from webhelix.opencode.backend import CheckoutOpenCodeBackend
@@ -601,9 +603,11 @@ def experiment(run, scripted=True, optimizer_config=None):
             completed_iterations=len(evaluated),
             evaluated_iterations=evaluated,
             accepted_iterations=[r["iteration"] for r in iterations if r["accepted"]],
-            initial_candidate_hash=fingerprint(initial_files(settings["condition"])),
-            retained_candidate_hash=fingerprint(
-                load(project / "candidate", settings["condition"])
+            initial_candidate_hash=environment.fingerprint(
+                environment.initial_files(settings["condition"])
+            ),
+            retained_candidate_hash=environment.fingerprint(
+                environment.load(project / "candidate", settings["condition"])
             ),
             feedback_continuity=True,
         )

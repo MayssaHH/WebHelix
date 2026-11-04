@@ -21,6 +21,7 @@ from webhelix.optimizer.backend import proposal_note, safe_read
 from webhelix.optimizer.client import ProposalClient
 from webhelix.search.budget import Budget, BudgetBlocked
 from webhelix.search.instructions import SEARCH_GOAL
+from webhelix.environments import get_environment
 from .contract import (
     FILES,
     candidate_files,
@@ -71,12 +72,16 @@ SYSTEM = SEARCH_GOAL + (
 )
 
 
-def proposal_schema(condition):
+def proposal_schema(condition, *, environment=None):
     schema = copy.deepcopy(SCHEMA)
-    names = candidate_files(condition)
+    names = (environment.candidate_files if environment else candidate_files)(condition)
     schema["properties"]["files"]["required"] = list(names)
     schema["properties"]["files"]["properties"] = {
-        name: {"type": "string", "maxLength": 24000} for name in names
+        name: {
+            "type": "string",
+            "maxLength": environment.max_file_bytes if environment else 24000,
+        }
+        for name in names
     }
     return schema
 
@@ -372,7 +377,77 @@ def behavioral_sequence(directory, receipt, evidence_root):
     return result
 
 
-def summarized_feedback(base, number, note, condition, *, protocol=None):
+def archive_behavioral_sequence(directory, receipt, evidence_root):
+    """Expose recorded cart events and native steps without checkout assumptions.
+
+    This checks archive agreement, not the environment-specific event semantics.
+    The protected evaluator supplies outcome classification. Unknown event fields
+    are preserved rather than reinterpreted as purchases or inferred intentions.
+    """
+    directory = Path(directory)
+    backend = receipt.get("backend_after") or {}
+    journal_path = directory / "interaction-journal.json"
+    result = {
+        "basis": "Recorded cart events and native browser evidence; no private reasoning or causal attribution inferred.",
+        "journal_status": "unavailable",
+        "events": [],
+        "terminal": {
+            "outcome": receipt.get("outcome"),
+            "reason": receipt.get("reason"),
+            "cart": backend.get("cart"),
+            "version": backend.get("version"),
+            "total_cents": backend.get("total_cents"),
+            "evidence": evidence_root + "/episode.json",
+        },
+        "selection": "Recorded journal entries, at most first eight and last four; all raw events remain in the read-only evidence.",
+        "omitted_event_count": 0,
+    }
+    if not journal_path.is_file() or "interaction_journal" not in backend:
+        return result
+    try:
+        journal = read(journal_path)
+        if not isinstance(journal, list) or journal != backend["interaction_journal"]:
+            raise ValueError("Journal differs from the final backend receipt")
+        backend_path = directory / "backend-after.json"
+        if backend_path.is_file() and read(backend_path) != backend:
+            raise ValueError("Final backend artifact differs from episode receipt")
+    except (ValueError, OSError, TypeError) as exc:
+        result.update(journal_status="inconsistent", detail=str(exc))
+        return result
+    result["journal_status"] = "artifact_consistent"
+    events = []
+    for index, event in enumerate(journal):
+        entry = {
+            "recorded_event": event,
+            "evidence": {
+                "journal": evidence_root + f"/interaction-journal.json#/{index}"
+            },
+        }
+        step = event.get("step") if isinstance(event, dict) else None
+        if type(step) is int:
+            for prefix in ("observation", "action", "action-result"):
+                path = directory / f"{prefix}-{step}.json"
+                if path.is_file():
+                    entry["evidence"][prefix] = evidence_root + "/" + path.name
+            observation_path = directory / f"observation-{step}.json"
+            if observation_path.is_file():
+                observation = read(observation_path)
+                entry["sent_to_model"] = observation.get("sent_to_model")
+                entry["visible_text_excerpt"] = _excerpt(
+                    observation.get("visible_text", observation.get("dom", "")), 600
+                )
+            action_path = directory / f"action-{step}.json"
+            if action_path.is_file():
+                entry["attempted_browser_action"] = read(action_path)
+        events.append(entry)
+    result["omitted_event_count"] = max(0, len(events) - 12)
+    result["events"] = events if len(events) <= 12 else events[:8] + events[-4:]
+    return result
+
+
+def summarized_feedback(
+    base, number, note, condition, *, protocol=None, environment=None
+):
     """Deterministic factual summary; full observations stay in the read-only archive."""
     base = Path(base)
     measurements = read(base / "result.json")
@@ -398,10 +473,13 @@ def summarized_feedback(base, number, note, condition, *, protocol=None):
             }
         }
         backend = receipt.get("backend_after", {})
-        summary["confirmed_backend"] = {
-            key: backend[key]
-            for key in ("confirmed", "order", "quantity", "extras", "delivery", "stage")
-            if key in backend
+        backend_fields = (
+            environment.context_metadata()["backend_summary_fields"]
+            if environment
+            else ("confirmed", "order", "quantity", "extras", "delivery", "stage")
+        )
+        summary["final_backend" if environment else "confirmed_backend"] = {
+            key: backend[key] for key in backend_fields if key in backend
         }
         summary["action_count"] = len(receipt.get("actions", []))
         episodes.append(
@@ -412,9 +490,11 @@ def summarized_feedback(base, number, note, condition, *, protocol=None):
                 "receipt_path": root + "/" + directory.name + "/episode.json",
                 **(
                     {
-                        "behavioral_sequence": behavioral_sequence(
-                            directory, receipt, root + "/" + directory.name
-                        )
+                        "behavioral_sequence": (
+                            archive_behavioral_sequence
+                            if environment
+                            else behavioral_sequence
+                        )(directory, receipt, root + "/" + directory.name)
                     }
                     if protocol == BEHAVIORAL_FEEDBACK_PROTOCOL
                     else {}
@@ -432,7 +512,9 @@ def summarized_feedback(base, number, note, condition, *, protocol=None):
                 "path": root + "/candidate/" + name,
                 **manifest["files"]["candidate/" + name],
             }
-            for name in candidate_files(condition)
+            for name in (
+                environment.candidate_files if environment else candidate_files
+            )(condition)
             if "candidate/" + name in manifest["files"]
         },
         "episodes": episodes,
@@ -478,7 +560,14 @@ def materialize_feedback_evidence(workspace, reference, context):
 def context_for(workspace, run, iteration, prompt, *, clean_report=None):
     workspace, run = Path(workspace), Path(run)
     settings = read(run / "runtime.json")
-    files = load(workspace / "candidate", settings["condition"])
+    environment = (
+        get_environment(settings)
+        if settings.get("environment", "checkout") != "checkout"
+        else None
+    )
+    files = (environment.load if environment else load)(
+        workspace / "candidate", settings["condition"]
+    )
     previous = []
     memory_policy = settings.get("memory_policy")
     for number in range(1, iteration):
@@ -492,6 +581,7 @@ def context_for(workspace, run, iteration, prompt, *, clean_report=None):
                     safe_read(workspace, f".autohelix/notes/iter-{number}.md"),
                     settings["condition"],
                     protocol=settings.get("optimizer_feedback_protocol"),
+                    environment=environment,
                 )
             )
             continue
@@ -505,8 +595,14 @@ def context_for(workspace, run, iteration, prompt, *, clean_report=None):
                     safe_read(workspace, relative / "result.json", MAX_FEEDBACK_BYTES)
                 ),
                 "candidate_files": {
-                    name: safe_read(workspace, relative / "candidate" / name, 24000)
-                    for name in candidate_files(settings["condition"])
+                    name: safe_read(
+                        workspace,
+                        relative / "candidate" / name,
+                        environment.max_file_bytes if environment else 24000,
+                    )
+                    for name in (
+                        environment.candidate_files if environment else candidate_files
+                    )(settings["condition"])
                     if (base / "candidate" / name).is_file()
                 },
                 "episodes": [
@@ -529,17 +625,34 @@ def context_for(workspace, run, iteration, prompt, *, clean_report=None):
         "condition": settings["condition"],
         "contract": safe_read(workspace, "CONTRACT.md"),
         "current_files": files,
-        "current_hash": fingerprint(files),
+        "current_hash": (environment.fingerprint if environment else fingerprint)(
+            files
+        ),
         "clean_measurements": clean["metrics"],
         "clean_journey": episode_context(Path(clean["batch"]) / "episode-0"),
         "renderer_context": {
-            "stages": ["product", "cart", "options", "review", "confirmation"],
-            "editable_pages": list(candidate_files(settings["condition"])),
-            "meaning": "Protected slots insert factual controls. The declared condition determines whether presentation and/or bounded event/state rules may change. Pricing, task, confirmation and evaluation remain trusted.",
+            **get_environment(settings).context_metadata()["renderer_context"],
+            "editable_pages": list(
+                (environment.candidate_files if environment else candidate_files)(
+                    settings["condition"]
+                )
+            ),
             "viewport": settings.get("viewport", {"width": 1280, "height": 720}),
         },
         "prior_feedback": previous,
-        "output_schema": proposal_schema(settings["condition"]),
+        "output_schema": proposal_schema(
+            settings["condition"], environment=environment
+        ),
+        **(
+            {
+                "environment": environment.name,
+                "protected_reference_files": list(
+                    environment.fixture_paths(settings["condition"])
+                ),
+            }
+            if environment
+            else {}
+        ),
         "history": safe_read(workspace, ".autohelix/history.jsonl", MAX_FEEDBACK_BYTES)
         if (workspace / ".autohelix/history.jsonl").is_file()
         else "",

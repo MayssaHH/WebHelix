@@ -58,17 +58,22 @@ class ParentSelector:
     security boundary against the optimizer itself.
     """
 
-    def __init__(self, workspace, reference, output, context):
+    def __init__(self, workspace, reference, output, context, *, environment=None):
         self.candidate = Path(workspace) / "candidate"
         self.reference, self.output = Path(reference), Path(output)
         self.condition = context["condition"]
         self.iteration = context["iteration"]
+        self.environment = environment
+        self._fingerprint = (
+            environment.fingerprint if environment is not None else fingerprint
+        )
+        self._validate = environment.validate if environment is not None else validate
         self._lock = threading.Lock()
         self._attempted = False
         self.selected = None
-        retained = _snapshot(self.candidate, self.condition)
-        validate(retained, self.condition)
-        self.retained_hash = fingerprint(retained)
+        retained = self._snapshot(self.candidate)
+        self._validate(retained, self.condition)
+        self.retained_hash = self._fingerprint(retained)
         if self.retained_hash != context["current_hash"]:
             raise ValueError("Retained candidate changed during parent preparation")
         self._choices = {
@@ -91,9 +96,9 @@ class ParentSelector:
                 "candidate_hash"
             ):
                 continue
-            files = _snapshot(directory / "candidate", self.condition)
-            validate(files, self.condition)
-            if fingerprint(files) != result["candidate_hash"]:
+            files = self._snapshot(directory / "candidate")
+            self._validate(files, self.condition)
+            if self._fingerprint(files) != result["candidate_hash"]:
                 raise ValueError("Archived parent differs from measured candidate")
             self._choices[str(number)] = {
                 "files": files,
@@ -121,18 +126,21 @@ class ParentSelector:
         save(self.reference / "parent-options.json", self.context)
         (self.reference / "select-parent.py").write_text(SELECT_HELPER)
 
+    def _snapshot(self, path):
+        return _snapshot(path, self.condition, environment=self.environment)
+
     def select(self, selection):
         with self._lock:
             if self._attempted:
                 raise ValueError("A parent can be selected only once per session")
             if type(selection) is not str or selection not in self._choices:
                 raise ValueError("Choose an allowlisted parent identifier")
-            before = _snapshot(self.candidate, self.condition)
-            if fingerprint(before) != self.retained_hash:
+            before = self._snapshot(self.candidate)
+            if self._fingerprint(before) != self.retained_hash:
                 raise ValueError("Choose the parent before making candidate edits")
             choice = self._choices[selection]
             if choice["directory"] is not None:
-                archived = _snapshot(choice["directory"], self.condition)
+                archived = self._snapshot(choice["directory"])
                 if archived != choice["files"]:
                     raise ValueError("Archived parent changed after preparation")
             files = choice["files"]
@@ -167,7 +175,7 @@ class ParentSelector:
                                 pass
                 finally:
                     os.close(descriptor)
-                copied = _snapshot(self.candidate, self.condition)
+                copied = self._snapshot(self.candidate)
                 if copied != files:
                     raise ValueError("Active candidate differs from selected parent")
                 self.selected = {
@@ -177,7 +185,7 @@ class ParentSelector:
                     "source_iteration": choice["source_iteration"],
                     "source_status": choice["source_status"],
                     "retained_hash_before": self.retained_hash,
-                    "selected_candidate_hash": fingerprint(copied),
+                    "selected_candidate_hash": self._fingerprint(copied),
                     "files": file_receipts(copied),
                     "acceptance_changed": False,
                     "meaning": "Host-verified initial candidate copy; final edited files require independent validation and evaluation. This is not an acceptance or steering result.",

@@ -18,8 +18,6 @@ from dotenv import dotenv_values
 
 from webhelix.checkout.contract import (
     InvalidCandidate,
-    fingerprint,
-    load,
     read,
     save,
 )
@@ -225,6 +223,34 @@ def provider_context_matches(output, context):
     return False
 
 
+def copy_reference_images(reference, images):
+    """Store observed route labels as metadata, never as filesystem paths."""
+    reference = Path(reference)
+    manifest = []
+    for condition, stage, path in images:
+        if (
+            condition not in {"clean", "previous"}
+            or not isinstance(stage, str)
+            or not stage
+        ):
+            raise ValueError("Invalid reference image condition or stage")
+        label = re.sub(r"[^A-Za-z0-9_-]+", "-", stage).strip("-")[:60] or "page"
+        identity = hashlib.sha256(json.dumps([condition, stage]).encode()).hexdigest()[
+            :16
+        ]
+        name = f"{condition}-{label}-{identity}.png"
+        shutil.copy2(path, reference / name)
+        manifest.append(
+            {
+                "path": "/work/reference/" + name,
+                "condition": condition,
+                "stage": stage,
+                "sha256": hashlib.sha256(Path(path).read_bytes()).hexdigest(),
+            }
+        )
+    return manifest
+
+
 class CheckoutOpenCodeBackend:
     """Delegate the actual tool loop to upstream OpenCodeAgent, not a JSON writer."""
 
@@ -273,6 +299,9 @@ class CheckoutOpenCodeBackend:
         selector = None
         started = time.monotonic()
         try:
+            from webhelix.environments import get_environment
+
+            environment = get_environment(runtime_settings)
             context = context_for(
                 workspace, root, iteration, prompt, clean_report=self.reference_report
             )
@@ -299,7 +328,9 @@ class CheckoutOpenCodeBackend:
                     "suggested_requests_reserved_for_completion": 4,
                     "meaning": "Plan within the existing cap; no extra requests are granted",
                 }
-                selector = ParentSelector(workspace, reference, output, context)
+                selector = ParentSelector(
+                    workspace, reference, output, context, environment=environment
+                )
                 context["parent_selection"] = selector.context
             if self.editing_check:
                 context["purpose"] = (
@@ -307,12 +338,7 @@ class CheckoutOpenCodeBackend:
                 )
             save(output / "optimizer-context.json", context)
             save(reference / "context.json", context)
-            for name in (
-                "TASK.json",
-                "CATALOGUE.json",
-                "CONTRACT.md",
-                "EVALUATION.json",
-            ):
+            for name in environment.fixture_paths(runtime_settings["condition"]):
                 shutil.copy2(workspace / name, reference / name)
             reference_report = self.reference_report or read(root / "clean.json")
             images = [
@@ -328,16 +354,7 @@ class CheckoutOpenCodeBackend:
                         root / "feedback" / f"iter-{iteration - 1}" / "episode-0"
                     )
                 ]
-            image_manifest = []
-            for condition, stage, path in images:
-                name = f"{condition}-{stage}.png"
-                shutil.copy2(path, reference / name)
-                image_manifest.append(
-                    {
-                        "path": "/work/reference/" + name,
-                        "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
-                    }
-                )
+            image_manifest = copy_reference_images(reference, images)
             save(output / "image-manifest.json", image_manifest)
             actual_prompt = launch_prompt(context, editing_check=self.editing_check)
             (output / "prompt.txt").write_text(actual_prompt)
@@ -348,7 +365,12 @@ class CheckoutOpenCodeBackend:
                 from .fixture import ToolFixture
                 import httpx
 
-                transport = httpx.MockTransport(ToolFixture(iteration))
+                fixture = (
+                    ToolFixture(iteration, environment=runtime_settings["environment"])
+                    if runtime_settings.get("environment", "checkout") != "checkout"
+                    else ToolFixture(iteration)
+                )
+                transport = httpx.MockTransport(fixture)
                 credential = "offline-fixture-no-provider-credential"
             else:
                 if read(root / "spending-plan.json").get("offline_fixture"):
@@ -378,6 +400,7 @@ class CheckoutOpenCodeBackend:
                         ),
                     ),
                     condition=runtime_settings["condition"],
+                    settings=runtime_settings,
                 )
 
             with DockerRuntime(
@@ -545,7 +568,7 @@ class CheckoutOpenCodeBackend:
                             error="Select the retained state or an allowed archived parent before editing",
                         )
                     else:
-                        files = load(
+                        files = environment.load(
                             workspace / "candidate", runtime_settings["condition"]
                         )
                         diff = "".join(
@@ -586,7 +609,7 @@ class CheckoutOpenCodeBackend:
                                 target.write_text(note)
                                 result.update(
                                     status="valid_proposal",
-                                    candidate_hash=fingerprint(files),
+                                    candidate_hash=environment.fingerprint(files),
                                 )
         except InvalidCandidate as exc:
             result.update(status="invalid_proposal", error=str(exc))
@@ -618,7 +641,11 @@ def editing_check(run, settings, reference_report, *, scripted=False):
     workspace.mkdir(parents=True)
     project = root / "project"
     shutil.copytree(project / "candidate", workspace / "candidate")
-    for name in ("TASK.json", "CATALOGUE.json", "CONTRACT.md", "EVALUATION.json"):
+    from webhelix.environments import get_environment
+
+    runtime_settings = read(root / "runtime.json")
+    environment = get_environment(runtime_settings)
+    for name in environment.fixture_paths(runtime_settings["condition"]):
         shutil.copy2(project / name, workspace / name)
     backend = CheckoutOpenCodeBackend(
         root, settings, scripted=scripted, editing_check=True

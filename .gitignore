@@ -35,3 +35,6 @@ opencode.local.json
 # Benchmark traces can contain website session cookies and fixture login headers.
 *.har
 fixture-credentials.json
+# Captured retailer material and local replay data are not redistributed in Git.
+captures/
+archive-data/

@@ -15,6 +15,7 @@ from webhelix.browser.manifest import runtime_identity
 
 from webhelix.evaluate import lock
 from webhelix.search.budget import Budget, BudgetBlocked
+from webhelix.environments import get_environment
 from .contract import (
     FIXTURES,
     InvalidCandidate,
@@ -35,6 +36,7 @@ POLICIES = {
     "scripted-stop",
     "scripted-attentive",
     "scripted-oblivious",
+    "scripted-wrong",
 }
 
 
@@ -46,7 +48,9 @@ def evaluation_signature(candidate_hash, settings, policy, episodes):
         "settings": settings,
         "policy": policy,
         "episodes": episodes,
-        "fixtures": {
+        "fixtures": get_environment(settings).fixture_hashes(settings["condition"])
+        if settings.get("environment", "checkout") != "checkout"
+        else {
             name: hashlib.sha256((FIXTURES / name).read_bytes()).hexdigest()
             for name in (
                 "task.json",
@@ -65,16 +69,25 @@ def worker(request):
     """CLI worker dispatch, kept in its own process for browser timeouts/cleanup."""
     from .episode import execute, feasibility
 
+    settings = request.get("settings", {})
+    environment = (
+        get_environment(settings)
+        if settings.get("environment", "checkout") != "checkout"
+        else None
+    )
+
     if request.get("kind") != "feasibility":
-        return execute(request)
+        return environment.execute(request) if environment else execute(request)
     output = Path(request["output"])
     output.mkdir(parents=True, exist_ok=True)
     started = time.monotonic()
     try:
-        result = feasibility(
-            load(request["candidate"], request["settings"]["condition"]),
+        result = (environment.feasibility if environment else feasibility)(
+            (environment.load if environment else load)(
+                request["candidate"], settings["condition"]
+            ),
             output=output,
-            condition=request["settings"]["condition"],
+            condition=settings["condition"],
         )
         receipt = {"valid": True, "checks": result}
     except InvalidCandidate as exc:
@@ -183,13 +196,15 @@ def _launch(request, timeout, grace=10):
         if request.get("kind") == "feasibility":
             receipt.update(valid=None, error_type="infrastructure_error")
         else:
-            receipt.update(
-                outcome="infrastructure_error",
-                core_purchase_completed=False,
-                unauthorized_commitment=False,
-                legitimate_success=False,
-                other_intent_violation=False,
-            )
+            receipt.update(outcome="infrastructure_error", legitimate_success=False)
+            if request.get("settings", {}).get("environment", "checkout") == "checkout":
+                receipt.update(
+                    core_purchase_completed=False,
+                    unauthorized_commitment=False,
+                    other_intent_violation=False,
+                )
+            else:
+                receipt.update(task_action_completed=False, steering_success=False)
         save(receipt_path, receipt)
     return receipt
 
@@ -236,6 +251,11 @@ def evaluate(
     # Do not resolve the candidate itself: a directory symlink must remain invalid.
     run, candidate = Path(run).resolve(), Path(candidate).absolute()
     settings = read(run / "runtime.json")
+    environment = (
+        get_environment(settings)
+        if settings.get("environment", "checkout") != "checkout"
+        else None
+    )
     if type(episodes) is not int or episodes not in (1, 3) or policy not in POLICIES:
         raise ValueError(
             "Use one scripted control or three experimental episodes and a known policy"
@@ -253,9 +273,18 @@ def evaluate(
                 episodes != 1
                 or label != "clean"
                 or settings.get("workflow") != "discovery-v1"
-                or settings.get("condition") != "combined"
-                or fingerprint(load(candidate, settings["condition"]))
-                != fingerprint(initial_files(settings["condition"]))
+                or settings.get("condition")
+                != ("archive" if environment else "combined")
+                or (environment.fingerprint if environment else fingerprint)(
+                    (environment.load if environment else load)(
+                        candidate, settings["condition"]
+                    )
+                )
+                != (environment.fingerprint if environment else fingerprint)(
+                    (environment.initial_files if environment else initial_files)(
+                        settings["condition"]
+                    )
+                )
             ):
                 raise ValueError(
                     "The one-episode exception requires the pristine discovery baseline"
@@ -270,6 +299,11 @@ def evaluate(
 
 
 def _evaluate(candidate, run, policy, episodes, label, settings, purpose="candidate"):
+    environment = (
+        get_environment(settings)
+        if settings.get("environment", "checkout") != "checkout"
+        else None
+    )
     batch = run / "batches" / f"{label}-{uuid.uuid4().hex[:8]}"
     batch.mkdir(parents=True)
     report = {
@@ -288,18 +322,24 @@ def _evaluate(candidate, run, policy, episodes, label, settings, purpose="candid
     snapshot = batch / "candidate"
     save(batch / "candidate-manifest.json", _snapshot(candidate, snapshot))
     try:
-        files = load(candidate, settings["condition"])
+        files = (environment.load if environment else load)(
+            candidate, settings["condition"]
+        )
         # These are the exact validated bytes that will be served by every worker.
         for name, content in files.items():
             (snapshot / name).write_text(content)
-        report["candidate_hash"] = fingerprint(files)
+        report["candidate_hash"] = (
+            environment.fingerprint if environment else fingerprint
+        )(files)
         report["evaluation_signature"] = evaluation_signature(
             report["candidate_hash"], settings, policy, episodes
         )
         diff = "".join(
             "".join(
                 difflib.unified_diff(
-                    initial_files(settings["condition"])[name].splitlines(True),
+                    (environment.initial_files if environment else initial_files)(
+                        settings["condition"]
+                    )[name].splitlines(True),
                     files[name].splitlines(True),
                     fromfile="clean/" + name,
                     tofile="candidate/" + name,
@@ -367,7 +407,7 @@ def _evaluate(candidate, run, policy, episodes, label, settings, purpose="candid
                 if receipt["outcome"] == "invalid_candidate":
                     report["validation"] = receipt.get("validation", {"valid": False})
                 break
-    report["metrics"] = summarize(
+    report["metrics"] = (environment.scoring.summarize if environment else summarize)(
         report["episodes"],
         episodes,
         report["validation"]["valid"],
@@ -405,11 +445,20 @@ def bridge(mode):
     run = Path(os.environ["WEBHELIX_CHECKOUT_RUN"]).resolve()
     workspace = Path.cwd().resolve()
     settings = read(run / "runtime.json")
+    environment = (
+        get_environment(settings)
+        if settings.get("environment", "checkout") != "checkout"
+        else None
+    )
     path = cache_path(run, workspace)
     if path.exists():
         report = read(path)
         signature = evaluation_signature(
-            fingerprint(load(workspace / "candidate", settings["condition"])),
+            (environment.fingerprint if environment else fingerprint)(
+                (environment.load if environment else load)(
+                    workspace / "candidate", settings["condition"]
+                )
+            ),
             settings,
             settings["policy"],
             settings["episodes_per_condition"],
@@ -432,7 +481,9 @@ def bridge(mode):
     save(workspace / ".autohelix/checkout-result.json", report)
     if mode == "constraint":
         best = read(run / "retention.json")
-        if not eligible(report["metrics"], best["clean_rate"], best["best_rate"]):
+        if not (environment.scoring.eligible if environment else eligible)(
+            report["metrics"], best["clean_rate"], best["best_rate"]
+        ):
             raise RuntimeError(
                 "No fully measured, core-complete, exposed strict steering improvement; "
                 "actual feedback preserved at " + report["batch"]
