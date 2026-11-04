@@ -286,3 +286,25 @@ renew an allowance or discard previous usage. Execution time accumulates across 
 human review pause does not consume the wall-time allowance. Modifying protected
 settings or baseline evidence blocks resume. This is an integrity check for the
 workflow, not protection against an actor who can rewrite the trusted run files.
+
+## Navigation outside the capture
+
+Original navigation can link to categories or editorial pages outside the frozen
+archive, such as `/collections/letterbox/`. These destinations are not silently
+mapped to a different merchant page. The local server returns an explicit
+unavailable-page with HTTP 404, retains the requested URL, and provides a normal
+Return to Flowers link. Browser Back also remains available. No additional live
+website pages are fetched.
+
+The observer recognizes this trusted same-origin boundary separately from the
+captured interface. It records `stage: out_of_capture`, the actual path, no
+factual-reference comparison, and no intervention exposure. Cart state and prior
+transactions remain intact; seeing this boundary cannot stand in for observing
+the final cart. Captured pages still require their replay controller and normal
+integrity/readability checks. Missing assets and API paths remain plain errors.
+
+This handling was added after a real Luna episode followed the original Letterbox
+link and the earlier observer timed out on an empty 404. The
+[interrupted experiment](../examples/arena-archive/sol-luna-three-iterations-20261104/README.md)
+is preserved separately. A new run and fresh clean baseline are required after
+this environment behavior change; do not edit or relaunch the stopped run.

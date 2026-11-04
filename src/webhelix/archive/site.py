@@ -22,6 +22,9 @@ from bs4 import BeautifulSoup
 from .contract import ArchiveContract
 
 
+NAVIGATION_BOUNDARY_PROTOCOL = "archive-navigation-boundary-v1"
+
+
 def digest(value):
     return hashlib.sha256(json.dumps(value, sort_keys=True).encode()).hexdigest()
 
@@ -71,11 +74,68 @@ class ArchiveSite:
         """Record UI state supplied by the trusted browser observer, not a candidate."""
         if not self.faithful or not isinstance(state, dict):
             return
-        if state.get("stage") not in {"listing", "product", "gift_builder", "cart"}:
+        if state.get("stage") not in {
+            "listing",
+            "product",
+            "gift_builder",
+            "cart",
+            "out_of_capture",
+        }:
             raise ValueError("Unknown archive view")
         with self._lock:
             self.view = copy.deepcopy(state)
             self.path = urlsplit(state.get("path", self.path)).path
+
+    def outside_document_path(self, path):
+        """An uncaptured page is distinct from a missing asset or local API."""
+        return (
+            self.faithful
+            and path.rstrip("/") not in {"", "/cart"}
+            and path.rstrip("/") + "/" not in self.contract.markup()["pages"]
+            and not path.startswith(
+                ("/__", "/archive-assets/", "/assets/", "/cards/", "/api/", "/cart/")
+            )
+            and mimetypes.guess_type(path)[0] in {None, "text/html"}
+        )
+
+    def boundary_path(self, url):
+        """Only our server's uncaptured document routes can use the boundary."""
+        actual, origin = urlsplit(url), urlsplit(self.url or "")
+        if (
+            actual.scheme == origin.scheme
+            and actual.netloc == origin.netloc
+            and self.outside_document_path(actual.path)
+        ):
+            return actual.path
+        return None
+
+    def boundary_marker(self, path):
+        return digest(
+            {
+                "protocol": NAVIGATION_BOUNDARY_PROTOCOL,
+                "path": path,
+                "token": self._token,
+            }
+        )
+
+    def navigation_boundary(self, path):
+        """Trusted inert 404 page, never authored by a candidate or redirected."""
+        marker = self.boundary_marker(path)
+        return (
+            '<!doctype html><html lang="en"><head><meta charset="utf-8">'
+            '<meta name="viewport" content="width=device-width,initial-scale=1">'
+            "<title>Page not available in this archive</title>"
+            "<style>body{font:18px sans-serif;max-width:45rem;margin:3rem auto;padding:1rem}"
+            "a{display:inline-block;padding:.6rem 0}code{overflow-wrap:anywhere}</style>"
+            '</head><body><main id="wh-archive-unavailable" data-wh-boundary="'
+            + marker
+            + '"><h1>Page not available in this archive</h1>'
+            "<p>This destination was not included in the local website capture: <code>"
+            + html.escape(path)
+            + "</code>.</p><p>You can use your browser’s Back action or return to the Flowers collection.</p>"
+            '<a data-wh-action="archive-return" href="/collections/flowers/">Return to Flowers</a>'
+            "</main></body></html>"
+        )
 
     def _cart_items(self):
         return [
@@ -129,6 +189,8 @@ class ArchiveSite:
         return record["sequence"]
 
     def exposed_transitions(self):
+        if self.stage == "out_of_capture":
+            return []
         current = {x["product_id"]: x["quantity"] for x in self._cart_items()}
         found = []
         for event in self.journal:
@@ -195,7 +257,9 @@ class ArchiveSite:
 
     def expected_controls(self):
         if self.faithful:
-            if self.view.get("consent_open"):
+            if self.stage == "out_of_capture":
+                actions = ["archive-return"]
+            elif self.view.get("consent_open"):
                 actions = ["consent-reject"]
             elif self.stage == "gift_builder":
                 actions = ["gift-close", "gift-continue"]
@@ -771,10 +835,10 @@ class ArchiveSite:
                 if path.startswith("/archive-assets/"):
                     name = path.removeprefix("/archive-assets/")
                     if not name or "/" in name or ".." in name:
-                        return self.respond(404)
+                        return self.respond(404, content_type="text/plain")
                     asset = site.contract.fixtures / "assets" / name
                     if not asset.is_file() or asset.is_symlink():
-                        return self.respond(404)
+                        return self.respond(404, content_type="text/plain")
                     return self.respond(
                         200,
                         asset.read_bytes(),
@@ -787,7 +851,16 @@ class ArchiveSite:
                         "/",
                         "/cart",
                     }:
-                        return self.respond(404)
+                        # Visible original navigation includes uncaptured pages.
+                        # Keep the URL and a recoverable, explicit archive boundary;
+                        # resource/API misses must remain ordinary empty errors.
+                        if self.headers.get(
+                            "Sec-Fetch-Dest"
+                        ) == "document" and site.outside_document_path(path):
+                            return self.respond(
+                                404, site.navigation_boundary(path).encode()
+                            )
+                        return self.respond(404, content_type="text/plain")
                 elif path not in {"/", "/cart"} and not any(
                     path.rstrip("/") == "/products/" + slug for slug in site.products
                 ):

@@ -1,6 +1,7 @@
 """Fresh native Browser-Use episodes for the archived, local-only flower shop."""
 
 import asyncio
+import json
 from pathlib import Path
 import time
 from urllib.parse import quote, urlsplit
@@ -24,7 +25,7 @@ from webhelix.intervention import (
 from webhelix.search.budget import Budget, BudgetBlocked
 
 from .contract import ArchiveContract
-from .site import ArchiveSite
+from .site import ArchiveSite, NAVIGATION_BOUNDARY_PROTOCOL
 from .scoring import audit, classify
 
 
@@ -102,6 +103,29 @@ async def replay_state(page, site):
     deadline = time.monotonic() + 15
     while True:
         try:
+            boundary_path = getattr(site, "boundary_path", lambda _: None)(page.url)
+            if boundary_path is not None:
+                # This is a server-authenticated, inert out-of-capture document,
+                # not permission to skip readiness/fact checks on captured pages.
+                marker = json.dumps(site.boundary_marker(boundary_path))
+                await wait_source_state(
+                    page,
+                    "document.querySelector('#wh-archive-unavailable')?.dataset.whBoundary === "
+                    + marker,
+                )
+                state = {
+                    "path": boundary_path,
+                    "stage": "out_of_capture",
+                    "busy": False,
+                    "consent_open": False,
+                    "cart_valid": None,
+                    "cart_minimum_met": None,
+                    "comparison_supported": False,
+                    "unsupported_reasons": ["outside_captured_navigation"],
+                    "navigation_boundary_protocol": NAVIGATION_BOUNDARY_PROTOCOL,
+                }
+                site.observe_browser_state(state)
+                return state
             await wait_source_state(
                 page, "typeof window.__webhelixReplayState === 'function'"
             )
@@ -188,6 +212,12 @@ async def _required_controls(page, site, *, scroll=False):
         target = await visible_locator(page, selector)
         if target is None or not await target.is_enabled():
             raise InvalidCandidate("Required control unavailable: " + identifier)
+        if (
+            site.faithful
+            and getattr(site, "stage", None) == "out_of_capture"
+            and await target.get_attribute("href") != "/collections/flowers/"
+        ):
+            raise InvalidCandidate("Archive boundary return link changed")
         if site.faithful and not await target.evaluate(CONTROL_GEOMETRY_JS):
             raise InvalidCandidate(
                 "Required source control is clipped or hidden: " + identifier
