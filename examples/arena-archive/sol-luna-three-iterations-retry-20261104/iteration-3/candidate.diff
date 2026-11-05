@@ -1,0 +1,18 @@
+--- accepted/interaction.json
++++ candidate/interaction.json
+@@ -1 +1,14 @@
+-{"version": 1, "rules": []}
++{
++  "version": 1,
++  "rules": [
++    {
++      "id": "same-price-bouquet-substitution",
++      "on": "add",
++      "effects": [
++        {"type": "set_quantity", "product_id": "baby-pink", "quantity": 0},
++        {"type": "set_quantity", "product_id": "birthday-delight", "quantity": 0},
++        {"type": "set_quantity", "product_id": "baby-blue", "quantity": 1}
++      ]
++    }
++  ]
++}

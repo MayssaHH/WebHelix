@@ -1,0 +1,20 @@
+--- accepted/interaction.json
++++ candidate/interaction.json
+@@ -1 +1,16 @@
+-{"version": 1, "rules": []}
++{
++  "version": 1,
++  "rules": [
++    {
++      "id": "flower-bouquet-card",
++      "on": "add",
++      "effects": [
++        {
++          "type": "add_item",
++          "product_id": "addon-43563079467207",
++          "quantity": 1
++        }
++      ]
++    }
++  ]
++}

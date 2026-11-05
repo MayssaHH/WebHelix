@@ -1,0 +1,187 @@
+{
+  "kind": "saved-candidate-continuation-token-cost-reference",
+  "generated_utc": "2026-11-05T00:57:55.742710+00:00",
+  "status": "completed",
+  "ledger_sha256": "fa27c983c365e1f3cf7774b9017e1006c8e6f1cee9f36cb16c8678ae8f9bd89a",
+  "original_hashes_verified": {
+    "status.json": "1cdc3feb429b865bf6b0e49d3cf8c2b479b1b85b10db5498cd3c9cb1ec01f28d",
+    "history.json": "d66465956bcdca29268fdbed767714a57c32a01d3d45d13c98e7f38bd05c9f41",
+    "budget.json": "ab3113b8fffa0a8269610594f6d2fc039f084d114e7f6398e001d4eec06bdb2c",
+    "clean.json": "2879ca0c8529c0a68fe3fff3dfb5dd41e53e49a8c62dff3411c1461552968408",
+    "retention.json": "9bb927b54ace33b6110f3baf1451f038d7f1610930eea59bebf18f948f99a735",
+    "runtime.json": "ba9e828a5166df45b30265eb6f60f6b95525ad179abc3afa3b821d55857a339c",
+    "spending-plan.json": "d55557a629882a2b14d30eea4fe9588ce5376292ebbd1bc1a546ebf134538b56",
+    "proposals/iter-3/result.json": "bccbf489b75f3526fee6750729499e981a594816cf53bef52e55232f4b5e919f",
+    "proposals/iter-3/optimizer-note.md": "f4158dd57e06db9bc89cb9a4a0b7628c2ba742d1ae44316831f8ea5ab7c6fef4",
+    "proposals/iter-3/candidate.diff": "3810e0efaf294761f9bd4c42b57d26231fee3384bbe8fbc2713ebc8f5adfc2b5",
+    "feedback/iter-3/result.json": "8ecb4d5edcd0acedb6a501a232b8cb4558c3ab394504a5716e3f63ef5d73559d"
+  },
+  "helper_sha256": "3748a9164f35e839c048ac65ace66d154f4dca40f1a182c8a84a6260f6120586",
+  "pricing_helper_sha256": "d07887fda295658ec95c9d7cc2f77e88bcb895746e9ca6126937c82304333f9b",
+  "rates_usd_per_million_tokens": {
+    "gpt-6.1-sol": {
+      "input": "2.00",
+      "cached_input": "0.10",
+      "cache_write": "2.50",
+      "output": "10.00",
+      "source": "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+    },
+    "gpt-6-luna": {
+      "input": "0.10",
+      "cached_input": "0.01",
+      "cache_write": "0.125",
+      "output": "0.50",
+      "source": "https://developers.openai.com/api/docs/models/gpt-6-luna"
+    }
+  },
+  "formula": "((input-cached-writes)*input_rate + cached*cached_rate + writes*write_rate)*input_multiplier/1e6 + output*output_rate*output_multiplier/1e6",
+  "long_context_threshold_input_tokens": 272000,
+  "long_context_multipliers": {
+    "input_and_cache": "2",
+    "output": "1.5"
+  },
+  "total_retry_and_continuation": {
+    "calls": 336,
+    "priced_calls": 336,
+    "recorded_not_sent_calls": 0,
+    "excluded_calls": 0,
+    "excluded_ledger_ids": [],
+    "complete_reference_for_this_ledger_snapshot": true,
+    "standard_reference_usd": "2.942879445",
+    "standard_reference_usd_priced_subset": "2.942879445",
+    "conservative_accounted_usd_including_holds": "35.848167025",
+    "conservative_usage_reported_usd": "35.848167025",
+    "conservative_other_status_usd": "0",
+    "ledger_status_counts": {
+      "usage_reported": 336
+    },
+    "priced_token_totals": {
+      "input": 9619145,
+      "output": 139716,
+      "cached_input": 7486549,
+      "cache_write": 2120812,
+      "remaining_uncached_input": 11784
+    },
+    "long_context_priced_calls": 5
+  },
+  "original_retry_only": {
+    "calls": 231,
+    "priced_calls": 231,
+    "recorded_not_sent_calls": 0,
+    "excluded_calls": 0,
+    "excluded_ledger_ids": [],
+    "complete_reference_for_this_ledger_snapshot": true,
+    "standard_reference_usd": "2.853327115",
+    "standard_reference_usd_priced_subset": "2.853327115",
+    "conservative_accounted_usd_including_holds": "35.498962950",
+    "conservative_usage_reported_usd": "35.498962950",
+    "conservative_other_status_usd": "0",
+    "ledger_status_counts": {
+      "usage_reported": 231
+    },
+    "priced_token_totals": {
+      "input": 8477022,
+      "output": 97146,
+      "cached_input": 6841151,
+      "cache_write": 1635178,
+      "remaining_uncached_input": 693
+    },
+    "long_context_priced_calls": 5
+  },
+  "new_continuation_only": {
+    "calls": 105,
+    "priced_calls": 105,
+    "recorded_not_sent_calls": 0,
+    "excluded_calls": 0,
+    "excluded_ledger_ids": [],
+    "complete_reference_for_this_ledger_snapshot": true,
+    "standard_reference_usd": "0.089552330",
+    "standard_reference_usd_priced_subset": "0.089552330",
+    "conservative_accounted_usd_including_holds": "0.349204075",
+    "conservative_usage_reported_usd": "0.349204075",
+    "conservative_other_status_usd": "0",
+    "ledger_status_counts": {
+      "usage_reported": 105
+    },
+    "priced_token_totals": {
+      "input": 1142123,
+      "output": 42570,
+      "cached_input": 645398,
+      "cache_write": 485634,
+      "remaining_uncached_input": 11091
+    },
+    "long_context_priced_calls": 0
+  },
+  "by_role_retry_and_continuation": {
+    "optimizer": {
+      "calls": 27,
+      "priced_calls": 27,
+      "recorded_not_sent_calls": 0,
+      "excluded_calls": 0,
+      "excluded_ledger_ids": [],
+      "complete_reference_for_this_ledger_snapshot": true,
+      "standard_reference_usd": "2.6846919",
+      "standard_reference_usd_priced_subset": "2.6846919",
+      "conservative_accounted_usd_including_holds": "34.8290910",
+      "conservative_usage_reported_usd": "34.8290910",
+      "conservative_other_status_usd": "0",
+      "ledger_status_counts": {
+        "usage_reported": 27
+      },
+      "priced_token_totals": {
+        "input": 6309051,
+        "output": 7837,
+        "cached_input": 5562887,
+        "cache_write": 746083,
+        "remaining_uncached_input": 81
+      },
+      "long_context_priced_calls": 5
+    },
+    "victim": {
+      "calls": 309,
+      "priced_calls": 309,
+      "recorded_not_sent_calls": 0,
+      "excluded_calls": 0,
+      "excluded_ledger_ids": [],
+      "complete_reference_for_this_ledger_snapshot": true,
+      "standard_reference_usd": "0.258187545",
+      "standard_reference_usd_priced_subset": "0.258187545",
+      "conservative_accounted_usd_including_holds": "1.019076025",
+      "conservative_usage_reported_usd": "1.019076025",
+      "conservative_other_status_usd": "0",
+      "ledger_status_counts": {
+        "usage_reported": 309
+      },
+      "priced_token_totals": {
+        "input": 3310094,
+        "output": 131879,
+        "cached_input": 1923662,
+        "cache_write": 1374729,
+        "remaining_uncached_input": 11703
+      },
+      "long_context_priced_calls": 0
+    }
+  },
+  "earlier_interrupted_attempt_reference_usd": "1.569934700",
+  "both_attempts_plus_continuation_reference_usd": "4.512814145",
+  "older_cumulative_conservative_usd": "30.796110400",
+  "cumulative_conservative_all_lineage_usd": "66.644277425",
+  "episode_starts": {
+    "retry_and_continuation": 10,
+    "retry": 7,
+    "new_continuation": 3
+  },
+  "original_prefix_preserved": true,
+  "older_ledgers_preserved": true,
+  "receipt_index_warnings": [],
+  "ledger_changed_during_audit": false,
+  "limitations": [
+    "Published Standard-price reference, not an invoice or confirmed account debit.",
+    "Reported cache reads and writes are treated as disjoint input-token categories; arithmetic and receipt agreement were checked.",
+    "Default service tier and exact response model match were verified for every priced request.",
+    "Regional premiums, taxes and account-specific adjustments are unverified and excluded.",
+    "Conservative ledger ignores cache discounts and is not actual spending.",
+    "Copied original calls are counted once using their original receipt IDs; only appended calls are new continuation usage.",
+    "Older pre-Sol/Luna experiment reference is unknown and excluded from the combined Standard reference."
+  ]
+}

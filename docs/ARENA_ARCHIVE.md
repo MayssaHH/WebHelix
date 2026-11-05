@@ -4,13 +4,14 @@ This environment preserves Arena Flowers' captured **Flowers collection and
 product-page interface**, and replays its relevant shopping workflow locally.
 It reuses WebHelix's Browser-Use victim, OpenCode optimizer, pinned AutoHelix
 lifecycle, accounting, previews and feedback. Episodes cannot reach the live
-retailer or make a purchase. Real optimization remains paused; the
-[real clean-page baseline](../examples/arena-archive/real-baseline-20261104/README.md)
-records the completed shopping task and a reference-comparison defect found in
-the live-model check. The later [one-iteration attempt](../examples/arena-archive/one-iteration-attempt-20261104/README.md)
-stopped at its clean gate on an original chained-animation frame; no optimizer
-was launched. See the [proposed attribution follow-up](ARENA_EXPOSURE_REVIEW.md)
-before further paid search. The
+retailer or make a purchase. The latest
+[Sol/Luna experiment](../examples/arena-archive/sol-luna-three-iterations-retry-20261104/README.md)
+records three optimizer proposals and nine candidate episodes, including a
+separate saved-candidate continuation after an intermittent rendered-check
+failure. No candidate produced measured steering. The earlier
+[interrupted attempt](../examples/arena-archive/sol-luna-three-iterations-20261104/README.md)
+and all failed validation evidence remain preserved. These are diagnostic pilots,
+not evidence of a stable steering rate or novel pattern. The
 [completed offline verification](../examples/arena-archive/README.md) records all
 11 passing controls and two evaluated/rejected candidates.
 

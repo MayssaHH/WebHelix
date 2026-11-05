@@ -1,0 +1,376 @@
+{
+  "kind": "saved-response-token-cost-reference",
+  "generated_utc": "2026-11-05T00:33:18.144125+00:00",
+  "run_status_at_read": "completed_with_unevaluated_attempts",
+  "ledger_sha256": "ab3113b8fffa0a8269610594f6d2fc039f084d114e7f6398e001d4eec06bdb2c",
+  "ledger_changed_during_audit": false,
+  "helper_sha256": "d07887fda295658ec95c9d7cc2f77e88bcb895746e9ca6126937c82304333f9b",
+  "rates_verified_on": "2026-11-04",
+  "rates_usd_per_million_tokens": {
+    "gpt-6.1-sol": {
+      "input": "2.00",
+      "cached_input": "0.10",
+      "cache_write": "2.50",
+      "output": "10.00",
+      "source": "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+    },
+    "gpt-6-luna": {
+      "input": "0.10",
+      "cached_input": "0.01",
+      "cache_write": "0.125",
+      "output": "0.50",
+      "source": "https://developers.openai.com/api/docs/models/gpt-6-luna"
+    }
+  },
+  "formula": "((input-cached-writes)*input_rate + cached*cached_rate + writes*write_rate)*input_multiplier/1e6 + output*output_rate*output_multiplier/1e6",
+  "multipliers": {
+    "input_tokens_at_most_272000": {
+      "input_and_cache": "1",
+      "output": "1"
+    },
+    "input_tokens_above_272000": {
+      "input_and_cache": "2",
+      "output": "1.5"
+    }
+  },
+  "limitations": [
+    "This is a published Standard token-rate reference, not a provider invoice or confirmed account debit.",
+    "It uses response-reported cache reads/writes as disjoint categories within input_tokens; arithmetic consistency is verified.",
+    "Actual response model, default service tier, and usage equality with saved call/ledger receipts must be verified before pricing a sent call.",
+    "Regional premiums, account-specific pricing, taxes, and other provider adjustments are not verified or applied.",
+    "An excluded or pending call has unknown reference cost; no full reference total is reported until every ledger call is priceable or recorded not_sent.",
+    "The conservative ledger applies upper-bound rates to all input and ignores cache discounts; active reservations remain included in its accounted total.",
+    "During active execution this is only a snapshot. Rerun after the experiment reaches a terminal state."
+  ],
+  "total": {
+    "calls": 231,
+    "priced_calls": 231,
+    "recorded_not_sent_calls": 0,
+    "excluded_calls": 0,
+    "excluded_ledger_ids": [],
+    "complete_reference_for_this_ledger_snapshot": true,
+    "standard_reference_usd": "2.853327115",
+    "standard_reference_usd_priced_subset": "2.853327115",
+    "conservative_accounted_usd_including_holds": "35.498962950",
+    "conservative_usage_reported_usd": "35.498962950",
+    "conservative_other_status_usd": "0",
+    "ledger_status_counts": {
+      "usage_reported": 231
+    },
+    "priced_token_totals": {
+      "input": 8477022,
+      "output": 97146,
+      "cached_input": 6841151,
+      "cache_write": 1635178,
+      "remaining_uncached_input": 693
+    },
+    "long_context_priced_calls": 5
+  },
+  "by_role": {
+    "optimizer": {
+      "calls": 27,
+      "priced_calls": 27,
+      "recorded_not_sent_calls": 0,
+      "excluded_calls": 0,
+      "excluded_ledger_ids": [],
+      "complete_reference_for_this_ledger_snapshot": true,
+      "standard_reference_usd": "2.6846919",
+      "standard_reference_usd_priced_subset": "2.6846919",
+      "conservative_accounted_usd_including_holds": "34.8290910",
+      "conservative_usage_reported_usd": "34.8290910",
+      "conservative_other_status_usd": "0",
+      "ledger_status_counts": {
+        "usage_reported": 27
+      },
+      "priced_token_totals": {
+        "input": 6309051,
+        "output": 7837,
+        "cached_input": 5562887,
+        "cache_write": 746083,
+        "remaining_uncached_input": 81
+      },
+      "long_context_priced_calls": 5
+    },
+    "victim": {
+      "calls": 204,
+      "priced_calls": 204,
+      "recorded_not_sent_calls": 0,
+      "excluded_calls": 0,
+      "excluded_ledger_ids": [],
+      "complete_reference_for_this_ledger_snapshot": true,
+      "standard_reference_usd": "0.168635215",
+      "standard_reference_usd_priced_subset": "0.168635215",
+      "conservative_accounted_usd_including_holds": "0.669871950",
+      "conservative_usage_reported_usd": "0.669871950",
+      "conservative_other_status_usd": "0",
+      "ledger_status_counts": {
+        "usage_reported": 204
+      },
+      "priced_token_totals": {
+        "input": 2167971,
+        "output": 89309,
+        "cached_input": 1278264,
+        "cache_write": 889095,
+        "remaining_uncached_input": 612
+      },
+      "long_context_priced_calls": 0
+    }
+  },
+  "by_phase": {
+    "clean": {
+      "calls": 25,
+      "priced_calls": 25,
+      "recorded_not_sent_calls": 0,
+      "excluded_calls": 0,
+      "excluded_ledger_ids": [],
+      "complete_reference_for_this_ledger_snapshot": true,
+      "standard_reference_usd": "0.018724875",
+      "standard_reference_usd_priced_subset": "0.018724875",
+      "conservative_accounted_usd_including_holds": "0.078273800",
+      "conservative_usage_reported_usd": "0.078273800",
+      "conservative_other_status_usd": "0",
+      "ledger_status_counts": {
+        "usage_reported": 25
+      },
+      "priced_token_totals": {
+        "input": 256732,
+        "output": 9300,
+        "cached_input": 156650,
+        "cache_write": 100007,
+        "remaining_uncached_input": 75
+      },
+      "long_context_priced_calls": 0
+    },
+    "iter-1": {
+      "calls": 102,
+      "priced_calls": 102,
+      "recorded_not_sent_calls": 0,
+      "excluded_calls": 0,
+      "excluded_ledger_ids": [],
+      "complete_reference_for_this_ledger_snapshot": true,
+      "standard_reference_usd": "0.803812455",
+      "standard_reference_usd_priced_subset": "0.803812455",
+      "conservative_accounted_usd_including_holds": "10.227245600",
+      "conservative_usage_reported_usd": "10.227245600",
+      "conservative_other_status_usd": "0",
+      "ledger_status_counts": {
+        "usage_reported": 102
+      },
+      "priced_token_totals": {
+        "input": 2790825,
+        "output": 45518,
+        "cached_input": 2161496,
+        "cache_write": 629023,
+        "remaining_uncached_input": 306
+      },
+      "long_context_priced_calls": 0
+    },
+    "iter-2": {
+      "calls": 96,
+      "priced_calls": 96,
+      "recorded_not_sent_calls": 0,
+      "excluded_calls": 0,
+      "excluded_ledger_ids": [],
+      "complete_reference_for_this_ledger_snapshot": true,
+      "standard_reference_usd": "0.917952285",
+      "standard_reference_usd_priced_subset": "0.917952285",
+      "conservative_accounted_usd_including_holds": "13.142278050",
+      "conservative_usage_reported_usd": "13.142278050",
+      "conservative_other_status_usd": "0",
+      "ledger_status_counts": {
+        "usage_reported": 96
+      },
+      "priced_token_totals": {
+        "input": 3246579,
+        "output": 39583,
+        "cached_input": 2624472,
+        "cache_write": 621819,
+        "remaining_uncached_input": 288
+      },
+      "long_context_priced_calls": 0
+    },
+    "iter-3": {
+      "calls": 8,
+      "priced_calls": 8,
+      "recorded_not_sent_calls": 0,
+      "excluded_calls": 0,
+      "excluded_ledger_ids": [],
+      "complete_reference_for_this_ledger_snapshot": true,
+      "standard_reference_usd": "1.1128375",
+      "standard_reference_usd_priced_subset": "1.1128375",
+      "conservative_accounted_usd_including_holds": "12.0511655",
+      "conservative_usage_reported_usd": "12.0511655",
+      "conservative_other_status_usd": "0",
+      "ledger_status_counts": {
+        "usage_reported": 8
+      },
+      "priced_token_totals": {
+        "input": 2182886,
+        "output": 2745,
+        "cached_input": 1898533,
+        "cache_write": 284329,
+        "remaining_uncached_input": 24
+      },
+      "long_context_priced_calls": 5
+    }
+  },
+  "by_phase_and_role": {
+    "clean": {
+      "victim": {
+        "calls": 25,
+        "priced_calls": 25,
+        "recorded_not_sent_calls": 0,
+        "excluded_calls": 0,
+        "excluded_ledger_ids": [],
+        "complete_reference_for_this_ledger_snapshot": true,
+        "standard_reference_usd": "0.018724875",
+        "standard_reference_usd_priced_subset": "0.018724875",
+        "conservative_accounted_usd_including_holds": "0.078273800",
+        "conservative_usage_reported_usd": "0.078273800",
+        "conservative_other_status_usd": "0",
+        "ledger_status_counts": {
+          "usage_reported": 25
+        },
+        "priced_token_totals": {
+          "input": 256732,
+          "output": 9300,
+          "cached_input": 156650,
+          "cache_write": 100007,
+          "remaining_uncached_input": 75
+        },
+        "long_context_priced_calls": 0
+      }
+    },
+    "iter-1": {
+      "optimizer": {
+        "calls": 9,
+        "priced_calls": 9,
+        "recorded_not_sent_calls": 0,
+        "excluded_calls": 0,
+        "excluded_ledger_ids": [],
+        "complete_reference_for_this_ledger_snapshot": true,
+        "standard_reference_usd": "0.7249198",
+        "standard_reference_usd_priced_subset": "0.7249198",
+        "conservative_accounted_usd_including_holds": "9.9181225",
+        "conservative_usage_reported_usd": "9.9181225",
+        "conservative_other_status_usd": "0",
+        "ledger_status_counts": {
+          "usage_reported": 9
+        },
+        "priced_token_totals": {
+          "input": 1796437,
+          "output": 2286,
+          "cached_input": 1578758,
+          "cache_write": 217652,
+          "remaining_uncached_input": 27
+        },
+        "long_context_priced_calls": 0
+      },
+      "victim": {
+        "calls": 93,
+        "priced_calls": 93,
+        "recorded_not_sent_calls": 0,
+        "excluded_calls": 0,
+        "excluded_ledger_ids": [],
+        "complete_reference_for_this_ledger_snapshot": true,
+        "standard_reference_usd": "0.078892655",
+        "standard_reference_usd_priced_subset": "0.078892655",
+        "conservative_accounted_usd_including_holds": "0.309123100",
+        "conservative_usage_reported_usd": "0.309123100",
+        "conservative_other_status_usd": "0",
+        "ledger_status_counts": {
+          "usage_reported": 93
+        },
+        "priced_token_totals": {
+          "input": 994388,
+          "output": 43232,
+          "cached_input": 582738,
+          "cache_write": 411371,
+          "remaining_uncached_input": 279
+        },
+        "long_context_priced_calls": 0
+      }
+    },
+    "iter-2": {
+      "optimizer": {
+        "calls": 10,
+        "priced_calls": 10,
+        "recorded_not_sent_calls": 0,
+        "excluded_calls": 0,
+        "excluded_ledger_ids": [],
+        "complete_reference_for_this_ledger_snapshot": true,
+        "standard_reference_usd": "0.8469346",
+        "standard_reference_usd_priced_subset": "0.8469346",
+        "conservative_accounted_usd_including_holds": "12.8598030",
+        "conservative_usage_reported_usd": "12.8598030",
+        "conservative_other_status_usd": "0",
+        "ledger_status_counts": {
+          "usage_reported": 10
+        },
+        "priced_token_totals": {
+          "input": 2329728,
+          "output": 2806,
+          "cached_input": 2085596,
+          "cache_write": 244102,
+          "remaining_uncached_input": 30
+        },
+        "long_context_priced_calls": 0
+      },
+      "victim": {
+        "calls": 86,
+        "priced_calls": 86,
+        "recorded_not_sent_calls": 0,
+        "excluded_calls": 0,
+        "excluded_ledger_ids": [],
+        "complete_reference_for_this_ledger_snapshot": true,
+        "standard_reference_usd": "0.071017685",
+        "standard_reference_usd_priced_subset": "0.071017685",
+        "conservative_accounted_usd_including_holds": "0.282475050",
+        "conservative_usage_reported_usd": "0.282475050",
+        "conservative_other_status_usd": "0",
+        "ledger_status_counts": {
+          "usage_reported": 86
+        },
+        "priced_token_totals": {
+          "input": 916851,
+          "output": 36777,
+          "cached_input": 538876,
+          "cache_write": 377717,
+          "remaining_uncached_input": 258
+        },
+        "long_context_priced_calls": 0
+      }
+    },
+    "iter-3": {
+      "optimizer": {
+        "calls": 8,
+        "priced_calls": 8,
+        "recorded_not_sent_calls": 0,
+        "excluded_calls": 0,
+        "excluded_ledger_ids": [],
+        "complete_reference_for_this_ledger_snapshot": true,
+        "standard_reference_usd": "1.1128375",
+        "standard_reference_usd_priced_subset": "1.1128375",
+        "conservative_accounted_usd_including_holds": "12.0511655",
+        "conservative_usage_reported_usd": "12.0511655",
+        "conservative_other_status_usd": "0",
+        "ledger_status_counts": {
+          "usage_reported": 8
+        },
+        "priced_token_totals": {
+          "input": 2182886,
+          "output": 2745,
+          "cached_input": 1898533,
+          "cache_write": 284329,
+          "remaining_uncached_input": 24
+        },
+        "long_context_priced_calls": 5
+      }
+    }
+  },
+  "receipt_index_warnings": [],
+  "prior_immediate_attempt_reference_usd": "1.569934700",
+  "immediate_attempt_plus_retry_reference_usd": "4.423261815",
+  "prior_cumulative_conservative_accounted_usd": "30.796110400",
+  "cumulative_conservative_accounted_usd": "66.295073350"
+}
