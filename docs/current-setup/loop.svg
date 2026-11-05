@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="605" viewBox="0 0 1000 605" role="img" aria-labelledby="title desc">
+<title id="title">One iteration and two kinds of memory</title><desc id="desc">Optimizer produces candidate and hypothesis note. Validation precedes three fresh episodes. Evaluation informs retention and persistent evidence. Rejected state is not retained, but rejected evidence reaches the next session.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#526779"/></marker></defs>
+<style>text{font-family:DejaVu Sans,Arial,sans-serif;fill:#15324f}.title{font-weight:700}.small{fill:#526779}</style>
+<rect x="150" y="5" width="700" height="66" rx="10" fill="#f2f4f7" stroke="#15324f" stroke-width="1.8"/>
+<text x="168" y="36" class="title" font-size="22">INPUTS FOR A FRESH OPTIMIZER SESSION</text>
+<text x="500" y="57" font-size="19" fill="#526779" text-anchor="middle">Retained / allowed parent + task and contract + earlier evidence</text>
+<rect x="275" y="100" width="450" height="60" rx="10" fill="#eff6fc" stroke="#23629b" stroke-width="1.8"/>
+<text x="293" y="131" class="title" font-size="22">1   Optimizer inspects and edits</text>
+<rect x="275" y="190" width="450" height="60" rx="10" fill="#eff6fc" stroke="#23629b" stroke-width="1.8"/>
+<text x="293" y="221" class="title" font-size="22">2   Candidate + hypothesis note</text>
+<rect x="275" y="280" width="450" height="60" rx="10" fill="#edf7f3" stroke="#197568" stroke-width="1.8"/>
+<text x="293" y="311" class="title" font-size="22">3   Validate permitted changes</text>
+<rect x="275" y="370" width="450" height="60" rx="10" fill="#f5f1fa" stroke="#7046a3" stroke-width="1.8"/>
+<text x="293" y="401" class="title" font-size="22">4   Three fresh victim episodes</text>
+<rect x="275" y="460" width="450" height="60" rx="10" fill="#f2f4f7" stroke="#15324f" stroke-width="1.8"/>
+<text x="293" y="491" class="title" font-size="22">5   Measure outcomes + decide</text>
+<path d="M 500 71 V 95" fill="none" stroke="#526779" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M 500 160 V 185" fill="none" stroke="#526779" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M 500 250 V 275" fill="none" stroke="#526779" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M 500 340 V 365" fill="none" stroke="#526779" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M 500 430 V 455" fill="none" stroke="#526779" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="78" y="550" width="398" height="54" rx="10" fill="#edf7f3" stroke="#197568" stroke-width="1.8"/>
+<text x="96" y="581" class="title" font-size="17">Retained state: accepted edits only</text>
+<rect x="524" y="550" width="398" height="54" rx="10" fill="#f5f1fa" stroke="#7046a3" stroke-width="1.8"/>
+<text x="542" y="581" class="title" font-size="17">Evidence: save notes + results always</text>
+<path d="M 400 520 V 535 H 277 V 545" fill="none" stroke="#197568" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M 600 520 V 535 H 723 V 545" fill="none" stroke="#7046a3" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M 78 577 H 35 V 38 H 143" fill="none" stroke="#197568" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M 922 577 H 965 V 38 H 857" fill="none" stroke="#7046a3" stroke-width="2.5" marker-end="url(#arrow)" stroke-dasharray="7 5"/>
+<path d="M 725 310 H 870 V 543" fill="none" stroke="#7046a3" stroke-width="2.5" marker-end="url(#arrow)" stroke-dasharray="7 5"/>
+<text x="747" y="300" font-size="18" fill="#7046a3" text-anchor="start">invalid:</text>
+<text x="747" y="331" font-size="18" fill="#7046a3" text-anchor="start">record reason</text>
+</svg>

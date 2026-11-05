@@ -1,5 +1,8 @@
 # Arena Flowers: a local replay of the original interface
 
+For a concise architectural overview with diagrams, see the
+[three-page current-setup document](current-setup/README.md).
+
 This environment preserves Arena Flowers' captured **Flowers collection and
 product-page interface**, and replays its relevant shopping workflow locally.
 It reuses WebHelix's Browser-Use victim, OpenCode optimizer, pinned AutoHelix
