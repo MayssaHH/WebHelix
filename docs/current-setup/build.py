@@ -1,4 +1,4 @@
-"""Build the three-page handout from Markdown and editable SVGs; no model calls."""
+"""Build the three-page handout from Markdown and approved PNGs; no model calls."""
 
 from __future__ import annotations
 
@@ -18,6 +18,7 @@ from pypdf import PdfReader
 
 ROOT = Path(__file__).resolve().parent
 STEM = "webhelix-current-setup"
+FIGURES = ("candidate-test.png", "feedback-continuity.png")
 CSS = """
 @page { size: A4; margin: 0; }
 * { box-sizing: border-box; }
@@ -99,6 +100,8 @@ def reference_docx(path: Path) -> None:
 
 async def build() -> None:
     source = (ROOT / "setup.md").read_text()
+    for name in FIGURES:
+        assert (ROOT / name).is_file(), f"Missing approved figure: {name}"
     pages = source.split("<!-- pagebreak -->")
     assert len(pages) == 3, "The handout must have exactly three authored pages"
     bodies = [pandoc(page, "-t", "html5") for page in pages]
@@ -129,6 +132,12 @@ async def build() -> None:
             page = await context.new_page()
             await page.goto(html_path.as_uri(), wait_until="networkidle")
             await page.evaluate("document.fonts.ready")
+            figures = await page.locator("figure img").evaluate_all("""images => images.map(img => ({
+                source:img.getAttribute('src'), loaded:img.complete && img.naturalWidth > 0
+            }))""")
+            assert len(figures) == 2 and all(f["loaded"] for f in figures), (
+                f"Approved figures did not load: {figures}"
+            )
             fit = await page.locator(".page").evaluate_all("""pages => pages.map((p,i) => ({
                 page:i+1, contentBottom:p.querySelector('.content').getBoundingClientRect().bottom,
                 footerTop:p.querySelector('footer').getBoundingClientRect().top,
@@ -148,20 +157,13 @@ async def build() -> None:
                 outline=True,
                 display_header_footer=False,
             )
-            # Portable raster copies for Word; original SVG sources stay editable.
-            for name in ["access", "loop"]:
-                await page.goto((ROOT / f"{name}.svg").as_uri())
-                await page.evaluate("document.fonts.ready")
-                await page.locator("svg").screenshot(
-                    path=str(temporary / f"{name}.png")
-                )
             await browser.close()
         reference = temporary / "reference.docx"
         reference_docx(reference)
         word_source = source
-        for name in ["access", "loop"]:
+        for name in FIGURES:
             word_source = word_source.replace(
-                f"]({name}.svg)", f"]({temporary / (name + '.png')}){{width=6.6in}}"
+                f"]({name})", f"]({ROOT / name}){{width=7.0in}}"
             )
         word_source = word_source.replace(
             "<!-- pagebreak -->",
@@ -226,6 +228,7 @@ async def build() -> None:
                 "pdf_pages": len(pdf.pages),
                 "pdf_link_annotations": annotations,
                 "word_diagrams": len(word.inline_shapes),
+                "figures": figures,
                 "source_words": len(source.split()),
                 "layout_check": fit,
                 "outputs": [f"{STEM}.{ext}" for ext in ["pdf", "docx", "html"]],
