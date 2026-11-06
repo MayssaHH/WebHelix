@@ -143,14 +143,14 @@ export PLAYWRIGHT_BROWSERS_PATH=/workspace/.cache/ms-playwright
 uv sync --locked
 ```
 
-For a fresh clone, check out the implementation branch first:
+For a fresh clone, use the current main branch:
 
 ```sh
-git clone --branch feature/checkout-opencode https://github.com/MayssaHH/WebHelix.git
+git clone --branch main https://github.com/MayssaHH/WebHelix.git
 cd WebHelix
 ```
 
-Then follow the root README to install Chromium and build the pinned
+Then follow [Getting started](GETTING_STARTED.md) to install Chromium and build the pinned
 OpenCode Docker image. Full scripted search uses Docker even though it requests
 no external model generation. AutoHelix remains a Git dependency pinned in
 `pyproject.toml` and `uv.lock`, not copied source.
@@ -226,10 +226,14 @@ are never silently overwritten.
 
 ## Real-model pilot and baseline inspection
 
-The configured optimizer is OpenCode1.19.4 with
+The default example configuration uses OpenCode1.19.4 with
 `gpt-5.4-mini-2026-03-17`, medium reasoning. The independent victim is
 Browser-Use0.13.14 with `gpt-6.1-sol`, medium reasoning. The interactive
-assistant's model selection does not configure either role.
+assistant's model selection does not configure either role. The latest reported
+[Sol/Luna experiment](../examples/arena-archive/sol-luna-three-iterations-retry-20261104/README.md)
+instead supplies an explicit Sol optimizer configuration and Luna victim model;
+its saved configurations and limits document that three-proposal run. Do not
+assume the default example reproduces the latest model pairing.
 
 The pilot uses one clean competence episode, then two optimizer sessions with
 three fresh victim episodes per valid candidate: at most seven real victim

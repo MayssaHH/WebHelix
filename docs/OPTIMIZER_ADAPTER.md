@@ -142,7 +142,7 @@ Current paid reservation-adapter runs require two explicit accounting locations:
   spending ledger there. This is required even when API credentials are already set.
 
 Do not point both settings at the same directory: their `budget.json` formats are
-different. Follow the [current model-accounting requirements](../README.md#real-models-and-accounting)
+different. Follow the [current model-accounting requirements](GETTING_STARTED.md#real-models-and-accounting)
 and prepare a new bounded experiment before launching paid calls. The optimizer
 adapter retains its independent request allowance and usage records; the victim's
 spending ceiling is not a combined cap on this older optimizer path. Use the

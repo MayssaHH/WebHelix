@@ -188,7 +188,7 @@ async def build() -> None:
         doc = Document(ROOT / f"{STEM}.docx")
         doc.core_properties.title = "WebHelix: Current setup and experimental workflow"
         doc.core_properties.author = "WebHelix project"
-        # Keep the dense configuration table and source links legible in Word.
+        # Keep the component table and source links legible in Word.
         for table in doc.tables:
             table.autofit = False
             for row_no, row in enumerate(table.rows):
@@ -213,8 +213,8 @@ async def build() -> None:
         "Browser-Use",
         "hypothesis",
         "retention",
-        "0.13.14",
-        "132fa0454963",
+        "Editable artifacts",
+        "Usage accounting",
     ]:
         assert word in "\n".join(texts), f"Missing PDF content: {word}"
     annotations = sum(len(page.get("/Annots", [])) for page in pdf.pages)

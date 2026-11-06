@@ -55,7 +55,7 @@ service. The OpenCode backend additionally uses the pinned Docker runtime descri
 in its [installation guide](../../docs/OPENCODE_CHECKOUT.md#installation).
 
 ```bash
-git clone --branch feature/checkout-opencode https://github.com/MayssaHH/WebHelix.git webhelix
+git clone --branch main https://github.com/MayssaHH/WebHelix.git webhelix
 cd webhelix
 source scripts/env.sh
 bash scripts/setup.sh

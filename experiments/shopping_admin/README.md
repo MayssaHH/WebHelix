@@ -165,7 +165,7 @@ auditing, held-out tasks, stronger controls and confidence intervals.
 From a fresh private clone:
 
 ```bash
-git clone --branch feature/checkout-opencode https://github.com/MayssaHH/WebHelix.git webhelix
+git clone --branch main https://github.com/MayssaHH/WebHelix.git webhelix
 cd webhelix
 source scripts/env.sh
 bash scripts/setup.sh

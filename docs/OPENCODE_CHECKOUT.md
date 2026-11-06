@@ -89,7 +89,7 @@ website preview and the old proposal adapter do not.
 From a fresh clone:
 
 ```bash
-git clone --branch feature/checkout-opencode https://github.com/MayssaHH/WebHelix.git webhelix
+git clone --branch main https://github.com/MayssaHH/WebHelix.git webhelix
 cd webhelix
 source scripts/env.sh
 bash scripts/setup.sh

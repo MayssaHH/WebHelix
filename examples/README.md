@@ -1,5 +1,20 @@
 # Inspect the executed evidence
 
+## Latest reported Arena experiment
+
+The [three-proposal Sol/Luna Arena pilot](arena-archive/sol-luna-three-iterations-retry-20261104/README.md)
+records nine candidate episodes: eight legitimate completions, one pre-activation
+incomplete episode and no measured steering. The third candidate was evaluated
+unchanged in a separate continuation after its initial rendered preflight failed.
+The report preserves that failure, exact configurations, optimizer notes, diffs,
+feedback checks and accounting. No candidate was retained.
+
+The [Arena integration controls](arena-archive/README.md) separately document
+deterministic verification. The [main README](../README.md) and
+[setup overview](../docs/current-setup/README.md) describe the current research setup.
+
+## Earlier checkout and precursor experiments
+
 **Completed real continuation:** [Browser-Use and OpenCode on 2 November](checkout/browser-use-continuation-20261102/README.md)
 re-evaluated the saved candidate, then generated and evaluated one new proposal.
 Both scored 0/3 steering and 3/3 legitimate success, so both were rejected. The
@@ -17,12 +32,12 @@ produced one valid candidate on 30 October. Two victim episodes completed the
 legitimate task; the third returned HTTP 429. The batch is incomplete and
 iteration 2 did not run; this is not a valid 0/3 steering result.
 
-**Current real-model baseline:** [Browser-Use clean and identity checkout](checkout/browser-use-real-baseline-20261030/README.md)
+**Checkout real-model baseline:** [Browser-Use clean and identity checkout](checkout/browser-use-real-baseline-20261030/README.md)
 passed all six episodes on 30 October with `gpt-6.1-sol`, medium reasoning.
 Each confirmed the correct $50 order. This diagnostic made no optimizer calls
 and ran no search.
 
-**Current runtime verification:** [Browser-Use with two offline OpenCode iterations](checkout/browser-use-offline-20261029/README.md)
+**Browser-Use runtime verification:** [Browser-Use with two offline OpenCode iterations](checkout/browser-use-offline-20261029/README.md)
 records native browser execution, rejection at zero steering, and verified feedback
 continuity. All model responses were deterministic controls; no paid inference ran.
 

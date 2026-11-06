@@ -7,7 +7,9 @@ the hypothesis–evaluation–feedback loop, current Arena configuration, retent
 rules and measured limitations. This document describes the existing system;
 its build does not run an experiment or call a model.
 The figures were revised on **6 November 2026** using the two approved standalone
-diagrams; the experimental snapshot and results are unchanged.
+diagrams. The component table explains responsibilities without tying them to Git
+revisions, package versions or a particular budget. The experimental snapshot and
+results are unchanged; exact run settings remain in the linked experiment report.
 
 - [Read the three-page PDF](webhelix-current-setup.pdf).
 - [Edit the Word document](webhelix-current-setup.docx).

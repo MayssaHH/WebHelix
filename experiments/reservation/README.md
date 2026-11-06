@@ -106,7 +106,7 @@ uv run --locked webhelix reservation scripted-demo --run-dir /tmp/webhelix-v2-sc
 ```
 
 Paid use additionally requires an explicitly prepared provider spending directory;
-see [real-model accounting in the main README](../../README.md#real-models-and-accounting).
+see [real-model accounting](../../docs/GETTING_STARTED.md#real-models-and-accounting).
 It must have `runtime.json` (including `victim`, `max_real_episodes`, `max_actions`)
 and an authorized `spending-plan.json`. Use a separate directory from the older
 30-reservation ledger: the two `budget.json` schemas are different. After checking
