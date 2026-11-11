@@ -125,6 +125,11 @@ revalidated and evaluated unchanged in a separately recorded continuation. The
 original failure remains preserved and its intermittent cause is unresolved;
 this was not three uninterrupted successful search iterations.
 
+A subsequent [offline validation diagnosis](docs/ARENA_VALIDATION_DIAGNOSIS.md)
+reproduced a reference-page empty-cart initialization race and fixed reference
+synchronization. Paired failure evidence and regression checks were added; no new
+LLM experiment was run, and the exact historical timing remains unproven.
+
 These results show a functioning proposal–evaluation–feedback loop and victim
 recovery in this pilot. The small samples, bounded editing language and single
 site/model pairing do not establish novelty, stable steering rates, human effects

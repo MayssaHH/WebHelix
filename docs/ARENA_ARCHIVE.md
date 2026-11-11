@@ -18,6 +18,11 @@ not evidence of a stable steering rate or novel pattern. The
 [completed offline verification](../examples/arena-archive/README.md) records all
 11 passing controls and two evaluated/rejected candidates.
 
+The [offline validation diagnosis](ARENA_VALIDATION_DIAGNOSIS.md) documents the
+later reference-state race reproduction and repair, paired failure capture,
+validation-cache identity and separate preview-timeout findings. It preserves all
+historical results and does not add model episodes.
+
 The `arena-faithful-v2` capture supersedes the earlier four-product reconstruction.
 That reconstruction simplified the header, product controls and bag, so it was
 not an adequate visual reproduction. Its artifacts are retained as historical

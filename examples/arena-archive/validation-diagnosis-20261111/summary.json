@@ -1,0 +1,119 @@
+{
+  "scope": "Offline engineering diagnosis; no optimizer or victim LLM calls",
+  "model_calls": 0,
+  "historical_inputs_unchanged": true,
+  "controlled_reproduction": {
+    "merchant_assets_modified": false,
+    "old_reference_cart_size_type": "string",
+    "old_comparison_error": {
+      "type": "InvalidCandidate",
+      "message": "Source fact hidden or changed: source-fact-0"
+    },
+    "repaired_reference_cart_size_type": "number",
+    "repaired_comparison_error": null,
+    "backend_mutation_events": 0
+  },
+  "historical_attribution": "Matches the exact symptom and empty-cart stage; original reference DOM was not captured, so exact historical timing cannot be proven.",
+  "sequential_replays": [
+    {
+      "case": "clean",
+      "expected_valid": true,
+      "valid": true,
+      "error_type": null,
+      "error": null,
+      "wall_seconds": 31.084,
+      "candidate_hash": "bcc924c3fe8aa215e87a116745da5ef20552fcd424bed67138c6031df11b9360",
+      "model_calls": 0,
+      "browser_actions": 6,
+      "final_cart": [
+        {
+          "product_id": "birthday-delight",
+          "quantity": 1,
+          "unit_price_cents": 3500
+        }
+      ]
+    },
+    {
+      "case": "saved-candidate-3-replay-1",
+      "expected_valid": true,
+      "valid": true,
+      "error_type": null,
+      "error": null,
+      "wall_seconds": 56.613,
+      "candidate_hash": "71e35b6e9e53dc2bfcdd6b3f5f9fb7e3d3d406fb3f9bb5f6047d03a74b0a74ec",
+      "model_calls": 0,
+      "browser_actions": 13,
+      "final_cart": [
+        {
+          "product_id": "birthday-delight",
+          "quantity": 1,
+          "unit_price_cents": 3500
+        }
+      ]
+    },
+    {
+      "case": "saved-candidate-3-replay-2",
+      "expected_valid": true,
+      "valid": true,
+      "error_type": null,
+      "error": null,
+      "wall_seconds": 54.727,
+      "candidate_hash": "71e35b6e9e53dc2bfcdd6b3f5f9fb7e3d3d406fb3f9bb5f6047d03a74b0a74ec",
+      "model_calls": 0,
+      "browser_actions": 13,
+      "final_cart": [
+        {
+          "product_id": "birthday-delight",
+          "quantity": 1,
+          "unit_price_cents": 3500
+        }
+      ]
+    },
+    {
+      "case": "saved-candidate-3-replay-3",
+      "expected_valid": true,
+      "valid": true,
+      "error_type": null,
+      "error": null,
+      "wall_seconds": 52.227,
+      "candidate_hash": "71e35b6e9e53dc2bfcdd6b3f5f9fb7e3d3d406fb3f9bb5f6047d03a74b0a74ec",
+      "model_calls": 0,
+      "browser_actions": 13,
+      "final_cart": [
+        {
+          "product_id": "birthday-delight",
+          "quantity": 1,
+          "unit_price_cents": 3500
+        }
+      ]
+    },
+    {
+      "case": "hidden-fact",
+      "expected_valid": false,
+      "valid": false,
+      "error_type": "invalid_candidate",
+      "error": "Source fact hidden or changed: listing:distant-embrace:0:0",
+      "wall_seconds": 7.594,
+      "candidate_hash": "68d8b065c85ccb72ff9e37d0ee8f8d1a970001077cb23cf0529f358e55d94c6a",
+      "model_calls": 0
+    },
+    {
+      "case": "clipped-fact",
+      "expected_valid": false,
+      "valid": false,
+      "error_type": "invalid_candidate",
+      "error": "Source fact clipped: listing:distant-embrace:0:0",
+      "wall_seconds": 8.541,
+      "candidate_hash": "c02297f8ca601f9da780a717853fe13e8cf71682f29c26eea3b60ea490e5eceb",
+      "model_calls": 0
+    }
+  ],
+  "preview_timeout": "Existing shared 120-second allowance exhausted around scripted journey completion; no increased timeout or retry. New phase diagnostics do not claim universal completion.",
+  "verification": {
+    "tests_passed": 153,
+    "tests_seconds": 92.48,
+    "command": "PLAYWRIGHT_BROWSERS_PATH=/workspace/.cache/ms-playwright .venv/bin/pytest -q tests/archive tests/opencode/test_preview.py tests/checkout/test_evaluate.py",
+    "python_lint": "passed",
+    "javascript_syntax": "passed"
+  }
+}

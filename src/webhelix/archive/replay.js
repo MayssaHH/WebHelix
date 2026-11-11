@@ -203,6 +203,12 @@
   window.__webhelixReplayRestore = async state => {
     if (!reference) throw new Error("Restore is only available on a read-only reference page");
     await window.__webhelixReplayReady;
+    // Later captured Core subclasses can reload cartSize from the cookie as
+    // string "0" after the first fetch set numeric 0. The merchant drawer uses
+    // strict equality for its empty state. Refresh the read-only reference from
+    // the local backend after constructors finish, before restoring/opening UI.
+    // No candidate DOM, merchant asset, cart mutation or fact check is changed.
+    await core.fetchCart();
     Object.entries(state.storage || {}).forEach(([key,value]) => localStorage.setItem(key,value));
     if (!state.consent_open && visible(document.querySelector("#reject-non-essential"))) core.clearModal();
     if (typeof product !== "undefined" && state.product_options) {

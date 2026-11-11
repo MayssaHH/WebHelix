@@ -3,6 +3,7 @@
 import asyncio
 import json
 from pathlib import Path
+import sys
 import time
 from urllib.parse import quote, urlsplit
 import re
@@ -27,6 +28,7 @@ from webhelix.search.budget import Budget, BudgetBlocked
 from .contract import ArchiveContract
 from .site import ArchiveSite, NAVIGATION_BOUNDARY_PROTOCOL
 from .scoring import audit, classify
+from .validation import ValidationDiagnostics
 
 
 VIEWPORT = {"width": 1280, "height": 720}
@@ -162,7 +164,7 @@ FACT_SNAPSHOT_JS = """els=>{
 }""" % (VISIBLE_JS, READABLE_JS, TEXT_UNCLIPPED_JS)
 
 
-async def faithful_facts(page, reference, *, scroll=False):
+async def faithful_facts(page, reference, *, scroll=False, diagnostics=None):
     """Compare source facts in the same controller state, using batched reads.
 
     Filtering and inactive source steps may hide facts in the clean interface.
@@ -170,6 +172,8 @@ async def faithful_facts(page, reference, *, scroll=False):
     """
     expected = await reference.locator("[data-wh-fact]").evaluate_all(FACT_SNAPSHOT_JS)
     actual = await page.locator("[data-wh-fact]").evaluate_all(FACT_SNAPSHOT_JS)
+    if diagnostics is not None:
+        diagnostics.compared(expected, actual)
     if not expected:
         raise RuntimeError("Source replay has no visible protected fact annotations")
     for clean in expected:
@@ -341,13 +345,16 @@ async def validate_current_state(page, site, *, scroll=False):
     }
 
 
-async def _reference(page, site, clean, reference):
+async def _reference(page, site, clean, reference, *, diagnostics=None):
     if await reference.evaluate("location.origin") != site.url:
         raise RuntimeError(
             "Clean reference must share the local origin for captured font/assets fidelity"
         )
     if site.faithful:
         state = await replay_state(page, site)
+        if diagnostics is not None:
+            diagnostics.reference_target = state
+            diagnostics.comparison = None
         if not state.get("comparison_supported", True):
             return False
         await reference.goto(
@@ -645,10 +652,12 @@ async def engineering_observation(runtime, site):
 
 async def _faithful_feasibility(site, contract, output):
     """Original consumer flow with a bounded, deterministic recovery witness."""
+    diagnostics = ValidationDiagnostics(output, contract.fingerprint(site.files))
     async with async_playwright() as pw:
-        browser = await pw.chromium.launch(
-            headless=True, executable_path=pw.chromium.executable_path
-        )
+        with diagnostics.phase("browser_start"):
+            browser = await pw.chromium.launch(
+                headless=True, executable_path=pw.chromium.executable_path
+            )
         try:
             context = await browser.new_context(
                 viewport=VIEWPORT, service_workers="block"
@@ -656,23 +665,35 @@ async def _faithful_feasibility(site, contract, output):
             await local_only(context, site)
             page = await context.new_page()
             reference = await context.new_page()
-            await page.goto(site.url, wait_until="networkidle")
-            await reference.goto(site.url + "/__reference", wait_until="networkidle")
+            with diagnostics.phase("initial_navigation"):
+                await page.goto(site.url, wait_until="networkidle")
+                await reference.goto(
+                    site.url + "/__reference", wait_until="networkidle"
+                )
             shopper = ScriptedShopper("scripted-correct", contract)
             actions, checks = [], []
             inspected_listing = False
             for step in range(24):
-                state = await replay_state(page, site)
-                await validate_current_state(page, site, scroll=False)
-                comparable = await _reference(
-                    page, site, contract.initial_files("archive"), reference
-                )
+                diagnostics.comparison = None
+                diagnostics.reference_target = None
+                with diagnostics.phase("candidate_readiness", step):
+                    state = await replay_state(page, site)
+                    await validate_current_state(page, site, scroll=False)
+                with diagnostics.phase("reference_restore", step):
+                    comparable = await _reference(
+                        page,
+                        site,
+                        contract.initial_files("archive"),
+                        reference,
+                        diagnostics=diagnostics,
+                    )
                 if not comparable:
                     raise InvalidCandidate(
                         "Legitimate recovery witness reached an unsupported reference state: "
                         + ", ".join(site.view.get("unsupported_reasons", []))
                     )
-                await faithful_facts(page, reference)
+                with diagnostics.phase("fact_comparison", step):
+                    await faithful_facts(page, reference, diagnostics=diagnostics)
                 # Check every source-listed item remains linked and reachable in
                 # the unfiltered listing. Individual source PDP routes are fixed
                 # protected inputs, not candidate-controlled targets.
@@ -766,36 +787,40 @@ async def _faithful_feasibility(site, contract, output):
                         "final_cart": site.snapshot(),
                         "method": "source-interface links and bounded original-flow recovery witness; not an LLM result",
                     }
-                if "click" in action:
-                    locator = locators[action["click"]["index"]]
-                    name = await locator.get_attribute("data-wh-action")
-                    await locator.click(timeout=5000)
-                    actions.append(name)
-                else:
-                    await page.mouse.wheel(0, 500 if action["scroll"]["down"] else -500)
-                    actions.append(action)
+                with diagnostics.phase("scripted_action", step):
+                    if "click" in action:
+                        locator = locators[action["click"]["index"]]
+                        name = await locator.get_attribute("data-wh-action")
+                        await locator.click(timeout=5000)
+                        actions.append(name)
+                    else:
+                        await page.mouse.wheel(
+                            0, 500 if action["scroll"]["down"] else -500
+                        )
+                        actions.append(action)
                 await page.wait_for_timeout(100)
             raise InvalidCandidate("Source consumer flow recovery exceeds 24 actions")
         except Exception as exc:
-            if output and "page" in locals():
-                try:
-                    await page.screenshot(path=str(output / "failure.png"))
-                    (output / "failure.html").write_text(await page.content())
-                    save(
-                        output / "failure.json",
-                        {
-                            "error_type": type(exc).__name__,
-                            "error": str(exc),
-                            "backend": site.snapshot(),
-                            "actions": locals().get("actions", []),
-                        },
-                    )
-                except Exception:
-                    # Preserve the original validation/infrastructure error.
-                    pass
+            try:
+                await diagnostics.failure(
+                    exc,
+                    site,
+                    locals().get("page"),
+                    locals().get("reference"),
+                    actions=locals().get("actions", []),
+                )
+            except Exception:
+                # Diagnostic storage failure must not replace the original error.
+                pass
             raise
         finally:
-            await browser.close()
+            primary_error = sys.exception()
+            try:
+                with diagnostics.phase("browser_cleanup"):
+                    await browser.close()
+            except Exception:
+                if primary_error is None:
+                    raise
 
 
 async def _execute(request):
@@ -821,6 +846,7 @@ async def _execute(request):
         files = contract.load(request["candidate"], "archive")
         clean = contract.initial_files("archive")
         report["candidate_hash"] = contract.fingerprint(files)
+        diagnostics = ValidationDiagnostics(output, report["candidate_hash"])
         description = describe_changes(
             clean,
             files,
@@ -854,16 +880,42 @@ async def _execute(request):
                         await reference.goto(site.url, wait_until="networkidle")
                         report["validation"] = {"valid": True}
 
+                        async def check_state(rt, step, *, compare):
+                            diagnostics.comparison = None
+                            diagnostics.reference_target = None
+                            try:
+                                with diagnostics.phase("candidate_readiness", step):
+                                    await validate_current_state(rt.page, site)
+                                if not compare:
+                                    return False
+                                with diagnostics.phase("reference_restore", step):
+                                    comparable = await _reference(
+                                        rt.page,
+                                        site,
+                                        clean,
+                                        reference,
+                                        diagnostics=diagnostics,
+                                    )
+                                if site.faithful and comparable:
+                                    with diagnostics.phase("fact_comparison", step):
+                                        await faithful_facts(
+                                            rt.page, reference, diagnostics=diagnostics
+                                        )
+                                return comparable
+                            except Exception as exc:
+                                try:
+                                    await diagnostics.failure(
+                                        exc, site, rt.page, reference
+                                    )
+                                except Exception:
+                                    pass  # Preserve the original validation error.
+                                raise
+
                         async def before_step(rt, step):
-                            await validate_current_state(rt.page, site)
+                            await check_state(rt, step, compare=False)
 
                         async def observed(rt, step):
-                            await validate_current_state(rt.page, site)
-                            comparable = await _reference(
-                                rt.page, site, clean, reference
-                            )
-                            if site.faithful and comparable:
-                                await faithful_facts(rt.page, reference)
+                            comparable = await check_state(rt, step, compare=True)
                             save(output / f"backend-{step}.json", site.snapshot())
                             diagnostic = await rt.page.evaluate(OBS_JS)
                             save(

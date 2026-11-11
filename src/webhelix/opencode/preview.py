@@ -6,6 +6,7 @@ import json
 import os
 from pathlib import Path
 import stat
+import sys
 import time
 
 from webhelix.checkout.contract import (
@@ -87,6 +88,7 @@ def preview(
 
     ``output`` must be a fresh trusted directory outside the candidate. The two
     browser workers share an execution deadline and have bounded termination grace.
+    Phase receipts record each worker's allowance and wall time, including failures.
     Only screenshots, the victim's visible observation channel, and scripted actions
     are returned to OpenCode. Raw worker evidence stays in the trusted archive.
     """
@@ -119,6 +121,11 @@ def preview(
         "validation": {"valid": None},
         "stages": [],
         "artifacts": [],
+        "timing": {
+            "budget_seconds": timeout_seconds,
+            "worker_termination_grace_seconds": 2,
+            "phases": [],
+        },
         "interpretation": (
             "These observations follow a fixed scripted shopper, not a model. "
             "They test rendering and reachability, not steering effectiveness. "
@@ -126,11 +133,71 @@ def preview(
         ),
     }
 
-    def launch(request):
-        remaining = deadline - time.monotonic()
-        if remaining <= 0:
-            raise TimeoutError("Preview execution deadline exhausted")
-        return _launch(request, timeout=remaining, grace=2)
+    def persist(*, preserve_error=False):
+        # Persist before launch too: an interrupted parent still leaves the
+        # active phase and its original allowance, not an invented completion.
+        try:
+            save(
+                output / "preview.json",
+                {k: v for k, v in response.items() if k != "artifacts"},
+            )
+        except Exception as exc:
+            if not preserve_error:
+                raise
+            # Failed diagnostics must not replace the original worker failure
+            # or cancellation. The caller can still return this in-memory record.
+            response.setdefault("diagnostic_errors", []).append(
+                {"artifact": "preview.json", "error": f"{type(exc).__name__}: {exc}"}
+            )
+
+    def launch(request, name):
+        phase_started = time.monotonic()
+        remaining = deadline - phase_started
+        phase = {
+            "name": name,
+            "status": "running",
+            "started_after_seconds": phase_started - started,
+            "worker_timeout_seconds": max(0, remaining),
+        }
+        response["timing"]["phases"].append(phase)
+        try:
+            persist()
+            if remaining <= 0:
+                raise TimeoutError("Preview execution deadline exhausted")
+            receipt = _launch(request, timeout=remaining, grace=2)
+            if request.get("kind") == "feasibility":
+                outcome = {
+                    True: "valid",
+                    False: "invalid_candidate",
+                    None: "infrastructure_error",
+                }[receipt.get("valid")]
+            else:
+                outcome = receipt.get("outcome", "infrastructure_error")
+            phase["worker_outcome"] = outcome
+            phase["status"] = (
+                "failed"
+                if outcome in {"invalid_candidate", "infrastructure_error"}
+                else "completed"
+            )
+            error = receipt.get("error")
+            if isinstance(error, str) and error.startswith("Worker exceeded "):
+                phase["status"] = "timed_out"
+            if phase["status"] != "completed":
+                response["failure_phase"] = name
+            return receipt
+        except BaseException as exc:
+            phase["status"] = "timed_out" if isinstance(exc, TimeoutError) else "failed"
+            phase["error_type"] = type(exc).__name__
+            response["failure_phase"] = name
+            raise
+        finally:
+            ended = time.monotonic()
+            phase["latency_seconds"] = ended - phase_started
+            phase["remaining_after_seconds"] = max(0, deadline - ended)
+            persist(
+                preserve_error=sys.exception() is not None
+                or phase["status"] in {"failed", "timed_out"}
+            )
 
     try:
         try:
@@ -167,7 +234,8 @@ def preview(
                 "candidate": str(frozen),
                 "output": str(output / "feasibility"),
                 "settings": worker_settings,
-            }
+            },
+            "rendered_validation",
         )
         response["validation"] = {
             key: feasibility[key]
@@ -190,7 +258,8 @@ def preview(
                 "policy": "scripted-correct",
                 "seed": 0,
                 "settings": worker_settings,
-            }
+            },
+            "scripted_journey",
         )
         response["status"] = {
             "legitimate_success": "preview_complete",
@@ -237,7 +306,7 @@ def preview(
     finally:
         response["latency_seconds"] = time.monotonic() - started
         # No API credential, victim setting, metric or experiment budget is copied.
-        save(
-            output / "preview.json",
-            {k: v for k, v in response.items() if k != "artifacts"},
+        persist(
+            preserve_error=sys.exception() is not None
+            or response["status"] != "preview_complete"
         )

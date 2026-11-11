@@ -41,6 +41,27 @@ POLICIES = {
 }
 
 
+def archive_validation_identity():
+    """Bind Arena verdicts to the protected validator and reference replay code.
+
+    The browser-agent identity intentionally covers different code. Keeping this
+    identity separate avoids reusing an older Arena validation verdict while
+    leaving other environments' cache signatures unchanged.
+    """
+    package = Path(__file__).resolve().parents[1] / "archive"
+    sources = {
+        name: hashlib.sha256((package / name).read_bytes()).hexdigest()
+        for name in ("contract.py", "episode.py", "replay.js", "validation.py")
+    }
+    return {
+        "protocol": "arena-validation-identity-v1",
+        "implementation_sha256": hashlib.sha256(
+            json.dumps(sources, sort_keys=True).encode()
+        ).hexdigest(),
+        "sources": sources,
+    }
+
+
 def evaluation_signature(candidate_hash, settings, policy, episodes):
     """Invalidate a cached measurement after any candidate/config/fixture change."""
     value = {
@@ -64,6 +85,8 @@ def evaluation_signature(candidate_hash, settings, policy, episodes):
             )
         },
     }
+    if settings.get("environment") == "arena-archive":
+        value["archive_validation"] = archive_validation_identity()
     return hashlib.sha256(json.dumps(value, sort_keys=True).encode()).hexdigest()
 
 
@@ -322,6 +345,8 @@ def _evaluate(candidate, run, policy, episodes, label, settings, purpose="candid
         "episodes": [],
         "unstarted_episodes": episodes,
     }
+    if settings.get("environment") == "arena-archive":
+        report["archive_validation"] = archive_validation_identity()
     snapshot = batch / "candidate"
     save(batch / "candidate-manifest.json", _snapshot(candidate, snapshot))
     try:

@@ -1,6 +1,7 @@
 """Environment dispatch and measured cart feedback must not inherit order semantics."""
 
 import hashlib
+import json
 from pathlib import Path
 import time
 
@@ -82,6 +83,105 @@ def test_evaluation_cache_is_bound_to_protected_asset_bytes(tmp_path, monkeypatc
     image.symlink_to(tmp_path / "outside")
     with pytest.raises(ValueError, match="symlinks"):
         evaluation.evaluation_signature("unchanged candidate", settings, "api", 3)
+
+
+@pytest.mark.parametrize(
+    "changed", ["contract.py", "episode.py", "replay.js", "validation.py"]
+)
+def test_archive_validation_identity_tracks_each_protected_source(
+    tmp_path, monkeypatch, changed
+):
+    package = tmp_path / "webhelix"
+    archive = package / "archive"
+    archive.mkdir(parents=True)
+    for name in ("contract.py", "episode.py", "replay.js", "validation.py"):
+        (archive / name).write_text("original protected source")
+    monkeypatch.setattr(evaluation, "__file__", str(package / "checkout/evaluate.py"))
+    first = evaluation.archive_validation_identity()
+    (archive / changed).write_text("changed protected source")
+    second = evaluation.archive_validation_identity()
+    assert first["implementation_sha256"] != second["implementation_sha256"]
+    assert first["sources"][changed] != second["sources"][changed]
+
+
+def test_archive_validation_change_invalidates_old_verdict_signature(
+    tmp_path, monkeypatch
+):
+    (tmp_path / "catalogue.json").write_text("unchanged protected catalogue")
+    env = adapter(tmp_path)
+    monkeypatch.setattr(evaluation, "get_environment", lambda settings: env)
+    settings = {"environment": "arena-archive", "condition": "archive"}
+    previous_format = {
+        "measurement_protocol": evaluation.PROTOCOL,
+        "browser_runtime": evaluation.runtime_identity(),
+        "candidate": "same candidate",
+        "settings": settings,
+        "policy": "api",
+        "episodes": 3,
+        "fixtures": env.fixture_hashes("archive"),
+    }
+    old_signature = hashlib.sha256(
+        json.dumps(previous_format, sort_keys=True).encode()
+    ).hexdigest()
+    monkeypatch.setattr(
+        evaluation,
+        "archive_validation_identity",
+        lambda: {"implementation_sha256": "before"},
+    )
+    before = evaluation.evaluation_signature("same candidate", settings, "api", 3)
+    monkeypatch.setattr(
+        evaluation,
+        "archive_validation_identity",
+        lambda: {"implementation_sha256": "after"},
+    )
+    after = evaluation.evaluation_signature("same candidate", settings, "api", 3)
+    assert len({old_signature, before, after}) == 3
+
+
+def test_checkout_signature_does_not_consult_archive_validation_identity(monkeypatch):
+    settings = {"condition": "truthful"}
+    before = evaluation.evaluation_signature("same candidate", settings, "api", 3)
+
+    def unavailable():
+        raise AssertionError("Checkout must not depend on Arena validator source")
+
+    monkeypatch.setattr(evaluation, "archive_validation_identity", unavailable)
+    assert (
+        evaluation.evaluation_signature("same candidate", settings, "api", 3) == before
+    )
+
+
+def test_archive_report_preserves_validator_identity_without_starting_workers(
+    archive_root, tmp_path, monkeypatch
+):
+    identity = evaluation.archive_validation_identity()
+    calls = []
+
+    def invalid_preflight(request, *args):
+        calls.append(request["kind"])
+        return {
+            "valid": False,
+            "error_type": "invalid_candidate",
+            "error": "Control fixture",
+        }
+
+    monkeypatch.setattr(evaluation, "_launch", invalid_preflight)
+    report = evaluation._evaluate(
+        archive_root / "candidate",
+        tmp_path / "run",
+        "scripted-correct",
+        3,
+        "candidate",
+        {
+            "environment": "arena-archive",
+            "archive_root": str(archive_root),
+            "condition": "archive",
+        },
+    )
+    assert calls == ["feasibility"]
+    assert report["archive_validation"] == identity
+    assert read(Path(report["batch"]) / "report.json")["archive_validation"] == identity
+    assert report["episodes"] == []
 
 
 def test_worker_dispatches_archive_and_preserves_validation_failure(
