@@ -41,6 +41,8 @@ class ArchiveSite:
         self.catalogue = self.contract.catalogue()
         self.products = self.catalogue["products"]
         self.faithful = self.contract.manifest.get("profile") == "arena-faithful-v2"
+        if self.faithful:
+            self.contract.product_fact_manifest()
         self.view = {}
         self.line_attributes = {}
         self._next_checkout_path = (
@@ -387,7 +389,7 @@ class ArchiveSite:
         if route.startswith("/products/"):
             slug = route.rstrip("/").split("/")[-1]
             if slug in markup["products"]:
-                values.update(markup["products"][slug])
+                values.update(self.contract.annotated_product_fragments(slug))
                 has_product = True
         values["cart_drawer"] = markup["cart_drawer"]
 

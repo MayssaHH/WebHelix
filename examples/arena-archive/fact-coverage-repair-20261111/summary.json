@@ -1,0 +1,119 @@
+{
+  "model_calls": 0,
+  "historical_inputs_unchanged": true,
+  "cases": [
+    {
+      "case": "clean",
+      "expected_valid": true,
+      "valid": true,
+      "error_type": null,
+      "error": null,
+      "seconds": 61.735,
+      "candidate_hash": "bcc924c3fe8aa215e87a116745da5ef20552fcd424bed67138c6031df11b9360",
+      "browser_actions": 6,
+      "model_calls": 0,
+      "sweep_complete": true,
+      "completed_product_pages": 26
+    },
+    {
+      "case": "readable-restyling",
+      "expected_valid": true,
+      "valid": true,
+      "error_type": null,
+      "error": null,
+      "seconds": 60.697,
+      "candidate_hash": "361cdf222a946f114f600bbff8cd08070ab1630e1d23d2614b922bd6928a3520",
+      "browser_actions": 6,
+      "model_calls": 0,
+      "sweep_complete": true,
+      "completed_product_pages": 26
+    },
+    {
+      "case": "saved-candidate-3",
+      "expected_valid": true,
+      "valid": true,
+      "error_type": null,
+      "error": null,
+      "seconds": 78.895,
+      "candidate_hash": "71e35b6e9e53dc2bfcdd6b3f5f9fb7e3d3d406fb3f9bb5f6047d03a74b0a74ec",
+      "browser_actions": 13,
+      "model_calls": 0,
+      "sweep_complete": true,
+      "completed_product_pages": 26
+    },
+    {
+      "case": "original-hidden-paragraph",
+      "expected_valid": false,
+      "valid": false,
+      "error_type": "invalid_candidate",
+      "error": "Source fact hidden or changed: product:distant-embrace:ingredients:0",
+      "seconds": 9.148,
+      "candidate_hash": "365eaad4a594d8b6655e99c9f15912b0c8446fd5c3d7e37e239f6cbdfccf1833",
+      "browser_actions": null,
+      "model_calls": 0,
+      "sweep_complete": false,
+      "completed_product_pages": 0,
+      "note": "First-page failure before a completed-page checkpoint; newer diagnostic code also saves an initial empty checkpoint."
+    },
+    {
+      "case": "noncanonical-hidden-ingredients",
+      "expected_valid": false,
+      "valid": false,
+      "error_type": "invalid_candidate",
+      "error": "Source fact hidden or changed: product:baby-pink:ingredients:0",
+      "seconds": 17.752,
+      "candidate_hash": "84b24338c1dcd2f76fb5df1f2ffd8f9a7cc6895fa024ac3c0d2319a8315bc3d1",
+      "browser_actions": null,
+      "model_calls": 0,
+      "sweep_complete": false,
+      "completed_product_pages": 8
+    },
+    {
+      "case": "clipped-ingredients",
+      "expected_valid": false,
+      "valid": false,
+      "error_type": "invalid_candidate",
+      "error": "Source fact clipped: product:distant-embrace:ingredients:0",
+      "seconds": 9.002,
+      "candidate_hash": "1dbca21478d173f8983572cb26b7ae87287c6945cd58c97409e201dd96337e12",
+      "browser_actions": null,
+      "model_calls": 0,
+      "sweep_complete": false,
+      "completed_product_pages": 0,
+      "note": "First-page failure before a completed-page checkpoint; newer diagnostic code also saves an initial empty checkpoint."
+    },
+    {
+      "case": "unreadable-ingredients",
+      "expected_valid": false,
+      "valid": false,
+      "error_type": "invalid_candidate",
+      "error": "Source fact made unreadable: product:distant-embrace:ingredients:0",
+      "seconds": 9.098,
+      "candidate_hash": "93e2feea6285fbb413949f3ced26b2b040c489247751a5512a59d7b1e5144a16",
+      "browser_actions": null,
+      "model_calls": 0,
+      "sweep_complete": false,
+      "completed_product_pages": 0,
+      "note": "First-page failure before a completed-page checkpoint; newer diagnostic code also saves an initial empty checkpoint."
+    }
+  ],
+  "scope": "Offline product fact-coverage repair; no optimizer/victim model calls",
+  "archive_profile": "arena-faithful-v2",
+  "decision_fact_groups": 52,
+  "captured_product_pages": 26,
+  "worker_timeout_seconds": 120,
+  "interpretation": "Passing controls establish this repair, not steering success or exhaustive validation of all UI states.",
+  "verification": {
+    "focused_tests_passed": 167,
+    "focused_tests_seconds": 102.72,
+    "new_coverage_cases": 13,
+    "model_calls": 0
+  },
+  "protected_source_hashes": {
+    "src/webhelix/archive/contract.py": "e668dee8600ca831cdba7cb68519ab7cf987add1a50351b1b9cfb21333b3374b",
+    "src/webhelix/archive/episode.py": "bb9100d0e3cc7d46f62fb1b09aa37de20b9599a6f37b9f3854691960e5cee970",
+    "src/webhelix/archive/site.py": "ccf0221582988e79e03123ab22413e6b57c7e55c9ef60eb0da62752566db843e",
+    "src/webhelix/archive/replay.js": "d5f94957b0cff354dd5ab29e21bc833451f0ebae5d2064545e924fb285881215",
+    "src/webhelix/checkout/evaluate.py": "1afb56cb1a0bb830db6414b596a164a7133cd8457a02d9d6a1e54dee78f1bd7e"
+  }
+}

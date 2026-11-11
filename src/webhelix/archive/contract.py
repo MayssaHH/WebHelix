@@ -310,6 +310,78 @@ class ArchiveContract:
     def product_fragments(self, slug):
         return self.markup()["products"][slug]
 
+    def product_fact_manifest(self):
+        """Derive mandatory decision facts from protected source, never candidates.
+
+        Keys and annotations are attached before candidate template expansion.
+        Missing/mismatched captured facts are setup errors, not invalid proposals.
+        """
+        if hasattr(self, "_product_fact_manifest"):
+            return self._product_fact_manifest
+        if self.manifest.get("profile") != FAITHFUL_PROFILE:
+            return {}
+        markup, products = self.markup(), self.catalogue()["products"]
+        manifest, annotated = {}, {}
+
+        def normalize(value):
+            return re.sub(r"\s+", "", value)
+
+        for slug, fragments in markup["products"].items():
+            route = f"/products/{slug}/"
+            if slug not in products or route not in markup["pages"]:
+                raise ValueError("Captured product fact has no catalogue/page: " + slug)
+            details = BeautifulSoup(fragments.get("product_details", ""), "html.parser")
+            facts = []
+            for field, selector in (
+                ("ingredients", ".description"),
+                ("description", ".description-preview"),
+            ):
+                expected = products[slug].get(field)
+                nodes = details.select(selector)
+                texts = [node.get_text(" ", strip=True) for node in nodes]
+                if (
+                    not isinstance(expected, str)
+                    or not expected.strip()
+                    or not nodes
+                    or any(not text for text in texts)
+                    or any(
+                        any(
+                            parent.name
+                            in {"template", "script", "style", "noscript", "head"}
+                            for parent in (node, *node.parents)
+                        )
+                        for node in nodes
+                    )
+                    or normalize(" ".join(texts)) != normalize(expected)
+                ):
+                    raise ValueError(
+                        f"Protected product {field} missing or inconsistent: {slug}"
+                    )
+                for index, (node, text) in enumerate(zip(nodes, texts)):
+                    key = f"product:{slug}:{field}:{index}"
+                    node["data-wh-fact"] = key
+                    facts.append({"key": key, "field": field, "text": text})
+            manifest[slug] = {"route": route, "facts": facts}
+            annotated[slug] = {**fragments, "product_details": str(details)}
+        if not manifest:
+            raise ValueError("Faithful archive has no captured product facts")
+        # A task-eligible product cannot silently omit its page/decision facts.
+        for slug, product in products.items():
+            if (
+                product.get("listed")
+                and product.get("available")
+                and product.get("one_off_bouquet")
+                and slug not in manifest
+            ):
+                raise ValueError("Available bouquet has no captured fact page: " + slug)
+        self._product_fact_manifest = manifest
+        self._annotated_product_fragments = annotated
+        return manifest
+
+    def annotated_product_fragments(self, slug):
+        self.product_fact_manifest()
+        return dict(self._annotated_product_fragments[slug])
+
     def protected_identifiers(self):
         """Candidate wrappers must not shadow original controller targets."""
         if not hasattr(self, "_protected_identifiers"):

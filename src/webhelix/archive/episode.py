@@ -345,7 +345,9 @@ async def validate_current_state(page, site, *, scroll=False):
     }
 
 
-async def _reference(page, site, clean, reference, *, diagnostics=None):
+async def _reference(
+    page, site, clean, reference, *, diagnostics=None, wait_until="networkidle"
+):
     if await reference.evaluate("location.origin") != site.url:
         raise RuntimeError(
             "Clean reference must share the local origin for captured font/assets fidelity"
@@ -359,7 +361,7 @@ async def _reference(page, site, clean, reference, *, diagnostics=None):
             return False
         await reference.goto(
             site.url + "/__reference?path=" + quote(state["path"], safe=""),
-            wait_until="networkidle",
+            wait_until=wait_until,
         )
         await wait_source_state(
             reference, "typeof window.__webhelixReplayRestore === 'function'"
@@ -650,6 +652,96 @@ async def engineering_observation(runtime, site):
     return value
 
 
+async def _product_fact_coverage(
+    page, reference, site, contract, diagnostics, output=None
+):
+    """Check every captured PDP before a paid episode, without mutating the cart.
+
+    A ground-truth-aware recovery witness cannot prove that decision facts are
+    still observable. This independent sweep also catches product-specific CSS
+    on pages that witness never visits. Source readiness/fonts are awaited;
+    networkidle's fixed quiet interval is unnecessary for each read-only page.
+    """
+    checks = []
+    manifest = contract.product_fact_manifest()
+    if output:
+        save(
+            Path(output) / "product-fact-coverage.json",
+            {
+                "complete": False,
+                "expected_pages": len(manifest),
+                "checks": [],
+            },
+        )
+    for slug, expected in manifest.items():
+        diagnostics.comparison = None
+        diagnostics.reference_target = None
+        with diagnostics.phase("product_fact_coverage", slug):
+            await page.goto(site.url + expected["route"], wait_until="domcontentloaded")
+            await replay_state(page, site)
+            reject = page.locator("#reject-non-essential")
+            if await reject.is_visible():
+                await reject.click()
+            await validate_current_state(page, site)
+            comparable = await _reference(
+                page,
+                site,
+                None,
+                reference,
+                diagnostics=diagnostics,
+                wait_until="domcontentloaded",
+            )
+            if not comparable:
+                raise RuntimeError("Clean product fact page is not comparable: " + slug)
+            observed = await reference.locator("[data-wh-fact]").evaluate_all(
+                FACT_SNAPSHOT_JS
+            )
+            diagnostics.compared(
+                observed,
+                await page.locator("[data-wh-fact]").evaluate_all(FACT_SNAPSHOT_JS),
+            )
+            for fact in expected["facts"]:
+                matches = [item for item in observed if item["key"] == fact["key"]]
+                if (
+                    len(matches) != 1
+                    or matches[0]["text"] != re.sub(r"\s+", "", fact["text"])
+                    or not matches[0]["readable"]
+                    or not matches[0]["unclipped"]
+                ):
+                    raise RuntimeError(
+                        "Clean captured product fact is unavailable: " + fact["key"]
+                    )
+            await faithful_facts(page, reference, diagnostics=diagnostics)
+            checks.append(
+                {
+                    "product_id": slug,
+                    "route": expected["route"],
+                    "facts": [fact["key"] for fact in expected["facts"]],
+                    "valid": True,
+                }
+            )
+            if output:
+                save(
+                    Path(output) / "product-fact-coverage.json",
+                    {
+                        "complete": False,
+                        "expected_pages": len(manifest),
+                        "checks": checks,
+                    },
+                )
+    if site.events:
+        raise RuntimeError("Read-only product fact sweep mutated the cart")
+    result = {
+        "complete": True,
+        "expected_pages": len(manifest),
+        "checks": checks,
+        "backend_mutations": 0,
+    }
+    if output:
+        save(Path(output) / "product-fact-coverage.json", result)
+    return result
+
+
 async def _faithful_feasibility(site, contract, output):
     """Original consumer flow with a bounded, deterministic recovery witness."""
     diagnostics = ValidationDiagnostics(output, contract.fingerprint(site.files))
@@ -659,6 +751,21 @@ async def _faithful_feasibility(site, contract, output):
                 headless=True, executable_path=pw.chromium.executable_path
             )
         try:
+            context = await browser.new_context(
+                viewport=VIEWPORT, service_workers="block"
+            )
+            await local_only(context, site)
+            page = await context.new_page()
+            reference = await context.new_page()
+            await reference.goto(
+                site.url + "/__reference", wait_until="domcontentloaded"
+            )
+            product_facts = await _product_fact_coverage(
+                page, reference, site, contract, diagnostics, output
+            )
+            # The independent catalogue sweep must not pre-clear consent or
+            # leave storage/history in the original recovery witness's browser.
+            await context.close()
             context = await browser.new_context(
                 viewport=VIEWPORT, service_workers="block"
             )
@@ -782,6 +889,7 @@ async def _faithful_feasibility(site, contract, output):
                     return {
                         "valid": True,
                         "checks": checks,
+                        "product_fact_coverage": product_facts,
                         "browser_actions": len(actions),
                         "actions": actions,
                         "final_cart": site.snapshot(),

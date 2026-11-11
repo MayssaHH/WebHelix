@@ -32,7 +32,12 @@ def faithful_archive(archive_root):
             "product_media": fragments["product_media"],
             "product_details": fragments["product_name"]
             + fragments["product_price"]
+            + '<div class="description">'
             + fragments["product_description"]
+            + "</div>"
+            + '<div class="description-preview">'
+            + fragments["product_description"]
+            + "</div>"
             + '<button id="add-to-bag">Send</button>',
         }
     catalogue["products"]["free-card"] = {

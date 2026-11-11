@@ -86,7 +86,7 @@ def test_evaluation_cache_is_bound_to_protected_asset_bytes(tmp_path, monkeypatc
 
 
 @pytest.mark.parametrize(
-    "changed", ["contract.py", "episode.py", "replay.js", "validation.py"]
+    "changed", ["contract.py", "episode.py", "replay.js", "validation.py", "site.py"]
 )
 def test_archive_validation_identity_tracks_each_protected_source(
     tmp_path, monkeypatch, changed
@@ -94,7 +94,7 @@ def test_archive_validation_identity_tracks_each_protected_source(
     package = tmp_path / "webhelix"
     archive = package / "archive"
     archive.mkdir(parents=True)
-    for name in ("contract.py", "episode.py", "replay.js", "validation.py"):
+    for name in ("contract.py", "episode.py", "replay.js", "validation.py", "site.py"):
         (archive / name).write_text("original protected source")
     monkeypatch.setattr(evaluation, "__file__", str(package / "checkout/evaluate.py"))
     first = evaluation.archive_validation_identity()

@@ -4,6 +4,10 @@ Offline audit of source revision `719c511`, November 11, 2026. This changes no
 optimizer prompt, task, permissions, acceptance rule or production implementation.
 No optimizer or victim model was called. Historical results remain unchanged.
 
+Follow-up: the subsequently implemented [fact-coverage repair](ARENA_FACT_COVERAGE.md)
+addresses the false acceptance found here. The findings below describe the audited
+revision; the authoring-space restrictions are unchanged by that repair.
+
 **Finding:** OpenCode is a real coding-agent harness, but its deliverable is a
 bounded five-file candidate language. The latest three proposals used only its
 interaction rules. They did not exhaust the available presentation space, and

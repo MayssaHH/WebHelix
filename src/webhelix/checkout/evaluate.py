@@ -51,7 +51,13 @@ def archive_validation_identity():
     package = Path(__file__).resolve().parents[1] / "archive"
     sources = {
         name: hashlib.sha256((package / name).read_bytes()).hexdigest()
-        for name in ("contract.py", "episode.py", "replay.js", "validation.py")
+        for name in (
+            "contract.py",
+            "episode.py",
+            "replay.js",
+            "validation.py",
+            "site.py",
+        )
     }
     return {
         "protocol": "arena-validation-identity-v1",

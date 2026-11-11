@@ -25,8 +25,9 @@ historical results and does not add model episodes.
 
 The [optimizer search-space audit](ARENA_SEARCH_SPACE_AUDIT.md) distinguishes
 permitted HTML/CSS and interaction changes from what the model actually explored.
-It also documents a newly confirmed ingredient-visibility validation gap; a
-passing recovery check alone does not establish complete task-fact visibility.
+Its ingredient-visibility gap is addressed by the [fact-coverage repair](ARENA_FACT_COVERAGE.md):
+source-derived ingredient/description annotations and an independent check of
+every captured product page. A passing recovery journey alone is insufficient.
 
 The `arena-faithful-v2` capture supersedes the earlier four-product reconstruction.
 That reconstruction simplified the header, product controls and bag, so it was
