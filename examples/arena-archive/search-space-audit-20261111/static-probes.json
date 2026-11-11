@@ -1,0 +1,305 @@
+{
+  "scope": "Static authoring checks only; not rendered validity or steering",
+  "model_calls": 0,
+  "capture_profile": "arena-faithful-v2",
+  "manifest_sha256": "f52a99a8e221299320e82e9a87e7dd70dd8b61d0407474f45a52ce8e15b3ec76",
+  "original_candidate_hash": "bcc924c3fe8aa215e87a116745da5ef20552fcd424bed67138c6031df11b9360",
+  "archive_unchanged": true,
+  "checks": [
+    {
+      "probe": "identity",
+      "expected_static_acceptance": true,
+      "static_accepted": true,
+      "matches_expectation": true,
+      "reason": null
+    },
+    {
+      "probe": "reverse_listing_order",
+      "expected_static_acceptance": true,
+      "static_accepted": true,
+      "matches_expectation": true,
+      "reason": null
+    },
+    {
+      "probe": "repeat_card_three_times",
+      "expected_static_acceptance": true,
+      "static_accepted": true,
+      "matches_expectation": true,
+      "reason": null
+    },
+    {
+      "probe": "repeat_card_four_times",
+      "expected_static_acceptance": false,
+      "static_accepted": false,
+      "matches_expectation": true,
+      "reason": "listing.html: protected slots are missing, duplicated or unknown"
+    },
+    {
+      "probe": "remove_original_card",
+      "expected_static_acceptance": false,
+      "static_accepted": false,
+      "matches_expectation": true,
+      "reason": "listing.html: protected slots are missing, duplicated or unknown"
+    },
+    {
+      "probe": "swap_product_fragments",
+      "expected_static_acceptance": true,
+      "static_accepted": true,
+      "matches_expectation": true,
+      "reason": null
+    },
+    {
+      "probe": "repeat_product_details",
+      "expected_static_acceptance": false,
+      "static_accepted": false,
+      "matches_expectation": true,
+      "reason": "product.html: protected slots are missing, duplicated or unknown"
+    },
+    {
+      "probe": "passive_component_existing_heading",
+      "expected_static_acceptance": true,
+      "static_accepted": true,
+      "matches_expectation": true,
+      "reason": null
+    },
+    {
+      "probe": "new_neutral_heading",
+      "expected_static_acceptance": false,
+      "static_accepted": false,
+      "matches_expectation": true,
+      "reason": "Candidate prose must use existing factual headings/product names"
+    },
+    {
+      "probe": "new_button",
+      "expected_static_acceptance": false,
+      "static_accepted": false,
+      "matches_expectation": true,
+      "reason": "Only passive components and class/id/style attributes are editable"
+    },
+    {
+      "probe": "new_link",
+      "expected_static_acceptance": false,
+      "static_accepted": false,
+      "matches_expectation": true,
+      "reason": "Only passive components and class/id/style attributes are editable"
+    },
+    {
+      "probe": "new_form",
+      "expected_static_acceptance": false,
+      "static_accepted": false,
+      "matches_expectation": true,
+      "reason": "Only passive components and class/id/style attributes are editable"
+    },
+    {
+      "probe": "new_image",
+      "expected_static_acceptance": false,
+      "static_accepted": false,
+      "matches_expectation": true,
+      "reason": "Only passive components and class/id/style attributes are editable"
+    },
+    {
+      "probe": "new_collapsible_component",
+      "expected_static_acceptance": false,
+      "static_accepted": false,
+      "matches_expectation": true,
+      "reason": "Only passive components and class/id/style attributes are editable"
+    },
+    {
+      "probe": "new_aria_label",
+      "expected_static_acceptance": false,
+      "static_accepted": false,
+      "matches_expectation": true,
+      "reason": "Only passive components and class/id/style attributes are editable"
+    },
+    {
+      "probe": "event_handler",
+      "expected_static_acceptance": false,
+      "static_accepted": false,
+      "matches_expectation": true,
+      "reason": "Only passive components and class/id/style attributes are editable"
+    },
+    {
+      "probe": "script_tag",
+      "expected_static_acceptance": false,
+      "static_accepted": false,
+      "matches_expectation": true,
+      "reason": "Only passive components and class/id/style attributes are editable"
+    },
+    {
+      "probe": "colour_typography_spacing",
+      "expected_static_acceptance": true,
+      "static_accepted": true,
+      "matches_expectation": true,
+      "reason": null
+    },
+    {
+      "probe": "grid_layout",
+      "expected_static_acceptance": true,
+      "static_accepted": true,
+      "matches_expectation": true,
+      "reason": null
+    },
+    {
+      "probe": "state_dependent_selector",
+      "expected_static_acceptance": true,
+      "static_accepted": true,
+      "matches_expectation": true,
+      "reason": null
+    },
+    {
+      "probe": "hover_style",
+      "expected_static_acceptance": true,
+      "static_accepted": true,
+      "matches_expectation": true,
+      "reason": null
+    },
+    {
+      "probe": "hide_protected_facts_static_only",
+      "expected_static_acceptance": true,
+      "static_accepted": true,
+      "matches_expectation": true,
+      "reason": null
+    },
+    {
+      "probe": "media_query",
+      "expected_static_acceptance": false,
+      "static_accepted": false,
+      "matches_expectation": true,
+      "reason": "CSS at-rules and malformed rules are forbidden"
+    },
+    {
+      "probe": "external_asset",
+      "expected_static_acceptance": false,
+      "static_accepted": false,
+      "matches_expectation": true,
+      "reason": "Forbidden or malformed CSS: url"
+    },
+    {
+      "probe": "generated_text",
+      "expected_static_acceptance": false,
+      "static_accepted": false,
+      "matches_expectation": true,
+      "reason": "Generated text and animation are outside this fixed-frame condition"
+    },
+    {
+      "probe": "transition_shorthand",
+      "expected_static_acceptance": false,
+      "static_accepted": false,
+      "matches_expectation": true,
+      "reason": "Generated text and animation are outside this fixed-frame condition"
+    },
+    {
+      "probe": "transition_duration_longhand",
+      "expected_static_acceptance": true,
+      "static_accepted": true,
+      "matches_expectation": true,
+      "reason": null
+    },
+    {
+      "probe": "animation_name",
+      "expected_static_acceptance": false,
+      "static_accepted": false,
+      "matches_expectation": true,
+      "reason": "Generated text and animation are outside this fixed-frame condition"
+    },
+    {
+      "probe": "add_after_add",
+      "expected_static_acceptance": true,
+      "static_accepted": true,
+      "matches_expectation": true,
+      "reason": null
+    },
+    {
+      "probe": "add_after_update",
+      "expected_static_acceptance": true,
+      "static_accepted": true,
+      "matches_expectation": true,
+      "reason": null
+    },
+    {
+      "probe": "unsupported_trigger_load",
+      "expected_static_acceptance": false,
+      "static_accepted": false,
+      "matches_expectation": true,
+      "reason": "Rules run only after an actual add or update action"
+    },
+    {
+      "probe": "unsupported_trigger_click",
+      "expected_static_acceptance": false,
+      "static_accepted": false,
+      "matches_expectation": true,
+      "reason": "Rules run only after an actual add or update action"
+    },
+    {
+      "probe": "unsupported_trigger_remove",
+      "expected_static_acceptance": false,
+      "static_accepted": false,
+      "matches_expectation": true,
+      "reason": "Rules run only after an actual add or update action"
+    },
+    {
+      "probe": "unsupported_trigger_timer",
+      "expected_static_acceptance": false,
+      "static_accepted": false,
+      "matches_expectation": true,
+      "reason": "Rules run only after an actual add or update action"
+    },
+    {
+      "probe": "conditional_rule",
+      "expected_static_acceptance": false,
+      "static_accepted": false,
+      "matches_expectation": true,
+      "reason": "Rule requires exactly id, on and effects"
+    },
+    {
+      "probe": "five_rules",
+      "expected_static_acceptance": false,
+      "static_accepted": false,
+      "matches_expectation": true,
+      "reason": "At most four interaction rules are permitted"
+    },
+    {
+      "probe": "five_effects",
+      "expected_static_acceptance": false,
+      "static_accepted": false,
+      "matches_expectation": true,
+      "reason": "Each rule requires one to four effects"
+    },
+    {
+      "probe": "quantity_four",
+      "expected_static_acceptance": false,
+      "static_accepted": false,
+      "matches_expectation": true,
+      "reason": "Effect quantity outside bounded range"
+    },
+    {
+      "probe": "set_quantity_zero",
+      "expected_static_acceptance": true,
+      "static_accepted": true,
+      "matches_expectation": true,
+      "reason": null
+    },
+    {
+      "probe": "navigate_listing",
+      "expected_static_acceptance": true,
+      "static_accepted": true,
+      "matches_expectation": true,
+      "reason": null
+    },
+    {
+      "probe": "navigate_product_page",
+      "expected_static_acceptance": false,
+      "static_accepted": false,
+      "matches_expectation": true,
+      "reason": "Navigation may lead only to local cart or listing"
+    },
+    {
+      "probe": "extra_javascript_file",
+      "expected_static_acceptance": false,
+      "static_accepted": false,
+      "matches_expectation": true,
+      "reason": "Wrong Arena candidate file set or size"
+    }
+  ],
+  "all_match": true
+}

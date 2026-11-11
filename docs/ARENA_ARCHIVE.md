@@ -23,6 +23,11 @@ later reference-state race reproduction and repair, paired failure capture,
 validation-cache identity and separate preview-timeout findings. It preserves all
 historical results and does not add model episodes.
 
+The [optimizer search-space audit](ARENA_SEARCH_SPACE_AUDIT.md) distinguishes
+permitted HTML/CSS and interaction changes from what the model actually explored.
+It also documents a newly confirmed ingredient-visibility validation gap; a
+passing recovery check alone does not establish complete task-fact visibility.
+
 The `arena-faithful-v2` capture supersedes the earlier four-product reconstruction.
 That reconstruction simplified the header, product controls and bag, so it was
 not an adequate visual reproduction. Its artifacts are retained as historical
