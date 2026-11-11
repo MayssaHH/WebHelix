@@ -11,6 +11,31 @@ def test_context_default_preserves_legacy_sol_settings():
     assert OpenCodeSettings().context_window_tokens == 1050000
 
 
+def test_preview_phase_limits_are_independent_of_model_request_limits():
+    settings = OpenCodeSettings()
+    assert settings.preview_timeout_seconds == 260
+    assert settings.preview_validation_timeout_seconds == 120
+    assert settings.preview_journey_timeout_seconds == 120
+    assert settings.preview_finalization_reserve_seconds == 60
+    assert settings.session_timeout_seconds == 600
+    assert settings.max_requests_per_session == 10
+    assert OpenCodeSettings(preview_timeout_seconds=120).preview_timeout_seconds == 120
+
+
+@pytest.mark.parametrize(
+    "field, value",
+    [
+        ("preview_timeout_seconds", 261),
+        ("preview_validation_timeout_seconds", 121),
+        ("preview_journey_timeout_seconds", 121),
+        ("preview_finalization_reserve_seconds", 0),
+    ],
+)
+def test_preview_deadlines_remain_bounded(field, value):
+    with pytest.raises(ValueError, match=field):
+        OpenCodeSettings(**{field: value})
+
+
 def test_mini_context_is_loaded_and_serialized(tmp_path):
     path = tmp_path / "optimizer.json"
     path.write_text(

@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 import re
 import shutil
+import threading
 
 import pytest
 
@@ -51,7 +52,7 @@ def test_output_never_overwrites_candidate_or_previous_preview(tmp_path):
     with pytest.raises(FileExistsError):
         preview(candidate, destination)
     with pytest.raises(ValueError, match="timeout"):
-        preview(candidate, tmp_path / "bad-timeout", timeout_seconds=121)
+        preview(candidate, tmp_path / "bad-timeout", timeout_seconds=261)
 
 
 def test_worker_failure_preserves_an_infrastructure_result(tmp_path, monkeypatch):
@@ -60,7 +61,7 @@ def test_worker_failure_preserves_an_infrastructure_result(tmp_path, monkeypatch
 
     def fail(request, timeout, grace):
         calls.append(request)
-        assert 0 < timeout <= 1
+        assert 0 < timeout <= 3
         return {
             "valid": None,
             "error_type": "infrastructure_error",
@@ -68,7 +69,7 @@ def test_worker_failure_preserves_an_infrastructure_result(tmp_path, monkeypatch
         }
 
     monkeypatch.setattr("webhelix.opencode.preview._launch", fail)
-    result = preview(candidate, tmp_path / "failed", timeout_seconds=1)
+    result = preview(candidate, tmp_path / "failed", timeout_seconds=5)
     assert result["status"] == "infrastructure_error"
     assert len(calls) == 1
     assert result["artifacts"] == []
@@ -94,21 +95,21 @@ def test_phase_receipts_explain_shared_deadline_without_retry(tmp_path, monkeypa
         if request.get("kind") == "feasibility":
             clock[0] += 53
             return {"valid": True, "latency_seconds": 51}
-        clock[0] += 68  # Includes bounded worker termination after its allowance.
+        clock[0] += 67  # Includes bounded worker termination after its allowance.
         return {
             "outcome": "infrastructure_error",
             "error": f"Worker exceeded {timeout} seconds; no retry",
         }
 
     monkeypatch.setattr("webhelix.opencode.preview._launch", launch)
-    result = preview(candidate, output)
-    assert allowances == [120, 67]
+    result = preview(candidate, output, timeout_seconds=120)
+    assert allowances == [118, 65]
     assert result["status"] == "infrastructure_error"
     assert result["validation"]["valid"] is True
     assert result["failure_phase"] == "scripted_journey"
     phases = result["timing"]["phases"]
     assert [p["name"] for p in phases] == ["rendered_validation", "scripted_journey"]
-    assert [p["latency_seconds"] for p in phases] == [53, 68]
+    assert [p["latency_seconds"] for p in phases] == [53, 67]
     assert phases[0]["status"] == "completed"
     assert phases[1]["status"] == "timed_out"
     assert phases[1]["remaining_after_seconds"] == 0
@@ -130,7 +131,7 @@ def test_exhausted_deadline_records_unstarted_journey(tmp_path, monkeypatch):
         return {"valid": True}
 
     monkeypatch.setattr("webhelix.opencode.preview._launch", launch)
-    result = preview(candidate, tmp_path / "exhausted")
+    result = preview(candidate, tmp_path / "exhausted", timeout_seconds=120)
     assert len(calls) == 1
     assert result["status"] == "infrastructure_error"
     assert result["failure_phase"] == "scripted_journey"
@@ -139,6 +140,154 @@ def test_exhausted_deadline_records_unstarted_journey(tmp_path, monkeypatch):
     assert phase["worker_timeout_seconds"] == 0
     assert phase["status"] == "timed_out"
     assert "worker_outcome" not in phase
+
+
+def test_separate_phase_allowances_complete_beyond_old_shared_limit(
+    tmp_path, monkeypatch
+):
+    candidate = candidate_at(tmp_path)
+    clock = [100.0]
+    allowances = []
+    monkeypatch.setattr("webhelix.opencode.preview.time.monotonic", lambda: clock[0])
+
+    def launch(request, timeout, grace):
+        allowances.append(timeout)
+        assert grace == 2
+        if request.get("kind") == "feasibility":
+            clock[0] += 79
+            return {"valid": True}
+        clock[0] += 85
+        return {"outcome": "legitimate_success"}
+
+    monkeypatch.setattr("webhelix.opencode.preview._launch", launch)
+    result = preview(candidate, tmp_path / "separate-phases")
+    assert result["status"] == "preview_complete"
+    assert result["latency_seconds"] == 164
+    assert allowances == [120, 120]
+    assert result["timing"]["budget_seconds"] == 260
+    assert result["timing"]["cleanup_reserved_inside_budget"] is True
+    assert all(
+        p["configured_timeout_seconds"] == 120 for p in result["timing"]["phases"]
+    )
+    assert result["model_calls"] == result["real_victim_episodes"] == 0
+
+
+def test_custom_phase_caps_remain_inside_overall_cap(tmp_path, monkeypatch):
+    candidate = candidate_at(tmp_path)
+    clock = [100.0]
+    allowances = []
+    monkeypatch.setattr("webhelix.opencode.preview.time.monotonic", lambda: clock[0])
+
+    def launch(request, timeout, grace):
+        allowances.append(timeout)
+        if request.get("kind") == "feasibility":
+            clock[0] += 19
+            return {"valid": True}
+        clock[0] += 25
+        return {"outcome": "legitimate_success"}
+
+    monkeypatch.setattr("webhelix.opencode.preview._launch", launch)
+    result = preview(
+        candidate,
+        tmp_path / "custom-phases",
+        timeout_seconds=90,
+        validation_timeout_seconds=20,
+        journey_timeout_seconds=30,
+    )
+    assert result["status"] == "preview_complete"
+    assert allowances == [20, 30]
+    assert result["latency_seconds"] == 44
+
+
+@pytest.mark.parametrize(
+    "options",
+    [
+        {"validation_timeout_seconds": 121},
+        {"journey_timeout_seconds": 121},
+        {"validation_timeout_seconds": False},
+        {"journey_timeout_seconds": 0},
+    ],
+)
+def test_invalid_phase_limits_fail_before_work(tmp_path, monkeypatch, options):
+    candidate = candidate_at(tmp_path)
+    monkeypatch.setattr(
+        "webhelix.opencode.preview._snapshot",
+        lambda *a, **kw: pytest.fail("started work"),
+    )
+    with pytest.raises(ValueError, match="timeout"):
+        preview(candidate, tmp_path / "invalid-phase", **options)
+
+
+def test_no_worker_starts_without_its_cleanup_reserve(tmp_path, monkeypatch):
+    candidate = candidate_at(tmp_path)
+    monkeypatch.setattr(
+        "webhelix.opencode.preview._launch",
+        lambda *a, **kw: pytest.fail("started worker"),
+    )
+    result = preview(candidate, tmp_path / "no-cleanup-time", timeout_seconds=1)
+    assert result["status"] == "infrastructure_error"
+    assert result["failure_phase"] == "rendered_validation"
+    assert result["timing"]["phases"][0]["worker_timeout_seconds"] == 0
+
+
+def test_snapshot_time_counts_against_the_overall_deadline(tmp_path, monkeypatch):
+    from webhelix.opencode import preview as module
+
+    candidate = candidate_at(tmp_path)
+    clock = [100.0]
+    original = module._snapshot
+    monkeypatch.setattr(module.time, "monotonic", lambda: clock[0])
+
+    def snapshot(*args, **kwargs):
+        files = original(*args, **kwargs)
+        clock[0] += 260
+        return files
+
+    monkeypatch.setattr(module, "_snapshot", snapshot)
+    monkeypatch.setattr(
+        module, "_launch", lambda *a, **kw: pytest.fail("started worker")
+    )
+    result = preview(candidate, tmp_path / "snapshot-timeout")
+    assert result["status"] == "infrastructure_error"
+    assert result["failure_phase"] == "snapshot"
+    assert result["timing"]["phases"] == []
+
+
+def test_expired_artifact_export_cannot_leave_a_success_manifest(tmp_path, monkeypatch):
+    from webhelix.opencode import preview as module
+
+    candidate = candidate_at(tmp_path)
+    output = tmp_path / "export-timeout"
+    clock = [100.0]
+    original = module._artifact
+    monkeypatch.setattr(module.time, "monotonic", lambda: clock[0])
+
+    def launch(request, **kwargs):
+        return (
+            {"valid": True}
+            if request.get("kind") == "feasibility"
+            else {"outcome": "legitimate_success"}
+        )
+
+    def artifact(*args, **kwargs):
+        value = original(*args, **kwargs)
+        clock[0] += 260
+        return value
+
+    monkeypatch.setattr(module, "_launch", launch)
+    monkeypatch.setattr(module, "_artifact", artifact)
+    result = preview(candidate, output)
+    assert result["status"] == "infrastructure_error"
+    assert result["failure_phase"] == "artifact_collection"
+    assert result["artifacts"] == []
+    assert (
+        json.loads((output / "manifest.json").read_text())["status"]
+        == "infrastructure_error"
+    )
+    assert (
+        json.loads((output / "preview.json").read_text())["status"]
+        == "infrastructure_error"
+    )
 
 
 def test_launch_exception_preserves_phase_and_zero_paid_calls(tmp_path, monkeypatch):
@@ -212,8 +361,13 @@ def test_diagnostic_write_failure_does_not_replace_cancellation(tmp_path, monkey
     assert caught.value is original
 
 
-def test_receipt_write_failure_cannot_report_success(tmp_path, monkeypatch):
+@pytest.mark.parametrize("manifest_write_fails", [False, True])
+def test_receipt_write_failure_cannot_report_success(
+    tmp_path, monkeypatch, manifest_write_fails
+):
     candidate = candidate_at(tmp_path)
+    output = tmp_path / "missing-final-receipt"
+    original = OSError("final receipt disk full")
 
     def launch(request, **kwargs):
         return (
@@ -224,13 +378,139 @@ def test_receipt_write_failure_cannot_report_success(tmp_path, monkeypatch):
 
     def fail_final_receipt(path, value):
         if path.name == "preview.json" and value["status"] == "preview_complete":
-            raise OSError("final receipt disk full")
+            raise original
+        if (
+            manifest_write_fails
+            and path.name == "manifest.json"
+            and value["status"] == "infrastructure_error"
+        ):
+            raise OSError("manifest repair disk full")
         save(path, value)
 
     monkeypatch.setattr("webhelix.opencode.preview._launch", launch)
     monkeypatch.setattr("webhelix.opencode.preview.save", fail_final_receipt)
-    with pytest.raises(OSError, match="final receipt disk full"):
-        preview(candidate, tmp_path / "missing-final-receipt")
+    with pytest.raises(OSError, match="final receipt disk full") as caught:
+        preview(candidate, output)
+    assert caught.value is original
+    manifest = output / "manifest.json"
+    if manifest_write_fails:
+        assert not manifest.exists()
+    else:
+        assert json.loads(manifest.read_text())["status"] == "infrastructure_error"
+    assert (
+        json.loads((output / "preview.json").read_text())["status"]
+        == "infrastructure_error"
+    )
+
+
+def test_cancelled_session_never_starts_snapshot_or_worker(tmp_path, monkeypatch):
+    candidate = candidate_at(tmp_path)
+    cancelled = threading.Event()
+    cancelled.set()
+    for function in ("_snapshot", "_launch"):
+        monkeypatch.setattr(
+            "webhelix.opencode.preview." + function,
+            lambda *a, **kw: pytest.fail("Cancelled preview started work"),
+        )
+    result = preview(
+        candidate, tmp_path / "cancelled-before-start", cancel_event=cancelled
+    )
+    assert result["status"] == "infrastructure_error"
+    assert result["cancelled"] is True
+    assert result["failure_phase"] == "snapshot"
+    assert result["timing"]["phases"] == []
+
+
+@pytest.mark.parametrize("cancelled_phase", ["rendered_validation", "scripted_journey"])
+def test_worker_cancellation_is_preserved_and_stops_followup_work(
+    tmp_path, monkeypatch, cancelled_phase
+):
+    candidate = candidate_at(tmp_path)
+    cancelled = threading.Event()
+    calls = []
+
+    def launch(request, *, cancel_event, **kwargs):
+        assert cancel_event is cancelled
+        phase = (
+            "rendered_validation"
+            if request.get("kind") == "feasibility"
+            else "scripted_journey"
+        )
+        calls.append(phase)
+        if phase == cancelled_phase:
+            cancelled.set()
+            return {
+                "valid": None,
+                "outcome": "infrastructure_error",
+                "cancelled": True,
+                "error_type": "infrastructure_error",
+                "error": "Original worker cancellation",
+            }
+        return {"valid": True}
+
+    monkeypatch.setattr("webhelix.opencode.preview._launch", launch)
+    result = preview(candidate, tmp_path / cancelled_phase, cancel_event=cancelled)
+    assert result["status"] == "infrastructure_error"
+    assert result["cancelled"] is True
+    assert result["failure_phase"] == cancelled_phase
+    assert result["error"] == "Original worker cancellation"
+    assert result["timing"]["phases"][-1]["status"] == "cancelled"
+    assert calls[-1] == cancelled_phase
+    assert result["artifacts"] == []
+    assert result["model_calls"] == result["real_victim_episodes"] == 0
+
+
+def test_cancellation_after_validation_does_not_start_journey(tmp_path, monkeypatch):
+    candidate = candidate_at(tmp_path)
+    cancelled = threading.Event()
+    calls = []
+
+    def launch(request, *, cancel_event, **kwargs):
+        calls.append(request)
+        cancel_event.set()
+        return {"valid": True}
+
+    monkeypatch.setattr("webhelix.opencode.preview._launch", launch)
+    result = preview(
+        candidate, tmp_path / "cancelled-after-validation", cancel_event=cancelled
+    )
+    assert len(calls) == 1
+    assert result["status"] == "infrastructure_error"
+    assert result["timing"]["phases"][-1]["status"] == "cancelled"
+    assert result["cancelled"] is True
+
+
+def test_cancellation_during_export_invalidates_success_manifest(tmp_path, monkeypatch):
+    from webhelix.opencode import preview as module
+
+    candidate = candidate_at(tmp_path)
+    output = tmp_path / "cancelled-export"
+    cancelled = threading.Event()
+    original = module._artifact
+
+    def launch(request, **kwargs):
+        return (
+            {"valid": True}
+            if request.get("kind") == "feasibility"
+            else {"outcome": "legitimate_success"}
+        )
+
+    def artifact(path):
+        value = original(path)
+        cancelled.set()
+        return value
+
+    monkeypatch.setattr(module, "_launch", launch)
+    monkeypatch.setattr(module, "_artifact", artifact)
+    result = preview(candidate, output, cancel_event=cancelled)
+    assert result["status"] == "infrastructure_error"
+    assert result["cancelled"] is True
+    assert result["artifacts"] == []
+    assert result["failure_phase"] == "artifact_collection"
+    assert (
+        json.loads((output / "manifest.json").read_text())["status"]
+        == "infrastructure_error"
+    )
 
 
 def test_successful_phase_write_failure_stops_before_next_worker(tmp_path, monkeypatch):

@@ -496,7 +496,9 @@ def test_finalize_timeout_cancels_inflight_and_keeps_conservative_reservation(tm
         with ThreadPoolExecutor(max_workers=1) as pool:
             future = pool.submit(post, gateway)
             assert entered.wait(2)
-            summary = gateway.finalized_summary(timeout_seconds=0.02)
+            summary = gateway.finalized_summary(
+                timeout_seconds=0.02, cleanup_timeout_seconds=0.02
+            )
             assert not summary["finalized"] and summary["halted"] == "timeout"
             assert summary["requests"][0]["cancellation_requested"]
             call = read(tmp_path / "budget.json")["calls"][0]
@@ -507,6 +509,49 @@ def test_finalize_timeout_cancels_inflight_and_keeps_conservative_reservation(tm
     assert gateway.summary["requests"][0]["status"] == "timeout"
     call = read(tmp_path / "budget.json")["calls"][0]
     assert call["status"] == "usage_missing_full_reservation_retained"
+
+
+def test_finalize_cancels_running_preview_and_waits_for_evidence_without_model_calls(
+    tmp_path,
+):
+    settings = setup(tmp_path)
+    entered, cleaned = threading.Event(), threading.Event()
+
+    def preview():
+        entered.set()
+        assert gateway.cancellation_event.wait(5)
+        time.sleep(0.02)  # Represents bounded termination and receipt persistence.
+        cleaned.set()
+        return {"status": "infrastructure_error", "cancelled": True, "model_calls": 0}
+
+    with Gateway(
+        tmp_path,
+        tmp_path / "gateway",
+        settings,
+        "offline-secret",
+        preview_callback=preview,
+        transport=httpx.MockTransport(lambda _: pytest.fail("Preview called provider")),
+    ) as gateway:
+        with ThreadPoolExecutor(max_workers=1) as pool:
+            future = pool.submit(
+                httpx.post,
+                gateway.url + "/preview",
+                json={},
+                headers={"Authorization": "Bearer " + gateway.token},
+                trust_env=False,
+                timeout=5,
+            )
+            assert entered.wait(2)
+            summary = gateway.finalized_summary(
+                timeout_seconds=0.01, cleanup_timeout_seconds=1
+            )
+            assert cleaned.is_set()
+            assert summary["finalized"] and summary["halted"] == "timeout"
+            assert summary["requests_forwarded"] == 0
+            assert future.result(timeout=2).status_code == 504
+    receipt = read(tmp_path / "gateway/previews/request-1.json")
+    assert receipt["cancelled"] and receipt["status"] == "infrastructure_error"
+    assert not (tmp_path / "budget.json").exists()
 
 
 def test_preview_respects_whole_run_deadline_without_starting_callback(tmp_path):

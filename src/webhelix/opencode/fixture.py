@@ -261,7 +261,7 @@ WEBHELIX_PREVIEW"""
                     {
                         "command": self._preview_command(),
                         "description": "Preview the active candidate using deterministic browser actions",
-                        "timeout": 180000,
+                        "timeout": 300000,
                     },
                 )
             else:

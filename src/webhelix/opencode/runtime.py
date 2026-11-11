@@ -8,15 +8,19 @@ uses Docker isolation; the AutoHelix editable-file list alone is not a sandbox.
 from __future__ import annotations
 
 import json
+import hashlib
 import os
 from pathlib import Path
 import shlex
 import subprocess
 import uuid
 
+from .timing import HELPER_TIMEOUT_SECONDS, SHELL_TIMEOUT_SECONDS
+
 
 ROOT = Path(__file__).resolve().parents[3]
 LOCK = ROOT / "experiments/checkout/opencode-runtime/lock.json"
+PREVIEW_HELPER = LOCK.with_name("wh-preview.py")
 
 
 def opencode_config(
@@ -148,6 +152,29 @@ class DockerRuntime:
             timeout=timeout,
         )
 
+    @staticmethod
+    def _verified_preview_helper(image, docker):
+        """A pinned CLI version cannot certify that the baked helper is current."""
+        expected = hashlib.sha256(PREVIEW_HELPER.read_bytes()).hexdigest()
+        actual = docker(
+            "run",
+            "--rm",
+            "--network=none",
+            "--read-only",
+            "--cap-drop=ALL",
+            "--security-opt=no-new-privileges",
+            image,
+            "python",
+            "-c",
+            "import hashlib,pathlib;print(hashlib.sha256("
+            "pathlib.Path('/usr/local/bin/wh-preview').read_bytes()).hexdigest())",
+        ).stdout.strip()
+        if actual != expected:
+            raise ValueError(
+                "Runtime preview helper differs from repository; rebuild with scripts/setup-opencode.py"
+            )
+        return actual
+
     @classmethod
     def preflight(cls):
         """Verify the pinned installation and running CLI; never contact a model."""
@@ -179,10 +206,14 @@ class DockerRuntime:
         ).stdout.strip()
         if version != lock["version"]:
             raise ValueError("Running CLI version differs from OpenCode lock")
+        helper_hash = cls._verified_preview_helper(lock["image"], cls._docker)
         return {
             **lock,
             "image_id": image["Id"],
             "verified_cli_version": version,
+            "preview_helper_sha256": helper_hash,
+            "preview_http_timeout_seconds": HELPER_TIMEOUT_SECONDS,
+            "shell_default_timeout_seconds": SHELL_TIMEOUT_SECONDS,
             "model_calls": 0,
         }
 
@@ -210,6 +241,7 @@ class DockerRuntime:
                 raise ValueError(
                     "Runtime image does not match OpenCode lock; run scripts/setup-opencode.py"
                 )
+            helper_hash = self._verified_preview_helper(self.image, self._docker)
             self.output.mkdir(parents=True, exist_ok=True)
             self._docker(
                 "network",
@@ -231,6 +263,7 @@ class DockerRuntime:
                 "image_id": inspected["Id"],
                 "opencode_version": self.lock["version"],
                 "archive_sha256": self.lock["archive_sha256"],
+                "preview_helper_sha256": helper_hash,
                 "network_internal": True,
                 "network": self.network,
                 "container": self.name,
@@ -241,6 +274,8 @@ class DockerRuntime:
                 "maximum_agent_steps": self.max_steps,
                 "context_window_tokens": self.context_window_tokens,
                 "maximum_output_tokens": self.max_output,
+                "preview_http_timeout_seconds": HELPER_TIMEOUT_SECONDS,
+                "shell_default_timeout_seconds": SHELL_TIMEOUT_SECONDS,
                 "read_only_rootfs": True,
                 "capabilities_dropped": "ALL",
                 "real_credentials_in_container": False,
@@ -303,6 +338,10 @@ class DockerRuntime:
             f"/home/agent:rw,nosuid,nodev,size=268435456,uid={os.getuid()},gid={os.getgid()},mode=0700",
             "--env",
             "OPENCODE_CONFIG=/runtime/opencode.json",
+            "--env",
+            f"OPENCODE_EXPERIMENTAL_BASH_DEFAULT_TIMEOUT_MS={SHELL_TIMEOUT_SECONDS * 1000}",
+            "--env",
+            f"WEBHELIX_PREVIEW_HTTP_TIMEOUT_SECONDS={HELPER_TIMEOUT_SECONDS}",
             "--env",
             f"WEBHELIX_GATEWAY_URL={gateway_url}",
             "--env",

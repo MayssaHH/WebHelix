@@ -83,3 +83,8 @@ silently included in this bug fix.
 The original failed audit and prior model results remain historical evidence.
 New verification results are recorded separately in
 [the offline repair evidence](../examples/arena-archive/fact-coverage-repair-20261111/README.md).
+
+The broader validation and the optimizer's separate scripted preview journey now
+have [coordinated phase and enclosing deadlines](OPENCODE_PREVIEW_TIMING.md).
+Both checks remain enabled; increasing the preview allowance does not relax fact
+coverage or expand the optimizer's authoring permissions.

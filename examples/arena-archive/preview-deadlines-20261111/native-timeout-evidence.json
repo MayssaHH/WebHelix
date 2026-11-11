@@ -1,0 +1,14 @@
+{
+  "bash_timeout_parameter": {
+    "description": "Optional timeout in milliseconds",
+    "type": "integer"
+  },
+  "native_tool_call_included_timeout": false,
+  "packaged_helper_timeout_seconds": 280,
+  "native_returncode": 0,
+  "image_returned_to_offline_provider_fixture": true,
+  "bash_description_timeout_excerpt": [
+    "  - You can specify an optional timeout in milliseconds. If not specified, commands will time out after 300000ms."
+  ],
+  "full_native_tool_schema_sha256": "7c756a5d6c21ef284e5ba126136ad93a97034accd53ac6b994d72777bd1328bf"
+}

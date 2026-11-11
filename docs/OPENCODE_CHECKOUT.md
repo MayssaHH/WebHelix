@@ -219,11 +219,17 @@ preflight must pass before paid clean/identity evaluations start.
 | Optimizer output tokens per request | At most 8,192 |
 | Optimizer session time | At most 600 seconds |
 | Deterministic previews per optimizer session | At most 3 |
-| Time per preview | At most 120 seconds |
+| Time per preview | At most 260 seconds overall; validation and journey at most 120 seconds each |
 | Victim actions per episode | At most 24 |
 | Victim output tokens per request | At most 2,048 |
 | Victim episode time | At most 480 seconds |
 | Whole-run time | At most 7,200 seconds |
+
+The [preview deadline guide](OPENCODE_PREVIEW_TIMING.md) explains how these phase
+limits fit inside the unchanged optimizer session, how late previews are declined
+while preserving time for the note, and how interrupted workers are cleaned up.
+The 260-second setting applies to the current examples; historical configurations
+that explicitly specify 120 seconds retain that limit.
 
 An iteration is a proposal/evaluation cycle, not a single model call. An episode is
 one fresh victim attempt at the task, potentially containing multiple model calls

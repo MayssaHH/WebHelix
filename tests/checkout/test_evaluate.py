@@ -1,4 +1,7 @@
 import shutil
+import signal
+import subprocess
+import threading
 import time
 
 import pytest
@@ -206,3 +209,127 @@ def test_parent_cancellation_stops_worker_and_preserves_receipt(tmp_path, monkey
         _launch({"output": str(tmp_path)}, 10)
     assert terminated == [process]
     assert read(tmp_path / "cancellation.json")["outcome"] == "cancelled"
+
+
+@pytest.mark.parametrize("kind", ["feasibility", "episode"])
+def test_cooperative_cancellation_stops_process_group_and_preserves_partial_result(
+    tmp_path, monkeypatch, kind
+):
+    from webhelix.checkout.evaluate import _launch
+
+    cancelled = threading.Event()
+    signals, waits = [], []
+    partial = (
+        {"valid": True}
+        if kind == "feasibility"
+        else {"outcome": "legitimate_success"}
+    )
+    filename = "feasibility.json" if kind == "feasibility" else "episode.json"
+    save(tmp_path / filename, partial)
+
+    class Worker:
+        pid = 12345
+        args = ["offline-worker"]
+        returncode = None
+
+        def wait(self, timeout):
+            waits.append(timeout)
+            if self.returncode is not None:
+                return self.returncode
+            cancelled.set()
+            raise subprocess.TimeoutExpired(self.args, timeout)
+
+        def poll(self):
+            return self.returncode
+
+    process = Worker()
+
+    def start(*args, **kwargs):
+        assert kwargs["start_new_session"] is True
+        return process
+
+    def kill_group(pid, signum):
+        signals.append((pid, signum))
+        process.returncode = -signum
+
+    monkeypatch.setattr("webhelix.checkout.evaluate.subprocess.Popen", start)
+    monkeypatch.setattr("webhelix.checkout.evaluate.os.killpg", kill_group)
+    result = _launch(
+        {"output": str(tmp_path), "kind": kind},
+        timeout=120,
+        grace=2,
+        cancel_event=cancelled,
+    )
+    assert signals == [(process.pid, signal.SIGTERM)]
+    assert waits == [0.1, 2]
+    assert result["cancelled"] is True
+    assert "cancelled" in result["error"]
+    if kind == "feasibility":
+        assert result["valid"] is None
+        assert result["error_type"] == "infrastructure_error"
+    else:
+        assert result["outcome"] == "infrastructure_error"
+        assert result["legitimate_success"] is False
+    assert read(tmp_path / filename) == result
+    assert read(tmp_path / "worker-partial-receipt.json") == partial
+
+
+def test_pre_cancelled_worker_does_not_launch(tmp_path, monkeypatch):
+    from webhelix.checkout.evaluate import _launch
+
+    cancelled = threading.Event()
+    cancelled.set()
+    monkeypatch.setattr(
+        "webhelix.checkout.evaluate.subprocess.Popen",
+        lambda *a, **kw: pytest.fail("Cancelled request started a worker"),
+    )
+    result = _launch(
+        {"output": str(tmp_path), "kind": "feasibility"},
+        timeout=120,
+        cancel_event=cancelled,
+    )
+    assert result["cancelled"] and result["valid"] is None
+    assert "before launch" in result["error"]
+    assert read(tmp_path / "feasibility.json") == result
+
+
+def test_event_enabled_worker_keeps_timeout_and_process_cleanup(tmp_path, monkeypatch):
+    from webhelix.checkout.evaluate import _launch
+
+    now = [100.0]
+    signals = []
+
+    class Worker:
+        pid = 12345
+        args = ["offline-worker"]
+        returncode = None
+
+        def wait(self, timeout):
+            if self.returncode is not None:
+                return self.returncode
+            now[0] += timeout
+            raise subprocess.TimeoutExpired(self.args, timeout)
+
+        def poll(self):
+            return self.returncode
+
+    process = Worker()
+
+    def kill_group(pid, signum):
+        signals.append((pid, signum))
+        process.returncode = -signum
+
+    monkeypatch.setattr("webhelix.checkout.evaluate.time.monotonic", lambda: now[0])
+    monkeypatch.setattr(
+        "webhelix.checkout.evaluate.subprocess.Popen", lambda *a, **kw: process
+    )
+    monkeypatch.setattr("webhelix.checkout.evaluate.os.killpg", kill_group)
+    result = _launch(
+        {"output": str(tmp_path), "kind": "feasibility"},
+        timeout=0.25,
+        cancel_event=threading.Event(),
+    )
+    assert result["valid"] is None and "exceeded 0.25 seconds" in result["error"]
+    assert "cancelled" not in result
+    assert result["latency_seconds"] == 0.25
+    assert signals == [(process.pid, signal.SIGTERM)]

@@ -224,6 +224,7 @@ def test_note_must_exist_and_contain_actual_sections(tmp_path):
         ("refusal", "refusal"),
         ("service-error", "service_error"),
         ("setup-error", "local_error"),
+        ("late-preview", "valid_proposal"),
         ("behavioral-valid", "valid_proposal"),
         ("behavioral-missing-parent", "missing_parent_selection"),
         ("behavioral-incomplete-note", "missing_note"),
@@ -238,7 +239,9 @@ def test_no_candidate_or_provider_failure_never_becomes_valid(
         runtime = read(run / "runtime.json")
         runtime["optimizer_feedback_protocol"] = BEHAVIORAL_NOTE_PROTOCOL
         save(run / "runtime.json", runtime)
-    settings = OpenCodeSettings()
+    settings = OpenCodeSettings(
+        session_timeout_seconds=60 if scenario == "late-preview" else 600
+    )
     save(
         run / "spending-plan.json",
         {
@@ -316,6 +319,20 @@ def test_no_candidate_or_provider_failure_never_becomes_valid(
             assert config.reasoning_effort == "medium"
 
         def run(self, workspace, prompt, iteration, log_path, callback, **kwargs):
+            if scenario == "late-preview":
+                response = httpx.post(
+                    state["url"] + "/preview",
+                    headers={"Authorization": "Bearer " + state["token"]},
+                    json={},
+                    trust_env=False,
+                )
+                assert response.status_code == 200
+                denied = response.json()
+                assert denied["status"] == "preview_not_started"
+                assert denied["reason"] == "insufficient_session_time"
+                assert denied["validation"]["valid"] is None
+                assert denied["model_calls"] == denied["real_victim_episodes"] == 0
+                assert denied["artifacts"] == []
             if behavioral:
                 assert "Do not reread the entire context" in prompt
                 if scenario != "behavioral-missing-parent":
@@ -364,7 +381,7 @@ def test_no_candidate_or_provider_failure_never_becomes_valid(
     )
     receipt = read(run / "proposals/iter-1/result.json")
     assert receipt["status"] == expected
-    assert result.success == (scenario in {"valid", "behavioral-valid"})
+    assert result.success == (scenario in {"valid", "behavioral-valid", "late-preview"})
     assert state["token"] not in str(receipt)
     if scenario == "setup-error":
         assert not (run / "budget.json").exists()

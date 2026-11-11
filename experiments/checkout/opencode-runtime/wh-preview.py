@@ -9,7 +9,30 @@ import urllib.request
 import uuid
 
 
+# Packaged independently of the host Python project. Runtime tests keep this
+# transport ceiling aligned with webhelix.opencode.timing. The host preview has
+# a shorter overall deadline, including worker cleanup, so its result can return
+# before this HTTP client or the enclosing OpenCode shell tool times out.
+HTTP_TIMEOUT_SECONDS = 280
+
+
+def transport_timeout():
+    raw = os.environ.get(
+        "WEBHELIX_PREVIEW_HTTP_TIMEOUT_SECONDS", str(HTTP_TIMEOUT_SECONDS)
+    )
+    try:
+        value = int(raw)
+    except ValueError as exc:
+        raise ValueError("Preview HTTP timeout must be an integer") from exc
+    if not 1 <= value <= HTTP_TIMEOUT_SECONDS:
+        raise ValueError(
+            f"Preview HTTP timeout must be in 1..{HTTP_TIMEOUT_SECONDS} seconds"
+        )
+    return value
+
+
 def main():
+    timeout = transport_timeout()
     destination = Path("/work/previews") / uuid.uuid4().hex[:12]
     request = urllib.request.Request(
         os.environ["WEBHELIX_GATEWAY_URL"].rstrip("/") + "/preview",
@@ -19,11 +42,12 @@ def main():
             "Content-Type": "application/json",
         },
     )
-    with urllib.request.urlopen(request, timeout=180) as response:
+    with urllib.request.urlopen(request, timeout=timeout) as response:
         body = response.read(16_000_001)
     if len(body) > 16_000_000:
         raise ValueError("Preview response exceeds 16 MB")
     result = json.loads(body)
+    result["client_transport_timeout_seconds"] = timeout
     destination.mkdir(parents=True)
     for artifact in result.get("artifacts", []):
         name = artifact["path"]

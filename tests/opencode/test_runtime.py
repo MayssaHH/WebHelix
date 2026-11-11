@@ -1,11 +1,13 @@
 """Runtime configuration, mount boundaries and cleanup without Docker/model calls."""
 
 import json
+import hashlib
 from types import SimpleNamespace
 
 import pytest
 
-from webhelix.opencode.runtime import DockerRuntime, opencode_config
+from webhelix.opencode.runtime import DockerRuntime, PREVIEW_HELPER, opencode_config
+from webhelix.opencode.timing import HELPER_TIMEOUT_SECONDS, SHELL_TIMEOUT_SECONDS
 
 
 def test_provider_and_tools_are_explicit_and_no_remote_plugins():
@@ -40,7 +42,9 @@ def test_large_authoritative_context_is_configured_not_shell_interpolated():
     assert config["agent"]["webhelix"]["prompt"] == context
 
 
-def runtime_fixture(tmp_path, monkeypatch, wrong_image=False, **settings):
+def runtime_fixture(
+    tmp_path, monkeypatch, wrong_image=False, wrong_helper=False, **settings
+):
     workspace = tmp_path / "workspace"
     (workspace / "candidate").mkdir(parents=True)
     (workspace / ".env").write_text("MUST_NOT_MOUNT=private\n")
@@ -76,6 +80,12 @@ def runtime_fixture(tmp_path, monkeypatch, wrong_image=False, **settings):
             )
         elif args[0] == "exec":
             stdout = runtime.lock["version"] + "\n"
+        elif args[0] == "run" and "python" in args:
+            stdout = (
+                "stale-helper"
+                if wrong_helper
+                else hashlib.sha256(PREVIEW_HELPER.read_bytes()).hexdigest()
+            ) + "\n"
         return SimpleNamespace(stdout=stdout, stderr="", returncode=0)
 
     monkeypatch.setattr(runtime, "_docker", docker)
@@ -108,7 +118,7 @@ def test_only_candidate_notes_previews_writable_and_scoped_token_removed(
     with runtime:
         assert runtime.gateway_host == "172.18.0.1"
         runtime.start("http://172.18.0.1:1234", "scoped-test-token")
-        launch = next(c for c in calls if c[0] == "run")
+        launch = next(c for c in calls if c[0] == "run" and "--detach" in c)
         mounts = [launch[i + 1] for i, part in enumerate(launch) if part == "--mount"]
         assert len(mounts) == 5
         assert all(".env" not in m and ".git" not in m for m in mounts)
@@ -117,6 +127,13 @@ def test_only_candidate_notes_previews_writable_and_scoped_token_removed(
         assert "--read-only" in launch and "--cap-drop=ALL" in launch
         assert "--security-opt=no-new-privileges" in launch
         assert "HTTP_PROXY=" in launch and "NO_PROXY=*" in launch
+        assert (
+            f"OPENCODE_EXPERIMENTAL_BASH_DEFAULT_TIMEOUT_MS={SHELL_TIMEOUT_SECONDS * 1000}"
+            in launch
+        )
+        assert (
+            f"WEBHELIX_PREVIEW_HTTP_TIMEOUT_SECONDS={HELPER_TIMEOUT_SECONDS}" in launch
+        )
         assert "--user" in launch
         assert runtime.command_path.stat().st_mode & 0o100
         assert "docker exec --workdir /work" in runtime.command_path.read_text()
@@ -125,6 +142,9 @@ def test_only_candidate_notes_previews_writable_and_scoped_token_removed(
             not in (runtime.output / "opencode-config.json").read_text()
         )
         assert "private" not in (runtime.output / "runtime-receipt.json").read_text()
+        receipt = json.loads((runtime.output / "runtime-receipt.json").read_text())
+        assert receipt["preview_http_timeout_seconds"] == HELPER_TIMEOUT_SECONDS
+        assert receipt["shell_default_timeout_seconds"] == SHELL_TIMEOUT_SECONDS
     assert not (runtime.output / "runtime-private/opencode.json").exists()
     assert ("rm", "--force", runtime.name) in calls
     assert ("network", "rm", runtime.network) in calls
@@ -136,6 +156,16 @@ def test_version_mismatch_prevents_network_and_launch(tmp_path, monkeypatch):
         with runtime:
             pass
     assert not any(c[0] == "run" or c[:2] == ("network", "create") for c in calls)
+
+
+def test_stale_preview_helper_requires_rebuild_before_network_or_agent(
+    tmp_path, monkeypatch
+):
+    runtime, calls = runtime_fixture(tmp_path, monkeypatch, wrong_helper=True)
+    with pytest.raises(ValueError, match="preview helper differs.*rebuild"):
+        with runtime:
+            pass
+    assert not any("--detach" in c or c[:2] == ("network", "create") for c in calls)
 
 
 def test_cleanup_after_user_exception_and_no_reuse(tmp_path, monkeypatch):

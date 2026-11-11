@@ -10,5 +10,8 @@
   "max_response_bytes": 4000000,
   "max_requests_per_session": 10,
   "max_previews_per_session": 3,
-  "preview_timeout_seconds": 120
+  "preview_timeout_seconds": 260,
+  "preview_validation_timeout_seconds": 120,
+  "preview_journey_timeout_seconds": 120,
+  "preview_finalization_reserve_seconds": 60
 }

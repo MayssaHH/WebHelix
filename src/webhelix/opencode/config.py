@@ -5,6 +5,13 @@ import json
 from pathlib import Path
 import re
 
+from .timing import (
+    PREVIEW_TIMEOUT_SECONDS,
+    VALIDATION_TIMEOUT_SECONDS,
+    JOURNEY_TIMEOUT_SECONDS,
+    SESSION_FINALIZATION_RESERVE_SECONDS,
+)
+
 
 @dataclass(frozen=True)
 class OpenCodeSettings:
@@ -21,7 +28,10 @@ class OpenCodeSettings:
     max_response_bytes: int = 4000000
     max_requests_per_session: int = 10
     max_previews_per_session: int = 3
-    preview_timeout_seconds: int = 120
+    preview_timeout_seconds: int = PREVIEW_TIMEOUT_SECONDS
+    preview_validation_timeout_seconds: int = VALIDATION_TIMEOUT_SECONDS
+    preview_journey_timeout_seconds: int = JOURNEY_TIMEOUT_SECONDS
+    preview_finalization_reserve_seconds: int = SESSION_FINALIZATION_RESERVE_SECONDS
 
     def __post_init__(self):
         if self.endpoint != "https://api.openai.com/v1/responses":
@@ -45,7 +55,10 @@ class OpenCodeSettings:
             "max_response_bytes": 8000000,
             "max_requests_per_session": 20,
             "max_previews_per_session": 5,
-            "preview_timeout_seconds": 120,
+            "preview_timeout_seconds": PREVIEW_TIMEOUT_SECONDS,
+            "preview_validation_timeout_seconds": VALIDATION_TIMEOUT_SECONDS,
+            "preview_journey_timeout_seconds": JOURNEY_TIMEOUT_SECONDS,
+            "preview_finalization_reserve_seconds": 120,
         }.items():
             value = getattr(self, field)
             if type(value) is not int or not 1 <= value <= upper:

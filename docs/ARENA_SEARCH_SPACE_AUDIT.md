@@ -135,6 +135,11 @@ episode allowed 40 actions and 480 seconds. These are historical effective
 settings, not all repository defaults. Step 1 changed neither the search
 language nor these settings.
 
+Subsequently, the [preview deadline repair](OPENCODE_PREVIEW_TIMING.md) separated
+validation and journey allowances inside a 260-second overall preview bound for
+new configurations. The historical 120-second run settings described above remain
+unchanged; this timing repair does not expand the search language.
+
 Sources: [history summaries](../src/webhelix/checkout/optimizer.py#L452),
 [parent selection](../src/webhelix/opencode/parent.py#L79),
 [note checks](../src/webhelix/opencode/backend.py#L105),

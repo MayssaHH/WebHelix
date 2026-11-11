@@ -19,6 +19,7 @@ import httpx
 
 from webhelix.search.budget import Budget, BudgetBlocked
 from webhelix.v2.contract import read, save
+from .timing import WORKER_CLEANUP_SECONDS
 
 
 class RequestRejected(ValueError):
@@ -159,6 +160,11 @@ class Gateway:
         self._closed = False
         self._cancelled = threading.Event()
 
+    @property
+    def cancellation_event(self):
+        """Trusted preview workers observe this event when the session stops."""
+        return self._cancelled
+
     def _redact(self, value):
         if isinstance(value, str):
             return value.replace(
@@ -213,11 +219,14 @@ class Gateway:
                 lambda: self._active_handlers == 0, timeout_seconds
             )
 
-    def finalized_summary(self, timeout_seconds=10):
+    def finalized_summary(
+        self, timeout_seconds=10, *, cleanup_timeout_seconds=WORKER_CLEANUP_SECONDS + 1
+    ):
         """Close admission and return a settled snapshot, or an explicit incomplete stop.
 
         On timeout, unreported requests keep their pre-call conservative reservation.
-        HTTP cancellation is attempted, but a blocked transport may finish later;
+        Cancellation also reaches preview workers, with a bounded cleanup wait.
+        A blocked transport may still finish later;
         callers must reject ``finalized=False`` rather than claim a complete session.
         """
         self._closed = True
@@ -235,6 +244,7 @@ class Gateway:
                         )
             for client in clients:
                 client.close()
+            self.wait_idle(cleanup_timeout_seconds)
         summary = self.summary
         save(self.output_dir / "summary.json", summary)
         return summary
@@ -355,13 +365,19 @@ class Gateway:
             if self.preview_callback is None:
                 raise RequestRejected("Preview is unavailable in this session")
             result = self.preview_callback()
-            if self._cancelled.is_set() or time.time() >= runtime["run_deadline_epoch"]:
-                raise BudgetBlocked("Whole-run deadline reached during preview")
             save(
                 self.output_dir / "previews" / f"request-{number}.json",
                 self._redact(result),
             )
+            if self._cancelled.is_set():
+                raise TimeoutError("Optimizer session ended during preview")
+            if time.time() >= runtime["run_deadline_epoch"]:
+                raise BudgetBlocked("Whole-run deadline reached during preview")
             self._json(handler, 200, result)
+        except TimeoutError as exc:
+            with self._lock:
+                self._halted = "timeout"
+            self._json(handler, 504, {"error": {"message": str(exc)}})
         except BudgetBlocked as exc:
             with self._lock:
                 self._halted = "budget_blocked"

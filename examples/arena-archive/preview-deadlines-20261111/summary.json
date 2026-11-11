@@ -1,0 +1,338 @@
+{
+  "purpose": "Offline engineering verification of coordinated OpenCode preview deadlines; no new optimizer proposals or real-victim measurements",
+  "date": "2026-11-11",
+  "source_revision_before_fix": "06a52cc302131dc32a973f0506adc58ecf38238a",
+  "real_model_calls": 0,
+  "real_victim_episodes": 0,
+  "standalone_journeys": [
+    {
+      "case": "clean",
+      "outcome": "legitimate_success",
+      "error": null,
+      "wall_seconds": 38.383,
+      "usage_entries": 0,
+      "model_calls": 0,
+      "measurement_timeout_seconds": 180
+    },
+    {
+      "case": "saved-candidate-3",
+      "outcome": "legitimate_success",
+      "error": null,
+      "wall_seconds": 69.37,
+      "usage_entries": 0,
+      "model_calls": 0,
+      "measurement_timeout_seconds": 180
+    }
+  ],
+  "full_previews": [
+    {
+      "case": "clean",
+      "status": "preview_complete",
+      "seconds": 94.929,
+      "candidate_hash": "bcc924c3fe8aa215e87a116745da5ef20552fcd424bed67138c6031df11b9360",
+      "validation": {
+        "valid": true,
+        "latency_seconds": 55.42402817000402
+      },
+      "timing": {
+        "budget_seconds": 260,
+        "validation_timeout_seconds": 120,
+        "journey_timeout_seconds": 120,
+        "worker_termination_grace_seconds": 2,
+        "cleanup_reserved_inside_budget": true,
+        "phases": [
+          {
+            "name": "rendered_validation",
+            "status": "completed",
+            "started_after_seconds": 0.9948116989980917,
+            "configured_timeout_seconds": 120,
+            "worker_timeout_seconds": 120,
+            "cleanup_reserve_seconds": 2,
+            "worker_outcome": "valid",
+            "latency_seconds": 56.68963926199649,
+            "remaining_after_seconds": 202.31554903900542
+          },
+          {
+            "name": "scripted_journey",
+            "status": "completed",
+            "started_after_seconds": 57.68470282199269,
+            "configured_timeout_seconds": 120,
+            "worker_timeout_seconds": 120,
+            "cleanup_reserve_seconds": 2,
+            "worker_outcome": "legitimate_success",
+            "latency_seconds": 37.2284683809994,
+            "remaining_after_seconds": 165.0868287970079
+          }
+        ]
+      },
+      "artifacts_returned": 24,
+      "model_calls": 0,
+      "real_victim_episodes": 0,
+      "fact_coverage": {
+        "complete": true,
+        "expected_pages": 26,
+        "pages_checked": 26
+      }
+    },
+    {
+      "case": "saved-candidate-3",
+      "status": "preview_complete",
+      "seconds": 144.983,
+      "candidate_hash": "71e35b6e9e53dc2bfcdd6b3f5f9fb7e3d3d406fb3f9bb5f6047d03a74b0a74ec",
+      "validation": {
+        "valid": true,
+        "latency_seconds": 79.05884602900187
+      },
+      "timing": {
+        "budget_seconds": 260,
+        "validation_timeout_seconds": 120,
+        "journey_timeout_seconds": 120,
+        "worker_termination_grace_seconds": 2,
+        "cleanup_reserved_inside_budget": true,
+        "phases": [
+          {
+            "name": "rendered_validation",
+            "status": "completed",
+            "started_after_seconds": 0.937528544003726,
+            "configured_timeout_seconds": 120,
+            "worker_timeout_seconds": 120,
+            "cleanup_reserve_seconds": 2,
+            "worker_outcome": "valid",
+            "latency_seconds": 80.1958459969901,
+            "remaining_after_seconds": 178.86662545900617
+          },
+          {
+            "name": "scripted_journey",
+            "status": "completed",
+            "started_after_seconds": 81.13365886099928,
+            "configured_timeout_seconds": 120,
+            "worker_timeout_seconds": 120,
+            "cleanup_reserve_seconds": 2,
+            "worker_outcome": "legitimate_success",
+            "latency_seconds": 63.81440048299555,
+            "remaining_after_seconds": 115.05194065600517
+          }
+        ]
+      },
+      "artifacts_returned": 45,
+      "model_calls": 0,
+      "real_victim_episodes": 0,
+      "fact_coverage": {
+        "complete": true,
+        "expected_pages": 26,
+        "pages_checked": 26
+      }
+    },
+    {
+      "case": "hidden-fact",
+      "status": "invalid_candidate",
+      "seconds": 11.621,
+      "candidate_hash": "a59beeba10b97ae419393537518daf00d2cac1e2d6c42bd779a904f28b08c7b4",
+      "validation": {
+        "valid": false,
+        "error": "Source fact hidden or changed: product:distant-embrace:ingredients:0",
+        "error_type": "invalid_candidate",
+        "latency_seconds": 9.259353836998343
+      },
+      "timing": {
+        "budget_seconds": 260,
+        "validation_timeout_seconds": 120,
+        "journey_timeout_seconds": 120,
+        "worker_termination_grace_seconds": 2,
+        "cleanup_reserved_inside_budget": true,
+        "phases": [
+          {
+            "name": "rendered_validation",
+            "status": "failed",
+            "started_after_seconds": 1.1561026359995594,
+            "configured_timeout_seconds": 120,
+            "worker_timeout_seconds": 120,
+            "cleanup_reserve_seconds": 2,
+            "worker_outcome": "invalid_candidate",
+            "latency_seconds": 10.462900611004443,
+            "remaining_after_seconds": 248.380996752996
+          }
+        ]
+      },
+      "artifacts_returned": 0,
+      "model_calls": 0,
+      "real_victim_episodes": 0,
+      "fact_coverage": {
+        "complete": false,
+        "expected_pages": 26,
+        "pages_checked": 0
+      }
+    },
+    {
+      "case": "forced-validation-timeout",
+      "status": "infrastructure_error",
+      "seconds": 2.087,
+      "candidate_hash": "bcc924c3fe8aa215e87a116745da5ef20552fcd424bed67138c6031df11b9360",
+      "validation": {
+        "valid": null,
+        "error": "Worker exceeded 1 seconds; no retry",
+        "error_type": "infrastructure_error",
+        "latency_seconds": 1.1649361730087548
+      },
+      "timing": {
+        "budget_seconds": 260,
+        "validation_timeout_seconds": 1,
+        "journey_timeout_seconds": 120,
+        "worker_termination_grace_seconds": 2,
+        "cleanup_reserved_inside_budget": true,
+        "phases": [
+          {
+            "name": "rendered_validation",
+            "status": "timed_out",
+            "started_after_seconds": 0.9199477469956037,
+            "configured_timeout_seconds": 1,
+            "worker_timeout_seconds": 1,
+            "cleanup_reserve_seconds": 2,
+            "worker_outcome": "infrastructure_error",
+            "latency_seconds": 1.1654603039933136,
+            "remaining_after_seconds": 257.9145919490111
+          }
+        ]
+      },
+      "artifacts_returned": 0,
+      "model_calls": 0,
+      "real_victim_episodes": 0
+    }
+  ],
+  "native_harness": {
+    "status": "passed",
+    "elapsed_seconds": 151.66,
+    "native_returncode": 0,
+    "shell_timeout_omitted": true,
+    "accounted_usd": "0",
+    "fixture": {
+      "kind": "scripted_provider_fixture",
+      "real_model_calls": 0,
+      "synthetic_usage": true,
+      "requests": 4,
+      "tool_loop_turns": 4,
+      "auxiliary_calls": 0,
+      "preview_image_sent_to_provider_fixture": true
+    },
+    "candidate_hash_before": "71e35b6e9e53dc2bfcdd6b3f5f9fb7e3d3d406fb3f9bb5f6047d03a74b0a74ec",
+    "candidate_hash_after": "71e35b6e9e53dc2bfcdd6b3f5f9fb7e3d3d406fb3f9bb5f6047d03a74b0a74ec",
+    "source_hash_after": "71e35b6e9e53dc2bfcdd6b3f5f9fb7e3d3d406fb3f9bb5f6047d03a74b0a74ec",
+    "preview": {
+      "status": "preview_complete",
+      "latency_seconds": 142.1028030680027,
+      "timing": {
+        "budget_seconds": 260,
+        "validation_timeout_seconds": 120,
+        "journey_timeout_seconds": 120,
+        "worker_termination_grace_seconds": 2,
+        "cleanup_reserved_inside_budget": true,
+        "phases": [
+          {
+            "name": "rendered_validation",
+            "status": "completed",
+            "started_after_seconds": 0.8903946040081792,
+            "configured_timeout_seconds": 120,
+            "worker_timeout_seconds": 120,
+            "cleanup_reserve_seconds": 2,
+            "worker_outcome": "valid",
+            "latency_seconds": 77.34133785098675,
+            "remaining_after_seconds": 181.76826754500507
+          },
+          {
+            "name": "scripted_journey",
+            "status": "completed",
+            "started_after_seconds": 78.23198869200132,
+            "configured_timeout_seconds": 120,
+            "worker_timeout_seconds": 120,
+            "cleanup_reserve_seconds": 2,
+            "worker_outcome": "legitimate_success",
+            "latency_seconds": 63.84034093900118,
+            "remaining_after_seconds": 117.9276703689975
+          }
+        ]
+      },
+      "model_calls": 0,
+      "real_victim_episodes": 0,
+      "candidate_hash": "71e35b6e9e53dc2bfcdd6b3f5f9fb7e3d3d406fb3f9bb5f6047d03a74b0a74ec"
+    }
+  },
+  "limits": {
+    "validation_seconds": 120,
+    "journey_seconds": 120,
+    "overall_preview_seconds": 260,
+    "helper_socket_timeout_seconds": 280,
+    "native_bash_default_seconds": 300,
+    "optimizer_session_seconds_unchanged": 600,
+    "transport_reserve_seconds": 20,
+    "finalization_reserve_seconds": 60,
+    "required_remaining_seconds": 340
+  },
+  "runtime": {
+    "version": "1.19.4",
+    "platform": "linux/amd64",
+    "image": "webhelix-opencode:1.19.4",
+    "base_image": "python:3.12-slim-bookworm@sha256:6a0e06f5ba0b373d051aabd3fffb9b873f27f9a2a3a14bcbe37dee6f0e3bbc70",
+    "archive_url": "https://github.com/anomalyco/opencode/releases/download/v1.19.4/opencode-linux-x64-baseline.tar.gz",
+    "archive_sha256": "1697ef40558d378bd2f72efa8fafe1bed1f0e664f09247b9357556b95dbc7cbc",
+    "license": "MIT",
+    "source": "https://github.com/anomalyco/opencode/tree/v1.19.4",
+    "git_package_version": "1:2.39.5-0+deb12u3",
+    "image_id": "sha256:f620c5ddf80bde190c5c87132637ed6e020f21bb22713142cbfff8e9d414be2d",
+    "verified_cli_version": "1.19.4",
+    "preview_helper_sha256": "51523a3e62dff4de68b57ddaa617b5c6460932a5aed384947b4d14e426976910",
+    "preview_http_timeout_seconds": 280,
+    "shell_default_timeout_seconds": 300,
+    "model_calls": 0,
+    "previous_image_id": "sha256:2fd904e84bff68c0f16d064e8c57e09827612fd348d77447e1fd0a34d0fbc2ae",
+    "refresh": "Only packaged wh-preview helper replaced on existing verified runtime; original Dockerfile/CLI pin unchanged"
+  },
+  "cooperative_cancellation": {
+    "status": "infrastructure_error",
+    "kind": "deterministic_optimizer_preview",
+    "policy": "scripted-correct",
+    "model_calls": 0,
+    "real_victim_episodes": 0,
+    "candidate_hash": "bcc924c3fe8aa215e87a116745da5ef20552fcd424bed67138c6031df11b9360",
+    "validation": {
+      "valid": null,
+      "error": "Worker cancelled; optimizer session ended",
+      "error_type": "infrastructure_error",
+      "latency_seconds": 2.318639571996755
+    },
+    "stages": [],
+    "timing": {
+      "budget_seconds": 260,
+      "validation_timeout_seconds": 120,
+      "journey_timeout_seconds": 120,
+      "worker_termination_grace_seconds": 2,
+      "cleanup_reserved_inside_budget": true,
+      "phases": [
+        {
+          "name": "rendered_validation",
+          "status": "cancelled",
+          "started_after_seconds": 0.9156976740050595,
+          "configured_timeout_seconds": 120,
+          "worker_timeout_seconds": 120,
+          "cleanup_reserve_seconds": 2,
+          "worker_outcome": "infrastructure_error",
+          "latency_seconds": 2.319807204999961,
+          "remaining_after_seconds": 256.764495120995
+        }
+      ]
+    },
+    "interpretation": "These observations follow a fixed scripted shopper, not a model. They test rendering and reachability, not steering effectiveness. Screenshots and controls use the same observation code as the victim.",
+    "cancelled": true,
+    "failure_phase": "rendered_validation",
+    "error": "Worker cancelled; optimizer session ended",
+    "latency_seconds": 3.2358824490074767,
+    "wall_seconds": 3.237
+  },
+  "regression_verification": {
+    "command": "PLAYWRIGHT_BROWSERS_PATH=/workspace/.cache/ms-playwright .venv/bin/pytest -q tests/opencode tests/archive tests/checkout/test_evaluate.py",
+    "passed": 342,
+    "elapsed_seconds": 130.07,
+    "ruff": "passed",
+    "whitespace_check": "passed",
+    "final_readonly_review": "no remaining material issue reported"
+  }
+}

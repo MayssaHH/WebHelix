@@ -149,8 +149,13 @@ def _terminate(process, grace):
         process.wait()
 
 
-def _launch(request, timeout, grace=10):
-    """Retain a failed receipt, including partial observations, without retrying."""
+def _launch(request, timeout, grace=10, *, cancel_event=None):
+    """Retain failed evidence without retrying; optionally stop on parent cancellation.
+
+    Preview requests run in an HTTP handler thread, so cancelling the optimizer
+    does not interrupt their Python stack. A supplied event cooperatively stops
+    the worker's process group and records an infrastructure failure.
+    """
     output = Path(request["output"])
     output.mkdir(parents=True, exist_ok=True)
     save(output / "worker.json", request)
@@ -160,26 +165,48 @@ def _launch(request, timeout, grace=10):
     started = time.monotonic()
     process = None
     problem = None
+    cancelled = False
     try:
         with (output / "worker.log").open("w") as log:
-            process = subprocess.Popen(
-                [
-                    sys.executable,
-                    "-m",
-                    "webhelix.checkout.cli",
-                    "worker",
-                    str(output / "worker.json"),
-                ],
-                stdout=log,
-                stderr=subprocess.STDOUT,
-                start_new_session=True,
-            )
-            try:
-                process.wait(timeout=timeout)
-            except subprocess.TimeoutExpired:
-                problem = f"Worker exceeded {timeout} seconds; no retry"
-                _terminate(process, grace)
-        if process.returncode and not problem:
+            if cancel_event is not None and cancel_event.is_set():
+                cancelled = True
+                problem = "Worker cancelled before launch; optimizer session ended"
+            else:
+                process = subprocess.Popen(
+                    [
+                        sys.executable,
+                        "-m",
+                        "webhelix.checkout.cli",
+                        "worker",
+                        str(output / "worker.json"),
+                    ],
+                    stdout=log,
+                    stderr=subprocess.STDOUT,
+                    start_new_session=True,
+                )
+                try:
+                    if cancel_event is None:
+                        process.wait(timeout=timeout)
+                    else:
+                        deadline = time.monotonic() + timeout
+                        while True:
+                            if cancel_event.is_set():
+                                cancelled = True
+                                problem = "Worker cancelled; optimizer session ended"
+                                _terminate(process, grace)
+                                break
+                            remaining = deadline - time.monotonic()
+                            if remaining <= 0:
+                                raise subprocess.TimeoutExpired(process.args, timeout)
+                            try:
+                                process.wait(timeout=min(0.1, remaining))
+                                break
+                            except subprocess.TimeoutExpired:
+                                pass
+                except subprocess.TimeoutExpired:
+                    problem = f"Worker exceeded {timeout} seconds; no retry"
+                    _terminate(process, grace)
+        if process is not None and process.returncode and not problem:
             problem = f"Worker exited {process.returncode}"
         if not receipt_path.exists() and not problem:
             problem = "Worker ended without a receipt"
@@ -224,6 +251,8 @@ def _launch(request, timeout, grace=10):
         if receipt:
             save(output / "worker-partial-receipt.json", receipt)
         receipt.update(error=problem, latency_seconds=time.monotonic() - started)
+        if cancelled:
+            receipt["cancelled"] = True
         if request.get("kind") == "feasibility":
             receipt.update(valid=None, error_type="infrastructure_error")
         else:
