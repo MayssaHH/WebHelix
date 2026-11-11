@@ -33,7 +33,9 @@ from webhelix.search.instructions import (
     BEHAVIORAL_NOTE_PROTOCOL,
     BEHAVIORAL_NOTE_FIELDS,
     BEHAVIORAL_NOTE_INSTRUCTIONS,
+    FOCUSED_FEEDBACK_INSTRUCTIONS,
 )
+from webhelix.search.feedback import FOCUSED_MEMORY_POLICY
 from .timing import PreviewSessionBudget, SHELL_TIMEOUT_SECONDS
 
 CONTEXT_START = "WEBHELIX_AUTHORITATIVE_CONTEXT_BEGIN\n"
@@ -68,6 +70,12 @@ def launch_prompt(context, *, editing_check=False):
     return (
         objective
         + protocol_instructions
+        + (
+            "\n" + FOCUSED_FEEDBACK_INSTRUCTIONS
+            if context.get("memory_policy") == FOCUSED_MEMORY_POLICY
+            and not editing_check
+            else ""
+        )
         + "\nYou are an interactive coding agent. Use your read/edit/bash tools to inspect "
         "the files, implement a candidate, inspect its render, and revise it if needed. "
         "Only the files listed in renderer_context.editable_pages under /work/candidate are candidate artifacts. "
@@ -345,6 +353,12 @@ class CheckoutOpenCodeBackend:
             for name in environment.fixture_paths(runtime_settings["condition"]):
                 shutil.copy2(workspace / name, reference / name)
             reference_report = self.reference_report or read(root / "clean.json")
+            if context.get("memory_policy") == FOCUSED_MEMORY_POLICY:
+                from .context import materialize_context_references
+
+                materialize_context_references(
+                    workspace, reference, context, reference_report
+                )
             images = [
                 ("clean", stage, path)
                 for stage, path in stage_images(

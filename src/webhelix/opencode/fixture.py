@@ -144,7 +144,7 @@ if condition in ('interaction', 'combined'):
     program = {{'version':1, 'rules':[{{'id':'fixture-{self.iteration}', 'on':{{'stage':'product','action':'add'}}, 'effects':[{{'op':'set_extra','id':{'"case"' if self.iteration == 1 else '"protection"'},'selected':True}}]}}]}}
     Path('/work/candidate/interaction.json').write_text(json.dumps(program)+'\\n')
 previous = context.get('prior_feedback', [])
-if previous and context.get('memory_policy') == 'summary-with-readonly-evidence-v1':
+if previous and context.get('memory_policy') in ('summary-with-readonly-evidence-v1', 'focused-with-readonly-evidence-v2'):
     evidence = previous[-1]['evidence']
     archive = Path(evidence['directory'])
     manifest = json.loads(Path(evidence['manifest_path']).read_text())

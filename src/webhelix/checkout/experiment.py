@@ -18,6 +18,7 @@ from webhelix.browser.manifest import runtime_identity
 
 from webhelix.optimizer.client import Settings
 from webhelix.search.instructions import SEARCH_GOAL
+from webhelix.search.feedback import FOCUSED_MEMORY_POLICY, focused_feedback
 from webhelix.environments import get_environment
 from webhelix.intervention import PROTOCOL
 from .contract import (
@@ -228,8 +229,16 @@ def feedback_continuity(run, iteration):
             if (base / "optimizer-note.md").is_file()
             else ""
         )
-        if context.get("memory_policy") == SUMMARY_MEMORY_POLICY:
-            expected_feedback = summarized_feedback(
+        if context.get("memory_policy") in {
+            SUMMARY_MEMORY_POLICY,
+            FOCUSED_MEMORY_POLICY,
+        }:
+            summarize = (
+                focused_feedback
+                if context["memory_policy"] == FOCUSED_MEMORY_POLICY
+                else summarized_feedback
+            )
+            expected_feedback = summarize(
                 base,
                 number,
                 note,
@@ -284,11 +293,17 @@ def feedback_continuity(run, iteration):
                 "all_episodes_match": previous["episodes"] == episodes,
             }
         )
+    reference_checks = None
+    if context.get("memory_policy") == FOCUSED_MEMORY_POLICY:
+        from webhelix.opencode.context import verify_context_references
+
+        reference_checks = verify_context_references(path.parent / "reference", context)
     expected = list(range(1, iteration))
     passed = (
         request_matches
         and [x["iteration"] for x in checks] == expected
         and all(all(v for k, v in x.items() if k != "iteration") for x in checks)
+        and (reference_checks is None or reference_checks["passed"])
     )
     return {
         "passed": passed,
@@ -296,6 +311,11 @@ def feedback_continuity(run, iteration):
         "next_iteration": iteration,
         "prior_iterations": checks,
         "context_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+        **(
+            {"context_reference_checks": reference_checks}
+            if reference_checks is not None
+            else {}
+        ),
     }
 
 

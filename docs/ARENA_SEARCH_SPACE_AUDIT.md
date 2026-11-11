@@ -225,3 +225,9 @@ No restriction was loosened, no prompt was tuned, and no paid experiment was
 started here. The [audit evidence and rerun instructions](../examples/arena-archive/search-space-audit-20261111/README.md)
 record 42 static probes plus the browser coverage check. Raw captured merchant
 pages remain private in the workspace.
+
+The subsequent [focused feedback handoff](OPTIMIZER_FEEDBACK.md) implements the
+feedback recommendation for new discovery runs: it prioritizes intervention and
+response evidence, separates prior predictions from measurements, and makes bulky
+reference material available through read-only files. This does not expand the
+authoring language or change the historical results described in this audit.

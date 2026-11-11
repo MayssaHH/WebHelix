@@ -69,6 +69,13 @@ messages and screenshots establish what the victim actually received. No particu
 prescribed. The optimizer must write `optimizer-note.md` with four sections:
 `hypothesis`, `predicted_observation`, `falsification`, and `reflection`.
 
+New discovery runs use the [focused feedback handoff](OPTIMIZER_FEEDBACK.md):
+prior predictions and all episode outcomes are summarized with relevant recorded
+events, while complete catalogue, clean traces and historical artifacts remain
+in verified read-only references. The next note must explain how actual evidence
+motivates its hypothesis; the optimizer still chooses the mechanism. Existing
+run contexts retain their original memory policy.
+
 The task, renderer, truthful presentation contract and independent scoring are
 preserved. The victim now uses Browser-Use's Agent and browser integration with
 its own Responses API model conversation. Browser-Use supplies the instructions,

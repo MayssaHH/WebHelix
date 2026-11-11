@@ -95,6 +95,40 @@ def test_behavioral_protocol_requires_real_predictions_without_prescribing_mecha
     assert "behavioral-v1" not in legacy
 
 
+def test_focused_feedback_requires_evidence_based_revision_not_a_prescribed_pattern():
+    from webhelix.search.feedback import FOCUSED_MEMORY_POLICY
+
+    prompt = launch_prompt(
+        {
+            "memory_policy": FOCUSED_MEMORY_POLICY,
+            "optimizer_feedback_protocol": BEHAVIORAL_NOTE_PROTOCOL,
+        }
+    ).split(CONTEXT_START)[0]
+    normalized = " ".join(prompt.split())
+    for phrase in (
+        "reflection.response_to_feedback",
+        "a specific earlier prediction",
+        "challenges it or leaves it untested",
+        "does not establish attention or causation",
+        "Read the relevant catalogue facts",
+        "Summaries explicitly mark omissions",
+    ):
+        assert phrase in normalized
+    for phrase in ("shopper", "membership", "checkout", "purchase"):
+        assert phrase not in normalized.lower()
+
+
+def test_toolless_backend_cannot_use_reference_only_context(tmp_path):
+    from webhelix.search.feedback import FOCUSED_MEMORY_POLICY
+
+    run, project = setup_context(tmp_path)
+    runtime = read(run / "runtime.json")
+    runtime.update(memory_policy=FOCUSED_MEMORY_POLICY, optimizer_backend="proposal")
+    save(run / "runtime.json", runtime)
+    with pytest.raises(ValueError, match="tool-using OpenCode"):
+        context_for(project, run, 1, "prompt")
+
+
 def test_large_prior_measurement_is_preserved_without_silent_truncation(tmp_path):
     run, project = setup_context(tmp_path)
     previous = add_previous(run, project)

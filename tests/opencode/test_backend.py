@@ -226,6 +226,7 @@ def test_note_must_exist_and_contain_actual_sections(tmp_path):
         ("setup-error", "local_error"),
         ("late-preview", "valid_proposal"),
         ("behavioral-valid", "valid_proposal"),
+        ("behavioral-focused", "valid_proposal"),
         ("behavioral-missing-parent", "missing_parent_selection"),
         ("behavioral-incomplete-note", "missing_note"),
     ],
@@ -235,9 +236,18 @@ def test_no_candidate_or_provider_failure_never_becomes_valid(
 ):
     run, project = setup_context(tmp_path)
     behavioral = scenario.startswith("behavioral-")
+    focused = scenario == "behavioral-focused"
+    iteration = 2 if focused else 1
     if behavioral:
         runtime = read(run / "runtime.json")
         runtime["optimizer_feedback_protocol"] = BEHAVIORAL_NOTE_PROTOCOL
+        if focused:
+            from webhelix.search.feedback import FOCUSED_MEMORY_POLICY
+
+            add_previous(run, project)
+            runtime.update(
+                memory_policy=FOCUSED_MEMORY_POLICY, optimizer_backend="opencode"
+            )
         save(run / "runtime.json", runtime)
     settings = OpenCodeSettings(
         session_timeout_seconds=60 if scenario == "late-preview" else 600
@@ -367,7 +377,11 @@ def test_no_candidate_or_provider_failure_never_becomes_valid(
                 )
             if scenario != "missing-note":
                 state["sandbox"].note_path.write_text(
-                    behavioral_note("[]")
+                    behavioral_note(
+                        '["/work/reference/history/iter-1/result.json"]'
+                        if focused
+                        else "[]"
+                    )
                     if behavioral and scenario != "behavioral-incomplete-note"
                     else "## hypothesis\nFixture\n## predicted_observation\nZero\n## falsification\nError\n## reflection\nNone"
                 )
@@ -377,11 +391,14 @@ def test_no_candidate_or_provider_failure_never_becomes_valid(
     monkeypatch.setattr("webhelix.opencode.fixture.ToolFixture", Fixture)
     monkeypatch.setattr("webhelix.opencode.backend.OpenCodeAgent", Native)
     result = CheckoutOpenCodeBackend(run, settings, scripted=True).run(
-        project, "prompt", 1, run / "agent.log", None
+        project, "prompt", iteration, run / "agent.log", None
     )
-    receipt = read(run / "proposals/iter-1/result.json")
+    output = run / "proposals" / f"iter-{iteration}"
+    receipt = read(output / "result.json")
     assert receipt["status"] == expected
-    assert result.success == (scenario in {"valid", "behavioral-valid", "late-preview"})
+    assert result.success == (
+        scenario in {"valid", "behavioral-valid", "behavioral-focused", "late-preview"}
+    )
     assert state["token"] not in str(receipt)
     if scenario == "setup-error":
         assert not (run / "budget.json").exists()
@@ -391,9 +408,17 @@ def test_no_candidate_or_provider_failure_never_becomes_valid(
         assert (project / ".autohelix/notes/iter-1.md").is_file()
         assert load(project / "candidate")
     if behavioral:
-        validation = read(run / "proposals/iter-1/note-validation.json")
+        validation = read(output / "note-validation.json")
         assert validation["passed"] == (scenario != "behavioral-incomplete-note")
         if scenario == "behavioral-valid":
             parent = read(run / "proposals/iter-1/parent-selection.json")
             assert parent["selection"] == "retained"
             assert not parent["acceptance_changed"]
+    if focused:
+        context = read(output / "optimizer-context.json")
+        assert context["prior_feedback"][0]["hypothesis_review"]
+        assert context["catalogue"] != read(project / "CATALOGUE.json")
+        assert read(output / "reference/CATALOGUE.json") == read(
+            project / "CATALOGUE.json"
+        )
+        assert feedback_continuity(run, iteration)["passed"]

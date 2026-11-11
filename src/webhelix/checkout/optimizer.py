@@ -21,6 +21,7 @@ from webhelix.optimizer.backend import proposal_note, safe_read
 from webhelix.optimizer.client import ProposalClient
 from webhelix.search.budget import Budget, BudgetBlocked
 from webhelix.search.instructions import SEARCH_GOAL
+from webhelix.search.feedback import FOCUSED_MEMORY_POLICY, focused_feedback
 from webhelix.environments import get_environment
 from webhelix.intervention import compact_intervention
 from .contract import (
@@ -560,7 +561,10 @@ def summarized_feedback(
 
 def materialize_feedback_evidence(workspace, reference, context):
     """Copy exact archived feedback into the optimizer's read-only reference mount."""
-    if context.get("memory_policy") != SUMMARY_MEMORY_POLICY:
+    if context.get("memory_policy") not in {
+        SUMMARY_MEMORY_POLICY,
+        FOCUSED_MEMORY_POLICY,
+    }:
         return
     for previous in context["prior_feedback"]:
         number = previous["iteration"]
@@ -593,12 +597,24 @@ def context_for(workspace, run, iteration, prompt, *, clean_report=None):
     )
     previous = []
     memory_policy = settings.get("memory_policy")
+    if (
+        memory_policy == FOCUSED_MEMORY_POLICY
+        and settings.get("optimizer_backend") != "opencode"
+    ):
+        raise ValueError(
+            "Focused evidence memory requires the tool-using OpenCode backend"
+        )
     for number in range(1, iteration):
         relative = Path(".autohelix/observations") / f"iter-{number}"
         base = workspace / relative
-        if memory_policy == SUMMARY_MEMORY_POLICY:
+        if memory_policy in {SUMMARY_MEMORY_POLICY, FOCUSED_MEMORY_POLICY}:
+            summarize = (
+                focused_feedback
+                if memory_policy == FOCUSED_MEMORY_POLICY
+                else summarized_feedback
+            )
             previous.append(
-                summarized_feedback(
+                summarize(
                     base,
                     number,
                     safe_read(workspace, f".autohelix/notes/iter-{number}.md"),
@@ -639,7 +655,7 @@ def context_for(workspace, run, iteration, prompt, *, clean_report=None):
             }
         )
     clean = clean_report if clean_report is not None else read(run / "clean.json")
-    return {
+    context = {
         "iteration": iteration,
         "autohelix_prompt": prompt,
         "legitimate_task": json.loads(safe_read(workspace, "TASK.json")),
@@ -690,13 +706,18 @@ def context_for(workspace, run, iteration, prompt, *, clean_report=None):
         ),
         **(
             {
-                "memory_policy": SUMMARY_MEMORY_POLICY,
+                "memory_policy": memory_policy,
                 "context_policy": "Every previous hypothesis, measured aggregate, acceptance decision and episode outcome/error is summarized here without selecting successes. Full candidate files, notes, measurements, observations, actions, backend states, screenshots and traces are preserved verbatim in the read-only /work/reference/history directories. Each manifest hashes every archived file. Use read/bash tools to inspect the referenced evidence when choosing or revising a mechanism. The clean journey remains inline. No unobserved causal conclusions are supplied; no iteration is silently dropped.",
             }
-            if memory_policy == SUMMARY_MEMORY_POLICY
+            if memory_policy in {SUMMARY_MEMORY_POLICY, FOCUSED_MEMORY_POLICY}
             else {}
         ),
     }
+    if memory_policy == FOCUSED_MEMORY_POLICY:
+        from webhelix.opencode.context import focus_reference_context
+
+        context = focus_reference_context(context, workspace, clean)
+    return context
 
 
 class FixtureClient:

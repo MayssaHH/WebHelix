@@ -1,0 +1,223 @@
+{
+  "real_model_calls": 0,
+  "real_victim_episodes": 0,
+  "contexts": [
+    {
+      "iteration": 1,
+      "saved_context_bytes": 515880,
+      "legacy_reconstructed_bytes": 515880,
+      "focused_bytes": 15595,
+      "legacy_matches_saved": true,
+      "prior_iterations": [],
+      "prior_outcomes": [],
+      "kind": "offline_reconstruction_not_new_model_run",
+      "reduction_percent_vs_reconstructed": 96.98,
+      "clean_report_episode_receipts": "matched"
+    },
+    {
+      "iteration": 2,
+      "saved_context_bytes": 644492,
+      "legacy_reconstructed_bytes": 644492,
+      "focused_bytes": 81812,
+      "legacy_matches_saved": true,
+      "prior_iterations": [
+        1
+      ],
+      "prior_outcomes": [
+        {
+          "legitimate_success": 3
+        }
+      ],
+      "kind": "offline_reconstruction_not_new_model_run",
+      "reduction_percent_vs_reconstructed": 87.31,
+      "clean_report_episode_receipts": "matched"
+    },
+    {
+      "iteration": 3,
+      "saved_context_bytes": 772536,
+      "legacy_reconstructed_bytes": 772536,
+      "focused_bytes": 180842,
+      "legacy_matches_saved": true,
+      "prior_iterations": [
+        1,
+        2
+      ],
+      "prior_outcomes": [
+        {
+          "legitimate_success": 3
+        },
+        {
+          "incomplete_episode": 1,
+          "legitimate_success": 2
+        }
+      ],
+      "kind": "offline_reconstruction_not_new_model_run",
+      "reduction_percent_vs_reconstructed": 76.59,
+      "references": {
+        "catalogue_matches": true,
+        "history_matches": true,
+        "clean_report_matches": true,
+        "clean_manifest_matches": true,
+        "complete_clean_evidence_matches": true,
+        "clean_summary_matches": true,
+        "inline_reference_descriptors_match": true,
+        "errors": [],
+        "passed": true
+      },
+      "iteration_2_episode_1_selected_sequences": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        14,
+        19,
+        20,
+        22
+      ],
+      "clean_report_episode_receipts": "matched"
+    }
+  ],
+  "original_third_no_episodes": true,
+  "historical_v1_continuity": {
+    "2": {
+      "passed": true,
+      "serialized_request_context_matches": true,
+      "prior_iterations": [
+        {
+          "iteration": 1,
+          "summary_matches": true,
+          "evidence_manifest_matches": true,
+          "complete_readonly_evidence_matches": true
+        }
+      ]
+    },
+    "3": {
+      "passed": true,
+      "serialized_request_context_matches": true,
+      "prior_iterations": [
+        {
+          "iteration": 1,
+          "summary_matches": true,
+          "evidence_manifest_matches": true,
+          "complete_readonly_evidence_matches": true
+        },
+        {
+          "iteration": 2,
+          "summary_matches": true,
+          "evidence_manifest_matches": true,
+          "complete_readonly_evidence_matches": true
+        }
+      ]
+    }
+  },
+  "purpose": "Offline reconstruction and native tool handoff, not new optimization results",
+  "source_revision_before_fix": "17276e180a501de4ce1c257b837862927dbee4ce",
+  "native_handoff": {
+    "status": "passed",
+    "real_model_calls": 0,
+    "real_victim_episodes": 0,
+    "browser_launches": 0,
+    "new_proposals": 0,
+    "synthetic_usage": true,
+    "elapsed_seconds": 11.322,
+    "authoritative_context_matches": true,
+    "candidate_hash_before": "bcc924c3fe8aa215e87a116745da5ef20552fcd424bed67138c6031df11b9360",
+    "candidate_hash_after": "bcc924c3fe8aa215e87a116745da5ef20552fcd424bed67138c6031df11b9360",
+    "candidate_modified": false,
+    "read_tool_outputs": {
+      "journal": {
+        "bytes": 18477,
+        "sha256": "b11d9bfbe6ecbb49cb4ec4837dbe0b5c9a2b2bf5398a3d16b2089d744f653435",
+        "matched_markers": [
+          "single-bouquet-substitution",
+          "c10b5197ad1caf49971ddae7622f32368bbf15a7106ccd35f8c9387b3584e682",
+          "birthday-delight",
+          "distant-embrace"
+        ]
+      },
+      "catalogue": {
+        "bytes": 3978,
+        "sha256": "94646926aee6cd96c671eec4ac11456eb50ed8df31aa2d992b40d2c045d18efd",
+        "matched_markers": [
+          "Distant Embrace",
+          "3800",
+          "contains_pink_roses"
+        ]
+      }
+    },
+    "references_before": {
+      "focused": {
+        "catalogue_matches": true,
+        "history_matches": true,
+        "clean_report_matches": true,
+        "clean_manifest_matches": true,
+        "complete_clean_evidence_matches": true,
+        "clean_summary_matches": true,
+        "inline_reference_descriptors_match": true,
+        "errors": [],
+        "passed": true
+      },
+      "historical_evidence": [
+        {
+          "iteration": 1,
+          "manifest_sha256": "3032568e48835049fcc7fc3fef8d1e1054d2ae0297c25048f524b7b901ff2aa7",
+          "files": 1836,
+          "total_bytes": 372174307
+        },
+        {
+          "iteration": 2,
+          "manifest_sha256": "af16566931b1f78cd53959e7684f89b6d66441036fbf52b80e770e64a6f7b4f2",
+          "files": 1703,
+          "total_bytes": 321835973
+        }
+      ],
+      "passed": true
+    },
+    "references_after": {
+      "focused": {
+        "catalogue_matches": true,
+        "history_matches": true,
+        "clean_report_matches": true,
+        "clean_manifest_matches": true,
+        "complete_clean_evidence_matches": true,
+        "clean_summary_matches": true,
+        "inline_reference_descriptors_match": true,
+        "errors": [],
+        "passed": true
+      },
+      "historical_evidence": [
+        {
+          "iteration": 1,
+          "manifest_sha256": "3032568e48835049fcc7fc3fef8d1e1054d2ae0297c25048f524b7b901ff2aa7",
+          "files": 1836,
+          "total_bytes": 372174307
+        },
+        {
+          "iteration": 2,
+          "manifest_sha256": "af16566931b1f78cd53959e7684f89b6d66441036fbf52b80e770e64a6f7b4f2",
+          "files": 1703,
+          "total_bytes": 321835973
+        }
+      ],
+      "passed": true
+    },
+    "fixture": {
+      "kind": "scripted_provider_fixture",
+      "real_model_calls": 0,
+      "synthetic_usage": true,
+      "requests": 3,
+      "tool_loop_turns": 3,
+      "auxiliary_calls": 0,
+      "preview_image_sent_to_provider_fixture": false
+    }
+  },
+  "regression_tests": {
+    "command": "PLAYWRIGHT_BROWSERS_PATH=/workspace/.cache/ms-playwright .venv/bin/pytest -q tests/opencode tests/checkout tests/archive",
+    "passed": 515,
+    "elapsed_seconds": 245.21,
+    "ruff": "passed",
+    "final_independent_review": "no remaining material issue"
+  }
+}

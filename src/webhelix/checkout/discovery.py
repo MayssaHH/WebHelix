@@ -19,6 +19,7 @@ from webhelix.opencode.backend import CheckoutOpenCodeBackend
 from webhelix.opencode.config import OpenCodeSettings
 from webhelix.opencode.runtime import DockerRuntime
 from webhelix.search.budget import validate_plan
+from webhelix.search.feedback import FOCUSED_MEMORY_POLICY
 from .cli import _offline_plan, _pilot_settings
 from .contract import FIXTURES, ROOT, fingerprint, initial_files, load, read, save
 from .evaluate import evaluate
@@ -115,7 +116,7 @@ def prepare_discovery(
     settings.update(
         measurement_protocol=PROTOCOL,
         workflow="discovery-v1",
-        memory_policy="summary-with-readonly-evidence-v1",
+        memory_policy=FOCUSED_MEMORY_POLICY,
         optimizer_feedback_protocol="behavioral-v1",
         baseline_episodes=1,
         browser_runtime=runtime_identity(),
